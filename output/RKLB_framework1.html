@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RKLB Framework 1 初篩</title>
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --ink: #1c1917;
+    --muted: #78716c;
+    --card: #fffdf8;
+    --line: #e7e0d5;
+    --teal: #0f766e;
+    --teal-soft: #ccfbf1;
+    --watch: #c2410c;
+    --watch-soft: #ffedd5;
+    --fail: #b91c1c;
+    --fail-soft: #fee2e2;
+    --pass: #15803d;
+    --pass-soft: #dcfce7;
+    --info: #1d4ed8;
+    --info-soft: #dbeafe;
+    --shadow: 0 12px 40px rgba(28, 25, 23, 0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Iowan Old Style", "Songti TC", "Noto Serif TC", "PingFang TC", serif;
+    background:
+      radial-gradient(circle at 12% 0%, #dff7f3 0, transparent 28%),
+      radial-gradient(circle at 88% 8%, #ffe8d6 0, transparent 24%),
+      var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .sans { font-family: "Avenir Next", "PingFang TC", "Noto Sans TC", sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 18px 72px; }
+  .hero {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }
+  .score-box {
+    background: linear-gradient(160deg, #fff7ed, #ffedd5 70%, #fed7aa);
+    border: 1px solid #fdba74;
+    border-radius: 24px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+  }
+  .score-box .eyebrow {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--watch);
+    font-weight: 700;
+  }
+  .score-num {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--watch);
+    margin: 8px 0 0;
+  }
+  .score-den { font-size: 1.1rem; color: var(--muted); font-weight: 600; }
+  .meter {
+    height: 10px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 14px;
+    border: 1px solid #fdba74;
+  }
+  .meter > span {
+    display: block;
+    height: 100%;
+    width: 53.8%;
+    background: linear-gradient(90deg, #ea580c, #f59e0b);
+  }
+  .hero-main {
+    background: linear-gradient(135deg, #134e4a, #0f766e 58%, #115e59);
+    color: white;
+    border-radius: 24px;
+    padding: 26px;
+    box-shadow: var(--shadow);
+  }
+  .hero-main h1 {
+    margin: 0 0 8px;
+    font-size: 1.85rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .hero-main p { margin: 0; opacity: 0.92; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .badge {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    display: inline-flex; align-items: center;
+    padding: 6px 12px; border-radius: 999px; font-size: 0.82rem; font-weight: 700;
+    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.18);
+  }
+  .badge.watch { background: var(--watch-soft); color: var(--watch); border-color: transparent; }
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  @media (max-width: 860px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .kpi .label { font-family: "Avenir Next", "PingFang TC", sans-serif; color: var(--muted); font-size: 0.78rem; }
+  .kpi .value { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 1.35rem; font-weight: 800; margin-top: 4px; }
+  .kpi.green { border-top: 4px solid var(--pass); }
+  .kpi.orange { border-top: 4px solid var(--watch); }
+  .kpi.teal { border-top: 4px solid var(--teal); }
+  .kpi.blue { border-top: 4px solid var(--info); }
+  .tabs {
+    display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0 12px;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .tab {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 999px;
+    padding: 9px 14px;
+    cursor: pointer;
+    font: inherit;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .tab.active {
+    background: var(--teal);
+    color: white;
+    border-color: var(--teal);
+  }
+  .panel {
+    display: none;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+  }
+  .panel.active { display: block; }
+  h2 {
+    margin: 0 0 14px;
+    font-size: 1.2rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .callout {
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin: 0 0 14px;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .callout.watch { background: var(--watch-soft); border: 1px solid #fdba74; }
+  .callout.info { background: var(--info-soft); border: 1px solid #93c5fd; }
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 860px) { .score-grid { grid-template-columns: 1fr; } }
+  .dim {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px;
+    background: white;
+    border-left-width: 5px;
+  }
+  .dim.s10 { border-left-color: var(--pass); background: linear-gradient(180deg, #f0fdf4, white 40%); }
+  .dim.s5 { border-left-color: var(--watch); background: linear-gradient(180deg, #fff7ed, white 40%); }
+  .dim.s0 { border-left-color: var(--fail); background: linear-gradient(180deg, #fef2f2, white 40%); }
+  .dim-top {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .dim-name { font-weight: 800; }
+  .pill {
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+  .pill.s10 { background: var(--pass-soft); color: var(--pass); }
+  .pill.s5 { background: var(--watch-soft); color: var(--watch); }
+  .pill.s0 { background: var(--fail-soft); color: var(--fail); }
+  .dim-evidence { color: var(--muted); font-size: 0.9rem; margin: 8px 0 4px; }
+  .dim-why { font-size: 0.92rem; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .chip {
+    border: 1px solid var(--line);
+    background: white;
+    border-radius: 999px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+  .chip.on { background: var(--teal-soft); border-color: #99f6e4; color: var(--teal); }
+  .redline-grid, .adv-grid, .struct-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 860px) {
+    .redline-grid, .adv-grid, .struct-grid { grid-template-columns: 1fr; }
+  }
+  .box {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px;
+    background: white;
+  }
+  .box h3 {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .safe { color: var(--pass); font-weight: 800; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .chart {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    align-items: end;
+    height: 180px;
+    margin: 16px 0 8px;
+  }
+  .bar-wrap { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; }
+  .bar {
+    width: 100%;
+    border-radius: 10px 10px 4px 4px;
+    background: linear-gradient(180deg, #14b8a6, #0f766e);
+    min-height: 8px;
+  }
+  .bar-label, .bar-val {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 0.75rem;
+  }
+  .bar-label { color: var(--muted); }
+  .bar-val { font-weight: 800; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+  th { color: var(--muted); font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.78rem; }
+  .footer {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 1 總分</div>
+      <div class="score-num">70 <span class="score-den">/ 130</span></div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge watch">WATCH</span>
+        <span class="badge" style="background:#fff;color:#0f766e;border-color:#99f6e4">紅線全部通過</span>
+      </div>
+      <div class="meter" aria-label="score progress"><span></span></div>
+      <p class="sans" style="margin:10px 0 0;color:var(--muted);font-size:0.82rem">距離 PASS 還差 20 分（門檻 ≥90）</p>
+    </div>
+    <div class="hero-main">
+      <h1>RKLB · Framework 1 基本面初篩</h1>
+      <p>Rocket Lab Corporation · 截至 2026-08-05 · 官方 8-K / 10-Q 優先，市況數據來自 yfinance（延遲）</p>
+      <div class="badges">
+        <span class="badge">會計基準：US GAAP + Non-GAAP</span>
+        <span class="badge">核心 KPI：Backlog</span>
+        <span class="badge">下一步：Framework 2</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">股價（延遲）</div><div class="value">US$74.48</div></div>
+    <div class="kpi green"><div class="label">Q1 2026 營收</div><div class="value">US$200.3M</div></div>
+    <div class="kpi blue"><div class="label">Backlog</div><div class="value">US$2.2B</div></div>
+    <div class="kpi orange"><div class="label">P/S TTM</div><div class="value">≈68x</div></div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-tab="summary">結論</button>
+    <button class="tab" data-tab="redlines">致命紅線</button>
+    <button class="tab" data-tab="score">13 維度評分</button>
+    <button class="tab" data-tab="trend">五季趨勢</button>
+    <button class="tab" data-tab="next">下一步</button>
+  </div>
+
+  <section id="summary" class="panel active">
+    <h2>初篩結論</h2>
+    <div class="callout watch">
+      <strong>WATCH（70 / 130）</strong>：業務動能同 backlog 夠強，可以繼續做 Framework 2；但盈利、自由現金流同估值仍然硬傷，未達 PASS。
+    </div>
+    <div class="struct-grid">
+      <div class="box" style="border-top:4px solid var(--pass)">
+        <h3>10 分維度 · 5 項</h3>
+        <p>現金、TAM、需求 KPI、行業趨勢、相對標普</p>
+      </div>
+      <div class="box" style="border-top:4px solid var(--watch)">
+        <h3>5 分維度 · 4 項</h3>
+        <p>營收增長、護城河、管理層、預期 vs 實際</p>
+      </div>
+      <div class="box" style="border-top:4px solid var(--fail)">
+        <h3>0 分維度 · 4 項</h3>
+        <p>淨利率、估值、ROE、自由現金流</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="redlines" class="panel">
+    <h2>致命紅線掃描</h2>
+    <div class="redline-grid">
+      <div class="box" style="background:linear-gradient(180deg,#f0fdf4,white)">
+        <h3><span class="safe">① 流動性 — 安全</span></h3>
+        <p>現金約 US$1.38B，債務約 US$139M（約 10 倍）。FCF 雖為負，但紅線要兩者同時成立，因此未觸發。</p>
+      </div>
+      <div class="box" style="background:linear-gradient(180deg,#f0fdf4,white)">
+        <h3><span class="safe">② 衰退陷阱 — 安全</span></h3>
+        <p>YoY +63.5%，高於主對照 RDW（約 +58%）。利潤雖負，但增長未低於主對照。</p>
+      </div>
+      <div class="box" style="background:linear-gradient(180deg,#f0fdf4,white)">
+        <h3><span class="safe">③ 估值泡沫 — 未否決</span></h3>
+        <p>P/S ≈ 68x 極貴，但有 60%+ 增長支持。PEG 不可用；估值維度仍給 0 分。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="score" class="panel">
+    <h2>13 維度評分卡</h2>
+    <div class="filters" id="scoreFilters">
+      <button class="chip on" data-filter="all">全部</button>
+      <button class="chip" data-filter="10">10 分</button>
+      <button class="chip" data-filter="5">5 分</button>
+      <button class="chip" data-filter="0">0 分</button>
+    </div>
+    <div class="score-grid" id="scoreCards"></div>
+  </section>
+
+  <section id="trend" class="panel">
+    <h2>五季營收趨勢（US$ million）</h2>
+    <div class="chart" id="revChart"></div>
+    <table>
+      <thead><tr><th>季度</th><th>營收</th><th>淨利潤</th><th>核心觀察</th></tr></thead>
+      <tbody>
+        <tr><td>2025-Q1</td><td>122.6</td><td>−60.6</td><td>基期</td></tr>
+        <tr><td>2025-Q2</td><td>144.5</td><td>−66.4</td><td>增長持續</td></tr>
+        <tr><td>2025-Q3</td><td>155.1</td><td>−18.3</td><td>虧損收窄</td></tr>
+        <tr><td>2025-Q4</td><td>179.7</td><td>−52.9</td><td>營收再上</td></tr>
+        <tr><td>2026-Q1</td><td>200.3</td><td>−45.0</td><td>紀錄季；Q2 指引 225–240</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="next" class="panel">
+    <h2>Adversarial check 同下一步</h2>
+    <div class="adv-grid">
+      <div class="box" style="border-top:4px solid var(--pass)"><h3>最強支持</h3><p>紀錄營收、backlog 急升、現金充裕，顯示真實需求同融資能力。</p></div>
+      <div class="box" style="border-top:4px solid var(--fail)"><h3>最強反證</h3><p>盈利同 FCF 未轉正，估值已計入 Neutron 成功。</p></div>
+      <div class="box" style="border-top:4px solid var(--watch)"><h3>最易失效假設</h3><p>Neutron 如期進入中型運載。延誤或失敗會令估值邏輯崩潰。</p></div>
+    </div>
+    <div class="callout info" style="margin-top:14px">
+      <strong>WATCH → PASS：</strong>連續兩季營業虧損明顯收窄或 Adjusted EBITDA 轉正；季度 FCF 轉正；P/S 回落到可解釋區間。Framework 2 必挖 backlog 轉化，以及 Neutron／收購對 FCF 同稀釋嘅影響。
+    </div>
+  </section>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。官方文件優先；yfinance 市況／估值屬延遲數據。報告產生於 2026-08-05。</p>
+</div>
+
+<script>
+  const scores = [
+    ["現金 vs 債務", 10, "現金≈US$1.38B；債務≈US$139M（約10倍）", "現金遠超債務2倍"],
+    ["營收增長", 5, "Q1 2026 YoY +63.5%；RDW 約 +58%", "高於同業但未穩穩拋離10pp"],
+    ["淨利潤率", 0, "TTM 約 −26.9%；Q1 淨虧 US$45.0M", "持續虧損"],
+    ["估值（PEG）", 0, "虧損致 PEG 不可用；P/S ≈ 68x", "估值嚴重透支"],
+    ["TAM", 10, "發射約 US$10–21B；太空系統／太空經濟更大", "可觸及市場 > US$100B"],
+    ["需求 KPI", 10, "Backlog US$2.2B；QoQ +20%、YoY +108%", "以 backlog 替代用戶增長"],
+    ["ROE", 0, "約 −13.5%", "低於 8% 且為負"],
+    ["自由現金流", 0, "近五季 FCF 皆負；TTM 約 −US$215M", "不穩定且為負"],
+    ["護城河", 5, "Electron 紀錄、垂直整合；SpaceX 主導", "有壁壘但非壟斷"],
+    ["行業趨勢", 10, "太空／國防／LEO／物理 AI", "完全符合主題"],
+    ["管理層", 5, "創辦人領導、營收執行改善；Neutron 風險仍在", "有成果但未無爭議領先"],
+    ["相對 S&P 500", 10, "上市以來大幅跑贏標普（超額約 +550pp）", "長期大幅跑贏"],
+    ["預期 vs 實際", 5, "近四季 EPS：miss／beat／beat／beat", "大致符合並改善"],
+  ];
+
+  const cards = document.getElementById("scoreCards");
+  cards.innerHTML = scores.map(([name, score, evidence, why]) => `
+    <article class="dim s${score}" data-score="${score}">
+      <div class="dim-top">
+        <div class="dim-name">${name}</div>
+        <span class="pill s${score}">${score} 分</span>
+      </div>
+      <div class="dim-evidence">${evidence}</div>
+      <div class="dim-why">${why}</div>
+    </article>
+  `).join("");
+
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById(tab.dataset.tab).classList.add("active");
+    });
+  });
+
+  document.querySelectorAll("#scoreFilters .chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      document.querySelectorAll("#scoreFilters .chip").forEach(c => c.classList.remove("on"));
+      chip.classList.add("on");
+      const f = chip.dataset.filter;
+      document.querySelectorAll("#scoreCards .dim").forEach(card => {
+        card.style.display = (f === "all" || card.dataset.score === f) ? "" : "none";
+      });
+    });
+  });
+
+  const revs = [
+    { label: "25Q1", value: 122.6 },
+    { label: "25Q2", value: 144.5 },
+    { label: "25Q3", value: 155.1 },
+    { label: "25Q4", value: 179.7 },
+    { label: "26Q1", value: 200.3 },
+  ];
+  const max = Math.max(...revs.map(r => r.value));
+  document.getElementById("revChart").innerHTML = revs.map(r => {
+    const h = Math.round((r.value / max) * 140);
+    return `<div class="bar-wrap"><div class="bar-val">${r.value}</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${r.label}</div></div>`;
+  }).join("");
+</script>
+</body>
+</html>
