@@ -121,34 +121,15 @@
   .kpi.orange { border-top: 4px solid var(--watch); }
   .kpi.teal { border-top: 4px solid var(--teal); }
   .kpi.blue { border-top: 4px solid var(--info); }
-  .tabs {
-    display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0 12px;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
-  .tab {
-    border: 1px solid var(--line);
-    background: var(--card);
-    border-radius: 999px;
-    padding: 9px 14px;
-    cursor: pointer;
-    font: inherit;
-    color: var(--ink);
-    font-weight: 600;
-  }
-  .tab.active {
-    background: var(--teal);
-    color: white;
-    border-color: var(--teal);
-  }
+  .sections { display: grid; gap: 16px; margin-top: 18px; }
   .panel {
-    display: none;
+    display: block;
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 22px;
     padding: 22px;
     box-shadow: var(--shadow);
   }
-  .panel.active { display: block; }
   h2 {
     margin: 0 0 14px;
     font-size: 1.2rem;
@@ -289,15 +270,8 @@
     <div class="kpi orange"><div class="label">P/S TTM</div><div class="value">≈68x</div></div>
   </div>
 
-  <div class="tabs" role="tablist">
-    <button class="tab active" data-tab="summary">結論</button>
-    <button class="tab" data-tab="redlines">致命紅線</button>
-    <button class="tab" data-tab="score">13 維度評分</button>
-    <button class="tab" data-tab="trend">五季趨勢</button>
-    <button class="tab" data-tab="next">下一步</button>
-  </div>
-
-  <section id="summary" class="panel active">
+  <div class="sections">
+  <section id="summary" class="panel">
     <h2>初篩結論</h2>
     <div class="callout watch">
       <strong>WATCH（70 / 130）</strong>：業務動能同 backlog 夠強，可以繼續做 Framework 2；但盈利、自由現金流同估值仍然硬傷，未達 PASS。
@@ -373,6 +347,7 @@
       <strong>WATCH → PASS：</strong>連續兩季營業虧損明顯收窄或 Adjusted EBITDA 轉正；季度 FCF 轉正；P/S 回落到可解釋區間。Framework 2 必挖 backlog 轉化，以及 Neutron／收購對 FCF 同稀釋嘅影響。
     </div>
   </section>
+  </div>
 
   <p class="footer">此分析僅供研究參考，不構成投資建議。官方文件優先；yfinance 市況／估值屬延遲數據。報告產生於 2026-08-05。</p>
 </div>
@@ -405,15 +380,6 @@
       <div class="dim-why">${why}</div>
     </article>
   `).join("");
-
-  document.querySelectorAll(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-      tab.classList.add("active");
-      document.getElementById(tab.dataset.tab).classList.add("active");
-    });
-  });
 
   document.querySelectorAll("#scoreFilters .chip").forEach(chip => {
     chip.addEventListener("click", () => {
