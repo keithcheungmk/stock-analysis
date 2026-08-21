@@ -1,0 +1,258 @@
+companies:
+  CLSK:
+    FY2025-Q1:
+      documents:
+      - type: earnings_presentation
+        url: https://s21.q4cdn.com/978676932/files/doc_financials/2025/q1/FY2025-Q1-Earnings.pdf
+      - type: official_transcript
+        url: https://s21.q4cdn.com/978676932/files/doc_financials/2025/q1/CleanSpark-Inc-Q1-2025-Earnings-Call-Feb-06-2025-1.pdf
+    FY2025-Q2:
+      documents:
+      - type: official_transcript
+        url: https://s21.q4cdn.com/978676932/files/doc_financials/2025/q2/CleanSpark-s-Q2-FY2025-Earnings-Results-Webcast-Transcript.pdf
+      unavailable:
+      - type: earnings_presentation
+        status: not_published_on_official_archive
+    FY2025-Q3:
+      documents:
+      - type: official_transcript
+        url: https://s21.q4cdn.com/978676932/files/doc_financials/2025/q3/50979342_1955318227_3523835_Transcript_EditedCopy_20250812093002.pdf
+      unavailable:
+      - type: earnings_presentation
+        status: not_published_on_official_archive
+    FY2025-Q4:
+      documents:
+      - type: earnings_presentation
+        url: https://s21.q4cdn.com/978676932/files/doc_financials/2025/q4/CLSK-FY2025-Earnings-PDF.pdf
+      - type: official_transcript
+        url: https://s21.q4cdn.com/978676932/files/doc_financials/2025/q4/CleanSpark-FY25-Transcript.pdf
+    FY2026-Q1:
+      documents:
+      - type: earnings_presentation
+        url: https://s21.q4cdn.com/978676932/files/doc_financials/2026/q1/CLSK-FY2026-Q1-1.pdf
+      - type: official_transcript
+        url: https://s21.q4cdn.com/978676932/files/doc_financials/2026/q1/Q1FY26_CLSK-Earnings-Transcript.pdf
+    FY2026-Q2:
+      documents:
+      - type: earnings_presentation
+        url: https://s21.q4cdn.com/978676932/files/doc_financials/2026/q2/CLSK-Q2.pdf
+      - type: official_transcript
+        url: https://s21.q4cdn.com/978676932/files/doc_financials/2026/q2/Q2FY26-CLSK-Earnings-Call-Transcript-FINAL.pdf
+    FY2026-Q3:
+      documents:
+      - type: earnings_release
+        url: https://investors.cleanspark.com/news/news-details/2026/CleanSpark-Reports-Third-Fiscal-Quarter-2026-Results/default.aspx
+      - type: earnings_release
+        url: https://s21.q4cdn.com/978676932/files/doc_news/CleanSpark-Reports-Third-Fiscal-Quarter-2026-Results-2026.pdf
+  GOOG:
+    2025-Q1:
+      documents:
+      - type: official_transcript
+        url: https://s206.q4cdn.com/479360582/files/doc_financials/2025/q1/2025-q1-earnings-transcript.pdf
+    2025-Q2:
+      documents:
+      - type: official_transcript
+        url: https://s206.q4cdn.com/479360582/files/doc_financials/2025/q2/2025-q2-earnings-transcript.pdf
+    2025-Q3:
+      documents:
+      - type: official_transcript
+        url: https://s206.q4cdn.com/479360582/files/doc_events/2025/Oct/29/2025_Q3_Earnings_Transcript.pdf
+    2025-Q4:
+      documents:
+      - type: official_transcript
+        url: https://s206.q4cdn.com/479360582/files/doc_events/2026/Feb/04/2025_Q4_Earnings_Transcript.pdf
+    2026-Q1:
+      documents:
+      - type: official_transcript
+        url: https://s206.q4cdn.com/479360582/files/doc_events/2026/Apr/29/Alphabet-2026_Q1_Earnings_Transcript.pdf
+    2026-Q2:
+      documents:
+      - type: official_transcript
+        url: https://s206.q4cdn.com/479360582/files/doc_events/2026/Jul/22/2026_Q2_Earnings_Transcript.pdf
+  DUOL:
+    2026-Q2:
+      documents:
+      - type: earnings_presentation
+        url: https://investors.duolingo.com/static-files/3c8277ee-bc94-4f5d-9b77-0db3e46f88b8
+      - type: earnings_release
+        url: https://investors.duolingo.com/news-releases/news-release-details/duolingo-reports-second-quarter-2026-results
+  HIMS:
+    2026-Q2:
+      documents:
+      - type: earnings_release
+        url: https://investors.hims.com/news/news-details/2026/Hims--Hers-Health-Inc--Reports-Second-Quarter-2026-Financial-Results/default.aspx
+  IREN:
+    FY2025-Q2:
+      documents:
+      - type: earnings_presentation
+        url: https://iren.gcs-web.com/static-files/a18dd174-516f-4896-bb2e-51254cff7d84
+      - type: financial_tables
+        url: https://iren.gcs-web.com/static-files/067bfead-5da8-4876-b5be-144019f0ad8b
+        optional: true
+    FY2025-Q3:
+      documents:
+      - type: earnings_presentation
+        url: https://iren.gcs-web.com/static-files/2de566f1-d74a-4164-b9c9-a40241ef81ce
+      - type: financial_tables
+        url: https://iren.gcs-web.com/static-files/f76d5271-b6f5-4004-8799-d2659196c427
+        optional: true
+    FY2025-Q4:
+      documents:
+      - type: earnings_presentation
+        url: https://iren.gcs-web.com/static-files/d958d6f0-e143-4508-af15-da6c7e540598
+      - type: financial_tables
+        url: https://iren.gcs-web.com/static-files/1992dde8-e264-4226-8421-8882a46411ae
+        optional: true
+    FY2026-Q1:
+      documents:
+      - type: earnings_presentation
+        url: https://iren.gcs-web.com/static-files/e66d1f70-087a-43d4-9c06-4df25f119936
+      - type: financial_tables
+        url: https://iren.gcs-web.com/static-files/9b1d3a9b-8657-4d9b-9f43-b267374dcf9c
+        optional: true
+    FY2026-Q2:
+      documents:
+      - type: earnings_presentation
+        url: https://iren.gcs-web.com/static-files/07e0b197-cf31-4158-a124-8ff0b70203c3
+      - type: financial_tables
+        url: https://iren.gcs-web.com/static-files/cb66edc1-790b-4460-8529-4f02c52217e0
+        optional: true
+    FY2026-Q3:
+      documents:
+      - type: earnings_presentation
+        url: https://iren.gcs-web.com/static-files/2289f56f-f0f8-4673-a7d4-2359afe93eb6
+      - type: financial_tables
+        url: https://iren.gcs-web.com/static-files/924cf03a-afc5-439b-926e-6c22feb57935
+        optional: true
+  NOK:
+    2025-Q1:
+      documents:
+      - type: earnings_presentation
+        url: https://www.nokia.com/system/files/2025-04/nokia_slides_2025_q1.pdf
+      - type: financial_tables
+        url: https://www.nokia.com/system/files/2025-04/nokia_factsheet_2025_q1.pdf
+    2025-Q2:
+      documents:
+      - type: financial_tables
+        url: https://www.nokia.com/system/files/2025-07/nokia_factsheet_2025_q2.pdf
+      unavailable:
+      - type: earnings_presentation
+        status: not_published_on_official_archive
+    2025-Q3:
+      documents:
+      - type: earnings_presentation
+        url: https://www.nokia.com/system/files/2025-10/nokia_slides_2025_q3.pdf
+      - type: financial_tables
+        url: https://www.nokia.com/system/files/2025-10/nokia_factsheet_2025_q3.pdf
+    2025-Q4:
+      documents:
+      - type: earnings_presentation
+        url: https://www.nokia.com/system/files/2026-01/nokia_slides_2025_q4.pdf
+      - type: financial_tables
+        url: https://www.nokia.com/system/files/2026-01/nokia_factsheet_2025_q4.pdf
+    2026-Q1:
+      documents:
+      - type: earnings_presentation
+        url: https://www.nokia.com/system/files/2026-04/nokia_slides_2026_q1.pdf
+      - type: financial_tables
+        url: https://www.nokia.com/system/files/2026-04/nokia_results_2026_q1.pdf
+    2026-Q2:
+      documents:
+      - type: earnings_presentation
+        url: https://www.nokia.com/system/files/2026-07/nokia_slides_2026_q2.pdf
+      - type: financial_tables
+        url: https://www.nokia.com/system/files/2026-07/nokia_factsheet_2026_q2.pdf
+      - type: earnings_release
+        url: https://www.nokia.com/system/files/2026-07/nokia_results_2026_q2.pdf
+  RDW:
+    2024-Q4:
+      documents:
+      - type: earnings_presentation
+        url: https://d1io3yog0oux5.cloudfront.net/_7bed82dbf69fb5b11daeac7f29921435/redwirespace/db/880/7589/presentation/Q4+2024+Earnings+Presentation.pdf
+    2025-Q1:
+      documents:
+      - type: earnings_presentation
+        url: https://d1io3yog0oux5.cloudfront.net/_5d9cc53bfa228bd0badf72595ba1bfd9/redwirespace/db/880/7598/presentation/Earnings+Presentation+3.31.2025.pdf
+    2025-Q2:
+      documents:
+      - type: earnings_presentation
+        url: https://d1io3yog0oux5.cloudfront.net/_5d9cc53bfa228bd0badf72595ba1bfd9/redwirespace/db/880/7615/presentation/Earnings+Presentation+6.30.2025.pdf
+    2025-Q3:
+      documents:
+      - type: earnings_presentation
+        url: https://d1io3yog0oux5.cloudfront.net/_e23d465d43ea200bbfd34eb9a00e13da/redwirespace/db/880/7628/presentation/Earnings+Presentation+9.30.2025.pdf
+    2025-Q4:
+      documents:
+      - type: earnings_presentation
+        url: https://d1io3yog0oux5.cloudfront.net/_e23d465d43ea200bbfd34eb9a00e13da/redwirespace/db/880/7635/presentation/Earnings+Presentation+12.31.2025.pdf
+    2026-Q1:
+      documents:
+      - type: earnings_presentation
+        url: https://d1io3yog0oux5.cloudfront.net/_5d9cc53bfa228bd0badf72595ba1bfd9/redwirespace/db/880/7645/presentation/Earnings+Presentation+03.31.2026.pdf
+    2026-Q2:
+      documents:
+      - type: earnings_presentation
+        url: https://d1io3yog0oux5.cloudfront.net/_cab91f250019f0b8fcf89fe6af4082d4/redwirespace/db/880/7652/presentation/Earnings+Presentation+06.30.2026.pdf
+      - type: earnings_release
+        url: https://ir.rdw.com/news-events/press-releases/detail/240/redwire-corporation-reports-second-quarter-2026-financial
+  RKLB:
+    2024-Q4:
+      documents:
+      - type: earnings_presentation
+        url: https://investors.rocketlabcorp.com/static-files/16817498-fc1c-4f35-903e-7bdd7d421d8e
+    2025-Q1:
+      documents:
+      - type: earnings_presentation
+        url: https://investors.rocketlabcorp.com/static-files/bbf2962a-dc50-4fe1-90e9-75caa0b8e68d
+    2025-Q2:
+      documents:
+      - type: earnings_presentation
+        url: https://investors.rocketlabcorp.com/static-files/815a4786-20f5-4f20-be8a-2bbfc8d75449
+    2025-Q3:
+      documents:
+      - type: earnings_presentation
+        url: https://investors.rocketlabcorp.com/static-files/f2e2847c-5660-4b81-8bf7-709f61289898
+    2025-Q4:
+      documents:
+      - type: earnings_presentation
+        url: https://investors.rocketlabcorp.com/static-files/be9441ad-c07f-49c2-ad50-531fd77180ee
+    2026-Q1:
+      documents:
+      - type: earnings_presentation
+        url: https://investors.rocketlabcorp.com/static-files/c0bd4327-c3ff-4843-8eae-8b0d8a4d4b82
+    2026-Q2:
+      documents:
+      - type: earnings_presentation
+        url: https://investors.rocketlabcorp.com/static-files/3dde8e68-7ce6-4685-8c0b-17afc94dbb86
+      - type: earnings_release
+        url: https://investors.rocketlabcorp.com/news-releases/news-release-details/rocket-lab-announces-second-quarter-2026-financial-results-posts
+  SPCX:
+    2026-Q2:
+      documents:
+      - type: earnings_release
+        url: https://s21.q4cdn.com/184289198/files/doc_financials/2026/q2/SpaceX-Reports-Second-Quarter-2026-Results.pdf
+  TSLA:
+    2025-Q1:
+      overrides:
+      - url: https://www.sec.gov/Archives/edgar/data/1318605/000162828025018851/exhbit991.htm
+        type: shareholder_update
+    2025-Q2:
+      overrides:
+      - url: https://www.sec.gov/Archives/edgar/data/1318605/000162828025035738/exhibit991.htm
+        type: shareholder_update
+    2025-Q3:
+      overrides:
+      - url: https://www.sec.gov/Archives/edgar/data/1318605/000162828025045861/exhibit991.htm
+        type: shareholder_update
+    2025-Q4:
+      overrides:
+      - url: https://www.sec.gov/Archives/edgar/data/1318605/000162828026003837/exhibit991.htm
+        type: shareholder_update
+    2026-Q1:
+      overrides:
+      - url: https://www.sec.gov/Archives/edgar/data/1318605/000162828026026551/exhibit991.htm
+        type: shareholder_update
+    2026-Q2:
+      overrides:
+      - url: https://www.sec.gov/Archives/edgar/data/1318605/000162828026049213/exhibit991.htm
+        type: shareholder_update

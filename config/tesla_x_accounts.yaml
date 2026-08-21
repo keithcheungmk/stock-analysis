@@ -1,0 +1,30 @@
+# X 輕量追蹤 — 每週 ≤5 條摘要
+# Phase 3c：手動貼 link 或接 X API；Agent 只摘要以下帳號
+
+accounts:
+  - handle: elonmusk
+    role: ceo
+    layers: [L2, L3, L4]
+    note: "高噪音；需 transcript 交叉驗證"
+  - handle: Tesla
+    role: official
+    layers: [L1, L2, L3, L4]
+    note: "產品、交付、官方里程碑"
+  - handle: Tesla_AI
+    role: official
+    layers: [L2, L3]
+    note: "若帳號活躍則追；否則略過"
+  - handle: karpathy
+    role: advisor_alumni
+    layers: [L2]
+    note: "可選；AI/自駕技術評論，非官方"
+
+digest_rules:
+  max_items_per_week: 5
+  tiers:
+    confirmed: "其後財報或官方文件證實"
+    narrative: "敘事性發言，未證實"
+    noise: "不納入 Catalyst Score"
+  exclude:
+    - "純政治、訴訟、個人生活"
+    - "無具體產品/時間表的玩笑帖"

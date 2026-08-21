@@ -1,0 +1,58 @@
+# Tesla AI peer set — 精簡 A：5 robotaxi + 5 humanoid
+# 多數未上市；里程碑靠新聞/官網手動更新，見 tesla_milestones.yaml
+
+robotaxi:
+  - symbol: GOOGL
+    name: Waymo
+    parent: Alphabet
+    focus: "無安全員 robotaxi，美國多城"
+    track: "城市數、車隊規模、監管批准"
+  - symbol: AMZN
+    name: Zoox
+    parent: Amazon
+    focus: "雙向車、封閉試點擴張"
+    track: "試點城市、載客商業化"
+  - symbol: GM
+    name: Cruise
+    parent: General Motors
+    focus: "美國 robotaxi（曾受挫後重組）"
+    track: "復甦進度、監管關係"
+  - symbol: BIDU
+    name: Apollo Go
+    parent: Baidu
+    focus: "中國 robotaxi 商業化領先者之一"
+    track: "訂單量、城市牌照、收費運營"
+  - symbol: PONY
+    name: Pony.ai
+    parent: null
+    focus: "中美雙地 robotaxi / robotruck"
+    track: "IPO 後披露、城市擴張"
+
+humanoid:
+  - name: Figure AI
+    symbol: null
+    focus: "通用人形機器人，工廠/物流"
+    track: "融資、BMW 等客戶部署、量產節奏"
+  - name: Agility Robotics
+    symbol: null
+    focus: "Digit — 物流倉儲人形"
+    track: "Amazon 等試點、出貨量"
+  - name: Boston Dynamics
+    symbol: null
+    parent: Hyundai
+    focus: "Atlas / Spot，品牌與研發"
+    track: "商業化產品、定價與客戶"
+  - name: Unitree
+    symbol: null
+    focus: "中國人形/四足，成本曲線"
+    track: "產品價格、出貨、演示"
+  - name: 1X Technologies
+    symbol: null
+    focus: "NEO 家用/輕量人形"
+    track: "OpenAI 關聯敘事、試點"
+
+# 傳統車廠錨（L1 估值對照，非 robotaxi 專用）
+auto_anchors:
+  - TSLA
+  - BYD
+  - GM

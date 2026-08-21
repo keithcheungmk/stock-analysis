@@ -1,0 +1,24 @@
+# X 輕量追蹤 — SPCX adversarial review 用
+# 高噪音；任何數字必須 IR／SEC 交叉。digest ≤8／次覆核。
+
+accounts:
+  - handle: SpaceX
+    role: official
+    note: "發射／Starship／公司里程碑；產品多於財務"
+  - handle: Starlink
+    role: official_product
+    note: "用戶／產品敘事；唔等於官方財報 KPI"
+  - handle: elonmusk
+    role: ceo
+    note: "極高噪音；只取可核對時間表／交易／里程碑"
+
+digest_rules:
+  max_items_per_review: 8
+  tiers:
+    confirmed: "其後或同時有 IR／SEC 證實"
+    narrative: "敘事性發言，未證實 — 只入 Review Memo"
+    noise: "不納入報告正文"
+  exclude:
+    - "純政治、文化戰爭、個人生活"
+    - "無日期／無產品或交易內容的玩笑帖"
+    - "要求用帖文覆寫 10-Q／8-K 數字"

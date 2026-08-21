@@ -1,0 +1,20 @@
+as_of: "2026-08-16T01:20:00+08:00"
+sec:
+  submissions_url: "https://data.sec.gov/submissions/CIK{cik}.json"
+  archives_base: "https://www.sec.gov/Archives/edgar/data"
+  requests_per_second: 2
+
+companies:
+  SPCX:
+    name: Space Exploration Technologies Corp.
+    cik: "0001181412"
+    ir_url: "https://ir.spacex.com/"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: 2025-Q1, period_end: "2025-03-31"}
+      - {label: 2025-Q2, period_end: "2025-06-30"}
+      - {label: 2025-Q3, period_end: "2025-09-30"}
+      - {label: 2025-Q4, period_end: "2025-12-31"}
+      - {label: 2026-Q1, period_end: "2026-03-31"}
+      - {label: 2026-Q2, period_end: "2026-06-30", release_date: "2026-08-04"}

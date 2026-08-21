@@ -1,0 +1,100 @@
+# Tesla AI 里程碑 — 手動/半自動更新（建議每季財報後修訂）
+# last_updated: YYYY-MM-DD
+
+meta:
+  last_updated: "2026-06-29"
+  next_earnings_estimate: null  # 填入下次財報日
+
+explosion_thresholds:
+  eps_beat_pct: 15        # 單季 vs consensus
+  price_3m_return_pct: 30
+
+layers:
+  L1_auto_energy:
+    - id: deliveries
+      label: "季度交付量"
+      status: unknown
+      note: ""
+    - id: auto_gross_margin
+      label: "汽車毛利率"
+      status: unknown
+      note: ""
+    - id: energy_deployments
+      label: "儲能部署 (MWh)"
+      status: unknown
+      note: ""
+
+  L2_fsd:
+    - id: fsd_version
+      label: "FSD 主線版本"
+      status: unknown
+      note: ""
+    - id: fsd_subscription
+      label: "FSD 訂閱滲透"
+      status: unknown
+      note: ""
+    - id: fsd_regulatory
+      label: "主要監管事件"
+      status: unknown
+      note: ""
+
+  L3_robotaxi:
+    - id: robotaxi_cities
+      label: "商業化/試點城市"
+      status: unknown
+      note: "例：Austin pilot"
+    - id: robotaxi_fleet
+      label: "營運車隊規模"
+      status: unknown
+      note: ""
+    - id: robotaxi_unsupervised
+      label: "無安全員批准"
+      status: unknown
+      note: ""
+
+  L4_optimus:
+    - id: optimus_stage
+      label: "階段 (demo/pilot/量產)"
+      status: unknown
+      note: ""
+    - id: optimus_internal_use
+      label: "工廠內部部署"
+      status: unknown
+      note: ""
+
+explosion_watchlist:
+  # 未來 90 天可驗證事件；分析時填寫
+  - date: null
+    event: ""
+    layer: L3
+    moves: rerating  # eps | rerating | both
+
+x_weekly_digest:
+  week_of: null
+  items: []
+  # - date: "2026-06-29"
+  #   handle: elonmusk
+  #   tier: narrative
+  #   summary: ""
+  #   layers: [L3]
+
+transcript_diff:
+  current_quarter: null
+  prior_quarter: null
+  keywords_shift: []
+  # - term: robotaxi
+  #   change: "more_specific"  # more_specific | less_specific | new | dropped
+
+macro_ai:
+  # 外部 CEO 摘句
+  - source: "Jensen Huang / NVDA"
+    date: null
+    quote_summary: ""
+    relevance: [L2, L4]
+
+catalyst_scores:
+  eps_upside: null
+  rerating_upside: null
+  execution_risk: null
+  regulatory_risk: null
+  peer_pressure: null

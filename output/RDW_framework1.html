@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RDW Framework 1 初篩</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:4rem;font-weight:800;line-height:1;color:var(--fail);margin:8px 0 0}
+  .score-den{font-size:1.1rem;color:var(--muted);font-weight:600}
+  .meter{height:10px;background:rgba(255,255,255,.7);border-radius:999px;overflow:hidden;margin-top:14px;border:1px solid #fca5a5}
+  .meter>span{display:block;height:100%;width:46.2%;background:linear-gradient(90deg,#dc2626,#f97316)}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0 0 14px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3,.score-grid{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dim{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left-width:5px}
+  .dim.s10{border-left-color:var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 40%)}
+  .dim.s5{border-left-color:var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 40%)}
+  .dim.s0{border-left-color:var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 40%)}
+  .dim-top{display:flex;justify-content:space-between;gap:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dim-name{font-weight:800}
+  .pill{border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:800}
+  .pill.s10{background:var(--pass-soft);color:var(--pass)}.pill.s5{background:var(--watch-soft);color:var(--watch)}.pill.s0{background:var(--fail-soft);color:var(--fail)}
+  .dim-evidence{color:var(--muted);font-size:.9rem;margin:8px 0 4px}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 1 總分</div>
+      <div class="score-num">60 <span class="score-den">/ 130</span></div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge fail">FAIL</span>
+        <span class="badge pass">紅線全部通過</span>
+      </div>
+      <div class="meter"><span></span></div>
+      <p class="sans muted" style="margin:10px 0 0">距離 WATCH 差 5 分（門檻 ≥65）</p>
+    </div>
+    <div class="hero-main">
+      <h1>RDW · Framework 1 基本面初篩</h1>
+      <p>Redwire Corporation · 截至 2026-08-06 · 最新季 2026-Q2 官方 IR（8/5）+ repo 內 8-K 至 2026-Q1</p>
+      <div class="badges">
+        <span class="badge">會計：US GAAP + Non-GAAP</span>
+        <span class="badge">核心 KPI：Contracted Backlog</span>
+        <span class="badge">主對照：RKLB</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">股價（延遲）</div><div class="value">US$10.72</div></div>
+    <div class="kpi green"><div class="label">Q2 2026 營收</div><div class="value">US$117.1M</div></div>
+    <div class="kpi orange"><div class="label">Backlog</div><div class="value">US$542.1M</div></div>
+    <div class="kpi red"><div class="label">P/S TTM</div><div class="value">≈5.9–6.3×</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>初篩結論</h2>
+      <div class="callout fail">
+        <strong>FAIL（60 / 130）</strong>：紅線全過，近季執行明顯改善；但盈利、FCF、長期跑輸標普，以及 backlog 增速相對 RKLB，令總分差 5 分未入 WATCH。
+      </div>
+      <div class="grid-3">
+        <div class="box" style="border-top:4px solid var(--pass)"><h3>10 分 · 4 項</h3><p>現金、營收增長、TAM、行業趨勢</p></div>
+        <div class="box" style="border-top:4px solid var(--watch)"><h3>5 分 · 4 項</h3><p>估值、護城河、管理層、預期 vs 實際</p></div>
+        <div class="box" style="border-top:4px solid var(--fail)"><h3>0 分 · 5 項</h3><p>淨利率、需求 KPI、ROE、FCF、相對標普</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>致命紅線掃描</h2>
+      <div class="grid-3">
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)"><h3><span class="safe">① 流動性 — 安全</span></h3><p>現金約 US$557M，term loans 降至 US$50M。FCF 雖負，紅線要兩者同時成立。</p></div>
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)"><h3><span class="safe">② 衰退陷阱 — 安全</span></h3><p>YoY +89.6%，高於 RKLB 近季增速。利潤負但增長未低於主對照。</p></div>
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)"><h3><span class="safe">③ 估值泡沫 — 未否決</span></h3><p>PEG 不可用；P/S ≈6× 對 90% 增長並非嚴重泡沫。</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>13 維度評分卡</h2>
+      <div class="score-grid" id="scoreCards"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Adversarial check 同下一步</h2>
+      <div class="grid-3">
+        <div class="box" style="border-top:4px solid var(--pass)"><h3>最強支持</h3><p>紀錄營收、毛利率轉正、backlog／流動性創高。</p></div>
+        <div class="box" style="border-top:4px solid var(--fail)"><h3>最強反證</h3><p>五季 FCF 負；股數大幅擴張；上市以來跑輸標普。</p></div>
+        <div class="box" style="border-top:4px solid var(--watch)"><h3>最易失效</h3><p>Backlog 轉化不及 FY 指引；毛利率再崩。</p></div>
+      </div>
+      <div class="callout info" style="margin-top:14px">
+        <strong>FAIL → WATCH：</strong>總分需 ≥65。最近路徑：需求 KPI 相對同業改善、或季度 FCF 轉正、或累計相對標普轉為跑贏。Framework 2 已同步完成時間序列驗證。
+      </div>
+    </section>
+  </div>
+  <p class="footer">官方文件優先；2026-Q2 取自 IR release（2026-08-05），尚未入 `data/raw`。市況延遲。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const scores=[
+["現金 vs 債務",10,"現金≈US$557M；term loans US$50M（>10×）","現金遠超債務2倍"],
+["營收增長",10,"Q2 2026 YoY +89.6%；RKLB 近季約 +63.5%","高於同業超過10pp"],
+["淨利潤率",0,"Q2 淨虧 US$41.0M；持續虧損","低於10%或虧損"],
+["估值（PEG）",5,"PEG 不可用；P/S ≈5.9–6.3×","非嚴重透支，但未便宜"],
+["TAM",10,"太空／國防基礎設施與無人系統","可觸及市場 > US$100B"],
+["需求 KPI",0,"Backlog YoY ≈+65%；RKLB backlog YoY ≈+108%","未高於主對照"],
+["ROE",0,"持續虧損，ROE 為負","低於8%"],
+["自由現金流",0,"Q2 FCF ≈ −US$35.3M；五季皆負","不穩定且為負"],
+["護城河",5,"國防認證／垂直能力；非壟斷","有壁壘但非壟斷"],
+["行業趨勢",10,"太空／國防／物理 AI","完全符合主題"],
+["管理層",5,"Q2 執行改善；整合與稀釋風險仍在","有成果但未無爭議領先"],
+["相對 S&P 500",0,"上市以來累計回報約持平至低雙位數，遠落後標普","長期跑輸"],
+["預期 vs 實際",5,"Q2 營收 117 vs 共識約 105（beat）；歷史參差","大致符合並改善"],
+];
+document.getElementById('scoreCards').innerHTML=scores.map(([n,s,e,w])=>`
+<article class="dim s${s}"><div class="dim-top"><div class="dim-name">${n}</div><span class="pill s${s}">${s} 分</span></div>
+<div class="dim-evidence">${e}</div><div class="dim-why">${w}</div></article>`).join('');
+</script>
+</body>
+</html>

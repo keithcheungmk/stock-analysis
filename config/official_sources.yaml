@@ -1,0 +1,146 @@
+as_of: "2026-08-13T14:45:00+08:00"
+sec:
+  submissions_url: "https://data.sec.gov/submissions/CIK{cik}.json"
+  archives_base: "https://www.sec.gov/Archives/edgar/data"
+  requests_per_second: 2
+
+companies:
+  AMD:
+    name: Advanced Micro Devices, Inc.
+    cik: "0000002488"
+    ir_url: "https://ir.amd.com/financial-information/financial-results"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: 2025-Q1, period_end: "2025-03-29"}
+      - {label: 2025-Q2, period_end: "2025-06-28"}
+      - {label: 2025-Q3, period_end: "2025-09-27"}
+      - {label: 2025-Q4, period_end: "2025-12-27"}
+      - {label: 2026-Q1, period_end: "2026-03-28"}
+      - {label: 2026-Q2, period_end: "2026-06-27", release_date: "2026-08-04"}
+
+  CLSK:
+    name: CleanSpark, Inc.
+    cik: "0000827876"
+    ir_url: "https://investors.cleanspark.com/financials/quarterly-results/default.aspx"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: FY2025-Q2, period_end: "2025-03-31"}
+      - {label: FY2025-Q3, period_end: "2025-06-30"}
+      - {label: FY2025-Q4, period_end: "2025-09-30"}
+      - {label: FY2026-Q1, period_end: "2025-12-31"}
+      - {label: FY2026-Q2, period_end: "2026-03-31"}
+      - {label: FY2026-Q3, period_end: "2026-06-30", release_date: "2026-08-06"}
+
+  DUOL:
+    name: Duolingo, Inc.
+    cik: "0001562088"
+    ir_url: "https://investors.duolingo.com/financials"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: 2025-Q1, period_end: "2025-03-31"}
+      - {label: 2025-Q2, period_end: "2025-06-30"}
+      - {label: 2025-Q3, period_end: "2025-09-30"}
+      - {label: 2025-Q4, period_end: "2025-12-31"}
+      - {label: 2026-Q1, period_end: "2026-03-31"}
+      - {label: 2026-Q2, period_end: "2026-06-30", release_date: "2026-08-05"}
+
+  GOOG:
+    name: Alphabet Inc.
+    cik: "0001652044"
+    ir_url: "https://abc.xyz/investor/earnings/"
+    currency: USD
+    accounting_basis: [US_GAAP]
+    periods:
+      - {label: 2025-Q1, period_end: "2025-03-31"}
+      - {label: 2025-Q2, period_end: "2025-06-30"}
+      - {label: 2025-Q3, period_end: "2025-09-30"}
+      - {label: 2025-Q4, period_end: "2025-12-31"}
+      - {label: 2026-Q1, period_end: "2026-03-31"}
+      - {label: 2026-Q2, period_end: "2026-06-30"}
+
+  HIMS:
+    name: Hims & Hers Health, Inc.
+    cik: "0001773751"
+    ir_url: "https://investors.hims.com/financials/quarterly-results/default.aspx"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: 2025-Q1, period_end: "2025-03-31"}
+      - {label: 2025-Q2, period_end: "2025-06-30"}
+      - {label: 2025-Q3, period_end: "2025-09-30"}
+      - {label: 2025-Q4, period_end: "2025-12-31"}
+      - {label: 2026-Q1, period_end: "2026-03-31"}
+      - {label: 2026-Q2, period_end: "2026-06-30", release_date: "2026-08-10"}
+
+  IREN:
+    name: IREN Limited
+    cik: "0001878848"
+    ir_url: "https://www.iren.com/investors/reports"
+    currency: USD
+    accounting_basis: [IFRS, US_GAAP]
+    periods:
+      - {label: FY2025-Q2, period_end: "2024-12-31", release_date: "2025-02-12", accounting_basis: IFRS}
+      - {label: FY2025-Q3, period_end: "2025-03-31", release_date: "2025-05-14", accounting_basis: IFRS}
+      - {label: FY2025-Q4, period_end: "2025-06-30", release_date: "2025-08-28", accounting_basis: US_GAAP}
+      - {label: FY2026-Q1, period_end: "2025-09-30", release_date: "2025-11-06", accounting_basis: US_GAAP}
+      - {label: FY2026-Q2, period_end: "2025-12-31", release_date: "2026-02-05", accounting_basis: US_GAAP}
+      - {label: FY2026-Q3, period_end: "2026-03-31", release_date: "2026-05-07", accounting_basis: US_GAAP}
+
+  NOK:
+    name: Nokia Corporation
+    cik: "0000924613"
+    ir_url: "https://www.nokia.com/about-us/investors/results-reports/"
+    currency: EUR
+    accounting_basis: [IFRS, Non_IFRS]
+    periods:
+      - {label: 2025-Q1, period_end: "2025-03-31", release_date: "2025-04-24"}
+      - {label: 2025-Q2, period_end: "2025-06-30", release_date: "2025-07-24"}
+      - {label: 2025-Q3, period_end: "2025-09-30", release_date: "2025-10-23"}
+      - {label: 2025-Q4, period_end: "2025-12-31", release_date: "2026-01-29"}
+      - {label: 2026-Q1, period_end: "2026-03-31", release_date: "2026-04-23"}
+      - {label: 2026-Q2, period_end: "2026-06-30", release_date: "2026-07-23"}
+
+  RDW:
+    name: Redwire Corporation
+    cik: "0001819810"
+    ir_url: "https://ir.redwirespace.com/news-events/press-releases"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: 2025-Q1, period_end: "2025-03-31", release_date: "2025-05-12"}
+      - {label: 2025-Q2, period_end: "2025-06-30", release_date: "2025-08-06"}
+      - {label: 2025-Q3, period_end: "2025-09-30", release_date: "2025-11-06"}
+      - {label: 2025-Q4, period_end: "2025-12-31", release_date: "2026-02-25"}
+      - {label: 2026-Q1, period_end: "2026-03-31", release_date: "2026-05-06"}
+      - {label: 2026-Q2, period_end: "2026-06-30", release_date: "2026-08-05"}
+
+  RKLB:
+    name: Rocket Lab Corporation
+    cik: "0001819994"
+    ir_url: "https://investors.rocketlabcorp.com/financial-information/quarterly-results"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: 2025-Q1, period_end: "2025-03-31", release_date: "2025-05-08"}
+      - {label: 2025-Q2, period_end: "2025-06-30", release_date: "2025-08-07"}
+      - {label: 2025-Q3, period_end: "2025-09-30", release_date: "2025-11-10"}
+      - {label: 2025-Q4, period_end: "2025-12-31", release_date: "2026-02-26"}
+      - {label: 2026-Q1, period_end: "2026-03-31", release_date: "2026-05-07"}
+      - {label: 2026-Q2, period_end: "2026-06-30", release_date: "2026-08-10"}
+
+  TSLA:
+    name: Tesla, Inc.
+    cik: "0001318605"
+    ir_url: "https://ir.tesla.com/"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: 2025-Q1, period_end: "2025-03-31", release_date: "2025-04-22"}
+      - {label: 2025-Q2, period_end: "2025-06-30", release_date: "2025-07-23"}
+      - {label: 2025-Q3, period_end: "2025-09-30", release_date: "2025-10-22"}
+      - {label: 2025-Q4, period_end: "2025-12-31", release_date: "2026-01-28"}
+      - {label: 2026-Q1, period_end: "2026-03-31", release_date: "2026-04-22"}
+      - {label: 2026-Q2, period_end: "2026-06-30", release_date: "2026-07-22"}

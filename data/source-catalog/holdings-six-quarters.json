@@ -1,0 +1,3991 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-13T14:45:00+08:00",
+  "generated_at": "2026-08-13T06:49:27.944122+00:00",
+  "companies": {
+    "AMD": {
+      "name": "Advanced Micro Devices, Inc.",
+      "cik": "0000002488",
+      "ir_url": "https://ir.amd.com/financial-information/financial-results",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "2025-Q1",
+          "period_end": "2025-03-29",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0000002488-25-000045",
+              "form": "8-K",
+              "filing_date": "2025-05-06",
+              "report_date": "2025-05-06",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000045/0000002488-25-000045-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248825000045/amd-20250506.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000045/q12025991.htm",
+                  "name": "q12025991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000045/amdq125earningsslides.htm",
+                  "name": "amdq125earningsslides.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_presentation"
+                }
+              ]
+            },
+            {
+              "accession_number": "0000002488-25-000047",
+              "form": "10-Q",
+              "filing_date": "2025-05-07",
+              "report_date": "2025-03-29",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/0000002488-25-000047-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248825000047/amd-20250329.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9160/webcast_transcript/AMD+Q1+2025+Earnings+Call.pdf",
+              "name": "AMD+Q1+2025+Earnings+Call.pdf",
+              "description": "Earnings Webcast Transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            },
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9160/financial_tables_pdf/Q1+2025+Gaap+and+Non-gaap+Earnings+Tables.pdf",
+              "name": "Q1+2025+Gaap+and+Non-gaap+Earnings+Tables.pdf",
+              "description": "Financial Tables PDF",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://ir.amd.com/financial-information/financial-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q2",
+          "period_end": "2025-06-28",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0000002488-25-000106",
+              "form": "8-K",
+              "filing_date": "2025-08-05",
+              "report_date": "2025-08-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000106/0000002488-25-000106-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248825000106/amd-20250805.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000106/q22025991.htm",
+                  "name": "q22025991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000106/amdq225earningsslidesfin.htm",
+                  "name": "amdq225earningsslidesfin.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_presentation"
+                }
+              ]
+            },
+            {
+              "accession_number": "0000002488-25-000108",
+              "form": "10-Q",
+              "filing_date": "2025-08-06",
+              "report_date": "2025-06-28",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/0000002488-25-000108-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9167/financial_tables_pdf/Q2+2025+GAAP+and+Non-GAAP+Earnings+Tables_CFS+_4.2.pdf",
+              "name": "Q2+2025+GAAP+and+Non-GAAP+Earnings+Tables_CFS+_4.2.pdf",
+              "description": "Financial Tables PDF",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://ir.amd.com/financial-information/financial-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q3",
+          "period_end": "2025-09-27",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0000002488-25-000163",
+              "form": "8-K",
+              "filing_date": "2025-11-04",
+              "report_date": "2025-11-04",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000163/0000002488-25-000163-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248825000163/amd-20251104.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000163/q32025991.htm",
+                  "name": "q32025991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000163/amdq325earningsslidesfin.htm",
+                  "name": "amdq325earningsslidesfin.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_presentation"
+                }
+              ]
+            },
+            {
+              "accession_number": "0000002488-25-000166",
+              "form": "10-Q",
+              "filing_date": "2025-11-05",
+              "report_date": "2025-09-27",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/0000002488-25-000166-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248825000166/amd-20250927.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9182/financial_tables_pdf/Q3+2025+GAAP+and+Non-GAAP+Earnings+Tables_.pdf",
+              "name": "Q3+2025+GAAP+and+Non-GAAP+Earnings+Tables_.pdf",
+              "description": "Financial Tables PDF",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://ir.amd.com/financial-information/financial-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q4",
+          "period_end": "2025-12-27",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0000002488-26-000014",
+              "form": "8-K",
+              "filing_date": "2026-02-03",
+              "report_date": "2026-02-03",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000014/0000002488-26-000014-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248826000014/amd-20260203.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000014/q42025991.htm",
+                  "name": "q42025991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000014/amdq425earningsslidesfin.htm",
+                  "name": "amdq425earningsslidesfin.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_presentation"
+                }
+              ]
+            },
+            {
+              "accession_number": "0000002488-26-000018",
+              "form": "10-K",
+              "filing_date": "2026-02-04",
+              "report_date": "2025-12-27",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/0000002488-26-000018-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+                  "name": "ix",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9223/webcast_transcript/AMD+Fiscal+Fourth+Quarter+and+Full+Year+2025+Financial+Results.pdf",
+              "name": "AMD+Fiscal+Fourth+Quarter+and+Full+Year+2025+Financial+Results.pdf",
+              "description": "Transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            },
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9223/financial_tables_pdf/Q4+2025+GAAP+and+Non-GAAP+Earnings+Tables.pdf",
+              "name": "Q4+2025+GAAP+and+Non-GAAP+Earnings+Tables.pdf",
+              "description": "Financial Tables PDF",
+              "type": "IR",
+              "document_type": "financial_tables"
+            },
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9090/webcast_transcript/2025-02-04+AMD+4Q+Earnings+call.pdf",
+              "name": "2025-02-04+AMD+4Q+Earnings+call.pdf",
+              "description": "Earnings Webcast Transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://ir.amd.com/financial-information/financial-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q1",
+          "period_end": "2026-03-28",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0000002488-26-000072",
+              "form": "8-K",
+              "filing_date": "2026-05-05",
+              "report_date": "2026-05-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000072/0000002488-26-000072-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248826000072/amd-20260505.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000072/q12026991.htm",
+                  "name": "q12026991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000072/amdq126earningsslidesfin.htm",
+                  "name": "amdq126earningsslidesfin.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_presentation"
+                }
+              ]
+            },
+            {
+              "accession_number": "0000002488-26-000076",
+              "form": "10-Q",
+              "filing_date": "2026-05-06",
+              "report_date": "2026-03-28",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000076/0000002488-26-000076-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248826000076/amd-20260328.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9232/webcast_transcript/AMD_1Q_2026_Earnings.pdf",
+              "name": "AMD_1Q_2026_Earnings.pdf",
+              "description": "Transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            },
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9232/financial_tables_pdf/Q1+2026+GAAP+and+Non-GAAP+Earnings+Tables.pdf",
+              "name": "Q1+2026+GAAP+and+Non-GAAP+Earnings+Tables.pdf",
+              "description": "Financial Tables PDF",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://ir.amd.com/financial-information/financial-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q2",
+          "period_end": "2026-06-27",
+          "release_date": "2026-08-04",
+          "filings": [
+            {
+              "accession_number": "0000002488-26-000121",
+              "form": "8-K",
+              "filing_date": "2026-08-04",
+              "report_date": "2026-08-04",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000121/0000002488-26-000121-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248826000121/amd-20260804.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000121/q22026991.htm",
+                  "name": "q22026991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000121/amdq22026earningsslidesf.htm",
+                  "name": "amdq22026earningsslidesf.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_presentation"
+                }
+              ]
+            },
+            {
+              "accession_number": "0000002488-26-000123",
+              "form": "10-Q",
+              "filing_date": "2026-08-05",
+              "report_date": "2026-06-27",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/0000002488-26-000123-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9237/presentation/AMD+Q2+2026+Earnings+Slides+FINAL.pdf",
+              "name": "AMD+Q2+2026+Earnings+Slides+FINAL.pdf",
+              "description": "Slide Presentation PDF",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_f54fb729fac473f1298badcbe60a65e0/amd/db/841/9237/financial_tables_pdf/Q2+2026+GAAP+and+Non-GAAP+Earnings+Tables.pdf",
+              "name": "Q2+2026+GAAP+and+Non-GAAP+Earnings+Tables.pdf",
+              "description": "Financial Tables PDF",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://ir.amd.com/financial-information/financial-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        }
+      ]
+    },
+    "CLSK": {
+      "name": "CleanSpark, Inc.",
+      "cik": "0000827876",
+      "ir_url": "https://investors.cleanspark.com/financials/quarterly-results/default.aspx",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "FY2025-Q2",
+          "period_end": "2025-03-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0000950170-25-067219",
+              "form": "10-Q",
+              "filing_date": "2025-05-08",
+              "report_date": "2025-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000095017025067219/0000950170-25-067219-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000095017025067219/clsk-20250331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0000950170-25-066936",
+              "form": "8-K",
+              "filing_date": "2025-05-08",
+              "report_date": "2025-05-08",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000095017025066936/0000950170-25-066936-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000095017025066936/clsk-20250508.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017025066936/clsk-ex99_1.htm",
+                  "name": "clsk-ex99_1.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s21.q4cdn.com/978676932/files/doc_financials/2025/q2/CleanSpark-s-Q2-FY2025-Earnings-Results-Webcast-Transcript.pdf",
+              "name": "CleanSpark-s-Q2-FY2025-Earnings-Results-Webcast-Transcript.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://investors.cleanspark.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_published_on_official_archive"
+            }
+          ]
+        },
+        {
+          "label": "FY2025-Q3",
+          "period_end": "2025-06-30",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0000827876-25-000005",
+              "form": "10-Q",
+              "filing_date": "2025-08-07",
+              "report_date": "2025-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000082787625000005/0000827876-25-000005-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000082787625000005/clsk-20250630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0000950170-25-105347",
+              "form": "8-K",
+              "filing_date": "2025-08-08",
+              "report_date": "2025-08-07",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000095017025105347/0000950170-25-105347-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000095017025105347/clsk-20250807.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/827876/000095017025105347/clsk-ex99_1.htm",
+                  "name": "clsk-ex99_1.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s21.q4cdn.com/978676932/files/doc_financials/2025/q3/50979342_1955318227_3523835_Transcript_EditedCopy_20250812093002.pdf",
+              "name": "50979342_1955318227_3523835_Transcript_EditedCopy_20250812093002.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://investors.cleanspark.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_published_on_official_archive"
+            }
+          ]
+        },
+        {
+          "label": "FY2025-Q4",
+          "period_end": "2025-09-30",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001193125-25-297510",
+              "form": "10-K",
+              "filing_date": "2025-11-25",
+              "report_date": "2025-09-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000119312525297510/0001193125-25-297510-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000119312525297510/clsk-20250930.htm",
+                  "name": "ix",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001193125-25-297163",
+              "form": "8-K",
+              "filing_date": "2025-11-25",
+              "report_date": "2025-11-25",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000119312525297163/0001193125-25-297163-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000119312525297163/clsk-20251125.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/827876/000119312525297163/clsk-ex99_1.htm",
+                  "name": "clsk-ex99_1.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s21.q4cdn.com/978676932/files/doc_financials/2025/q4/CLSK-FY2025-Earnings-PDF.pdf",
+              "name": "CLSK-FY2025-Earnings-PDF.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://s21.q4cdn.com/978676932/files/doc_financials/2025/q4/CleanSpark-FY25-Transcript.pdf",
+              "name": "CleanSpark-FY25-Transcript.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://investors.cleanspark.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": []
+        },
+        {
+          "label": "FY2026-Q1",
+          "period_end": "2025-12-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001193125-26-039538",
+              "form": "10-Q",
+              "filing_date": "2026-02-05",
+              "report_date": "2025-12-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526039538/0001193125-26-039538-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000119312526039538/clsk-20251231.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001193125-26-039382",
+              "form": "8-K",
+              "filing_date": "2026-02-05",
+              "report_date": "2026-02-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526039382/0001193125-26-039382-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000119312526039382/clsk-20260205.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526039382/clsk-ex99_1.htm",
+                  "name": "clsk-ex99_1.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s21.q4cdn.com/978676932/files/doc_financials/2026/q1/CLSK-FY2026-Q1-1.pdf",
+              "name": "CLSK-FY2026-Q1-1.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://s21.q4cdn.com/978676932/files/doc_financials/2026/q1/Q1FY26_CLSK-Earnings-Transcript.pdf",
+              "name": "Q1FY26_CLSK-Earnings-Transcript.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://investors.cleanspark.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": []
+        },
+        {
+          "label": "FY2026-Q2",
+          "period_end": "2026-03-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001193125-26-217036",
+              "form": "10-Q",
+              "filing_date": "2026-05-11",
+              "report_date": "2026-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526217036/0001193125-26-217036-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000119312526217036/clsk-20260331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001193125-26-216866",
+              "form": "8-K",
+              "filing_date": "2026-05-11",
+              "report_date": "2026-05-11",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526216866/0001193125-26-216866-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000119312526216866/clsk-20260511.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526216866/clsk-ex99_1.htm",
+                  "name": "clsk-ex99_1.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s21.q4cdn.com/978676932/files/doc_financials/2026/q2/CLSK-Q2.pdf",
+              "name": "CLSK-Q2.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://s21.q4cdn.com/978676932/files/doc_financials/2026/q2/Q2FY26-CLSK-Earnings-Call-Transcript-FINAL.pdf",
+              "name": "Q2FY26-CLSK-Earnings-Call-Transcript-FINAL.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://investors.cleanspark.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": []
+        },
+        {
+          "label": "FY2026-Q3",
+          "period_end": "2026-06-30",
+          "release_date": "2026-08-06",
+          "filings": [
+            {
+              "accession_number": "0001193125-26-338382",
+              "form": "10-Q",
+              "filing_date": "2026-08-06",
+              "report_date": "2026-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526338382/0001193125-26-338382-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000119312526338382/clsk-20260630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001193125-26-337999",
+              "form": "8-K",
+              "filing_date": "2026-08-06",
+              "report_date": "2026-08-06",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526337999/0001193125-26-337999-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/827876/000119312526337999/clsk-20260806.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526337999/clsk-ex99_1.htm",
+                  "name": "clsk-ex99_1.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://investors.cleanspark.com/news/news-details/2026/CleanSpark-Reports-Third-Fiscal-Quarter-2026-Results/default.aspx",
+              "name": "default.aspx",
+              "description": "earnings release",
+              "type": "IR",
+              "document_type": "earnings_release"
+            },
+            {
+              "url": "https://s21.q4cdn.com/978676932/files/doc_news/CleanSpark-Reports-Third-Fiscal-Quarter-2026-Results-2026.pdf",
+              "name": "CleanSpark-Reports-Third-Fiscal-Quarter-2026-Results-2026.pdf",
+              "description": "earnings release",
+              "type": "IR",
+              "document_type": "earnings_release"
+            }
+          ],
+          "ir_page": "https://investors.cleanspark.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": []
+        }
+      ]
+    },
+    "DUOL": {
+      "name": "Duolingo, Inc.",
+      "cik": "0001562088",
+      "ir_url": "https://investors.duolingo.com/financials",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "2025-Q1",
+          "period_end": "2025-03-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001562088-25-000098",
+              "form": "8-K",
+              "filing_date": "2025-05-01",
+              "report_date": "2025-05-01",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000156208825000098/0001562088-25-000098-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000156208825000098/duol-20250501.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000156208825000098/q1fy25duolingo3-31x25press.htm",
+                  "name": "q1fy25duolingo3-31x25press.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000156208825000098/q1fy25duolingo3-31x25share.htm",
+                  "name": "q1fy25duolingo3-31x25share.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001562088-25-000100",
+              "form": "10-Q",
+              "filing_date": "2025-05-02",
+              "report_date": "2025-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000156208825000100/0001562088-25-000100-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000156208825000100/duol-20250331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.duolingo.com/financials",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "shareholder_update"
+            },
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q2",
+          "period_end": "2025-06-30",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001562088-25-000165",
+              "form": "8-K",
+              "filing_date": "2025-08-06",
+              "report_date": "2025-08-06",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000156208825000165/0001562088-25-000165-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000156208825000165/duol-20250806.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000156208825000165/q2fy25duolingo6-30x25press.htm",
+                  "name": "q2fy25duolingo6-30x25press.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000156208825000165/q2fy25duolingo6-30x25share.htm",
+                  "name": "q2fy25duolingo6-30x25share.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001562088-25-000168",
+              "form": "10-Q",
+              "filing_date": "2025-08-07",
+              "report_date": "2025-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000156208825000168/0001562088-25-000168-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000156208825000168/duol-20250630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.duolingo.com/financials",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "shareholder_update"
+            },
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q3",
+          "period_end": "2025-09-30",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001628280-25-049514",
+              "form": "8-K",
+              "filing_date": "2025-11-05",
+              "report_date": "2025-11-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828025049514/0001628280-25-049514-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000162828025049514/duol-20251105.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828025049514/q3fy25duolingo9-30x25press.htm",
+                  "name": "q3fy25duolingo9-30x25press.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828025049514/q3fy25duolingo9-30x25share.htm",
+                  "name": "q3fy25duolingo9-30x25share.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-25-049743",
+              "form": "10-Q",
+              "filing_date": "2025-11-06",
+              "report_date": "2025-09-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828025049743/0001628280-25-049743-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000162828025049743/duol-20250930.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.duolingo.com/financials",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "shareholder_update"
+            },
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q4",
+          "period_end": "2025-12-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001628280-26-012246",
+              "form": "8-K",
+              "filing_date": "2026-02-26",
+              "report_date": "2026-02-26",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026012246/0001628280-26-012246-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000162828026012246/duol-20260226.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026012246/q4fy25duolingo12-31x25pres.htm",
+                  "name": "q4fy25duolingo12-31x25pres.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026012246/q4fy25duolingo12-31x25shar.htm",
+                  "name": "q4fy25duolingo12-31x25shar.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-26-012494",
+              "form": "10-K",
+              "filing_date": "2026-02-27",
+              "report_date": "2025-12-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026012494/0001628280-26-012494-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000162828026012494/duol-20251231.htm",
+                  "name": "ix",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.duolingo.com/financials",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "shareholder_update"
+            },
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q1",
+          "period_end": "2026-03-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001628280-26-029790",
+              "form": "8-K",
+              "filing_date": "2026-05-04",
+              "report_date": "2026-05-04",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026029790/0001628280-26-029790-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000162828026029790/duol-20260504.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026029790/q1fy26duolingo3-31x26xpres.htm",
+                  "name": "q1fy26duolingo3-31x26xpres.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026029790/q1fy26duolingo3-31x26share.htm",
+                  "name": "q1fy26duolingo3-31x26share.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-26-029976",
+              "form": "10-Q",
+              "filing_date": "2026-05-05",
+              "report_date": "2026-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026029976/0001628280-26-029976-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000162828026029976/duol-20260331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.duolingo.com/financials",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "shareholder_update"
+            },
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q2",
+          "period_end": "2026-06-30",
+          "release_date": "2026-08-05",
+          "filings": [
+            {
+              "accession_number": "0001628280-26-053299",
+              "form": "8-K",
+              "filing_date": "2026-08-05",
+              "report_date": "2026-08-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026053299/0001628280-26-053299-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000162828026053299/duol-20260805.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026053299/q2fy26duolingo6-30x26xpres.htm",
+                  "name": "q2fy26duolingo6-30x26xpres.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026053299/q2fy26duolingo6-30x26share.htm",
+                  "name": "q2fy26duolingo6-30x26share.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-26-053603",
+              "form": "10-Q",
+              "filing_date": "2026-08-06",
+              "report_date": "2026-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1562088/000162828026053603/0001628280-26-053603-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1562088/000162828026053603/duol-20260630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://investors.duolingo.com/static-files/3c8277ee-bc94-4f5d-9b77-0db3e46f88b8",
+              "name": "3c8277ee-bc94-4f5d-9b77-0db3e46f88b8",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://investors.duolingo.com/news-releases/news-release-details/duolingo-reports-second-quarter-2026-results",
+              "name": "duolingo-reports-second-quarter-2026-results",
+              "description": "earnings release",
+              "type": "IR",
+              "document_type": "earnings_release"
+            }
+          ],
+          "ir_page": "https://investors.duolingo.com/financials",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "shareholder_update"
+            },
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        }
+      ]
+    },
+    "GOOG": {
+      "name": "Alphabet Inc.",
+      "cik": "0001652044",
+      "ir_url": "https://abc.xyz/investor/earnings/",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "2025-Q1",
+          "period_end": "2025-03-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001652044-25-000040",
+              "form": "8-K",
+              "filing_date": "2025-04-24",
+              "report_date": "2025-04-23",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000040/0001652044-25-000040-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204425000040/goog-20250423.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000040/googexhibit991q12025.htm",
+                  "name": "googexhibit991q12025.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001652044-25-000043",
+              "form": "10-Q",
+              "filing_date": "2025-04-25",
+              "report_date": "2025-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000043/0001652044-25-000043-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204425000043/goog-20250331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s206.q4cdn.com/479360582/files/doc_financials/2025/q1/2025-q1-earnings-transcript.pdf",
+              "name": "2025-q1-earnings-transcript.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://abc.xyz/investor/earnings/",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "earnings_release"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q2",
+          "period_end": "2025-06-30",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001652044-25-000056",
+              "form": "8-K",
+              "filing_date": "2025-07-23",
+              "report_date": "2025-07-23",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000056/0001652044-25-000056-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204425000056/goog-20250723.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000056/googexhibit991q22025.htm",
+                  "name": "googexhibit991q22025.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001652044-25-000062",
+              "form": "10-Q",
+              "filing_date": "2025-07-24",
+              "report_date": "2025-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000062/0001652044-25-000062-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204425000062/goog-20250630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s206.q4cdn.com/479360582/files/doc_financials/2025/q2/2025-q2-earnings-transcript.pdf",
+              "name": "2025-q2-earnings-transcript.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://abc.xyz/investor/earnings/",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "earnings_release"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q3",
+          "period_end": "2025-09-30",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001652044-25-000087",
+              "form": "8-K",
+              "filing_date": "2025-10-29",
+              "report_date": "2025-10-29",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000087/0001652044-25-000087-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204425000087/goog-20251029.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000087/googexhibit991q32025.htm",
+                  "name": "googexhibit991q32025.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001652044-25-000091",
+              "form": "10-Q",
+              "filing_date": "2025-10-30",
+              "report_date": "2025-09-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204425000091/0001652044-25-000091-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204425000091/goog-20250930.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s206.q4cdn.com/479360582/files/doc_events/2025/Oct/29/2025_Q3_Earnings_Transcript.pdf",
+              "name": "2025_Q3_Earnings_Transcript.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://abc.xyz/investor/earnings/",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "earnings_release"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q4",
+          "period_end": "2025-12-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001652044-26-000012",
+              "form": "8-K",
+              "filing_date": "2026-02-04",
+              "report_date": "2026-02-04",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000012/0001652044-26-000012-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204426000012/goog-20260204.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000012/googexhibit991q42025.htm",
+                  "name": "googexhibit991q42025.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001652044-26-000018",
+              "form": "10-K",
+              "filing_date": "2026-02-05",
+              "report_date": "2025-12-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+                  "name": "ix",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s206.q4cdn.com/479360582/files/doc_events/2026/Feb/04/2025_Q4_Earnings_Transcript.pdf",
+              "name": "2025_Q4_Earnings_Transcript.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://abc.xyz/investor/earnings/",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "earnings_release"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q1",
+          "period_end": "2026-03-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001652044-26-000043",
+              "form": "8-K",
+              "filing_date": "2026-04-29",
+              "report_date": "2026-04-29",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/0001652044-26-000043-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204426000043/goog-20260429.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000043/googexhibit991q12026.htm",
+                  "name": "googexhibit991q12026.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001652044-26-000048",
+              "form": "10-Q",
+              "filing_date": "2026-04-30",
+              "report_date": "2026-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000048/0001652044-26-000048-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204426000048/goog-20260331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s206.q4cdn.com/479360582/files/doc_events/2026/Apr/29/Alphabet-2026_Q1_Earnings_Transcript.pdf",
+              "name": "Alphabet-2026_Q1_Earnings_Transcript.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://abc.xyz/investor/earnings/",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "earnings_release"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q2",
+          "period_end": "2026-06-30",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001652044-26-000066",
+              "form": "8-K",
+              "filing_date": "2026-07-22",
+              "report_date": "2026-07-22",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/0001652044-26-000066-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204426000066/goog-20260722.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm",
+                  "name": "googexhibit991q22026.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001652044-26-000071",
+              "form": "10-Q",
+              "filing_date": "2026-07-23",
+              "report_date": "2026-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/0001652044-26-000071-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1652044/000165204426000071/goog-20260630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s206.q4cdn.com/479360582/files/doc_events/2026/Jul/22/2026_Q2_Earnings_Transcript.pdf",
+              "name": "2026_Q2_Earnings_Transcript.pdf",
+              "description": "official transcript",
+              "type": "IR",
+              "document_type": "official_transcript"
+            }
+          ],
+          "ir_page": "https://abc.xyz/investor/earnings/",
+          "unavailable_sources": [
+            {
+              "type": "earnings_presentation",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "earnings_release"
+            }
+          ]
+        }
+      ]
+    },
+    "HIMS": {
+      "name": "Hims & Hers Health, Inc.",
+      "cik": "0001773751",
+      "ir_url": "https://investors.hims.com/financials/quarterly-results/default.aspx",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "2025-Q1",
+          "period_end": "2025-03-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001773751-25-000154",
+              "form": "10-Q",
+              "filing_date": "2025-05-05",
+              "report_date": "2025-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000154/0001773751-25-000154-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375125000154/hims-20250331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001773751-25-000152",
+              "form": "8-K",
+              "filing_date": "2025-05-05",
+              "report_date": "2025-05-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000152/0001773751-25-000152-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375125000152/hims-20250505.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000152/hims-20250331x8xkearningsr.htm",
+                  "name": "hims-20250331x8xkearningsr.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000152/finalq12025shareholderle.htm",
+                  "name": "finalq12025shareholderle.htm",
+                  "type": "EX-99.2",
+                  "document_type": "shareholder_update"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.hims.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q2",
+          "period_end": "2025-06-30",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001773751-25-000250",
+              "form": "10-Q",
+              "filing_date": "2025-08-04",
+              "report_date": "2025-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000250/0001773751-25-000250-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375125000250/hims-20250630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001773751-25-000248",
+              "form": "8-K",
+              "filing_date": "2025-08-04",
+              "report_date": "2025-08-04",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000248/0001773751-25-000248-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375125000248/hims-20250804.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000248/hims-20250630x8xkearningsr.htm",
+                  "name": "hims-20250630x8xkearningsr.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000248/finalq22025shareholderle.htm",
+                  "name": "finalq22025shareholderle.htm",
+                  "type": "EX-99.2",
+                  "document_type": "shareholder_update"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.hims.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q3",
+          "period_end": "2025-09-30",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001773751-25-000354",
+              "form": "10-Q",
+              "filing_date": "2025-11-03",
+              "report_date": "2025-09-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000354/0001773751-25-000354-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375125000354/hims-20250930.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001773751-25-000352",
+              "form": "8-K",
+              "filing_date": "2025-11-03",
+              "report_date": "2025-11-03",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000352/0001773751-25-000352-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375125000352/hims-20251103.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000352/hims-20250930x8xkearningsr.htm",
+                  "name": "hims-20250930x8xkearningsr.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375125000352/finalq32025shareholderle.htm",
+                  "name": "finalq32025shareholderle.htm",
+                  "type": "EX-99.2",
+                  "document_type": "shareholder_update"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.hims.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q4",
+          "period_end": "2025-12-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001773751-26-000022",
+              "form": "10-K",
+              "filing_date": "2026-02-23",
+              "report_date": "2025-12-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375126000022/0001773751-26-000022-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375126000022/hims-20251231.htm",
+                  "name": "ix",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001773751-26-000019",
+              "form": "8-K",
+              "filing_date": "2026-02-23",
+              "report_date": "2026-02-23",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375126000019/0001773751-26-000019-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375126000019/hims-20260223.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375126000019/hims-20251231x8xkearningsr.htm",
+                  "name": "hims-20251231x8xkearningsr.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375126000019/finalq42025shareholderle.htm",
+                  "name": "finalq42025shareholderle.htm",
+                  "type": "EX-99.2",
+                  "document_type": "shareholder_update"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.hims.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q1",
+          "period_end": "2026-03-31",
+          "release_date": null,
+          "filings": [
+            {
+              "accession_number": "0001773751-26-000076",
+              "form": "10-Q",
+              "filing_date": "2026-05-11",
+              "report_date": "2026-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375126000076/0001773751-26-000076-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375126000076/hims-20260331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001773751-26-000074",
+              "form": "8-K",
+              "filing_date": "2026-05-11",
+              "report_date": "2026-05-11",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375126000074/0001773751-26-000074-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375126000074/hims-20260511.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375126000074/hims-20260331x8xkearningsr.htm",
+                  "name": "hims-20260331x8xkearningsr.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.hims.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": [
+            {
+              "type": "quarterly_shareholder_letter",
+              "status": "company_changed_to_annual_shareholder_letters",
+              "substitute": "earnings_release"
+            },
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q2",
+          "period_end": "2026-06-30",
+          "release_date": "2026-08-10",
+          "filings": [
+            {
+              "accession_number": "0001773751-26-000163",
+              "form": "10-Q",
+              "filing_date": "2026-08-10",
+              "report_date": "2026-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375126000163/0001773751-26-000163-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375126000163/hims-20260630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001773751-26-000161",
+              "form": "8-K",
+              "filing_date": "2026-08-10",
+              "report_date": "2026-08-10",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375126000161/0001773751-26-000161-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1773751/000177375126000161/hims-20260810.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1773751/000177375126000161/hims-20260630x8xkearningsr.htm",
+                  "name": "hims-20260630x8xkearningsr.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://investors.hims.com/news/news-details/2026/Hims--Hers-Health-Inc--Reports-Second-Quarter-2026-Financial-Results/default.aspx",
+              "name": "default.aspx",
+              "description": "earnings release",
+              "type": "IR",
+              "document_type": "earnings_release"
+            }
+          ],
+          "ir_page": "https://investors.hims.com/financials/quarterly-results/default.aspx",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        }
+      ]
+    },
+    "IREN": {
+      "name": "IREN Limited",
+      "cik": "0001878848",
+      "ir_url": "https://www.iren.com/investors/reports",
+      "currency": "USD",
+      "accounting_basis": [
+        "IFRS",
+        "US_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "FY2025-Q2",
+          "period_end": "2024-12-31",
+          "release_date": "2025-02-12",
+          "filings": [
+            {
+              "accession_number": "0001878848-25-000009",
+              "form": "6-K",
+              "filing_date": "2025-02-12",
+              "report_date": "2024-12-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000009/0001878848-25-000009-index.html",
+              "documents": [
+                {
+                  "description": "6-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884825000009/iren-20241231.htm",
+                  "name": "ix",
+                  "type": "6-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000009/q2fy25resultspressreleas.htm",
+                  "name": "q2fy25resultspressreleas.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000009/q2fy25resultspresentatio.htm",
+                  "name": "q2fy25resultspresentatio.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.3",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884825000009/iren-20241231_d2.htm",
+                  "name": "ix",
+                  "type": "EX-99.3",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.4",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000009/irenlimited-exx994dec2024.htm",
+                  "name": "irenlimited-exx994dec2024.htm",
+                  "type": "EX-99.4",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://iren.gcs-web.com/static-files/a18dd174-516f-4896-bb2e-51254cff7d84",
+              "name": "a18dd174-516f-4896-bb2e-51254cff7d84",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://iren.gcs-web.com/static-files/067bfead-5da8-4876-b5be-144019f0ad8b",
+              "name": "067bfead-5da8-4876-b5be-144019f0ad8b",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.iren.com/investors/reports",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2025-Q3",
+          "period_end": "2025-03-31",
+          "release_date": "2025-05-14",
+          "filings": [
+            {
+              "accession_number": "0001878848-25-000043",
+              "form": "6-K",
+              "filing_date": "2025-05-14",
+              "report_date": "2025-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000043/0001878848-25-000043-index.html",
+              "documents": [
+                {
+                  "description": "6-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884825000043/iren-20250331.htm",
+                  "name": "ix",
+                  "type": "6-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000043/q3fy25resultspressreleas.htm",
+                  "name": "q3fy25resultspressreleas.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.2",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000043/q3fy25presentationvf.htm",
+                  "name": "q3fy25presentationvf.htm",
+                  "type": "EX-99.2",
+                  "document_type": "earnings_presentation"
+                },
+                {
+                  "description": "EX-99.3",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884825000043/iren-20250331_d2.htm",
+                  "name": "ix",
+                  "type": "EX-99.3",
+                  "document_type": "earnings_release"
+                },
+                {
+                  "description": "EX-99.4",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000043/irenlimited-exx994mar2025.htm",
+                  "name": "irenlimited-exx994mar2025.htm",
+                  "type": "EX-99.4",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://iren.gcs-web.com/static-files/2de566f1-d74a-4164-b9c9-a40241ef81ce",
+              "name": "2de566f1-d74a-4164-b9c9-a40241ef81ce",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://iren.gcs-web.com/static-files/f76d5271-b6f5-4004-8799-d2659196c427",
+              "name": "f76d5271-b6f5-4004-8799-d2659196c427",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.iren.com/investors/reports",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2025-Q4",
+          "period_end": "2025-06-30",
+          "release_date": "2025-08-28",
+          "filings": [
+            {
+              "accession_number": "0001878848-25-000063",
+              "form": "10-K",
+              "filing_date": "2025-08-28",
+              "report_date": "2025-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000063/0001878848-25-000063-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884825000063/iren-20250630.htm",
+                  "name": "ix",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001878848-25-000062",
+              "form": "8-K",
+              "filing_date": "2025-08-28",
+              "report_date": "2025-08-28",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000062/0001878848-25-000062-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884825000062/iren-20250828.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000062/ex991fy25pr.htm",
+                  "name": "ex991fy25pr.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://iren.gcs-web.com/static-files/d958d6f0-e143-4508-af15-da6c7e540598",
+              "name": "d958d6f0-e143-4508-af15-da6c7e540598",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://iren.gcs-web.com/static-files/1992dde8-e264-4226-8421-8882a46411ae",
+              "name": "1992dde8-e264-4226-8421-8882a46411ae",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.iren.com/investors/reports",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2026-Q1",
+          "period_end": "2025-09-30",
+          "release_date": "2025-11-06",
+          "filings": [
+            {
+              "accession_number": "0001878848-25-000081",
+              "form": "10-Q",
+              "filing_date": "2025-11-06",
+              "report_date": "2025-09-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000081/0001878848-25-000081-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884825000081/iren-20250930.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001878848-25-000079",
+              "form": "8-K",
+              "filing_date": "2025-11-06",
+              "report_date": "2025-11-06",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000079/0001878848-25-000079-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884825000079/iren-20251106.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000079/q1fy26resultspressreleas.htm",
+                  "name": "q1fy26resultspressreleas.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://iren.gcs-web.com/static-files/e66d1f70-087a-43d4-9c06-4df25f119936",
+              "name": "e66d1f70-087a-43d4-9c06-4df25f119936",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://iren.gcs-web.com/static-files/9b1d3a9b-8657-4d9b-9f43-b267374dcf9c",
+              "name": "9b1d3a9b-8657-4d9b-9f43-b267374dcf9c",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.iren.com/investors/reports",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2026-Q2",
+          "period_end": "2025-12-31",
+          "release_date": "2026-02-05",
+          "filings": [
+            {
+              "accession_number": "0001878848-26-000015",
+              "form": "10-Q",
+              "filing_date": "2026-02-05",
+              "report_date": "2025-12-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000015/0001878848-26-000015-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884826000015/iren-20251231.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001878848-26-000014",
+              "form": "8-K",
+              "filing_date": "2026-02-05",
+              "report_date": "2026-02-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000014/0001878848-26-000014-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884826000014/iren-20260205.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000014/a991irenreportsq2fy26res.htm",
+                  "name": "a991irenreportsq2fy26res.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://iren.gcs-web.com/static-files/07e0b197-cf31-4158-a124-8ff0b70203c3",
+              "name": "07e0b197-cf31-4158-a124-8ff0b70203c3",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://iren.gcs-web.com/static-files/cb66edc1-790b-4460-8529-4f02c52217e0",
+              "name": "cb66edc1-790b-4460-8529-4f02c52217e0",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.iren.com/investors/reports",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2026-Q3",
+          "period_end": "2026-03-31",
+          "release_date": "2026-05-07",
+          "filings": [
+            {
+              "accession_number": "0001878848-26-000026",
+              "form": "10-Q",
+              "filing_date": "2026-05-08",
+              "report_date": "2026-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000026/0001878848-26-000026-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884826000026/iren-20260331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001878848-26-000025",
+              "form": "8-K",
+              "filing_date": "2026-05-08",
+              "report_date": "2026-05-07",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000025/0001878848-26-000025-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884826000025/iren-20260507.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000025/irenreportsq3fy26results.htm",
+                  "name": "irenreportsq3fy26results.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://iren.gcs-web.com/static-files/2289f56f-f0f8-4673-a7d4-2359afe93eb6",
+              "name": "2289f56f-f0f8-4673-a7d4-2359afe93eb6",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://iren.gcs-web.com/static-files/924cf03a-afc5-439b-926e-6c22feb57935",
+              "name": "924cf03a-afc5-439b-926e-6c22feb57935",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.iren.com/investors/reports",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        }
+      ]
+    },
+    "NOK": {
+      "name": "Nokia Corporation",
+      "cik": "0000924613",
+      "ir_url": "https://www.nokia.com/about-us/investors/results-reports/",
+      "currency": "EUR",
+      "accounting_basis": [
+        "IFRS",
+        "Non_IFRS"
+      ],
+      "periods": [
+        {
+          "label": "2025-Q1",
+          "period_end": "2025-03-31",
+          "release_date": "2025-04-24",
+          "filings": [
+            {
+              "accession_number": "0001104659-25-038218",
+              "form": "6-K",
+              "filing_date": "2025-04-24",
+              "report_date": "2025-04-24",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/924613/000110465925038218/0001104659-25-038218-index.html",
+              "documents": [
+                {
+                  "description": "FORM 6-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/924613/000110465925038218/tm2513093d1_6k.htm",
+                  "name": "tm2513093d1_6k.htm",
+                  "type": "6-K",
+                  "document_type": "event_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://www.nokia.com/system/files/2025-04/nokia_slides_2025_q1.pdf",
+              "name": "nokia_slides_2025_q1.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://www.nokia.com/system/files/2025-04/nokia_factsheet_2025_q1.pdf",
+              "name": "nokia_factsheet_2025_q1.pdf",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.nokia.com/about-us/investors/results-reports/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q2",
+          "period_end": "2025-06-30",
+          "release_date": "2025-07-24",
+          "filings": [
+            {
+              "accession_number": "0001104659-25-070159",
+              "form": "6-K",
+              "filing_date": "2025-07-24",
+              "report_date": "2025-07-24",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/924613/000110465925070159/0001104659-25-070159-index.html",
+              "documents": [
+                {
+                  "description": "FORM 6-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/924613/000110465925070159/tm2521634d1_6k.htm",
+                  "name": "tm2521634d1_6k.htm",
+                  "type": "6-K",
+                  "document_type": "event_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://www.nokia.com/system/files/2025-07/nokia_factsheet_2025_q2.pdf",
+              "name": "nokia_factsheet_2025_q2.pdf",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.nokia.com/about-us/investors/results-reports/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            },
+            {
+              "type": "earnings_presentation",
+              "status": "not_published_on_official_archive"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q3",
+          "period_end": "2025-09-30",
+          "release_date": "2025-10-23",
+          "filings": [
+            {
+              "accession_number": "0001104659-25-101680",
+              "form": "6-K",
+              "filing_date": "2025-10-23",
+              "report_date": "2025-10-23",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/924613/000110465925101680/0001104659-25-101680-index.html",
+              "documents": [
+                {
+                  "description": "FORM 6-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/924613/000110465925101680/tm2529343d1_6k.htm",
+                  "name": "tm2529343d1_6k.htm",
+                  "type": "6-K",
+                  "document_type": "event_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://www.nokia.com/system/files/2025-10/nokia_slides_2025_q3.pdf",
+              "name": "nokia_slides_2025_q3.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://www.nokia.com/system/files/2025-10/nokia_factsheet_2025_q3.pdf",
+              "name": "nokia_factsheet_2025_q3.pdf",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.nokia.com/about-us/investors/results-reports/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q4",
+          "period_end": "2025-12-31",
+          "release_date": "2026-01-29",
+          "filings": [
+            {
+              "accession_number": "0001104659-26-007630",
+              "form": "6-K",
+              "filing_date": "2026-01-29",
+              "report_date": "2026-01-29",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/924613/000110465926007630/0001104659-26-007630-index.html",
+              "documents": [
+                {
+                  "description": "FORM 6-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/924613/000110465926007630/tm264427d3_6k.htm",
+                  "name": "tm264427d3_6k.htm",
+                  "type": "6-K",
+                  "document_type": "event_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001104659-26-007621",
+              "form": "6-K",
+              "filing_date": "2026-01-29",
+              "report_date": "2026-01-29",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/924613/000110465926007621/0001104659-26-007621-index.html",
+              "documents": [
+                {
+                  "description": "FORM 6-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/924613/000110465926007621/tm264427d2_6k.htm",
+                  "name": "tm264427d2_6k.htm",
+                  "type": "6-K",
+                  "document_type": "event_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001104659-26-007608",
+              "form": "6-K",
+              "filing_date": "2026-01-29",
+              "report_date": "2026-01-29",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/924613/000110465926007608/0001104659-26-007608-index.html",
+              "documents": [
+                {
+                  "description": "FORM 6-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/924613/000110465926007608/tm264427d1_6k.htm",
+                  "name": "tm264427d1_6k.htm",
+                  "type": "6-K",
+                  "document_type": "event_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-26-015034",
+              "form": "20-F",
+              "filing_date": "2026-03-05",
+              "report_date": "2025-12-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/924613/000162828026015034/0001628280-26-015034-index.html",
+              "documents": [
+                {
+                  "description": "20-F",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/924613/000162828026015034/nok-20251231.htm",
+                  "name": "ix",
+                  "type": "20-F",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://www.nokia.com/system/files/2026-01/nokia_slides_2025_q4.pdf",
+              "name": "nokia_slides_2025_q4.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://www.nokia.com/system/files/2026-01/nokia_factsheet_2025_q4.pdf",
+              "name": "nokia_factsheet_2025_q4.pdf",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.nokia.com/about-us/investors/results-reports/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q1",
+          "period_end": "2026-03-31",
+          "release_date": "2026-04-23",
+          "filings": [
+            {
+              "accession_number": "0001104659-26-045907",
+              "form": "6-K",
+              "filing_date": "2026-04-21",
+              "report_date": "2026-04-21",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/924613/000110465926045907/0001104659-26-045907-index.html",
+              "documents": [
+                {
+                  "description": "FORM 6-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/924613/000110465926045907/tm2612373d1_6k.htm",
+                  "name": "tm2612373d1_6k.htm",
+                  "type": "6-K",
+                  "document_type": "event_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://www.nokia.com/system/files/2026-04/nokia_slides_2026_q1.pdf",
+              "name": "nokia_slides_2026_q1.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://www.nokia.com/system/files/2026-04/nokia_results_2026_q1.pdf",
+              "name": "nokia_results_2026_q1.pdf",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.nokia.com/about-us/investors/results-reports/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q2",
+          "period_end": "2026-06-30",
+          "release_date": "2026-07-23",
+          "filings": [
+            {
+              "accession_number": "0001104659-26-086081",
+              "form": "6-K",
+              "filing_date": "2026-07-23",
+              "report_date": "2026-07-23",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/924613/000110465926086081/0001104659-26-086081-index.html",
+              "documents": [
+                {
+                  "description": "FORM 6-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/924613/000110465926086081/tm2621179d1_6k.htm",
+                  "name": "tm2621179d1_6k.htm",
+                  "type": "6-K",
+                  "document_type": "event_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://www.nokia.com/system/files/2026-07/nokia_slides_2026_q2.pdf",
+              "name": "nokia_slides_2026_q2.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://www.nokia.com/system/files/2026-07/nokia_factsheet_2026_q2.pdf",
+              "name": "nokia_factsheet_2026_q2.pdf",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            },
+            {
+              "url": "https://www.nokia.com/system/files/2026-07/nokia_results_2026_q2.pdf",
+              "name": "nokia_results_2026_q2.pdf",
+              "description": "earnings release",
+              "type": "IR",
+              "document_type": "earnings_release"
+            }
+          ],
+          "ir_page": "https://www.nokia.com/about-us/investors/results-reports/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        }
+      ]
+    },
+    "RDW": {
+      "name": "Redwire Corporation",
+      "cik": "0001819810",
+      "ir_url": "https://ir.redwirespace.com/news-events/press-releases",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "2025-Q1",
+          "period_end": "2025-03-31",
+          "release_date": "2025-05-12",
+          "filings": [
+            {
+              "accession_number": "0001819810-25-000137",
+              "form": "10-Q",
+              "filing_date": "2025-05-12",
+              "report_date": "2025-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981025000137/0001819810-25-000137-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981025000137/rdw-20250331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001819810-25-000133",
+              "form": "8-K",
+              "filing_date": "2025-05-12",
+              "report_date": "2025-05-12",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981025000133/0001819810-25-000133-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981025000133/rdw-20250512.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981025000133/exhibit991redwire3312025ea.htm",
+                  "name": "exhibit991redwire3312025ea.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_5d9cc53bfa228bd0badf72595ba1bfd9/redwirespace/db/880/7598/presentation/Earnings+Presentation+3.31.2025.pdf",
+              "name": "Earnings+Presentation+3.31.2025.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://ir.redwirespace.com/news-events/press-releases",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q2",
+          "period_end": "2025-06-30",
+          "release_date": "2025-08-06",
+          "filings": [
+            {
+              "accession_number": "0001819810-25-000212",
+              "form": "8-K",
+              "filing_date": "2025-08-06",
+              "report_date": "2025-08-06",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981025000212/0001819810-25-000212-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981025000212/rdw-20250806.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.,1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981025000212/exhibit991redwire6302025ea.htm",
+                  "name": "exhibit991redwire6302025ea.htm",
+                  "type": "EX-99.,1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001819810-25-000215",
+              "form": "10-Q",
+              "filing_date": "2025-08-07",
+              "report_date": "2025-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981025000215/0001819810-25-000215-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981025000215/rdw-20250630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_5d9cc53bfa228bd0badf72595ba1bfd9/redwirespace/db/880/7615/presentation/Earnings+Presentation+6.30.2025.pdf",
+              "name": "Earnings+Presentation+6.30.2025.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://ir.redwirespace.com/news-events/press-releases",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q3",
+          "period_end": "2025-09-30",
+          "release_date": "2025-11-06",
+          "filings": [
+            {
+              "accession_number": "0001819810-25-000244",
+              "form": "8-K",
+              "filing_date": "2025-11-05",
+              "report_date": "2025-11-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981025000244/0001819810-25-000244-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981025000244/rdw-20251105.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981025000244/exhibit991redwire9302025ea.htm",
+                  "name": "exhibit991redwire9302025ea.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001819810-25-000248",
+              "form": "10-Q",
+              "filing_date": "2025-11-06",
+              "report_date": "2025-09-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981025000248/0001819810-25-000248-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981025000248/rdw-20250930.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_e23d465d43ea200bbfd34eb9a00e13da/redwirespace/db/880/7628/presentation/Earnings+Presentation+9.30.2025.pdf",
+              "name": "Earnings+Presentation+9.30.2025.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://ir.redwirespace.com/news-events/press-releases",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q4",
+          "period_end": "2025-12-31",
+          "release_date": "2026-02-25",
+          "filings": [
+            {
+              "accession_number": "0001819810-26-000017",
+              "form": "8-K",
+              "filing_date": "2026-02-25",
+              "report_date": "2026-02-20",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981026000017/0001819810-26-000017-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981026000017/rdw-20260220.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981026000017/exhibit991redwire12312025e.htm",
+                  "name": "exhibit991redwire12312025e.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001819810-26-000029",
+              "form": "10-K",
+              "filing_date": "2026-02-27",
+              "report_date": "2025-12-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981026000029/0001819810-26-000029-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981026000029/rdw-20251231.htm",
+                  "name": "ix",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_e23d465d43ea200bbfd34eb9a00e13da/redwirespace/db/880/7635/presentation/Earnings+Presentation+12.31.2025.pdf",
+              "name": "Earnings+Presentation+12.31.2025.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://ir.redwirespace.com/news-events/press-releases",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q1",
+          "period_end": "2026-03-31",
+          "release_date": "2026-05-06",
+          "filings": [
+            {
+              "accession_number": "0001819810-26-000060",
+              "form": "8-K",
+              "filing_date": "2026-05-06",
+              "report_date": "2026-05-06",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981026000060/0001819810-26-000060-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981026000060/rdw-20260506.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981026000060/exhibit991redwire03312026e.htm",
+                  "name": "exhibit991redwire03312026e.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001819810-26-000063",
+              "form": "10-Q",
+              "filing_date": "2026-05-07",
+              "report_date": "2026-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981026000063/0001819810-26-000063-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981026000063/rdw-20260331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_5d9cc53bfa228bd0badf72595ba1bfd9/redwirespace/db/880/7645/presentation/Earnings+Presentation+03.31.2026.pdf",
+              "name": "Earnings+Presentation+03.31.2026.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://ir.redwirespace.com/news-events/press-releases",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q2",
+          "period_end": "2026-06-30",
+          "release_date": "2026-08-05",
+          "filings": [
+            {
+              "accession_number": "0001819810-26-000121",
+              "form": "8-K",
+              "filing_date": "2026-08-05",
+              "report_date": "2026-08-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981026000121/0001819810-26-000121-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981026000121/rdw-20260805.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981026000121/exhibit991redwire06302026e.htm",
+                  "name": "exhibit991redwire06302026e.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001819810-26-000124",
+              "form": "10-Q",
+              "filing_date": "2026-08-06",
+              "report_date": "2026-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981026000124/0001819810-26-000124-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819810/000181981026000124/rdw-20260630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://ir.rdw.com/news-events/press-releases/detail/240/redwire-corporation-reports-second-quarter-2026-financial",
+              "name": "redwire-corporation-reports-second-quarter-2026-financial",
+              "description": "Redwire Corporation Reports Second Quarter 2026 Financial Results, Achieves Record Revenue, Gross Margins, and Contracted Backlog",
+              "type": "IR",
+              "document_type": "earnings_release"
+            },
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_cab91f250019f0b8fcf89fe6af4082d4/redwirespace/db/880/7652/presentation/Earnings+Presentation+06.30.2026.pdf",
+              "name": "Earnings+Presentation+06.30.2026.pdf",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://ir.redwirespace.com/news-events/press-releases",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        }
+      ]
+    },
+    "RKLB": {
+      "name": "Rocket Lab Corporation",
+      "cik": "0001819994",
+      "ir_url": "https://investors.rocketlabcorp.com/financial-information/quarterly-results",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "2025-Q1",
+          "period_end": "2025-03-31",
+          "release_date": "2025-05-08",
+          "filings": [
+            {
+              "accession_number": "0001628280-25-023857",
+              "form": "10-Q",
+              "filing_date": "2025-05-08",
+              "report_date": "2025-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000162828025023857/0001628280-25-023857-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000162828025023857/rklb-20250331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-25-023816",
+              "form": "8-K",
+              "filing_date": "2025-05-08",
+              "report_date": "2025-05-08",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000162828025023816/0001628280-25-023816-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000162828025023816/rklb-20250508.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819994/000162828025023816/rklb-05082025ex991.htm",
+                  "name": "rklb-05082025ex991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://investors.rocketlabcorp.com/static-files/bbf2962a-dc50-4fe1-90e9-75caa0b8e68d",
+              "name": "bbf2962a-dc50-4fe1-90e9-75caa0b8e68d",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://investors.rocketlabcorp.com/financial-information/quarterly-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q2",
+          "period_end": "2025-06-30",
+          "release_date": "2025-08-07",
+          "filings": [
+            {
+              "accession_number": "0001628280-25-038936",
+              "form": "10-Q",
+              "filing_date": "2025-08-07",
+              "report_date": "2025-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000162828025038936/0001628280-25-038936-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000162828025038936/rklb-20250630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-25-038900",
+              "form": "8-K",
+              "filing_date": "2025-08-07",
+              "report_date": "2025-08-07",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000162828025038900/0001628280-25-038900-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000162828025038900/rklb-20250807.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819994/000162828025038900/rklb-08072025ex991.htm",
+                  "name": "rklb-08072025ex991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://investors.rocketlabcorp.com/static-files/815a4786-20f5-4f20-be8a-2bbfc8d75449",
+              "name": "815a4786-20f5-4f20-be8a-2bbfc8d75449",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://investors.rocketlabcorp.com/financial-information/quarterly-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q3",
+          "period_end": "2025-09-30",
+          "release_date": "2025-11-10",
+          "filings": [
+            {
+              "accession_number": "0001819994-25-000021",
+              "form": "10-Q",
+              "filing_date": "2025-11-10",
+              "report_date": "2025-09-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999425000021/0001819994-25-000021-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000181999425000021/rklb-20250930.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001819994-25-000020",
+              "form": "8-K",
+              "filing_date": "2025-11-10",
+              "report_date": "2025-11-07",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999425000020/0001819994-25-000020-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000181999425000020/rklb-20251107.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999425000020/rklb-11102025ex991.htm",
+                  "name": "rklb-11102025ex991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://investors.rocketlabcorp.com/static-files/f2e2847c-5660-4b81-8bf7-709f61289898",
+              "name": "f2e2847c-5660-4b81-8bf7-709f61289898",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://investors.rocketlabcorp.com/financial-information/quarterly-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q4",
+          "period_end": "2025-12-31",
+          "release_date": "2026-02-26",
+          "filings": [
+            {
+              "accession_number": "0001819994-26-000013",
+              "form": "10-K",
+              "filing_date": "2026-02-26",
+              "report_date": "2025-12-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999426000013/0001819994-26-000013-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000181999426000013/rklb-20251231.htm",
+                  "name": "ix",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001819994-26-000012",
+              "form": "8-K",
+              "filing_date": "2026-02-26",
+              "report_date": "2026-02-26",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999426000012/0001819994-26-000012-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000181999426000012/rklb-20260226.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999426000012/rklb-02262026ex991.htm",
+                  "name": "rklb-02262026ex991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://investors.rocketlabcorp.com/static-files/be9441ad-c07f-49c2-ad50-531fd77180ee",
+              "name": "be9441ad-c07f-49c2-ad50-531fd77180ee",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://investors.rocketlabcorp.com/financial-information/quarterly-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q1",
+          "period_end": "2026-03-31",
+          "release_date": "2026-05-07",
+          "filings": [
+            {
+              "accession_number": "0001819994-26-000028",
+              "form": "10-Q",
+              "filing_date": "2026-05-07",
+              "report_date": "2026-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999426000028/0001819994-26-000028-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000181999426000028/rklb-20260331.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001819994-26-000027",
+              "form": "8-K",
+              "filing_date": "2026-05-07",
+              "report_date": "2026-05-07",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999426000027/0001819994-26-000027-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000181999426000027/rklb-20260507.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999426000027/rklb-05072026ex991.htm",
+                  "name": "rklb-05072026ex991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://investors.rocketlabcorp.com/static-files/c0bd4327-c3ff-4843-8eae-8b0d8a4d4b82",
+              "name": "c0bd4327-c3ff-4843-8eae-8b0d8a4d4b82",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://investors.rocketlabcorp.com/financial-information/quarterly-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q2",
+          "period_end": "2026-06-30",
+          "release_date": "2026-08-10",
+          "filings": [
+            {
+              "accession_number": "0001819994-26-000062",
+              "form": "10-Q",
+              "filing_date": "2026-08-10",
+              "report_date": "2026-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999426000062/0001819994-26-000062-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000181999426000062/rklb-20260630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001819994-26-000061",
+              "form": "8-K",
+              "filing_date": "2026-08-10",
+              "report_date": "2026-08-10",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999426000061/0001819994-26-000061-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1819994/000181999426000061/rklb-20260810.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1819994/000181999426000061/rklb-08102026ex991.htm",
+                  "name": "rklb-08102026ex991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://investors.rocketlabcorp.com/static-files/3dde8e68-7ce6-4685-8c0b-17afc94dbb86",
+              "name": "3dde8e68-7ce6-4685-8c0b-17afc94dbb86",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://investors.rocketlabcorp.com/news-releases/news-release-details/rocket-lab-announces-second-quarter-2026-financial-results-posts",
+              "name": "rocket-lab-announces-second-quarter-2026-financial-results-posts",
+              "description": "earnings release",
+              "type": "IR",
+              "document_type": "earnings_release"
+            }
+          ],
+          "ir_page": "https://investors.rocketlabcorp.com/financial-information/quarterly-results",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        }
+      ]
+    },
+    "TSLA": {
+      "name": "Tesla, Inc.",
+      "cik": "0001318605",
+      "ir_url": "https://ir.tesla.com/",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "2025-Q1",
+          "period_end": "2025-03-31",
+          "release_date": "2025-04-22",
+          "filings": [
+            {
+              "accession_number": "0001628280-25-018851",
+              "form": "8-K",
+              "filing_date": "2025-04-22",
+              "report_date": "2025-04-22",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018851/0001628280-25-018851-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018851/tsla-20250422.htm",
+                  "name": "tsla-20250422.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018851/exhbit991.htm",
+                  "name": "exhbit991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "shareholder_update"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-25-018911",
+              "form": "10-Q",
+              "filing_date": "2025-04-23",
+              "report_date": "2025-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018911/0001628280-25-018911-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018911/tsla-20250331.htm",
+                  "name": "tsla-20250331.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://ir.tesla.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q2",
+          "period_end": "2025-06-30",
+          "release_date": "2025-07-23",
+          "filings": [
+            {
+              "accession_number": "0001628280-25-035738",
+              "form": "8-K",
+              "filing_date": "2025-07-23",
+              "report_date": "2025-07-23",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035738/0001628280-25-035738-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035738/tsla-20250723.htm",
+                  "name": "tsla-20250723.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035738/exhibit991.htm",
+                  "name": "exhibit991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "shareholder_update"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-25-035806",
+              "form": "10-Q",
+              "filing_date": "2025-07-24",
+              "report_date": "2025-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035806/0001628280-25-035806-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035806/tsla-20250630.htm",
+                  "name": "tsla-20250630.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://ir.tesla.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q3",
+          "period_end": "2025-09-30",
+          "release_date": "2025-10-22",
+          "filings": [
+            {
+              "accession_number": "0001628280-25-045861",
+              "form": "8-K",
+              "filing_date": "2025-10-22",
+              "report_date": "2025-10-22",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045861/0001628280-25-045861-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045861/tsla-20251022.htm",
+                  "name": "tsla-20251022.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045861/exhibit991.htm",
+                  "name": "exhibit991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "shareholder_update"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-25-045968",
+              "form": "10-Q",
+              "filing_date": "2025-10-23",
+              "report_date": "2025-09-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/0001628280-25-045968-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm",
+                  "name": "tsla-20250930.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://ir.tesla.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q4",
+          "period_end": "2025-12-31",
+          "release_date": "2026-01-28",
+          "filings": [
+            {
+              "accession_number": "0001628280-26-003837",
+              "form": "8-K",
+              "filing_date": "2026-01-28",
+              "report_date": "2026-01-28",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003837/0001628280-26-003837-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003837/tsla-20260128.htm",
+                  "name": "tsla-20260128.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003837/exhibit991.htm",
+                  "name": "exhibit991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "shareholder_update"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-26-003952",
+              "form": "10-K",
+              "filing_date": "2026-01-29",
+              "report_date": "2025-12-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/0001628280-26-003952-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+                  "name": "tsla-20251231.htm",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://ir.tesla.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q1",
+          "period_end": "2026-03-31",
+          "release_date": "2026-04-22",
+          "filings": [
+            {
+              "accession_number": "0001628280-26-026551",
+              "form": "8-K",
+              "filing_date": "2026-04-22",
+              "report_date": "2026-04-22",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026551/0001628280-26-026551-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026551/tsla-20260422.htm",
+                  "name": "tsla-20260422.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026551/exhibit991.htm",
+                  "name": "exhibit991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "shareholder_update"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-26-026673",
+              "form": "10-Q",
+              "filing_date": "2026-04-23",
+              "report_date": "2026-03-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/0001628280-26-026673-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/tsla-20260331.htm",
+                  "name": "tsla-20260331.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://ir.tesla.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q2",
+          "period_end": "2026-06-30",
+          "release_date": "2026-07-22",
+          "filings": [
+            {
+              "accession_number": "0001628280-26-049213",
+              "form": "8-K",
+              "filing_date": "2026-07-22",
+              "report_date": "2026-07-22",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049213/0001628280-26-049213-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049213/tsla-20260722.htm",
+                  "name": "tsla-20260722.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049213/exhibit991.htm",
+                  "name": "exhibit991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "shareholder_update"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-26-049270",
+              "form": "10-Q",
+              "filing_date": "2026-07-23",
+              "report_date": "2026-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/0001628280-26-049270-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/tsla-20260630.htm",
+                  "name": "tsla-20260630.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://ir.tesla.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

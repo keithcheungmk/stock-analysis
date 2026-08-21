@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Local environment and editor files
+.env
+.env.*
+.DS_Store
+.vscode/
+
+# Generated analysis artifacts and caches
+output/*.csv
+output/*.json
+output/*.png
+output/*.log
+output/imported/
+output/migration/
+
+# Keep generated Markdown reports trackable when desired
+!output/*.md
+
+# Raw filings live on OneDrive (see scripts/link_onedrive_raw.sh).
+# Ignore the local symlink so a personal CloudStorage path is never committed.
+/data/raw
+
+# If data/raw is ever a real directory again, still keep heavy binaries out of git
+data/raw/**/*.html
+data/raw/**/*.pdf
+data/raw/**/*.xlsx
+data/raw/**/*.docx
+data/raw/**/*.jpeg
+data/raw/**/*.jpg
+data/raw/**/*.png
+data/raw/**/*.zip
+data/raw/**/*.jsx
+
+# Never track private portfolio or broker documents
+data/private/
+**/ActivityStatement*.pdf
+**/IB statement*.pdf
+
+# Download / migration scratch (local only)
+data/.migration-staging/
+data/.official-download-staging/
+
+# Office lock / temp files
+~$*
+**/~$*

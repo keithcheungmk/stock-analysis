@@ -1,0 +1,20 @@
+# Stock analysis configuration
+default_symbol: TSLA
+history_period: 1y
+history_interval: 1d
+
+peers:
+  - RIVN
+  - NIO
+  - GM
+  - F
+
+technical:
+  ma_windows: [20, 50, 200]
+  rsi_period: 14
+  macd:
+    fast: 12
+    slow: 26
+    signal: 9
+
+output_dir: output

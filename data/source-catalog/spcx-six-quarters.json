@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-16T01:20:00+08:00",
+  "generated_at": "2026-08-15T17:20:27.417500+00:00",
+  "companies": {
+    "SPCX": {
+      "name": "Space Exploration Technologies Corp.",
+      "cik": "0001181412",
+      "ir_url": "https://ir.spacex.com/",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "2025-Q1",
+          "period_end": "2025-03-31",
+          "release_date": null,
+          "filings": [],
+          "ir_documents": [],
+          "ir_page": "https://ir.spacex.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q2",
+          "period_end": "2025-06-30",
+          "release_date": null,
+          "filings": [],
+          "ir_documents": [],
+          "ir_page": "https://ir.spacex.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q3",
+          "period_end": "2025-09-30",
+          "release_date": null,
+          "filings": [],
+          "ir_documents": [],
+          "ir_page": "https://ir.spacex.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2025-Q4",
+          "period_end": "2025-12-31",
+          "release_date": null,
+          "filings": [],
+          "ir_documents": [],
+          "ir_page": "https://ir.spacex.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q1",
+          "period_end": "2026-03-31",
+          "release_date": null,
+          "filings": [],
+          "ir_documents": [],
+          "ir_page": "https://ir.spacex.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q2",
+          "period_end": "2026-06-30",
+          "release_date": "2026-08-04",
+          "filings": [
+            {
+              "accession_number": "0001628280-26-052535",
+              "form": "10-Q",
+              "filing_date": "2026-08-04",
+              "report_date": "2026-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/0001628280-26-052535-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm",
+                  "name": "ix",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001628280-26-052515",
+              "form": "8-K",
+              "filing_date": "2026-08-04",
+              "report_date": "2026-08-04",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052515/0001628280-26-052515-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1181412/000162828026052515/spcx-20260804.htm",
+                  "name": "ix",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052515/earningsreleaseq22608042.htm",
+                  "name": "earningsreleaseq22608042.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://s21.q4cdn.com/184289198/files/doc_financials/2026/q2/SpaceX-Reports-Second-Quarter-2026-Results.pdf",
+              "name": "SpaceX-Reports-Second-Quarter-2026-Results.pdf",
+              "description": "earnings release",
+              "type": "IR",
+              "document_type": "earnings_release"
+            }
+          ],
+          "ir_page": "https://ir.spacex.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

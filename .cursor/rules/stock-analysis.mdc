@@ -1,0 +1,25 @@
+---
+description: Stock analysis project conventions and CLI usage
+alwaysApply: true
+---
+
+# Stock Analysis Project
+
+- Project root: `/Users/keith/Documents/stock-analysis/`
+- Run analysis: `source .venv/bin/activate && python src/main.py SYMBOL`
+- Do not commit `.venv/` or large CSV caches
+- Data source: yfinance (free, delayed) — not for live trading
+- Before quoting financial figures, search `data/raw/{SYMBOL}/` and validate its
+  manifests with `python scripts/validate_raw_manifests.py --root data/raw`
+- For symbols in `config/official_sources.yaml`, also require
+  `--coverage-config config/official_sources.yaml`; inspect `pending_sources`
+  and `unavailable_sources` before calling a six-quarter package complete
+- Source priority: regulatory filing / official IR > official presentation >
+  third-party research > yfinance; never let an aggregator override an official figure
+- Treat `source_tier: unverified` as a research lead, not authoritative evidence
+- State fiscal period, currency, accounting basis, source, and validation status
+  for material financial figures; stop the verdict if a critical figure is disputed
+- Never expose or index files under `~/Documents/stock-analysis-private/`
+- User-facing summaries: Traditional Chinese
+- Reports must include disclaimer: research only, not investment advice
+- Extend modules in `src/` — keep `main.py` as thin CLI orchestrator

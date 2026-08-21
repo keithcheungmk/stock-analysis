@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IREN Framework 1 初篩</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:4rem;font-weight:800;line-height:1;color:var(--fail);margin:8px 0 0}
+  .score-den{font-size:1.1rem;color:var(--muted);font-weight:600}
+  .meter{height:10px;background:rgba(255,255,255,.7);border-radius:999px;overflow:hidden;margin-top:14px;border:1px solid #fca5a5}
+  .meter>span{display:block;height:100%;width:46.2%;background:linear-gradient(90deg,#dc2626,#f97316)}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0 0 14px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3,.score-grid{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dim{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left-width:5px}
+  .dim.s10{border-left-color:var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 40%)}
+  .dim.s5{border-left-color:var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 40%)}
+  .dim.s0{border-left-color:var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 40%)}
+  .dim-top{display:flex;justify-content:space-between;gap:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dim-name{font-weight:800}
+  .pill{border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:800}
+  .pill.s10{background:var(--pass-soft);color:var(--pass)}.pill.s5{background:var(--watch-soft);color:var(--watch)}.pill.s0{background:var(--fail-soft);color:var(--fail)}
+  .dim-evidence{color:var(--muted);font-size:.9rem;margin:8px 0 4px}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 1</div>
+      <div class="score-num">FAIL</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge fail">紅線 1 觸發</span>
+        <span class="badge fail">停止正式評分</span>
+      </div>
+      <p class="sans muted" style="margin:10px 0 0">非正式參考 55／130 · 低於 WATCH 65</p>
+    </div>
+    <div class="hero-main">
+      <h1>IREN · Framework 1 基本面初篩</h1>
+      <p>IREN Limited · 2026-08-15 · FY2026-Q3 官方 8-K（2026-05-07）· USD US GAAP unaudited</p>
+      <div class="badges">
+        <span class="badge">現價 US$44.06 delayed</span>
+        <span class="badge">持倉 1,080 @ ~US$60</span>
+        <span class="badge">核心 KPI：已入帳 AI Cloud 收入</span>
+      </div>
+    </div>
+  </section>
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">現價（延遲 8/14）</div><div class="value">US$44.06</div></div>
+    <div class="kpi green"><div class="label">Q3 AI Cloud</div><div class="value">US$33.6M</div></div>
+    <div class="kpi orange"><div class="label">Contracted ARR</div><div class="value">US$3.1bn</div></div>
+    <div class="kpi red"><div class="label">Q3 FCF</div><div class="value">−US$1.28B</div></div>
+  </div>
+  <div class="sections">
+    <section class="panel">
+      <h2>初篩結論</h2>
+      <div class="callout fail">
+        <strong>FAIL（紅線否決）。</strong>最大亮點係 Microsoft US$9.7bn 同 NVIDIA US$3.4bn 已喺官方 8-K 確認。最大風險係現金 US$2.21B 低於有息負債約 US$3.96B，而且單季 FCF 約 −US$1.28B。即使豁免紅線，非正式 55 分都未到 WATCH。
+      </div>
+    </section>
+    <section class="panel">
+      <h2>致命紅線掃描</h2>
+      <div class="grid-3">
+        <div class="box" style="background:linear-gradient(180deg,#fef2f2,#fff)"><h3>① 流動性 — 觸發</h3><p>現金 US$2,213m &lt; 可轉債 US$3,688m＋租賃 US$274m。FCF 約 −US$1.28B。兩者同時成立。</p></div>
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)"><h3><span class="safe">② 衰退陷阱 — 安全</span></h3><p>YoY ~0%，唔低於 CLSK −30.5%。淨利率雖負，第一項未成立。</p></div>
+        <div class="box" style="background:linear-gradient(180deg,#fff7ed,#fff)"><h3>③ 估值泡沫 — 未否決</h3><p>PEG 不可靠；trailing P/S 20.8×，但有 US$3.1bn ARR 支持。</p></div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Adversarial 同下一步</h2>
+      <div class="grid-3">
+        <div class="box" style="border-top:4px solid var(--pass)"><h3>最強支持</h3><p>官方 hyperscaler／NVIDIA 合約；AI 收入兩季翻倍；Adj. EBITDA margin 41%。</p></div>
+        <div class="box" style="border-top:4px solid var(--fail)"><h3>最強反證</h3><p>現金少於可轉債；FCF 惡化；總營收因拆 ASIC 打平；持續發股。</p></div>
+        <div class="box" style="border-top:4px solid var(--watch)"><h3>最易失效</h3><p>GPU／Horizon 延誤，mining 已拆、AI 未計費。</p></div>
+      </div>
+      <div class="callout info" style="margin-top:14px">解除紅線：現金 ≥ 有息負債，或單季 FCF ≥ 0。按要求繼續 Framework 2。</div>
+    </section>
+  </div>
+  <p class="footer">來源：SEC 8-K EX-99.1 2026-05-07。現價 yfinance delayed。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body></html>
