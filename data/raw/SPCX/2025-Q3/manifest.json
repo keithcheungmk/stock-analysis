@@ -1,0 +1,33 @@
+{
+  "schema_version": 2,
+  "company": "Space Exploration Technologies Corp.",
+  "ticker": "SPCX",
+  "fiscal_period": "2025-Q3",
+  "period_end": "2025-09-30",
+  "authority": "Official company IR and SEC EDGAR",
+  "event_page": "https://ir.spacex.com/",
+  "files": [],
+  "currency": "USD",
+  "accounting_basis": [
+    "US_GAAP",
+    "Non_GAAP"
+  ],
+  "cik": "0001181412",
+  "retrieved_at": "2026-08-21T17:12:20.700351+00:00",
+  "unavailable_sources": [
+    {
+      "type": "standalone_10q",
+      "status": "not_filed_as_public_company",
+      "substitute": "ipo_prospectus_package",
+      "substitute_path": "../_ipo/"
+    },
+    {
+      "type": "official_transcript",
+      "status": "not_part_of_standard_official_package",
+      "substitute": "webcast_metadata"
+    }
+  ],
+  "pending_sources": [],
+  "validation_status": "partial",
+  "notes": "Pre-IPO / no standalone public 10-Q; use data/raw/SPCX/_ipo S-1/424B4 figures with period tags."
+}
