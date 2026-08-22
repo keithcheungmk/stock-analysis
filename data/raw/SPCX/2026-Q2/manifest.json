@@ -1,0 +1,109 @@
+{
+  "schema_version": 2,
+  "company": "Space Exploration Technologies Corp.",
+  "ticker": "SPCX",
+  "fiscal_period": "2026-Q2",
+  "period_end": "2026-06-30",
+  "authority": "Official company IR and SEC EDGAR",
+  "event_page": "https://ir.spacex.com/",
+  "files": [
+    {
+      "path": "ir-ir-official-ir-spacex-reports-second-quarter-2026-results.pdf",
+      "type": "earnings_release",
+      "source_tier": "official",
+      "source_url": "https://s21.q4cdn.com/184289198/files/doc_financials/2026/q2/SpaceX-Reports-Second-Quarter-2026-Results.pdf",
+      "source_authority": "Official company IR",
+      "sha256": "4829f4b93d366f14b19fb5912e91a781166b7208b5ad76212d825466910f7f79",
+      "size_bytes": 5622366,
+      "mime_type": "application/pdf",
+      "period_end": "2026-06-30",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "retrieved_at": "2026-08-21T17:12:20.700714+00:00",
+      "validation_status": "verified"
+    },
+    {
+      "path": "sec-10-q-0001628280-26-052535-spcx-20260630.html",
+      "type": "regulatory_filing",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm",
+      "source_authority": "SEC EDGAR",
+      "sha256": "2b6762e149c2af81f1f840acb7541e0df8b420cb18e0058d59b451721418ff88",
+      "size_bytes": 2271923,
+      "mime_type": "text/html",
+      "period_end": "2026-06-30",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "retrieved_at": "2026-08-21T17:12:20.700714+00:00",
+      "validation_status": "verified",
+      "filing_form": "10-Q",
+      "accession_number": "0001628280-26-052535",
+      "filing_date": "2026-08-04"
+    },
+    {
+      "path": "sec-8-k-0001628280-26-052515-earningsreleaseq22608042.html",
+      "type": "earnings_release",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052515/earningsreleaseq22608042.htm",
+      "source_authority": "SEC EDGAR",
+      "sha256": "dd1d9de38215b8fba3da0d5aa5dc2ff6193ec747a5930fe48c16aa3afe491cb9",
+      "size_bytes": 33535,
+      "mime_type": "text/html",
+      "period_end": "2026-06-30",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "retrieved_at": "2026-08-21T17:12:20.700714+00:00",
+      "validation_status": "verified",
+      "filing_form": "8-K",
+      "accession_number": "0001628280-26-052515",
+      "filing_date": "2026-08-04"
+    },
+    {
+      "path": "sec-8-k-0001628280-26-052515-spcx-20260804.html",
+      "type": "event_filing",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052515/spcx-20260804.htm",
+      "source_authority": "SEC EDGAR",
+      "sha256": "acea2f27c4fb07add04f4826713bb6c3e686be2c716fd032173357c043d90e43",
+      "size_bytes": 26144,
+      "mime_type": "text/html",
+      "period_end": "2026-06-30",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "retrieved_at": "2026-08-21T17:12:20.700714+00:00",
+      "validation_status": "verified",
+      "filing_form": "8-K",
+      "accession_number": "0001628280-26-052515",
+      "filing_date": "2026-08-04"
+    }
+  ],
+  "currency": "USD",
+  "accounting_basis": [
+    "US_GAAP",
+    "Non_GAAP"
+  ],
+  "cik": "0001181412",
+  "release_date": "2026-08-04",
+  "retrieved_at": "2026-08-21T17:12:20.700714+00:00",
+  "unavailable_sources": [
+    {
+      "type": "official_transcript",
+      "status": "not_part_of_standard_official_package",
+      "substitute": "webcast_metadata"
+    }
+  ],
+  "pending_sources": [],
+  "validation_status": "complete"
+}

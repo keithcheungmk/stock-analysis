@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "company": "Space Exploration Technologies Corp.",
+  "ticker": "SPCX",
+  "fiscal_period": "_events",
+  "period_end": "2026-08-14",
+  "authority": "SEC EDGAR",
+  "event_page": "https://ir.spacex.com/",
+  "files": [
+    {
+      "path": "sec-8-k-0001628280-26-056945-spcx-20260814.html",
+      "type": "event_filing",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026056945/spcx-20260814.htm",
+      "source_authority": "SEC EDGAR",
+      "sha256": "e35f4ba1b1dc32abe8986e5553d6c652a30307db6c1e24d9bbdd0c2616859260",
+      "size_bytes": 28791,
+      "mime_type": "text/html",
+      "filing_form": "8-K",
+      "accession_number": "0001628280-26-056945",
+      "filing_date": "2026-08-14",
+      "period_end": "2026-08-14",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP"
+      ],
+      "retrieved_at": "2026-08-21T17:13:09.791384+00:00",
+      "validation_status": "verified",
+      "notes": "Cursor acquisition closing"
+    }
+  ],
+  "currency": "USD",
+  "accounting_basis": [
+    "US_GAAP"
+  ],
+  "cik": "0001181412",
+  "retrieved_at": "2026-08-21T17:13:09.791546+00:00",
+  "pending_sources": [],
+  "unavailable_sources": [],
+  "validation_status": "complete"
+}
