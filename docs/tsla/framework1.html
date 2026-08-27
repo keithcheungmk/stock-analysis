@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TSLA Framework 1 初篩</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:4rem;font-weight:800;line-height:1;color:var(--watch);margin:8px 0 0}
+  .score-den{font-size:1.1rem;color:var(--muted);font-weight:600}
+  .meter{height:10px;background:rgba(255,255,255,.7);border-radius:999px;overflow:hidden;margin-top:14px;border:1px solid #fdba74}
+  .meter>span{display:block;height:100%;width:57.7%;background:linear-gradient(90deg,#f97316,#eab308)}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.watch{background:var(--watch-soft);color:var(--watch);border-color:transparent}
+  .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3,.score-grid{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .warn{color:var(--watch);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dim{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left-width:5px}
+  .dim.s10{border-left-color:var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 40%)}
+  .dim.s5{border-left-color:var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 40%)}
+  .dim.s0{border-left-color:var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 40%)}
+  .dim-top{display:flex;justify-content:space-between;gap:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dim-name{font-weight:800}
+  .pill{border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:800}
+  .pill.s10{background:var(--pass-soft);color:var(--pass)}.pill.s5{background:var(--watch-soft);color:var(--watch)}.pill.s0{background:var(--fail-soft);color:var(--fail)}
+  .dim-evidence{color:var(--muted);font-size:.9rem;margin:8px 0 4px}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#134e4a;color:#fff;border-color:#134e4a}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 1</div>
+      <div class="score-num">WATCH</div>
+      <div class="score-den">75 / 130</div>
+      <div class="meter"><span></span></div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge pass">紅線全過</span>
+        <span class="badge watch">距離 PASS 差 15 分</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>TSLA · Framework 1 基本面初篩</h1>
+      <p>Tesla, Inc. · 截至 2026-08-27 · 最新季 2026-Q2（期終 2026-06-30）· USD · US GAAP · SEC 8-K EX-99.1 + 10-Q</p>
+      <div class="badges">
+        <span class="badge">現價 US$345.82 delayed</span>
+        <span class="badge">市值 ~US$1.37T</span>
+        <span class="badge">主對照：GM／F／RIVN／BYD</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">現價（延遲 8/26）</div><div class="value">US$345.82</div><div class="note">3 個月 −21.5% · 未觸發股價爆發</div></div>
+    <div class="kpi green"><div class="label">Q2 2026 營收</div><div class="value">US$28.24B</div><div class="note">YoY +26% · 交付 480,126（+25%）</div></div>
+    <div class="kpi green"><div class="label">現金＋短期投資</div><div class="value">US$43.52B</div><div class="note">有息債務＋融資租賃 US$9.34B</div></div>
+    <div class="kpi red"><div class="label">Q2 官方 FCF</div><div class="value">−US$1.09B</div><div class="note">非 GAAP EPS US$0.33 vs 共識 US$0.54</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>初篩結論</h2>
+      <div class="callout watch verdict">
+        <p><strong>WATCH（75／130）。</strong>三條致命紅線全部通過：現金＋短期投資 US$43.52B 約為有息債務＋融資租賃 4.7 倍，所以即使官方自由現金流（FCF，Free Cash Flow＝經營現金流減 capex）單季 −US$1.09B 都唔構成破產紅線；Q2 營收 +26% 明顯高過 GM（+1.9%）同 Ford（−4%）。評分停喺觀察區，因為淨利率、ROE（Return on Equity）、FCF 同 PEG（Price/Earnings-to-Growth）四項全係 0 分——市場用約 323 倍 trailing 盈利、5 倍 PEG 預支 Robotaxi 同 Optimus。</p>
+        <p>正在被驗證嘅支柱係 L1 汽車基本盤重新擴張：紀錄 Q2 交付 480,126 輛（+25%）、FSD（Full Self-Driving，Supervised）訂閱 1.48m（+56%）、儲能部署 13.5 GWh（+41%）。呢啲已經入帳，唔使賭 8-K 以外嘅參觀紀要。</p>
+        <p>仍未成立嘅路徑係盈利自我融資同 AI 變現。經營利潤率只得 1.4%（−57% YoY）；汽車毛利（除積分）16.3%；2026 年 capex 官方寫「超過 US$25B」。Robotaxi 七城同 Cybercab 投產係敘事驗證，累計付費英里仍以百萬計，損益表上未見到獨立 Robotaxi 收入。</p>
+        <p>最大裂痕係「交付爆發 ≠ EPS 爆發」。定義 C 要求單季 EPS beat >15%，今次非 GAAP EPS US$0.33 對共識約 US$0.54（−39%）；近三個月股價 −21.5%，兩條爆發軌道都未觸發。對行動含義：值得納入觀察同進入 Framework 2，但現價已經把自動駕駛選擇權買咗好大一部分，唔支持把交付紀錄當加倉依據。持倉未確認 → <strong>僅觀察，唔好加倉</strong>。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>雙軌爆發（定義 C）</h2>
+      <div class="grid-2">
+        <div class="box" style="background:linear-gradient(180deg,#fef2f2,#fff)">
+          <h3>EPS 爆發 — 未觸發</h3>
+          <p>條件：單季 EPS vs consensus beat &gt;15%。Q2 非 GAAP 稀釋 EPS <strong>US$0.33</strong>，yfinance 共識 US$0.54（−39%）。營收有 beat，但定義唔用營收。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#fef2f2,#fff)">
+          <h3>股價爆發 — 未觸發</h3>
+          <p>條件：3 個月總回報 &gt;+30%。約 5 月底 US$440 收到 8/26 <strong>US$345.82（−21.5%）</strong>。52 週高位 US$498.83 已經大幅回吐。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>致命紅線掃描</h2>
+      <div class="grid-3">
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">① 流動性 — 安全</span></h3>
+          <p>2026-06-30 現金＋短期投資 US$43.52B，有息債務＋融資租賃 US$9.34B（約 4.7×）。Q2 FCF −US$1.09B，但紅線要「現金低於債務 <strong>並且</strong> FCF 為負」同時成立。yfinance 債務 US$16.1B 含經營租賃，已棄用。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">② 衰退陷阱 — 安全</span></h3>
+          <p>Q2 YoY +26%，高過 GM +1.9% 同 Ford −4%。淨利率雖只有 3.9%，但為正而且 Q1→Q2 上升。TTM 營收 US$103.6B 首次超過 US$100B。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#fff7ed,#fff)">
+          <h3><span class="warn">③ 估值泡沫 — 未否決</span></h3>
+          <p>PEG ≈5.13、P/S ≈13.2× 遠高過整車 0.3–1.1×，但低過 Tesla 自身 52 週高位隱含約 19×。近季 +26% 增長令「完全無增長硬泡沫」唔成立，但係主風險。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>四層價值快照</h2>
+      <div class="grid-2">
+        <div class="box"><h3>L1 汽車＋能源</h3><p>交付 480,126（+25%）；汽車收入 US$20.52B（+23%）；汽車毛利 16.9%／除積分 16.3%；儲能 13.5 GWh（+41%）。基本盤在擴，單位利潤在縮。</p></div>
+        <div class="box"><h3>L2 FSD／軟件</h3><p>活躍訂閱 1.48m（+56%）；北美新車附著率超過 55%。仍然標 Supervised，唔等於無人駕駛已經賣緊。</p></div>
+        <div class="box"><h3>L3 Robotaxi</h3><p>七個主要都會區（灣區仍有安全員；佛州三城 7 月開、屬期後）。Cybercab 德州已投產。付費英里仍約百萬級，未入獨立收入。</p></div>
+        <div class="box"><h3>L4 Optimus</h3><p>Fremont 第一代產線安裝中，Outlook 預期 2026 年生產。未有外部銷售。8 月 JPMorgan「2027 H2 外售」只係第三方線索。</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>13 維度評分卡</h2>
+      <div class="grid-3" style="margin-bottom:14px">
+        <div class="box" style="border-top:4px solid var(--pass)"><h3>10 分 · 6 項</h3><p>現金、營收增長、TAM、需求 KPI、行業趨勢、相對標普</p></div>
+        <div class="box" style="border-top:4px solid var(--watch)"><h3>5 分 · 3 項</h3><p>護城河、管理層、預期 vs 實際</p></div>
+        <div class="box" style="border-top:4px solid var(--fail)"><h3>0 分 · 4 項</h3><p>淨利率、估值、ROE、FCF</p></div>
+      </div>
+      <div class="score-grid" id="scoreCards"></div>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="filters sans" id="filters">
+        <button class="active" data-f="all">全部</button>
+        <button data-f="support">支持</button>
+        <button data-f="neutral">中性</button>
+        <button data-f="weaken">削弱</button>
+      </div>
+      <div class="ev-grid" id="evidence"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Adversarial 同下一步</h2>
+      <div class="grid-3">
+        <div class="box" style="border-top:4px solid var(--pass)">
+          <h3>最強支持</h3>
+          <p>交付同營收同時創 Q2 新高，FSD 訂閱按年 +56%，現金＋投資 US$43.5B、幾乎無 recourse 債務。TTM 營收同 TTM FCF 仍為正，流動性唔係問題。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--fail)">
+          <h3>最強反證</h3>
+          <p>經營利潤 −57%、單季 FCF −US$1.1B、2026 capex 超過 US$25B。GAAP 淨利有 SpaceX 未實現收益支撑。Robotaxi／Optimus 未貢獻可驗證收入，估值卻係 323× 盈利。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--watch)">
+          <h3>最易失效</h3>
+          <p>下半年交付增速回到同業水平，同時 capex 繼續高於 OCF，令 TTM FCF 轉負、PEG 維持 &gt;5，市場把 Tesla 重新按車廠倍數定價。</p>
+        </div>
+      </div>
+      <div class="callout info" style="margin-top:14px">
+        <strong>WATCH → PASS（≥90）需要約 +15 分。</strong>可量化路徑：（1）連續兩季官方 FCF ≥ 0；（2）GAAP 淨利率 ≥10% 且唔靠未實現投資收益；（3）trailing PEG ≤1.5，或 P/S 回到約 ≤8× 同時交付仍按年正增長。最近催化：比亞迪 H1 2026-08-28；Q3 財報約 10/21。Framework 2 必挖汽車單位經濟（ASP／積分／FSD 對沖）同 Robotaxi 收入入帳時點。
+      </div>
+    </section>
+  </div>
+
+  <p class="footer">官方優先：SEC 8-K EX-99.1 + 10-Q（2026-07-22／23）；交付 8-K（2026-07-02）。市況 yfinance delayed（2026-08-26）。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const scores=[
+["現金 vs 債務",10,"現金＋短期投資 US$43.52B，有息債務＋融資租賃 US$9.34B（≈4.7×）。幾乎全部係 non-recourse。即使只計現金等價物 US$15.2B 仍高過債務。","現金遠超債務 2 倍"],
+["營收增長",10,"Q2 US$28.24B vs US$22.50B（+26%）。GM +1.9%、Ford −4%、RIVN +27%。TTM US$103.6B 首次超過 US$100B。","近季高於同業超過 10pp"],
+["淨利潤率",0,"Q2 GAAP 淨利 US$1.11B，淨利率約 3.9%；經營利潤率 1.4%（−57% YoY）。含 SpaceX 未實現稅後收益約 US$763M。","低於 10%"],
+["估值（PEG）",0,"PEG ≈5.13；trailing P/E ≈323×；P/S ≈13.2× vs 整車 0.3–1.1×。52 週高位隱含約 19×。","PEG >1.5 且透支盈利"],
+["TAM",10,"全球汽車＋儲能＋Robotaxi／無人駕駛里程＋人形機器人。公司把價值錨喺實體世界 AI。","可觸及 > US$100B"],
+["需求 KPI",10,"交付 480,126（+25%）vs GM −4.2%、Ford 批發 −12%、BYD H1 −16%。FSD 訂閱 1.48m（+56%）作 L2 補充。","高過整車同業超過 20pp"],
+["ROE",0,"TTM GAAP 淨利 US$3.80B / 權益 US$86.86B ≈ 4.4%。","低於 8%"],
+["自由現金流",0,"Q2 官方 FCF −US$1.09B（OCF US$4.70B − capex US$5.79B）。Q1 曾 +US$1.44B。TTM 仍 +US$5.76B。","不穩定且近季為負"],
+["護城河",5,"垂直整合、超充、車隊數據、FSD 飛輪；同時 BYD 純電量領先、Waymo 規模仍大、FSD 仍須監督。","有壁壘但非壟斷"],
+["行業趨勢",10,"電動車＋儲能＋實時 AI／Robotaxi／人形機器人，完全對住實體世界 AI 主線。","完全符合主題"],
+["管理層",5,"紀錄交付、FSD 滲透、Cybercab 投產、七城 Robotaxi；同時 EPS 大 miss、經營利潤腰斬、單季 FCF 轉負。","有成果但盈利執行未領先"],
+["相對 S&P 500",10,"2010-06-29 起總回報約 +21,613%，同期 SPY 約 +876%，超額約 +20,737pp。","高出標普超過 20pp"],
+["預期 vs 實際",5,"近四季非 GAAP EPS：−11%／+11%／+17%／−39%。Q2 營收 beat、EPS 大 miss。","未連續超預期"],
+];
+document.getElementById('scoreCards').innerHTML=scores.map(([n,s,e,w])=>`
+<article class="dim s${s}"><div class="dim-top"><div class="dim-name">${n}</div><span class="pill s${s}">${s} 分</span></div>
+<div class="dim-evidence">${e}</div><div class="dim-why">${w}</div></article>`).join('');
+
+const evidence=[
+{k:"support",type:"資產負債",title:"現金＋短期投資 US$43.52B，約 4.7× 有息債務",body:"2026-06-30 官方 10-Q／EX-99.1：現金等價物 US$15.22B、短期投資 US$28.31B。債務＋融資租賃共 US$9.34B，當中 recourse 只得 US$2M。Q2 FCF 雖負，紅線要現金低於債務並且 FCF 為負同時成立。呢個係而家已經入帳、唔使賭 Robotaxi 嘅安全墊。"},
+{k:"support",type:"交付／營收",title:"Q2 交付 480,126 輛（+25%），營收 +26%",body:"交付 8-K（2026-07-02）同 EX-99.1：Model 3/Y 467,762、其他 12,364，創 Q2 紀錄。總營收 US$28.24B vs 上年 US$22.50B。GM 同期營收只 +1.9%、Ford −4%。增長維度 10 分成立，但唔等於利潤已經跟上。"},
+{k:"support",type:"軟件 KPI",title:"FSD 訂閱 1.48m，按年 +56%",body:"EX-99.1 營運摘要：活躍 FSD 訂閱（含一次過同月費、唔計免費試用）由 0.95m 升到 1.48m。北美新車附著率超過 55%。呢個係 L2 飛輪最硬嘅官方數字，但仍標 Supervised，唔可以當成無人駕駛收入。"},
+{k:"support",type:"長期回報",title:"上市以來大幅跑贏標普",body:"2010-06-29 IPO 起，yfinance 調整後收市顯示 Tesla 約 +21,613%，同期 SPY 約 +876%。超額超過兩萬個百分點，相對回報維度穩得 10 分。呢個係歷史事實，唔保證未來倍數維持。"},
+{k:"neutral",type:"Robotaxi",title:"七城營運＋Cybercab 投產，收入未入帳",body:"EX-99.1：Robotaxi 喺七個主要都會區 live；灣區仍有安全員；佛州邁阿密／奧蘭多／坦帕 7 月才開（期後）。Cybercab 德州已投產，員工試乘 7 月開始。累計付費英里圖軸至約 2.5m。支持敘事，未支持而家呢張損益表已經有 Robotaxi 貢獻。"},
+{k:"weaken",type:"損益",title:"經營利潤 −57%，淨利率只有 3.9%",body:"GAAP 經營收入 US$398M，利潤率 1.4%。汽車毛利（除積分）16.3%，積分收入由上年 US$439M 跌到 US$146M。GAAP 淨利 US$1.11B 含 SpaceX 股權未實現稅前收益 US$1.01B（稅後約 US$763M）。扣掉之後核心盈利更薄，淨利率同 ROE 只能 0 分。"},
+{k:"weaken",type:"現金流",title:"Q2 官方 FCF −US$1.09B，capex +142%",body:"EX-99.1 定義：FCF = OCF − capex。OCF US$4.70B，capex US$5.79B。Q1 仲有 +US$1.44B。10-Q 寫 2026 年 capex 超過 US$25B。TTM FCF 仍 +US$5.76B，所以未破紅線，但評分上近季轉負必須 0 分。yfinance 正 FCF 口徑不同，已棄用其金額。"},
+{k:"weaken",type:"估值／預期",title:"PEG ≈5.1×，Q2 EPS 大 miss 39%",body:"市值約 US$1.37T 除以 TTM 營收 US$103.6B 得 13.2× 銷售；除以 TTM 淨利得約 323× 盈利。非 GAAP EPS US$0.33 vs 共識 US$0.54。近四季 EPS 兩 beat 兩 miss，唔係連續超預期。紅線 3 因有 +26% 增長同未破自身歷史 P/S 極值而不機械 FAIL，估值維度必須 0 分。"},
+];
+const evRoot=document.getElementById('evidence');
+function render(filter){
+  evRoot.innerHTML=evidence.filter(e=>filter==='all'||e.k===filter).map(e=>`
+  <article class="ev ${e.k}"><div class="type">${e.type}<span class="impact ${e.k}">${e.k==='support'?'支持':e.k==='weaken'?'削弱':'中性'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+});
+</script>
+<section id="page-comments" data-page="/tsla/framework1.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

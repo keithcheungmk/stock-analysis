@@ -186,7 +186,7 @@ def hub_html(pages: dict[str, list[dict[str, str]]]) -> str:
     extra = {
         "SPCX": [("./spcx/", "Position Brief（手機投影片）")],
     }
-    preferred = ("NVDA", "SPCX", "IREN", "RKLB", "RDW", "MRNA")
+    preferred = ("TSLA", "NVDA", "SPCX", "IREN", "RKLB", "RDW", "MRNA")
     tickers = [t for t in preferred if t in pages] + [t for t in pages if t not in preferred]
     cards = []
     for ticker in tickers:
