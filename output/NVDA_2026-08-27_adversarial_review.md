@@ -67,4 +67,26 @@
 
 F2 判定：增長 thesis **通過**；現金流／應收 **部分通過**。無關鍵數字爭議需停 verdict。
 
+## Remaining skills 覆核（2026-08-27 稍後；Asia/Hong_Kong）
+
+- **IR／SEC：** IR filings 頁最新仍係 2026-08-26 10-Q／earnings 8-K；2026-08-24 係 Form 4（Ajay Puri 退休），唔係新 8-K。無財報後修正稿。
+- **官方 Newsroom 補漏（已寫入 Skill 5／6／one-pager，唔改 F3 目標價）：**
+  1. 2026-08-26 AWS 額外約 200 萬顆 GPU（2027–2028 部署 Blackwell Ultra／Rubin／Rubin Ultra；另規劃 10 萬顆聯邦安全區）— `confirmed` 新聞稿，**未入帳**。標 MISSING→已 patch 催化劑／thesis；唔當 Q3 P&L。
+  2. 2026-08-24 Groq 3 LPX 量產、SpaceXAI 採用 Vera CPU — `confirmed` 產品新聞，近端財務影響低。
+- **同業官方（Skill 4）：** AMD 8-K／Newsroom 2026-08-04；AVGO 8-K 2026-06-03（Q3 指引 AI US$16.0B 仍未入帳；IR 排期 2026-09-02 公布）；TSMC 2026-07-16；INTC 2026-07-23。曆法唔對齊。
+- **價格：** F3 錨維持 US$209.66（08-26 收市）。yfinance 2026-08-27 delayed 約 US$225.51（IR 頁曾顯示 ~225.47）。估值卡提供切換，**唔重寫 F3 目標價**。
+- **X：** `x_access: degraded` 維持；公開 web 無可用一手帖。唔宣稱已完整監察 X。
+
+| 項目 | 狀態 | 說明 |
+|---|---|---|
+| F3 Bear／Base／Bull | OK | 剩餘技能只引用，無另起 22／26／30 模型 |
+| AWS 200 萬顆 | MISSING→已 patch | Skill 5／6／one-pager；近端 P&L 低 |
+| Form 4 退休 | LEAD_ONLY／雜訊 | 唔寫進財務 thesis |
+| H200 對華 | LEAD_ONLY | 官方 Q3 指引仍寫中國 DC = 0 |
+| delayed US$225 vs 錨 209.66 | OK | 展示層標 delayed；行動仍唔追 |
+
+**Verdict impact：維持。** F1 PASS、F2 增長通過／現金部分通過、F3 對 Base 低估（暫定）。無關鍵數字爭議需停 verdict。
+
+已 patch：`output/NVDA_2026-08-27_peer_comparison.md`、`catalyst_calendar.md`、`thesis_tracker.md` 及對應 HTML、估值卡、one-pager、`NVDA_framework3.html`。
+
 *此分析僅供研究參考，不構成投資建議。*

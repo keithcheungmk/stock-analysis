@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NVDA 估值卡 · Framework 3</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:920px;margin:0 auto;padding:24px 16px 72px}
+  h1{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.7rem;margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 16px}
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.hero{grid-template-columns:1fr}}
+  .big{border-radius:22px;padding:18px;color:#fff;box-shadow:var(--shadow)}
+  .big.navy{background:linear-gradient(145deg,#134e4a,#0f766e)}
+  .big.warn{background:linear-gradient(145deg,#7c2d12,#c2410c)}
+  .big .l{font-size:.72rem;opacity:.85;font-weight:800;letter-spacing:.06em;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .big .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.1rem;font-weight:800;margin:4px 0}
+  .big .d{font-size:.88rem;opacity:.92}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:14px;box-shadow:var(--shadow)}
+  .toggles{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .toggles button,.presets button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
+  .toggles button.on,.presets button.on{background:#134e4a;color:#fff;border-color:#134e4a}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{border:1px solid var(--line);border-radius:12px;padding:10px;border-top:3px solid var(--teal);font-size:.78rem}
+  .kpi .l{color:var(--muted);font-weight:700}.kpi .v{font-weight:800;font-size:1rem;margin-top:2px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:700px){.val-grid{grid-template-columns:1fr}}
+  .val{border-radius:18px;padding:14px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .val.bear{border-top:6px solid var(--fail)}
+  .val.base{border-top:6px solid var(--watch)}
+  .val.bull{border-top:6px solid var(--pass)}
+  .val.on{box-shadow:var(--shadow);transform:translateY(-2px)}
+  .val .tag{font-size:.72rem;font-weight:800;letter-spacing:.08em}
+  .val .px{font-size:1.8rem;font-weight:800;margin:6px 0}
+  .val p{margin:0;color:var(--muted);font-size:.82rem}
+  .ruler{margin:16px 0 8px;position:relative;height:44px}
+  .track{height:10px;background:#e7e0d5;border-radius:999px;position:relative;margin-top:18px}
+  .seg{position:absolute;height:100%;border-radius:999px}
+  .mark{position:absolute;top:-22px;font-size:.68rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;transform:translateX(-50%);white-space:nowrap}
+  .pin{position:absolute;top:-6px;width:4px;height:22px;background:#134e4a;border-radius:4px;transform:translateX(-50%)}
+  .note{margin-top:12px;background:var(--info-soft);border:1px solid #93c5fd;border-radius:14px;padding:12px 14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.88rem}
+  .warnbox{margin-top:12px;background:var(--watch-soft);border:1px solid #fdba74;border-radius:14px;padding:12px 14px;font-size:.88rem}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .disc{font-size:.78rem;color:var(--muted);margin-top:18px;text-align:center}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <p class="sans" style="color:var(--teal);font-weight:800;margin:0 0 8px">估值卡 · 只展示 Framework 3 · 無另起 22／26／30 模型</p>
+  <h1>NVDA · FY2028 normalized P/E</h1>
+  <p class="sub">判定：對 Base 低估（暫定）。行動：等待確認／唔追 delayed。官方 FY2027-Q2 verified；Street 財報後仍在 refresh。</p>
+
+  <div class="hero">
+    <div class="big navy sans">
+      <div class="l" id="priceLabel">F3 價格錨 · 2026-08-26 收市</div>
+      <div class="v" id="priceNow">US$209.66</div>
+      <div class="d" id="priceGap">對 Base US$300 約 +43%</div>
+    </div>
+    <div class="big warn sans">
+      <div class="l">行動</div>
+      <div class="v" style="font-size:1.55rem">唔好加倉</div>
+      <div class="d">建倉觀察區 US$180–205，要全部 F2 確認</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="toggles sans" id="priceToggle">
+      <button class="on" data-p="close" type="button">收市錨 US$209.66</button>
+      <button data-p="delayed" type="button">8/27 delayed US$225.51</button>
+    </div>
+    <div class="kpis sans">
+      <div class="kpi"><div class="l">概率加權</div><div class="v">US$291</div></div>
+      <div class="kpi"><div class="l">Bear 30%</div><div class="v">US$170</div></div>
+      <div class="kpi"><div class="l">Base 50%</div><div class="v">US$300</div></div>
+      <div class="kpi"><div class="l">Bull 20%</div><div class="v">US$450</div></div>
+    </div>
+    <div class="ruler sans" id="ruler"></div>
+    <p class="muted" style="font-size:.78rem;color:var(--muted)">尺：Bear 下沿 152 → Bull 上沿 510。針係所選價格。</p>
+  </div>
+
+  <div class="card">
+    <h2 class="sans" style="margin:0 0 10px;font-size:1.1rem">情景（點擊對照）</h2>
+    <div class="val-grid" id="valGrid">
+      <button class="val bear" data-val="bear" type="button">
+        <div class="tag">BEAR · 30%</div>
+        <div class="px">US$170</div>
+        <p>FY28 收入 US$450B · NM 53.8% · EPS US$10.0 · 17× · 區間 152–189</p>
+      </button>
+      <button class="val base on" data-val="base" type="button">
+        <div class="tag">BASE · 50%</div>
+        <div class="px">US$300</div>
+        <p>FY28 收入 US$550B · NM 54.5% · EPS US$12.5 · 24× · 區間 275–330</p>
+      </button>
+      <button class="val bull" data-val="bull" type="button">
+        <div class="tag">BULL · 20%</div>
+        <div class="px">US$450</div>
+        <p>FY28 收入 US$650B · NM 54.9% · EPS US$15.0 · 30× · 區間 420–510</p>
+      </button>
+    </div>
+    <div class="note" id="valNote"></div>
+    <div class="warnbox">
+      現價約 23.2× FY27／16.0× FY28 street adj EPS（用收市錨）。若市場畀 Base 24×，隱含 FY28 EPS 約 US$8.74、收入約 US$385B——低過本卡 Base US$550B。市場係喺折現 EPS 下修同／或多數壓縮，唔係單純漏咗計增長。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="sans" style="margin:0 0 8px;font-size:1.1rem">官方錨 vs 第三方</h2>
+    <table>
+      <thead><tr><th>項目</th><th class="num">數字</th><th>來源</th></tr></thead>
+      <tbody>
+        <tr><td>TTM 收入／GAAP NI／FCF</td><td class="num">303.0／192.9／126.9B</td><td>官方 TTM 至 Q2 FY27</td></tr>
+        <tr><td>流動性 vs 有息債務</td><td class="num">56.6 vs 33.4B</td><td>10-Q；6 月票據 US$25B</td></tr>
+        <tr><td>FY27／FY28 street adj EPS</td><td class="num">~9.03／~13.08</td><td>第三方，post-print pending</td></tr>
+        <tr><td>Q3 指引</td><td class="num">108.0B ±2%</td><td>官方；中國 DC = 0</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="disc">卡片只係 F3 展示層，禁止另起 compact 倍數模型。delayed 價格可快速變動，唔當 live。未確認持倉。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const F3 = {
+  close: 209.66,
+  delayed: 225.51,
+  bear: 170, base: 300, bull: 450,
+  lo: 152, hi: 510,
+  notes: {
+    bear: "Bear：FY28 收入約 US$450B、normalized EPS US$10、17×。對收市約 −19%；對 delayed 約 −25%。適用於 ASIC 搶增量、DSO 常態 ≥60、PORTS 風險溢價上升。",
+    base: "Base 係主參考：收入約 US$550B（略低過 Street）、EPS US$12.5、24× → US$300。收市上行約 43%；delayed 約 33%。要 Q3 確認 DSO／FCF／GM 先討論建倉區。",
+    bull: "Bull：收入約 US$650B、EPS US$15、30× → US$450。需要 Rubin／networking 超預期且 PORTS 不觸發。現價未確認前唔當可追目標。"
+  }
+};
+let priceKey = "close";
+let scenario = "base";
+function pct(target, px){ const v=(target/px-1)*100; return (v>=0?"+":"")+v.toFixed(1)+"%"; }
+function render(){
+  const px = F3[priceKey];
+  document.getElementById("priceNow").textContent = "US$"+px.toFixed(2);
+  document.getElementById("priceLabel").textContent = priceKey==="close" ? "F3 價格錨 · 2026-08-26 收市" : "yfinance delayed · 2026-08-27";
+  document.getElementById("priceGap").textContent = "對 Base US$300 約 "+pct(F3.base, px)+" · 對 Bear "+pct(F3.bear, px)+" · 對 Bull "+pct(F3.bull, px);
+  document.getElementById("valNote").textContent = F3.notes[scenario];
+  const span = F3.hi - F3.lo;
+  const pos = p => Math.min(100, Math.max(0, (p-F3.lo)/span*100));
+  document.getElementById("ruler").innerHTML = `
+    <div class="track">
+      <div class="seg" style="left:${pos(152)}%;width:${pos(189)-pos(152)}%;background:#fecaca"></div>
+      <div class="seg" style="left:${pos(275)}%;width:${pos(330)-pos(275)}%;background:#fdba74"></div>
+      <div class="seg" style="left:${pos(420)}%;width:${pos(510)-pos(420)}%;background:#86efac"></div>
+      <div class="pin" style="left:${pos(px)}%"></div>
+    </div>
+    <div class="mark" style="left:${pos(px)}%">現價 ${px.toFixed(0)}</div>
+  `;
+}
+document.getElementById("priceToggle").addEventListener("click", e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#priceToggle button").forEach(x=>x.classList.toggle("on", x===b));
+  priceKey=b.dataset.p; render();
+});
+document.getElementById("valGrid").addEventListener("click", e=>{
+  const b=e.target.closest(".val"); if(!b) return;
+  document.querySelectorAll(".val").forEach(x=>x.classList.toggle("on", x===b));
+  scenario=b.dataset.val; render();
+});
+render();
+</script>
+</body>
+</html>

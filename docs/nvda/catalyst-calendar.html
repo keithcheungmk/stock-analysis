@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NVDA 催化劑日曆</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--teal-deep:#134e4a;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .event{display:grid;grid-template-columns:170px 1fr auto;gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:10px}
+  @media(max-width:860px){.event{grid-template-columns:1fr}}
+  .when{font-weight:800;font-size:.82rem;color:var(--teal-deep);font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dir{font-size:.75rem;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap;font-family:"Avenir Next","PingFang TC",sans-serif;height:fit-content}
+  .dir.high{background:var(--watch-soft);color:var(--watch)}.dir.mid{background:var(--info-soft);color:var(--info)}.dir.low{background:#f5f5f4;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.warn{border-left:5px solid var(--watch)}.box.fail{border-left:5px solid var(--fail)}.box.ok{border-left:5px solid var(--pass)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 5 · 未來 1–2 季</div>
+      <div class="verdict-title">等 Q3 現金閘<br>9/2 前唔追</div>
+      <p class="sans muted" style="margin:12px 0 0">未確認持倉。僅觀察／唔好加倉。</p>
+    </div>
+    <div class="hero-main">
+      <h1>NVDA · 催化劑地圖</h1>
+      <p>真正改倍數嘅唔係再一次營收 beat，而係 FY2027-Q3 嘅 DSO／FCF／Rubin 毛利率，同 2026-09-02 Broadcom AI 有冇印到約 US$16B。</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>事件</h2>
+    <div class="event">
+      <div class="when">2026-09-02<br>AVGO IR 已排期</div>
+      <div><strong>Broadcom FY26-Q3</strong><div class="muted">AI 半導體 vs 指引 US$16.0B。ASIC 替代近端成績表。Beat 兼上修 → NVDA 倍數受壓。</div></div>
+      <span class="dir high">高 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">2026-10-15</div>
+      <div><strong>TSMC CY Q3</strong><div class="muted">HPC 佔比、2nm／CoWoS、全年 USD +40% 指引。供應緊撐出貨；需求轉弱先打倍數。</div></div>
+      <span class="dir mid">中 · read-through</span>
+    </div>
+    <div class="event">
+      <div class="when">約 2026-11-03</div>
+      <div><strong>AMD CY Q3</strong><div class="muted">DC 下半年加速、Helios／Instinct。挑戰者進度，唔係 NVDA 失效條件本身。</div></div>
+      <span class="dir mid">中 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">約 2026-11-17<br>yfinance；部分寫 11-18</div>
+      <div><strong>NVIDIA FY2027-Q3</strong><div class="muted">DSO≤55、FCF≥US$30B 或 margin≥35%、GM≥73.5%、DC 仍高過同業。對住 US$108.0B ±2% 只係入場券。官方日期未確認。</div></div>
+      <span class="dir high">最高 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">2027–2028<br>2026-08-26 Newsroom</div>
+      <div><strong>AWS 額外約 200 萬顆 GPU</strong><div class="muted">官方稿，未入 Q3 帳。市場最易高估呢個 headline。</div></div>
+      <span class="dir low">敘事 · 近端低</span>
+    </div>
+    <div class="event">
+      <div class="when">FY2029 首期</div>
+      <div><strong>PORTS／OpenAI 擔保 cap US$105B</strong><div class="muted">近兩季只有重分類成類債務先係失效。唔好把現金峰值排進未來兩季。</div></div>
+      <span class="dir mid">估值折扣</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>誤判同行動</h2>
+    <div class="grid-2">
+      <div class="box warn"><h3 class="sans">市場高估</h3><p>AWS 200 萬顆、Groq／Vera 新聞、再一次 EPS beat 而無現金改善、分析員目標價。</p></div>
+      <div class="box fail"><h3 class="sans">市場低估</h3><p>賬期常態化、記憶體承諾 US$279B、AVGO 客戶侵蝕超大規模 mix。</p></div>
+      <div class="box ok" style="grid-column:1/-1"><h3 class="sans">而家點做</h3><p>AVGO 9/2 同 NVDA Q3 前：僅觀察、唔追 delayed US$225。Q3 全部確認先討論 US$180–205。無持倉，唔寫減倉。</p></div>
+    </div>
+  </section>
+  <p class="footer">AVGO 日期：公司 IR 2026-08-03 公告。NVDA Q3 日期：yfinance／第三方日曆，IR 尚未確認。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>
