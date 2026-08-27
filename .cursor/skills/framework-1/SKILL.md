@@ -96,7 +96,7 @@ description: >-
 
 ### 下一步
 
-- `PASS`：列出 Framework 2 必須深挖的兩個問題。
+- `PASS`：列出 Framework 2 必須深挖的兩個問題。用戶其後叫 Framework 2 時，跟 `.cursor/skills/framework-2/SKILL.md`。
 - `WATCH`：列出升級至 PASS 所需的量化條件及最近催化日期。
 - `FAIL`：列出紅線解除或重新評估的量化條件。
 

@@ -23,3 +23,5 @@ alwaysApply: true
 - User-facing summaries: Traditional Chinese
 - Reports must include disclaimer: research only, not investment advice
 - Extend modules in `src/` — keep `main.py` as thin CLI orchestrator
+- Handoff: GitHub only; one Skill per run; follow `AGENTS.md`. Claude Cowork
+  follows `CLAUDE.md` (review memos, no parallel unpushed edits)
