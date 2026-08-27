@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORCL Framework 2 深度增長</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.2rem;font-weight:800;line-height:1.15;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.25rem;font-weight:800;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0 0 14px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .dim{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left-width:5px}
+  .dim.s10{border-left-color:var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 40%)}
+  .dim.s5{border-left-color:var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 40%)}
+  .dim.s0{border-left-color:var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 40%)}
+  .pill{border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .pill.s10{background:var(--pass-soft);color:var(--pass)}.pill.s5{background:var(--watch-soft);color:var(--watch)}.pill.s0{background:var(--fail-soft);color:var(--fail)}
+  .dim-top{display:flex;justify-content:space-between;gap:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{text-align:left;padding:7px 5px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 2</div>
+      <div class="score-num">增長部分通過<br>現金流未通過</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge fail">F1 紅線 FAIL · 唔翻案</span>
+        <span class="badge pass">IaaS 已入帳</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>ORCL · Framework 2 深度增長</h1>
+      <p>五季 FY2025-Q4 → FY2026-Q4 · 核心 KPI：已入帳 IaaS 營收；官方 FCF＝OCF−capex（年累計差額）。唔用 RPO 當收入。</p>
+    </div>
+  </section>
+  <div class="kpis">
+    <div class="kpi green"><div class="label">Q4 IaaS</div><div class="value">US$5.79B</div><div class="muted">YoY +93%</div></div>
+    <div class="kpi teal"><div class="label">RPO</div><div class="value">US$638B</div><div class="muted">12 個月內約確認 12%</div></div>
+    <div class="kpi orange"><div class="label">預付／BYOH</div><div class="value">US$75B</div><div class="muted">大型 AI 合約其中部分 · 8-K</div></div>
+    <div class="kpi red"><div class="label">Q4 單季 FCF</div><div class="value">−US$1.87B</div><div class="muted">五季全負</div></div>
+  </div>
+  <div class="sections">
+    <section class="panel">
+      <h2>一句結論</h2>
+      <div class="callout fail">IaaS 由 US$3.0B 升到 US$5.79B（+93%），增長叙事係真；但五季官方口徑單季 FCF 全部為負，最近一季仍約 −US$1.87B。F1 已 FAIL，本篇唔翻案。持倉未確認 → 僅觀察，唔好加倉。</div>
+    </section>
+    <section class="panel">
+      <h2>兩條必挖問題</h2>
+      <div class="grid-2">
+        <div class="box"><h3>RPO 預付 vs 自墊 capex</h3><p>8-K：大型 AI 合約入面預付 GPU 或客戶自帶硬件合計 US$75B。Q4 預付（significant financing）令遞延收入 +US$4.59B。證明有實質預付，但未拆 US$638B 整體已收現金比例。12 個月只確認約 12%。</p></div>
+        <div class="box"><h3>OCF 追唔追到 capex</h3><p>已經追唔到：Q4 單季 OCF 約 US$14.6B、capex 約 US$16.5B。Cloud＋software 成本率由 Q1 27.9% 升到 Q4 31.2%。FY2027 再籌約 US$40B 係 8-K 原文。</p></div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>五季摘要</h2>
+      <table>
+        <thead><tr><th>KPI</th><th>FY25 Q4</th><th>Q1</th><th>Q2</th><th>Q3</th><th>FY26 Q4</th></tr></thead>
+        <tbody>
+          <tr><td>總營收</td><td>15,903</td><td>14,926</td><td>16,058</td><td>17,190</td><td>19,184</td></tr>
+          <tr><td>YoY</td><td>+11%</td><td>+12%</td><td>+14%</td><td>+22%</td><td>+21%</td></tr>
+          <tr><td>IaaS</td><td>2,995</td><td>3,347</td><td>4,079</td><td>4,888</td><td>5,787</td></tr>
+          <tr><td>IaaS YoY</td><td>+52%</td><td>+55%</td><td>+68%</td><td>+84%</td><td>+93%</td></tr>
+          <tr><td>經營利潤率</td><td>32%</td><td>29%</td><td>29%</td><td>32%</td><td>32%</td></tr>
+          <tr><td>單季 FCF</td><td>−2,923</td><td>−362</td><td>−9,967</td><td>−11,484</td><td>−1,873</td></tr>
+          <tr><td>RPO (US$B)</td><td>138</td><td>455</td><td>523</td><td>553</td><td>638</td></tr>
+        </tbody>
+      </table>
+      <p class="muted">USD million。FCF 由 10-Q／10-K 年累計差額。來源：各季 EX-99.1 同 10-Q／10-K。</p>
+    </section>
+    <section class="panel">
+      <h2>五大維度</h2>
+      <div class="grid-2">
+        <article class="dim s5"><div class="dim-top"><div>敘事</div><span class="pill s5">部分通過</span></div><p class="muted">IaaS 已入帳連續加速；RPO 暴增來自「若干重大雲合約」，未證明廣基需求。</p></article>
+        <article class="dim s5"><div class="dim-top"><div>單位經濟</div><span class="pill s5">部分通過</span></div><p class="muted">經營利潤率仍約 29–32%；Cloud＋software 成本率隨 IaaS mix 上升約 4pp。</p></article>
+        <article class="dim s5"><div class="dim-top"><div>護城河</div><span class="pill s5">部分通過</span></div><p class="muted">應用／資料庫轉換成本仍在；IaaS 層客戶可自帶 GPU，容量可替代。</p></article>
+        <article class="dim s5"><div class="dim-top"><div>營運槓桿</div><span class="pill s5">部分通過</span></div><p class="muted">利潤率企穩 32%；利息由 US$978m 升到 US$1,438m，財務槓桿食營業槓桿。</p></article>
+        <article class="dim s0"><div class="dim-top"><div>現金流</div><span class="pill s0">未通過</span></div><p class="muted">五季單季 FCF 全負。現金上升主要來自發債 US$43B＋優先股 US$5B，唔係自我融資。</p></article>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>確認／失效</h2>
+      <div class="grid-2">
+        <div class="box"><h3>確認（Q1 10-Q 起）</h3><p>當季 FCF ≥ 0；IaaS YoY 仍 ≥ +50% 且成本率不再升；ATM 實際售股為零或極小。</p></div>
+        <div class="box"><h3>失效</h3><p>當季 FCF 再深過 −US$5B；IaaS 跌到同 Azure／AWS 斜率同時 FCF 仍大負；官方下修 US$90B。</p></div>
+      </div>
+    </section>
+  </div>
+  <p class="footer">官方優先：8-K EX-99.1、10-Q、10-K。FY27 淨 capex US$70B 等電話會議數字屬 unverified，唔覆寫 8-K。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>

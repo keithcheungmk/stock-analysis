@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORCL Earnings Preview</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),var(--bg);color:var(--ink);line-height:1.55}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.8rem;font-weight:800;color:var(--watch);margin:8px 0 0;line-height:1.25}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.15rem;margin-top:4px}
+  .kpi.red{border-top:4px solid var(--fail)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.green{border-top:4px solid var(--pass)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.2rem}
+  .callout{background:var(--watch-soft);border:1px solid #fdba74;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.grid-3{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Skill 8 · Preview</div>
+      <div class="score-num">高風險高彈性<br>EPS 預期已高</div>
+    </div>
+    <div class="hero-main">
+      <h1>ORCL · FY2027-Q1 財報前瞻</h1>
+      <p>市場唔係再確認 IaaS 好快，而係賭 capex／FCF／ATM。日期取 yfinance 日曆 2026-09-10（IR 未見獨立定日稿）。</p>
+    </div>
+  </section>
+  <div class="kpis">
+    <div class="kpi orange"><div class="label">官方 EPS 指引</div><div class="value">US$1.72–1.76</div></div>
+    <div class="kpi teal"><div class="label">官方營收指引</div><div class="value">+27–29%</div></div>
+    <div class="kpi green"><div class="label">隱含營收</div><div class="value">US$18.96–19.26B</div></div>
+    <div class="kpi red"><div class="label">真超預期</div><div class="value">當季 FCF ≥ 0</div></div>
+  </div>
+  <section class="panel">
+    <h2>結論</h2>
+    <div class="callout">只交 EPS 落喺指引、營收 +27–29%，係普通符合，<strong>唔夠翻案紅線</strong>。真 bullish＝FCF 轉正或明顯收窄 ＋ IaaS 仍大幅快過同業 ＋ ATM 實際為零 ＋ US$90B 守住。財報前：不追高，僅觀察。</div>
+  </section>
+  <section class="panel">
+    <h2>必看 KPI</h2>
+    <table>
+      <thead><tr><th>KPI</th><th>Bullish</th><th>Bearish</th></tr></thead>
+      <tbody>
+        <tr><td>單季 FCF</td><td>≥ 0 或細過 −US$1B</td><td>再深過 −US$5B</td></tr>
+        <tr><td>IaaS YoY</td><td>仍顯著高過 Azure／AWS</td><td>塌向同業</td></tr>
+        <tr><td>ATM／股數</td><td>仍未按 ATM 售股</td><td>已售可觀金額</td></tr>
+        <tr><td>指引</td><td>守住／上修 US$90B、US$8.05</td><td>下修或再加大融資</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="panel">
+    <h2>反應地圖</h2>
+    <div class="grid-3">
+      <div class="box"><h3>Bull</h3><p>FCF 轉正、IaaS 仍快、ATM 未動。先交易「紅線可解除」，而唔係 EPS。</p></div>
+      <div class="box"><h3>Base</h3><p>數字落喺指引內，FCF 仍負但唔惡化到 −US$10B。維持 Weakening，唔翻案 FAIL。</p></div>
+      <div class="box"><h3>Bear</h3><p>FCF 再塌、ATM 啟動或下修全年。EPS beat 但現金流更差＝低質量。</p></div>
+    </div>
+  </section>
+  <p class="footer">官方指引：8-K EX-99.1 2026-06-10。共識 yfinance 屬第三方。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>
