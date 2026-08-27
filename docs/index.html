@@ -16,6 +16,8 @@
   .card { background:#fffdf8; border:1px solid #e7e0d5; border-radius:22px; padding:18px 16px;
     box-shadow:0 12px 40px rgba(28,25,23,.08); }
   h2 { font-family:"Avenir Next","PingFang TC",sans-serif; margin:0 0 8px; font-size:1.05rem; }
+  .badge { display:inline-block; margin-left:6px; font-size:.72rem; font-weight:800;
+    background:#0f766e; color:#fff; border-radius:999px; padding:3px 8px; vertical-align:middle; }
   a { display:block; margin-top:10px; text-decoration:none; color:#fff; background:#0f766e;
     border-radius:999px; padding:12px 16px; font-weight:800; text-align:center;
     font-family:"Avenir Next","PingFang TC",sans-serif; }
@@ -25,15 +27,15 @@
 <body>
   <div class="wrap">
     <h1>手機互動報告</h1>
-    <p class="lede">GitHub／Cursor 檔案頁會顯示 HTML 原始碼。用瀏覽器打開呢個 GitHub Pages 目錄，先可以撳、篩選、睇卡片。</p>
+    <p class="lede">用 Safari／Chrome 打開呢頁。每張報告頁底可以留意見；下次分析會跟住改。唔使睇任何程式碼。</p>
     <div class="grid">
     <article class="card">
-      <h2>NVDA</h2>
+      <h2>NVDA <span class="badge">更新 2026-08-27</span></h2>
       <a href="./nvda/framework1.html">Framework 1 初篩</a>
       <a href="./nvda/framework2.html">Framework 2 深度增長</a>
     </article>
     <article class="card">
-      <h2>SPCX</h2>
+      <h2>SPCX <span class="badge">更新 2026-08-27</span></h2>
       <a href="./spcx/">Position Brief（手機投影片）</a>
       <a href="./spcx/earnings-review.html">Earnings Review</a>
       <a href="./spcx/framework1.html">Framework 1 初篩</a>
@@ -43,31 +45,33 @@
       <a href="./spcx/valuation-model.html">估值模型</a>
     </article>
     <article class="card">
-      <h2>IREN</h2>
+      <h2>IREN <span class="badge">更新 2026-08-27</span></h2>
       <a href="./iren/earnings-review.html">Earnings Review</a>
       <a href="./iren/framework1.html">Framework 1 初篩</a>
       <a href="./iren/framework2.html">Framework 2 深度增長</a>
       <a href="./iren/thesis-tracker.html">Thesis Tracker</a>
     </article>
     <article class="card">
-      <h2>RKLB</h2>
-      <a href="./rklb/one-pager.html">One-pager</a>
+      <h2>RKLB <span class="badge">更新 2026-08-27</span></h2>
       <a href="./rklb/framework1.html">Framework 1 初篩</a>
       <a href="./rklb/framework2.html">Framework 2 深度增長</a>
+      <a href="./rklb/one-pager.html">one pager</a>
     </article>
     <article class="card">
-      <h2>RDW</h2>
+      <h2>RDW <span class="badge">更新 2026-08-27</span></h2>
       <a href="./rdw/earnings-review.html">Earnings Review</a>
       <a href="./rdw/framework1.html">Framework 1 初篩</a>
       <a href="./rdw/framework2.html">Framework 2 深度增長</a>
       <a href="./rdw/thesis-tracker.html">Thesis Tracker</a>
     </article>
     <article class="card">
-      <h2>MRNA</h2>
+      <h2>MRNA <span class="badge">更新 2026-08-27</span></h2>
       <a href="./mrna/framework1.html">Framework 1 初篩</a>
     </article>
     </div>
-    <p class="note">網址：https://keithcheungmk.github.io/stock-analysis/ · 合併到 main 之後先會更新。此分析僅供研究參考，不構成投資建議。</p>
+    <p class="note">網址：https://keithcheungmk.github.io/stock-analysis/ · 合併到 main 之後先會更新。<br>Mac 保留完整研究檔案（git pull + OneDrive raw）。此分析僅供研究參考，不構成投資建議。</p>
   </div>
+<section id="page-comments" data-page="/index.html"></section>
+<script src="assets/page-comments.js" defer></script>
 </body>
 </html>

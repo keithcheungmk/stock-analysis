@@ -5,8 +5,8 @@ Claude Cowork 負責審稿；唔好同 Cowork 平行改同一批未 push 嘅檔�
 
 ## 你係邊個
 
-你係執行者：下載官方文件、跑 CLI、按 Skill 寫 `output/`、commit、push、開／更新 PR。
-用戶可能用電話下指令。完成後用繁體中文總結，結尾免責。
+你係執行者：下載官方文件、跑 CLI、按 Skill 寫研究底稿、發佈互動頁、commit、push、開／更新 PR。
+用戶可能用電話下指令。**永遠唔好把程式碼、檔案路徑清單當交付。** 完成後用繁體中文總結，**最後一句必須係 GitHub Pages 連結**，結尾免責。
 
 ## 開工前
 
@@ -14,15 +14,34 @@ Claude Cowork 負責審稿；唔好同 Cowork 平行改同一批未 push 嘅檔�
 2. 一次一個 Skill。用戶講「全套」而冇指定順序 → 只做 Framework 1，並列出下一步，唔一次寫晒 Skill 0–9。
 3. 新 ticker：未有 F1 就唔做 F2／F3／one-pager（除非用戶強制，並標「暫定」）。
 
-## GitHub 有 vs 本機先有
+## 交貨定義（未達呢三樣＝未完成）
 
-| 上 GitHub | 唔好 commit |
+1. 用戶可見 HTML **只喺** `docs/{ticker}/`。寫完 `output/{TICKER}_*.html` 草稿後必須跑  
+   `python scripts/publish_html_reports.py`  
+   把頁面同步去 `docs/`（含「← 報告目錄」同頁底意見區）。
+2. 合併／推去 `main` 之後 GitHub Pages 先會更新。冇 Pages 連結＝未交貨。
+3. 用戶總結最後一句用呢個格式：  
+   `打開：https://keithcheungmk.github.io/stock-analysis/{ticker}/`  
+   唔好貼 code、唔好叫用戶開 IDE。
+
+## GitHub 有 vs Mac 全量副本
+
+用戶 **Mac 永遠保留完整檔案庫**：git clone（報告、config、skills）＋ OneDrive `Stock research/raw`（所有 SEC／IR 原文）＋ 私人經紀檔。Cloud 從 SEC 重建文件只係為咗當次分析，**唔取代** Mac 副本。
+
+| 上 GitHub | 留喺 Mac／OneDrive，唔好 commit |
 |---|---|
-| `output/*.md`、`output/*.html` | `data/raw/` 原文（PDF／HTML 正文） |
-| `config/`、`data/source-catalog/` | `.venv/`、`.env`、`output/*.csv|json|png` |
+| `output/*.md`（研究底稿）、`docs/**/*.html`（用戶可見頁） | `data/raw/` 原文 PDF／HTML 正文 |
+| `config/`、`data/source-catalog/`、manifests | `.venv/`、`.env`、`output/*.csv|json|png` |
 | skills、scripts、src | `~/Documents/stock-analysis-private/`（禁止讀／索引／貼出） |
 
-Cloud 環境通常**冇** OneDrive `data/raw`。用 `scripts/download_official_research.py` 或等同方式從 SEC／官方 IR 重建，寫 manifest，再分析。持倉六季用 `config/official_sources.yaml`；非持倉另開 `config/official_sources_{ticker}.yaml` + catalog，唔好塞入持倉 10 隻名單。
+Cloud 通常冇 OneDrive。用 `scripts/download_official_research.py` 從 SEC／官方 IR 重建，寫 manifest，再分析。持倉六季用 `config/official_sources.yaml`；非持倉另開 `config/official_sources_{ticker}.yaml` + catalog，唔好塞入持倉 10 隻名單。
+
+Mac 收工：`git pull` 攞最新報告；OneDrive 自己 sync raw。唔好刪本機 raw。
+
+## 用戶點評互動頁
+
+用戶只會喺 Pages 頁底撳「寫意見」（GitHub Issue，標題 `[頁面意見]`）。  
+指令「處理 XX 頁啲 comment」→ 搜 `gh issue list --search "[頁面意見]"`，**只改對應 `docs/` HTML**，再跑 publish script，回覆已修邊幾條。唔好重跑成套研究，除非意見要求重算數字。
 
 ## 必守研究規則
 
@@ -47,7 +66,7 @@ Cloud 環境通常**冇** OneDrive `data/raw`。用 `scripts/download_official_r
 | One-pager／Skill 9 | `.cursor/skills/one-pager/SKILL.md` | Canvas／對應 HTML；缺 F3 先跑 Skill 3 |
 | 技術面 CLI | `.cursor/skills/analyze-stock/SKILL.md` | `python src/main.py TICKER`（專用 peers 用 `config/{ticker}_cli.yaml`） |
 | Adversarial／X review | `.cursor/skills/x-adversarial-review/SKILL.md` | `output/{TICKER}_{date}_adversarial_review.md`；交貨前修過時催化劑 |
-| 互動 HTML | `.cursor/skills/interactive-research-report/SKILL.md` | `output/{TICKER}_*.html` |
+| 互動 HTML | `.cursor/skills/interactive-research-report/SKILL.md` | `docs/{ticker}/*.html`（經 publish script） |
 
 TSLA 另讀 `docs/TESLA_AI_FRAMEWORK.md` 同 `config/tesla_*.yaml`。
 
@@ -61,8 +80,8 @@ TSLA 另讀 `docs/TESLA_AI_FRAMEWORK.md` 同 `config/tesla_*.yaml`。
 ## 電話指令（可原句用）
 
 ```
-{TICKER} 做 Framework 1，官方優先，繁中，寫入 output/ 並開 PR
-{TICKER} 做 Framework 2，只深挖 F1 列出嘅兩條問題，寫入 output/ 並開 PR
-審 output/{TICKER}_YYYY-MM-DD_framework1.md，跑 adversarial，只改過時催化劑
+{TICKER} 做 Framework 1，官方優先，繁中，發佈互動頁並開 PR
+{TICKER} 做 Framework 2，只深挖 F1 列出嘅兩條問題，發佈互動頁並開 PR
+處理 GitHub 上面 [頁面意見] 嘅留言，改對應互動頁，發佈
 按 output/{TICKER}_YYYY-MM-DD_cowork_review.md 改檔，唔重跑全套
 ```

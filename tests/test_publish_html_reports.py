@@ -1,6 +1,11 @@
+from pathlib import Path
 from unittest import TestCase
 
-from scripts.publish_html_reports import slug_and_label
+from scripts.publish_html_reports import (
+    comment_script_src,
+    inject_comments,
+    slug_and_label,
+)
 
 
 class PublishHtmlReportsTests(TestCase):
@@ -17,3 +22,21 @@ class PublishHtmlReportsTests(TestCase):
             slug_and_label("RDW_earnings_review_q2_2026", "RDW")[0],
             "earnings-review",
         )
+
+    def test_comment_script_depth(self) -> None:
+        docs = Path(__file__).resolve().parents[1] / "docs"
+        self.assertEqual(comment_script_src(docs / "index.html"), "assets/page-comments.js")
+        self.assertEqual(
+            comment_script_src(docs / "spcx" / "valuation-model.html"),
+            "../assets/page-comments.js",
+        )
+
+    def test_inject_comments_idempotent(self) -> None:
+        docs = Path(__file__).resolve().parents[1] / "docs"
+        dest = docs / "spcx" / "valuation-model.html"
+        html = "<html><body>hi</body></html>"
+        once = inject_comments(html, dest)
+        twice = inject_comments(once, dest)
+        self.assertEqual(once, twice)
+        self.assertIn("page-comments", once)
+        self.assertIn("../assets/page-comments.js", once)

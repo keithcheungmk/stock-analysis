@@ -60,3 +60,12 @@ description: >-
 ## Official-first
 
 數字優先 `data/raw/{TICKER}/` 同官方 IR；標明期間、幣種、來源。關鍵數字爭議時停 verdict。
+
+## 發佈（用戶只睇頁，唔睇 code）
+
+1. 寫 `output/{TICKER}_*.html` 草稿後跑 `python scripts/publish_html_reports.py`。
+2. 用戶可見版本只喺 `docs/{ticker}/`。頁底必須有「頁面意見」區。
+3. 對用戶嘅交付係 GitHub Pages 連結，例如  
+   `https://keithcheungmk.github.io/stock-analysis/{ticker}/`  
+   **唔好**貼 HTML 原始碼或叫用戶開 IDE。
+4. 用戶之後會喺頁底留言（GitHub Issue，標題 `[頁面意見]`）。跟住只改對應頁再 publish。

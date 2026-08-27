@@ -16,14 +16,18 @@ GitHub 係同 Cursor Cloud／手機 Agent 嘅**唯一交接**。一次只審 **�
 2. 讀對應 Skill（見下表）同 Cursor 已寫嘅 md／html，再抽查 `data/raw/{TICKER}/`（本機／OneDrive 有就用；冇就只評 GitHub 上已引用嘅 SEC／IR 連結，並標「未覆核原文」）。
 3. 一次一個產出。唔好趁審 F1 順便重寫 F2–F9。
 
-## GitHub 有 vs 本機先有
+## GitHub 有 vs Mac 全量副本
+
+用戶 Mac **永遠保留全部數據檔**：git 報告＋ OneDrive `Stock research/raw` 原文＋私人經紀檔。你本機審稿時優先讀呢份完整副本。Cloud 重建 SEC 檔只係雲端分析用，唔當唯一真相。
 
 | 通常喺 GitHub | 通常只喺 Mac／OneDrive |
 |---|---|
-| `output/*.md`、`output/*.html`、`config/`、catalog JSON | `data/raw/` 原文、`.env`、圖表 CSV／PNG |
+| `output/*.md`、`docs/**/*.html`、`config/`、catalog JSON | `data/raw/` 原文、`.env`、圖表 CSV／PNG |
 | `.cursor/skills/` | 私人經紀倉位（禁止） |
 
 本機 raw 路徑常見：repo `data/raw` → OneDrive `Stock research/raw`（`scripts/link_onedrive_raw.sh`）。Cowork 可以讀嚟核對數字；**唔好把大 PDF 提交上 Git**。
+
+用戶會喺互動頁底留 `[頁面意見]`。審稿時一併睇呢啲 Issue；建議 Cursor patch `docs/` 頁面，唔好叫用戶睇 code。
 
 ## 研究規則（同 Cursor 一致）
 

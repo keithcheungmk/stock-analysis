@@ -1,0 +1,21 @@
+name: 頁面意見
+description: 對互動報告一頁嘅修改意見（唔使寫 code）
+title: "[頁面意見] "
+labels: []
+body:
+  - type: input
+    id: page
+    attributes:
+      label: 邊一頁
+      description: 網址或路徑，例如 /spcx/valuation-model.html
+      placeholder: https://keithcheungmk.github.io/stock-analysis/spcx/
+    validations:
+      required: true
+  - type: textarea
+    id: comment
+    attributes:
+      label: 我嘅意見
+      description: 用日常說話講想改咩。唔使貼程式碼。
+      placeholder: 例如：估值模型個 8GW preset 太樂觀，請加一個 delay 2 年情景。
+    validations:
+      required: true

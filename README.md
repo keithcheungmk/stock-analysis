@@ -137,6 +137,18 @@ config.yaml       通用分析設定
 requirements.txt  Python 套件
 ```
 
+## 喺 Mac 保留完整檔案
+
+Mac 係完整檔案庫（唔係淨係睇網頁）：
+
+1. 打開 repo 資料夾，拉最新報告：`git pull`
+2. OneDrive 會自己 sync `Stock research/raw`（所有 SEC／IR 原文、PDF）
+3. 第一次設定 raw 連結：`./scripts/link_onedrive_raw.sh`
+4. 私人經紀檔只留本機，永遠唔上 GitHub
+
+手機／MacBook Air **睇報告**請用瀏覽器開：  
+https://keithcheungmk.github.io/stock-analysis/
+
 ## 注意
 
 yfinance 資料可能延遲、缺漏或受供應商限制，不適合作即時交易依據。
