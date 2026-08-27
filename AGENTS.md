@@ -18,7 +18,8 @@ Claude Cowork 負責審稿；唔好同 Cowork 平行改同一批未 push 嘅檔�
 
 1. 用戶可見 HTML **只喺** `docs/{ticker}/`。寫完 `output/{TICKER}_*.html` 草稿後必須跑  
    `python scripts/publish_html_reports.py`  
-   把頁面同步去 `docs/`（含「← 報告目錄」同頁底意見區）。
+   把頁面同步去 `docs/`（含「← 報告目錄」同頁底意見區）。  
+   每份互動頁必須有 Decision HUD（`.cursor/skills/interactive-research-report/DECISION_HUD.md`）：現價對住估值尺、溢價／折讓、3–5 個估值驅動 KPI。行動第一句要引用溢價／折讓。未有 Framework 3 就標 `F3 pending`，只用 P/S、PEG、FCF yield 等可核對倍數，**禁止寫 target price**。
 2. 合併／推去 `main` 之後 GitHub Pages 先會更新。冇 Pages 連結＝未交貨。
 3. 用戶總結最後一句用呢個格式：  
    `打開：https://keithcheungmk.github.io/stock-analysis/{ticker}/`  
@@ -66,7 +67,7 @@ Mac 收工：`git pull` 攞最新報告；OneDrive 自己 sync raw。唔好刪�
 | One-pager／Skill 9 | `.cursor/skills/one-pager/SKILL.md` | Canvas／對應 HTML；缺 F3 先跑 Skill 3 |
 | 技術面 CLI | `.cursor/skills/analyze-stock/SKILL.md` | `python src/main.py TICKER`（專用 peers 用 `config/{ticker}_cli.yaml`） |
 | Adversarial／X review | `.cursor/skills/x-adversarial-review/SKILL.md` | `output/{TICKER}_{date}_adversarial_review.md`；交貨前修過時催化劑 |
-| 互動 HTML | `.cursor/skills/interactive-research-report/SKILL.md` | `docs/{ticker}/*.html`（經 publish script） |
+| 互動 HTML | `.cursor/skills/interactive-research-report/SKILL.md` + `DECISION_HUD.md` | `docs/{ticker}/*.html`（經 publish script）；每頁頂部要有 Decision HUD（現價 vs 估值 + 驅動 KPI）。未有 F3 標 `F3 pending`，禁止假裝 target price。Interactive Brief 係合成頁，唔另估倍數 |
 
 TSLA 另讀 `docs/TESLA_AI_FRAMEWORK.md` 同 `config/tesla_*.yaml`。
 

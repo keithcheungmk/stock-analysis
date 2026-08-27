@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TSLA Framework 3 估值</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.35rem;font-weight:800;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.7rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  th,td{padding:10px 8px;border-bottom:1px solid var(--line)}
+  td.num,th.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;background:var(--watch-soft);border:1px solid #fdba74;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.fail{border-left:5px solid var(--fail)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  a.model{display:inline-block;margin-top:12px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;color:#fff;background:#0f766e;border-radius:999px;padding:10px 16px;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Framework 3</div>
+      <div class="verdict-title">偏貴 · vs Base +120%</div>
+      <p class="sans" style="color:#78716c;margin:12px 0 0">僅觀察、唔好加倉</p>
+    </div>
+    <div class="hero-main">
+      <h1>TSLA · L1–L4 SOTP</h1>
+      <p>主方法：已入帳 TTM × P/S + Robotaxi／Optimus 期權桶。唔用 323× trailing P/E。</p>
+    </div>
+  </section>
+  <section class="hud" id="decision-hud">
+    <h2 class="sans">Decision HUD <span class="hud-tag">權威 · 現價 vs Base +120%</span></h2>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/26）</div><div class="v">US$345.82</div><div class="s">市值 ~US$1.366T</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">63 / 157 / 402</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+120%</div><div class="s">偏貴 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 13.2×</div><div class="s">PEG 5.13 · TTM FCF yield ~0.4%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ TTM 汽車 US$75.6B</span>
+      <span>★ TTM 儲能 US$12.8B</span>
+      <span>★ TTM 服務 US$15.2B</span>
+      <span>★ 官方 FCF −US$1.09B</span>
+      <span>★ Robotaxi 入帳 US$0</span>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>結論</h2>
+    <div class="callout">
+      <p><strong>行動：僅觀察、唔好加倉。</strong>現價相對 Base 溢價約 120%。US$1.37T 已接近 Bull SOTP 嘅八成，市場已 price in 大部分 L3／L4 可選性。</p>
+      <p>L3／L4 已入帳收入為零；Bull 嘅 US$400B／US$200B 期權桶係研究假設，唔係官方指引。</p>
+      <a class="model" href="./valuation-model.html">打開可調滑桿模型</a>
+    </div>
+    <div class="grid-2">
+      <div class="box fail">
+        <h3>EPS 爆發 — 未觸發</h3>
+        <p>定義 C：單季 EPS beat &gt;15%。Q2 非 GAAP EPS <strong>US$0.33</strong> vs 共識 US$0.54（−39%）。唔同營收 beat 合併。</p>
+      </div>
+      <div class="box fail">
+        <h3>股價爆發 — 未觸發</h3>
+        <p>定義 C：3 個月回報 &gt;+30%。US$440.36 → <strong>US$345.82（−21.5%）</strong>。兩欄分開報。</p>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>情景</th><th class="num">L1 汽車 P/S</th><th class="num">L3+L4 期權</th><th class="num">股權</th><th class="num">每股</th></tr></thead>
+      <tbody>
+        <tr><td>Bear</td><td class="num">2.0×</td><td class="num">0</td><td class="num">US$0.25T</td><td class="num">US$63</td></tr>
+        <tr><td>Base</td><td class="num">4.0×</td><td class="num">US$120B</td><td class="num">US$0.62T</td><td class="num">US$157</td></tr>
+        <tr><td>Bull</td><td class="num">8.0×</td><td class="num">US$600B</td><td class="num">US$1.59T</td><td class="num">US$402</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <p class="footer">TTM 來自 Q2 2026 EX-99.1 四季加總。現價 yfinance delayed 2026-08-26。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TSLA Skill 8 Earnings Review · Q2 2026</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.28rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.7rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.watch{background:var(--watch-soft);color:var(--watch);border:0}.badge.pass{background:var(--pass-soft);color:var(--pass);border:0}.badge.fail{background:var(--fail-soft);color:var(--fail);border:0}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.15rem;font-weight:800;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.red{border-top:4px solid var(--fail)}.kpi.teal{border-top:4px solid var(--teal)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .verdict p{margin:0 0 10px}.verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.pass{border-left:5px solid var(--pass)}.box.warn{border-left:5px solid var(--watch)}.box.fail{border-left:5px solid var(--fail)}
+  table{width:100%;border-collapse:collapse;font-size:.84rem}
+  th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}.ev.weaken{border-left-color:var(--fail)}.ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 8 · Q2 2026 Review</div>
+      <div class="verdict-title">收入 beat · EPS／FCF miss<br>Thesis Mixed</div>
+      <div class="badges" style="margin-top:12px">
+        <span class="badge pass">交付 +25%</span>
+        <span class="badge fail">EPS −39% vs 共識</span>
+        <span class="badge fail">FCF −US$1.09B</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>TSLA · 財報回顧</h1>
+      <p>2026-Q2 · 期終 2026-06-30 · SEC 8-K EX-99.1 + 10-Q · 官方 transcript unavailable</p>
+      <div class="badges">
+        <span class="badge">低質量 beat（量）+ 盈利 miss</span>
+        <span class="badge">現價 US$345.82 delayed</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2 class="sans">Decision HUD <span class="hud-tag">現價 vs Base +120%</span></h2>
+    <p class="muted" style="margin:0">收入 beat 唔降低溢價。權威來源：Framework 3 SOTP。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/26）</div><div class="v">US$345.82</div><div class="s">市值 ~US$1.366T</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">63 / 157 / 402</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+120%</div><div class="s">偏貴 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 13.2×</div><div class="s">PEG 5.13 · TTM FCF yield ~0.4%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ 交付 480,126（+25%）</span>
+      <span>★ 汽車 GM 16.9%／除積分 16.3%</span>
+      <span>★ FSD 1.48m（+56%）</span>
+      <span>★ 官方 FCF −US$1.09B</span>
+      <span>★ Robotaxi 未入帳</span>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi green"><div class="label">營收 vs 共識</div><div class="value">US$28.24B</div><div class="muted">官方 +26% YoY · 收入 beat</div></div>
+    <div class="kpi red"><div class="label">非 GAAP EPS</div><div class="value">US$0.33</div><div class="muted">共識 US$0.54（−39%）</div></div>
+    <div class="kpi teal"><div class="label">FSD 訂閱</div><div class="value">1.48m</div><div class="muted">+56% · HUD 驅動改善</div></div>
+    <div class="kpi red"><div class="label">官方 FCF</div><div class="value">−US$1.09B</div><div class="muted">2026 capex &gt;US$25B</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>回顧結論</h2>
+      <div class="callout watch verdict">
+        <p>Q2 唔係全面 beat。營收同交付係量嘅高質量擴張；非 GAAP EPS −39% vs 共識、經營利潤 −57%、官方 FCF 轉負，先係改 earning power 嘅數。GAAP 淨利 US$1.11B 含 SpaceX 未實現稅後收益約 US$763m，唔好當成核心盈利 beat。</p>
+        <p>Robotaxi 七城同 Cybercab 投產係敘事更新，損益表零入帳。對 13.2× P/S 嘅股票，「只係量 beat」唔夠。</p>
+        <p><strong>行動：僅觀察、唔好加倉。</strong>現價相對 Base 溢價約 120%（US$346 vs US$157）；F3 唔改建倉區。</p>
+      </div>
+      <div class="grid-2" style="margin-top:12px">
+        <div class="box fail">
+          <h3>EPS 爆發 — 未觸發</h3>
+          <p>定義 C：單季 EPS beat &gt;15%。Q2 非 GAAP EPS <strong>US$0.33</strong> vs 共識 US$0.54（−39%）。唔同收入 beat 合併。</p>
+        </div>
+        <div class="box fail">
+          <h3>股價爆發 — 未觸發</h3>
+          <p>定義 C：3 個月回報 &gt;+30%。US$440.36 → <strong>US$345.82（−21.5%）</strong>。兩欄分開報。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>KPI vs 共識 vs 估值驅動</h2>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>項目</th><th>官方結果</th><th>vs 共識／YoY</th><th>vs HUD</th><th>判斷</th></tr></thead>
+          <tbody>
+            <tr><td>營收</td><td>US$28.24B</td><td>YoY +26%；第三方共識 beat</td><td>撐分母、唔減溢價</td><td>強於預期（量）</td></tr>
+            <tr><td>交付 ★</td><td>480,126</td><td>+25%</td><td>驅動① 改善</td><td>強於預期</td></tr>
+            <tr><td>非 GAAP EPS</td><td>US$0.33</td><td>vs US$0.54（−39%）</td><td>唔壓縮 PEG</td><td>弱於預期</td></tr>
+            <tr><td>汽車 GM ★</td><td>16.9%／16.3% 除積分</td><td>積分 US$146m vs US$439m</td><td>驅動② 中性</td><td>大致符合</td></tr>
+            <tr><td>FSD ★</td><td>1.48m</td><td>+56%</td><td>驅動③ 改善</td><td>強於預期</td></tr>
+            <tr><td>官方 FCF ★</td><td>−US$1.09B</td><td>capex +142%</td><td>驅動④ 惡化</td><td>弱於預期</td></tr>
+            <tr><td>Robotaxi ★</td><td>七城；Cybercab 投產</td><td>無收入行</td><td>驅動⑤ 未入帳</td><td>低質量改善</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="ev-grid">
+        <article class="ev support"><div class="type">交付</div><p>480,126 輛、+25%，高過 GM／Ford 量能。支撐 L1 需求，唔等於估值便宜。</p></article>
+        <article class="ev support"><div class="type">FSD</div><p>1.48m 訂閱、+56%；服務毛利 US$648m。對沖積分塌縮，係 L2 最硬嘅官方數。</p></article>
+        <article class="ev weaken"><div class="type">盈利</div><p>EPS 大 miss；經營利潤率 1.4%。SpaceX 未實現收益撑住 GAAP 淨利，屬一次性。</p></article>
+        <article class="ev weaken"><div class="type">現金流</div><p>官方 FCF −US$1.09B；10-Q 寫 2026 capex 超過 US$25B。H1 OCF 年化覆蓋唔到指引 capex。</p></article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Thesis 同下一步</h2>
+      <div class="grid-2">
+        <div class="box warn"><h3>Thesis Mixed</h3><p>L1 量 Intact；L1 利潤／FCF Weakening；L3 delaying（有覆蓋無入帳）。唔升到 Intact，亦未 Broken。</p></div>
+        <div class="box fail"><h3>Checkpoint</h3><p>Q3 財報（第三方日期 2026-10-21，以 IR 為準）：FCF≥0、除積分 GM、Robotaxi 入帳。Skill 7 跳過（無持倉）。</p></div>
+      </div>
+    </section>
+  </div>
+  <p class="footer">來源：SEC 8-K EX-99.1（2026-07-22）+ 10-Q（2026-07-23）。共識 EPS／現價 yfinance delayed。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/tsla/earnings-review.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
