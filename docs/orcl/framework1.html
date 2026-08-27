@@ -70,6 +70,19 @@
   th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;color:var(--muted)}
   .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .muted{color:var(--muted);font-size:.9rem}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+
 </style>
 </head>
 <body>
@@ -95,6 +108,22 @@
       </div>
     </div>
   </section>
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +14%</span></h2>
+    <p class="muted" style="margin:0">現價較 Base 溢價 <strong>+14%</strong> → 僅觀察，唔好加倉。權威來源：Framework 3 觀察區間（研究情景，非指引）。F1 紅線已 FAIL。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/27）</div><div class="v">US$147.87</div><div class="s">市值 ~US$425.9B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">80 / 130 / 180</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+14%</div><div class="s">偏貴 · 僅觀察</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 6.32×</div><div class="s">Fwd P/E 18.4× · TTM FCF yield −5.6%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 IaaS US$5.79B（+93%）</span>
+      <span>★ Q4 官方 FCF −US$1.87B</span>
+      <span>★ RPO US$638B（12 個月約 12%）</span>
+      <span>★ 現金 US$31.9B vs 票據 US$129.5B</span>
+    </div>
+  </section>
 
   <div class="kpis">
     <div class="kpi teal"><div class="label">現價（延遲 8/27）</div><div class="value">US$147.87</div><div class="note">52 週高位 US$345.72 · −57%</div></div>
@@ -110,7 +139,7 @@
         <p><strong>FAIL。</strong>破產／流動性紅線要「現金低於總債務」而且「自由現金流為負」同時成立。2026-05-31 現金＋有價證券 US$31.89B 對有息票據 US$129.54B（0.25 倍）；最近一季官方口徑 FCF（OCF−capex，由 10-Q／10-K 年累計差額）約 −US$1.87B。兩項都中 → 立即 FAIL，停止 13 維度評分。先前把 trailing-four-quarter 表嘅 TTM 差額當成單季 FCF、得出約 +US$1.05B 同 WATCH 85 分，<strong>計算錯，已作廢</strong>。</p>
         <p>正在被驗證嘅支柱仍然係 Cloud Infrastructure 已入帳：IaaS 營收 US$5.79B（+93%），剩餘履約義務（RPO）US$638B。呢啲係 8-K／10-K 數字，唔使賭路演——但增長叙事<strong>唔可以翻案</strong>紅線。</p>
         <p>仍未成立嘅路徑係自我融資。FY2026 四季單季 FCF 全部為負（約 −0.4／−10.0／−11.5／−1.9B）。公司確認 FY2027 總營收 US$90B，同時寫明再籌約 US$40B 債＋股（含最多 US$20B ATM）。8-K 稱大型 AI 合約入面預付或客戶自帶 GPU 部分合計 US$75B，減少自籌壓力，但 Q4 當季仍然倒貼 capex。</p>
-        <p>最大裂痕係「RPO 爆發 ≠ 現金爆發」。12 個月內只確認約 12% RPO 入帳。對行動含義：增長可以繼續深挖，但初篩已否決。持倉未確認 → <strong>僅觀察，唔好加倉</strong>。</p>
+        <p>最大裂痕係「RPO 爆發 ≠ 現金爆發」。12 個月內只確認約 12% RPO 入帳。對行動含義：現價較 Base 溢價 <strong>+14%</strong>，初篩已否決。持倉未確認 → <strong>僅觀察，唔好加倉</strong>。</p>
       </div>
     </section>
 

@@ -19,6 +19,7 @@ SKIP_OVERWRITE = {
     DOCS / "spcx" / "index.html",
     DOCS / "spcx" / "valuation-model.html",
     DOCS / "tsla" / "index.html",
+    DOCS / "orcl" / "index.html",
 }
 
 LABELS = (

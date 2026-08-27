@@ -46,6 +46,19 @@
   .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
   .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;background:var(--fail-soft);color:var(--fail);font-weight:800;font-size:.82rem}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+
 </style>
 </head>
 <body>
@@ -61,6 +74,22 @@
       <p>增長支柱正在被驗證，自我融資未成立。Framework 1 已因紅線 1 FAIL。持倉未確認。</p>
     </div>
   </section>
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +14%</span></h2>
+    <p class="muted" style="margin:0">現價較 Base 溢價 <strong>+14%</strong> → 僅觀察，唔好加倉。權威來源：Framework 3 觀察區間（研究情景，非指引）。F1 紅線已 FAIL。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/27）</div><div class="v">US$147.87</div><div class="s">市值 ~US$425.9B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">80 / 130 / 180</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+14%</div><div class="s">偏貴 · 僅觀察</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 6.32×</div><div class="s">Fwd P/E 18.4× · TTM FCF yield −5.6%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 IaaS US$5.79B（+93%）</span>
+      <span>★ Q4 官方 FCF −US$1.87B</span>
+      <span>★ RPO US$638B（12 個月約 12%）</span>
+      <span>★ 現金 US$31.9B vs 票據 US$129.5B</span>
+    </div>
+  </section>
   <div class="kpis">
     <div class="kpi green"><div class="label">增長支柱</div><div class="value">IaaS +93%</div></div>
     <div class="kpi teal"><div class="label">能見度</div><div class="value">RPO US$638B</div></div>
@@ -73,7 +102,7 @@
       <p>原始 thesis 係企業軟件底倉加 AI IaaS 加速度，RPO 證明需求，股價回落後值得重新定價。</p>
       <p>正在被驗證：IaaS 五季加速、RPO US$638B、Q4 營收 +21%。呢啲係 8-K／10-K，唔係路演。</p>
       <p>仍未成立：自我融資。四季加五季單季 FCF 全負，現金只有票據 0.25 倍。最大裂痕係紅線 1 機械 FAIL，唔係差 5 分。</p>
-      <p>對行動：僅觀察，唔好加倉。唔好把 IaaS 斜率當成 thesis Intact。</p>
+      <p>對行動：現價較 Base 溢價 +14%。F1 FAIL + F2 現金流未通過。持倉未確認 → <strong>僅觀察，唔好加倉</strong>。</p>
     </div>
   </section>
   <section class="panel">

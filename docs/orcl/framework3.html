@@ -41,6 +41,19 @@
   .pin{position:absolute;top:-6px;width:4px;height:26px;background:#1c1917;border-radius:4px}
   .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);margin-right:6px}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+
 </style>
 </head>
 <body>
@@ -58,6 +71,22 @@
       <div style="margin-top:14px"><span class="badge">現價 US$147.87 delayed</span><span class="badge">只觀察</span></div>
     </div>
   </section>
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +14%</span></h2>
+    <p class="muted" style="margin:0">現價較 Base 溢價 <strong>+14%</strong> → 僅觀察，唔好加倉。權威來源：Framework 3 觀察區間（研究情景，非指引）。F1 紅線已 FAIL。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/27）</div><div class="v">US$147.87</div><div class="s">市值 ~US$425.9B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">80 / 130 / 180</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+14%</div><div class="s">偏貴 · 僅觀察</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 6.32×</div><div class="s">Fwd P/E 18.4× · TTM FCF yield −5.6%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 IaaS US$5.79B（+93%）</span>
+      <span>★ Q4 官方 FCF −US$1.87B</span>
+      <span>★ RPO US$638B（12 個月約 12%）</span>
+      <span>★ 現金 US$31.9B vs 票據 US$129.5B</span>
+    </div>
+  </section>
   <div class="kpis">
     <div class="kpi teal"><div class="label">現價</div><div class="value">US$147.87</div></div>
     <div class="kpi red"><div class="label">Bear</div><div class="value">~US$80</div></div>
@@ -66,7 +95,7 @@
   </div>
   <section class="panel">
     <h2>結論</h2>
-    <div class="callout"><p style="margin:0 0 8px"><strong>F1 未過紅線，呢頁唔係建倉框架。</strong>現價 forward P/E 約 18.4×（147.87／8.05），已經反映大部分官方增長指引，未反映 FCF 轉正。到 Bear 約 −46%，到 Bull 約 +22%，值搏率唔吸引。</p>
+    <div class="callout"><p style="margin:0 0 8px"><strong>現價較 Base 溢價 +14%，僅觀察，唔好加倉。</strong>F1 未過紅線，呢頁唔係建倉框架。現價 forward P/E 約 18.4×（147.87／8.05），已經反映大部分官方增長指引。到 Bear 約 −46%，到 Bull 約 +22%，值搏率唔吸引。</p>
     <p style="margin:0">建倉條件：紅線 1 解除（當季 FCF ≥ 0 或現金 &gt; 票據）<strong>而且</strong>現價回到 Base 附近之後，先重新討論。</p></div>
     <p class="muted">價格尺：Bear US$80 · Base US$130 · 現價 · Bull US$180</p>
     <div class="ruler"><span class="pin" style="left:68%"></span></div>
