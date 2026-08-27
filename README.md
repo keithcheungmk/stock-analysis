@@ -81,6 +81,15 @@ python scripts/validate_raw_manifests.py \
 python scripts/report_official_coverage.py
 ```
 
+## Agent 交接（手機 Cursor × Claude Cowork）
+
+GitHub 係唯一交接。一次一個 Skill、一隻 ticker。
+
+- **Cursor／手機 Cloud Agent** 讀 [`AGENTS.md`](AGENTS.md)：下載官方來源、寫 `output/`、開 PR。
+- **Claude Cowork** 讀 [`CLAUDE.md`](CLAUDE.md)：審已有報告，寫 `output/{TICKER}_{date}_cowork_review.md`，唔同 Cursor 平行改同一批未 push 嘅檔。
+
+電話可直接貼：`{TICKER} 做 Framework 1，官方優先，繁中，寫入 output/ 並開 PR`。
+
 ## 在 Cursor 使用
 
 專案 Skill 位於 `.cursor/skills/analyze-stock/SKILL.md`，專案規則位於 `.cursor/rules/stock-analysis.mdc`。可在 Cursor Agent 對話輸入：
