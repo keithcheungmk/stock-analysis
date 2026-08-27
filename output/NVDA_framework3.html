@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NVDA Framework 3 估值</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.25rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem}
+  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
+  .callout{border-radius:16px;padding:14px 16px;background:var(--watch-soft);border:1px solid #fdba74}
+  .muted{color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  a{color:#0f766e;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Framework 3 判定</div>
+      <div class="verdict-title">對 Base 低估（暫定）</div>
+      <p class="sans muted" style="margin:12px 0 0">Base US$300 · 等待確認／唔追 delayed · 唔好加倉</p>
+    </div>
+    <div class="hero-main">
+      <h1>NVDA · FY2028 normalized P/E</h1>
+      <p>價格錨 US$209.66（2026-08-26 收市）。完整推理見 Markdown；手機摘要同 <a href="./valuation.html" style="color:#fff">估值卡</a>。</p>
+    </div>
+  </section>
+  <div class="kpis">
+    <div class="kpi orange"><div class="label">Base 50%</div><div class="value">US$300</div><div class="note">區間 275–330 · 24× EPS 12.5</div></div>
+    <div class="kpi red"><div class="label">Bear 30%</div><div class="value">US$170</div><div class="note">區間 152–189 · 17× EPS 10.0</div></div>
+    <div class="kpi green"><div class="label">Bull 20%</div><div class="value">US$450</div><div class="note">區間 420–510 · 30× EPS 15.0</div></div>
+    <div class="kpi teal"><div class="label">概率加權</div><div class="value">US$291</div><div class="note">對收市約 +39%</div></div>
+  </div>
+  <section class="panel">
+    <h2>結論</h2>
+    <div class="callout sans">
+      收市約 23.2× FY2027／16.0× FY2028 第三方 adjusted EPS，表面上對 +83%／+44% 收入增長偏平。Base 用低過 Street 嘅 FY2028 收入仍然得出約 US$300（+43%）。但 yfinance Q3 共識仍約 US$104.4B，低過官方 US$108.0B；DSO／FCF／Rubin GM 尚未驗證。故「對 Base 低估」，行動仍係等待確認，唔追 8 月 27 日 delayed 約 US$225.51。
+    </div>
+  </section>
+  <section class="panel">
+    <h2>情景橋接（研究假設，非公司指引）</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th></th><th class="num">FY28 收入</th><th class="num">NM</th><th class="num">股數</th><th class="num">EPS</th><th class="num">FCF</th><th class="num">P/E</th><th class="num">目標</th></tr></thead>
+        <tbody>
+          <tr><td>Bear</td><td class="num">450B</td><td class="num">53.8%</td><td class="num">24.2B</td><td class="num">10.0</td><td class="num">125B</td><td class="num">17×</td><td class="num">170</td></tr>
+          <tr><td>Base</td><td class="num">550B</td><td class="num">54.5%</td><td class="num">24.0B</td><td class="num">12.5</td><td class="num">190B</td><td class="num">24×</td><td class="num">300</td></tr>
+          <tr><td>Bull</td><td class="num">650B</td><td class="num">54.9%</td><td class="num">23.8B</td><td class="num">15.0</td><td class="num">250B</td><td class="num">30×</td><td class="num">450</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">Normalized EPS = 收入 × NM ÷ 預計攤薄加權平均股數。NM 含 SBC，剔股本證券收益。官方 TTM FCF US$126.9B → 收市 FCF yield 約 2.5%。</p>
+  </section>
+  <section class="panel">
+    <h2>倉位區（無確認持倉）</h2>
+    <p>US$180–205 只喺 DSO≤55、FCF≥US$30B 或 margin≥35%、GM≥73.5%、DC 仍高過同業 <strong>全部確認</strong> 先由觀察轉建倉。US$205–240 等待確認。≥US$420 已大致 price in Bull。無持倉唔寫減倉。</p>
+  </section>
+  <p class="footer">完整模型：output/NVDA_2026-08-27_framework3.md。展示層：估值卡。yfinance TTM／FCF／債務已棄用。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>

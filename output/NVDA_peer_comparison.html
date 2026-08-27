@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NVDA 同業比較</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#f0fdf4,#dcfce7 70%,#bbf7d0);border:1px solid #86efac;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--pass);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--pass);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;background:var(--info-soft);border:1px solid #93c5fd}
+  .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  @media(max-width:960px){.grid{grid-template-columns:1fr 1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff}
+  .box.p1{border-top:4px solid var(--pass)}.box.p2{border-top:4px solid var(--teal)}.box.p3{border-top:4px solid var(--info)}.box.p4{border-top:4px solid var(--watch)}.box.p5{border-top:4px solid var(--fail)}
+  .rank{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.78rem;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .chart{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end;height:160px;margin:12px 0 8px}
+  .bar-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:end;gap:6px}
+  .bar{width:100%;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#14b8a6,#0f766e);min-height:8px}
+  .bar-label,.bar-val{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  .bar-label{color:var(--muted)}.bar-val{font-weight:800}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 4 · 若只能選一間</div>
+      <div class="verdict-title">NVIDIA（質量）<br>現價只宜觀察</div>
+      <p class="sans muted" style="margin:12px 0 0">排序係研究配置，唔係追 delayed US$225 嘅指令。</p>
+    </div>
+    <div class="hero-main">
+      <h1>NVDA vs AMD / AVGO / TSM / INTC</h1>
+      <p>AI 計算曝險組。財政日曆唔對齊：NVDA FY27-Q2 期終 7/26；AMD／TSM／INTC 日曆 Q2；AVGO FY26-Q2 期終 5/3。只可比方向。</p>
+      <div class="badges">
+        <span class="badge">官方 NVDA verified</span>
+        <span class="badge">Peer 官方業績稿</span>
+        <span class="badge">價格 delayed 8/27</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>一句話</h2>
+    <div class="callout sans">NVIDIA 係唯一把 AI factory 做成百億級季度利潤同現金嘅平台。市場最易把 Broadcom／AMD 更快增速，或者 Intel CPU 復甦，直接等同可以取代 CUDA 現金機器。規模上 NVDA DC 一季約 8× AVGO AI、13× AMD DC。</div>
+  </section>
+
+  <section class="panel">
+    <h2>角色同排序</h2>
+    <div class="grid">
+      <div class="box p1"><div class="rank">1 · 核心質量</div><h3>NVDA</h3><p>平台龍頭。F1 PASS、F2 增長通過。75% GM、DC US$89B。現金 Q2 裂縫，所以觀察唔追。</p></div>
+      <div class="box p2"><div class="rank">2 · 鏟子</div><h3>TSM</h3><p>HPC 佔 66%，USD 營收 US$40.2B +33.7%。瓶頸溢價，唔係 NVDA 替代倉。</p></div>
+      <div class="box p3"><div class="rank">3 · 進攻 ASIC</div><h3>AVGO</h3><p>AI 半導體 US$10.8B +143%；FCF 約 46% of sales。9/2 Q3 係 read-through。</p></div>
+      <div class="box p4"><div class="rank">4 · 挑戰者</div><h3>AMD</h3><p>DC US$6.7B +107%。規模細一個零，forward ~31×，一年已大漲。</p></div>
+      <div class="box p5"><div class="rank">5 · 只宜觀察</div><h3>INTC</h3><p>DCAI +59% 但 foundry 虧 US$2.1B、GAAP EPS $(2.16)。轉折期權。</p></div>
+    </div>
+    <h3 style="margin-top:16px">AI／DC 線規模（US$B，曆法唔對齊）</h3>
+    <div class="chart" id="aiChart"></div>
+    <p class="muted">TSM HPC* = 官方 66% mix × USD 營收 US$40.20B，唔係獨立「AI 晶片」科目；其餘四條係官方分部／AI 半導體。</p>
+  </section>
+
+  <section class="panel">
+    <h2>核心比較</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>公司</th><th>最新官方季</th><th class="num">總營收</th><th>AI／DC 線</th><th>毛利率</th><th>現金流</th><th>delayed 價</th><th>fwd P/E*</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>NVDA</td><td>FY27 Q2 7/26</td><td class="num">96.2B +106%</td><td>DC 89.0B +117%</td><td>GAAP 75.0%</td><td>Q2 FCF 21.3B（Q1 48.6B）</td><td>225.51（錨 209.66）</td><td>F3：16.0× FY28 street</td></tr>
+          <tr><td>AMD</td><td>CY Q2 6/27</td><td class="num">11.5B +50%</td><td>DC 6.72B +107%</td><td>GAAP 54%</td><td>FCF 1.56B（14%）</td><td>472.29</td><td>~30.6×</td></tr>
+          <tr><td>AVGO</td><td>FY26 Q2 5/3</td><td class="num">22.2B +48%</td><td>AI 10.8B +143%</td><td>nGAAP OM 67%</td><td>FCF 10.3B（~46%）</td><td>367.57</td><td>~18.9×</td></tr>
+          <tr><td>TSM</td><td>CY Q2 6/30</td><td class="num">40.2B +33.7% USD</td><td>HPC 66% of sales</td><td>TIFRS 67.7%</td><td>高 capex；唔引用未核對 USD FCF</td><td>423.98</td><td>~19.5×</td></tr>
+          <tr><td>INTC</td><td>CY Q2</td><td class="num">16.1B +25%</td><td>DCAI 6.3B +59%</td><td>GAAP 41.8%</td><td>Foundry 經營虧 2.1B</td><td>90.79</td><td>~44.5× 無意義</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">*forward P/E 係 yfinance 第三方溫度計，財政期同 non-GAAP 口徑唔一致。NVDA 主錨用 F3，唔用 yfinance trailing。</p>
+  </section>
+
+  <section class="panel">
+    <h2>誰該享有溢價／配置</h2>
+    <p>最值得溢價：<strong>NVDA</strong>（平台＋現金機器）。看似最便宜但合理折價：<strong>INTC</strong>（轉折未完成）。最易被吹捧：<strong>AMD 增速</strong>同 AVGO AI 敘事。核心首選仍係 NVDA，但未確認持倉、F2 現金未過關 → <strong>僅觀察、唔好加倉</strong>。進攻型：AVGO 或 AMD。長持只選一間：NVDA。</p>
+  </section>
+  <p class="footer">NVDA 數字：verified raw manifests。Peer：AMD 8-K 2026-08-04、AVGO 8-K 2026-06-03、TSMC 2026-07-16、INTC 2026-07-23。價格 yfinance 2026-08-27 delayed。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const rows=[{l:"NVDA DC",v:89.0},{l:"AVGO AI",v:10.8},{l:"AMD DC",v:6.7},{l:"INTC DCAI",v:6.3},{l:"TSM HPC*",v:26.5}];
+const max=Math.max(...rows.map(r=>r.v));
+document.getElementById("aiChart").innerHTML=rows.map(r=>{
+  const h=Math.max(8,Math.round(r.v/max*130));
+  return `<div class="bar-wrap"><div class="bar-val">${r.v}</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${r.l}</div></div>`;
+}).join("");
+</script>
+</body>
+</html>

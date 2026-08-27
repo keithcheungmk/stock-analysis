@@ -31,6 +31,9 @@ LABELS = (
     ("valuation_model", "估值模型"),
     ("interactive_brief", "Interactive Brief"),
     ("one-pager", "One-pager"),
+    ("valuation", "估值卡"),
+    ("peer_comparison", "同業比較"),
+    ("catalyst_calendar", "催化劑日曆"),
     ("index", "報告目錄"),
 )
 
