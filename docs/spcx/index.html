@@ -66,6 +66,11 @@
   .nav a.on, .nav a:hover {
     color: var(--navy); background: #fff; border-color: var(--line);
   }
+  .nav a.ext {
+    border-color: var(--line);
+    background: var(--teal-soft);
+    color: var(--teal);
+  }
   .slide {
     background: var(--card);
     border: 1px solid var(--line);
@@ -255,7 +260,7 @@
           <a href="#s6" data-i="5">證據</a>
           <a href="#s7" data-i="6">催化劑</a>
           <a href="#s8" data-i="7">期權</a>
-          <a href="./valuation-model.html">估值</a>
+          <a href="./valuation-model.html" class="ext">估值模型</a>
         </nav>
       </div>
     </div>
@@ -477,7 +482,10 @@
   function show(idx) {
     i = Math.max(0, Math.min(slides.length - 1, idx));
     slides.forEach((s, n) => s.classList.toggle("hidden", n !== i));
-    navLinks.forEach((a, n) => a.classList.toggle("on", n === i));
+    navLinks.forEach((a) => {
+      const isSlide = a.dataset.i !== undefined && a.dataset.i !== "";
+      a.classList.toggle("on", isSlide && Number(a.dataset.i) === i);
+    });
     pageLabel.textContent = `${i + 1} / ${slides.length}`;
     prev.disabled = i === 0;
     next.disabled = i === slides.length - 1;
@@ -487,6 +495,7 @@
   prev.addEventListener("click", () => show(i - 1));
   next.addEventListener("click", () => show(i + 1));
   navLinks.forEach((a) => a.addEventListener("click", (e) => {
+    if (a.dataset.i === undefined || a.dataset.i === "") return;
     e.preventDefault();
     show(Number(a.dataset.i));
   }));
