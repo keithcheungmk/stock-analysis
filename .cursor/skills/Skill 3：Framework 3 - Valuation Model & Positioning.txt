@@ -123,6 +123,16 @@ Bull Case 應反映 thesis 被驗證、成長持續加速、或市場願意給�
 
 技術面只可作輔助，主要目的是改善進出場節奏，而不是推翻基本面估值結論。
 
+## Decision HUD（權威來源）
+
+Framework 3 係全 ticker Decision HUD 嘅 **Bear／Base／Bull 權威來源**。寫互動頁（尤其 `valuation-model.html`）時跟 `.cursor/skills/interactive-research-report/DECISION_HUD.md`：
+
+- HUD 現價 vs Base 溢價／折讓必須同本報告情景表一致
+- 3–5 個估值驅動 KPI 必須係敏感度用嗰批（承接 F2 標明嘅驅動，唔另揀靚數）
+- 有 HTML 估值模型時：官方錨點 → 可調滑桿 → 重算 vs 現價；預設情景 = 本報告 Base／Bull／Bear
+- 完成後回頭把先前 `F3 pending` 頁換成正式區間，避免各頁數字打架
+- 行動第一句引用現價相對 Base 嘅 %；冇持倉確認唔好寫加倉／減倉
+
 ## 輸出格式要求
 
 請固定使用以下結構：
@@ -131,6 +141,8 @@ Bull Case 應反映 thesis 被驗證、成長持續加速、或市場願意給�
 - 判定結果：[ 低估 / 合理 / 偏貴 / 高估 ]
 - Base Case 目標價：[ XX ]
 - Bull / Bear 區間：[ XX – XX ]
+- 現價相對 Base：[ ±X% ]（Decision HUD 溢價／折讓；行動第一句引用）
+- 估值驅動 KPI：[ 3–5 個官方數 + 點樣郁本模型 ]
 - 核心結論：[ 用 2 句話總結最大上行來源與最大估值風險 ]
 
 ### 🧠 估值前提
