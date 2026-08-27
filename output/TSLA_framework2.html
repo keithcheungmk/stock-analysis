@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TSLA Framework 2 深度增長分析</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.28rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.watch{background:var(--watch-soft);color:var(--watch);border:0}.badge.pass{background:var(--pass-soft);color:var(--pass);border:0}.badge.fail{background:var(--fail-soft);color:var(--fail);border:0}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.2rem;font-weight:800;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .verdict p{margin:0 0 10px}.verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.pass{border-left:5px solid var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 45%)}
+  .box.warn{border-left:5px solid var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 45%)}
+  .box.fail{border-left:5px solid var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 45%)}
+  .pill{display:inline-flex;border-radius:999px;padding:3px 10px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .pill.pass{background:var(--pass-soft);color:var(--pass)}.pill.warn{background:var(--watch-soft);color:var(--watch)}.pill.fail{background:var(--fail-soft);color:var(--fail)}
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem}
+  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
+  tr.up td:last-child{color:var(--pass);font-weight:700} tr.down td:last-child{color:var(--fail);font-weight:700} tr.mix td:last-child{color:var(--watch);font-weight:700}
+  .star{color:var(--teal);font-weight:800}
+  .chart{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end;height:180px;margin:12px 0 8px}
+  .bar-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;gap:6px}
+  .bar{width:100%;border-radius:10px 10px 4px 4px;min-height:8px}
+  .bar.pos{background:linear-gradient(180deg,#14b8a6,#0f766e)}
+  .bar.neg{background:linear-gradient(180deg,#fb7185,#b91c1c)}
+  .bar-label,.bar-val{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}.bar-label{color:var(--muted)}.bar-val{font-weight:800}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Framework 2 判定</div>
+      <div class="verdict-title">汽車／服務 部分通過<br>Robotaxi 未通過 · 現金流未通過</div>
+      <div class="badges" style="margin-top:12px">
+        <span class="badge watch">單位經濟部分對沖</span>
+        <span class="badge fail">Robotaxi 未入帳</span>
+        <span class="badge fail">FCF 未穩定轉正</span>
+      </div>
+      <p class="sans muted" style="margin:12px 0 0">承接 F1 WATCH 75/130</p>
+    </div>
+    <div class="hero-main">
+      <h1>TSLA · Framework 2 深度增長分析</h1>
+      <p>Tesla, Inc. · 五季：2025-Q2 → 2026-Q2 · 官方 8-K EX-99.1 + 10-Q（2026-07-22／23）</p>
+      <div class="badges">
+        <span class="badge">Core KPI：官方 FCF + 汽車 GM（除積分）+ FSD 訂閱</span>
+        <span class="badge">現價 US$345.82 delayed</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2 class="sans">Decision HUD <span class="hud-tag">F3 pending · 非 target price</span></h2>
+    <p class="muted" style="margin:0">買賣前先睇呢條尺。未有 Framework 3 之前只用可核對倍數，唔寫建倉區。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/26）</div><div class="v">US$345.82</div><div class="s">市值 ~US$1.366T</div></div>
+      <div class="hud-cell"><div class="l">估值尺</div><div class="v">P/S 13.2×</div><div class="s">PEG 5.13 · trailing P/E 323×</div></div>
+      <div class="hud-cell"><div class="l">相對整車溢價</div><div class="v">~30–45×</div><div class="s">vs GM 0.42×／Ford 0.29× P/S</div></div>
+      <div class="hud-cell"><div class="l">TTM FCF yield</div><div class="v">~0.4%</div><div class="s">官方 TTM FCF US$5.76B</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ 交付 480,126（+25%）</span>
+      <span>★ 汽車 GM 16.9%／除積分 16.3%</span>
+      <span>★ FSD 1.48m（+56%）</span>
+      <span>★ 官方 FCF −US$1.09B</span>
+      <span>★ Robotaxi 未入帳</span>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">服務毛利</div><div class="value">US$648m</div><div class="muted">Q2 · 5.4%→14.1% GM</div></div>
+    <div class="kpi green"><div class="label">FSD 訂閱</div><div class="value">1.48m</div><div class="muted">0.95m→1.48m YoY</div></div>
+    <div class="kpi orange"><div class="label">汽車 GM 除積分</div><div class="value">16.3%</div><div class="muted">YoY 改善；QoQ 回落</div></div>
+    <div class="kpi red"><div class="label">Q2 官方 FCF</div><div class="value">−US$1.09B</div><div class="muted">2026 capex &gt;US$25B</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>深度分析結論</h2>
+      <div class="callout watch verdict">
+        <p>正在被驗證：L1 汽車＋服務。五季內交付同營收重新擴張（Q2 480,126 輛、+25%；營收 US$28.24B、+26%）。監管積分由 US$439m 跌到 US$146m，但服務毛利由 US$166m 升到 US$648m（多出約 US$482m，覆蓋積分少收嘅 US$293m），汽車 GM（除積分）由 15.0% 升到 16.3%。</p>
+        <p>仍未成立：Robotaxi 收入路徑。官方確認七城 live、Cybercab 已喺 Giga Texas 投產，10-Q 寫 service-driven，但無獨立收入行、無車隊、無 $/mile、無入帳時點。付費英里只有圖軸，唔當核對數。對 Waymo 嘅規模差距無法用本包官方數字量度。</p>
+        <p>最大裂縫：現金流同估值尺。OCF 五季皆正，但 Q2 capex US$5.79B 令官方 FCF −US$1.09B；10-Q 預期 2026 capex 超過 US$25B，H1 OCF US$8.63B 年化約 US$17B 覆蓋唔到。經營利潤同時由 US$0.92B 跌到 US$0.40B（OpEx +47%）。</p>
+        <p><strong>行動：僅觀察、唔好加倉。</strong>現價 P/S 約 13.2× 已較 GM／Ford 溢價一個數量級；F3 pending，禁止把交付紀錄當成買入區。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>承接 Framework 1 必挖問題</h2>
+      <div class="grid-2">
+        <div class="box warn">
+          <h3>1. 汽車單位經濟 + FCF 轉正</h3>
+          <p>積分塌縮已被服務毛利同除積分 GM 部分對沖。官方指 ASP（除 FX）下跌。單季 FCF 穩定轉正：<strong>未證明</strong>——H1 FCF 僅約 +US$0.35B，全年 capex &gt;US$25B。</p>
+        </div>
+        <div class="box fail">
+          <h3>2. Robotaxi／Cybercab 收入路徑</h3>
+          <p>七城覆蓋同 Cybercab 投產有官方文字。灣區仍要安全員；佛州三城相對 6/30 期終屬期後披露。損益表零入帳 → <strong>未通過</strong>。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>關鍵 KPI 五季儀表板（US$ million）</h2>
+      <p class="muted"><span class="star">★</span> = 估值驅動，交 Framework 3 沿用</p>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>維度</th><th>KPI</th><th class="num">25Q2</th><th class="num">25Q3</th><th class="num">25Q4</th><th class="num">26Q1</th><th class="num">26Q2</th><th>趨勢</th></tr></thead>
+          <tbody>
+            <tr class="up"><td>成長</td><td>總營收</td><td class="num">22,496</td><td class="num">28,095</td><td class="num">24,901</td><td class="num">22,387</td><td class="num">28,236</td><td>改善</td></tr>
+            <tr class="up"><td>成長</td><td><span class="star">★</span> 交付（輛）</td><td class="num">384,122</td><td class="num">497,099</td><td class="num">418,227</td><td class="num">358,023</td><td class="num">480,126</td><td>改善</td></tr>
+            <tr class="up"><td>成長</td><td>服務收入</td><td class="num">3,046</td><td class="num">3,475</td><td class="num">3,371</td><td class="num">3,745</td><td class="num">4,581</td><td>改善</td></tr>
+            <tr class="mix"><td>單位經濟</td><td><span class="star">★</span> 汽車 GM 除積分</td><td class="num">15.0%</td><td class="num">15.4%</td><td class="num">17.9%</td><td class="num">19.2%</td><td class="num">16.3%</td><td>YoY 改善／QoQ 回落</td></tr>
+            <tr class="down"><td>單位經濟</td><td>監管積分</td><td class="num">439</td><td class="num">417</td><td class="num">542</td><td class="num">380</td><td class="num">146</td><td>惡化</td></tr>
+            <tr class="up"><td>單位經濟</td><td>服務毛利</td><td class="num">166</td><td class="num">366</td><td class="num">298</td><td class="num">346</td><td class="num">648</td><td>改善</td></tr>
+            <tr class="up"><td>需求</td><td><span class="star">★</span> FSD 訂閱（mil）</td><td class="num">0.95</td><td class="num">1.04</td><td class="num">1.10</td><td class="num">1.28</td><td class="num">1.48</td><td>改善</td></tr>
+            <tr class="down"><td>槓桿</td><td>經營利潤</td><td class="num">923</td><td class="num">1,624</td><td class="num">1,409</td><td class="num">941</td><td class="num">398</td><td>惡化</td></tr>
+            <tr class="down"><td>現金流</td><td><span class="star">★</span> 官方 FCF</td><td class="num">146</td><td class="num">3,990</td><td class="num">1,420</td><td class="num">1,444</td><td class="num">−1,092</td><td>近季轉負</td></tr>
+            <tr class="down"><td>敘事</td><td><span class="star">★</span> Robotaxi 入帳</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">未披露</td><td>未通過</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 style="margin-top:16px">官方 FCF 五季（US$ B）</h3>
+      <div class="chart" id="fcfChart"></div>
+    </section>
+
+    <section class="panel">
+      <h2>五大維度動態判斷</h2>
+      <div class="grid-2">
+        <div class="box warn"><div style="display:flex;justify-content:space-between"><h3>1. 敘事</h3><span class="pill warn">部分通過</span></div><p>賣車同服務已入帳；Robotaxi 仍係覆蓋表＋投產句，未變成收入。</p></div>
+        <div class="box warn"><div style="display:flex;justify-content:space-between"><h3>2. 單位經濟</h3><span class="pill warn">部分通過</span></div><p>服務毛利同除積分 GM 對沖積分塌縮；經營利潤未跟住改善。</p></div>
+        <div class="box warn"><div style="display:flex;justify-content:space-between"><h3>3. 護城河</h3><span class="pill warn">部分通過</span></div><p>FSD 訂閱 +56%；灣區 Robotaxi 仍要安全員。vs Waymo 無法用官方包定量。</p></div>
+        <div class="box fail"><div style="display:flex;justify-content:space-between"><h3>4. 營運槓桿</h3><span class="pill fail">未通過</span></div><p>營收 +26%、OpEx +47%、經營利潤 −57%。規模未喺營業利潤顯現。</p></div>
+        <div class="box warn" style="grid-column:1/-1"><div style="display:flex;justify-content:space-between"><h3>5. 現金流</h3><span class="pill warn">部分通過（總判定未通過）</span></div><p>OCF 五季皆正、TTM FCF 仍 +US$5.76B；Q2 單季 −US$1.09B 加 capex &gt;US$25B，可持續轉正未成立，故現金流 thesis 記未通過。</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Bull / Bear / 行動</h2>
+      <div class="grid-3">
+        <div class="box pass"><h3>Bull Case</h3><p>交付雙位數；除積分 GM ≥16%；H2 OCF 明顯高過 H1；Robotaxi 開始可核對入帳。</p></div>
+        <div class="box fail"><h3>Bear Case</h3><p>交付回到同業增速；capex 按指引而 OCF 停喺每季 US$4–5B；Robotaxi 停喺七城演示。</p></div>
+        <div class="box warn"><h3>行動</h3><p><strong>僅觀察、唔好加倉。</strong>現價 P/S 13.2× 溢價一個數量級；未有 F3 Base 唔寫建倉區。</p></div>
+      </div>
+      <div class="callout info" style="margin-top:14px">
+        <strong>確認（下兩季／Q3 財報）：</strong>官方 FCF ≥0；除積分汽車 GM ≥16.3%；服務毛利 ≥US$648m；FSD 訂閱 YoY &gt;+30%；出現已入帳 Robotaxi 收入或官方英里／車隊／$/mile。<br>
+        <strong>失效：</strong>FCF 更負且 TTM FCF≤0；交付增速唔高過同業；除積分 GM &lt;15%；下兩季 Robotaxi 仍零收入。
+      </div>
+    </section>
+  </div>
+  <p class="footer">來源：SEC 8-K EX-99.1（2026-07-22）五季對照 + Form 10-Q（2026-07-23）。現價 yfinance delayed（2026-08-26）。官方 earnings transcript unavailable。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+  const fcf = [
+    {label:"25Q2", value:0.146},
+    {label:"25Q3", value:3.990},
+    {label:"25Q4", value:1.420},
+    {label:"26Q1", value:1.444},
+    {label:"26Q2", value:-1.092}
+  ];
+  const max = Math.max(...fcf.map(d => Math.abs(d.value)));
+  document.getElementById("fcfChart").innerHTML = fcf.map(d => {
+    const h = Math.max(8, Math.round((Math.abs(d.value) / max) * 140));
+    const cls = d.value >= 0 ? "pos" : "neg";
+    const txt = (d.value >= 0 ? "+" : "") + d.value.toFixed(2) + "B";
+    return `<div class="bar-wrap"><div class="bar-val">${txt}</div><div class="bar ${cls}" style="height:${h}px"></div><div class="bar-label">${d.label}</div></div>`;
+  }).join("");
+</script>
+</body>
+</html>
