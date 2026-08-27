@@ -25,3 +25,8 @@ alwaysApply: true
 - Extend modules in `src/` — keep `main.py` as thin CLI orchestrator
 - Handoff: GitHub only; one Skill per run; follow `AGENTS.md`. Claude Cowork
   follows `CLAUDE.md` (review memos, no parallel unpushed edits)
+- Research chats: one long-lived primary chat per ticker; continue that ticker's
+  Framework sequence in the same chat while still running one Skill per request.
+  Use separate chats only for a new ticker, cross-stock/portfolio work, or repo
+  engineering. Chat is not the source of truth: resume from committed reports,
+  catalogs, and PRs. Branches/PRs remain per logical change, not per ticker chat.

@@ -106,6 +106,17 @@ GitHub 係唯一交接。一次一個 Skill、一隻 ticker。
 
 Cursor 會執行 CLI、讀取最新輸出，並按 Skill 指示整理報告。TSLA 分析亦會讀取 `docs/TESLA_AI_FRAMEWORK.md` 及 `config/tesla_*.yaml`。
 
+### 建議 chat 結構
+
+- 一個 repo；每隻股票一個長期主 chat，命名 `{TICKER} — 全套分析`
+- 同一 ticker 嘅 Framework 1 → 2 → 3、Thesis、財報等沿用同一 chat，但每次只跑一個 Skill
+- 新 ticker、跨股票／組合比較、純網站／repo 維修先另開 chat
+- Chat 唔係正式記憶庫；以已 commit 嘅 `output/`、source catalog 同 PR 為準
+- 一個股票 chat 可以先後用多條短期 branch／PR；唔好將 chat 同永久 branch 綁死
+- 一次性 README／repo 導覽或已完成維修 chat 可以封存
+
+詳細 agent 規則見 `AGENTS.md`；Claude Cowork 見 `CLAUDE.md`。
+
 ## 設定
 
 編輯 `config.yaml` 可調整：
