@@ -2,8 +2,8 @@
 # last_updated: YYYY-MM-DD
 
 meta:
-  last_updated: "2026-06-29"
-  next_earnings_estimate: null  # 填入下次財報日
+  last_updated: "2026-08-27"
+  next_earnings_estimate: "2026-10-21"  # yfinance；以 Tesla IR 為準
 
 explosion_thresholds:
   eps_beat_pct: 15        # 單季 vs consensus
@@ -13,88 +13,98 @@ layers:
   L1_auto_energy:
     - id: deliveries
       label: "季度交付量"
-      status: unknown
-      note: ""
+      status: "480,126 Q2'26 (+25% YoY vs 384,122)"
+      note: "官方交付 8-K 2026-07-02 + EX-99.1；Model 3/Y 467,762，其他 12,364"
     - id: auto_gross_margin
       label: "汽車毛利率"
-      status: unknown
-      note: ""
+      status: "16.9% GAAP / 16.3% ex-credits"
+      note: "EX-99.1 調節表；積分收入 US$146m vs US$439m YoY"
     - id: energy_deployments
       label: "儲能部署 (MWh)"
-      status: unknown
-      note: ""
+      status: "13.5 GWh Q2'26 (+41% YoY)"
+      note: "交付 8-K 同 EX-99.1"
 
   L2_fsd:
     - id: fsd_version
       label: "FSD 主線版本"
-      status: unknown
-      note: ""
+      status: "v14 lite 向 AI3 推送（美／韓）；v15 僅 JPMorgan 轉述"
+      note: "官方 EX-99.1 寫 v14 lite；v15 step-change = 2026-08 JPM 參觀，unverified"
     - id: fsd_subscription
       label: "FSD 訂閱滲透"
-      status: unknown
-      note: ""
+      status: "1.48m 活躍訂閱（+56% YoY）；北美新車 >55% attach"
+      note: "EX-99.1；含一次過＋月費、唔計免費試用"
     - id: fsd_regulatory
       label: "主要監管事件"
-      status: unknown
-      note: ""
+      status: "荷／立／愛沙／丹／比已批 FSD；灣區 Robotaxi 仍須安全員"
+      note: "EX-99.1；CA TCP #TCP0046782-A"
 
   L3_robotaxi:
     - id: robotaxi_cities
       label: "商業化/試點城市"
-      status: unknown
-      note: "例：Austin pilot"
+      status: "七個主要都會區 live"
+      note: "灣區安全員；Austin/Dallas/Houston unsupervised；Miami/Orlando/Tampa 7 月開（期後）；Phoenix/Vegas 準備中"
     - id: robotaxi_fleet
       label: "營運車隊規模"
       status: unknown
-      note: ""
+      note: "官方未披露車隊輛數；累計付費英里圖軸至約 2.5m"
     - id: robotaxi_unsupervised
       label: "無安全員批准"
-      status: unknown
-      note: ""
+      status: "德州同佛州部分城市 ramping unsupervised；加州仍有安全員"
+      note: "EX-99.1 Services 頁"
 
   L4_optimus:
     - id: optimus_stage
       label: "階段 (demo/pilot/量產)"
-      status: unknown
-      note: ""
+      status: "第一代產線安裝中（Fremont）；Outlook 預期 2026 生產"
+      note: "EX-99.1；未寫 volume。JPM 稱 2027 H2 外售 = unverified"
     - id: optimus_internal_use
       label: "工廠內部部署"
       status: unknown
-      note: ""
+      note: "官方未量化內部機器人數量"
 
 explosion_watchlist:
-  # 未來 90 天可驗證事件；分析時填寫
+  - date: "2026-08-28"
+    event: "比亞迪 H1 2026 業績（董事會批准）"
+    layer: L1
+    moves: eps
+  - date: "2026-10-21"
+    event: "Tesla Q3 2026 財報（yfinance 估計）"
+    layer: L1
+    moves: both
   - date: null
-    event: ""
+    event: "Cybercab 車隊部署／無人駕駛覆蓋擴大（Outlook 未定量）"
     layer: L3
-    moves: rerating  # eps | rerating | both
+    moves: rerating
+  - date: "2026"
+    event: "Optimus 第一代生產（Outlook：產線安裝、預期 2026 生產）"
+    layer: L4
+    moves: rerating
 
 x_weekly_digest:
-  week_of: null
+  week_of: "2026-08-27"
   items: []
-  # - date: "2026-06-29"
-  #   handle: elonmusk
-  #   tier: narrative
-  #   summary: ""
-  #   layers: [L3]
+  # x_access=degraded this run
 
 transcript_diff:
-  current_quarter: null
-  prior_quarter: null
-  keywords_shift: []
-  # - term: robotaxi
-  #   change: "more_specific"  # more_specific | less_specific | new | dropped
+  current_quarter: "2026-Q2"
+  prior_quarter: "2026-Q1"
+  keywords_shift:
+    - term: robotaxi
+      change: more_specific  # 七城名單＋Cybercab 投產
+    - term: fsd
+      change: more_specific  # 1.48m 訂閱、>55% attach
+    - term: capex
+      change: more_specific  # 10-Q：2026 >US$25B
 
 macro_ai:
-  # 外部 CEO 摘句
   - source: "Jensen Huang / NVDA"
     date: null
-    quote_summary: ""
+    quote_summary: "本次未重跑 NVDA 摘句；下一次 Skill 0／F2 再補"
     relevance: [L2, L4]
 
 catalyst_scores:
-  eps_upside: null
-  rerating_upside: null
-  execution_risk: null
-  regulatory_risk: null
-  peer_pressure: null
+  eps_upside: 4          # 交付強但 EPS 大 miss、capex 壓 FCF
+  rerating_upside: 6     # Robotaxi／Cybercab／Optimus 敘事仍在
+  execution_risk: 7      # 利潤同 FCF 同指引節奏
+  regulatory_risk: 5     # 加州仍須安全員；FSD 標 Supervised
+  peer_pressure: 6       # BYD 量、Waymo 規模
