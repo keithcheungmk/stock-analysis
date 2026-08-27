@@ -3,17 +3,19 @@ name: interactive-research-report
 description: >-
   Renders stock research (Thesis Tracker, Framework 1/2, earnings reviews) as
   Claude-style interactive HTML card pages plus matching Canvas and Markdown.
+  Every HTML page must include a Decision HUD (spot vs valuation + driver KPIs).
   Use when the user asks for interactive HTML, Claude-style reports, box/card
-  layout, thesis tracker UI, evidence cards, filterable evidence, or visual
-  research pages instead of plain tables.
+  layout, thesis tracker UI, evidence cards, filterable evidence, visual
+  research pages, Interactive Brief, or KPI-versus-valuation buy/sell context.
 ---
 
 # Interactive Research Report（Claude 卡片風格）
 
 ## When to use
 
-產出 **Thesis Tracker、Framework、earnings review、one-pager** 等研究報告的用戶可視版面時套用。
+產出 **Thesis Tracker、Framework、earnings review、one-pager、Interactive Brief、valuation-model** 等研究報告的用戶可視版面時套用。
 預設交付：HTML（主視覺）+ Canvas + Markdown。One-pager 用 4 頁投影片翻頁，見 `.cursor/skills/one-pager/SKILL.md`。
+寫任何 `docs/{ticker}/*.html` 之前必須讀 [DECISION_HUD.md](DECISION_HUD.md)（KPI 對住估值；買賣前必睇）。Interactive Brief 係合成頁，唔另估倍數。
 
 ## Non-negotiable content depth
 
@@ -32,8 +34,9 @@ description: >-
 | 區塊 | 規則 |
 |---|---|
 | 背景 | 淺米色＋輕微 radial 氣氛；白／米白大圓角卡片 |
-| Hero | 左：狀態盒（Mixed／PASS／FAIL 色）；右：標題＋行動 badge |
-| KPI 列 | 4 個關鍵數字，支持綠／削弱紅／警示橙 |
+| Hero | 左：狀態盒（Mixed／PASS／FAIL 色）；中：Decision HUD；行動 badge 只准喺 HUD 之後 |
+| Decision HUD | 見 [DECISION_HUD.md](DECISION_HUD.md)：現價 vs 估值尺、溢價／折讓、3–5 個估值驅動 KPI。未有 F3 標 `F3 pending` |
+| KPI 列 | 4 個關鍵數字，支持綠／削弱紅／警示橙；其中估值驅動須同 HUD 一致 |
 | Thesis | 獨立 panel；內層 highlight callout（橙底細邊）放 **3–4 段**結論 |
 | 支柱 | 彩色左邊框卡片（改善綠、削弱紅）；唔用沉悶大表做主視覺 |
 | 證據 | **卡片網格**（非主表）；可篩選：全部／支持／中性／削弱；左色條對應影響 |
@@ -63,7 +66,7 @@ description: >-
 
 ## 發佈（用戶只睇頁，唔睇 code）
 
-1. 寫 `output/{TICKER}_*.html` 草稿後跑 `python scripts/publish_html_reports.py`。
+1. 寫 `output/{TICKER}_*.html` 草稿後跑 `python scripts/publish_html_reports.py`。每頁含 Decision HUD；同一 ticker 各頁現價／Base／溢價 % 必須相同。
 2. 用戶可見版本只喺 `docs/{ticker}/`。頁底必須有「頁面意見」區。
 3. 對用戶嘅交付係 GitHub Pages 連結，例如  
    `https://keithcheungmk.github.io/stock-analysis/{ticker}/`  

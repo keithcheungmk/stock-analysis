@@ -23,7 +23,7 @@ description: >-
 - F1 已 PASS／WATCH，問值唔值得入 Framework 3
 - F1 FAIL 但用戶仍要深挖執行拐點（例如 RDW）→ 可以跑，但開頭必須寫明紅線已 FAIL，F2 唔翻案
 
-唔用嚟做：Skill 0 賽道、F1 13 維評分、F3 target price、期權、one-pager。
+唔用嚟做：Skill 0 賽道、F1 13 維評分、F3 target price、期權、one-pager。互動頁仍要有 Decision HUD（`F3 pending` 倍數尺），但**唔准**喺 F2 計出 Bear／Base／Bull 目標價。
 
 ## 開工前
 
@@ -43,6 +43,8 @@ description: >-
 - 現金或稀釋（股數／債務／股本融資）— 若 F1 裂縫涉及流動性或回購／發債
 
 禁止：把 contracted ARR、指引、訂單意向當成已入帳收入；把融資現金當成經營自我融資。
+
+五季表須標明邊 3–5 行係 **估值驅動 KPI**（後續 F3／HUD 用呢批，唔另揀靚數）。互動頁跟 `.cursor/skills/interactive-research-report/DECISION_HUD.md`：現價 + `F3 pending` 倍數尺 + 呢 3–5 個 KPI；行動第一句引用倍數位置。
 
 ## Step 2：回答兩條必挖問題
 
@@ -72,7 +74,7 @@ description: >-
 
 繁體中文、廣東話語氣；ticker 同技術詞保留英文；縮寫首次寫全名。
 
-寫入 `output/{TICKER}_{YYYY-MM-DD}_framework2.md`。用戶要互動頁就跟 interactive-research-report，參考 `output/IREN_framework2.html`。
+寫入 `output/{TICKER}_{YYYY-MM-DD}_framework2.md`。用戶要互動頁就跟 interactive-research-report（含 `DECISION_HUD.md`），參考 `output/IREN_framework2.html` 或 `docs/spcx/framework2.html`。
 
 ### 必備區塊
 
@@ -92,7 +94,10 @@ description: >-
 | 必挖問題 | 發現 |
 
 ## 8–12 KPI 五季摘要
-（缺數留空 + 註）
+（缺數留空 + 註；標明估值驅動列）
+
+## Decision HUD（F3 pending 或引用已有 F3）
+現價 · 倍數尺或 vs Base · 3–5 驅動 KPI
 
 ## 五大維度
 1. 敘事 2. 單位經濟 3. 護城河 4. 營運槓桿 5. 現金流
@@ -110,4 +115,4 @@ description: >-
 
 - 增長質量至少一條主線 **通過** 或 **部分通過**，且現金流唔係唯一仍未 dig 嘅未知 → 可入 Framework 3。
 - 兩條必挖都 **未通過** → 唔入 F3；列可量化重跑條件。
-- 列出 F3 最敏感嘅 1–2 個變數（收入、margin、FCF 或 multiple），唔好當場計 target price。
+- 列出 F3 最敏感嘅 1–2 個變數（收入、margin、FCF 或 multiple），唔好當場計 target price。估值驅動 KPI 清單交俾 F3 做 SOTP／倍數敏感度，數字必須同 F2 五季表一致。

@@ -104,6 +104,17 @@
   .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
   .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .muted{color:var(--muted);font-size:.9rem}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
 </style>
 </head>
 <body>
@@ -130,6 +141,24 @@
     </div>
   </section>
 
+  <section class="hud" id="decision-hud">
+    <h2 class="sans">Decision HUD <span class="hud-tag">現價 vs Base +120%</span></h2>
+    <p class="muted" style="margin:0">買賣前先睇呢條尺。權威來源：Framework 3 SOTP（研究情景，非指引）。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/26）</div><div class="v">US$345.82</div><div class="s">市值 ~US$1.366T</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">63 / 157 / 402</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+120%</div><div class="s">偏貴 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 13.2×</div><div class="s">PEG 5.13 · TTM FCF yield ~0.4%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ 交付 480,126（+25%）</span>
+      <span>★ 汽車 GM 16.9%／除積分 16.3%</span>
+      <span>★ FSD 1.48m（+56%）</span>
+      <span>★ 官方 FCF −US$1.09B</span>
+      <span>★ Robotaxi 未入帳</span>
+    </div>
+  </section>
+
   <div class="kpis">
     <div class="kpi teal"><div class="label">現價（延遲 8/26）</div><div class="value">US$345.82</div><div class="note">3 個月 −21.5% · 未觸發股價爆發</div></div>
     <div class="kpi green"><div class="label">Q2 2026 營收</div><div class="value">US$28.24B</div><div class="note">YoY +26% · 交付 480,126（+25%）</div></div>
@@ -144,7 +173,7 @@
         <p><strong>WATCH（75／130）。</strong>三條致命紅線全部通過：現金＋短期投資 US$43.52B 約為有息債務＋融資租賃 4.7 倍，所以即使官方自由現金流（FCF，Free Cash Flow＝經營現金流減 capex）單季 −US$1.09B 都唔構成破產紅線；Q2 營收 +26% 明顯高過 GM（+1.9%）同 Ford（−4%）。評分停喺觀察區，因為淨利率、ROE（Return on Equity）、FCF 同 PEG（Price/Earnings-to-Growth）四項全係 0 分——市場用約 323 倍 trailing 盈利、5 倍 PEG 預支 Robotaxi 同 Optimus。</p>
         <p>正在被驗證嘅支柱係 L1 汽車基本盤重新擴張：紀錄 Q2 交付 480,126 輛（+25%）、FSD（Full Self-Driving，Supervised）訂閱 1.48m（+56%）、儲能部署 13.5 GWh（+41%）。呢啲已經入帳，唔使賭 8-K 以外嘅參觀紀要。</p>
         <p>仍未成立嘅路徑係盈利自我融資同 AI 變現。經營利潤率只得 1.4%（−57% YoY）；汽車毛利（除積分）16.3%；2026 年 capex 官方寫「超過 US$25B」。Robotaxi 七城同 Cybercab 投產係敘事驗證，累計付費英里仍以百萬計，損益表上未見到獨立 Robotaxi 收入。</p>
-        <p>最大裂痕係「交付爆發 ≠ EPS 爆發」。定義 C 要求單季 EPS beat >15%，今次非 GAAP EPS US$0.33 對共識約 US$0.54（−39%）；近三個月股價 −21.5%，兩條爆發軌道都未觸發。對行動含義：值得納入觀察同進入 Framework 2，但現價已經把自動駕駛選擇權買咗好大一部分，唔支持把交付紀錄當加倉依據。持倉未確認 → <strong>僅觀察，唔好加倉</strong>。</p>
+        <p>最大裂痕係「交付爆發 ≠ EPS 爆發」。定義 C 要求單季 EPS beat >15%，今次非 GAAP EPS US$0.33 對共識約 US$0.54（−39%）；近三個月股價 −21.5%，兩條爆發軌道都未觸發。對行動含義：現價相對 Framework 3 Base 溢價約 120%（US$346 vs US$157），唔支持把交付紀錄當買入／加倉依據。持倉未確認 → <strong>僅觀察，唔好加倉</strong>。</p>
       </div>
     </section>
 

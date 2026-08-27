@@ -94,6 +94,16 @@ description: >-
 - 最強反證
 - 哪一項假設最可能令結論失效
 
+### Decision HUD（互動頁必填；唔改 130 分邏輯）
+
+寫 HTML 時跟 `.cursor/skills/interactive-research-report/DECISION_HUD.md`。F1 通常未有 F3 → HUD 標 **`F3 pending`**：
+
+- 現價（delayed）+ P/S、PEG（若可用）、官方 FCF vs 市值；標明暫定規尺、非 target price
+- 3–5 個**估值驅動** KPI（唔係最靚嘅四個數）。例如 TSLA：交付或汽車 GM、FSD 訂閱、官方 FCF、Robotaxi 已入帳／官方英里（標清未入帳）
+- 行動第一句引用倍數相對同業／歷史嘅位置；禁止喺 F1 寫建倉區
+
+Markdown 報告亦應有同等「估值驅動 KPI」小節，方便後續頁共用數字。
+
 ### 下一步
 
 - `PASS`：列出 Framework 2 必須深挖的兩個問題。用戶其後叫 Framework 2 時，跟 `.cursor/skills/framework-2/SKILL.md`。

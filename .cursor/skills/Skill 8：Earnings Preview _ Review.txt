@@ -35,7 +35,7 @@
 - Skill 7 用於期權交易與事件前後執行。
 - Skill 8 用於單次 earnings event 的 preview 或 review。
 
-除非我明確要求，否則不要在 Skill 8 中重做完整 Skill 3 或 Skill 6；應聚焦在「這次財報事件本身」如何影響 thesis、估值與行動。
+除非我明確要求，否則不要在 Skill 8 中重做完整 Skill 3 或 Skill 6；應聚焦在「這次財報事件本身」如何影響 thesis、估值與行動。互動頁跟 `.cursor/skills/interactive-research-report/DECISION_HUD.md`：頂部 HUD 用 F3 現價 vs Base（或 `F3 pending` 倍數尺）+ 本季 3–5 個估值驅動 KPI；行動第一句引用溢價／折讓。
 
 ## 核心原則
 
@@ -107,7 +107,8 @@
 每個 KPI 都要說明：
 - 為什麼重要；
 - 高於 / 低於什麼方向才算 bullish / bearish；
-- 它對哪個 thesis 支柱最敏感。
+- 它對哪個 thesis 支柱最敏感；
+- **vs 共識** 同 **vs F3 估值敏感度**（例如呢個 KPI 轉正會唔會移動 Base；未有 F3 則標 `F3 pending`，只講會唔會改 P/S、PEG、FCF yield 規尺）。
 
 #### Step 3：做三情景反應地圖
 在 earnings preview 中，不是做完整估值模型，而是做 event reaction map：
@@ -168,8 +169,8 @@
 ### 📊 必看 KPI 清單
 請用表格輸出：
 
-| KPI | 為什麼重要 | 什麼結果算 bullish | 什麼結果算 bearish |
-|---|---|---|---|
+| KPI | 為什麼重要 | vs 共識 | vs 估值驅動（F3／HUD） | 什麼結果算 bullish | 什麼結果算 bearish |
+|---|---|---|---|---|---|
 
 ### 🪞 Bull / Base / Bear 反應地圖
 - Bull：
@@ -205,8 +206,8 @@
 ### 📊 KPI 與質量判斷
 請用表格輸出：
 
-| 項目 | 結果 | 判斷 | 對 thesis 的影響 |
-|---|---|---|---|
+| 項目 | 結果 | 判斷 | vs 共識 | vs 估值驅動（F3／HUD） | 對 thesis 的影響 |
+|---|---|---|---|---|---|
 
 其中「判斷」可用：
 - 強於預期

@@ -16,6 +16,17 @@
 - 同業：GM Q2 2026 官方 8-K／新聞稿（US GAAP／USD）；Ford Q2 2026 官方 EX-99.1（US GAAP／USD）；Rivian Q2 2026 官方 IR（US GAAP／USD）；BYD 用官方產銷快報（輛），H1 2026 財務仍未刊（董事會 2026-08-28）
 - yfinance 只用於市況、歷史回報、共識 EPS、PEG／P/S。**yfinance `totalDebt` US$16.08B 含經營租賃；紅線用 10-Q 有息債務＋融資租賃 US$9.34B。** yfinance TTM FCF ≈ US$4.84B 同官方 TTM FCF US$5.76B 方向一致但金額不同，以 EX-99.1 定義（OCF − capex）為準。
 
+## Decision HUD（權威來源：Framework 3 SOTP）
+
+| 欄 | 數字 |
+|---|---|
+| 現價 | US$345.82 delayed（2026-08-26）；市值約 US$1.366T |
+| Bear／Base／Bull | **US$63／US$157／US$402**（研究情景每股） |
+| 溢價 | 現價 vs Base **+120%**（US$346 vs US$157）；輔助：P/S ≈ 13.2×；PEG ≈ 5.13；TTM FCF yield ≈ 0.4% |
+| 估值驅動 KPI | 交付 480,126（+25%）；汽車 GM 16.9%／除積分 16.3%；FSD 1.48m（+56%）；官方 FCF −US$1.09B；Robotaxi 未入帳 |
+
+行動第一句：現價相對 Base 溢價約 **120%**（US$346 vs US$157），**僅觀察、唔好加倉**。
+
 ## 雙軌爆發（定義 C；Tesla 專用，唔併入 F1 分數）
 
 | 軌道 | 條件 | 今次 | 狀態 |

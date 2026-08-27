@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TSLA Thesis Tracker</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.4rem;font-weight:800;color:var(--watch);margin:8px 0 0}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;background:var(--watch-soft);border:1px solid #fdba74;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.pass{border-left:5px solid var(--pass)}.box.warn{border-left:5px solid var(--watch)}.box.fail{border-left:5px solid var(--fail)}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.on{background:#134e4a;color:#fff}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}.ev.weaken{border-left-color:var(--fail)}.ev.neutral{border-left-color:var(--watch)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 6</div>
+      <div class="verdict-title">Mixed</div>
+      <p class="sans" style="color:#78716c;margin:12px 0 0">僅觀察、唔好加倉</p>
+    </div>
+    <div class="hero-main">
+      <h1 style="margin:0 0 8px;font-family:Avenir Next,PingFang TC,sans-serif">TSLA · Thesis Tracker</h1>
+      <p style="margin:0;opacity:.92">L1 量 Intact · L1 FCF Weakening · L3 入帳 delaying</p>
+    </div>
+  </section>
+  <section class="hud" id="decision-hud">
+    <h2 class="sans">Decision HUD <span class="hud-tag">現價 vs Base +120%</span></h2>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/26）</div><div class="v">US$345.82</div><div class="s">市值 ~US$1.366T</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">63 / 157 / 402</div><div class="s">F3 研究情景</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+120%</div><div class="s">偏貴 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 13.2×</div><div class="s">TTM FCF yield ~0.4%</div></div>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>Thesis 結論</h2>
+    <div class="callout">
+      <p>正在被驗證：支柱 A／B — 交付 +25%、服務毛利 US$648m、FSD 1.48m。仍未成立：支柱 C Robotaxi 入帳（收入 US$0）、支柱 D 自我融資（Q2 FCF −US$1.09B、capex &gt;US$25B）。最大裂縫：現價相對 Base 溢價約 120%，已預支 L3／L4。行動：僅觀察、唔好加倉。</p>
+    </div>
+    <div class="grid-2" style="margin-top:12px">
+      <div class="box fail"><h3>EPS 爆發 — 未觸發</h3><p>定義 C：單季 EPS beat &gt;15%。Q2 非 GAAP EPS US$0.33 vs 共識 US$0.54（−39%）。</p></div>
+      <div class="box fail"><h3>股價爆發 — 未觸發</h3><p>定義 C：3 個月回報 &gt;+30%。US$440.36 → US$345.82（−21.5%）。兩欄分開，唔合成看多分。</p></div>
+    </div>
+    <div class="grid-2" style="margin-top:14px">
+      <div class="box pass"><h3>A 汽車單位經濟</h3><p>除積分 GM 15.0%→16.3%；積分塌縮被服務對沖。估值驅動：交付、除積分 GM。</p></div>
+      <div class="box pass"><h3>B FSD／服務</h3><p>訂閱 +56%。官方未拆 FSD 收入。估值驅動：服務 TTM、訂閱。</p></div>
+      <div class="box warn"><h3>C Robotaxi</h3><p>七城＋Cybercab 投產；無入帳。估值驅動：已入帳收入（而家 0）。</p></div>
+      <div class="box fail"><h3>D 現金流</h3><p>OCF 正、單季 FCF 負。估值驅動：官方 FCF vs 2026 capex。</p></div>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>證據</h2>
+    <div class="filters" id="filters">
+      <button class="on" data-f="all">全部</button>
+      <button data-f="support">支持</button>
+      <button data-f="neutral">中性</button>
+      <button data-f="weaken">削弱</button>
+    </div>
+    <div class="ev-grid" id="evidence">
+      <article class="ev support" data-f="support"><p><strong>交付 480,126（+25%）</strong> — 支柱 A 量完好。唔降低 +120% 溢價。</p></article>
+      <article class="ev support" data-f="support"><p><strong>FSD 1.48m、服務毛利 US$648m</strong> — 支柱 B 最硬官方數。</p></article>
+      <article class="ev weaken" data-f="weaken"><p><strong>官方 FCF −US$1.09B</strong> — 支柱 D 自我融資未成立。</p></article>
+      <article class="ev neutral" data-f="neutral"><p><strong>Robotaxi 七城、收入 US$0</strong> — 執行線索，未通過入帳門檻。</p></article>
+    </div>
+  </section>
+  <p class="footer">來源：Q2 2026 EX-99.1／10-Q；F3 SOTP 2026-08-27。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest("button[data-f]");
+  if(!b) return;
+  document.querySelectorAll("#filters button").forEach(x => x.classList.toggle("on", x===b));
+  const f = b.dataset.f;
+  document.querySelectorAll("#evidence .ev").forEach(el => {
+    el.style.display = (f==="all" || el.dataset.f===f) ? "" : "none";
+  });
+});
+</script>
+<section id="page-comments" data-page="/tsla/thesis-tracker.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
