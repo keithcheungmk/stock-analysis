@@ -2,38 +2,439 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>TSLA · 互動報告</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<title>TSLA · Position Brief · Skill 9 · 2026-08-27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  body { margin:0; min-height:100vh; font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;
-    background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),#f4f1ea; color:#1c1917;
-    padding:24px 16px 64px; }
-  .wrap { max-width:440px; margin:0 auto; }
-  h1 { font-family:"Avenir Next","PingFang TC",sans-serif; font-size:1.4rem; margin:0 0 8px; }
-  p { color:#78716c; line-height:1.5; }
-  .badge { display:inline-block; margin-left:6px; font-size:.72rem; font-weight:800;
-    font-family:"Avenir Next","PingFang TC",sans-serif; background:#0f766e; color:#fff;
-    border-radius:999px; padding:3px 8px; vertical-align:middle; }
-  a { display:block; margin-top:12px; text-decoration:none; color:#fff; background:#0f766e;
-    border-radius:999px; padding:14px 16px; font-weight:800; text-align:center;
-    font-family:"Avenir Next","PingFang TC",sans-serif; }
-  a.secondary { background:#fff; color:#0f766e; border:1px solid #e7e0d5; }
+  :root {
+    --navy: #0b1f33;
+    --navy-2: #143049;
+    --ink: #15202b;
+    --muted: #5b6b7c;
+    --line: #d7dee7;
+    --paper: #f7f9fc;
+    --card: #ffffff;
+    --teal: #0e7c66;
+    --teal-soft: #e6f5f1;
+    --amber: #b45309;
+    --amber-soft: #fff4e5;
+    --red: #b42318;
+    --red-soft: #fdecec;
+    --blue: #1d4ed8;
+    --blue-soft: #e8eefc;
+    --radius: 18px;
+    --shadow: 0 10px 30px rgba(11, 31, 51, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background:
+      linear-gradient(180deg, #eef3f8 0%, var(--paper) 28%, #f4f7fb 100%);
+    font-family: "Manrope", "PingFang TC", "Noto Sans TC", sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .shell { max-width: 980px; margin: 0 auto; padding: 18px 14px 120px; }
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    backdrop-filter: blur(14px);
+    background: rgba(247, 249, 252, 0.88);
+    border-bottom: 1px solid rgba(215, 222, 231, 0.9);
+    margin: -18px -14px 18px;
+    padding: 12px 14px;
+  }
+  .topbar-inner { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+  .brand {
+    font-weight: 800; letter-spacing: 0.04em; color: var(--navy);
+    font-size: 0.78rem; text-transform: uppercase;
+  }
+  .nav {
+    display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; padding-bottom: 2px;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex: 0 0 auto; text-decoration: none; color: var(--muted);
+    font-size: 0.74rem; font-weight: 700; padding: 8px 11px;
+    border-radius: 999px; border: 1px solid transparent; background: transparent;
+  }
+  .nav a.on, .nav a:hover {
+    color: var(--navy); background: #fff; border-color: var(--line);
+  }
+  .nav a.ext {
+    border-color: var(--line);
+    background: var(--teal-soft);
+    color: var(--teal);
+  }
+  .slide {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    padding: 22px 18px;
+    margin-bottom: 16px;
+  }
+  .slide-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  }
+  .slide-kicker .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--teal);
+  }
+  h1 {
+    font-family: "Fraunces", "Songti TC", serif;
+    font-size: clamp(1.7rem, 5vw, 2.35rem);
+    line-height: 1.15; margin: 0 0 10px; color: var(--navy);
+    font-weight: 700;
+  }
+  h2 {
+    font-family: "Fraunces", "Songti TC", serif;
+    font-size: 1.35rem; margin: 0 0 8px; color: var(--navy); font-weight: 700;
+  }
+  h3 { margin: 0 0 6px; font-size: 1rem; color: var(--navy); font-weight: 800; }
+  p { margin: 0 0 10px; color: var(--ink); }
+  .lede { color: var(--muted); font-size: 0.95rem; max-width: 42rem; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; margin-top: 16px;
+  }
+  @media (max-width: 760px) { .hero-grid { grid-template-columns: 1fr; } }
+  .status-card {
+    border-radius: 20px; padding: 18px;
+    background: linear-gradient(160deg, #fff7ed, #ffedd5);
+    border: 1px solid #fdba74;
+  }
+  .status-card.watch .label { color: var(--amber); }
+  .status-card .label {
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .status-card .score {
+    font-family: "Fraunces", serif; font-size: 2.2rem; font-weight: 700;
+    color: var(--amber); margin: 6px 0 4px; line-height: 1;
+  }
+  .action {
+    display: inline-flex; margin-top: 10px; padding: 8px 12px; border-radius: 999px;
+    background: var(--navy); color: #fff; font-size: 0.8rem; font-weight: 800;
+  }
+  .navy-card {
+    border-radius: 20px; padding: 18px;
+    background: linear-gradient(145deg, var(--navy), var(--navy-2));
+    color: #fff;
+  }
+  .navy-card p { color: rgba(255,255,255,0.9); }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .chip {
+    display: inline-flex; align-items: center; padding: 6px 10px; border-radius: 999px;
+    font-size: 0.74rem; font-weight: 700; background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px;
+  }
+  @media (max-width: 760px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px;
+    border-top: 4px solid var(--teal);
+  }
+  .kpi.warn { border-top-color: var(--amber); }
+  .kpi.bad { border-top-color: var(--red); }
+  .kpi.neutral { border-top-color: #94a3b8; }
+  .kpi .k { font-size: 0.72rem; font-weight: 700; color: var(--muted); }
+  .kpi .v { font-size: 1.15rem; font-weight: 800; color: var(--navy); margin-top: 4px; }
+  .kpi .s { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+  .pillars {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px;
+  }
+  @media (max-width: 760px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar {
+    border: 1px solid var(--line); border-radius: 16px; padding: 14px 14px 14px 16px;
+    background: #fff; border-left-width: 5px;
+  }
+  .pillar.ok { border-left-color: var(--teal); background: linear-gradient(180deg, var(--teal-soft), #fff 48%); }
+  .pillar.mix { border-left-color: var(--amber); background: linear-gradient(180deg, var(--amber-soft), #fff 48%); }
+  .pillar.bad { border-left-color: var(--red); background: linear-gradient(180deg, var(--red-soft), #fff 48%); }
+  .pillar .code { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; color: var(--muted); }
+  .pillar .title { font-weight: 800; color: var(--navy); margin-top: 2px; }
+  .pillar .body { font-size: 0.88rem; color: var(--muted); margin-top: 8px; }
+  .tag {
+    display: inline-flex; margin-top: 10px; padding: 4px 9px; border-radius: 999px;
+    font-size: 0.7rem; font-weight: 800;
+  }
+  .tag.ok { background: var(--teal-soft); color: var(--teal); }
+  .tag.mix { background: var(--amber-soft); color: var(--amber); }
+  .tag.bad { background: var(--red-soft); color: var(--red); }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .filter {
+    border: 1px solid var(--line); background: #fff; border-radius: 999px;
+    padding: 7px 12px; font: inherit; font-size: 0.76rem; font-weight: 700;
+    color: var(--muted); cursor: pointer;
+  }
+  .filter.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .evidence {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  }
+  @media (max-width: 760px) { .evidence { grid-template-columns: 1fr; } }
+  .ev {
+    border: 1px solid var(--line); border-radius: 16px; padding: 14px;
+    background: #fff; border-left-width: 5px; min-height: 150px;
+  }
+  .ev.support { border-left-color: var(--teal); }
+  .ev.neutral { border-left-color: #94a3b8; }
+  .ev.weaken { border-left-color: var(--red); }
+  .ev-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+  .ev-type { font-size: 0.7rem; font-weight: 800; color: var(--muted); letter-spacing: 0.04em; }
+  .ev-pill {
+    font-size: 0.68rem; font-weight: 800; padding: 3px 8px; border-radius: 999px;
+  }
+  .ev-pill.support { background: var(--teal-soft); color: var(--teal); }
+  .ev-pill.neutral { background: #eef2f6; color: #475569; }
+  .ev-pill.weaken { background: var(--red-soft); color: var(--red); }
+  .ev-title { font-weight: 800; color: var(--navy); margin-top: 8px; }
+  .ev-note { font-size: 0.88rem; color: var(--muted); margin-top: 8px; }
+  .bars { display: grid; gap: 8px; margin-top: 10px; }
+  .bar-row { display: grid; grid-template-columns: 110px 1fr 52px; gap: 8px; align-items: center; }
+  .bar-label { font-size: 0.78rem; font-weight: 700; color: var(--muted); }
+  .bar-track { height: 10px; background: #e8eef5; border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 999px; background: var(--teal); }
+  .bar-fill.bad { background: var(--red); }
+  .bar-fill.warn { background: var(--amber); }
+  .bar-val { font-size: 0.78rem; font-weight: 800; color: var(--navy); text-align: right; }
+  .timeline { display: grid; gap: 10px; margin-top: 8px; }
+  .tl {
+    display: grid; grid-template-columns: 54px 1fr; gap: 10px;
+    padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: #fff;
+  }
+  .tl .pri {
+    font-size: 0.72rem; font-weight: 800; color: #fff; background: var(--navy);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  }
+  .tl .pri.p0 { background: var(--red); }
+  .tl .pri.p1 { background: var(--amber); }
+  .tl .pri.p2 { background: var(--teal); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 760px) { .split { grid-template-columns: 1fr; } }
+  .box {
+    border: 1px solid var(--line); border-radius: 16px; padding: 14px; background: #fff;
+  }
+  .box.ok { border-left: 5px solid var(--teal); }
+  .box.bad { border-left: 5px solid var(--red); }
+  .source {
+    margin-top: 14px; padding: 12px 14px; border-radius: 14px;
+    background: var(--blue-soft); color: #1e3a8a; font-size: 0.8rem;
+  }
+  .footer {
+    margin-top: 8px; color: var(--muted); font-size: 0.8rem; text-align: center;
+  }
+  .pager {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(11, 31, 51, 0.94); color: #fff;
+    display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  }
+  .pager button {
+    appearance: none; border: 0; border-radius: 999px; padding: 10px 14px;
+    font: inherit; font-size: 0.8rem; font-weight: 800; cursor: pointer;
+    background: #fff; color: var(--navy);
+  }
+  .pager button:disabled { opacity: 0.35; cursor: default; }
+  .pager .mid { font-size: 0.78rem; font-weight: 700; opacity: 0.9; }
+  .hidden { display: none !important; }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>TSLA 互動報告 <span class="badge">更新 2026-08-27</span></h1>
-  <p>用瀏覽器打開。頁底可以留意見，下次會跟住改。</p>
-    <a href="./earnings-review.html">Earnings Review</a>
-    <a href="./framework1.html">Framework 1 初篩</a>
-    <a href="./framework2.html">Framework 2 深度增長</a>
-    <a href="./framework3.html">Framework 3 估值</a>
-    <a href="./interactive-brief.html">Interactive Brief</a>
-    <a href="./thesis-tracker.html">Thesis Tracker</a>
-    <a href="./valuation-model.html">估值模型</a>
-  <a class="secondary" href="../">全部報告目錄</a>
-  <p style="margin-top:24px;font-size:.82rem;color:#78716c">此分析僅供研究參考，不構成投資建議。</p>
-</div>
+  <div class="shell">
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">TSLA Brief</div>
+        <nav class="nav" id="nav">
+          <a href="#s1" class="on" data-i="0">封面</a>
+          <a href="#s2" data-i="1">結論</a>
+          <a href="#s3" data-i="2">HUD</a>
+          <a href="#s4" data-i="3">F2</a>
+          <a href="#s5" data-i="4">Thesis</a>
+          <a href="#s6" data-i="5">證據</a>
+          <a href="#s7" data-i="6">催化劑</a>
+          <a href="./valuation-model.html" class="ext">估值模型</a>
+          <a href="./framework1.html" class="ext">F1</a>
+          <a href="./framework2.html" class="ext">F2</a>
+          <a href="./framework3.html" class="ext">F3</a>
+          <a href="./earnings-review.html" class="ext">Q2</a>
+          <a href="./thesis-tracker.html" class="ext">Thesis</a>
+          <a href="../" class="ext">目錄</a>
+        </nav>
+      </div>
+    </div>
+
+    <section class="slide" id="s1" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Skill 9 · Position Brief · Slide 01</div>
+      <h1>Tesla（TSLA）<br />全套研究翻頁版</h1>
+      <p class="lede">官方數字優先 · 2026-Q2 EX-99.1／10-Q · Decision HUD：現價 vs Base</p>
+      <div class="hero-grid">
+        <div class="status-card watch">
+          <div class="label">Framework 1</div>
+          <div class="score">WATCH</div>
+          <div style="font-weight:800;color:var(--amber)">75 / 130</div>
+          <div class="action">僅觀察／唔好加倉</div>
+        </div>
+        <div class="navy-card">
+          <h3 style="color:#fff;margin-bottom:8px">As of 2026-08-27</h3>
+          <p>現價 US$345.82（delayed 8/26）· 市值約 US$1.366T</p>
+          <p>F3 Base US$157 · 現價溢價 <strong>+120%</strong></p>
+          <div class="meta-row">
+            <span class="chip">USD · US GAAP</span>
+            <span class="chip">Q2 verified</span>
+            <span class="chip">持倉未確認</span>
+          </div>
+        </div>
+      </div>
+      <div class="source">來源：SEC 8-K EX-99.1（2026-07-22）+ 10-Q（2026-07-23）。yfinance 只用於現價／共識。</div>
+    </section>
+
+    <section class="slide" id="s2" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Executive Verdict · Slide 02</div>
+      <h2>結論（3–4 句）</h2>
+      <div class="box ok" style="margin-top:10px">
+        <p><strong>正在被驗證：</strong>L1 量同 L2 訂閱。Q2 交付 480,126（+25%）、服務毛利 US$648m、FSD 1.48m（+56%）。積分塌縮已被服務對沖。</p>
+        <p><strong>仍未成立：</strong>Robotaxi 入帳同自我融資。七城＋Cybercab 投產，損益表收入 US$0。官方 FCF −US$1.09B；2026 capex &gt;US$25B。</p>
+        <p><strong>最大裂縫：</strong>現價相對 F3 Base 溢價約 120%。市場已 price in 大部分 L3／L4 期權。</p>
+        <p style="margin:0"><strong>行動含義：</strong>僅觀察、唔好加倉。現價相對 Base 溢價約 120%（US$346 vs US$157），唔支持買入。</p>
+      </div>
+      <div class="split" style="margin-top:12px">
+        <div class="box bad">
+          <h3>EPS 爆發 — 未觸發</h3>
+          <p>定義 C：單季 EPS beat &gt;15%。Q2 非 GAAP EPS <strong>US$0.33</strong> vs 共識 US$0.54（−39%）。唔同收入 beat 合併。</p>
+        </div>
+        <div class="box bad">
+          <h3>股價爆發 — 未觸發</h3>
+          <p>定義 C：3 個月回報 &gt;+30%。US$440.36 → <strong>US$345.82（−21.5%）</strong>。兩欄分開報，唔合成看多分。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="s3" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Decision HUD · Slide 03</div>
+      <h2 id="decision-hud">KPI 對住估值</h2>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="k">現價</div><div class="v">$345.82</div><div class="s">delayed 8/26</div></div>
+        <div class="kpi warn"><div class="k">Base</div><div class="v">$157</div><div class="s">SOTP US$0.62T</div></div>
+        <div class="kpi bad"><div class="k">現價 vs Base</div><div class="v">+120%</div><div class="s">偏貴</div></div>
+        <div class="kpi"><div class="k">Bear / Bull</div><div class="v">63 / 402</div><div class="s">研究情景</div></div>
+        <div class="kpi"><div class="k">交付 ★</div><div class="v">480,126</div><div class="s">+25% YoY</div></div>
+        <div class="kpi"><div class="k">汽車 GM 除積分 ★</div><div class="v">16.3%</div><div class="s">YoY 改善</div></div>
+        <div class="kpi"><div class="k">FSD ★</div><div class="v">1.48m</div><div class="s">+56%</div></div>
+        <div class="kpi bad"><div class="k">官方 FCF ★</div><div class="v">−$1.09B</div><div class="s">capex &gt;$25B</div></div>
+      </div>
+      <div class="source">L3 Robotaxi 已入帳收入 = US$0。可調模型見 valuation-model.html。唔另估倍數。</div>
+    </section>
+
+    <section class="slide" id="s4" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Framework 2 · Slide 04</div>
+      <h2>增長質量</h2>
+      <div class="split" style="margin-top:12px">
+        <div class="box ok"><h3>1. 汽車／服務 · 部分通過</h3><p>服務毛利 US$166m→US$648m 覆蓋積分少收 US$293m。除積分 GM 15.0%→16.3%。單季 FCF 穩定轉正未證明（H1 僅約 +US$0.35B vs capex &gt;US$25B）。</p></div>
+        <div class="box bad"><h3>2. Robotaxi · 未通過</h3><p>七城覆蓋、Cybercab 投產、灣區仍有安全員。無收入行、無車隊、無 $/mile。付費英里只有圖軸（約 0–2.5m），唔當表列數。vs Waymo 無法用官方包定量。</p></div>
+      </div>
+      <div class="box bad" style="margin-top:10px"><h3>現金流／價格 · 未通過</h3><p>Q2 FCF −US$1.09B。H1 OCF US$8.63B 年化覆蓋唔到 &gt;US$25B capex。經營利潤 −57%。</p></div>
+    </section>
+
+    <section class="slide" id="s5" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Thesis · Slide 05</div>
+      <h2>四條支柱</h2>
+      <div class="pillars">
+        <div class="pillar ok"><div class="code">PILLAR A</div><div class="title">汽車單位經濟</div><div class="body">量 + 除積分 GM。估值驅動：交付、汽車 GM。</div><span class="tag ok">支持</span></div>
+        <div class="pillar ok"><div class="code">PILLAR B</div><div class="title">FSD／服務</div><div class="body">訂閱飛輪。官方未拆 FSD 收入。</div><span class="tag ok">支持</span></div>
+        <div class="pillar mix"><div class="code">PILLAR C</div><div class="title">Robotaxi 入帳</div><div class="body">覆蓋≠收入。L3 仍係期權桶。</div><span class="tag mix">延後</span></div>
+        <div class="pillar bad"><div class="code">PILLAR D</div><div class="title">自我融資</div><div class="body">OCF 正、FCF 負、capex 指引硬。</div><span class="tag bad">削弱</span></div>
+      </div>
+    </section>
+
+    <section class="slide" id="s6" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Evidence · Slide 06</div>
+      <h2>可篩選證據卡</h2>
+      <div class="filters" id="filters">
+        <button class="filter on" data-f="all">全部</button>
+        <button class="filter" data-f="support">支持</button>
+        <button class="filter" data-f="neutral">中性</button>
+        <button class="filter" data-f="weaken">削弱</button>
+      </div>
+      <div class="evidence" id="evidence">
+        <article class="ev support" data-f="support"><div class="ev-top"><span class="ev-type">KPI</span><span class="ev-pill support">支持</span></div><div class="ev-title">交付 480,126（+25%）</div><div class="ev-note">L1 量完好。唔降低 +120% vs Base。</div></article>
+        <article class="ev support" data-f="support"><div class="ev-top"><span class="ev-type">KPI</span><span class="ev-pill support">支持</span></div><div class="ev-title">FSD 1.48m · 服務毛利 $648m</div><div class="ev-note">對沖積分塌縮。FSD 收入未拆帳。</div></article>
+        <article class="ev weaken" data-f="weaken"><div class="ev-top"><span class="ev-type">現金流</span><span class="ev-pill weaken">削弱</span></div><div class="ev-title">官方 FCF −US$1.09B</div><div class="ev-note">2026 capex &gt;US$25B。自我融資未成立。</div></article>
+        <article class="ev weaken" data-f="weaken"><div class="ev-top"><span class="ev-type">估值</span><span class="ev-pill weaken">削弱</span></div><div class="ev-title">現價 vs Base +120%</div><div class="ev-note">US$1.37T 接近 Bull 八成。L3／L4 已大部分 price in。</div></article>
+        <article class="ev neutral" data-f="neutral"><div class="ev-top"><span class="ev-type">敘事</span><span class="ev-pill neutral">中性</span></div><div class="ev-title">Robotaxi 七城 · 入帳 $0</div><div class="ev-note">執行線索。未通過收入門檻。</div></article>
+      </div>
+    </section>
+
+    <section class="slide" id="s7" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Catalysts · Slide 07</div>
+      <h2>未來 1–2 季</h2>
+      <div class="timeline">
+        <div class="tl"><div class="pri p0">P0</div><div><strong>Q3 2026 財報</strong><br /><span class="lede">估 2026-10-21（以 IR 為準）· ★ FCF、除積分 GM、Robotaxi 入帳</span></div></div>
+        <div class="tl"><div class="pri p1">P1</div><div><strong>Cybercab 車隊／無安全員覆蓋</strong><br /><span class="lede">Outlook 未定量 · 要官方數字先郁 L3 桶</span></div></div>
+        <div class="tl"><div class="pri p2">P2</div><div><strong>比亞迪 H1 財務</strong><br /><span class="lede">2026-08-28 · 只補同業錨</span></div></div>
+      </div>
+      <div class="source">Skill 7 跳過（無確認持倉）。爆發定義 C：EPS 爆發未觸發（−39%）；股價爆發未觸發（3 個月 −21.5%）。兩欄分開，唔合併。</div>
+    </section>
+
+    <p class="footer">此分析僅供研究參考，不構成投資建議。· TSLA interactive brief · 2026-08-27</p>
+  </div>
+  <div class="pager">
+    <button id="prev" type="button">上一頁</button>
+    <div class="mid" id="pageLabel">1 / 7</div>
+    <button id="next" type="button">下一頁</button>
+  </div>
+<script>
+  const slides = [...document.querySelectorAll("[data-slide]")];
+  const navLinks = [...document.querySelectorAll("#nav a")];
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  const pageLabel = document.getElementById("pageLabel");
+  let i = 0;
+  function show(idx) {
+    i = Math.max(0, Math.min(slides.length - 1, idx));
+    slides.forEach((s, n) => s.classList.toggle("hidden", n !== i));
+    navLinks.forEach((a) => {
+      const isSlide = a.dataset.i !== undefined && a.dataset.i !== "";
+      a.classList.toggle("on", isSlide && Number(a.dataset.i) === i);
+    });
+    pageLabel.textContent = `${i + 1} / ${slides.length}`;
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  prev.addEventListener("click", () => show(i - 1));
+  next.addEventListener("click", () => show(i + 1));
+  navLinks.forEach((a) => a.addEventListener("click", (e) => {
+    if (a.dataset.i === undefined || a.dataset.i === "") return;
+    e.preventDefault();
+    show(Number(a.dataset.i));
+  }));
+  let x0 = null;
+  document.addEventListener("touchstart", (e) => { x0 = e.changedTouches[0].clientX; }, { passive: true });
+  document.addEventListener("touchend", (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1));
+    x0 = null;
+  }, { passive: true });
+  const filters = document.getElementById("filters");
+  const cards = [...document.querySelectorAll("#evidence .ev")];
+  filters.addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter");
+    if (!btn) return;
+    filters.querySelectorAll(".filter").forEach((b) => b.classList.remove("on"));
+    btn.classList.add("on");
+    const f = btn.dataset.f;
+    cards.forEach((c) => { c.style.display = (f === "all" || c.dataset.f === f) ? "" : "none"; });
+  });
+  show(0);
+</script>
 <section id="page-comments" data-page="/tsla/index.html"></section>
 <script src="../assets/page-comments.js" defer></script>
 </body>

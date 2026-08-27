@@ -18,9 +18,10 @@
 - 「Cursor 交割」唔適用 Tesla。
 - 佛州 Robotaxi：EX-99.1（7/22）已寫入七城表；相對 6/30 期終仍標期後披露，無需改成「未開通」。
 - Q3 財報日期維持第三方估計 2026-10-21，以 IR 為準。
+- Skill 9 Position Brief 已成為 `docs/tsla/index.html`（對齊 SPCX）；Skill 7 仍跳過。
 
 ## 結論
 
-無需改官方 KPI 或 F3 Base。HUD 現價 vs Base +120% 仍然有效。行動維持僅觀察。
+無需改官方 KPI 或 F3 Base。HUD 現價 vs Base +120% 仍然有效。爆發定義 C 兩欄均未觸發。行動維持僅觀察／唔好加倉。
 
 *此分析僅供研究參考，不構成投資建議。*

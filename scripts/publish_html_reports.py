@@ -18,6 +18,7 @@ DOCS = ROOT / "docs"
 SKIP_OVERWRITE = {
     DOCS / "spcx" / "index.html",
     DOCS / "spcx" / "valuation-model.html",
+    DOCS / "tsla" / "index.html",
 }
 
 LABELS = (
@@ -185,6 +186,7 @@ def ticker_index_html(ticker: str, items: list[dict[str, str]], updated: str) ->
 def hub_html(pages: dict[str, list[dict[str, str]]]) -> str:
     extra = {
         "SPCX": [("./spcx/", "Position Brief（手機投影片）")],
+        "TSLA": [("./tsla/", "Position Brief（手機投影片）")],
     }
     preferred = ("TSLA", "NVDA", "SPCX", "IREN", "RKLB", "RDW", "MRNA")
     tickers = [t for t in preferred if t in pages] + [t for t in pages if t not in preferred]

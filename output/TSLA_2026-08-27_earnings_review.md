@@ -3,11 +3,18 @@
 - **判定：** 營收／交付 **高質量擴張**；盈利同現金流 **低質量 miss**。整體：**低質量 beat（收入）+ thesis Mixed**
 - **數據截至：** 2026-08-27；最新官方季 2026-Q2（期終 2026-06-30）
 - **現價：** US$345.82（yfinance delayed，2026-08-26）
-- **行動：** **僅觀察、唔好加倉**。現價 P/S 約 13.2× 已較 GM／Ford 溢價一個數量級（F3 pending，非 target price）
+- **行動：** **僅觀察、唔好加倉**。現價相對 Base 溢價約 **120%**（US$346 vs US$157）
 
-## Decision HUD（F3 pending）
+## Decision HUD（權威來源：Framework 3 SOTP）
 
-同 Framework 2：P/S 13.2× · PEG 5.13 · trailing P/E 323× · TTM FCF yield ~0.4%。估值驅動 KPI：交付 480,126；汽車 GM 16.9%／除積分 16.3%；FSD 1.48m；官方 FCF −US$1.09B；Robotaxi 未入帳。
+現價 US$345.82 vs Bear／Base／Bull **US$63／US$157／US$402** → 現價 vs Base **+120%**。輔助：P/S 13.2× · PEG 5.13 · TTM FCF yield ~0.4%。估值驅動 KPI：交付 480,126；汽車 GM 16.9%／除積分 16.3%；FSD 1.48m；官方 FCF −US$1.09B；Robotaxi 未入帳。
+
+### 爆發定義 C（兩欄分開，唔合併成一個看多分）
+
+| 軌道 | 條件 | 今次 | 狀態 |
+|---|---|---|---|
+| EPS 爆發 | 單季 EPS vs consensus beat >15% | 非 GAAP EPS US$0.33 vs 共識 US$0.54（−39%） | **未觸發** |
+| 股價爆發 | 3 個月總回報 >+30% | US$440.36 → US$345.82（**−21.5%**） | **未觸發** |
 
 ## Earnings Review 結論
 
@@ -44,13 +51,13 @@ Q2 唔係「全面 beat」。官方營收 US$28.236B 對第三方轉述共識約
 
 ## 對估值與持倉
 
-- **未有 F3**：唔改 Base／建倉區（禁止本 skill 另估）。
-- HUD 含義：收入 beat **唔降低** 相對整車 30–45× P/S 溢價；FCF 轉負令 FCF yield 更難成為買入錨。
-- Thesis Tracker 應更新為 **Mixed**（L1 量完好、L1 利潤／現金裂縫擴大、L3 未入帳）。
+- **已有 F3：** Bear／Base／Bull US$63／US$157／US$402。現價 vs Base **+120%**。本 skill **唔另估**、**唔改建倉區**。
+- HUD 含義：收入 beat **唔降低** +120% vs Base；FCF 轉負令 FCF yield 更難成為買入錨。
+- Thesis Tracker：**Mixed**（L1 量完好、L1 利潤／現金裂縫擴大、L3 未入帳）。
 
 ## 財報後行動
 
-- **僅觀察、唔好加倉。** 現價 P/S 約 13.2× 溢價一個數量級。
+- **僅觀察、唔好加倉。** 現價相對 Base 溢價約 120%（US$346 vs US$157）。
 - 下一個 checkpoint：Q3 2026 財報（yfinance 列 2026-10-21，以 Tesla IR 為準）— 官方 FCF 是否 ≥0、除積分 GM、Robotaxi 是否開始入帳。
 - 期權：持倉未確認，唔做 Skill 7。
 

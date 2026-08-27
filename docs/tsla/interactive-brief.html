@@ -66,6 +66,11 @@
   .nav a.on, .nav a:hover {
     color: var(--navy); background: #fff; border-color: var(--line);
   }
+  .nav a.ext {
+    border-color: var(--line);
+    background: var(--teal-soft);
+    color: var(--teal);
+  }
   .slide {
     background: var(--card);
     border: 1px solid var(--line);
@@ -256,12 +261,19 @@
           <a href="#s5" data-i="4">Thesis</a>
           <a href="#s6" data-i="5">證據</a>
           <a href="#s7" data-i="6">催化劑</a>
+          <a href="./valuation-model.html" class="ext">估值模型</a>
+          <a href="./framework1.html" class="ext">F1</a>
+          <a href="./framework2.html" class="ext">F2</a>
+          <a href="./framework3.html" class="ext">F3</a>
+          <a href="./earnings-review.html" class="ext">Q2</a>
+          <a href="./thesis-tracker.html" class="ext">Thesis</a>
+          <a href="../" class="ext">目錄</a>
         </nav>
       </div>
     </div>
 
     <section class="slide" id="s1" data-slide>
-      <div class="slide-kicker"><span class="dot"></span> Position Brief · Slide 01</div>
+      <div class="slide-kicker"><span class="dot"></span> Skill 9 · Position Brief · Slide 01</div>
       <h1>Tesla（TSLA）<br />全套研究翻頁版</h1>
       <p class="lede">官方數字優先 · 2026-Q2 EX-99.1／10-Q · Decision HUD：現價 vs Base</p>
       <div class="hero-grid">
@@ -292,13 +304,23 @@
         <p><strong>正在被驗證：</strong>L1 量同 L2 訂閱。Q2 交付 480,126（+25%）、服務毛利 US$648m、FSD 1.48m（+56%）。積分塌縮已被服務對沖。</p>
         <p><strong>仍未成立：</strong>Robotaxi 入帳同自我融資。七城＋Cybercab 投產，損益表收入 US$0。官方 FCF −US$1.09B；2026 capex &gt;US$25B。</p>
         <p><strong>最大裂縫：</strong>現價相對 F3 Base 溢價約 120%。市場已 price in 大部分 L3／L4 期權。</p>
-        <p style="margin:0"><strong>行動含義：</strong>僅觀察、唔好加倉。現價 vs Base +120%，唔支持買入。</p>
+        <p style="margin:0"><strong>行動含義：</strong>僅觀察、唔好加倉。現價相對 Base 溢價約 120%（US$346 vs US$157），唔支持買入。</p>
+      </div>
+      <div class="split" style="margin-top:12px">
+        <div class="box bad">
+          <h3>EPS 爆發 — 未觸發</h3>
+          <p>定義 C：單季 EPS beat &gt;15%。Q2 非 GAAP EPS <strong>US$0.33</strong> vs 共識 US$0.54（−39%）。唔同收入 beat 合併。</p>
+        </div>
+        <div class="box bad">
+          <h3>股價爆發 — 未觸發</h3>
+          <p>定義 C：3 個月回報 &gt;+30%。US$440.36 → <strong>US$345.82（−21.5%）</strong>。兩欄分開報，唔合成看多分。</p>
+        </div>
       </div>
     </section>
 
     <section class="slide" id="s3" data-slide>
       <div class="slide-kicker"><span class="dot"></span> Decision HUD · Slide 03</div>
-      <h2>KPI 對住估值</h2>
+      <h2 id="decision-hud">KPI 對住估值</h2>
       <div class="kpi-grid">
         <div class="kpi"><div class="k">現價</div><div class="v">$345.82</div><div class="s">delayed 8/26</div></div>
         <div class="kpi warn"><div class="k">Base</div><div class="v">$157</div><div class="s">SOTP US$0.62T</div></div>
@@ -316,8 +338,8 @@
       <div class="slide-kicker"><span class="dot"></span> Framework 2 · Slide 04</div>
       <h2>增長質量</h2>
       <div class="split" style="margin-top:12px">
-        <div class="box ok"><h3>汽車／服務 · 部分通過</h3><p>服務毛利 US$166m→US$648m 覆蓋積分少收 US$293m。除積分 GM 15.0%→16.3%。</p></div>
-        <div class="box bad"><h3>Robotaxi · 未通過</h3><p>七城覆蓋、Cybercab 投產、無收入行、無 $/mile。</p></div>
+        <div class="box ok"><h3>1. 汽車／服務 · 部分通過</h3><p>服務毛利 US$166m→US$648m 覆蓋積分少收 US$293m。除積分 GM 15.0%→16.3%。單季 FCF 穩定轉正未證明（H1 僅約 +US$0.35B vs capex &gt;US$25B）。</p></div>
+        <div class="box bad"><h3>2. Robotaxi · 未通過</h3><p>七城覆蓋、Cybercab 投產、灣區仍有安全員。無收入行、無車隊、無 $/mile。付費英里只有圖軸（約 0–2.5m），唔當表列數。vs Waymo 無法用官方包定量。</p></div>
       </div>
       <div class="box bad" style="margin-top:10px"><h3>現金流／價格 · 未通過</h3><p>Q2 FCF −US$1.09B。H1 OCF US$8.63B 年化覆蓋唔到 &gt;US$25B capex。經營利潤 −57%。</p></div>
     </section>
@@ -359,7 +381,7 @@
         <div class="tl"><div class="pri p1">P1</div><div><strong>Cybercab 車隊／無安全員覆蓋</strong><br /><span class="lede">Outlook 未定量 · 要官方數字先郁 L3 桶</span></div></div>
         <div class="tl"><div class="pri p2">P2</div><div><strong>比亞迪 H1 財務</strong><br /><span class="lede">2026-08-28 · 只補同業錨</span></div></div>
       </div>
-      <div class="source">Skill 7 跳過（無確認持倉）。爆發定義 C：EPS 同 3 個月股價均未觸發。</div>
+      <div class="source">Skill 7 跳過（無確認持倉）。爆發定義 C：EPS 爆發未觸發（−39%）；股價爆發未觸發（3 個月 −21.5%）。兩欄分開，唔合併。</div>
     </section>
 
     <p class="footer">此分析僅供研究參考，不構成投資建議。· TSLA interactive brief · 2026-08-27</p>
@@ -379,7 +401,10 @@
   function show(idx) {
     i = Math.max(0, Math.min(slides.length - 1, idx));
     slides.forEach((s, n) => s.classList.toggle("hidden", n !== i));
-    navLinks.forEach((a, n) => a.classList.toggle("on", n === i));
+    navLinks.forEach((a) => {
+      const isSlide = a.dataset.i !== undefined && a.dataset.i !== "";
+      a.classList.toggle("on", isSlide && Number(a.dataset.i) === i);
+    });
     pageLabel.textContent = `${i + 1} / ${slides.length}`;
     prev.disabled = i === 0;
     next.disabled = i === slides.length - 1;
@@ -388,6 +413,7 @@
   prev.addEventListener("click", () => show(i - 1));
   next.addEventListener("click", () => show(i + 1));
   navLinks.forEach((a) => a.addEventListener("click", (e) => {
+    if (a.dataset.i === undefined || a.dataset.i === "") return;
     e.preventDefault();
     show(Number(a.dataset.i));
   }));
