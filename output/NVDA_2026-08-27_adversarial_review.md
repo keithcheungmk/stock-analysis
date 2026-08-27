@@ -50,10 +50,21 @@
 - `output/NVDA_2026-08-27_framework1.md`
 - `output/NVDA_framework1.html`
 - `output/NVDA_2026-08-27_report.md`（官方對帳）
+- `output/NVDA_2026-08-27_framework2.md`
+- `output/NVDA_framework2.html`
 - 本 memo
 
 ## Verdict impact
 
 **維持 PASS 115／130。** 無關鍵數字爭議需要停 verdict。PORTS 擔保改變嘅係 2028 年起或有負債同客戶集中度，唔改當前紅線 1（FCF 為正且官方流動性 > 債務）。
+
+## Framework 2 同日覆核（2026-08-27）
+
+- SEC submissions 至覆核時最新仍係 2026-08-26 10-Q／earnings 8-K；無財報後修正 8-K。
+- F2 用 10-Q／CFO 把 PORTS 首期 ready-for-service 寫成 **財政年度 2029**（約 2028 日曆年），九期；毛風險含其他場地擔保共 US$108.5B。F1「2028 年起」同財政日曆大致相容，F2 用更精確嘅 fiscal label。
+- 10-Q Note 7：IG 大型 data center 建設付款條款可 90 日至一年；五個直接客戶佔應收 70%。呢兩條喺 F1 未展開，已寫入 F2。
+- `x_access: degraded` 維持；無一手 X 帖覆寫官方數字。
+
+F2 判定：增長 thesis **通過**；現金流／應收 **部分通過**。無關鍵數字爭議需停 verdict。
 
 *此分析僅供研究參考，不構成投資建議。*
