@@ -37,7 +37,7 @@ Cloud 環境通常**冇** OneDrive `data/raw`。用 `scripts/download_official_r
 |---|---|---|
 | 賽道／Skill 0 | `.cursor/skills/Skill 0_ Sector Overview.txt` | `output/{TICKER_or_SECTOR}_{date}_sector_overview.md` |
 | Framework 1／初篩 | `.cursor/skills/framework-1/SKILL.md` + `SCORING.md` | `output/{TICKER}_{date}_framework1.md`（可加 HTML） |
-| Framework 2 | **未有獨立 SKILL.md**；跟最近一份 `output/*_framework2.md` 結構，只深挖 F1 列出嘅兩條問題 | `output/{TICKER}_{date}_framework2.md` |
+| Framework 2／深度增長 | `.cursor/skills/framework-2/SKILL.md` + `DIMENSIONS.md` | `output/{TICKER}_{date}_framework2.md` |
 | Framework 3／估值 | `.cursor/skills/Skill 3：Framework 3 - Valuation Model & Positioning.txt` | `output/{TICKER}_{date}_framework3.md` |
 | 同業／Skill 4 | `.cursor/skills/Skill 4：Peer Comparison.txt` | `output/{TICKER}_{date}_peer_comparison.md` |
 | 催化劑／Skill 5 | `.cursor/skills/Skill 5：Catalyst Calendar.txt` | `output/{TICKER}_{date}_catalyst_calendar.md` |
@@ -62,6 +62,7 @@ TSLA 另讀 `docs/TESLA_AI_FRAMEWORK.md` 同 `config/tesla_*.yaml`。
 
 ```
 {TICKER} 做 Framework 1，官方優先，繁中，寫入 output/ 並開 PR
+{TICKER} 做 Framework 2，只深挖 F1 列出嘅兩條問題，寫入 output/ 並開 PR
 審 output/{TICKER}_YYYY-MM-DD_framework1.md，跑 adversarial，只改過時催化劑
 按 output/{TICKER}_YYYY-MM-DD_cowork_review.md 改檔，唔重跑全套
 ```

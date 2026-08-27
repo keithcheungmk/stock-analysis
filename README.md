@@ -88,7 +88,7 @@ GitHub 係唯一交接。一次一個 Skill、一隻 ticker。
 - **Cursor／手機 Cloud Agent** 讀 [`AGENTS.md`](AGENTS.md)：下載官方來源、寫 `output/`、開 PR。
 - **Claude Cowork** 讀 [`CLAUDE.md`](CLAUDE.md)：審已有報告，寫 `output/{TICKER}_{date}_cowork_review.md`，唔同 Cursor 平行改同一批未 push 嘅檔。
 
-電話可直接貼：`{TICKER} 做 Framework 1，官方優先，繁中，寫入 output/ 並開 PR`。
+電話可直接貼：`{TICKER} 做 Framework 1，官方優先，繁中，寫入 output/ 並開 PR`。F1 之後：`{TICKER} 做 Framework 2，只深挖 F1 列出嘅兩條問題`。
 
 ## 在 Cursor 使用
 

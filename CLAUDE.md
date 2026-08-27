@@ -60,7 +60,7 @@ GitHub 係同 Cursor Cloud／手機 Agent 嘅**唯一交接**。一次只審 **�
 | 你喺審 | 規則檔 |
 |---|---|
 | Framework 1 | `.cursor/skills/framework-1/SKILL.md`、`SCORING.md`（唔可改維度） |
-| Framework 2 | 未有 SKILL.md；對住 F1 寫明要深挖嘅兩條問題 + 現有 `*_framework2.md` |
+| Framework 2 | `.cursor/skills/framework-2/SKILL.md`、`DIMENSIONS.md` |
 | Framework 3 | `.cursor/skills/Skill 3：Framework 3 - Valuation Model & Positioning.txt` |
 | Skill 0／4／5／6／7／8 | `.cursor/skills/` 對應 `.txt` |
 | One-pager | `.cursor/skills/one-pager/SKILL.md` |
