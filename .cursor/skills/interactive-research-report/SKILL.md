@@ -53,6 +53,22 @@ description: >-
 路徑：`~/.cursor/projects/.../canvases/{TICKER}-*.canvas.tsx`  
 跟 canvas skill：無 gradient／box-shadow／emoji；用 `Callout`／`Card`／`Stat`／左邊框。Thesis 用多段 `Text`；證據 `note` 與 HTML 同等長度。
 
+## 手機要睇到網頁，唔係代碼
+
+GitHub／Cursor 檔案檢視會把 `.html` 當原始碼。真正互動頁靠 **GitHub Pages**（`docs/`）。
+
+寫完 `output/{TICKER}_*.html` 之後必須跑：
+
+```bash
+python scripts/publish_html_reports.py
+```
+
+呢條指令會複製報告去 `docs/{ticker}/` 並更新 `docs/index.html`。合併到 `main` 之後手機用瀏覽器打開：
+
+https://keithcheungmk.github.io/stock-analysis/
+
+唔好叫用戶喺 GitHub App 入面「打開檔案」嚟睇 HTML。
+
 ## Markdown 同步
 
 `output/{TICKER}_YYYY-MM-DD_*.md` 的「結論」同「解讀」欄必須與 HTML／Canvas 同深度，唔好只留短句。

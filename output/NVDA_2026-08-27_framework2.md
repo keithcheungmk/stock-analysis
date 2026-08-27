@@ -99,6 +99,8 @@ Data Center 已經喺損益表證明質變（五季 US$41.1B → US$89.0B、最�
 1. **FCF 轉換／DSO**（工作資本會唔會把 TTM FCF 由約 US$127B 再削一截）
 2. **Rubin 毛利率 vs 74.0% ±50bps 指引**（估值 multiples 對 100bps 毛利好敏感）
 
-互動報告：`output/NVDA_framework2.html`
+互動報告（Markdown）：`output/NVDA_2026-08-27_framework2.md`  
+互動報告（HTML）：`output/NVDA_framework2.html`  
+手機網頁（GitHub Pages，合併 main 後）：https://keithcheungmk.github.io/stock-analysis/nvda/framework2.html
 
 *此分析僅供研究參考，不構成投資建議。*

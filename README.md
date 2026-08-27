@@ -23,6 +23,27 @@ python src/main.py AAPL
 
 省略股票代號時，程式會使用 `config.yaml` 的 `default_symbol`。
 
+## 手機睇互動報告
+
+`output/*.html` 係研究頁面，但 GitHub／Cursor 喺手機打開檔案會顯示**原始碼**，唔會當網頁跑。
+
+互動版發佈喺 GitHub Pages。寫完 HTML 之後跑：
+
+```bash
+python scripts/publish_html_reports.py
+```
+
+合併到 `main` 之後，用手機**瀏覽器**打開（唔好用 GitHub App 檔案頁）：
+
+https://keithcheungmk.github.io/stock-analysis/
+
+NVDA 直接開：
+
+- https://keithcheungmk.github.io/stock-analysis/nvda/
+- https://keithcheungmk.github.io/stock-analysis/nvda/framework2.html
+
+## 產出
+
 產出檔案會寫入 `output/`：
 
 - `{SYMBOL}_{date}_report.md`：一般分析報告

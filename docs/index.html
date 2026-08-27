@@ -3,32 +3,71 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Stock Analysis · Interactive Briefs</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap" rel="stylesheet" />
+<title>Stock Analysis · 手機互動報告</title>
 <style>
-  body {
-    margin: 0; min-height: 100vh; display: grid; place-items: center;
-    font-family: Manrope, "PingFang TC", sans-serif;
-    background: #0b1f33; color: #fff; padding: 24px;
-  }
-  .card {
-    width: min(440px, 100%); background: #143049; border: 1px solid #2a4660;
-    border-radius: 20px; padding: 24px;
-  }
-  h1 { margin: 0 0 8px; font-size: 1.4rem; }
-  p { color: #b7c4d2; line-height: 1.5; }
-  a {
-    display: block; margin-top: 14px; text-decoration: none; color: #0b1f33;
-    background: #fff; border-radius: 999px; padding: 12px 16px; font-weight: 800; text-align: center;
-  }
+  body { margin:0; min-height:100vh; font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;
+    background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),
+      radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),#f4f1ea;
+    color:#1c1917; padding:24px 16px 72px; }
+  .wrap { max-width:720px; margin:0 auto; }
+  h1 { font-family:"Avenir Next","PingFang TC",sans-serif; font-size:1.55rem; margin:0 0 8px; }
+  .lede { color:#78716c; line-height:1.55; margin:0 0 22px; }
+  .grid { display:grid; gap:14px; }
+  .card { background:#fffdf8; border:1px solid #e7e0d5; border-radius:22px; padding:18px 16px;
+    box-shadow:0 12px 40px rgba(28,25,23,.08); }
+  h2 { font-family:"Avenir Next","PingFang TC",sans-serif; margin:0 0 8px; font-size:1.05rem; }
+  a { display:block; margin-top:10px; text-decoration:none; color:#fff; background:#0f766e;
+    border-radius:999px; padding:12px 16px; font-weight:800; text-align:center;
+    font-family:"Avenir Next","PingFang TC",sans-serif; }
+  .note { margin-top:22px; color:#78716c; font-size:.82rem; font-family:"Avenir Next","PingFang TC",sans-serif; }
 </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Interactive Research Briefs</h1>
-    <p>手機友善投影片式報告。目前已發佈 SPCX 全套 brief。</p>
-    <a href="./spcx/">打開 SPCX Brief →</a>
-    <a href="./spcx/valuation-model.html" style="margin-top:10px;background:#0e7c66;color:#fff">互動估值模型 →</a>
+  <div class="wrap">
+    <h1>手機互動報告</h1>
+    <p class="lede">GitHub／Cursor 檔案頁會顯示 HTML 原始碼。用瀏覽器打開呢個 GitHub Pages 目錄，先可以撳、篩選、睇卡片。</p>
+    <div class="grid">
+    <article class="card">
+      <h2>NVDA</h2>
+      <a href="./nvda/framework1.html">Framework 1 初篩</a>
+      <a href="./nvda/framework2.html">Framework 2 深度增長</a>
+    </article>
+    <article class="card">
+      <h2>SPCX</h2>
+      <a href="./spcx/">Position Brief（手機投影片）</a>
+      <a href="./spcx/earnings-review.html">Earnings Review</a>
+      <a href="./spcx/framework1.html">Framework 1 初篩</a>
+      <a href="./spcx/framework2.html">Framework 2 深度增長</a>
+      <a href="./spcx/interactive-brief.html">Interactive Brief</a>
+      <a href="./spcx/thesis-tracker.html">Thesis Tracker</a>
+      <a href="./spcx/valuation-model.html">估值模型</a>
+    </article>
+    <article class="card">
+      <h2>IREN</h2>
+      <a href="./iren/earnings-review.html">Earnings Review</a>
+      <a href="./iren/framework1.html">Framework 1 初篩</a>
+      <a href="./iren/framework2.html">Framework 2 深度增長</a>
+      <a href="./iren/thesis-tracker.html">Thesis Tracker</a>
+    </article>
+    <article class="card">
+      <h2>RKLB</h2>
+      <a href="./rklb/one-pager.html">One-pager</a>
+      <a href="./rklb/framework1.html">Framework 1 初篩</a>
+      <a href="./rklb/framework2.html">Framework 2 深度增長</a>
+    </article>
+    <article class="card">
+      <h2>RDW</h2>
+      <a href="./rdw/earnings-review.html">Earnings Review</a>
+      <a href="./rdw/framework1.html">Framework 1 初篩</a>
+      <a href="./rdw/framework2.html">Framework 2 深度增長</a>
+      <a href="./rdw/thesis-tracker.html">Thesis Tracker</a>
+    </article>
+    <article class="card">
+      <h2>MRNA</h2>
+      <a href="./mrna/framework1.html">Framework 1 初篩</a>
+    </article>
+    </div>
+    <p class="note">網址：https://keithcheungmk.github.io/stock-analysis/ · 合併到 main 之後先會更新。此分析僅供研究參考，不構成投資建議。</p>
   </div>
 </body>
 </html>

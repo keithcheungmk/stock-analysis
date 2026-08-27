@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IREN Thesis Tracker</title>
+<style>
+  :root {
+    --bg: #f3efe6;
+    --ink: #1c1917;
+    --muted: #78716c;
+    --card: #fffdf8;
+    --line: #e7e0d5;
+    --teal: #0f766e;
+    --teal-deep: #134e4a;
+    --watch: #c2410c;
+    --watch-soft: #ffedd5;
+    --fail: #b91c1c;
+    --fail-soft: #fee2e2;
+    --pass: #15803d;
+    --pass-soft: #dcfce7;
+    --info: #1d4ed8;
+    --info-soft: #dbeafe;
+    --shadow: 0 14px 40px rgba(28, 25, 23, 0.09);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Iowan Old Style", "Songti TC", "Noto Serif TC", "PingFang TC", serif;
+    color: var(--ink);
+    line-height: 1.55;
+    background:
+      radial-gradient(circle at 8% 0%, #d8f3ee 0, transparent 30%),
+      radial-gradient(circle at 92% 6%, #ffe4cc 0, transparent 26%),
+      radial-gradient(circle at 50% 100%, #fde68a22 0, transparent 40%),
+      var(--bg);
+  }
+  .sans { font-family: "Avenir Next", "PingFang TC", "Noto Sans TC", sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 18px 80px; }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+
+  .status-box {
+    background: linear-gradient(165deg, #fff7ed, #ffedd5 55%, #fdba74);
+    border: 1px solid #fb923c;
+    border-radius: 28px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .eyebrow {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--watch);
+    font-weight: 800;
+  }
+  .status-title {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--watch);
+    margin: 10px 0 0;
+    line-height: 1.2;
+  }
+  .hero-main {
+    background: linear-gradient(135deg, #134e4a, #0f766e 50%, #115e59);
+    color: #fff;
+    border-radius: 28px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+  }
+  .hero-main h1 {
+    margin: 0 0 8px;
+    font-size: 1.85rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .hero-main p { margin: 0; opacity: 0.92; }
+
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .badge {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.18);
+  }
+  .badge.watch { background: var(--watch-soft); color: var(--watch); border: 0; }
+  .badge.pass { background: var(--pass-soft); color: var(--pass); border: 0; }
+  .badge.fail { background: var(--fail-soft); color: var(--fail); border: 0; }
+  .badge.ink { background: #fff; color: var(--teal-deep); border: 0; }
+
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  @media (max-width: 900px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+  }
+  .kpi .label { font-family: "Avenir Next", "PingFang TC", sans-serif; color: var(--muted); font-size: 0.75rem; font-weight: 700; }
+  .kpi .value { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 1.25rem; font-weight: 800; margin-top: 6px; }
+  .kpi .note { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+  .kpi.pass { border-top: 4px solid var(--pass); }
+  .kpi.warn { border-top: 4px solid var(--watch); }
+  .kpi.fail { border-top: 4px solid var(--fail); }
+  .kpi.teal { border-top: 4px solid var(--teal); }
+
+  .sections { display: grid; gap: 16px; margin-top: 18px; }
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  h2 {
+    margin: 0 0 6px;
+    font-size: 1.2rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .section-sub { margin: 0 0 16px; color: var(--muted); font-size: 0.92rem; }
+  h3 {
+    margin: 0 0 8px;
+    font-size: 0.98rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+
+  .verdict {
+    border-radius: 18px;
+    padding: 16px 18px;
+    background: linear-gradient(90deg, #fff7ed, #ffedd5);
+    border: 1px solid #fdba74;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 900px) { .pillar-grid { grid-template-columns: 1fr; } }
+  .pillar {
+    border-radius: 18px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    background: #fff;
+    min-height: 118px;
+  }
+  .pillar.ok {
+    border-left: 6px solid var(--pass);
+    background: linear-gradient(180deg, #f0fdf4, #fff 42%);
+  }
+  .pillar.bad {
+    border-left: 6px solid var(--fail);
+    background: linear-gradient(180deg, #fef2f2, #fff 42%);
+  }
+  .pillar .code {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .pillar .title { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; font-size: 1.05rem; margin-top: 4px; }
+  .pillar .kpi { border: 0; box-shadow: none; padding: 0; background: transparent; margin-top: 8px; color: var(--muted); font-size: 0.9rem; }
+  .pillar .state {
+    display: inline-flex;
+    margin-top: 10px;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
+  .state.up { background: var(--pass-soft); color: var(--pass); }
+  .state.down { background: var(--fail-soft); color: var(--fail); }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .chip {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 999px;
+    padding: 7px 12px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .chip.on { background: #ccfbf1; border-color: #99f6e4; color: var(--teal); }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 900px) { .evidence-grid { grid-template-columns: 1fr; } }
+  .ev {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px 16px;
+    background: #fff;
+    border-left-width: 6px;
+  }
+  .ev.support { border-left-color: var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 38%); }
+  .ev.neutral { border-left-color: #a8a29e; background: linear-gradient(180deg, #fafaf9, #fff 38%); }
+  .ev.weaken { border-left-color: var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 38%); }
+  .ev-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .ev-type { color: var(--muted); font-size: 0.75rem; font-weight: 700; }
+  .pill {
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .pill.support { background: var(--pass-soft); color: var(--pass); }
+  .pill.neutral { background: #f5f5f4; color: #57534e; }
+  .pill.weaken { background: var(--fail-soft); color: var(--fail); }
+  .ev-title { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; margin-top: 8px; }
+  .ev-note { color: var(--muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.55; }
+  .verdict p { margin: 0 0 10px; }
+  .verdict p:last-child { margin-bottom: 0; }
+  .ev { min-height: 168px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+  .box {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 16px;
+    background: #fff;
+  }
+  .box.pass { border-left: 6px solid var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 40%); }
+  .box.warn { border-left: 6px solid var(--watch); background: linear-gradient(180deg, #fff7ed, #fff 40%); }
+  .box.fail { border-left: 6px solid var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 40%); }
+  .box.info { border-left: 6px solid var(--info); background: linear-gradient(180deg, #eff6ff, #fff 40%); }
+
+  .fcf-chart {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    align-items: end;
+    height: 150px;
+    margin-top: 12px;
+  }
+  .bar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+  .bar {
+    width: 100%;
+    border-radius: 10px 10px 4px 4px;
+    min-height: 8px;
+    background: linear-gradient(180deg, #fb7185, #b91c1c);
+  }
+  .bar-val, .bar-label {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 0.72rem;
+  }
+  .bar-val { font-weight: 800; }
+  .bar-label { color: var(--muted); }
+
+  .action-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 900px) { .action-grid { grid-template-columns: 1fr; } }
+
+  .footer {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+</style>
+</head>
+
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="status-box">
+      <div class="eyebrow">Skill 6 · Thesis Tracker</div>
+      <div class="status-title">Mixed / Needs Monitoring</div>
+      <div class="badges">
+        <span class="badge watch">續抱 · 唔好加倉</span>
+        <span class="badge pass">合約支柱改善</span>
+        <span class="badge fail">資金紀律削弱</span>
+      </div>
+      <p class="sans" style="margin:14px 0 0;color:var(--muted);font-size:0.86rem">1,080 股 @ ~US$60 · 現價 US$44.06 delayed</p>
+    </div>
+    <div class="hero-main">
+      <h1>IREN · 投資 Thesis 狀態報告</h1>
+      <p>IREN Limited · 2026-08-15 · FY2026-Q3 官方 8-K · F1 紅線 FAIL · F2 部分通過 · Skill 3 Base US$36</p>
+      <div class="badges">
+        <span class="badge ink">核心 KPI：已入帳 AI Cloud</span>
+        <span class="badge">Checkpoint：2026-08-28 Q4</span>
+      </div>
+    </div>
+  </section>
+  <div class="kpi-row">
+    <div class="kpi pass"><div class="label">Q3 AI Cloud</div><div class="value">US$33.6M</div><div class="note">QoQ +94%</div></div>
+    <div class="kpi warn"><div class="label">已計費 / ARR</div><div class="value">~4%</div><div class="note">US$3.1bn contracted</div></div>
+    <div class="kpi fail"><div class="label">Q3 FCF</div><div class="value">−US$1.28B</div><div class="note">OCF 仍正</div></div>
+    <div class="kpi warn"><div class="label">Skill 3 Base</div><div class="value">US$36</div><div class="note">現價 US$44.06</div></div>
+  </div>
+  <div class="sections">
+    <section class="panel">
+      <h2>Thesis 結論（詳細）</h2>
+      <div class="verdict">
+        <p>原始買入理由——IREN 擁有稀缺電力，能夠把 Bitcoin 廠改造成 Microsoft／NVIDIA 級 AI Cloud——合約支柱正在被驗證，計費支柱仍未成立。</p>
+        <p>官方 8-K 已經寫明 US$9.7bn Microsoft 同 US$3.4bn NVIDIA 合約，呢啲唔係社媒傳聞；但 Q3 已入帳 AI 收入只有 US$33.6m，大約係 US$3.1bn contracted ARR 嘅 4%，所以「雲公司」路徑仍未出現喺損益表。</p>
+        <p>最大裂痕係現金 US$2.21B 低於可轉債為主嘅有息負債約 US$3.96B，Q3 FCF 約 −US$1.28B，而且總營收因為拆礦機而打回一年前水平。</p>
+        <p>對持倉嘅含義：thesis 未壞，所以唔使因為跌穿成本就認輸清倉；但 thesis 亦未完整到值得喺 US$44（高過 Base）加倉。續抱、盯 Q4 已計費 AI 收入。</p>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>原始 thesis 四支柱</h2>
+      <div class="pillar-grid">
+        <article class="pillar ok"><div class="code">PILLAR A</div><div class="title">電力護城河</div><div class="kpi">已接電 MW、Sweetwater</div><span class="state up">改善中</span></article>
+        <article class="pillar ok"><div class="code">PILLAR B</div><div class="title">客戶質變</div><div class="kpi">MSFT／NVIDIA 官方合約</div><span class="state up">改善中</span></article>
+        <article class="pillar bad"><div class="code">PILLAR C</div><div class="title">計費規模</div><div class="kpi">已入帳 AI 收入 vs ARR</div><span class="state down">未成立</span></article>
+        <article class="pillar bad"><div class="code">PILLAR D</div><div class="title">資金紀律</div><div class="kpi">FCF、可轉債、發股</div><span class="state down">削弱中</span></article>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>最新證據卡</h2>
+      <p class="section-sub">每張 2–4 句。可按影響篩選。</p>
+      <div class="filters" id="filters">
+        <button class="chip on" data-f="all">全部</button>
+        <button class="chip" data-f="support">支持</button>
+        <button class="chip" data-f="neutral">中性</button>
+        <button class="chip" data-f="weaken">削弱</button>
+      </div>
+      <div class="evidence-grid" id="evidence"></div>
+    </section>
+    <section class="panel">
+      <h2>FCF 走勢（US$ million）</h2>
+      <div class="fcf-chart" id="fcfChart"></div>
+    </section>
+    <section class="panel">
+      <h2>投資行動</h2>
+      <div class="action-grid">
+        <div class="box warn"><h3>建議</h3><p><strong>續抱 · 唔好加倉</strong><br>浮虧約 27% 係沉沒成本</p></div>
+        <div class="box"><h3>Checkpoint</h3><p>2026-08-28 Q4 AI Cloud 收入同 ARR 措辭</p></div>
+        <div class="box fail"><h3>失效</h3><p>兩季 AI 停滯，或 Horizon 延期一季，或再大額發股而 GPU 未計費</p></div>
+      </div>
+    </section>
+  </div>
+  <p class="footer">來源：SEC 8-K EX-99.1 2026-05-07。持倉由用戶今次確認。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const evidence = [
+  ["support","分部","AI Cloud US$7.0 → 33.6M","四個 US GAAP 季確認轉型方向。US$33.6M 仍然細，只證明方向未證明規模。過關條件係 run-rate 進入數億美元級，而唔係再簽一張新聞稿。"],
+  ["support","合約","Microsoft US$9.7bn 寫入 8-K","支柱由傳聞升到監管文件。20% 預付款同 GPU financing 降低硬件資金風險，但預付款唔等於而家嘅每股盈利。交付延誤仍可令選擇權過期。"],
+  ["support","合約","NVIDIA US$3.4bn ＋ 5GW","晶片廠願意綁 IREN 架構，係高質量背書。Ramp 目標 early 2027，對未來兩季現金幫助有限。3,000 萬股 @ US$70 現價價外。"],
+  ["weaken","財報","總營收 US$144.8M，YoY 0%","拆 ASIC 係管理層選擇，所以唔等於需求死亡；但投資人買嘅係增長股，headline 零增長會壓住倍數。若 AI 計費再慢一季，真空會被解讀成結構性。"],
+  ["weaken","現金流","Q3 FCF 約 −US$1.28B","經營現金流仍正，燒嘅係 capex，所以屬延後多過經營崩潰。但紅線已觸發，再拖兩季大規模負 FCF 加發股就會變成結構性。"],
+  ["weaken","轉型成本","ASIC 減值 US$140.4M","證明舊資產經濟壽命被策略縮短。可以係正確商業決定，但係真實財富轉移：股東為轉型預付報廢。不可當成無關非現金。"],
+  ["neutral","市場","股價 52 週高 US$76.87 → US$44","股價唔等於 thesis。回調顯示市場對計費速度重新折現，同 F2／F3 一致。唔好把跌穿成本當成失效，亦唔好當成自動加倉券。"],
+  ["neutral","同業","CRWV Q2 營收 US$2.58B","板塊故事成立。CRWV 證明 AI 雲可以有收入；亦突顯 IREN 規模差距。唔支持所有 miner 都應享 CRWV 倍數。"],
+];
+const label = { support: "支持", neutral: "中性", weaken: "削弱" };
+const root = document.getElementById("evidence");
+function render(filter) {
+  root.innerHTML = evidence.filter(([i]) => filter === "all" || i === filter).map(([impact, type, title, note]) => `
+    <article class="ev ${impact}">
+      <div class="ev-top"><span class="ev-type">${type}</span><span class="pill ${impact}">${label[impact]}</span></div>
+      <div class="ev-title">${title}</div>
+      <div class="ev-note">${note}</div>
+    </article>`).join("");
+}
+render("all");
+document.querySelectorAll("#filters .chip").forEach((chip) => {
+  chip.addEventListener("click", () => {
+    document.querySelectorAll("#filters .chip").forEach((c) => c.classList.remove("on"));
+    chip.classList.add("on");
+    render(chip.dataset.f);
+  });
+});
+const fcf = [{label:"26Q1",value:-138},{label:"26Q2",value:-648},{label:"26Q3",value:-1280}];
+const maxAbs = Math.max(...fcf.map(d => Math.abs(d.value)));
+document.getElementById("fcfChart").innerHTML = fcf.map(d => {
+  const h = Math.round((Math.abs(d.value)/maxAbs)*110);
+  return `<div class="bar-wrap"><div class="bar-val">${d.value}</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${d.label}</div></div>`;
+}).join("");
+</script>
+</body></html>
