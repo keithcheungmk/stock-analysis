@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPCX Thesis Tracker</title>
+<style>
+  :root {
+    --bg: #f3efe6; --ink: #1c1917; --muted: #78716c; --card: #fffdf8; --line: #e7e0d5;
+    --teal: #0f766e; --teal-deep: #134e4a; --watch: #c2410c; --watch-soft: #ffedd5;
+    --fail: #b91c1c; --fail-soft: #fee2e2; --pass: #15803d; --pass-soft: #dcfce7;
+    --info: #1d4ed8; --info-soft: #dbeafe; --shadow: 0 14px 40px rgba(28, 25, 23, 0.09);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Iowan Old Style", "Songti TC", "Noto Serif TC", "PingFang TC", serif;
+    color: var(--ink); line-height: 1.55;
+    background:
+      radial-gradient(circle at 8% 0%, #d8f3ee 0, transparent 30%),
+      radial-gradient(circle at 92% 6%, #ffe4cc 0, transparent 26%),
+      radial-gradient(circle at 50% 100%, #fde68a22 0, transparent 40%),
+      var(--bg);
+  }
+  .sans { font-family: "Avenir Next", "PingFang TC", "Noto Sans TC", sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 18px 80px; }
+  .hero { display: grid; grid-template-columns: 320px 1fr; gap: 16px; }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+  .status-box {
+    background: linear-gradient(165deg, #fff7ed, #ffedd5 55%, #fdba74);
+    border: 1px solid #fb923c; border-radius: 28px; padding: 24px; box-shadow: var(--shadow);
+  }
+  .eyebrow {
+    font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.75rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--watch); font-weight: 800;
+  }
+  .status-title {
+    font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 1.7rem;
+    font-weight: 800; color: var(--watch); margin: 10px 0 0; line-height: 1.2;
+  }
+  .hero-main {
+    background: linear-gradient(135deg, #134e4a, #0f766e 50%, #115e59);
+    color: #fff; border-radius: 28px; padding: 28px; box-shadow: var(--shadow);
+  }
+  .hero-main h1 { margin: 0 0 8px; font-size: 1.85rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .hero-main p { margin: 0; opacity: 0.92; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .badge {
+    font-family: "Avenir Next", "PingFang TC", sans-serif; display: inline-flex; align-items: center;
+    padding: 7px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
+    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.18);
+  }
+  .badge.watch { background: var(--watch-soft); color: var(--watch); border: 0; }
+  .badge.pass { background: var(--pass-soft); color: var(--pass); border: 0; }
+  .badge.fail { background: var(--fail-soft); color: var(--fail); border: 0; }
+  .badge.ink { background: #fff; color: var(--teal-deep); border: 0; }
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+  @media (max-width: 900px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+    padding: 16px; box-shadow: var(--shadow);
+  }
+  .kpi .label { font-family: "Avenir Next", "PingFang TC", sans-serif; color: var(--muted); font-size: 0.75rem; font-weight: 700; }
+  .kpi .value { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 1.25rem; font-weight: 800; margin-top: 6px; }
+  .kpi .note { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+  .kpi.pass { border-top: 4px solid var(--pass); }
+  .kpi.warn { border-top: 4px solid var(--watch); }
+  .kpi.fail { border-top: 4px solid var(--fail); }
+  .kpi.teal { border-top: 4px solid var(--teal); }
+  .sections { display: grid; gap: 16px; margin-top: 18px; }
+  .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: 26px;
+    padding: 24px; box-shadow: var(--shadow);
+  }
+  h2 { margin: 0 0 6px; font-size: 1.2rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .section-sub { margin: 0 0 16px; color: var(--muted); font-size: 0.92rem; }
+  .verdict {
+    border-radius: 18px; padding: 16px 18px;
+    background: linear-gradient(90deg, #fff7ed, #ffedd5); border: 1px solid #fdba74;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .verdict p { margin: 0 0 10px; }
+  .verdict p:last-child { margin-bottom: 0; }
+  .pillar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .pillar-grid { grid-template-columns: 1fr; } }
+  .pillar {
+    border-radius: 18px; padding: 16px; border: 1px solid var(--line); background: #fff; min-height: 118px;
+  }
+  .pillar.ok { border-left: 6px solid var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 42%); }
+  .pillar.bad { border-left: 6px solid var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 42%); }
+  .pillar.mix { border-left: 6px solid var(--watch); background: linear-gradient(180deg, #fff7ed, #fff 42%); }
+  .pillar .code { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; color: var(--muted); }
+  .pillar .title { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; font-size: 1.05rem; margin-top: 4px; }
+  .pillar .kpi-text { margin-top: 8px; color: var(--muted); font-size: 0.9rem; }
+  .pillar .state { display: inline-flex; margin-top: 10px; font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.75rem; font-weight: 800; border-radius: 999px; padding: 4px 10px; }
+  .state.up { background: var(--pass-soft); color: var(--pass); }
+  .state.down { background: var(--fail-soft); color: var(--fail); }
+  .state.mix { background: var(--watch-soft); color: var(--watch); }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 7px 12px; cursor: pointer; font: inherit; font-size: 0.8rem; font-weight: 700; }
+  .chip.on { background: #ccfbf1; border-color: #99f6e4; color: var(--teal); }
+  .evidence-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .evidence-grid { grid-template-columns: 1fr; } }
+  .ev { border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; background: #fff; border-left-width: 6px; min-height: 168px; }
+  .ev.support { border-left-color: var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 38%); }
+  .ev.neutral { border-left-color: #a8a29e; background: linear-gradient(180deg, #fafaf9, #fff 38%); }
+  .ev.weaken { border-left-color: var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 38%); }
+  .ev-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .ev-type { color: var(--muted); font-size: 0.75rem; font-weight: 700; }
+  .pill { border-radius: 999px; padding: 3px 10px; font-size: 0.72rem; font-weight: 800; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .pill.support { background: var(--pass-soft); color: var(--pass); }
+  .pill.neutral { background: #f5f5f4; color: #57534e; }
+  .pill.weaken { background: var(--fail-soft); color: var(--fail); }
+  .ev-title { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; margin-top: 8px; }
+  .ev-note { color: var(--muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.55; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+  .box { border: 1px solid var(--line); border-radius: 18px; padding: 16px; background: #fff; }
+  .box.pass { border-left: 6px solid var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 40%); }
+  .box.warn { border-left: 6px solid var(--watch); background: linear-gradient(180deg, #fff7ed, #fff 40%); }
+  .box.fail { border-left: 6px solid var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 40%); }
+  .box h3 { margin: 0 0 8px; font-size: 0.98rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .box p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+  .action-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .action-grid { grid-template-columns: 1fr; } }
+  .footer { margin-top: 18px; color: var(--muted); font-size: 0.82rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="status-box">
+      <div class="eyebrow">Skill 6 · Thesis Tracker</div>
+      <div class="status-title">Mixed / Needs Monitoring</div>
+      <div class="badges">
+        <span class="badge watch">續抱／唔好加倉</span>
+        <span class="badge pass">A 強驗證</span>
+        <span class="badge fail">D 估值／capex 削弱</span>
+      </div>
+      <p class="sans" style="margin:14px 0 0;color:var(--muted);font-size:0.86rem">827 @ US$137 · put 195/170 · 9/18</p>
+    </div>
+    <div class="hero-main">
+      <h1>SPCX · 投資 Thesis 狀態報告</h1>
+      <p>Space Exploration Technologies Corp. · 2026-08-21 · 對照 Q2 官方業績同 Framework 1／2</p>
+      <div class="badges">
+        <span class="badge ink">F1：WATCH 75/130</span>
+        <span class="badge">F2：Connectivity 通過 · FCF 未通過</span>
+        <span class="badge">現價 US$135.86 delayed</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="kpi-row">
+    <div class="kpi pass"><div class="label">Starlink 用戶</div><div class="value">12.0M</div><div class="note">6.0M→12.0M YoY · 支柱 A</div></div>
+    <div class="kpi pass"><div class="label">Connectivity 營業利潤</div><div class="value">US$1.66B</div><div class="note">Q2 · 十億級引擎</div></div>
+    <div class="kpi pass"><div class="label">AI 收入</div><div class="value">US$2.56B</div><div class="note">支柱 C 部分支持</div></div>
+    <div class="kpi fail"><div class="label">AI Capex</div><div class="value">US$15.8B</div><div class="note">H1 FCF ~−US$25B · 支柱 D</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>Thesis 結論（詳細）</h2>
+      <div class="verdict">
+        <p>支柱 A（Connectivity 現金引擎）已被 Q2 官方數字強驗證：Starlink 用戶 12.0M、Connectivity 營業利潤 US$1.66B、Enterprise & gov US$1.81B，證明平台唔只靠故事而係已規模化訂閱＋政府／企業收入。</p>
+        <p>支柱 C（AI 第二曲線）有收入爆發（US$2.56B，QoQ +213%）但尚未證明可重複同可轉 FCF；Cloud Agreements ~US$1.6B 增量需連續兩季驗證，警惕 Q2 集中確認收入。</p>
+        <p>支柱 B（發射／Starship 成本曲線）有發射領先同 Starship 進度，但仍係資本消耗故事，未轉成可持續自由現金流。最大裂痕係 D（估值同 capex）——AI capex US$15.8B／季、H1 近似 FCF ~−US$25B，市值 ~US$1.79T 已大幅超前近端收入。</p>
+        <p>喺 US$135.86 同兩張 deep ITM short put（195／170，9/18）之下，正確動作係續抱現股、停止加倉、主動管理期權，而唔係用「長期一定贏」去合理化更高成本嘅被迫吸貨。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>原始 thesis 四支柱</h2>
+      <p class="section-sub">Starlink 訂閱＋發射主導＋AI 雲基礎設施第二曲線；以 Connectivity 自我造血證明平台，長期改善 FCF。</p>
+      <div class="pillar-grid">
+        <article class="pillar ok">
+          <div class="code">PILLAR A</div>
+          <div class="title">Connectivity 現金引擎</div>
+          <div class="kpi-text">Starlink 12.0M · 營業利潤 US$1.66B</div>
+          <span class="state up">強驗證</span>
+        </article>
+        <article class="pillar mix">
+          <div class="code">PILLAR B</div>
+          <div class="title">發射／Starship 成本曲線</div>
+          <div class="kpi-text">發射主導 · Starship 進展</div>
+          <span class="state mix">資本消耗中</span>
+        </article>
+        <article class="pillar mix">
+          <div class="code">PILLAR C</div>
+          <div class="title">AI 第二曲線</div>
+          <div class="kpi-text">AI US$2.56B · Cloud ~US$1.6B</div>
+          <span class="state mix">部分支持</span>
+        </article>
+        <article class="pillar bad">
+          <div class="code">PILLAR D</div>
+          <div class="title">估值同資本強度</div>
+          <div class="kpi-text">P/S ~72× · AI capex US$15.8B</div>
+          <span class="state down">削弱中</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>最新證據卡</h2>
+      <p class="section-sub">卡片式證據；每張含完整解讀。可按影響篩選。</p>
+      <div class="filters" id="filters">
+        <button class="chip on" data-f="all">全部</button>
+        <button class="chip" data-f="support">支持</button>
+        <button class="chip" data-f="neutral">中性</button>
+        <button class="chip" data-f="weaken">削弱</button>
+      </div>
+      <div class="evidence-grid" id="evidence"></div>
+    </section>
+
+    <section class="panel">
+      <h2>裂痕監控</h2>
+      <div class="split">
+        <div class="box pass">
+          <h3>最強支持</h3>
+          <p>Q2 營收 US$7.81B（+92% YoY）；用戶 6.0→12.0M；Connectivity 利潤擴張至 US$1.66B；現金＋MS ~US$100B。</p>
+        </div>
+        <div class="box fail">
+          <h3>最大裂痕</h3>
+          <p>AI capex US$15.8B／季吞噬 OCF；H1 近似 FCF ~−US$25B；現價 US$135.86 遠超建倉區 ≤95；deep ITM puts 9/18 assignment 風險。</p>
+        </div>
+      </div>
+      <div class="split" style="margin-top:12px">
+        <div class="box warn">
+          <h3>ARPU 監控</h3>
+          <p>已由 US$85 降至 US$66：若再跌而淨增放緩 → 支柱 A 轉弱。企業／政府收入目前抵消但需持續觀察。</p>
+        </div>
+        <div class="box warn">
+          <h3>失效條件</h3>
+          <p><strong>再削弱：</strong>AI 收入下一季大幅回吐 → 支柱 C 降級為一次性。<br>
+          <strong>Broken：</strong>Put assignment 令平均成本上移至 150–160，倉位風險回報變差。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>投資行動</h2>
+      <div class="action-grid">
+        <div class="box warn">
+          <h3>建議</h3>
+          <p><strong>續抱／唔好加倉</strong><br>業務質量支持核心倉，但現價同期權結構唔支持加碼</p>
+        </div>
+        <div class="box">
+          <h3>下一個 checkpoint</h3>
+          <p>Q3 AI 收入唔崩、capex 節奏講清楚、ARPU 企穩、9/18 puts 處理</p>
+        </div>
+        <div class="box">
+          <h3>下一步技能</h3>
+          <p>期權 → Skill 7<br>估值 → Skill 3<br>催化劑 → Skill 5</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <p class="footer">來源：SPCX Q2 2026 官方 8-K + 10-Q（2026-08-04）；Framework 1／2（2026-08-21）。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+
+<script>
+  const evidence = [
+    ["support", "財報", "Q2 營收 US$7.81B（+92% YoY）", "官方首份公眾季報確認頂線加速，增速遠超發射／太空同業。驗證增長拐點敘事，但 P/S ~72× 意味估值並唔便宜。對 thesis 支柱 A（Connectivity 現金引擎）同整體成長屬直接支持，但唔等於估值便宜。"],
+    ["support", "KPI", "Starlink 用戶 6.0→12.0M（×2 YoY）", "核心訂閱 thesis 最強硬證據：用戶基數一年倍增，遠超同業發射 KPI。Enterprise & gov Q2 US$1.81B 顯示 B2B／G2B 渠道開始貢獻規模收入。對支柱 A 屬強支持，但 ARPU 已由 US$85 降至 US$66 需持續監控。"],
+    ["support", "分部", "Connectivity 營業利潤 US$1.66B（+79% QoQ）", "分部利潤率 ~38.6%，說明星座已過「純投入」階段，Connectivity 係十億級自我造血引擎。Q2 營業利潤由 Q1 US$1.19B 擴張，路徑清晰。對支柱 A 屬最強支持，直接反駁「Starlink 仍係燒錢」敘事。"],
+    ["support", "KPI", "AI 收入 US$2.56B（QoQ +213%）", "AI solutions & infrastructure 由 Q1 US$0.82B 暴增至 Q2 US$2.56B，Cloud Agreements 貢獻增量 ~US$1.6B。Adj. EBITDA 改善至合計 US$3.54B。對支柱 C 屬有條件支持——增長真，但可持續性待連續兩季驗證。"],
+    ["neutral", "資本結構", "IPO 現金 US$85.7B 淨所得 + 現金 ~US$100B", "IPO 同債券發行後現金堡壘強（~US$100B vs 債務 ~US$23.3B），提供 capex 緩衝。但同時抬高市場期望同稀釋基數；流動性改善唔等於經營自給。對 thesis 中性偏削弱——抗風險↑但每股 thesis 被 IPO 定價影響。"],
+    ["neutral", "收購", "Cursor 已交割（2026-08-14，隱含 US$60.0B）", "已發約 389.3M Class A + RSU／期權假設。可強化 AI 企業端，亦即時帶來稀釋／整合裂縫。對支柱 C 屬潛在支持但需觀察整合執行同實際協同。"],
+    ["weaken", "現金流", "H1 近似 FCF ~−US$25B；AI capex US$15.8B", "H1 OCF US$3.5B 被 PPE US$28.5B 吞噬，其中 AI capex 單季 US$15.8B 係主因。自我融資未成立——營收同 Adj. EBITDA 改善尚未被現金流確認。直接削弱支柱 D，亦間接削弱支柱 C 嘅「可轉 FCF」路徑。"],
+    ["weaken", "估值", "現價 US$135.86 vs 建倉區 ≤95；P/S ~72×", "市值 ~US$1.79T 對年化營收 ~US$25B 倍數極高。現價已遠超建倉區，加上兩張 deep ITM short put（195/170，9/18），assignment 可令平均成本上移至 150–160。直接削弱支柱 D，對行動含義係停止加倉。"],
+  ];
+  const label = { support: "支持", neutral: "中性", weaken: "削弱" };
+  const root = document.getElementById("evidence");
+  function render(filter) {
+    root.innerHTML = evidence
+      .filter(([impact]) => filter === "all" || impact === filter)
+      .map(([impact, type, title, note]) => `
+        <article class="ev ${impact}" data-impact="${impact}">
+          <div class="ev-top">
+            <span class="ev-type">${type}</span>
+            <span class="pill ${impact}">${label[impact]}</span>
+          </div>
+          <div class="ev-title">${title}</div>
+          <div class="ev-note">${note}</div>
+        </article>
+      `).join("");
+  }
+  render("all");
+  document.querySelectorAll("#filters .chip").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      document.querySelectorAll("#filters .chip").forEach((c) => c.classList.remove("on"));
+      chip.classList.add("on");
+      render(chip.dataset.f);
+    });
+  });
+</script>
+</body>
+</html>

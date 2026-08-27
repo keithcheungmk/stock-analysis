@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RKLB Framework 2 深度增長分析</title>
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --ink: #1c1917;
+    --muted: #78716c;
+    --card: #fffdf8;
+    --line: #e7e0d5;
+    --teal: #0f766e;
+    --teal-soft: #ccfbf1;
+    --watch: #c2410c;
+    --watch-soft: #ffedd5;
+    --fail: #b91c1c;
+    --fail-soft: #fee2e2;
+    --pass: #15803d;
+    --pass-soft: #dcfce7;
+    --info: #1d4ed8;
+    --info-soft: #dbeafe;
+    --shadow: 0 12px 40px rgba(28, 25, 23, 0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Iowan Old Style", "Songti TC", "Noto Serif TC", "PingFang TC", serif;
+    background:
+      radial-gradient(circle at 12% 0%, #dff7f3 0, transparent 28%),
+      radial-gradient(circle at 88% 8%, #ffe8d6 0, transparent 24%),
+      var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .sans { font-family: "Avenir Next", "PingFang TC", "Noto Sans TC", sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 18px 72px; }
+  .hero {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }
+  .verdict-box {
+    background: linear-gradient(160deg, #fff7ed, #ffedd5 70%, #fed7aa);
+    border: 1px solid #fdba74;
+    border-radius: 24px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+  }
+  .eyebrow {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--watch);
+    font-weight: 700;
+  }
+  .verdict-title {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--watch);
+    margin: 8px 0 0;
+  }
+  .hero-main {
+    background: linear-gradient(135deg, #134e4a, #0f766e 58%, #115e59);
+    color: white;
+    border-radius: 24px;
+    padding: 26px;
+    box-shadow: var(--shadow);
+  }
+  .hero-main h1 {
+    margin: 0 0 8px;
+    font-size: 1.75rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .hero-main p { margin: 0; opacity: 0.92; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .badge {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    display: inline-flex; align-items: center;
+    padding: 6px 12px; border-radius: 999px; font-size: 0.82rem; font-weight: 700;
+    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.18);
+  }
+  .badge.watch { background: var(--watch-soft); color: var(--watch); border-color: transparent; }
+  .badge.pass { background: var(--pass-soft); color: var(--pass); border-color: transparent; }
+  .badge.fail { background: var(--fail-soft); color: var(--fail); border-color: transparent; }
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  @media (max-width: 860px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .kpi .label { font-family: "Avenir Next", "PingFang TC", sans-serif; color: var(--muted); font-size: 0.78rem; }
+  .kpi .value { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 1.25rem; font-weight: 800; margin-top: 4px; }
+  .kpi.green { border-top: 4px solid var(--pass); }
+  .kpi.orange { border-top: 4px solid var(--watch); }
+  .kpi.teal { border-top: 4px solid var(--teal); }
+  .kpi.red { border-top: 4px solid var(--fail); }
+  .sections { display: grid; gap: 16px; margin-top: 18px; }
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+  }
+  h2 {
+    margin: 0 0 14px;
+    font-size: 1.2rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  h3 {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .callout {
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin: 0 0 14px;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .callout.watch { background: var(--watch-soft); border: 1px solid #fdba74; }
+  .callout.info { background: var(--info-soft); border: 1px solid #93c5fd; }
+  .callout.pass { background: var(--pass-soft); border: 1px solid #86efac; }
+  .callout.fail { background: var(--fail-soft); border: 1px solid #fca5a5; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  @media (max-width: 860px) {
+    .grid-2, .grid-3, .grid-5 { grid-template-columns: 1fr; }
+  }
+  .box {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px;
+    background: white;
+  }
+  .box.pass { border-left: 5px solid var(--pass); background: linear-gradient(180deg, #f0fdf4, white 45%); }
+  .box.warn { border-left: 5px solid var(--watch); background: linear-gradient(180deg, #fff7ed, white 45%); }
+  .box.fail { border-left: 5px solid var(--fail); background: linear-gradient(180deg, #fef2f2, white 45%); }
+  .box.info { border-left: 5px solid var(--info); background: linear-gradient(180deg, #eff6ff, white 45%); }
+  .pill {
+    display: inline-flex;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .pill.pass { background: var(--pass-soft); color: var(--pass); }
+  .pill.warn { background: var(--watch-soft); color: var(--watch); }
+  .pill.fail { background: var(--fail-soft); color: var(--fail); }
+  .pill.info { background: var(--info-soft); color: var(--info); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { color: var(--muted); font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.75rem; }
+  td.num { text-align: right; font-family: "Avenir Next", "PingFang TC", sans-serif; font-variant-numeric: tabular-nums; }
+  tr.up td:last-child { color: var(--pass); font-weight: 700; }
+  tr.mix td:last-child { color: var(--watch); font-weight: 700; }
+  tr.down td:last-child { color: var(--fail); font-weight: 700; }
+  .chart {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    align-items: end;
+    height: 170px;
+    margin: 12px 0 8px;
+  }
+  .bar-wrap { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; }
+  .bar {
+    width: 100%;
+    border-radius: 10px 10px 4px 4px;
+    background: linear-gradient(180deg, #14b8a6, #0f766e);
+    min-height: 8px;
+  }
+  .bar.neg { background: linear-gradient(180deg, #fb7185, #b91c1c); }
+  .bar-label, .bar-val {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 0.72rem;
+  }
+  .bar-label { color: var(--muted); }
+  .bar-val { font-weight: 800; }
+  .footer {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .muted { color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Framework 2 判定</div>
+      <div class="verdict-title">業務 thesis 部分通過<br>價格 thesis 未通過</div>
+      <div class="badges" style="margin-top:12px">
+        <span class="badge watch">長期觀察</span>
+        <span class="badge fail">FCF 未確認</span>
+        <span class="badge pass">增長拐點確認</span>
+      </div>
+      <p class="sans muted" style="margin:12px 0 0">下一步：Valuation Model，唔好追現價</p>
+    </div>
+    <div class="hero-main">
+      <h1>RKLB · Framework 2 深度增長分析</h1>
+      <p>Rocket Lab Corporation · 五季：2025-Q1 → 2026-Q1 · 官方 8-K earnings releases 優先</p>
+      <div class="badges">
+        <span class="badge">Core KPI：Backlog 轉化</span>
+        <span class="badge">會計：US GAAP + Non-GAAP</span>
+        <span class="badge">承接 F1：WATCH 70/130</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">Q1 2026 營收</div><div class="value">US$200.3M</div><div class="muted">YoY +63.5%</div></div>
+    <div class="kpi green"><div class="label">Backlog</div><div class="value">US$2.2B</div><div class="muted">QoQ +20.2%</div></div>
+    <div class="kpi orange"><div class="label">Adj. EBITDA</div><div class="value">−US$11.8M</div><div class="muted">由 −30.0 → −11.8</div></div>
+    <div class="kpi red"><div class="label">季度 FCF</div><div class="value">≈ −US$77M</div><div class="muted">五季皆負</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>板塊一：承接 Framework 1 兩個必挖問題</h2>
+      <div class="grid-2">
+        <div class="box warn">
+          <h3>① Backlog 轉化速度</h3>
+          <p><strong>證據：</strong>Backlog 由 2025 年底 US$1.85B 升至 2026-Q1 US$2.2B（QoQ +20%）。同期季度營收 US$200.3M，約等於 backlog 的 9%。Q2 指引 US$225–240M 顯示近端轉化仍在加速，但全年 run-rate 仍遠低於 backlog，意味著大量合約屬多年期 Space Systems／國防交付。</p>
+          <p class="muted">判定：需求真實；轉化路徑存在，但並非「一年內全部入帳」。</p>
+        </div>
+        <div class="box fail">
+          <h3>② Neutron／收購對 FCF 與稀釋</h3>
+          <p><strong>證據：</strong>Neutron 首次發射目標延至 2026-Q4；五季 FCF 皆負，Q4 2025 季度 FCF 約 −US$114M（YTD 差分解）。加權平均股數由 505.6M（2025-Q1）升至 605.4M（2026-Q1）；可轉債淨額由約 US$346M 降至 US$37M。現金＋短期證券約 US$1.38B，流動性靠融資／ATM 支撐擴張。</p>
+          <p class="muted">判定：第二曲線未兌現；稀釋與 capex 已發生，FCF 轉正尚未確認。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>板塊二：10 大核心 KPI 五季儀表板</h2>
+      <p class="muted" style="margin-top:-6px">單位：US$ million（另有標示除外）。太空硬件公司以 Backlog／Launch cadence／Gross margin 替代 SaaS 的 NRR／CAC。</p>
+      <div style="overflow-x:auto; margin-top:12px">
+        <table>
+          <thead>
+            <tr>
+              <th>維度</th><th>KPI</th>
+              <th class="num">25Q1</th><th class="num">25Q2</th><th class="num">25Q3</th><th class="num">25Q4</th><th class="num">26Q1</th>
+              <th>趨勢</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="up"><td>成長引擎</td><td>營收</td><td class="num">122.6</td><td class="num">144.5</td><td class="num">155.1</td><td class="num">179.7</td><td class="num">200.3</td><td>改善</td></tr>
+            <tr class="up"><td>成長引擎</td><td>營收 YoY</td><td class="num">+32%</td><td class="num">+36%</td><td class="num">+48%</td><td class="num">+36%</td><td class="num">+64%</td><td>改善</td></tr>
+            <tr class="up"><td>成長引擎</td><td>Backlog (US$B)</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">1.85</td><td class="num">2.20</td><td>改善</td></tr>
+            <tr class="up"><td>單位經濟</td><td>GAAP 毛利率</td><td class="num">28.8%</td><td class="num">32.1%</td><td class="num">37.0%</td><td class="num">38.0%</td><td class="num">38.2%</td><td>改善</td></tr>
+            <tr class="mix"><td>單位經濟</td><td>SG&amp;A / 營收</td><td class="num">32.1%</td><td class="num">27.6%</td><td class="num">29.4%</td><td class="num">22.5%</td><td class="num">25.9%</td><td>持平偏改善</td></tr>
+            <tr class="mix"><td>護城河</td><td>Service 營收佔比</td><td class="num">34%</td><td class="num">36%</td><td class="num">33%</td><td class="num">48%</td><td class="num">36%</td><td>波動</td></tr>
+            <tr class="up"><td>護城河</td><td>發射執行</td><td class="num">5 Electron</td><td class="num">5 Electron</td><td class="num">合約紀錄</td><td class="num">7 missions</td><td class="num">31 新合約</td><td>改善</td></tr>
+            <tr class="up"><td>營運槓桿</td><td>OpEx / 營收</td><td class="num">77%</td><td class="num">73%</td><td class="num">75%</td><td class="num">66%</td><td class="num">66%</td><td>改善</td></tr>
+            <tr class="up"><td>營運槓桿</td><td>Adj. EBITDA</td><td class="num">−30.0</td><td class="num">−27.6</td><td class="num">−26.3</td><td class="num">−17.4</td><td class="num">−11.8</td><td>改善</td></tr>
+            <tr class="down"><td>現金流</td><td>OCF / FCF*</td><td class="num">−54 / −83</td><td class="num">−23 / −55</td><td class="num">−24 / −69</td><td class="num">−65 / −114</td><td class="num">−50 / −77</td><td>惡化／仍負</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">*OCF／FCF：Q2–Q4 由現金流量表 YTD 差分解得季度數；FCF ≈ OCF − PPE purchases。來源：各季官方 8-K Exhibit 99.1。</p>
+
+      <h3 style="margin-top:18px">營收五季趨勢</h3>
+      <div class="chart" id="revChart"></div>
+    </section>
+
+    <section class="panel">
+      <h2>五大維度動態判斷</h2>
+      <div class="grid-2">
+        <div class="box pass">
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+            <h3>1. 時間序列敘事</h3><span class="pill pass">質變確認</span>
+          </div>
+          <p>敘事由「Electron 小火箭執行」轉向「Space Systems + 國防端到端 + Neutron 中型運載」。Q4 承認 stage-1 tank 測試失敗並把首次發射推至 2026-Q4，顯示管理層願意公開修正時間表，而非無限延期不說。</p>
+        </div>
+        <div class="box pass">
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+            <h3>2. 單位經濟</h3><span class="pill pass">改善中</span>
+          </div>
+          <p>GAAP 毛利率由 28.8% 升至 38.2%；Adj. EBITDA 虧損由 −US$30.0M 收窄至 −US$11.8M。SG&amp;A 佔比整體下行，但尚未見到「回收期／LTV」式 SaaS 指標——硬件業務要用毛利＋項目執行取代 CAC。</p>
+        </div>
+        <div class="box warn">
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+            <h3>3. 護城河與黏性</h3><span class="pill warn">部分確認</span>
+          </div>
+          <p>Electron／HASTE 發射頻率與國防合約形成轉換成本；Space Systems 垂直整合（衛星、組件、任務運營）提高黏性。但 SpaceX 在中大型運載仍主導；Neutron 未飛行前，護城河唔可以當壟斷。</p>
+        </div>
+        <div class="box pass">
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+            <h3>4. 營運槓桿</h3><span class="pill pass">結構改善</span>
+          </div>
+          <p>OpEx／營收由 77% 降至 66%；毛利率擴張同步出現。路徑清晰，但仍未 GAAP 盈利。Q2 指引毛利率 33–35%（GAAP）略低於 Q1 紀錄，需留意 mix 回吐。</p>
+        </div>
+        <div class="box fail" style="grid-column:1/-1">
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+            <h3>5. 真實現金流</h3><span class="pill fail">未通過</span>
+          </div>
+          <p>營收爆發<strong>沒有</strong>被 OCF／FCF 同步確認——五季 OCF 與 FCF 皆為負。現金堆積主要來自融資與可轉債結構變化，而非經營自給。這是刺穿成長假象的核心反證。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>板塊三：Buy-side Investment Memo</h2>
+      <div class="grid-3">
+        <div class="box pass">
+          <h3>Bull Case</h3>
+          <p>第二增長曲線 = Neutron 中型可回收運載 + 國防／太空系統端到端。Backlog US$2.2B、毛利率擴張、Adj. EBITDA 虧損收窄，支持「硬件規模化後的盈利路徑」。若 Neutron 2026-Q4 如期首飛並開始貢獻，高估值才有基本面錨點。</p>
+        </div>
+        <div class="box fail">
+          <h3>Bear Case</h3>
+          <p>股價崩盤最可能路徑：Neutron 再延誤／失敗，同時 FCF 持續燒，市場改用「高稀釋成長股」定價。P/S 約 66–71×（延遲市值／TTM 營收）已大幅提前計入成功；護城河在中型運載未驗證前可被 SpaceX 與資金成本同時擠壓。</p>
+        </div>
+        <div class="box warn">
+          <h3>下一步行動</h3>
+          <p><strong>加入長期觀察名單，等待回調／估值驗證。</strong>業務拐點夠真實，值得跟進；現價未通過現金流與估值雙重測試。下一步跑 Valuation Model（Bull／Base／Bear），唔好因為 F1 WATCH 或營收強就追價。</p>
+        </div>
+      </div>
+
+      <div class="callout info" style="margin-top:14px">
+        <strong>確認條件（未來兩季）：</strong>Backlog 轉化令營收 ≥ 指引中位；Adj. EBITDA 虧損繼續收窄或轉正；季度 FCF 明顯改善（唔只靠 working capital）；Neutron 進度有可驗證里程碑。<br>
+        <strong>失效條件：</strong>營收增速連續兩季明顯失速；毛利率跌穿 33% 且 OpEx 佔比回升；Neutron 再大幅延期；再大幅 ATM／稀釋而 FCF 無改善。
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Evidence ladder</h2>
+      <table>
+        <thead><tr><th>層級</th><th>證據</th><th>解讀</th></tr></thead>
+        <tbody>
+          <tr><td>高</td><td>五季官方營收、毛利、Adj. EBITDA、現金流表</td><td>增長與毛利改善已入帳；FCF 仍負同屬硬數據</td></tr>
+          <tr><td>高</td><td>Backlog US$2.2B；Q2 指引 225–240</td><td>需求與近端轉化可追蹤</td></tr>
+          <tr><td>中</td><td>國防合約、Electron／HASTE 發射紀錄</td><td>執行能力強，但不等於 Neutron 成功</td></tr>
+          <tr><td>反證</td><td>五季負 FCF；股數 +20%；Neutron 延期至 2026-Q4</td><td>價格已計入未兌現第二曲線</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <p class="footer">
+    主要來源：Rocket Lab 2025-Q1～2026-Q1 Form 8-K Exhibit 99.1（官方 earnings release）；市況／市值為延遲數據（約 US$74–76，2026-08-04/05）。
+    會計基準：US GAAP；Adj. EBITDA 為 Non-GAAP。此分析僅供研究參考，不構成投資建議。
+  </p>
+</div>
+<script>
+  const revs = [
+    { label: "25Q1", value: 122.6 },
+    { label: "25Q2", value: 144.5 },
+    { label: "25Q3", value: 155.1 },
+    { label: "25Q4", value: 179.7 },
+    { label: "26Q1", value: 200.3 },
+  ];
+  const max = Math.max(...revs.map(r => r.value));
+  document.getElementById("revChart").innerHTML = revs.map(r => {
+    const h = Math.round((r.value / max) * 130);
+    return `<div class="bar-wrap"><div class="bar-val">${r.value}</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${r.label}</div></div>`;
+  }).join("");
+</script>
+</body>
+</html>
