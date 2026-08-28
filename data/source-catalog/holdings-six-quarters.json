@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-08-13T14:45:00+08:00",
+  "as_of": "2026-08-28T09:52:00+08:00",
   "generated_at": "2026-08-13T06:49:27.944122+00:00",
   "companies": {
     "AMD": {
@@ -2074,81 +2074,6 @@
       ],
       "periods": [
         {
-          "label": "FY2025-Q2",
-          "period_end": "2024-12-31",
-          "release_date": "2025-02-12",
-          "filings": [
-            {
-              "accession_number": "0001878848-25-000009",
-              "form": "6-K",
-              "filing_date": "2025-02-12",
-              "report_date": "2024-12-31",
-              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000009/0001878848-25-000009-index.html",
-              "documents": [
-                {
-                  "description": "6-K",
-                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884825000009/iren-20241231.htm",
-                  "name": "ix",
-                  "type": "6-K",
-                  "document_type": "event_filing"
-                },
-                {
-                  "description": "EX-99.1",
-                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000009/q2fy25resultspressreleas.htm",
-                  "name": "q2fy25resultspressreleas.htm",
-                  "type": "EX-99.1",
-                  "document_type": "earnings_release"
-                },
-                {
-                  "description": "EX-99.2",
-                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000009/q2fy25resultspresentatio.htm",
-                  "name": "q2fy25resultspresentatio.htm",
-                  "type": "EX-99.2",
-                  "document_type": "earnings_release"
-                },
-                {
-                  "description": "EX-99.3",
-                  "url": "https://www.sec.gov/ix?doc=/Archives/edgar/data/1878848/000187884825000009/iren-20241231_d2.htm",
-                  "name": "ix",
-                  "type": "EX-99.3",
-                  "document_type": "earnings_release"
-                },
-                {
-                  "description": "EX-99.4",
-                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884825000009/irenlimited-exx994dec2024.htm",
-                  "name": "irenlimited-exx994dec2024.htm",
-                  "type": "EX-99.4",
-                  "document_type": "earnings_release"
-                }
-              ]
-            }
-          ],
-          "ir_documents": [
-            {
-              "url": "https://iren.gcs-web.com/static-files/a18dd174-516f-4896-bb2e-51254cff7d84",
-              "name": "a18dd174-516f-4896-bb2e-51254cff7d84",
-              "description": "earnings presentation",
-              "type": "IR",
-              "document_type": "earnings_presentation"
-            },
-            {
-              "url": "https://iren.gcs-web.com/static-files/067bfead-5da8-4876-b5be-144019f0ad8b",
-              "name": "067bfead-5da8-4876-b5be-144019f0ad8b",
-              "description": "financial tables",
-              "type": "IR",
-              "document_type": "financial_tables"
-            }
-          ],
-          "ir_page": "https://www.iren.com/investors/reports",
-          "unavailable_sources": [
-            {
-              "type": "official_transcript",
-              "status": "not_part_of_standard_official_package",
-              "substitute": "webcast_metadata"
-            }
-          ]
-        },
-        {
           "label": "FY2025-Q3",
           "period_end": "2025-03-31",
           "release_date": "2025-05-14",
@@ -2489,6 +2414,76 @@
             {
               "url": "https://iren.gcs-web.com/static-files/924cf03a-afc5-439b-926e-6c22feb57935",
               "name": "924cf03a-afc5-439b-926e-6c22feb57935",
+              "description": "financial tables",
+              "type": "IR",
+              "document_type": "financial_tables"
+            }
+          ],
+          "ir_page": "https://www.iren.com/investors/reports",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2026-Q4",
+          "period_end": "2026-06-30",
+          "release_date": "2026-08-27",
+          "filings": [
+            {
+              "accession_number": "0001878848-26-000052",
+              "form": "10-K",
+              "filing_date": "2026-08-27",
+              "report_date": "2026-06-30",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000052/0001878848-26-000052-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000052/iren-20260630.htm",
+                  "name": "iren-20260630.htm",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001878848-26-000051",
+              "form": "8-K",
+              "filing_date": "2026-08-27",
+              "report_date": "2026-08-27",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000051/0001878848-26-000051-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000051/iren-20260827.htm",
+                  "name": "iren-20260827.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1878848/000187884826000051/irenreportsfy26results.htm",
+                  "name": "irenreportsfy26results.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://iren.gcs-web.com/static-files/1ca5b6f0-4b4d-4710-a7e2-69435e112b60",
+              "name": "1ca5b6f0-4b4d-4710-a7e2-69435e112b60",
+              "description": "earnings presentation",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://iren.gcs-web.com/static-files/1cb9f4da-d4c7-4510-8bda-e475022b59f5",
+              "name": "1cb9f4da-d4c7-4510-8bda-e475022b59f5",
               "description": "financial tables",
               "type": "IR",
               "document_type": "financial_tables"

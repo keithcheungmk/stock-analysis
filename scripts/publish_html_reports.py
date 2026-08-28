@@ -19,11 +19,17 @@ SKIP_OVERWRITE = {
     DOCS / "spcx" / "index.html",
     DOCS / "spcx" / "valuation-model.html",
     DOCS / "orcl" / "index.html",
+    DOCS / "iren" / "index.html",
 }
 
-# Tesla Pages 目錄對齊 NVDA：只露出同一套 8 頁。底稿仍留喺 output/。
+# Tesla／IREN 目錄對齊 NVDA：只露出同一套 8 頁。底稿仍留喺 output/。
 HIDE_DOCS_SLUGS = {
     "TSLA": {
+        "earnings-review",
+        "interactive-brief",
+        "valuation-model",
+    },
+    "IREN": {
         "earnings-review",
         "interactive-brief",
         "valuation-model",
@@ -199,6 +205,7 @@ def ticker_index_html(ticker: str, items: list[dict[str, str]], updated: str) ->
 def hub_html(pages: dict[str, list[dict[str, str]]]) -> str:
     extra = {
         "SPCX": [("./spcx/", "Position Brief（手機投影片）")],
+        "IREN": [("./iren/", "報告目錄")],
         "ORCL": [("./orcl/", "報告目錄")],
     }
     preferred = ("TSLA", "NVDA", "SPCX", "IREN", "RKLB", "RDW", "MRNA")

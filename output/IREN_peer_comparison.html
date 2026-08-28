@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IREN 同業比較</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;background:var(--info-soft);border:1px solid #93c5fd}
+  .callout.warn{background:var(--watch-soft);border:1px solid #fdba74}
+  .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  @media(max-width:960px){.grid{grid-template-columns:1fr 1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff}
+  .box.p1{border-top:4px solid var(--pass)}.box.p2{border-top:4px solid var(--teal)}.box.p3{border-top:4px solid var(--info)}.box.p4{border-top:4px solid var(--watch)}.box.p5{border-top:4px solid var(--fail)}
+  .rank{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.78rem;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
+  .muted{color:var(--muted);font-size:.9rem}
+  .stale{display:inline-block;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:2px 8px;margin-left:4px}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .chart{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end;height:160px;margin:12px 0 8px}
+  .bar-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:end;gap:6px}
+  .bar{width:100%;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#14b8a6,#0f766e);min-height:8px}
+  .bar-label,.bar-val{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  .bar-label{color:var(--muted)}.bar-val{font-weight:800}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action-bar{margin-top:12px}
+  .action-pill{display:inline-flex;padding:10px 16px;border-radius:999px;background:#1c1917;color:#fff;font-weight:800;font-size:.88rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 4 · 若只能選一間</div>
+      <div class="verdict-title">CRWV（質量）<br>IREN 衛星、唔好加倉</div>
+      <p class="sans muted" style="margin:12px 0 0">排序係研究配置。現價對 Base +1%，唔係追價指令。</p>
+    </div>
+    <div class="hero-main">
+      <h1>IREN vs CLSK / CRWV / CIFR</h1>
+      <p>已接電 AI 雲 × Bitcoin miner 轉型組。直接可比：電網、轉型進度、當期營收方向、槓桿、稀釋。唔好硬比 CRWV 千億級 backlog 對 IREN ARR，亦唔好比 CIFR 租賃 NOI 對 IREN GPU ARR。</p>
+      <div class="badges">
+        <span class="badge">IREN 官方 Q4 FY26 verified</span>
+        <span class="badge">Peer 市況 yfinance 8/28</span>
+        <span class="badge">Peer 損益 STALE 8/15</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +1%</span></h2>
+    <p class="muted" style="margin:0">現價相對 Base 溢價約 <strong>+1%</strong>（US$40.53 vs US$40）→ 接近公允，<strong>唔好加倉</strong>。權威來源：Framework 3 研究情景（非指引）。F1 紅線已 FAIL。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/28）</div><div class="v">US$40.53</div><div class="s">市值 ~US$16.0B · 官方 394.1M 股</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">16 / 40 / 80</div><div class="s">F3 研究情景每股 · 非指引</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+1%</div><div class="s">接近公允 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 22.6×</div><div class="s">FY26 US$707.0m · EV ≈ US$17.9B</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 GAAP AI Cloud US$70.5m</span>
+      <span>★ operating ARR US$1bn（8/26 · 非 GAAP）</span>
+      <span>★ Q4 FCF ≈ −US$167m</span>
+      <span>★ 394.1M 股 · 有息負債 US$7.84B</span>
+      <span>★ 淨負債 ≈ US$1.94B（7.84 − 5.90）</span>
+    </div>
+  </section>
+  <div class="action-bar">
+    <span class="action-pill">現價相對 Base 溢價約 +1%，接近公允，唔好加倉。</span>
+  </div>
+
+  <section class="panel">
+    <h2>一句話</h2>
+    <div class="callout sans">四間都喺搶「已接電嘅 AI 產能」，但只有 CRWV 已經把呢樣變成十億級季度收入。市場最易把 IREN 嘅 contracted ARR、或者 CIFR 嘅 GW pipeline，直接等同已經入帳嘅雲收入。IREN 喺 miner 轉型組入面合約最好，但 F1 紅線 FAIL，只宜衛星倉、唔好加倉。</div>
+  </section>
+
+  <section class="panel">
+    <h2>可比性</h2>
+    <p><strong>可直接比：</strong>電網規模、miner→雲／租賃轉型進度、當期營收方向、槓桿、稀釋。<strong>只可參考：</strong>估值倍數（CRWV 已係規模雲；另外三隻仍係故事＋期權）。<strong>不宜硬比：</strong>CRWV 千億級 backlog 對 IREN ARR；CIFR 租賃 NOI 對 IREN GPU 雲 ARR。財政日曆唔對齊——棒圖只顯示「最近一季營收量級」，唔係同一曆法季度。</p>
+  </section>
+
+  <section class="panel">
+    <h2>角色同排序（12–24 個月）</h2>
+    <div class="grid">
+      <div class="box p1"><div class="rank">1 · 核心質量</div><h3>CRWV</h3><p>質量／規模龍頭。最近季營收 US$2,575m（STALE）。板塊內唯一已驗證嘅 AI 雲規模；問題係債同價格，唔係「做唔做得成」。</p></div>
+      <div class="box p2"><div class="rank">2 · 轉型組最佳合約</div><h3>IREN</h3><p>官方 Q4 AI US$70.5m、合約 ARR US$4bn。miner 轉型組披露最好，但 F1 FAIL、FCF 深負。已持倉 → 衛星，唔好加倉。</p></div>
+      <div class="box p3"><div class="rank">3 · 較平、mining 弱</div><h3>CLSK</h3><p>yf P/S ~4.9× 最唔貴。當期 mining 弱（STALE Q3 營收 US$138.0m YoY −30.5%）。折價有原因，唔升格做核心。</p></div>
+      <div class="box p4"><div class="rank">4 · 貴 vs 細收入</div><h3>CIFR</h3><p>市值 ~US$6.96B 對 STALE 季度營收 US$24.8m，yf P/S ~36.4×。開發敘事透支當期損益表。</p></div>
+      <div class="box p5"><div class="rank">5 · 配置結論</div><h3>長持只選 CRWV</h3><p>若只能選一間長持：CRWV。用戶已持 IREN → 當衛星倉續抱；現價 vs Base +1%，<strong>唔好加倉</strong>。</p></div>
+    </div>
+    <h3 style="margin-top:16px">最近一季營收量級（US$m，曆法唔對齊）</h3>
+    <div class="chart" id="revChart"></div>
+    <p class="muted">CRWV 2,575（2026 Q2，STALE）· IREN 137.2（官方 Q4 FY26，期終 2026-06-30）· CLSK 138.0（FY26 Q3，STALE）· CIFR 24.8（2026 Q2，STALE）。唔好把四條當成同一季同口徑。</p>
+  </section>
+
+  <section class="panel">
+    <h2>市況同損益來源</h2>
+    <div class="callout warn sans" style="margin-bottom:14px">Peer <strong>市況</strong>用 yfinance delayed 2026-08-28（歷史對照 2026-08-27），aggregator 只服務 CLSK／CRWV／CIFR 價格同市值。<strong>今次 run 冇重拉</strong>三間官方財報包。損益沿用 2026-08-15 筆記，標 <span class="stale">STALE</span>，唔當今日已覆核原文。</div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>公司</th><th>最新季</th><th class="num">總營收</th><th>當期方向</th><th>現金／槓桿</th><th>delayed 價</th><th class="num">市值</th><th>倍數</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IREN</td>
+            <td>Q4 FY26 期終 6/30<br>官方 8-K／10-K 2026-08-27</td>
+            <td class="num">137.2m<br>AI 70.5 · BTC 66.7</td>
+            <td>AI 首次超過 BTC；總營收仍係 miner 量級</td>
+            <td>現金 5.90B vs 有息負債 7.84B<br>FCF ≈ −167m · 394.1M 股</td>
+            <td>40.53</td>
+            <td class="num">~16.0B</td>
+            <td>P/S 22.6×（FY26 707.0m）<br>EV ~17.9B</td>
+          </tr>
+          <tr>
+            <td>CLSK</td>
+            <td>FY26 Q3<span class="stale">STALE</span></td>
+            <td class="num">138.0m YoY −30.5%</td>
+            <td>當期 mining 弱；轉型靠租賃路徑</td>
+            <td>今次未重核官方現金負債</td>
+            <td>12.95</td>
+            <td class="num">~3.33B</td>
+            <td>yf P/S ~4.9×</td>
+          </tr>
+          <tr>
+            <td>CRWV</td>
+            <td>2026 Q2<span class="stale">STALE</span></td>
+            <td class="num">2,575m +112%</td>
+            <td>已係十億級 GPU 雲；唔好同 IREN ARR 硬比 backlog</td>
+            <td>今次未重核官方負債包</td>
+            <td>86.80</td>
+            <td class="num">~47.9B</td>
+            <td>yf P/S ~6.3×</td>
+          </tr>
+          <tr>
+            <td>CIFR</td>
+            <td>2026 Q2<span class="stale">STALE</span></td>
+            <td class="num">24.8m</td>
+            <td>當期收入細；唔好比租賃 NOI 對 IREN GPU ARR</td>
+            <td>今次未重核官方包</td>
+            <td>16.77</td>
+            <td class="num">~6.96B</td>
+            <td>yf P/S ~36.4×</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">IREN 合約 ARR US$4bn、operating ARR US$1bn（截至 2026-08-26，官方非 GAAP）。Peer 倍數係 yfinance 溫度計，口徑同財政期唔一致，唔覆寫 IREN 官方數字。</p>
+  </section>
+
+  <section class="panel">
+    <h2>質量對照</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>公司</th><th>商業質量</th><th>增長質量</th><th>現金流質量</th><th>估值吸引力</th><th>最大亮點</th><th>最大風險</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>IREN</td><td>中高（合約）／當期仍 miner</td><td>AI 線改善；總營收未上台階</td><td>低（FCF ≈ −167；紅線 FAIL）</td><td>低（trailing 22.6×；現價 ≈ Base）</td><td>MSFT／NVIDIA 合約已開始計費</td><td>稀釋＋預付 bridging；F1 FAIL</td></tr>
+          <tr><td>CLSK</td><td>中（租賃路徑清晰）</td><td>低（STALE mining 倒退）</td><td>低</td><td>中（最平）</td><td>相對便宜</td><td>當期基本面弱、規模細</td></tr>
+          <tr><td>CRWV</td><td>高</td><td>高（STALE +112%）</td><td>低（規模燒錢，但收入對得住）</td><td>中（貴但有帳）</td><td>唯一已驗證規模</td><td>槓桿／利率；千億 backlog 唔好硬套 IREN</td></tr>
+          <tr><td>CIFR</td><td>低–中（開發商）</td><td>低（當期收入細）</td><td>低</td><td>低（36× 買細帳）</td><td>租賃開發敘事</td><td>市值同損益表脫節</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>誰該享有溢價／配置</h2>
+    <p>最值得溢價：<strong>CRWV</strong>（收入已經係十億級）。看似最便宜但折價合理：<strong>CLSK</strong>（mining 差、租賃未完全入帳）。最易被吹捧：<strong>IREN 嘅 ARR</strong>同 <strong>CIFR 嘅 GW 口號</strong>。核心首選（板塊內）係 CRWV。進攻型／已持倉：IREN 只宜衛星。值博率：CLSK 較平但質量唔支持改核心。只宜觀察、不宜追高：CIFR。長持只選一間：<strong>CRWV</strong>。用戶已持 IREN → 衛星倉續抱；現價相對 Base +1%，<strong>唔好加倉</strong>。</p>
+  </section>
+  <p class="footer">IREN：官方 Q4 FY26 8-K／10-K filing 2026-08-27，期終 2026-06-30，USD US GAAP，verified。股數 394.1M；市值 ~US$16.0B；EV ~US$17.9B；P/S 22.6×（FY26 US$707.0m）。Peer 價格／市值／yf P/S：yfinance delayed 2026-08-28（hist 2026-08-27）。Peer 損益：2026-08-15 筆記，STALE，今次未重拉官方包。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const rows=[{l:"CRWV Q2*",v:2575},{l:"IREN Q4",v:137.2},{l:"CLSK Q3*",v:138},{l:"CIFR Q2*",v:24.8}];
+const max=Math.max(...rows.map(r=>r.v));
+document.getElementById("revChart").innerHTML=rows.map(r=>{
+  const h=Math.max(8,Math.round(r.v/max*130));
+  return `<div class="bar-wrap"><div class="bar-val">${r.v}</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${r.l}</div></div>`;
+}).join("");
+</script>
+</body>
+</html>

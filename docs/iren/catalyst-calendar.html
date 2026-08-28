@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IREN 催化劑日曆</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--teal-deep:#134e4a;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .event{display:grid;grid-template-columns:170px 1fr auto;gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:10px}
+  @media(max-width:860px){.event{grid-template-columns:1fr}}
+  .event.past{opacity:.62;background:#faf8f4}
+  .when{font-weight:800;font-size:.82rem;color:var(--teal-deep);font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dir{font-size:.75rem;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap;font-family:"Avenir Next","PingFang TC",sans-serif;height:fit-content}
+  .dir.high{background:var(--watch-soft);color:var(--watch)}.dir.mid{background:var(--info-soft);color:var(--info)}.dir.low{background:#f5f5f4;color:var(--muted)}.dir.past{background:#e7e5e4;color:#57534e}
+  .muted{color:var(--muted);font-size:.9rem}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.warn{border-left:5px solid var(--watch)}.box.fail{border-left:5px solid var(--fail)}.box.ok{border-left:5px solid var(--pass)}.box.info{border-left:5px solid var(--info)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;background:var(--info-soft);border:1px solid #93c5fd;margin:0}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action-bar{margin-top:12px}
+  .action-pill{display:inline-flex;padding:10px 16px;border-radius:999px;background:#1c1917;color:#fff;font-weight:800;font-size:.88rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 5 · 未來 1–2 季</div>
+      <div class="verdict-title">等 Horizon 2–4<br>唔好加倉</div>
+      <p class="sans muted" style="margin:12px 0 0">Q4 同 Horizon 1 已過去。衛星倉續抱。</p>
+    </div>
+    <div class="hero-main">
+      <h1>IREN · 催化劑地圖</h1>
+      <p>真正改倍數嘅唔係再一次 headline 營收，而係 2026 年曆 Q4 Horizon 2–4 有冇交付、年底 operating ARR 對住 US$4bn 目標、同 GAAP AI 有冇跟上合約。</p>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +1%</span></h2>
+    <p class="muted" style="margin:0">現價相對 Base 溢價約 <strong>+1%</strong>（US$40.53 vs US$40）→ 接近公允，<strong>唔好加倉</strong>。權威來源：Framework 3 研究情景（非指引）。F1 紅線已 FAIL。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/28）</div><div class="v">US$40.53</div><div class="s">市值 ~US$16.0B · 官方 394.1M 股</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">16 / 40 / 80</div><div class="s">F3 研究情景每股 · 非指引</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+1%</div><div class="s">接近公允 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 22.6×</div><div class="s">FY26 US$707.0m · EV ≈ US$17.9B</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 GAAP AI Cloud US$70.5m</span>
+      <span>★ operating ARR US$1bn（8/26 · 非 GAAP）</span>
+      <span>★ Q4 FCF ≈ −US$167m</span>
+      <span>★ 394.1M 股 · 有息負債 US$7.84B</span>
+      <span>★ 淨負債 ≈ US$1.94B（7.84 − 5.90）</span>
+    </div>
+  </section>
+  <div class="action-bar">
+    <span class="action-pill">現價相對 Base 溢價約 +1%，接近公允，唔好加倉。</span>
+  </div>
+
+  <section class="panel">
+    <h2>一句話</h2>
+    <div class="callout sans">Q4 業績同 Horizon 1 已經出完，唔好再寫成「即將公布」。未來 1–2 季真正值得盯嘅係 Horizon 2–4 喺 2026 年曆 Q4 有冇交付，同 GAAP AI 有冇跟上 US$4bn ARR。市場最易把每日 BTC 價、或者把 ARR 當成 GAAP 收入，當成可以交易嘅催化劑。</div>
+  </section>
+
+  <section class="panel">
+    <h2>核心敘事同敏感變數</h2>
+    <p>主敘事：IREN 已開始計費嘅 AI Cloud，但用稀釋同客戶預付 bridging。最敏感：Horizon 2–4 交付、下季 GAAP AI、有無再輪普通股。雜訊：單日 BTC、把 contracted／operating ARR 當成已入帳收入。</p>
+  </section>
+
+  <section class="panel">
+    <h2>事件</h2>
+    <div class="event past">
+      <div class="when">已發生<br>2026-08-27</div>
+      <div><strong>Q4 FY26／FY26 業績</strong><div class="muted">AI US$70.5m、BTC US$66.7m、總營收 US$137.2m；發股 US$2.11bn。驅動 KPI：GAAP AI、FCF、股數。已消化中，唔好再當即將公布。</div></div>
+      <span class="dir past">已發生</span>
+    </div>
+    <div class="event past">
+      <div class="when">已發生<br>2026-08-13</div>
+      <div><strong>Horizon 1 交付 Microsoft</strong><div class="muted">官方接受；operating ARR 去到 US$1bn（8/26，非 GAAP）。驅動 KPI：operating ARR。利多已部分 price in。</div></div>
+      <span class="dir past">已發生</span>
+    </div>
+    <div class="event">
+      <div class="when">2026 年曆 Q4</div>
+      <div><strong>Horizon 2–4 交付（官方目標）</strong><div class="muted">接受函／開始 bill。滑出呢個窗口超過一季，就係失效候選。驅動 KPI：operating ARR → 之後先入 GAAP AI。最高優先。</div></div>
+      <span class="dir high">高 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">2026-12-31</div>
+      <div><strong>官方 US$4bn operating ARR 目標日</strong><div class="muted">對住 contracted US$4bn。記住 ARR ≠ GAAP。驅動 KPI：operating ARR（非 GAAP）。達標都唔等於 Base FY27E 收入已入帳。</div></div>
+      <span class="dir high">高 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">FY2027-Q1 業績</div>
+      <div><strong>GAAP AI 有冇反映年底產能</strong><div class="muted">加倉閘：GAAP AI 年化佔 contracted ARR ≥ 15%（而家約 7%）。驅動 KPI：GAAP AI Cloud。產能遲上線會令收入落後一季。</div></div>
+      <span class="dir high">高 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">Early 2027</div>
+      <div><strong>NVIDIA 約 US$3.4bn ramp</strong><div class="muted">睇係咪仍講 early 2027。驅動 KPI：合約／未來 GAAP AI。偏利多但遠，近端唔好當已入帳。</div></div>
+      <span class="dir high">高 · 偏利多但遠</span>
+    </div>
+    <div class="event">
+      <div class="when">持續</div>
+      <div><strong>再融資／ATM／可轉債</strong><div class="muted">單季 &gt;US$1B 普通股而 AI 停滯 → 失效，退出而唔係攤薄。驅動 KPI：股數／淨負債。偏利空。</div></div>
+      <span class="dir high">高 · 偏利空</span>
+    </div>
+    <div class="event">
+      <div class="when">持續</div>
+      <div><strong>ERCOT 大負載規則／Sweetwater、Kiowa</strong><div class="muted">2027–28 產能物理瓶頸。驅動 KPI：只影響敘事同遠期產能，近端倍數弱。收緊先偏利空。</div></div>
+      <span class="dir mid">中 · 偏利空若收緊</span>
+    </div>
+    <div class="event">
+      <div class="when">價外</div>
+      <div><strong>NVIDIA 3,000 萬股 @ US$70</strong><div class="muted">現價 US$40.53 仍價外。驅動 KPI：潛在稀釋，近端唔觸發。低重要度。</div></div>
+      <span class="dir low">低 · 仍價外</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>誤判、估值同行動</h2>
+    <div class="grid-2">
+      <div class="box warn"><h3 class="sans">市場高估（雜訊）</h3><p>每日 BTC 價；把 contracted／operating ARR 當成 GAAP 收入；把已過去嘅 Q4 print 同 Horizon 1 再講成即將催化劑；NVIDIA 價外認股權。</p></div>
+      <div class="box fail"><h3 class="sans">市場低估</h3><p>Horizon 2–4 滑期；再一次大型普通股／ATM；GAAP AI 年化仍然只有合約嘅高單位數；FCF 同有息負債對紅線。</p></div>
+      <div class="box info"><h3 class="sans">最可能上修倍數</h3><p>Horizon 2–4 按年曆 Q4 交付並開始 bill，之後 GAAP AI 爬坡。呢個先郁 F3 Base 嘅 FY2027E 收入。</p></div>
+      <div class="box warn"><h3 class="sans">最可能下修倍數</h3><p>交付滑出窗口、或單季 &gt;US$1B 普通股而 AI 停滯。Skill 6 檢查點就係呢兩條。</p></div>
+      <div class="box ok" style="grid-column:1/-1"><h3 class="sans">而家點做</h3><p>現價相對 Base 溢價約 +1%，接近公允，唔好加倉。Horizon 2–4 結果前：衛星倉續抱、唔追。加倉只喺 GAAP AI 年化 ≥15% of contracted ARR <strong>而且</strong>冇再出現單季 &gt;US$1B 普通股，或價格落入建倉區 US$22–32。下一個最大事件前唔好追高。</p></div>
+    </div>
+  </section>
+  <p class="footer">IREN：官方 Q4 FY26 8-K／10-K filing 2026-08-27，期終 2026-06-30，USD US GAAP，verified。股數 394.1M；市值 ~US$16.0B；EV ~US$17.9B；P/S 22.6×（FY26 US$707.0m）。現價 yfinance delayed 2026-08-28。Horizon 1：2026-08-13 官方。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/iren/catalyst-calendar.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

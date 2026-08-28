@@ -124,6 +124,13 @@ companies:
       - type: financial_tables
         url: https://iren.gcs-web.com/static-files/924cf03a-afc5-439b-926e-6c22feb57935
         optional: true
+    FY2026-Q4:
+      documents:
+      - type: earnings_presentation
+        url: https://iren.gcs-web.com/static-files/1ca5b6f0-4b4d-4710-a7e2-69435e112b60
+      - type: financial_tables
+        url: https://iren.gcs-web.com/static-files/1cb9f4da-d4c7-4510-8bda-e475022b59f5
+        optional: true
   NOK:
     2025-Q1:
       documents:
