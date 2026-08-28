@@ -86,7 +86,12 @@ def build_tesla_ai_report(
     transcript_section = ""
     if transcript_text and transcript_quarter and transcript_year:
         transcript = analyze_transcript(symbol, transcript_quarter, transcript_year, transcript_text)
-        prev = load_previous_analysis(symbol, output_dir)
+        prev = load_previous_analysis(
+            symbol,
+            output_dir,
+            exclude_quarter=transcript_quarter,
+            exclude_fiscal_year=transcript_year,
+        )
         diff = compare_qoq(transcript, prev)
         save_transcript_analysis(transcript, output_dir)
         transcript_section = format_transcript_summary(transcript, diff)

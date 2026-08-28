@@ -134,31 +134,76 @@ def analyze_transcript(symbol: str, quarter: str, fiscal_year: int, text: str, s
     )
 
 
-def load_previous_analysis(symbol: str, output_dir: Path) -> QuarterTranscript | None:
-    """Load previous quarter's analysis for QoQ comparison."""
+def _quarter_number(quarter: str) -> int:
+    """Parse quarter index (1–4) from labels like 'Q4' or 'Q4 2024'."""
+    match = re.search(r"Q(\d+)", quarter, re.IGNORECASE)
+    return int(match.group(1)) if match else 0
+
+
+def _transcript_sort_key(data: dict) -> tuple[int, int]:
+    """Sort key from transcript JSON: (fiscal_year, quarter_number)."""
+    fiscal_year = int(data.get("fiscal_year", 0))
+    quarter_number = _quarter_number(str(data.get("quarter", "")))
+    return (fiscal_year, quarter_number)
+
+
+def _transcript_is_excluded(
+    data: dict,
+    exclude_quarter: str | None,
+    exclude_fiscal_year: int | None,
+) -> bool:
+    if exclude_quarter is None or exclude_fiscal_year is None:
+        return False
+    if int(data.get("fiscal_year", 0)) != exclude_fiscal_year:
+        return False
+    return _quarter_number(str(data.get("quarter", ""))) == _quarter_number(exclude_quarter)
+
+
+def _transcript_from_json(data: dict) -> QuarterTranscript:
+    return QuarterTranscript(
+        symbol=data["symbol"],
+        quarter=data["quarter"],
+        fiscal_year=data["fiscal_year"],
+        date=data["date"],
+        source=data["source"],
+        raw_text=data["raw_text"],
+        keywords=[KeywordMetrics(**k) for k in data["keywords"]],
+        robotaxi_mentions=data.get("robotaxi_mentions", []),
+        fsd_mentions=data.get("fsd_mentions", []),
+        optimus_mentions=data.get("optimus_mentions", []),
+        margin_mentions=data.get("margin_mentions", []),
+        guidance_summary=data.get("guidance_summary", ""),
+    )
+
+
+def load_previous_analysis(
+    symbol: str,
+    output_dir: Path,
+    exclude_quarter: str | None = None,
+    exclude_fiscal_year: int | None = None,
+) -> QuarterTranscript | None:
+    """Load the most recent prior quarter's analysis for QoQ comparison.
+
+    Candidates are ordered by (fiscal_year, quarter_number) parsed from each
+    file's JSON, not by filename string order (which mis-orders year boundaries).
+    """
     symbol_lower = symbol.lower()
     pattern = f"{symbol_lower}_*_transcript.json"
-    files = sorted(output_dir.glob(pattern), reverse=True)
-    
-    if len(files) >= 2:
-        # Return the second most recent (previous quarter)
-        with open(files[1], encoding="utf-8") as f:
+    candidates: list[tuple[tuple[int, int], dict]] = []
+
+    for path in output_dir.glob(pattern):
+        with open(path, encoding="utf-8") as f:
             data = json.load(f)
-            return QuarterTranscript(
-                symbol=data["symbol"],
-                quarter=data["quarter"],
-                fiscal_year=data["fiscal_year"],
-                date=data["date"],
-                source=data["source"],
-                raw_text=data["raw_text"],
-                keywords=[KeywordMetrics(**k) for k in data["keywords"]],
-                robotaxi_mentions=data.get("robotaxi_mentions", []),
-                fsd_mentions=data.get("fsd_mentions", []),
-                optimus_mentions=data.get("optimus_mentions", []),
-                margin_mentions=data.get("margin_mentions", []),
-                guidance_summary=data.get("guidance_summary", "")
-            )
-    return None
+        if _transcript_is_excluded(data, exclude_quarter, exclude_fiscal_year):
+            continue
+        candidates.append((_transcript_sort_key(data), data))
+
+    if not candidates:
+        return None
+
+    candidates.sort(key=lambda item: item[0])
+    _, latest_data = candidates[-1]
+    return _transcript_from_json(latest_data)
 
 
 @dataclass
