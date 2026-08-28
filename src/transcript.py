@@ -192,8 +192,11 @@ def load_previous_analysis(
     candidates: list[tuple[tuple[int, int], dict]] = []
 
     for path in output_dir.glob(pattern):
-        with open(path, encoding="utf-8") as f:
-            data = json.load(f)
+        try:
+            with open(path, encoding="utf-8") as f:
+                data = json.load(f)
+        except (OSError, json.JSONDecodeError):
+            continue
         if _transcript_is_excluded(data, exclude_quarter, exclude_fiscal_year):
             continue
         candidates.append((_transcript_sort_key(data), data))

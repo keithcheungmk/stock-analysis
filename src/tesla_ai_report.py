@@ -134,7 +134,7 @@ def build_tesla_ai_report(
         f"**EPS 爆發壓力:** {eps_status}",
         "",
         f"- 定義: 單季 EPS vs consensus > 15% beat",
-        f"- 最新: Q{explosion_status.last_quarter or 'N/A'} actual ${explosion_status.last_actual_eps or 'N/A'} vs consensus ${explosion_status.last_consensus_eps or 'N/A'}" if explosion_status.last_quarter else "- 最新數據: 從 yfinance 取得",
+        f"- 最新: {explosion_status.last_quarter or 'N/A'} actual ${explosion_status.last_actual_eps or 'N/A'} vs consensus ${explosion_status.last_consensus_eps or 'N/A'}" if explosion_status.last_quarter else "- 最新數據: 從 yfinance 取得",
         "",
         f"**股價爆發壓力:** {price_status}",
         "",
