@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MRVL Catalyst Calendar</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero-main{background:linear-gradient(135deg,#3730a3,#4338ca 58%,#312e81);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .timeline{display:grid;gap:10px}
+  .event{display:grid;grid-template-columns:130px 1fr;gap:14px;border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  @media(max-width:700px){.event{grid-template-columns:1fr}}
+  .event.high{border-left-color:var(--fail)}
+  .event.mid{border-left-color:var(--watch)}
+  .event.low{border-left-color:#a8a29e}
+  .event .date{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;color:var(--ink)}
+  .event .tag{display:inline-block;font-size:.7rem;font-weight:800;border-radius:999px;padding:2px 8px;margin-top:4px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .tag.high{background:var(--fail-soft);color:var(--fail)}
+  .tag.mid{background:var(--watch-soft);color:var(--watch)}
+  .tag.low{background:#f1f5f9;color:#64748b}
+  .event h3{margin:0 0 4px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="hero-main">
+    <h1>MRVL Catalyst Calendar</h1>
+    <p>未來 1–2 季真正值得盯：FY2027-Q2 10-Q 同 Investor Day（2026-10-06）會唔會拆細「Google custom 收入已入帳幾多」。</p>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>Catalyst 時間線</h2>
+      <div class="timeline">
+        <div class="event mid"><div><div class="date">約 2026-08-29</div><span class="tag mid">高重要度</span></div><div><h3>FY2027-Q2 Form 10-Q 申報</h3><p class="muted">現金／債務明細、優先股／warrant 會計處理；睇 Google warrant 喺財報附註點樣入賬。</p></div></div>
+        <div class="event mid"><div><div class="date">2026-09-02</div><span class="tag mid">中重要度</span></div><div><h3>AVGO Q3 FY2026 財報（同業 read-through）</h3><p class="muted">AVGO guide AI 半導體 +200% YoY 至 US$16.0B；留意客戶名單有冇同 MRVL 重疊，唔可直接等同 MRVL 利好。</p></div></div>
+        <div class="event high"><div><div class="date">2026-10-06</div><span class="tag high">最高重要度</span></div><div><h3>MRVL Investor Day</h3><p class="muted">管理層或首次拆細披露 custom／Google 已入帳收入；有冇更新 FY2027／FY2028 美元指引。</p></div></div>
+        <div class="event mid"><div><div class="date">約 2026-11 中</div><span class="tag mid">中重要度</span></div><div><h3>NVDA 財報（同業 read-through）</h3><p class="muted">AI 基建整體資本開支訊號，間接反映客戶（如 Google）分配資本開支意欲。</p></div></div>
+        <div class="event high"><div><div class="date">約 2026-12 初</div><span class="tag high">最高重要度</span></div><div><h3>FY2027-Q3 財報</h3><p class="muted">指引中位 US$3,150m ±5%；睇 Data Center 增速有冇維持/加速 +46%，FCF 有冇連續正，管理層有冇首提 Google custom 具體金額。</p></div></div>
+        <div class="event low"><div><div class="date">持續</div><span class="tag low">低重要度</span></div><div><h3>Google warrant tranche 歸屬</h3><p class="muted">時間性 tranche（1,360,867 股，首年逐季）金額細，主要噪音；performance tranche（每 US$500m 收入一份）先係真正驗證訊號。</p></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>事件排序與市場誤判</h2>
+      <div class="grid-2">
+        <div class="box"><h3 class="sans">市場最可能高估</h3><p class="muted">AVGO Q3 FY2026 財報——強勁未必直接轉化做 MRVL 業績，兩者客戶結構唔完全重疊。</p></div>
+        <div class="box"><h3 class="sans">市場最可能低估</h3><p class="muted">Google warrant performance tranche 歸屬披露——冇固定日期容易被忽略，但係全組最「硬」嘅驗證訊號。</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>行動建議</h2>
+      <p class="muted">Investor Day（2026-10-06）同 Q3 財報（約 2026-12 初）之前：可分批小倉位試探，主力等 catalyst 結果，唔宜現價大幅追高。Investor Day 前不應追高；若 Q3 財報維持或高於 +46% 增速且 warrant 開始有歸屬披露 → 可考慮加碼（需先確認持倉）；若明顯 miss 指引或增速回落至 Q4 FY26 水平 → 應重新評估。</p>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>

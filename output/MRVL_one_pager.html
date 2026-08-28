@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MRVL One-Pager</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:900px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:12px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.82rem;margin-bottom:16px}
+  .hero{display:grid;grid-template-columns:200px 1fr;gap:16px}
+  @media(max-width:700px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:20px;box-shadow:var(--shadow);text-align:center}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.2rem;font-weight:800;color:var(--watch)}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 6px;font-size:1.4rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92;font-size:.92rem}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-top:14px}
+  h2{margin:0 0 12px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.88rem}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+  .kpi .l{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.72rem}
+  .kpi .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.05rem;margin-top:2px}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}
+  th,td{text-align:left;padding:6px;border-bottom:1px solid var(--line)}
+  .timeline-mini{display:grid;gap:8px;margin-top:8px}
+  .ev-mini{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;font-size:.85rem}
+  .footer{margin-top:16px;color:var(--muted);font-size:.8rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">格式偏離說明：One-pager skill 建議主交付係 Cursor Canvas PPT（4 頁翻頁投影片），Cowork 呢個 session 冇 Cursor canvas 工具鏈，改用呢頁 4 段式互動 HTML 摘要代替，內容同 <code>output/MRVL_2026-08-28_one_pager.md</code> 一致。</div>
+
+  <section class="hero">
+    <div class="score-box"><div class="sans" style="font-size:.78rem;color:var(--watch);font-weight:700">STATUS</div><div class="score-num">WATCH</div><div class="muted">65 / 130</div></div>
+    <div class="hero-main">
+      <h1>MRVL One-Pager</h1>
+      <p>現價 US$241.45 vs Base US$271（-11.0%）· Bear US$197／Bull US$359 · 持倉未確認 · 數據截至 2026-08-28</p>
+    </div>
+  </section>
+
+  <div class="panel">
+    <h2>1 · 結論</h2>
+    <p class="muted"><strong>僅觀察，唔好加倉</strong>（第一句已引用 -11.0% 折讓）。Data Center 分部已入帳收入連續五季雙位數以上增長，Q2 FY27 加速到 +46% YoY，係已驗證嘅核心增長引擎。Google TPU-attach warrant 代表客戶深度真實，但完全 performance-based，五季窗口內未有已入帳數字支持，屬未驗證嘅第二增長曲線。資產負債表紀律未完全對得住增長速度：現金仍低過總債（缺口 US$1,030.1m），diluted 股數兩季內 +3.1%。現價對 Base 只有 -11.0% 折讓，唔算特別平，值博率中性。</p>
+  </div>
+
+  <div class="panel">
+    <h2>2 · 事實</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="l">總營收</div><div class="v">US$2.739B（+37%）</div></div>
+      <div class="kpi"><div class="l">Data Center</div><div class="v">US$2.172B（+46%）</div></div>
+      <div class="kpi"><div class="l">官方 FCF</div><div class="v">US$478.8m</div></div>
+      <div class="kpi"><div class="l">有息債務缺口</div><div class="v">-US$1.03B</div></div>
+      <div class="kpi"><div class="l">PEG</div><div class="v">1.45</div></div>
+      <div class="kpi"><div class="l">Google warrant</div><div class="v">58.97m 股 @ US$206.58</div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>3 · 估值（引用 Framework 3）</h2>
+    <table>
+      <thead><tr><th>情景</th><th>目標價</th><th>vs 現價</th></tr></thead>
+      <tbody>
+        <tr><td>Bear</td><td>US$197</td><td>-18.4%</td></tr>
+        <tr><td>Base</td><td>US$271</td><td>+12.2%</td></tr>
+        <tr><td>Bull</td><td>US$359</td><td>+48.6%</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin-top:6px">主估值方法：EV／Sales（遠期，FY2027 自行外推營收）；詳見 Framework 3 頁。</p>
+  </div>
+
+  <div class="panel">
+    <h2>4 · 催化劑（1–2 季）</h2>
+    <div class="timeline-mini">
+      <div class="ev-mini"><strong>2026-09-02</strong> — AVGO Q3 FY2026 財報（同業 read-through）</div>
+      <div class="ev-mini"><strong>2026-10-06</strong> — MRVL Investor Day（最高重要度）</div>
+      <div class="ev-mini"><strong>約 2026-12 初</strong> — FY2027-Q3 財報（指引中位 US$3,150m ±5%）</div>
+    </div>
+    <p class="muted" style="margin-top:8px"><strong>失效：</strong>官方 FCF 連續兩季轉負，或 Q3 FY27 Data Center 增速回落至 +21% 以下。</p>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>

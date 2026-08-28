@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MRVL Framework 3 估值模型</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#f0fdf4,#dcfce7 70%,#bbf7d0);border:1px solid #86efac;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--pass);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.4rem;font-weight:800;line-height:1.1;color:var(--pass);margin:8px 0 0}
+  .score-den{font-size:1.0rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#064e3b,#0f766e 58%,#065f46);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .price-scale{position:relative;height:64px;margin:18px 0 8px;background:linear-gradient(90deg,#fee2e2,#ffedd5 33%,#dcfce7 66%,#dbeafe);border-radius:14px}
+  .price-scale .marker{position:absolute;top:-8px;transform:translateX(-50%);text-align:center;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .price-scale .marker .dot{width:14px;height:14px;border-radius:999px;background:#1c1917;margin:0 auto 4px;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+  .price-scale .marker .lbl{font-size:.72rem;font-weight:800;white-space:nowrap}
+  .price-scale .marker .val{font-size:.78rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 3</div>
+      <div class="score-num">合理偏低估</div>
+      <div class="score-den">Base US$271 · 現價折讓 -11.0%</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge" style="background:var(--pass-soft);color:var(--pass);border:0">小倉位試探性建倉</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>MRVL · Framework 3 估值模型與倉位策略</h1>
+      <p>主估值方法：EV／Sales（遠期，FY2027 自行外推營收）· 輔助：PEG／FCF yield · 數據截至 2026-08-28</p>
+      <div class="badges">
+        <span class="badge">現價 US$241.45</span>
+        <span class="badge">Base US$271</span>
+        <span class="badge">Bear US$197 · Bull US$359</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi red"><div class="label">Bear</div><div class="value">US$197</div><div class="note">-18.4% vs 現價</div></div>
+    <div class="kpi teal"><div class="label">Base</div><div class="value">US$271</div><div class="note">+12.2% vs 現價</div></div>
+    <div class="kpi green"><div class="label">Bull</div><div class="value">US$359</div><div class="note">+48.6% vs 現價</div></div>
+    <div class="kpi orange"><div class="label">Reward／Risk</div><div class="value">~2.6×</div><div class="note">Bull 上行 ÷ Bear 下行</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>估值前提</h2>
+      <div class="callout info verdict">
+        <p>MRVL 屬「轉折期資產」——Data Center 分部已入帳收入連續五季雙位數以上增長（Q2 FY27 +46% YoY），商業質量最強嘅地方係 custom silicon／TPU-attach 護城河；最大風險係資產負債表槓桿（現金仍低過總債 US$1.03B）同稀釋速度快過 FCF 累積。估值最敏感嘅變數係營收增速能否喺 H2 FY27 兌現管理層「顯著加速」嘅前瞻句，其次係 diluted 股數擴張點樣拖累每股價值。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>估值方法選擇</h2>
+      <div class="grid-3">
+        <div class="box" style="border-top:4px solid var(--pass)"><h3>主方法</h3><p class="muted">EV／Sales（遠期，混合 FY2027 自行外推營收）——公司未穩定 GAAP 盈利，半導體同業亦慣用 P/S／EV/Sales 做主要語言。</p></div>
+        <div class="box" style="border-top:4px solid var(--teal)"><h3>輔助驗證</h3><p class="muted">PEG（1.45，對 AVGO 0.40／NVDA 0.59 仍貴）+ FCF yield（H1 年化約 0.9%）。</p></div>
+        <div class="box" style="border-top:4px solid var(--fail)"><h3>不採用</h3><p class="muted">Trailing／Forward P/E（GAAP 淨利五季大幅波動）；純 DCF（custom silicon 業務仍處敘事轉化早期，只作方向性交叉檢查）。</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Bull / Base / Bear 情景表</h2>
+      <table>
+        <thead><tr><th>情景</th><th>核心經營假設</th><th>估值方法</th><th>倍數／參數</th><th>目標價</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Bear</strong></td><td>H2 FY27 custom／Google 敘事未兌現；FY2027 營收自行外推 ~US$10.5B</td><td>EV/Sales</td><td>17×</td><td><strong>US$197</strong></td></tr>
+          <tr><td><strong>Base</strong></td><td>Q3 FY27 兌現指引中位 US$3.15B；FY2027 營收自行外推 ~US$11.8B（+44%）</td><td>EV/Sales</td><td>21×</td><td><strong>US$271</strong></td></tr>
+          <tr><td><strong>Bull</strong></td><td>H2 custom／Google 顯著加速兌現；FY2027 營收自行外推 ~US$13.0B（+59%）</td><td>EV/Sales</td><td>26×</td><td><strong>US$359</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:8px"><strong>方法論標示：</strong>公司未披露 FY2027 全年美元指引，以上全年營收數字係本模型自行外推（H1 實際 US$5,157.1m ＋ Q3 指引中位 US$3,150m ＋ Q4 按情景外推），唔係官方指引。淨債（現金 US$3,932.8m − 有息債務 US$4,962.9m = -US$1,030.1m）三個情景一致扣除。</p>
+      <div class="price-scale">
+        <div class="marker" style="left:8%"><div class="dot"></div><div class="lbl">Bear</div><div class="val">US$197</div></div>
+        <div class="marker" style="left:42%"><div class="dot" style="background:#0f766e"></div><div class="lbl">現價</div><div class="val">US$241.45</div></div>
+        <div class="marker" style="left:58%"><div class="dot"></div><div class="lbl">Base</div><div class="val">US$271</div></div>
+        <div class="marker" style="left:92%"><div class="dot"></div><div class="lbl">Bull</div><div class="val">US$359</div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>市場隱含預期</h2>
+      <p class="muted">現價 US$241.45 對應官方 TTM 營收 US$9.45B → P/S 23.0×，同 AVGO（23.4×）非常接近，貴過 AMD（18.8×）約 22%。PEG（yfinance）1.45，貴過 AVGO 0.40／NVDA 0.59。現價反推：市場隱含大約已經 price in 接近 Base case 嘅營收路徑，但未完全 price in Bull case 嗰種 H2 顯著加速兌現。市場現價界乎 Base 同 Bear 之間，未算過度樂觀，但都未見明顯「平買」嘅折讓空間。</p>
+    </section>
+
+    <section class="panel">
+      <h2>倉位與價格策略</h2>
+      <div class="grid-2">
+        <div class="box">
+          <h3>建倉區間 & 分批</h3>
+          <p class="muted">US$215–230（貼近 Bear／現價之間）；分 2–3 批，首批現價附近小倉位試探，加碼留返俾 Q3 FY27 財報確認 custom 收入入帳後。</p>
+        </div>
+        <div class="box">
+          <h3>加倉條件 & 止賺</h3>
+          <p class="muted">加倉：DC／custom 增速持平或高於 +46%、現金缺口收窄、股數擴張放緩。止賺：接近或超過 Bull US$359 分批獲利了結。</p>
+        </div>
+      </div>
+      <div class="callout info" style="margin-top:14px">
+        <strong>Thesis invalidation：</strong>官方 FCF 連續兩季轉負，或 Q3／Q4 FY27 Data Center 增速回落至 +21% 以下，或現金對債缺口進一步擴闊。
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>顧問下一步建議</h2>
+      <p class="muted"><strong>可小倉位試探性建倉，主力等待更好價格或 Q3 FY27 custom 收入實質驗證，唔建議現價大幅加碼。</strong>最可能改變估值中樞嘅即將 catalyst：2026-10-06 Investor Day 同 FY2027-Q3 財報（約 2026-12 初）。</p>
+    </section>
+  </div>
+
+  <p class="footer">估值倍數同業參考：AVGO 23.4×、NVDA 21.7×、AMD 18.8×（yfinance TTM P/S，2026-08-28）。FY2027 營收情景屬本模型自行外推，非官方指引。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>
