@@ -1,0 +1,20 @@
+as_of: "2026-08-27T11:30:00+08:00"
+sec:
+  submissions_url: "https://data.sec.gov/submissions/CIK{cik}.json"
+  archives_base: "https://www.sec.gov/Archives/edgar/data"
+  requests_per_second: 2
+
+companies:
+  NVDA:
+    name: NVIDIA Corporation
+    cik: "0001045810"
+    ir_url: "https://nvidianews.nvidia.com/news/releases"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: FY2026-Q1, period_end: "2025-04-27", release_date: "2025-05-28"}
+      - {label: FY2026-Q2, period_end: "2025-07-27", release_date: "2025-08-27"}
+      - {label: FY2026-Q3, period_end: "2025-10-26", release_date: "2025-11-19"}
+      - {label: FY2026-Q4, period_end: "2026-01-25", release_date: "2026-02-25"}
+      - {label: FY2027-Q1, period_end: "2026-04-26", release_date: "2026-05-20"}
+      - {label: FY2027-Q2, period_end: "2026-07-26", release_date: "2026-08-26"}
