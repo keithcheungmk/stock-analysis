@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-28T15:30:00+08:00",
+  "generated_at": "2026-08-28T07:30:18.594596+00:00",
+  "companies": {
+    "MRVL": {
+      "name": "Marvell Technology, Inc.",
+      "cik": "0001835632",
+      "ir_url": "https://investor.marvell.com/",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "FY2026-Q1",
+          "period_end": "2025-05-03",
+          "release_date": "2025-05-29",
+          "filings": [
+            {
+              "accession_number": "0001835632-25-000115",
+              "form": "8-K",
+              "filing_date": "2025-05-29",
+              "report_date": "2025-05-29",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000115/0001835632-25-000115-index.html",
+              "documents": [
+                {
+                  "description": "FORM 8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000115/mrvl-20250529.htm",
+                  "name": "mrvl-20250529.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EXHIBIT 99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000115/q126_8kx532025ex-991.htm",
+                  "name": "q126_8kx532025ex-991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001835632-25-000117",
+              "form": "10-Q",
+              "filing_date": "2025-05-30",
+              "report_date": "2025-05-03",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000117/0001835632-25-000117-index.html",
+              "documents": [
+                {
+                  "description": "FORM 10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000117/mrvl-20250503.htm",
+                  "name": "mrvl-20250503.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investor.marvell.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2026-Q2",
+          "period_end": "2025-08-02",
+          "release_date": "2025-08-28",
+          "filings": [
+            {
+              "accession_number": "0001835632-25-000187",
+              "form": "8-K",
+              "filing_date": "2025-08-28",
+              "report_date": "2025-08-28",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000187/0001835632-25-000187-index.html",
+              "documents": [
+                {
+                  "description": "FORM 8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000187/mrvl-20250828.htm",
+                  "name": "mrvl-20250828.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EXHIBIT 99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000187/q226_8kx822025ex-991.htm",
+                  "name": "q226_8kx822025ex-991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001835632-25-000189",
+              "form": "10-Q",
+              "filing_date": "2025-08-29",
+              "report_date": "2025-08-02",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000189/0001835632-25-000189-index.html",
+              "documents": [
+                {
+                  "description": "FORM 10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000189/mrvl-20250802.htm",
+                  "name": "mrvl-20250802.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_eac9f0b88f7114d6778a284aa60d5990/marvell/db/3734/35391/presentation/2026_08_27_Marvell_Q2_FY27_financial_business_results_FINAL+%281%29.pdf",
+              "name": "2026_08_27_Marvell_Q2_FY27_financial_business_results_FINAL+%281%29.pdf",
+              "description": "Financial and Business Results PDF",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_87851a5f9e6c66e45b32635dc38b9874/marvell/db/3734/35391/presentation/2026_08_27_Marvell_Q2_FY27_financial_business_results_FINAL+%281%29.pdf",
+              "name": "2026_08_27_Marvell_Q2_FY27_financial_business_results_FINAL+%281%29.pdf",
+              "description": "Financial and Business Results PDF",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://investor.marvell.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2026-Q3",
+          "period_end": "2025-11-01",
+          "release_date": "2025-12-02",
+          "filings": [
+            {
+              "accession_number": "0001193125-25-305289",
+              "form": "8-K",
+              "filing_date": "2025-12-02",
+              "report_date": "2025-12-02",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000119312525305289/0001193125-25-305289-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000119312525305289/d34367d8k.htm",
+                  "name": "d34367d8k.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000119312525305289/d34367dex991.htm",
+                  "name": "d34367dex991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001835632-25-000193",
+              "form": "8-K",
+              "filing_date": "2025-12-02",
+              "report_date": "2025-12-02",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000193/0001835632-25-000193-index.html",
+              "documents": [
+                {
+                  "description": "FORM 8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000193/mrvl-20251202.htm",
+                  "name": "mrvl-20251202.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EXHIBIT 99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000193/q326_8kx1112025ex-991.htm",
+                  "name": "q326_8kx1112025ex-991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001193125-25-305271",
+              "form": "8-K",
+              "filing_date": "2025-12-02",
+              "report_date": "2025-12-02",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000119312525305271/0001193125-25-305271-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000119312525305271/d81371d8k.htm",
+                  "name": "d81371d8k.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001835632-25-000197",
+              "form": "10-Q",
+              "filing_date": "2025-12-03",
+              "report_date": "2025-11-01",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000197/0001835632-25-000197-index.html",
+              "documents": [
+                {
+                  "description": "FORM 10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563225000197/mrvl-20251101.htm",
+                  "name": "mrvl-20251101.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investor.marvell.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2026-Q4",
+          "period_end": "2026-01-31",
+          "release_date": "2026-03-05",
+          "filings": [
+            {
+              "accession_number": "0001835632-26-000006",
+              "form": "8-K",
+              "filing_date": "2026-03-05",
+              "report_date": "2026-03-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000006/0001835632-26-000006-index.html",
+              "documents": [
+                {
+                  "description": "FORM 8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000006/mrvl-20260305.htm",
+                  "name": "mrvl-20260305.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EXHIBIT 99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000006/q426_8kx1312026ex-991.htm",
+                  "name": "q426_8kx1312026ex-991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001835632-26-000011",
+              "form": "10-K",
+              "filing_date": "2026-03-11",
+              "report_date": "2026-01-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000011/0001835632-26-000011-index.html",
+              "documents": [
+                {
+                  "description": "FORM 10-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000011/mrvl-20260131.htm",
+                  "name": "mrvl-20260131.htm",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investor.marvell.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2027-Q1",
+          "period_end": "2026-05-02",
+          "release_date": "2026-05-27",
+          "filings": [
+            {
+              "accession_number": "0001835632-26-000014",
+              "form": "8-K",
+              "filing_date": "2026-05-27",
+              "report_date": "2026-05-27",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000014/0001835632-26-000014-index.html",
+              "documents": [
+                {
+                  "description": "FORM 8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000014/mrvl-20260527.htm",
+                  "name": "mrvl-20260527.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EXHIBIT 99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000014/q127_8kx522026ex-991.htm",
+                  "name": "q127_8kx522026ex-991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001835632-26-000019",
+              "form": "10-Q",
+              "filing_date": "2026-05-28",
+              "report_date": "2026-05-02",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000019/0001835632-26-000019-index.html",
+              "documents": [
+                {
+                  "description": "FORM 10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000019/mrvl-20260502.htm",
+                  "name": "mrvl-20260502.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investor.marvell.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2027-Q2",
+          "period_end": "2026-08-01",
+          "release_date": "2026-08-27",
+          "filings": [
+            {
+              "accession_number": "0001835632-26-000022",
+              "form": "8-K",
+              "filing_date": "2026-08-27",
+              "report_date": "2026-08-27",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000022/0001835632-26-000022-index.html",
+              "documents": [
+                {
+                  "description": "FORM 8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000022/mrvl-20260827.htm",
+                  "name": "mrvl-20260827.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EXHIBIT 99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000022/q227_8kx812026ex-991.htm",
+                  "name": "q227_8kx812026ex-991.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_eac9f0b88f7114d6778a284aa60d5990/marvell/db/3734/35391/presentation/2026_08_27_Marvell_Q2_FY27_financial_business_results_FINAL+%281%29.pdf",
+              "name": "2026_08_27_Marvell_Q2_FY27_financial_business_results_FINAL+%281%29.pdf",
+              "description": "Financial and Business Results PDF",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            },
+            {
+              "url": "https://d1io3yog0oux5.cloudfront.net/_87851a5f9e6c66e45b32635dc38b9874/marvell/db/3734/35391/presentation/2026_08_27_Marvell_Q2_FY27_financial_business_results_FINAL+%281%29.pdf",
+              "name": "2026_08_27_Marvell_Q2_FY27_financial_business_results_FINAL+%281%29.pdf",
+              "description": "Financial and Business Results PDF",
+              "type": "IR",
+              "document_type": "earnings_presentation"
+            }
+          ],
+          "ir_page": "https://investor.marvell.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

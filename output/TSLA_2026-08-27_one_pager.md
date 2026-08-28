@@ -1,8 +1,7 @@
 # TSLA Skill 9 Position Brief · 2026-08-27
 
 - **模式：** First（無先前 Canvas one-pager）
-- **Pages 主件：** `docs/tsla/index.html`（翻頁 Position Brief；對齊 SPCX）
-- **合成頁：** `docs/tsla/interactive-brief.html`（同一套投影片 + 外連 F1–F3／估值模型）
+- **Pages 主件：** NVDA 同級粉粒目錄（`docs/tsla/index.html`）+ `one-pager.html` 四頁翻頁 + `valuation.html` 估值卡
 - **持倉：** 未確認 → 行動只准 **僅觀察／唔好加倉**
 - **跳過：** Skill 7 期權；獨立 Skill 0（L1–L4 已摺入 F2／F3／thesis）
 
