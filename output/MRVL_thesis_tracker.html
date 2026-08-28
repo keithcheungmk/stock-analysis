@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MRVL Thesis Tracker</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.7rem;font-weight:800;line-height:1.2;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif;background:var(--watch-soft);border:1px solid #fdba74}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .pillar{border-radius:12px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--teal)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#9a3412;color:#fff;border-color:#9a3412}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Thesis Tracker</div>
+      <div class="score-num">Mixed / Needs Monitoring</div>
+    </div>
+    <div class="hero-main">
+      <h1>MRVL · Thesis Tracker</h1>
+      <p>持倉未確認 · 數據截至 2026-08-28 · 承接 F1 WATCH 65/130、F2 部分通過、F3 Base US$271（現價 -11.0%）</p>
+      <div class="badges">
+        <span class="badge">僅觀察</span>
+        <span class="badge">兩條主要裂痕未解</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>Thesis 結論</h2>
+      <div class="callout verdict">
+        <p>MRVL 核心 thesis 建基於「Data Center 已入帳增長加速」同「custom silicon／Google TPU-attach 係未來已驗證嘅第二增長曲線」兩條支柱，第一條<strong>正被持續驗證</strong>——Data Center 五季全部雙位數以上 YoY 增長，Q2 FY27 加速到 +46%；但第二條支柱<strong>仍未成立</strong>——Google warrant 完全 performance-based，簽署時間喺五季窗口之後，未有已入帳數字支持。</p>
+        <p>最大裂痕在於資產負債表：現金仍低過總債（缺口 US$1,030.1m）、diluted 股數兩季內由 893.3m 升到 921m（guidance，+3.1%），顯示擴張部分靠槓桿同股本融資。對行動嘅含義：現價對 F3 Base 只有 -11.0% 折讓（唔算好平），支持「僅觀察，唔好加倉」而非任何積極買賣動作。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>原始 thesis 重建（3 條支柱）</h2>
+      <div class="sections" style="margin-top:0">
+        <div class="pillar"><h3>1. AI 基建 custom silicon 需求爆發</h3><p class="muted">對應 KPI：Data Center 分部已入帳營收增速（估值驅動）</p></div>
+        <div class="pillar"><h3>2. Google TPU-attach 第二增長曲線</h3><p class="muted">對應 KPI：Google warrant performance tranche 歸屬進度（估值驅動）</p></div>
+        <div class="pillar"><h3>3. 業務擴張同時保持財務紀律</h3><p class="muted">對應 KPI：現金對有息債務缺口、diluted 股數變化（估值驅動）</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>最新證據</h2>
+      <div class="filters sans" id="filters">
+        <button class="active" data-f="all">全部</button>
+        <button data-f="support">支持</button>
+        <button data-f="neutral">中性</button>
+        <button data-f="weaken">削弱</button>
+      </div>
+      <div class="ev-grid" id="evidence"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Thesis 狀態判斷</h2>
+      <div class="grid-2">
+        <div class="box" style="border-top:4px solid var(--pass)"><h3>最強支持</h3><p class="muted">Data Center 已入帳營收連續加速，Q2 FY27 +46% YoY 係五季新高。</p></div>
+        <div class="box" style="border-top:4px solid var(--fail)"><h3>最大裂痕</h3><p class="muted">支柱 2（Google custom 收入）完全未有已入帳驗證，同時支柱 3（財務紀律）槓桿同稀釋同步跳升。</p></div>
+      </div>
+      <p class="muted" style="margin-top:10px">裂痕性質：屬<strong>執行延後</strong>（warrant 剛簽）加<strong>階段性壓力</strong>（併購驅動槓桿跳升），暫未見結構性惡化證據；若 Q3／Q4 FY27 續一步惡化，要重新評級做 Weakening。</p>
+    </section>
+
+    <section class="panel">
+      <h2>投資行動</h2>
+      <p class="muted"><strong>僅觀察（未有持倉確認，唔提供加倉／減倉指令）。</strong>下一個必盯 checkpoint：FY2027-Q3 財報（約 2026-12 初）嘅 Data Center 增速同 Investor Day（2026-10-06）有冇拆細披露 custom／Google 收入。</p>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const evidence=[
+{k:"support",type:"KPI",title:"Data Center 營收 US$2,171.5m，+46% YoY",body:"五季由 +69%／+38%／+21%／+27%／+46%，Q4 FY26 見底後連續兩季回升，Q2 FY27 係五季新高，代表加速唔係單季波動，方向對支柱 1；但基數效應都要計落去。"},
+{k:"neutral",type:"協議",title:"Google warrant：58,970,907 股 @ US$206.58，performance tranche 每 US$500m 收入一份",body:"證明 Google 客戶深度真實存在，但完全未觸發任何已入帳收入驗證——簽署本身唔等於收入，要睇之後幾季有冇歸屬披露先算支持。"},
+{k:"support",type:"現金流",title:"官方 FCF 五季全部為正",body:"US$414.1m／US$508.8m／US$259.4m／US$483.1m／US$478.8m，冇一季轉負，支持支柱 3 下半；但金額波動、Q4 FY26 明顯回落，只可打「部分支持」。"},
+{k:"weaken",type:"資本結構",title:"現金 US$3,932.8m vs 有息債務 US$4,962.9m，缺口 US$1,030.1m",body:"長債 Q4 FY26→Q1 FY27 一次過跳升 US$990.5m，明顯由 Celestial AI／XConn 收購驅動而非經營自然累積，削弱支柱 3。"},
+{k:"weaken",type:"股權結構",title:"Diluted 股數 893.3m → 921m（guidance，+3.1%）",body:"兩季內加權股數已見明顯上升，未計入 Google warrant 潛在稀釋（最多約 +6.6%），削弱支柱 3。"},
+{k:"neutral",type:"盈利能力",title:"GAAP 淨利率 1.4%（Q1 FY27）→ 11.2%（Q2 FY27）",body:"方向改善但基數波動大，Non-GAAP／GAAP 缺口持續（Q2 non-GAAP US$865.9m vs GAAP US$308.0m），未可當盈利質量已穩定嘅證據。"},
+{k:"neutral",type:"事件",title:"Investor Day 官方確認 2026-10-06",body:"未發生，係首個可能拆細披露 custom／Google 收入嘅場合，值得標記為下一個檢查點。"},
+];
+const evRoot=document.getElementById('evidence');
+function render(filter){
+  evRoot.innerHTML=evidence.filter(e=>filter==='all'||e.k===filter).map(e=>`
+  <article class="ev ${e.k}"><div class="type">${e.type}<span class="impact ${e.k}">${e.k==='support'?'支持':e.k==='weaken'?'削弱':'中性'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+});
+</script>
+</body>
+</html>

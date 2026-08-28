@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MRVL 互動估值模型</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:900px;margin:0 auto;padding:28px 18px 72px}
+  .hero-main{background:linear-gradient(135deg,#064e3b,#0f766e 58%,#065f46);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.6rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 14px;font-size:1.1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .presets{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .presets button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer}
+  .presets button.bear{color:var(--fail)}.presets button.base{color:var(--teal)}.presets button.bull{color:var(--pass)}
+  .presets button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .slider-row{margin-bottom:20px}
+  .slider-row label{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;font-size:.88rem;display:flex;justify-content:space-between}
+  .slider-row input[type=range]{width:100%;margin-top:8px}
+  .result{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;text-align:center}
+  .result .price{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.6rem;font-weight:800;color:var(--teal)}
+  .result .delta{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;margin-top:4px}
+  .result .delta.up{color:var(--pass)}.result .delta.down{color:var(--fail)}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+  @media(max-width:700px){.grid-3{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="hero-main">
+    <h1>MRVL · 互動估值模型</h1>
+    <p>拖動滑桿調整 FY2027 自行外推營收同 EV／Sales 倍數，即時重算隱含股價。三個預設情景對應 Framework 3 嘅 Bear／Base／Bull。</p>
+  </div>
+
+  <div class="panel">
+    <h2>官方錨點</h2>
+    <div class="grid-3">
+      <div class="box"><div class="muted">現價（2026-08-28）</div><div class="sans" style="font-weight:800;font-size:1.2rem">US$241.45</div></div>
+      <div class="box"><div class="muted">H1 FY27 實際營收</div><div class="sans" style="font-weight:800;font-size:1.2rem">US$5,157.1m</div></div>
+      <div class="box"><div class="muted">淨債（現金−有息債務）</div><div class="sans" style="font-weight:800;font-size:1.2rem">-US$1,030.1m</div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>可調滑桿</h2>
+    <div class="presets sans">
+      <button class="bear" data-p="bear">Bear（US$197）</button>
+      <button class="base active" data-p="base">Base（US$271）</button>
+      <button class="bull" data-p="bull">Bull（US$359）</button>
+    </div>
+    <div class="slider-row sans">
+      <label>FY2027 自行外推營收 <span id="rev-val">US$11.8B</span></label>
+      <input type="range" id="rev" min="9.5" max="14" step="0.1" value="11.8" />
+      <div class="muted">官方冇披露全年美元指引；H1 實際 US$5.16B ＋ Q3 指引中位 US$3.15B ＋ Q4 情景外推。</div>
+    </div>
+    <div class="slider-row sans">
+      <label>EV／Sales 倍數 <span id="mult-val">21.0×</span></label>
+      <input type="range" id="mult" min="15" max="28" step="0.5" value="21" />
+      <div class="muted">參考同業 TTM P/S：AMD 18.8× · AVGO 23.4× · NVDA 21.7×</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>重算 vs 現價</h2>
+    <div class="result">
+      <div class="price" id="out-price">US$271</div>
+      <div class="delta up" id="out-delta">+12.2% vs 現價 US$241.45</div>
+      <div class="muted" style="margin-top:10px" id="out-detail">股數基準 ~898.7m（現時基準，未計 Google warrant 完全歸屬情境）</div>
+    </div>
+  </div>
+
+  <p class="footer">股數基準沿用現時 ~898.7m（US$217.0B 市值 ÷ US$241.45）；淨債固定扣除 US$1,030.1m。呢個係研究用簡化模型，唔係精確 target price——詳細假設同方法論見 <code>output/MRVL_2026-08-28_framework3.md</code>。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const SHARES = 898.7; // million
+const NET_DEBT = 1030.1; // million, subtracted
+const CURRENT = 241.45;
+const presets = {
+  bear: {rev:10.5, mult:17},
+  base: {rev:11.8, mult:21},
+  bull: {rev:13.0, mult:26},
+};
+const revEl = document.getElementById('rev');
+const multEl = document.getElementById('mult');
+const revVal = document.getElementById('rev-val');
+const multVal = document.getElementById('mult-val');
+const outPrice = document.getElementById('out-price');
+const outDelta = document.getElementById('out-delta');
+
+function recalc(){
+  const rev = parseFloat(revEl.value); // US$B
+  const mult = parseFloat(multEl.value);
+  revVal.textContent = 'US$' + rev.toFixed(1) + 'B';
+  multVal.textContent = mult.toFixed(1) + '×';
+  const ev = rev * 1000 * mult; // US$m
+  const equity = ev - NET_DEBT;
+  const price = equity / SHARES;
+  outPrice.textContent = 'US$' + price.toFixed(0);
+  const delta = (price - CURRENT) / CURRENT * 100;
+  outDelta.className = 'delta ' + (delta >= 0 ? 'up' : 'down');
+  outDelta.textContent = (delta >= 0 ? '+' : '') + delta.toFixed(1) + '% vs 現價 US$241.45';
+}
+revEl.addEventListener('input', () => { clearActive(); recalc(); });
+multEl.addEventListener('input', () => { clearActive(); recalc(); });
+function clearActive(){ document.querySelectorAll('.presets button').forEach(b=>b.classList.remove('active')); }
+document.querySelectorAll('.presets button').forEach(btn=>{
+  btn.addEventListener('click', () => {
+    clearActive(); btn.classList.add('active');
+    const p = presets[btn.dataset.p];
+    revEl.value = p.rev; multEl.value = p.mult;
+    recalc();
+  });
+});
+recalc();
+</script>
+</body>
+</html>
