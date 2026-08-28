@@ -2,7 +2,7 @@
 # last_updated: YYYY-MM-DD
 
 meta:
-  last_updated: "2026-08-27"
+  last_updated: "2026-08-28"
   next_earnings_estimate: "2026-10-21"  # yfinance；以 Tesla IR 為準
 
 explosion_thresholds:
@@ -63,6 +63,10 @@ layers:
       note: "官方未量化內部機器人數量"
 
 explosion_watchlist:
+  - date: "2026-09-03"
+    event: "Cybercab 發佈會（Austin／Giga Texas；Tesla X 邀請函，未入 8-K）"
+    layer: L3
+    moves: rerating
   - date: "2026-08-28"
     event: "比亞迪 H1 2026 業績（董事會批准）"
     layer: L1
@@ -72,7 +76,7 @@ explosion_watchlist:
     layer: L1
     moves: both
   - date: null
-    event: "Cybercab 車隊部署／無人駕駛覆蓋擴大（Outlook 未定量）"
+    event: "Cybercab 規模化車隊／官方英里／$/mile／入帳（發佈會之後仍要呢組數）"
     layer: L3
     moves: rerating
   - date: "2026"
@@ -81,9 +85,21 @@ explosion_watchlist:
     moves: rerating
 
 x_weekly_digest:
-  week_of: "2026-08-27"
-  items: []
-  # x_access=degraded this run
+  week_of: "2026-08-28"
+  x_access: degraded
+  items:
+    - handle: "@Tesla"
+      approx_date: "2026-08-22"
+      summary: "Exclusive Access: Cybercab 海報；Austin 2026-09-03 邀請場＋直播（經 Electrek／Teslarati／We Talk Tesla 轉述）"
+      tag: narrative
+    - handle: "@robotaxi"
+      approx_date: "2026-08-26"
+      summary: "服務改 6am–10pm、7 日；unsupervised fleet「a lot bigger」；派車／路由 intelligence（無車隊數）"
+      tag: narrative
+    - handle: "@robotaxi"
+      approx_date: "2026-08-18"
+      summary: "Ride in Robotaxi through 8/23 抽獎入 Cybercab launch；官方條款 tesla.com/event/cybercab-event-sweepstakes（本環境 403，未能直讀）"
+      tag: narrative
 
 transcript_diff:
   current_quarter: "2026-Q2"
@@ -103,8 +119,8 @@ macro_ai:
     relevance: [L2, L4]
 
 catalyst_scores:
-  eps_upside: 4          # 交付強但 EPS 大 miss、capex 壓 FCF
-  rerating_upside: 6     # Robotaxi／Cybercab／Optimus 敘事仍在
+  eps_upside: 4          # 交付強但 EPS 大 miss、capex 壓 FCF；9/3 唔改 2026 EPS
+  rerating_upside: 7     # 9/3 硬件閘已定量；規模／入帳仍未定量
   execution_risk: 7      # 利潤同 FCF 同指引節奏
-  regulatory_risk: 5     # 加州仍須安全員；FSD 標 Supervised
+  regulatory_risk: 5     # 加州仍須安全員；FSD 標 Supervised；無軚盤車要另一套認證
   peer_pressure: 6       # BYD 量、Waymo 規模

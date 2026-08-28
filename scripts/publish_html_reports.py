@@ -20,6 +20,8 @@ SKIP_OVERWRITE = {
     DOCS / "spcx" / "valuation-model.html",
     DOCS / "orcl" / "index.html",
     DOCS / "iren" / "index.html",
+    # Tesla hub 八粒掣順序已對齊 NVDA；publish 唔好用 collect_pages 重排。
+    DOCS / "tsla" / "index.html",
 }
 
 # Tesla／IREN 目錄對齊 NVDA：只露出同一套 8 頁。底稿仍留喺 output/。
