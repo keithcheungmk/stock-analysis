@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>IREN · 互動估值模型</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy:#0b1f33; --navy-2:#143049; --ink:#15202b; --muted:#5b6b7c; --line:#d7dee7;
+    --paper:#f7f9fc; --card:#fff; --teal:#0e7c66; --teal-soft:#e6f5f1;
+    --amber:#b45309; --amber-soft:#fff4e5; --red:#b42318; --blue:#1d4ed8;
+    --watch:#c2410c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Manrope,"PingFang TC",sans-serif;background:linear-gradient(180deg,#eef3f8,var(--paper) 30%);color:var(--ink);line-height:1.5;padding-bottom:48px}
+  .wrap{max-width:920px;margin:0 auto;padding:16px 14px}
+  h1{font-family:Fraunces,"Songti TC",serif;font-size:clamp(1.5rem,4.5vw,2rem);color:var(--navy);margin:0 0 6px}
+  h2{font-family:Fraunces,serif;font-size:1.15rem;color:var(--navy);margin:0 0 12px}
+  h3{margin:0 0 10px;font-size:0.88rem;color:var(--navy)}
+  .sub{color:var(--muted);font-size:0.9rem;margin-bottom:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 8px 24px rgba(11,31,51,.06)}
+  .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+  @media(min-width:640px){.kpi-grid{grid-template-columns:repeat(4,1fr)}}
+  .kpi{border:1px solid var(--line);border-radius:12px;padding:10px;border-top:3px solid var(--teal);font-size:0.78rem}
+  .kpi.warn{border-top-color:var(--amber)}
+  .kpi.bad{border-top-color:var(--red)}
+  .kpi .l{color:var(--muted);font-weight:700}.kpi .v{font-weight:800;color:var(--navy);font-size:1rem;margin-top:2px}.kpi .s{color:var(--muted);font-size:0.72rem}
+
+  .hud{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:0 8px 24px rgba(11,31,51,.06);margin-bottom:14px}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-weight:800;font-size:1.02rem;margin-top:4px;color:var(--navy)}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-size:.78rem;font-weight:700;background:var(--teal-soft);border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .hud-note{margin:8px 0 0;font-size:.82rem;color:var(--muted)}
+  .action-pill{display:inline-flex;margin-top:12px;padding:10px 16px;border-radius:999px;background:#1c1917;color:#fff;font-weight:800;font-size:.88rem}
+
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .presets button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-size:0.76rem;font-weight:700;cursor:pointer;font-family:inherit;color:var(--navy)}
+  .presets button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .ctrl{margin-bottom:14px}
+  .ctrl-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:8px;flex-wrap:wrap}
+  .ctrl-head label{font-weight:700;font-size:0.85rem;color:var(--navy)}
+  .ctrl-head output{font-weight:800;color:var(--teal);font-size:0.9rem}
+  input[type=range]{width:100%;accent-color:var(--teal)}
+  .calc-box{font-size:0.78rem;background:#fff;border:1px dashed var(--line);border-radius:10px;padding:10px;margin-top:8px;color:var(--muted)}
+  .calc-box strong{color:var(--navy)}
+  .result-hero{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+  @media(max-width:520px){.result-hero{grid-template-columns:1fr}}
+  .big{background:linear-gradient(145deg,var(--navy),var(--navy-2));color:#fff;border-radius:16px;padding:16px;text-align:center}
+  .big .l{font-size:0.72rem;opacity:.85;font-weight:700;letter-spacing:.06em}
+  .big .v{font-family:Fraunces,serif;font-size:2rem;font-weight:700;margin:4px 0}
+  .big .d{font-size:0.82rem;opacity:.9}
+  .big.warn{background:linear-gradient(145deg,#7c2d12,var(--amber))}
+  .big.good{background:linear-gradient(145deg,#065f46,var(--teal))}
+  table{width:100%;border-collapse:collapse;font-size:0.8rem;margin-top:10px}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+  th{color:var(--muted);font-weight:700}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .note{font-size:0.78rem;color:var(--muted);background:var(--amber-soft);border:1px solid #fdba74;border-radius:12px;padding:12px;margin-top:12px}
+  .warn-box{font-size:0.82rem;background:#fef2f2;border:1px solid #fca5a5;border-radius:12px;padding:12px;margin-top:12px;color:#7f1d1d}
+  .disc{font-size:0.72rem;color:var(--muted);margin-top:20px;text-align:center}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <h1>IREN 互動估值模型</h1>
+  <p class="sub">FY2027E EV/Sales − 淨負債 ÷ 攤薄股數。預設 = Framework 3 Base。FY2027E 係研究假設，<strong>唔係</strong>公司指引。唔好把 contracted ARR 當營收。</p>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +1%</span></h2>
+    <p class="hud-note">現價相對 Base 溢價約 <strong>+1%</strong>（US$40.53 vs US$40）→ 接近公允，唔好加倉。區間係 F3 研究情景，<strong>唔係</strong>公司指引。棄用 yfinance 357.4M 股同 Q3 現金／負債。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 2026-08-28）</div><div class="v">US$40.53</div><div class="s">市值 ~US$16.0B · 10-K 394,058,648 股</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">16 / 40 / 80</div><div class="s">F3 研究情景，非指引</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+1%</div><div class="s">接近公允 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 22.6×</div><div class="s">FY26 US$707.0m · EV/S 25.3× · EV ≈ US$17.9B</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 GAAP AI Cloud US$70.5m（+110% QoQ）</span>
+      <span>★ operating ARR US$1bn（2026-08-26，NON-GAAP ≠ P&amp;L）</span>
+      <span>★ Q4 研究 FCF ≈ −US$167m（OCF 1811.1 − PPE 1328.9 − 硬件 649.3）</span>
+      <span>★ Q4 發股 US$2.11bn + 可轉債 US$3.00bn</span>
+      <span>★ 淨負債 ~US$1.94B（7.84 − 5.90）</span>
+    </div>
+    <p class="hud-note">官方：8-K 0001878848-26-000051 EX-99.1 + 10-K 0001878848-26-000052 · 期末 2026-06-30 · USD US GAAP · verified。持倉 1,080 @ ~US$60，紙上虧約 32%。</p>
+    <span class="action-pill">現價相對 Base 溢價約 +1%，接近公允，唔好加倉。</span>
+  </section>
+
+  <section class="card">
+    <h2>① 官方錨點（唔好當滑桿輸入）</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="l">Q4 GAAP AI Cloud</div><div class="v">US$70.5m</div><div class="s">+110% QoQ · 已入帳</div></div>
+      <div class="kpi warn"><div class="l">Contracted ARR</div><div class="v">US$4bn</div><div class="s">NON-GAAP ≠ 營收</div></div>
+      <div class="kpi warn"><div class="l">Operating ARR</div><div class="v">US$1bn</div><div class="s">截至 2026-08-26</div></div>
+      <div class="kpi"><div class="l">現金／有息負債</div><div class="v">5.90 / 7.84</div><div class="s">US$B · 淨負債 ~1.94</div></div>
+    </div>
+    <div class="kpi-grid" style="margin-top:8px">
+      <div class="kpi"><div class="l">10-K 普通股</div><div class="v">394.1M</div><div class="s">394,058,648 · 棄用 357.4M</div></div>
+      <div class="kpi bad"><div class="l">Q4 研究 FCF</div><div class="v">−US$167m</div><div class="s">仍負 · 紅線 1 FAIL</div></div>
+      <div class="kpi bad"><div class="l">Q4 發股</div><div class="v">US$2.11bn</div><div class="s">+ 可轉債 US$3.00bn</div></div>
+      <div class="kpi"><div class="l">FY26 營收</div><div class="v">US$707.0m</div><div class="s">trailing P/S 22.6×</div></div>
+    </div>
+    <div class="warn-box">
+      <strong>警告：</strong>ARR ≠ GAAP 收入。Operating ARR 日期係 2026-08-26，唔等於 6 月 30 日損益表。FCF 仍然為負。F1 紅線 1 FAIL。滑桿嘅 FY2027E 營收係研究假設——<strong>唔好把 contracted ARR US$4bn 當成已入帳營收</strong>去估倍數。
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>② 情景滑桿（對齊 F3 表）</h2>
+    <div class="presets" id="presets">
+      <button type="button" data-p="bear">Bear US$16</button>
+      <button type="button" data-p="base" class="on">Base US$40</button>
+      <button type="button" data-p="bull">Bull US$80</button>
+    </div>
+
+    <div class="ctrl">
+      <div class="ctrl-head"><label>FY2027E 營收（US$B）</label><output id="o_rev">2.8</output></div>
+      <input type="range" id="rev" min="1.0" max="5.5" step="0.1" value="2.8" />
+    </div>
+    <div class="ctrl">
+      <div class="ctrl-head"><label>EV/S 倍數</label><output id="o_evs">7.0×</output></div>
+      <input type="range" id="evs" min="4" max="12" step="0.1" value="7" />
+    </div>
+    <div class="ctrl">
+      <div class="ctrl-head"><label>攤薄股數（百萬）</label><output id="o_sh">420</output></div>
+      <input type="range" id="sh" min="390" max="480" step="1" value="420" />
+    </div>
+    <div class="ctrl">
+      <div class="ctrl-head"><label>淨負債（US$B）</label><output id="o_nd">2.2</output></div>
+      <input type="range" id="nd" min="0" max="4" step="0.1" value="2.2" />
+    </div>
+
+    <div class="calc-box" id="calcBox"></div>
+
+    <div class="result-hero">
+      <div class="big" id="boxPx"><div class="l">模型每股</div><div class="v" id="px">—</div><div class="d" id="pxSub"></div></div>
+      <div class="big" id="boxPrem"><div class="l">現價 vs 模型</div><div class="v" id="prem">—</div><div class="d">現價 US$40.53 delayed</div></div>
+    </div>
+    <table>
+      <thead><tr><th>項目</th><th class="num">US$B</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="note">公式：權益價值 = FY2027E 營收 × EV/S − 淨負債；每股 = 權益 ÷ 攤薄股數。F3 發表價 Bear／Base／Bull = US$16／40／80（Base 公式 ≈ US$41.4 四捨五入）。預設滑桿對齊 F3 表，唔對齊 10-K 已發行 394.1M——Base 用 420M 反映預期再攤薄。</p>
+  </section>
+
+  <p class="disc">此分析僅供研究參考，不構成投資建議。研究情景倍數同 FY2027E 營收唔係公司指引。</p>
+</div>
+<script>
+const SPOT = 40.53;
+const presets = {
+  bear: {rev:1.4, evs:6, sh:450, nd:3.0},
+  base: {rev:2.8, evs:7, sh:420, nd:2.2},
+  bull: {rev:4.5, evs:8, sh:410, nd:1.5}
+};
+const ids = ["rev","evs","sh","nd"];
+function n(id){ return parseFloat(document.getElementById(id).value); }
+function fmtB(x){ return x.toFixed(1); }
+function calc(){
+  const rev = n("rev"), evs = n("evs"), sh = n("sh"), nd = n("nd");
+  document.getElementById("o_rev").textContent = fmtB(rev);
+  document.getElementById("o_evs").textContent = evs.toFixed(1) + "×";
+  document.getElementById("o_sh").textContent = sh.toFixed(0);
+  document.getElementById("o_nd").textContent = fmtB(nd);
+  const ev = rev * evs;
+  const eq = ev - nd;
+  const px = (eq * 1000) / sh;
+  const vsSpot = ((SPOT / px) - 1) * 100;
+  document.getElementById("calcBox").innerHTML =
+    `EV = ${fmtB(rev)} × ${evs.toFixed(1)} = <strong>US$${fmtB(ev)}B</strong>；權益 = ${fmtB(ev)} − ${fmtB(nd)} = <strong>US$${fmtB(eq)}B</strong>；÷ ${sh.toFixed(0)}M ≈ <strong>US$${px.toFixed(1)}</strong>`;
+  document.getElementById("px").textContent = "US$" + px.toFixed(1);
+  document.getElementById("pxSub").textContent = "權益 US$" + fmtB(eq) + "B";
+  const sign = vsSpot >= 0 ? "+" : "";
+  document.getElementById("prem").textContent = sign + vsSpot.toFixed(0) + "%";
+  const box = document.getElementById("boxPrem");
+  box.className = "big " + (vsSpot >= 15 ? "warn" : vsSpot <= -15 ? "good" : "");
+  document.getElementById("rows").innerHTML = [
+    ["FY2027E 營收（研究假設）", rev],
+    ["企業價值 EV", ev],
+    ["減：淨負債", nd],
+    ["權益價值", eq]
+  ].map(([k,v]) => `<tr><td>${k}</td><td class="num">${v.toFixed(2)}</td></tr>`).join("");
+}
+function apply(p){
+  const s = presets[p];
+  ids.forEach(id => { document.getElementById(id).value = s[id]; });
+  calc();
+}
+ids.forEach(id => document.getElementById(id).addEventListener("input", calc));
+document.getElementById("presets").addEventListener("click", e => {
+  const b = e.target.closest("button[data-p]");
+  if (!b) return;
+  document.querySelectorAll("#presets button").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  apply(b.dataset.p);
+});
+calc();
+</script>
+<section id="page-comments" data-page="/iren/valuation-model.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

@@ -191,6 +191,7 @@ def hub_html(pages: dict[str, list[dict[str, str]]]) -> str:
     extra = {
         "SPCX": [("./spcx/", "Position Brief（手機投影片）")],
         "TSLA": [("./tsla/", "Position Brief（手機投影片）")],
+        "IREN": [("./iren/interactive-brief.html", "Position Brief（手機投影片）")],
         "ORCL": [("./orcl/", "報告目錄")],
     }
     preferred = ("TSLA", "NVDA", "SPCX", "IREN", "RKLB", "RDW", "MRNA")

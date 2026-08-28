@@ -38,11 +38,7 @@
   .sans { font-family: "Avenir Next", "PingFang TC", "Noto Sans TC", sans-serif; }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 18px 80px; }
 
-  .hero {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 16px;
-  }
+  .hero { display: grid; grid-template-columns: 320px 1fr; gap: 16px; }
   @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
 
   .status-box {
@@ -75,44 +71,47 @@
     padding: 28px;
     box-shadow: var(--shadow);
   }
-  .hero-main h1 {
-    margin: 0 0 8px;
-    font-size: 1.85rem;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
+  .hero-main h1 { margin: 0 0 8px; font-size: 1.85rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
   .hero-main p { margin: 0; opacity: 0.92; }
 
   .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
   .badge {
     font-family: "Avenir Next", "PingFang TC", sans-serif;
-    display: inline-flex;
-    align-items: center;
-    padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    background: rgba(255,255,255,0.14);
-    border: 1px solid rgba(255,255,255,0.18);
+    display: inline-flex; align-items: center;
+    padding: 7px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
+    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.18);
   }
   .badge.watch { background: var(--watch-soft); color: var(--watch); border: 0; }
   .badge.pass { background: var(--pass-soft); color: var(--pass); border: 0; }
   .badge.fail { background: var(--fail-soft); color: var(--fail); border: 0; }
   .badge.ink { background: #fff; color: var(--teal-deep); border: 0; }
 
-  .kpi-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 16px;
+  .hud { margin-top: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 18px 20px; box-shadow: var(--shadow); }
+  .hud h2 { margin: 0 0 6px; font-size: 1.05rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .hud-tag { display: inline-flex; font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #9a3412; background: #ffedd5; border-radius: 999px; padding: 3px 10px; margin-left: 8px; }
+  .hud-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+  @media (max-width: 860px) { .hud-grid { grid-template-columns: repeat(2, 1fr); } }
+  .hud-cell { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: #fff; border-top: 3px solid var(--watch); }
+  .hud-cell .l { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: .72rem; color: var(--muted); font-weight: 700; }
+  .hud-cell .v { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; font-size: 1.02rem; margin-top: 4px; }
+  .hud-cell .s { color: var(--muted); font-size: .78rem; margin-top: 4px; }
+  .hud-drivers { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .hud-drivers span { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: .78rem; font-weight: 700; background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 999px; padding: 6px 10px; }
+  .hud-note { margin: 8px 0 0; font-size: .82rem; color: var(--muted); font-family: "Avenir Next", "PingFang TC", sans-serif; }
+
+  .action-bar {
+    margin-top: 12px;
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
   }
+  .action-pill {
+    display: inline-flex; padding: 10px 16px; border-radius: 999px;
+    background: #1c1917; color: #fff; font-weight: 800; font-size: 0.88rem;
+  }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
   @media (max-width: 900px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
-  .kpi {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 16px;
-    box-shadow: var(--shadow);
-  }
+  .kpi { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 16px; box-shadow: var(--shadow); }
   .kpi .label { font-family: "Avenir Next", "PingFang TC", sans-serif; color: var(--muted); font-size: 0.75rem; font-weight: 700; }
   .kpi .value { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 1.25rem; font-weight: 800; margin-top: 6px; }
   .kpi .note { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
@@ -122,275 +121,276 @@
   .kpi.teal { border-top: 4px solid var(--teal); }
 
   .sections { display: grid; gap: 16px; margin-top: 18px; }
-  .panel {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 26px;
-    padding: 24px;
-    box-shadow: var(--shadow);
-  }
-  h2 {
-    margin: 0 0 6px;
-    font-size: 1.2rem;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: 24px; box-shadow: var(--shadow); }
+  h2 { margin: 0 0 6px; font-size: 1.2rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
   .section-sub { margin: 0 0 16px; color: var(--muted); font-size: 0.92rem; }
-  h3 {
-    margin: 0 0 8px;
-    font-size: 0.98rem;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
+  h3 { margin: 0 0 8px; font-size: 0.98rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
 
   .verdict {
-    border-radius: 18px;
-    padding: 16px 18px;
+    border-radius: 18px; padding: 16px 18px;
     background: linear-gradient(90deg, #fff7ed, #ffedd5);
     border: 1px solid #fdba74;
     font-family: "Avenir Next", "PingFang TC", sans-serif;
   }
+  .verdict p { margin: 0 0 10px; }
+  .verdict p:last-child { margin-bottom: 0; }
 
-  .pillar-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
+  .pillar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
   @media (max-width: 900px) { .pillar-grid { grid-template-columns: 1fr; } }
-  .pillar {
-    border-radius: 18px;
-    padding: 16px;
-    border: 1px solid var(--line);
-    background: #fff;
-    min-height: 118px;
-  }
-  .pillar.ok {
-    border-left: 6px solid var(--pass);
-    background: linear-gradient(180deg, #f0fdf4, #fff 42%);
-  }
-  .pillar.bad {
-    border-left: 6px solid var(--fail);
-    background: linear-gradient(180deg, #fef2f2, #fff 42%);
-  }
-  .pillar .code {
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-  }
+  .pillar { border-radius: 18px; padding: 16px; border: 1px solid var(--line); background: #fff; min-height: 118px; }
+  .pillar.ok { border-left: 6px solid var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 42%); }
+  .pillar.mix { border-left: 6px solid var(--watch); background: linear-gradient(180deg, #fff7ed, #fff 42%); }
+  .pillar.bad { border-left: 6px solid var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 42%); }
+  .pillar .code { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; color: var(--muted); }
   .pillar .title { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; font-size: 1.05rem; margin-top: 4px; }
-  .pillar .kpi { border: 0; box-shadow: none; padding: 0; background: transparent; margin-top: 8px; color: var(--muted); font-size: 0.9rem; }
+  .pillar .body { color: var(--muted); font-size: 0.9rem; margin-top: 8px; }
   .pillar .state {
-    display: inline-flex;
-    margin-top: 10px;
+    display: inline-flex; margin-top: 10px;
     font-family: "Avenir Next", "PingFang TC", sans-serif;
-    font-size: 0.75rem;
-    font-weight: 800;
-    border-radius: 999px;
-    padding: 4px 10px;
+    font-size: 0.75rem; font-weight: 800; border-radius: 999px; padding: 4px 10px;
   }
   .state.up { background: var(--pass-soft); color: var(--pass); }
+  .state.mix { background: var(--watch-soft); color: var(--watch); }
   .state.down { background: var(--fail-soft); color: var(--fail); }
 
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 14px;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; font-family: "Avenir Next", "PingFang TC", sans-serif; }
   .chip {
-    border: 1px solid var(--line);
-    background: #fff;
-    border-radius: 999px;
-    padding: 7px 12px;
-    cursor: pointer;
-    font: inherit;
-    font-size: 0.8rem;
-    font-weight: 700;
+    border: 1px solid var(--line); background: #fff; border-radius: 999px;
+    padding: 7px 12px; cursor: pointer; font: inherit; font-size: 0.8rem; font-weight: 700;
   }
   .chip.on { background: #ccfbf1; border-color: #99f6e4; color: var(--teal); }
 
-  .evidence-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
+  .evidence-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
   @media (max-width: 900px) { .evidence-grid { grid-template-columns: 1fr; } }
   .ev {
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 14px 16px;
-    background: #fff;
-    border-left-width: 6px;
+    border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px;
+    background: #fff; border-left-width: 6px; min-height: 168px;
   }
   .ev.support { border-left-color: var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 38%); }
   .ev.neutral { border-left-color: #a8a29e; background: linear-gradient(180deg, #fafaf9, #fff 38%); }
   .ev.weaken { border-left-color: var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 38%); }
-  .ev-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    align-items: center;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
+  .ev-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; font-family: "Avenir Next", "PingFang TC", sans-serif; }
   .ev-type { color: var(--muted); font-size: 0.75rem; font-weight: 700; }
-  .pill {
-    border-radius: 999px;
-    padding: 3px 10px;
-    font-size: 0.72rem;
-    font-weight: 800;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
+  .pill { border-radius: 999px; padding: 3px 10px; font-size: 0.72rem; font-weight: 800; font-family: "Avenir Next", "PingFang TC", sans-serif; }
   .pill.support { background: var(--pass-soft); color: var(--pass); }
   .pill.neutral { background: #f5f5f4; color: #57534e; }
   .pill.weaken { background: var(--fail-soft); color: var(--fail); }
   .ev-title { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; margin-top: 8px; }
   .ev-note { color: var(--muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.55; }
-  .verdict p { margin: 0 0 10px; }
-  .verdict p:last-child { margin-bottom: 0; }
-  .ev { min-height: 168px; }
 
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
-  .box {
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 16px;
-    background: #fff;
-  }
+  .box { border: 1px solid var(--line); border-radius: 18px; padding: 16px; background: #fff; }
   .box.pass { border-left: 6px solid var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 40%); }
   .box.warn { border-left: 6px solid var(--watch); background: linear-gradient(180deg, #fff7ed, #fff 40%); }
   .box.fail { border-left: 6px solid var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 40%); }
   .box.info { border-left: 6px solid var(--info); background: linear-gradient(180deg, #eff6ff, #fff 40%); }
+  .box ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+  .box li { margin: 4px 0; }
 
-  .fcf-chart {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    align-items: end;
-    height: 150px;
-    margin-top: 12px;
-  }
-  .bar-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    justify-content: flex-end;
-    gap: 6px;
-  }
-  .bar {
-    width: 100%;
-    border-radius: 10px 10px 4px 4px;
-    min-height: 8px;
-    background: linear-gradient(180deg, #fb7185, #b91c1c);
-  }
-  .bar-val, .bar-label {
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-    font-size: 0.72rem;
-  }
+  .fcf-chart { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: end; height: 160px; margin-top: 12px; }
+  .bar-wrap { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; }
+  .bar { width: 100%; border-radius: 10px 10px 4px 4px; min-height: 8px; background: linear-gradient(180deg, #fb7185, #b91c1c); }
+  .bar-val, .bar-label { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.72rem; }
   .bar-val { font-weight: 800; }
   .bar-label { color: var(--muted); }
 
-  .action-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
+  .mix { display: grid; gap: 10px; margin-top: 12px; }
+  .mix-row { display: grid; grid-template-columns: 72px 1fr 88px; gap: 8px; align-items: center; }
+  .mix-track { height: 16px; background: #e7e0d5; border-radius: 999px; overflow: hidden; display: flex; }
+  .mix-ai { height: 100%; background: #0f766e; }
+  .mix-btc { height: 100%; background: #b45309; }
+  .mix-lab { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--muted); }
+  .mix-val { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.72rem; font-weight: 800; text-align: right; }
+  .legend { display: flex; gap: 14px; margin-top: 8px; font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.78rem; font-weight: 700; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; }
+  .legend .ai { background: #0f766e; }
+  .legend .btc { background: #b45309; }
+
+  .action-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   @media (max-width: 900px) { .action-grid { grid-template-columns: 1fr; } }
 
-  .footer {
-    margin-top: 18px;
-    color: var(--muted);
-    font-size: 0.82rem;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
+  .footer { margin-top: 18px; color: var(--muted); font-size: 0.82rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
 </style>
 </head>
-
 <body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
 <div class="wrap">
   <section class="hero">
     <div class="status-box">
       <div class="eyebrow">Skill 6 · Thesis Tracker</div>
       <div class="status-title">Mixed / Needs Monitoring</div>
       <div class="badges">
-        <span class="badge watch">續抱 · 唔好加倉</span>
-        <span class="badge pass">合約支柱改善</span>
-        <span class="badge fail">資金紀律削弱</span>
+        <span class="badge pass">合約已驗證</span>
+        <span class="badge watch">計費部分成立</span>
+        <span class="badge fail">FCF 未成立</span>
       </div>
-      <p class="sans" style="margin:14px 0 0;color:var(--muted);font-size:0.86rem">1,080 股 @ ~US$60 · 現價 US$44.06 delayed</p>
+      <p class="sans" style="margin:14px 0 0;color:var(--muted);font-size:0.86rem">持倉 1,080 股 @ ~US$60 · 紙上虧約 32%</p>
     </div>
     <div class="hero-main">
       <h1>IREN · 投資 Thesis 狀態報告</h1>
-      <p>IREN Limited · 2026-08-15 · FY2026-Q3 官方 8-K · F1 紅線 FAIL · F2 部分通過 · Skill 3 Base US$36</p>
+      <p>IREN Limited · 2026-08-28 · FY2026-Q4 官方 8-K／10-K · F1 紅線 FAIL · F2 計費部分通過 · F3 Base US$40</p>
       <div class="badges">
         <span class="badge ink">核心 KPI：已入帳 AI Cloud</span>
-        <span class="badge">Checkpoint：2026-08-28 Q4</span>
+        <span class="badge">Checkpoint：Horizon 2–4</span>
       </div>
     </div>
   </section>
-  <div class="kpi-row">
-    <div class="kpi pass"><div class="label">Q3 AI Cloud</div><div class="value">US$33.6M</div><div class="note">QoQ +94%</div></div>
-    <div class="kpi warn"><div class="label">已計費 / ARR</div><div class="value">~4%</div><div class="note">US$3.1bn contracted</div></div>
-    <div class="kpi fail"><div class="label">Q3 FCF</div><div class="value">−US$1.28B</div><div class="note">OCF 仍正</div></div>
-    <div class="kpi warn"><div class="label">Skill 3 Base</div><div class="value">US$36</div><div class="note">現價 US$44.06</div></div>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +1%</span></h2>
+    <p class="hud-note">現價相對 Base 溢價約 <strong>+1%</strong>（US$40.53 vs US$40）→ 接近公允，唔好加倉。區間係 F3 研究情景，<strong>唔係</strong>公司指引。棄用 yfinance 357.4M 股同 Q3 現金／負債。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 2026-08-28）</div><div class="v">US$40.53</div><div class="s">市值 ~US$16.0B · 10-K 394,058,648 股</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">16 / 40 / 80</div><div class="s">F3 研究情景，非指引</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+1%</div><div class="s">接近公允 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 22.6×</div><div class="s">FY26 US$707.0m · EV/S 25.3× · EV ≈ US$17.9B</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 GAAP AI Cloud US$70.5m（+110% QoQ）</span>
+      <span>★ operating ARR US$1bn（2026-08-26，NON-GAAP ≠ P&amp;L）</span>
+      <span>★ Q4 研究 FCF ≈ −US$167m（OCF 1811.1 − PPE 1328.9 − 硬件 649.3）</span>
+      <span>★ Q4 發股 US$2.11bn + 可轉債 US$3.00bn</span>
+      <span>★ 淨負債 ~US$1.94B（7.84 − 5.90）</span>
+    </div>
+    <p class="hud-note">官方：8-K 0001878848-26-000051 EX-99.1 + 10-K 0001878848-26-000052 · 期末 2026-06-30 · USD US GAAP · verified。</p>
+  </section>
+
+  <div class="action-bar">
+    <span class="action-pill">現價相對 Base 溢價約 +1%，接近公允，唔好加倉。</span>
   </div>
+
+  <div class="kpi-row">
+    <div class="kpi pass"><div class="label">Q4 AI Cloud</div><div class="value">US$70.5M</div><div class="note">QoQ +110% · 首次 &gt; BTC</div></div>
+    <div class="kpi warn"><div class="label">GAAP 年化 / contracted ARR</div><div class="value">~7%</div><div class="note">US$282m / US$4bn</div></div>
+    <div class="kpi fail"><div class="label">Q4 研究 FCF</div><div class="value">−US$167M</div><div class="note">OCF 幾乎係預付</div></div>
+    <div class="kpi warn"><div class="label">現價 vs 成本</div><div class="value">−32%</div><div class="note">1,080 @ ~US$60</div></div>
+  </div>
+
   <div class="sections">
     <section class="panel">
       <h2>Thesis 結論（詳細）</h2>
+      <p class="section-sub">合約已驗證 · 計費部分成立 · FCF 未成立</p>
       <div class="verdict">
-        <p>原始買入理由——IREN 擁有稀缺電力，能夠把 Bitcoin 廠改造成 Microsoft／NVIDIA 級 AI Cloud——合約支柱正在被驗證，計費支柱仍未成立。</p>
-        <p>官方 8-K 已經寫明 US$9.7bn Microsoft 同 US$3.4bn NVIDIA 合約，呢啲唔係社媒傳聞；但 Q3 已入帳 AI 收入只有 US$33.6m，大約係 US$3.1bn contracted ARR 嘅 4%，所以「雲公司」路徑仍未出現喺損益表。</p>
-        <p>最大裂痕係現金 US$2.21B 低於可轉債為主嘅有息負債約 US$3.96B，Q3 FCF 約 −US$1.28B，而且總營收因為拆礦機而打回一年前水平。</p>
-        <p>對持倉嘅含義：thesis 未壞，所以唔使因為跌穿成本就認輸清倉；但 thesis 亦未完整到值得喺 US$44（高過 Base）加倉。續抱、盯 Q4 已計費 AI 收入。</p>
+        <p>原始買入理由——IREN 擁有稀缺已接電電力，能夠把 Bitcoin 廠改造成 Microsoft／NVIDIA／frontier lab 級 AI Cloud——<strong>合約支柱已經驗證</strong>。官方 8-K 寫明 Q4 AI Cloud US$70.5m 首次超過 Bitcoin US$66.7m，Horizon 1 已交付並被 Microsoft 接受，contracted ARR 上修到 US$4bn。呢啲唔係社媒，亦唔係「只簽紙」。</p>
+        <p><strong>計費支柱喺 Q4 轉為部分成立，但仍未過關。</strong>GAAP AI 年化約 US$282m，只約佔 contracted ARR US$4bn 嘅 7%。Operating ARR US$1bn 截至 2026-08-26，係 NON-GAAP、季後日期，唔等於 6 月 30 日損益表。交付接受 ≠ 等額收入即時入帳。</p>
+        <p><strong>FCF 同盈利路徑仍未成立，呢條係最大裂痕。</strong>Q4 研究 FCF 約 −US$167m（OCF 1811.1 − PPE 1328.9 − 硬件 649.3）。OCF 幾乎全部嚟自客戶預付。當季發普通股 US$2.11bn、可轉債 US$3.00bn；無受限現金 US$5.90B 仍低於有息負債 US$7.84B。稀釋改善流動性 ≠ 經營自我融資。</p>
+        <p>對持倉：thesis 未壞，所以唔使因為跌穿成本就認輸清倉。現價相對 Base 溢價約 +1%，接近公允，<strong>唔好加倉</strong>。浮虧約 32% 係沉沒成本。盯 Horizon 2–4 同下季 GAAP AI，而唔係下一份 EPS。</p>
       </div>
     </section>
+
     <section class="panel">
       <h2>原始 thesis 四支柱</h2>
+      <p class="section-sub">左邊框顏色＝而家狀態，唔係買入當日狀態。</p>
       <div class="pillar-grid">
-        <article class="pillar ok"><div class="code">PILLAR A</div><div class="title">電力護城河</div><div class="kpi">已接電 MW、Sweetwater</div><span class="state up">改善中</span></article>
-        <article class="pillar ok"><div class="code">PILLAR B</div><div class="title">客戶質變</div><div class="kpi">MSFT／NVIDIA 官方合約</div><span class="state up">改善中</span></article>
-        <article class="pillar bad"><div class="code">PILLAR C</div><div class="title">計費規模</div><div class="kpi">已入帳 AI 收入 vs ARR</div><span class="state down">未成立</span></article>
-        <article class="pillar bad"><div class="code">PILLAR D</div><div class="title">資金紀律</div><div class="kpi">FCF、可轉債、發股</div><span class="state down">削弱中</span></article>
+        <article class="pillar ok">
+          <div class="code">PILLAR A</div>
+          <div class="title">電力／已接電</div>
+          <p class="body">已接電 MW 同 Sweetwater 仍然係稀缺瓶頸。轉 GPU 廠嘅物理前提未翻。估值驅動：上線容量，而唔係 contracted ARR。</p>
+          <span class="state up">支持</span>
+        </article>
+        <article class="pillar ok">
+          <div class="code">PILLAR B</div>
+          <div class="title">客戶質變 MSFT／NVIDIA／frontier</div>
+          <p class="body">Horizon 1 已交付 Microsoft 並被接受。NVIDIA Exemplar Cloud 同 frontier／企業客戶擴張，令「只係礦場講 AI」呢條舊質疑減弱。</p>
+          <span class="state up">支持（Horizon 1 delivered）</span>
+        </article>
+        <article class="pillar mix">
+          <div class="code">PILLAR C</div>
+          <div class="title">計費 GAAP AI</div>
+          <p class="body">Q4 US$70.5m 首次超過 mining，證明開始計費。年化約 7% of contracted ARR，距離「雲公司規模」仍然遠。過關要 GAAP run-rate 進入雙位數百分比。</p>
+          <span class="state mix">部分（年化 ~7%）</span>
+        </article>
+        <article class="pillar bad">
+          <div class="code">PILLAR D</div>
+          <div class="title">盈利／FCF</div>
+          <p class="body">Adj. EBITDA 跌到 US$19.2m；GAAP 淨虧 US$684.0m；FCF 仍負。發股＋可轉債證明自我融資未成立。紅線 1 仍然 FAIL。</p>
+          <span class="state down">削弱</span>
+        </article>
       </div>
     </section>
+
     <section class="panel">
       <h2>最新證據卡</h2>
-      <p class="section-sub">每張 2–4 句。可按影響篩選。</p>
+      <p class="section-sub">每張 2–4 句。可按影響篩選。全部一次顯示，唔用 tabs 隱藏。</p>
       <div class="filters" id="filters">
-        <button class="chip on" data-f="all">全部</button>
-        <button class="chip" data-f="support">支持</button>
-        <button class="chip" data-f="neutral">中性</button>
-        <button class="chip" data-f="weaken">削弱</button>
+        <button class="chip on" type="button" data-f="all">全部</button>
+        <button class="chip" type="button" data-f="support">支持</button>
+        <button class="chip" type="button" data-f="neutral">中性</button>
+        <button class="chip" type="button" data-f="weaken">削弱</button>
       </div>
       <div class="evidence-grid" id="evidence"></div>
     </section>
+
     <section class="panel">
-      <h2>FCF 走勢（US$ million）</h2>
+      <h2>AI vs Bitcoin 收入組合（US$ million）</h2>
+      <p class="section-sub">Q4 首次 AI 70.5 &gt; BTC 66.7。組合轉咗，headline 總營收仍然細。</p>
+      <div class="legend"><span><i class="ai"></i>AI Cloud</span><span><i class="btc"></i>Bitcoin</span></div>
+      <div class="mix" id="mixChart"></div>
+    </section>
+
+    <section class="panel">
+      <h2>FCF 走勢（研究口徑，US$ million）</h2>
+      <p class="section-sub">Q4 ≈ OCF 1,811.1 − PPE 1,328.9 − 硬件 649.3 ≈ −167。燒幅收窄，紅線未解除。</p>
       <div class="fcf-chart" id="fcfChart"></div>
     </section>
+
+    <section class="panel">
+      <h2>支持 vs 裂痕</h2>
+      <div class="split">
+        <div class="box pass">
+          <h3>正在被驗證</h3>
+          <ul>
+            <li>合約：contracted ARR US$4bn 官方上修</li>
+            <li>Horizon 1 已交付 Microsoft，第一期延期風險解除</li>
+            <li>Q4 GAAP AI US$70.5m，QoQ +110%，首次超過 mining</li>
+            <li>連續兩季 AI Cloud ≥ +50% QoQ</li>
+          </ul>
+        </div>
+        <div class="box fail">
+          <h3>最大裂痕</h3>
+          <ul>
+            <li>GAAP AI 年化只約 7% of US$4bn contracted</li>
+            <li>operating ARR US$1bn 係 NON-GAAP、8/26 季後數</li>
+            <li>FCF 仍負；OCF 幾乎係預付遞延收入</li>
+            <li>發股 US$2.11bn + 可轉債 US$3.00bn；現金 5.90B &lt; 有息 7.84B</li>
+            <li>Q4 ASIC 減值 US$450.4m；headline 營收 YoY −27%</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section class="panel">
       <h2>投資行動</h2>
       <div class="action-grid">
-        <div class="box warn"><h3>建議</h3><p><strong>續抱 · 唔好加倉</strong><br>浮虧約 27% 係沉沒成本</p></div>
-        <div class="box"><h3>Checkpoint</h3><p>2026-08-28 Q4 AI Cloud 收入同 ARR 措辭</p></div>
-        <div class="box fail"><h3>失效</h3><p>兩季 AI 停滯，或 Horizon 延期一季，或再大額發股而 GPU 未計費</p></div>
+        <div class="box warn">
+          <h3>建議</h3>
+          <p><strong>現價相對 Base 溢價約 +1%，接近公允，唔好加倉。</strong>續抱 1,080 股。浮虧約 32% 係沉沒成本，唔好攤薄。</p>
+        </div>
+        <div class="box info">
+          <h3>Checkpoint</h3>
+          <p>Horizon 2–4 年曆 Q4 2026 交付；下季 GAAP AI 有冇再翻倍；有冇再一次大型普通股融資。</p>
+        </div>
+        <div class="box fail">
+          <h3>失效</h3>
+          <p>未來兩季 AI QoQ ≤ 0%；Horizon 2–4 滑出年曆 Q4 2026 超過一個完整季度；AI 停滯期間再一次大型普通股融資。</p>
+        </div>
       </div>
     </section>
   </div>
-  <p class="footer">來源：SEC 8-K EX-99.1 2026-05-07。持倉由用戶今次確認。此分析僅供研究參考，不構成投資建議。</p>
+  <p class="footer">來源：SEC 8-K 0001878848-26-000051 EX-99.1 + 10-K 0001878848-26-000052（期末 2026-06-30，USD US GAAP，verified）。現價 yfinance delayed。持倉由用戶確認。此分析僅供研究參考，不構成投資建議。</p>
 </div>
 <script>
 const evidence = [
-  ["support","分部","AI Cloud US$7.0 → 33.6M","四個 US GAAP 季確認轉型方向。US$33.6M 仍然細，只證明方向未證明規模。過關條件係 run-rate 進入數億美元級，而唔係再簽一張新聞稿。"],
-  ["support","合約","Microsoft US$9.7bn 寫入 8-K","支柱由傳聞升到監管文件。20% 預付款同 GPU financing 降低硬件資金風險，但預付款唔等於而家嘅每股盈利。交付延誤仍可令選擇權過期。"],
-  ["support","合約","NVIDIA US$3.4bn ＋ 5GW","晶片廠願意綁 IREN 架構，係高質量背書。Ramp 目標 early 2027，對未來兩季現金幫助有限。3,000 萬股 @ US$70 現價價外。"],
-  ["weaken","財報","總營收 US$144.8M，YoY 0%","拆 ASIC 係管理層選擇，所以唔等於需求死亡；但投資人買嘅係增長股，headline 零增長會壓住倍數。若 AI 計費再慢一季，真空會被解讀成結構性。"],
-  ["weaken","現金流","Q3 FCF 約 −US$1.28B","經營現金流仍正，燒嘅係 capex，所以屬延後多過經營崩潰。但紅線已觸發，再拖兩季大規模負 FCF 加發股就會變成結構性。"],
-  ["weaken","轉型成本","ASIC 減值 US$140.4M","證明舊資產經濟壽命被策略縮短。可以係正確商業決定，但係真實財富轉移：股東為轉型預付報廢。不可當成無關非現金。"],
-  ["neutral","市場","股價 52 週高 US$76.87 → US$44","股價唔等於 thesis。回調顯示市場對計費速度重新折現，同 F2／F3 一致。唔好把跌穿成本當成失效，亦唔好當成自動加倉券。"],
-  ["neutral","同業","CRWV Q2 營收 US$2.58B","板塊故事成立。CRWV 證明 AI 雲可以有收入；亦突顯 IREN 規模差距。唔支持所有 miner 都應享 CRWV 倍數。"],
+  ["support","分部收入","Q4 GAAP AI Cloud US$70.5m，QoQ +110%","首次超過 Bitcoin US$66.7m，佔營收 51%。連續兩季翻倍，證明計費開始，唔係只簽紙。年化約 US$282m 對市值 US$16.0B 仍然細；過關要 GAAP run-rate 進入數億、再靠近 ARR。呢張卡支持支柱 C，但未等於通過。"],
+  ["support","里程碑","Horizon 1 已交付 Microsoft 並被接受","第一期延期風險解除，支柱 B 由「簡報」變成官方交付。Horizon 2–4 目標仍係 2026 年曆 Q4，仲未過關。交付接受 ≠ 等額 GAAP 收入即時入帳；Q4 印表同 Horizon 1 都已經係過去式。"],
+  ["support","經營指標","Contracted ARR US$4bn；operating ARR US$1bn（8/26）","官方上修，合約支柱已驗證。腳註寫明 ARR 非 GAAP，已確認收入可以明顯較低。Operating ARR 用季後日期、含 Horizon 1，唔好直接當 2026-06-30 損益表，亦唔好當已入帳收入去估倍數。"],
+  ["weaken","財報","總營收 US$137.2m，YoY −27%","拆 ASIC／mining 可解釋，但投資人買增長股。Headline 連續兩季低於 US$150m，會壓住 trailing P/S 22.6× 同 EV/S 25.3×。轉型成功與否，要睇 AI 爬坡快唔快過 mining 退出，而唔係總營收單季 beat。"],
+  ["weaken","現金流","Q4 研究 FCF ≈ −US$167m","口徑：OCF 1,811.1 − PPE 1,328.9 − 硬件 649.3。燒幅較 Q3 −US$1.28B 收窄，紅線 1 未解除。OCF 幾乎係客戶預付進遞延收入，唔等於已賺利潤。稀釋改善流動性 ≠ 經營自我融資；支柱 D 仍然削弱。"],
+  ["weaken","資本結構","普通股 394.1M；發股 US$2.11bn + 可轉債 US$3.00bn","10-K 封面 394,058,648 股，棄用 yfinance 357.4M。舊失效條件「&gt;US$1B 發股而 AI &lt; US$50m」未精準觸發（AI 已 70.5），但攤薄真實存在。現金 US$5.90B 仍低於有息負債 US$7.84B；成本 US$60 更難回本。"],
+  ["weaken","轉型成本","Q4 ASIC 減值 US$450.4m","全年減值 US$638.8m。持作出售公允值再跌 US$102.1m。呢啲係轉型報廢，唔好當成無關非現金。盈利路徑被減值同 SG&amp;A 跳升同時壓住，支柱 D 再削弱一格。"],
+  ["neutral","市場／估值","現價 US$40.53 vs 成本 ~US$60 vs Base US$40","現價相對 Base 溢價約 +1%，接近公允，唔係折扣。成本要靠 Bull US$80 先回本。市場把計費同稀釋對沖後定價靠近 Base。唔係自動加倉券，亦唔係 thesis broken。"]
 ];
 const label = { support: "支持", neutral: "中性", weaken: "削弱" };
 const root = document.getElementById("evidence");
@@ -410,11 +410,24 @@ document.querySelectorAll("#filters .chip").forEach((chip) => {
     render(chip.dataset.f);
   });
 });
-const fcf = [{label:"26Q1",value:-138},{label:"26Q2",value:-648},{label:"26Q3",value:-1280}];
+const fcf = [{label:"26Q1",value:-138},{label:"26Q2",value:-648},{label:"26Q3",value:-1280},{label:"26Q4",value:-167}];
 const maxAbs = Math.max(...fcf.map(d => Math.abs(d.value)));
 document.getElementById("fcfChart").innerHTML = fcf.map(d => {
-  const h = Math.round((Math.abs(d.value)/maxAbs)*110);
+  const h = Math.round((Math.abs(d.value)/maxAbs)*118);
   return `<div class="bar-wrap"><div class="bar-val">${d.value}</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${d.label}</div></div>`;
 }).join("");
+const mix = [
+  {q:"Q1", ai:7.3, btc:232.9},
+  {q:"Q2", ai:17.3, btc:167.4},
+  {q:"Q3", ai:33.6, btc:111.2},
+  {q:"Q4", ai:70.5, btc:66.7}
+];
+document.getElementById("mixChart").innerHTML = mix.map(d => {
+  const tot = d.ai + d.btc;
+  const aiPct = (d.ai / tot * 100).toFixed(1);
+  const btcPct = (d.btc / tot * 100).toFixed(1);
+  return `<div class="mix-row"><div class="mix-lab">FY26 ${d.q}</div><div class="mix-track"><span class="mix-ai" style="width:${aiPct}%"></span><span class="mix-btc" style="width:${btcPct}%"></span></div><div class="mix-val">AI ${d.ai} / BTC ${d.btc}</div></div>`;
+}).join("");
 </script>
-</body></html>
+</body>
+</html>

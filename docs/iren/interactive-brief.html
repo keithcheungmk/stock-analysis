@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<title>IREN · Position Brief · 2026-08-28</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0b1f33;
+    --navy-2: #143049;
+    --ink: #15202b;
+    --muted: #5b6b7c;
+    --line: #d7dee7;
+    --paper: #f7f9fc;
+    --card: #ffffff;
+    --teal: #0e7c66;
+    --teal-soft: #e6f5f1;
+    --amber: #b45309;
+    --amber-soft: #fff4e5;
+    --red: #b42318;
+    --red-soft: #fdecec;
+    --blue: #1d4ed8;
+    --blue-soft: #e8eefc;
+    --radius: 18px;
+    --shadow: 0 10px 30px rgba(11, 31, 51, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background:
+      linear-gradient(180deg, #eef3f8 0%, var(--paper) 28%, #f4f7fb 100%);
+    font-family: "Manrope", "PingFang TC", "Noto Sans TC", sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .shell { max-width: 980px; margin: 0 auto; padding: 18px 14px 120px; }
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    backdrop-filter: blur(14px);
+    background: rgba(247, 249, 252, 0.88);
+    border-bottom: 1px solid rgba(215, 222, 231, 0.9);
+    margin: -18px -14px 18px;
+    padding: 12px 14px;
+  }
+  .topbar-inner { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+  .brand {
+    font-weight: 800; letter-spacing: 0.04em; color: var(--navy);
+    font-size: 0.78rem; text-transform: uppercase;
+  }
+  .nav {
+    display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; padding-bottom: 2px;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex: 0 0 auto; text-decoration: none; color: var(--muted);
+    font-size: 0.74rem; font-weight: 700; padding: 8px 11px;
+    border-radius: 999px; border: 1px solid transparent; background: transparent;
+  }
+  .nav a.on, .nav a:hover {
+    color: var(--navy); background: #fff; border-color: var(--line);
+  }
+  .nav a.ext {
+    border-color: var(--line);
+    background: var(--teal-soft);
+    color: var(--teal);
+  }
+  .slide {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    padding: 22px 18px;
+    margin-bottom: 16px;
+  }
+  .slide-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  }
+  .slide-kicker .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--teal);
+  }
+  h1 {
+    font-family: "Fraunces", "Songti TC", serif;
+    font-size: clamp(1.7rem, 5vw, 2.35rem);
+    line-height: 1.15; margin: 0 0 10px; color: var(--navy);
+    font-weight: 700;
+  }
+  h2 {
+    font-family: "Fraunces", "Songti TC", serif;
+    font-size: 1.35rem; margin: 0 0 8px; color: var(--navy); font-weight: 700;
+  }
+  h3 { margin: 0 0 6px; font-size: 1rem; color: var(--navy); font-weight: 800; }
+  p { margin: 0 0 10px; color: var(--ink); }
+  .lede { color: var(--muted); font-size: 0.95rem; max-width: 42rem; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; margin-top: 16px;
+  }
+  @media (max-width: 760px) { .hero-grid { grid-template-columns: 1fr; } }
+  .status-card {
+    border-radius: 20px; padding: 18px;
+    background: linear-gradient(160deg, #fff7ed, #ffedd5);
+    border: 1px solid #fdba74;
+  }
+  .status-card.watch .label { color: var(--amber); }
+  .status-card.fail {
+    background: linear-gradient(160deg, #fef2f2, #fee2e2);
+    border: 1px solid #fca5a5;
+  }
+  .status-card.fail .label { color: var(--red); }
+  .status-card.fail .score { color: var(--red); }
+  .status-card .label {
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .status-card .score {
+    font-family: "Fraunces", serif; font-size: 2.2rem; font-weight: 700;
+    color: var(--amber); margin: 6px 0 4px; line-height: 1;
+  }
+  .action {
+    display: inline-flex; margin-top: 10px; padding: 8px 12px; border-radius: 999px;
+    background: var(--navy); color: #fff; font-size: 0.8rem; font-weight: 800;
+  }
+  .navy-card {
+    border-radius: 20px; padding: 18px;
+    background: linear-gradient(145deg, var(--navy), var(--navy-2));
+    color: #fff;
+  }
+  .navy-card p { color: rgba(255,255,255,0.9); }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .chip {
+    display: inline-flex; align-items: center; padding: 6px 10px; border-radius: 999px;
+    font-size: 0.74rem; font-weight: 700; background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px;
+  }
+  @media (max-width: 760px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px;
+    border-top: 4px solid var(--teal);
+  }
+  .kpi.warn { border-top-color: var(--amber); }
+  .kpi.bad { border-top-color: var(--red); }
+  .kpi.neutral { border-top-color: #94a3b8; }
+  .kpi .k { font-size: 0.72rem; font-weight: 700; color: var(--muted); }
+  .kpi .v { font-size: 1.15rem; font-weight: 800; color: var(--navy); margin-top: 4px; }
+  .kpi .s { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+  .pillars {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px;
+  }
+  @media (max-width: 760px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar {
+    border: 1px solid var(--line); border-radius: 16px; padding: 14px 14px 14px 16px;
+    background: #fff; border-left-width: 5px;
+  }
+  .pillar.ok { border-left-color: var(--teal); background: linear-gradient(180deg, var(--teal-soft), #fff 48%); }
+  .pillar.mix { border-left-color: var(--amber); background: linear-gradient(180deg, var(--amber-soft), #fff 48%); }
+  .pillar.bad { border-left-color: var(--red); background: linear-gradient(180deg, var(--red-soft), #fff 48%); }
+  .pillar .code { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; color: var(--muted); }
+  .pillar .title { font-weight: 800; color: var(--navy); margin-top: 2px; }
+  .pillar .body { font-size: 0.88rem; color: var(--muted); margin-top: 8px; }
+  .tag {
+    display: inline-flex; margin-top: 10px; padding: 4px 9px; border-radius: 999px;
+    font-size: 0.7rem; font-weight: 800;
+  }
+  .tag.ok { background: var(--teal-soft); color: var(--teal); }
+  .tag.mix { background: var(--amber-soft); color: var(--amber); }
+  .tag.bad { background: var(--red-soft); color: var(--red); }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .filter {
+    border: 1px solid var(--line); background: #fff; border-radius: 999px;
+    padding: 7px 12px; font: inherit; font-size: 0.76rem; font-weight: 700;
+    color: var(--muted); cursor: pointer;
+  }
+  .filter.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .evidence {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  }
+  @media (max-width: 760px) { .evidence { grid-template-columns: 1fr; } }
+  .ev {
+    border: 1px solid var(--line); border-radius: 16px; padding: 14px;
+    background: #fff; border-left-width: 5px; min-height: 150px;
+  }
+  .ev.support { border-left-color: var(--teal); }
+  .ev.neutral { border-left-color: #94a3b8; }
+  .ev.weaken { border-left-color: var(--red); }
+  .ev-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+  .ev-type { font-size: 0.7rem; font-weight: 800; color: var(--muted); letter-spacing: 0.04em; }
+  .ev-pill {
+    font-size: 0.68rem; font-weight: 800; padding: 3px 8px; border-radius: 999px;
+  }
+  .ev-pill.support { background: var(--teal-soft); color: var(--teal); }
+  .ev-pill.neutral { background: #eef2f6; color: #475569; }
+  .ev-pill.weaken { background: var(--red-soft); color: var(--red); }
+  .ev-title { font-weight: 800; color: var(--navy); margin-top: 8px; }
+  .ev-note { font-size: 0.88rem; color: var(--muted); margin-top: 8px; }
+  .bars { display: grid; gap: 8px; margin-top: 10px; }
+  .bar-row { display: grid; grid-template-columns: 110px 1fr 52px; gap: 8px; align-items: center; }
+  .bar-label { font-size: 0.78rem; font-weight: 700; color: var(--muted); }
+  .bar-track { height: 10px; background: #e8eef5; border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 999px; background: var(--teal); }
+  .bar-fill.bad { background: var(--red); }
+  .bar-fill.warn { background: var(--amber); }
+  .bar-val { font-size: 0.78rem; font-weight: 800; color: var(--navy); text-align: right; }
+  .timeline { display: grid; gap: 10px; margin-top: 8px; }
+  .tl {
+    display: grid; grid-template-columns: 54px 1fr; gap: 10px;
+    padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: #fff;
+  }
+  .tl .pri {
+    font-size: 0.72rem; font-weight: 800; color: #fff; background: var(--navy);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  }
+  .tl .pri.p0 { background: var(--red); }
+  .tl .pri.p1 { background: var(--amber); }
+  .tl .pri.p2 { background: var(--teal); }
+  .tl .pri.past { background: #94a3b8; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 760px) { .split { grid-template-columns: 1fr; } }
+  .box {
+    border: 1px solid var(--line); border-radius: 16px; padding: 14px; background: #fff;
+  }
+  .box.ok { border-left: 5px solid var(--teal); }
+  .box.bad { border-left: 5px solid var(--red); }
+  .box.warn { border-left: 5px solid var(--amber); }
+  .source {
+    margin-top: 14px; padding: 12px 14px; border-radius: 14px;
+    background: var(--blue-soft); color: #1e3a8a; font-size: 0.8rem;
+  }
+  .footer {
+    margin-top: 8px; color: var(--muted); font-size: 0.8rem; text-align: center;
+  }
+  .pager {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(11, 31, 51, 0.94); color: #fff;
+    display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  }
+  .pager button {
+    appearance: none; border: 0; border-radius: 999px; padding: 10px 14px;
+    font: inherit; font-size: 0.8rem; font-weight: 800; cursor: pointer;
+    background: #fff; color: var(--navy);
+  }
+  .pager button:disabled { opacity: 0.35; cursor: default; }
+  .pager .mid { font-size: 0.78rem; font-weight: 700; opacity: 0.9; }
+  .hidden { display: none !important; }
+
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:Manrope,"PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--amber)}
+  .hud-cell .l{font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-weight:800;font-size:1.02rem;margin-top:4px;color:var(--navy)}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-size:.78rem;font-weight:700;background:var(--teal-soft);border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .hud-note{margin:8px 0 0;font-size:.82rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+  <div class="shell">
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">IREN Brief</div>
+        <nav class="nav" id="nav">
+          <a href="#s1" class="on" data-i="0">封面</a>
+          <a href="#s2" data-i="1">結論</a>
+          <a href="#s3" data-i="2">HUD</a>
+          <a href="#s4" data-i="3">F2</a>
+          <a href="#s5" data-i="4">Thesis</a>
+          <a href="#s6" data-i="5">證據</a>
+          <a href="#s7" data-i="6">催化劑</a>
+          <a href="./framework1.html" class="ext">F1</a>
+          <a href="./framework2.html" class="ext">F2</a>
+          <a href="./framework3.html" class="ext">F3</a>
+          <a href="./earnings-review.html" class="ext">Q4</a>
+          <a href="./thesis-tracker.html" class="ext">Thesis</a>
+          <a href="./valuation-model.html" class="ext">估值模型</a>
+          <a href="../" class="ext">目錄</a>
+        </nav>
+      </div>
+    </div>
+
+    <section class="hud" id="decision-hud">
+      <h2>Decision HUD <span class="hud-tag">現價 vs Base +1%</span></h2>
+      <p class="hud-note">現價相對 Base 溢價約 <strong>+1%</strong>（US$40.53 vs US$40）→ 接近公允，唔好加倉。區間係 F3 研究情景，<strong>唔係</strong>公司指引。棄用 yfinance 357.4M 股同 Q3 現金／負債。</p>
+      <div class="hud-grid">
+        <div class="hud-cell"><div class="l">現價（延遲 2026-08-28）</div><div class="v">US$40.53</div><div class="s">市值 ~US$16.0B · 10-K 394,058,648 股</div></div>
+        <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">16 / 40 / 80</div><div class="s">F3 研究情景，非指引</div></div>
+        <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+1%</div><div class="s">接近公允 · 唔好加倉</div></div>
+        <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 22.6×</div><div class="s">FY26 US$707.0m · EV/S 25.3× · EV ≈ US$17.9B</div></div>
+      </div>
+      <div class="hud-drivers">
+        <span>★ Q4 GAAP AI Cloud US$70.5m（+110% QoQ）</span>
+        <span>★ operating ARR US$1bn（2026-08-26，NON-GAAP ≠ P&amp;L）</span>
+        <span>★ Q4 研究 FCF ≈ −US$167m（OCF 1811.1 − PPE 1328.9 − 硬件 649.3）</span>
+        <span>★ Q4 發股 US$2.11bn + 可轉債 US$3.00bn</span>
+        <span>★ 淨負債 ~US$1.94B（7.84 − 5.90）</span>
+      </div>
+    </section>
+
+    <section class="slide" id="s1" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Skill 9 · Position Brief · Slide 01</div>
+      <h1>IREN Limited<br />全套研究翻頁版</h1>
+      <p class="lede">官方數字優先 · FY2026-Q4 8-K／10-K · Decision HUD：現價 vs Base。Brief 唔另估倍數。</p>
+      <div class="hero-grid">
+        <div class="status-card fail">
+          <div class="label">Framework 1</div>
+          <div class="score">FAIL</div>
+          <div style="font-weight:800;color:var(--red)">紅線 1 流動性</div>
+          <div class="lede" style="margin-top:6px">非正式 50／130 · 現金 5.90B &lt; 有息 7.84B</div>
+        </div>
+        <div class="navy-card">
+          <h3 style="color:#fff;margin-bottom:8px">Thesis · Mixed / Needs Monitoring</h3>
+          <p>現價 US$40.53（delayed 8/28）· 市值約 US$16.0B</p>
+          <p>F3 Base US$40 · 現價溢價 <strong>+1%</strong></p>
+          <div class="action">現價相對 Base 溢價約 +1%，接近公允，唔好加倉。續抱現倉。</div>
+          <div class="meta-row">
+            <span class="chip">USD · US GAAP</span>
+            <span class="chip">Q4 verified</span>
+            <span class="chip">1,080 @ ~US$60</span>
+          </div>
+        </div>
+      </div>
+      <div class="source">來源：SEC 8-K 0001878848-26-000051 EX-99.1 + 10-K 0001878848-26-000052（期末 2026-06-30）。棄用 yfinance 357.4M 股同 Q3 現金／負債。</div>
+    </section>
+
+    <section class="slide" id="s2" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Executive Verdict · Slide 02</div>
+      <h2>結論（3–4 句）</h2>
+      <div class="box ok" style="margin-top:10px">
+        <p><strong>正在被驗證：</strong>合約同第一期交付。Q4 GAAP AI Cloud US$70.5m（+110% QoQ）首次超過 Bitcoin US$66.7m；Horizon 1 已交付 Microsoft；contracted ARR US$4bn。</p>
+        <p><strong>仍未成立：</strong>計費規模同自我融資。GAAP AI 年化約 US$282m ≈ contracted 嘅 7%。Operating ARR US$1bn 係 8/26 NON-GAAP，≠ P&amp;L。Q4 研究 FCF ≈ −US$167m。</p>
+        <p><strong>最大裂縫：</strong>用發股 US$2.11bn、可轉債 US$3.00bn 同預收款去 bridging。現金 US$5.90B 仍低於有息負債 US$7.84B。F1 紅線 1 FAIL。</p>
+        <p style="margin:0"><strong>行動含義：</strong>現價相對 Base 溢價約 +1%（US$40.53 vs US$40），接近公允，唔好加倉。續抱 1,080 股；浮虧約 32% 係沉沒成本。</p>
+      </div>
+      <div class="split" style="margin-top:12px">
+        <div class="box warn">
+          <h3>計費 — 部分成立</h3>
+          <p>AI 已過 mining，但年化 7% of US$4bn。過關要 GAAP run-rate ≥15% of contracted ARR。</p>
+        </div>
+        <div class="box bad">
+          <h3>FCF — 未成立</h3>
+          <p>OCF 1,811.1 − PPE 1,328.9 − 硬件 649.3 ≈ −167。正 OCF 幾乎係預付，唔係利潤。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="s3" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Decision HUD · Slide 03</div>
+      <h2>KPI 對住估值</h2>
+      <p class="lede">同上 HUD。Brief 重用 F3 區間，唔另估倍數。現價相對 Base 溢價約 +1%，接近公允，唔好加倉。</p>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="k">Q4 GAAP AI ★</div><div class="v">US$70.5m</div><div class="s">+110% QoQ · 首次 &gt; BTC</div></div>
+        <div class="kpi warn"><div class="k">operating ARR ★</div><div class="v">US$1bn</div><div class="s">8/26 NON-GAAP ≠ P&amp;L</div></div>
+        <div class="kpi bad"><div class="k">研究 FCF ★</div><div class="v">−US$167m</div><div class="s">預付扭曲 OCF</div></div>
+        <div class="kpi bad"><div class="k">淨負債 ★</div><div class="v">~US$1.94B</div><div class="s">7.84 − 5.90</div></div>
+      </div>
+      <div class="source">Brief 重用 F3 HUD，唔另估倍數。可調模型見 valuation-model.html。</div>
+    </section>
+
+    <section class="slide" id="s4" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Framework 2 · Slide 04</div>
+      <h2>增長質量 · 五大維度</h2>
+      <div class="split" style="margin-top:12px">
+        <div class="box ok"><h3>1. 敘事 · 通過</h3><p>質變確認。Horizon 1 已唔係簡報；客戶擴到 Microsoft／NVIDIA／frontier lab。Q4 AI 首次超過 mining。</p></div>
+        <div class="box warn"><h3>2. 單位經濟 · 部分通過</h3><p>AI 銷貨成本率約 13%（未計 D&amp;A）；mining 約 36%。總 Adj. EBITDA 跌到 US$19.2m（margin 14%）——單位改善、總體惡化。</p></div>
+      </div>
+      <div class="split" style="margin-top:10px">
+        <div class="box warn"><h3>3. 護城河 · 部分通過</h3><p>液冷交付＋NVIDIA Exemplar Cloud。客戶同 capex 集中仍係反護城河。</p></div>
+        <div class="box bad"><h3>4. 營運槓桿 · 未通過</h3><p>人手 nearly tripled；SG&amp;A US$128.3m 對營收 US$137.2m 未見槓桿。</p></div>
+      </div>
+      <div class="box bad" style="margin-top:10px"><h3>5. 現金流 · 未通過</h3><p>Q4 研究 FCF ≈ −US$167m。正 OCF 係預付，唔係利潤。發股 US$2.11bn＋可轉債 US$3.00bn 證明自我融資未成立。紅線 1 仍 FAIL。</p></div>
+    </section>
+
+    <section class="slide" id="s5" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Thesis · Slide 05</div>
+      <h2>四條支柱</h2>
+      <div class="pillars">
+        <div class="pillar ok"><div class="code">PILLAR A</div><div class="title">電力／已接電</div><div class="body">已接電 MW 仍然係 AI 瓶頸。物理前提未翻。</div><span class="tag ok">支持</span></div>
+        <div class="pillar ok"><div class="code">PILLAR B</div><div class="title">客戶質變 MSFT／NVIDIA／frontier</div><div class="body">Horizon 1 已交付 Microsoft。第一期延期風險解除。</div><span class="tag ok">支持</span></div>
+        <div class="pillar mix"><div class="code">PILLAR C</div><div class="title">計費 GAAP AI</div><div class="body">70.5 首次超過 mining。年化 ~7% of contracted US$4bn。</div><span class="tag mix">部分</span></div>
+        <div class="pillar bad"><div class="code">PILLAR D</div><div class="title">盈利／FCF</div><div class="body">FCF 仍負；發股＋可轉債 bridging。紅線未解除。</div><span class="tag bad">削弱</span></div>
+      </div>
+    </section>
+
+    <section class="slide" id="s6" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Evidence · Slide 06</div>
+      <h2>可篩選證據卡</h2>
+      <div class="filters" id="filters">
+        <button class="filter on" type="button" data-f="all">全部</button>
+        <button class="filter" type="button" data-f="support">支持</button>
+        <button class="filter" type="button" data-f="neutral">中性</button>
+        <button class="filter" type="button" data-f="weaken">削弱</button>
+      </div>
+      <div class="evidence" id="evidence">
+        <article class="ev support" data-f="support"><div class="ev-top"><span class="ev-type">分部</span><span class="ev-pill support">支持</span></div><div class="ev-title">Q4 GAAP AI US$70.5m（+110%）</div><div class="ev-note">首次超過 BTC US$66.7m。年化約 US$282m 對市值 US$16B 仍然細。證明計費開始，未等於通過。</div></article>
+        <article class="ev support" data-f="support"><div class="ev-top"><span class="ev-type">里程碑</span><span class="ev-pill support">支持</span></div><div class="ev-title">Horizon 1 已交付 Microsoft</div><div class="ev-note">第一期延期風險解除。交付接受 ≠ 等額 GAAP 即時入帳。Q4 印表同 Horizon 1 都係過去式。</div></article>
+        <article class="ev support" data-f="support"><div class="ev-top"><span class="ev-type">經營指標</span><span class="ev-pill support">支持</span></div><div class="ev-title">ARR US$4bn contracted／US$1bn operating</div><div class="ev-note">官方上修。腳註：ARR 非 GAAP。Operating ARR 截至 8/26，唔好當 6 月 30 日損益表。</div></article>
+        <article class="ev weaken" data-f="weaken"><div class="ev-top"><span class="ev-type">財報</span><span class="ev-pill weaken">削弱</span></div><div class="ev-title">總營收 US$137.2m，YoY −27%</div><div class="ev-note">拆 ASIC 可解釋，但 headline 連續兩季低於 US$150m 會壓倍數。轉型要 AI 爬坡快過 mining 退出。</div></article>
+        <article class="ev weaken" data-f="weaken"><div class="ev-top"><span class="ev-type">現金流</span><span class="ev-pill weaken">削弱</span></div><div class="ev-title">Q4 FCF ≈ −US$167m · 預付 OCF</div><div class="ev-note">OCF 1,811.1 − PPE 1,328.9 − 硬件 649.3。正 OCF 係預付。稀釋改善流動性 ≠ 自我融資。</div></article>
+        <article class="ev weaken" data-f="weaken"><div class="ev-top"><span class="ev-type">資本結構</span><span class="ev-pill weaken">削弱</span></div><div class="ev-title">394.1M 股 · 發股 2.11bn + 轉債 3.00bn</div><div class="ev-note">10-K 封面 394,058,648。棄用 yfinance 357.4M。現金 5.90B &lt; 有息 7.84B。成本 US$60 更難回本。</div></article>
+        <article class="ev weaken" data-f="weaken"><div class="ev-top"><span class="ev-type">轉型成本</span><span class="ev-pill weaken">削弱</span></div><div class="ev-title">Q4 減值 US$450.4m</div><div class="ev-note">全年 US$638.8m。持作出售公允值再跌 US$102.1m。唔好當成無關非現金。</div></article>
+        <article class="ev neutral" data-f="neutral"><div class="ev-top"><span class="ev-type">估值</span><span class="ev-pill neutral">中性</span></div><div class="ev-title">現價 40.53 vs 成本 60 vs Base 40</div><div class="ev-note">現價相對 Base 溢價約 +1%，接近公允。唔係折扣，亦唔係 thesis broken。成本要靠 Bull 先回本。</div></article>
+      </div>
+    </section>
+
+    <section class="slide" id="s7" data-slide>
+      <div class="slide-kicker"><span class="dot"></span> Catalysts · Slide 07</div>
+      <h2>未來 1–2 季（過去式分開標）</h2>
+      <div class="timeline">
+        <div class="tl"><div class="pri past">過去</div><div><strong>FY26 Q4 印表</strong><br /><span class="lede">2026-08-27 8-K／10-K · 已入帳。AI 70.5、減值 450.4、發股 2.11bn。唔再當未來催化劑。</span></div></div>
+        <div class="tl"><div class="pri past">過去</div><div><strong>Horizon 1 交付 Microsoft</strong><br /><span class="lede">已接受。第一期延期風險解除。唔再當未來 checkpoint。</span></div></div>
+        <div class="tl"><div class="pri p0">P0</div><div><strong>Horizon 2–4 交付</strong><br /><span class="lede">目標 2026 年曆 Q4。滑出超過一個完整季度 = 失效條件之一。</span></div></div>
+        <div class="tl"><div class="pri p1">P1</div><div><strong>2026-12-31 operating ARR 目標 US$4bn</strong><br /><span class="lede">而家 operating ARR US$1bn（8/26，NON-GAAP）。到達 ≠ GAAP 入帳。</span></div></div>
+        <div class="tl"><div class="pri p1">P1</div><div><strong>下一季 GAAP AI Cloud</strong><br /><span class="lede">要再翻倍／至少 QoQ &gt; 0%。兩季 QoQ ≤ 0% 即失效。</span></div></div>
+        <div class="tl"><div class="pri p2">P2</div><div><strong>融資觀察</strong><br /><span class="lede">單季 &gt;US$1B 普通股融資 + AI 停滯 = 退出而唔係攤薄。現金 vs 有息負債。</span></div></div>
+      </div>
+      <div class="source">加倉規則：GAAP AI 年化 ≥15% of contracted ARR（而家 ~7%）而且無單季 &gt;US$1B 普通股融資；或價格進入 US$22–32。減倉：反彈到 US$60–66 可減 20–30%。</div>
+    </section>
+
+    <p class="footer">此分析僅供研究參考，不構成投資建議。· IREN interactive brief · 2026-08-28</p>
+  </div>
+  <div class="pager">
+    <button id="prev" type="button">上一頁</button>
+    <div class="mid" id="pageLabel">1 / 7</div>
+    <button id="next" type="button">下一頁</button>
+  </div>
+<script>
+  const slides = [...document.querySelectorAll("[data-slide]")];
+  const navLinks = [...document.querySelectorAll("#nav a")];
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  const pageLabel = document.getElementById("pageLabel");
+  let i = 0;
+  function show(idx) {
+    i = Math.max(0, Math.min(slides.length - 1, idx));
+    slides.forEach((s, n) => s.classList.toggle("hidden", n !== i));
+    navLinks.forEach((a) => {
+      const isSlide = a.dataset.i !== undefined && a.dataset.i !== "";
+      a.classList.toggle("on", isSlide && Number(a.dataset.i) === i);
+    });
+    pageLabel.textContent = `${i + 1} / ${slides.length}`;
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  prev.addEventListener("click", () => show(i - 1));
+  next.addEventListener("click", () => show(i + 1));
+  navLinks.forEach((a) => a.addEventListener("click", (e) => {
+    if (a.dataset.i === undefined || a.dataset.i === "") return;
+    e.preventDefault();
+    show(Number(a.dataset.i));
+  }));
+  let x0 = null;
+  document.addEventListener("touchstart", (e) => { x0 = e.changedTouches[0].clientX; }, { passive: true });
+  document.addEventListener("touchend", (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1));
+    x0 = null;
+  }, { passive: true });
+  const filters = document.getElementById("filters");
+  const cards = [...document.querySelectorAll("#evidence .ev")];
+  filters.addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter");
+    if (!btn) return;
+    filters.querySelectorAll(".filter").forEach((b) => b.classList.remove("on"));
+    btn.classList.add("on");
+    const f = btn.dataset.f;
+    cards.forEach((c) => { c.style.display = (f === "all" || c.dataset.f === f) ? "" : "none"; });
+  });
+  show(0);
+</script>
+<section id="page-comments" data-page="/iren/interactive-brief.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

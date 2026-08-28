@@ -18,109 +18,346 @@
   .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
   @media(max-width:860px){.hero{grid-template-columns:1fr}}
   .score-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .score-box.fail{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5}
   .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
   .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:4rem;font-weight:800;line-height:1;color:var(--fail);margin:8px 0 0}
   .score-den{font-size:1.1rem;color:var(--muted);font-weight:600}
   .meter{height:10px;background:rgba(255,255,255,.7);border-radius:999px;overflow:hidden;margin-top:14px;border:1px solid #fca5a5}
-  .meter>span{display:block;height:100%;width:46.2%;background:linear-gradient(90deg,#dc2626,#f97316)}
+  .meter>span{display:block;height:100%;width:38.5%;background:linear-gradient(90deg,#dc2626,#f97316)}
   .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
   .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .hero-main p{margin:0;opacity:.92}
   .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
-  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .badge.watch{background:var(--watch-soft);color:var(--watch);border-color:transparent}
   .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
   @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
   .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
   .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
   .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
   .sections{display:grid;gap:16px;margin-top:18px}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
   h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .callout{border-radius:16px;padding:14px 16px;margin:0 0 14px;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
-  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
   .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
   .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
   .score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
   @media(max-width:860px){.grid-2,.grid-3,.score-grid{grid-template-columns:1fr}}
   .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
   .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .warn{color:var(--watch);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .danger{color:var(--fail);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
   .dim{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left-width:5px}
   .dim.s10{border-left-color:var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 40%)}
   .dim.s5{border-left-color:var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 40%)}
   .dim.s0{border-left-color:var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 40%)}
-  .dim-top{display:flex;justify-content:space-between;gap:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dim-top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
   .dim-name{font-weight:800}
-  .pill{border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:800}
+  .pill{border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:800;white-space:nowrap}
   .pill.s10{background:var(--pass-soft);color:var(--pass)}.pill.s5{background:var(--watch-soft);color:var(--watch)}.pill.s0{background:var(--fail-soft);color:var(--fail)}
+  .dim-meter{height:6px;background:#f1ede4;border-radius:999px;overflow:hidden;margin:10px 0 2px}
+  .dim-meter>span{display:block;height:100%;border-radius:999px}
+  .dim.s10 .dim-meter>span{width:100%;background:var(--pass)}
+  .dim.s5 .dim-meter>span{width:50%;background:var(--watch)}
+  .dim.s0 .dim-meter>span{width:4%;background:var(--fail)}
+  .dim-field{font-size:.88rem;color:#44403c;margin-top:8px;line-height:1.5}
+  .dim-field b{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.05em;color:#fff;border-radius:6px;padding:2px 7px;margin-right:6px;vertical-align:1px}
+  .dim-field.data b{background:#0f766e}
+  .dim-field.why b{background:#57534e}
+  .dim-field.rubric{color:var(--muted);font-size:.8rem;border-top:1px dashed var(--line);padding-top:8px}
+  .dim-field.rubric b{background:#a8a29e}
+  .dim-field.rubric .hit{font-weight:800;color:var(--ink);background:#fef3c7;border-radius:6px;padding:1px 5px}
+  .dim-field.up{background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:8px 10px}
+  .dim-field.up b{background:var(--info)}
+  .sub-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+  @media(max-width:860px){.sub-strip{grid-template-columns:repeat(2,1fr)}}
+  .sub{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .sub .n{font-size:1.4rem;font-weight:800}
+  .sub .d{color:var(--muted);font-size:.8rem;margin-top:2px}
+  .sub.g{border-top:4px solid var(--pass)}.sub.o{border-top:4px solid var(--watch)}.sub.r{border-top:4px solid var(--fail)}.sub.t{border-top:4px solid var(--teal);background:linear-gradient(180deg,#f0fdfa,#fff 55%)}
+  .total-bar{display:flex;height:14px;border-radius:999px;overflow:hidden;border:1px solid var(--line);margin:2px 0 16px}
+  .total-bar span{display:block;height:100%}
+  .total-bar .seg-g{background:var(--pass)}
+  .total-bar .seg-o{background:#f97316}
+  .total-bar .seg-e{background:#eee6d8}
   .dim-evidence{color:var(--muted);font-size:.9rem;margin:8px 0 4px}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#134e4a;color:#fff;border-color:#134e4a}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
   .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .muted{color:var(--muted);font-size:.9rem}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
 </style>
 </head>
-
 <body>
 <a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
 
 <div class="wrap">
   <section class="hero">
-    <div class="score-box">
+    <div class="score-box fail">
       <div class="eyebrow">Framework 1</div>
       <div class="score-num">FAIL</div>
+      <div class="score-den">非正式 50 / 130</div>
+      <div class="meter"><span></span></div>
       <div class="badges" style="margin-top:10px">
         <span class="badge fail">紅線 1 觸發</span>
         <span class="badge fail">停止正式評分</span>
       </div>
-      <p class="sans muted" style="margin:10px 0 0">非正式參考 55／130 · 低於 WATCH 65</p>
     </div>
     <div class="hero-main">
       <h1>IREN · Framework 1 基本面初篩</h1>
-      <p>IREN Limited · 2026-08-15 · FY2026-Q3 官方 8-K（2026-05-07）· USD US GAAP unaudited</p>
+      <p>IREN Limited · FY2026-Q4／FY26 官方 8-K＋10-K（filing 2026-08-27）· 期終 2026-06-30 · USD · US GAAP · validation verified</p>
       <div class="badges">
-        <span class="badge">現價 US$44.06 delayed</span>
+        <span class="badge">現價 US$40.53 delayed</span>
+        <span class="badge">市值 ~US$16.0B</span>
         <span class="badge">持倉 1,080 @ ~US$60</span>
-        <span class="badge">核心 KPI：已入帳 AI Cloud 收入</span>
       </div>
     </div>
   </section>
+
+  <section class="hud" id="decision-hud">
+    <h2 class="sans">Decision HUD <span class="hud-tag">現價 vs Base +1%</span></h2>
+    <p class="muted" style="margin:0">現價相對 Base 溢價約 <strong>+1%</strong>（接近公允）→ <strong>唔好加倉</strong>。權威來源：Framework 3 研究情景（非指引）。F1 紅線已 FAIL。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/28）</div><div class="v">US$40.53</div><div class="s">市值 ~US$16.0B · 394,058,648 股 × 40.53</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">US$16 / US$40 / US$80</div><div class="s">研究情景每股 · 非指引</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+1%</div><div class="s">接近公允 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 22.6×</div><div class="s">EV/S 25.3× · EV ≈ 16.0+7.84−5.90 = US$17.9B</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 AI Cloud US$70.5m（+110% QoQ）</span>
+      <span>★ operating ARR US$1bn（2026-08-26 · 非 GAAP）</span>
+      <span>★ Q4 FCF ≈ −US$167m</span>
+      <span>★ 394.1M 股 · Q4 發股 US$2.11bn</span>
+      <span>★ 淨負債 ≈ US$1.94B（7.84 − 5.90）</span>
+    </div>
+  </section>
+
   <div class="kpis">
-    <div class="kpi teal"><div class="label">現價（延遲 8/14）</div><div class="value">US$44.06</div></div>
-    <div class="kpi green"><div class="label">Q3 AI Cloud</div><div class="value">US$33.6M</div></div>
-    <div class="kpi orange"><div class="label">Contracted ARR</div><div class="value">US$3.1bn</div></div>
-    <div class="kpi red"><div class="label">Q3 FCF</div><div class="value">−US$1.28B</div></div>
+    <div class="kpi teal"><div class="label">現價（延遲 8/28）</div><div class="value">US$40.53</div><div class="note">官方 394.1M 股 · 市值 ~US$16.0B</div></div>
+    <div class="kpi green"><div class="label">Q4 AI Cloud</div><div class="value">US$70.5M</div><div class="note">QoQ +110% · 首次超過 Bitcoin</div></div>
+    <div class="kpi orange"><div class="label">Contracted ARR</div><div class="value">US$4bn</div><div class="note">非 GAAP · 8-K 腳註</div></div>
+    <div class="kpi red"><div class="label">Q4 FCF</div><div class="value">−US$167M</div><div class="note">OCF − PPE − 硬件 · 預付撐 OCF</div></div>
   </div>
+
   <div class="sections">
     <section class="panel">
       <h2>初篩結論</h2>
-      <div class="callout fail">
-        <strong>FAIL（紅線否決）。</strong>最大亮點係 Microsoft US$9.7bn 同 NVIDIA US$3.4bn 已喺官方 8-K 確認。最大風險係現金 US$2.21B 低於有息負債約 US$3.96B，而且單季 FCF 約 −US$1.28B。即使豁免紅線，非正式 55 分都未到 WATCH。
+      <div class="callout fail verdict">
+        <p><strong>FAIL（致命紅線 1 觸發）。</strong>官方停止 13 維度評分。非正式討論分只有 50／130，<strong>唔係</strong>正式 PASS／WATCH；就算豁免紅線，都未到 WATCH 65。無受限現金 US$5.90B 低過有息負債 US$7.84B，而且單季自由現金流（FCF，Free Cash Flow＝經營現金流減 PPE 同硬件）約 −US$167m——兩項同時成立。</p>
+        <p>正在被驗證嘅支柱係計費：Q4 AI Cloud US$70.5m 首次超過 Bitcoin US$66.7m（QoQ +110%），Horizon 1 已交付並被 Microsoft 接受。呢啲已經入帳／官方確認，唔使賭社媒。</p>
+        <p>仍未成立嘅路徑係 GAAP 收入追上 ARR、FCF 轉正、同停止大型發股。Q4 GAAP AI 年化約 US$282m，只約佔 contracted ARR US$4bn 嘅 7%。operating ARR US$1bn 截至 2026-08-26，官方腳註寫明非 GAAP。</p>
+        <p>最大裂痕係用稀釋同客戶預付去 bridging 轉型：Q4 發股 US$2.11bn、可轉債 US$3.00bn；OCF 幾乎係遞延收入；SG&amp;A US$128.3m 對營收 US$137.2m。對行動含義：現價相對 Framework 3 Base 溢價約 <strong>1%</strong>（US$40.53 vs US$40），接近公允但唔係折扣；成本 ~US$60 仍然要靠 Bull。持倉 1,080 股 @ ~US$60 → <strong>續抱、唔好加倉</strong>。</p>
       </div>
     </section>
+
     <section class="panel">
       <h2>致命紅線掃描</h2>
       <div class="grid-3">
-        <div class="box" style="background:linear-gradient(180deg,#fef2f2,#fff)"><h3>① 流動性 — 觸發</h3><p>現金 US$2,213m &lt; 可轉債 US$3,688m＋租賃 US$274m。FCF 約 −US$1.28B。兩者同時成立。</p></div>
-        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)"><h3><span class="safe">② 衰退陷阱 — 安全</span></h3><p>YoY ~0%，唔低於 CLSK −30.5%。淨利率雖負，第一項未成立。</p></div>
-        <div class="box" style="background:linear-gradient(180deg,#fff7ed,#fff)"><h3>③ 估值泡沫 — 未否決</h3><p>PEG 不可靠；trailing P/S 20.8×，但有 US$3.1bn ARR 支持。</p></div>
+        <div class="box" style="background:linear-gradient(180deg,#fef2f2,#fff)">
+          <h3><span class="danger">① 流動性 — 觸發</span></h3>
+          <p>2026-06-30 無受限現金 US$5,895.6m &lt; 有息負債 US$7,836.8m（債務 7,593.0 + 融資租賃 243.8）。現金＋受限 US$7,619.5m 仍然略低於 7,836.8。Q4 FCF ≈ −US$167m（OCF 1,811.1 − PPE 1,328.9 − 硬件 649.3）。OCF 質素差：遞延收入 +US$1,722.2m。重新評估：現金 ≥ 有息負債，<strong>或</strong>單季 FCF ≥ 0。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">② 衰退陷阱 — 安全</span></h3>
+          <p>Q4 YoY −26.7%（137.2 vs FY25 Q4 187.3），屬 miner 轉型組可比較口徑；淨虧單獨唔夠觸發。紅線要「增速低於同業並且淨利率為負／連跌」。今次未重拉 CLSK／CIFR 官方包，故不把超高增速同業拉入呢條機械閘。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#fff7ed,#fff)">
+          <h3><span class="warn">③ 估值泡沫 — 未否決</span></h3>
+          <p>盈利為負，PEG 不可用。Trailing P/S 22.6×（市值 ~US$16.0B／FY26 營收 US$707.0m），但有 US$4bn contracted ARR 而且計費已開始。市值／ARR ≈ 4.0×（假設準時計費，過於樂觀）；市值／operating ARR ≈ 16×。唔構成「無增長硬泡沫」機械否決。</p>
+        </div>
       </div>
     </section>
+
+    <section class="panel">
+      <h2>13 維度評分卡（非正式討論）</h2>
+      <div class="callout fail" style="margin-bottom:14px"><strong>非正式。</strong>紅線 1 已觸發，官方停止 13 維評分。下面 50／130 只供討論，<strong>唔係</strong>正式 PASS／WATCH。就算豁免紅線，都低過 WATCH 65。</div>
+      <p class="muted" style="margin:0 0 12px">每個維度只可以攞 10、5 或 0 分，滿分 13 × 10 = 130。每張卡列：官方數據 → 評分理由 → 該維度嘅 10／5／0 標準（黃底 = 今次命中）→ 未滿分嘅升級條件。</p>
+      <div class="sub-strip sans">
+        <div class="sub g"><div class="n">30 分</div><div class="d">10 分 × 3 項：TAM、需求 KPI、行業趨勢</div></div>
+        <div class="sub o"><div class="n">20 分</div><div class="d">5 分 × 4 項：護城河、管理層、相對標普、預期 vs 實際</div></div>
+        <div class="sub r"><div class="n">0 分</div><div class="d">0 分 × 6 項：現金 vs 債務、營收增長、淨利潤率、估值 PEG、ROE、FCF</div></div>
+        <div class="sub t"><div class="n">50 / 130</div><div class="d">30 + 20 + 0 · 非正式 · 低於 WATCH 65</div></div>
+      </div>
+      <div class="total-bar" title="綠 30 分＋橙 20 分＝50；灰 80 分未攞">
+        <span class="seg-g" style="width:23.1%"></span><span class="seg-o" style="width:15.4%"></span><span class="seg-e" style="width:61.5%"></span>
+      </div>
+      <div class="score-grid" id="scoreCards"></div>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="filters sans" id="filters">
+        <button class="active" data-f="all">全部</button>
+        <button data-f="support">支持</button>
+        <button data-f="neutral">中性</button>
+        <button data-f="weaken">削弱</button>
+      </div>
+      <div class="ev-grid" id="evidence"></div>
+    </section>
+
     <section class="panel">
       <h2>Adversarial 同下一步</h2>
       <div class="grid-3">
-        <div class="box" style="border-top:4px solid var(--pass)"><h3>最強支持</h3><p>官方 hyperscaler／NVIDIA 合約；AI 收入兩季翻倍；Adj. EBITDA margin 41%。</p></div>
-        <div class="box" style="border-top:4px solid var(--fail)"><h3>最強反證</h3><p>現金少於可轉債；FCF 惡化；總營收因拆 ASIC 打平；持續發股。</p></div>
-        <div class="box" style="border-top:4px solid var(--watch)"><h3>最易失效</h3><p>GPU／Horizon 延誤，mining 已拆、AI 未計費。</p></div>
+        <div class="box" style="border-top:4px solid var(--pass)">
+          <h3>最強支持</h3>
+          <p>Q4 AI 收入翻倍並首次超過 mining；Horizon 1 已交付 Microsoft；contracted ARR 上修到 US$4bn；GPU 融資覆蓋大部分硬件 capex。計費支柱由未成立轉為部分成立。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--fail)">
+          <h3>最強反證</h3>
+          <p>現金仍低於有息負債；FCF 仍負；Q4 發股 US$2.11bn＋可轉債 US$3.00bn；減值 US$450.4m；Adj. EBITDA margin 由 41% 跌到 14%。稀釋同預付喺 bridging 轉型。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--watch)">
+          <h3>最易失效</h3>
+          <p>Horizon 2–4 滑出 2026 年曆 Q4，operating ARR 到年底明顯低過 US$4bn，同時再來一輪大型普通股融資。最易令「續抱」變成要重估退出。</p>
+        </div>
       </div>
-      <div class="callout info" style="margin-top:14px">解除紅線：現金 ≥ 有息負債，或單季 FCF ≥ 0。按要求繼續 Framework 2。</div>
+      <div class="callout info" style="margin-top:14px">
+        <strong>解除紅線：</strong>無受限現金 ≥ 有息負債，<strong>或</strong>單季 FCF ≥ 0（同一 US GAAP 加減）。Framework 2 必挖：（1）US$1bn operating ARR 有幾多已經係 GAAP 收入；（2）預收款同發股之後嘅 FCF／稀釋路徑。增長叙事<strong>唔可以翻案</strong>紅線。
+      </div>
     </section>
   </div>
-  <p class="footer">來源：SEC 8-K EX-99.1 2026-05-07。現價 yfinance delayed。此分析僅供研究參考，不構成投資建議。</p>
+
+  <p class="footer">官方優先：SEC 8-K EX-99.1 accession 0001878848-26-000051 ＋ 10-K 0001878848-26-000052（filing 2026-08-27；期終 2026-06-30；USD US GAAP；validation verified）。現價 yfinance delayed（2026-08-28）。yfinance 股數 357.4M 同 Q3 現金／債務已棄用。此分析僅供研究參考，不構成投資建議。</p>
 </div>
+<script>
+const scores=[
+["現金 vs 債務",0,
+ "2026-06-30 無受限現金及等價物 US$5,895.6m；有息負債 US$7,836.8m（債務 7,593.0＋融資租賃 243.8）。現金＋受限 US$7,619.5m 仍略低於有息負債。來源：8-K EX-99.1。",
+ "現金低於債務，直接命中 0 分線。呢條同時觸發致命紅線 1（再加 FCF 為負）。發股換嚟嘅現金唔等於紅線過關。",
+ ["現金 ≥ 債務 2 倍","現金高於債務但未夠 2 倍","現金低於債務"],
+ "無受限現金 ≥ 有息負債，或單季 FCF ≥ 0（先解除紅線）；現金至少 2 倍債務先有 10 分。"],
+["營收增長",0,
+ "Q4 總營收 US$137.2m vs FY25 Q4 US$187.3m（YoY −26.7%）。FY26 全年 US$707.0m vs US$501.0m（+41%）。來源：8-K EX-99.1。",
+ "評分用最新季。Headline 倒退必須 0 分。拆 ASIC 可以解釋，但規則唔因為轉型故事改口徑。今次未重拉 CLSK／CIFR。",
+ ["高於行業均值 10pp 以上","與行業均值大致持平","低於行業或倒退"],
+ "最新季總營收恢復正增長，而且高過 miner 轉型組平均。"],
+["淨利潤率",0,
+ "Q4 GAAP 淨虧 US$684.0m ÷ 營收 US$137.2m ≈ −498%；FY26 全年淨利率約 −99%。含減值 US$450.4m。來源：8-K。",
+ "虧損直接 0 分。SG&A US$128.3m 幾乎食晒成季營收 US$137.2m，未見營運槓桿。",
+ ["高於 25%","10%–25%","低於 10% 或虧損"],
+ "GAAP 淨利率轉正且 ≥10%。"],
+["估值（PEG）",0,
+ "盈利為負，PEG 不可用。市值約 US$16.0B（394,058,648 × US$40.53）÷ FY26 營收 US$707.0m ≈ trailing P/S 22.6×；EV/S 25.3×。市值／contracted ARR 4.0×（樂觀）；市值／operating ARR 16×。",
+ "PEG 不可用就要用 P/S 補充。22.6× 預支未入帳 ARR，屬嚴重透支，0 分。紅線 3 因已開始計費而未機械否決，但評分唔可以當便宜。",
+ ["PEG < 1","PEG 1–1.5","PEG > 1.5 或估值嚴重透支"],
+ "trailing P/S 明顯回落，或 GAAP 收入追上 operating ARR 令倍數合理化。"],
+["TAM",10,
+ "公司定位係把已接電 Bitcoin 基礎設施轉成 AI Cloud。全球 AI 基礎設施／GPU 雲可觸及市場遠超 US$100B。",
+ "單計 AI 算力短缺已經過滿分門檻。TAM 大唔等於 IREN 攞到份額——呢個留返 Framework 2 驗證。",
+ ["超過 US$100B","US$10B–100B","低於 US$10B 或賽道飽和"],null],
+["需求 KPI（AI Cloud）",10,
+ "Q4 AI Cloud US$70.5m（QoQ +110%），首次超過 Bitcoin US$66.7m。Operating ARR US$1bn（截至 2026-08-26，非 GAAP）。來源：8-K。",
+ "非用戶型公司，用已入帳 AI 收入做需求 KPI。連續兩季翻倍、首次超過 mining，遠高過 miner 同業需求動能。",
+ ["增速高於同行平均 20pp 以上","高於同行平均 10pp 以上","與同行相當或更低"],null],
+["ROE",0,
+ "FY26 大額 GAAP 虧損；股東權益被發股抬高。ROE 遠低於 8%。來源：8-K／10-K。",
+ "虧損公司 ROE 為負，0 分。分母短期唔會縮（仲喺發股），出路只有轉盈。",
+ ["高於 15%","8%–15%","低於 8%"],
+ "GAAP 轉盈且 ROE ≥8%。"],
+["自由現金流",0,
+ "Q4 FCF ≈ −US$167m（OCF 1,811.1 − PPE 1,328.9 − 硬件 649.3）。OCF 含遞延收入 +US$1,722.2m。全年投資現金流 −US$4.72B。來源：8-K。",
+ "單季仍負，必須 0 分。正 OCF 幾乎係客戶預付，唔等於已賺現金。稀釋改善流動性 ≠ 經營自我融資。",
+ ["穩定增長","有波動但為正","不穩定或為負"],
+ "單季官方口徑 FCF ≥ 0，可升 5 分；連續兩季為正先有 10 分。"],
+["護城河",5,
+ "支持：已接電負載、Horizon 1 已交付 Microsoft、NVIDIA Exemplar Cloud。反證：客戶仍集中、ARR 未等額入帳。來源：8-K。",
+ "有真壁壘（電力＋液冷交付），但唔係顯著壟斷。5 分。升 10 分要多客戶規模化計費。",
+ ["顯著壁壘：專利、品牌或網絡效應","普通護城河，黏性一般","無明顯護城河"],
+ "多客戶規模化計費、GAAP 收入證明提價／鎖定能力。"],
+["行業趨勢",10,
+ "AI 算力短缺；官方業務描述把 GPU Cloud 當主線。Q4 AI 已佔營收 51%。",
+ "完全符合未來核心趨勢（AI 基礎設施），唔係邊沿相關。呢項評嘅係賽道方向，唔係執行成敗。",
+ ["完全符合未來核心趨勢","與趨勢相關但非核心主線","與趨勢無關或衰退行業"],null],
+["管理層能力",5,
+ "支持：Horizon 1 準時交付並被接受；AI 收入兩季翻倍。反證：Q4 發股 US$2.11bn、可轉債 US$3.00bn、減值 US$450.4m、SG&A 跳升。",
+ "產品交付有成果，資本紀律有爭議。5 分。唔係無爭議領先，亦未去到頻繁失信。",
+ ["行業領先、誠信且執行力強","有一定執行成果","頻繁失信或執行差"],
+ "停止大型普通股融資，同時 GAAP AI 繼續爬坡。"],
+["相對 S&P 500",5,
+ "維持上份量級：上市以來累計輕微跑贏標普（0–20pp）。今次未重算 yfinance 總回報。",
+ "未過 20pp 滿分線，亦未長期跑輸，5 分。呢項係歷史紀錄分，唔保證未來倍數維持。",
+ ["總回報高出 S&P 500 超過 20pp","累計跑贏 0–20pp","長期跑輸"],
+ "累計超額回報穩定超過 20pp（需重算含股息總回報）。"],
+["預期 vs 實際",5,
+ "Preview 核心 KPI（已計費 AI Cloud）達到 Bullish（US$70.5m）。Headline 營收仍平（US$137.2m）。同時大額融資。來源：8-K；yfinance 日曆。",
+ "結構轉型令傳統 beat／miss 難用。AI 達標、總營收未達成長股預期，5 分。唔符合連續超預期，亦未去到頻繁低於預期。",
+ ["連續多季超預期","大致符合預期","頻繁低於預期"],
+ "連續兩季 GAAP 總營收同 AI 收入同時超預期，且無再輪大型發股。"],
+];
+document.getElementById('scoreCards').innerHTML=scores.map(([n,s,data,why,rubric,up])=>{
+  const hit = s===10?0 : s===5?1 : 2;
+  const rub = rubric.map((r,i)=>{
+    const label = ["10 分","5 分","0 分"][i];
+    const txt = `${label}＝${r}`;
+    return i===hit ? `<span class="hit">${txt}</span>` : txt;
+  }).join(" · ");
+  return `
+<article class="dim s${s}">
+  <div class="dim-top"><div class="dim-name">${n}</div><span class="pill s${s}">${s} / 10 分</span></div>
+  <div class="dim-meter"><span></span></div>
+  <div class="dim-field data"><b>數據</b>${data}</div>
+  <div class="dim-field why"><b>點解</b>${why}</div>
+  <div class="dim-field rubric"><b>標準</b>${rub}</div>
+  ${up?`<div class="dim-field up"><b>升級</b>${up}</div>`:""}
+</article>`;
+}).join('');
+
+const evidence=[
+{k:"support",type:"分部／KPI",title:"Q4 AI Cloud US$70.5m，首次超過 Bitcoin",body:"Q4 AI Cloud US$70.5m，QoQ +110%，佔營收約 51%，首次超過 Bitcoin US$66.7m。呢個係計費支柱最硬嘅已入帳數字，證明唔再只簽紙。年化約 US$282m 對市值 US$16.0B 仍然細；過關要 GAAP run-rate 進入數億，先算雲公司規模，而家仍然未通過。"},
+{k:"support",type:"里程碑",title:"Horizon 1 已交付並被 Microsoft 接受",body:"官方 8-K 同 8 月 13 日新聞稿：Horizon 1 已交付並被 Microsoft 接受。上份失效條件「公開延期」喺第一期未觸發，合約支柱繼續成立。交付接受唔等於等額 GAAP 收入即時入帳；Horizon 2–4 目標仍係 2026 年曆第四季，仲未過關。"},
+{k:"support",type:"經營指標",title:"ARR US$4bn／operating US$1bn（非 GAAP）",body:"Contracted ARR 上修到 US$4bn；operating ARR US$1bn（截至 2026-08-26）。官方腳註寫明呢兩個都係非 GAAP，已確認收入可以明顯較低，所以唔好當成已入帳收入。Operating ARR 用季後日期、含 Horizon 1，唔好直接當 6 月 30 日損益表。GAAP 年化只約佔 contracted 七個百分點。"},
+{k:"weaken",type:"財報",title:"Q4 營收 US$137.2m，YoY −27%",body:"Q4 總營收 US$137.2m，YoY −26.7%（對比 FY25 Q4 US$187.3m），按季亦跌。拆 ASIC 可以解釋，但投資人買增長股，headline 連續兩季低於 US$150m 會壓住 trailing 倍數。增長維度必須 0 分；衰退紅線因 miner 轉型組而未機械觸發，淨虧單獨唔夠。"},
+{k:"weaken",type:"現金流",title:"Q4 FCF ≈ −US$167m，OCF 幾乎係預付",body:"Q4 FCF 約 −US$167m（OCF 1,811.1 − PPE 1,328.9 − 硬件 649.3）。燒幅較第三季收窄，但流動性紅線未解除。經營現金流幾乎係遞延收入 +US$1,722.2m 嘅客戶預付，唔等於已賺利潤。稀釋改善流動性，唔等於經營已經可以自我融資。"},
+{k:"weaken",type:"資本結構",title:"發股 US$2.11bn＋可轉債 US$3.00bn，394.1M 股",body:"Q4 發普通股所得約 US$2.11bn、可轉債 US$3.00bn；10-K 封面普通股 394,058,648。yfinance 357.4M 已過時，必須棄用。AI 已過 US$50m 所以舊失效條件未精準觸發，但每股權利被攤薄，成本約 US$60 更加難回本，續抱都唔好再加倉。"},
+{k:"weaken",type:"轉型成本",title:"Q4 減值 US$450.4m；SG&A 幾乎食晒營收",body:"Q4 ASIC 相關減值 US$450.4m，全年 US$638.8m；持作出售公允值再跌。SG&A US$128.3m 對營收 US$137.2m，未見營運槓桿。呢啲係轉型真實報廢同費用，唔好當成無關非現金；同發股同預付一齊構成而家最大裂痕。"},
+{k:"neutral",type:"市場",title:"現價 US$40.53 ≈ Base US$40，低過成本 US$60",body:"現價相對 Framework 3 Base 溢價約 1%，低過成本約 US$60 約三成。市場把計費同稀釋對沖之後，定價靠近公允，所以唔係自動加倉券，亦唔係 thesis 已壞。續抱現倉；要回本仍然要靠牛市路徑。"},
+];
+const evRoot=document.getElementById('evidence');
+function render(filter){
+  evRoot.innerHTML=evidence.filter(e=>filter==='all'||e.k===filter).map(e=>`
+  <article class="ev ${e.k}"><div class="type">${e.type}<span class="impact ${e.k}">${e.k==='support'?'支持':e.k==='weaken'?'削弱':'中性'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+});
+</script>
 <section id="page-comments" data-page="/iren/framework1.html"></section>
 <script src="../assets/page-comments.js" defer></script>
-</body></html>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>IREN Q3 Review + Q4 Preview</title>
+<title>IREN Q4 FY26／FY26 Earnings Review</title>
 <style>
   :root {
     --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
@@ -17,90 +17,323 @@
   .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
   .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
   @media(max-width:860px){.hero{grid-template-columns:1fr}}
-  .score-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
-  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
-  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:4rem;font-weight:800;line-height:1;color:var(--fail);margin:8px 0 0}
-  .score-den{font-size:1.1rem;color:var(--muted);font-weight:600}
-  .meter{height:10px;background:rgba(255,255,255,.7);border-radius:999px;overflow:hidden;margin-top:14px;border:1px solid #fca5a5}
-  .meter>span{display:block;height:100%;width:46.2%;background:linear-gradient(90deg,#dc2626,#f97316)}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.85rem;font-weight:800;line-height:1.2;color:var(--watch);margin:8px 0 0}
   .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
-  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main h1{margin:0 0 8px;font-size:1.7rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .hero-main p{margin:0;opacity:.92}
   .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
-  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .badge.watch{background:var(--watch-soft);color:var(--watch);border-color:transparent}
   .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
   @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
   .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
-  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.25rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
   .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
   .sections{display:grid;gap:16px;margin-top:18px}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
   h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .callout{border-radius:16px;padding:14px 16px;margin:0 0 14px;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
-  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
   .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .callout.pass{background:var(--pass-soft);border:1px solid #86efac}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
   .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  .score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  @media(max-width:860px){.grid-2,.grid-3,.score-grid{grid-template-columns:1fr}}
+  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
   .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
-  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .dim{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left-width:5px}
-  .dim.s10{border-left-color:var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 40%)}
-  .dim.s5{border-left-color:var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 40%)}
-  .dim.s0{border-left-color:var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 40%)}
-  .dim-top{display:flex;justify-content:space-between;gap:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .dim-name{font-weight:800}
-  .pill{border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:800}
-  .pill.s10{background:var(--pass-soft);color:var(--pass)}.pill.s5{background:var(--watch-soft);color:var(--watch)}.pill.s0{background:var(--fail-soft);color:var(--fail)}
-  .dim-evidence{color:var(--muted);font-size:.9rem;margin:8px 0 4px}
+  .box.pass{border-left:5px solid var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 45%)}
+  .box.warn{border-left:5px solid var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 45%)}
+  .box.fail{border-left:5px solid var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 45%)}
+  table{width:100%;border-collapse:collapse;font-size:.84rem}
+  th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
+  tr.up td:last-child{color:var(--pass);font-weight:700}
+  tr.mix td:last-child{color:var(--watch);font-weight:700}
+  tr.down td:last-child{color:var(--fail);font-weight:700}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#134e4a;color:#fff;border-color:#134e4a}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  .ev p{margin:8px 0 0;color:#44403c;font-size:.9rem}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
   .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .muted{color:var(--muted);font-size:.9rem}
 </style>
 </head>
-
 <body>
 <a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
 
 <div class="wrap">
   <section class="hero">
     <div class="score-box">
-      <div class="eyebrow">Skill 8</div>
-      <div class="score-num" style="font-size:2.2rem">轉型季</div>
-      <p class="sans muted">AI 強 · headline 弱</p>
+      <div class="eyebrow">Skill 8 · Mode Review</div>
+      <div class="score-num">計費確認／稀釋確認</div>
+      <div class="badges" style="margin-top:12px">
+        <span class="badge pass">計費高質量</span>
+        <span class="badge fail">Headline／GAAP 低質量</span>
+        <span class="badge watch">轉型季</span>
+      </div>
+      <p class="sans muted" style="margin:12px 0 0">唔係傳統成長股 beat。唔宣稱 EPS beat。</p>
     </div>
     <div class="hero-main">
-      <h1>IREN · Q3 FY26 Review ＋ Q4 Preview</h1>
-      <p>官方 8-K 2026-05-07 · Q4 日曆約 2026-08-28 · 現價 US$44.06 delayed</p>
+      <h1>IREN · Q4 FY26／FY26 財報回顧</h1>
+      <p>公布 2026-08-27 · IR presentation 2026-08-28 · 期終 2026-06-30 · USD US GAAP · 8-K EX-99.1 0001878848-26-000051 + 10-K 0001878848-26-000052 · verified</p>
+      <div class="badges">
+        <span class="badge">持倉 1,080 @ ~US$60</span>
+        <span class="badge">現價 US$40.53 delayed</span>
+        <span class="badge">核心 KPI：已計費 AI Cloud</span>
+      </div>
     </div>
   </section>
-  <div class="kpis">
-    <div class="kpi orange"><div class="label">Q3 總營收</div><div class="value">US$144.8M</div></div>
-    <div class="kpi green"><div class="label">AI Cloud</div><div class="value">US$33.6M</div></div>
-    <div class="kpi red"><div class="label">GAAP 淨虧</div><div class="value">US$247.8M</div></div>
-    <div class="kpi teal"><div class="label">Q4 日曆</div><div class="value">8/28</div></div>
+
+  <section class="hud" id="decision-hud">
+    <h2 class="sans">Decision HUD <span class="hud-tag">現價 vs Base +1%</span></h2>
+    <p class="muted" style="margin:0">買賣前先睇呢條尺。Bear／Base／Bull 係 Framework 3 研究情景，<strong>非公司指引</strong>。市值用 10-K 封面 <strong>394.1M</strong> 股 × US$40.53 ≈ US$16.0B；棄用 yfinance 357.4M。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 2026-08-28）</div><div class="v">US$40.53</div><div class="s">市值 ~US$16.0B · 394.1M 股</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">16 / 40 / 80</div><div class="s">F3 研究每股，非指引</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+1%</div><div class="s">貼近 Base · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 22.6×</div><div class="s">FY26 營收 707.0 · EV ~US$17.9B · EV/S 25.3×</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 AI Cloud US$70.5m（+110%）</span>
+      <span>★ Operating ARR US$1bn（2026-08-26，非 GAAP）</span>
+      <span>★ Q4 FCF ≈ −US$167m</span>
+      <span>★ 股數 394.1M · 當季發股 US$2.11bn</span>
+      <span>★ 淨負債 ~US$1.94B</span>
+    </div>
+  </section>
+
+  <div class="badges">
+    <span class="badge watch">現價相對 Base +1%（US$40.53 vs US$40）→ 續抱、唔好加倉</span>
+    <span class="badge fail">唔宣稱 EPS beat</span>
   </div>
+
+  <div class="kpis">
+    <div class="kpi green"><div class="label">Q4 AI Cloud ★</div><div class="value">US$70.5m</div><div class="note">QoQ +110% · Preview Bullish HIT</div></div>
+    <div class="kpi teal"><div class="label">AI 佔營收</div><div class="value">51%</div><div class="note">51.4% · 首次過半</div></div>
+    <div class="kpi orange"><div class="label">總營收</div><div class="value">US$137.2m</div><div class="note">Headline 弱 · 拆礦抵銷</div></div>
+    <div class="kpi red"><div class="label">Q4 FCF ★</div><div class="value">−US$167m</div><div class="note">收窄但仍負 · 預付扭曲 OCF</div></div>
+  </div>
+
   <div class="sections">
     <section class="panel">
       <h2>Review 結論</h2>
-      <div class="callout watch">用 miner 口徑係失望（總營收 YoY 0%）。用 GPU 取代 ASIC 口徑係確認（AI QoQ +94%）。兩種讀法同時成立。財報後行動：續抱、唔好加倉；Q4 前唔追價。</div>
+      <div class="callout watch verdict">
+        <p><strong>現價相對 Base 溢價約 1%（US$40.53 vs US$40），唔好加倉。</strong>計費支柱係<strong>高質量確認</strong>：AI Cloud US$70.5m、QoQ +110%、首次超過 Bitcoin，Horizon 1 已交付 Microsoft。Headline 營收同 GAAP 盈利係<strong>低質量轉型季</strong>：總營收 137.2 仍平、淨虧 684.0 被減值主導，唔好當成經營 miss 或者 EPS beat。</p>
+        <p>正在被驗證嘅支柱已經由「合約未計費」轉到「計費開始」。用 miner 總營收看，Q4 仍然弱（QoQ −5.2%，YoY −26.7% vs FY25 Q4 187.3）。用「GPU 有冇開始取代 ASIC」去評，Q4 係結構拐點。兩種讀法同時成立，權重已切換。</p>
+        <p>仍未成立嘅路徑係自我融資。當季發股 US$2.11bn、可轉債 US$3.00bn；OCF 1,811.1 幾乎係遞延收入 +1,722.2。所以呢季官方故事係<strong>計費確認 + 稀釋確認</strong>，唔係傳統成長股 beat。</p>
+        <p>最大裂痕係市場已經 price in 計費同罰稀釋，但未證明 Bear 路徑（產能再滑、再輪大額發股）。成本約 US$60 仍高過現價同 Base。行動：<strong>續抱、唔好加倉</strong>。</p>
+      </div>
     </section>
+
     <section class="panel">
-      <h2>Q4 必看</h2>
-      <div class="grid-3">
-        <div class="box"><h3>AI 收入</h3><p>Bullish ≥ US$50m 或 QoQ +40%+；bearish 持平／倒退。</p></div>
-        <div class="box"><h3>ARR 措辭</h3><p>維持或上修並披露已上線 MW；目標縮水則下修 Base。</p></div>
-        <div class="box"><h3>融資</h3><p>無新 ATM 偏多；又一次大型發股偏空。</p></div>
+      <h2>對上份 Preview 門檻</h2>
+      <p class="muted" style="margin-top:-6px">yfinance 日曆營收共識約 US$135.6m 只係 aggregator，非正式官方預期。官方 137.2 略高過呢個數字；<strong>本地無存檔 sell-side 共識，不宣稱 EPS beat／miss</strong>。</p>
+      <div style="overflow-x:auto;margin-top:12px">
+        <table>
+          <thead>
+            <tr><th>Preview 門檻</th><th>結果</th><th>判斷</th><th>對 thesis</th></tr>
+          </thead>
+          <tbody>
+            <tr class="up"><td>AI Cloud ≥ US$50m 或 QoQ +40%</td><td>US$70.5m，+110%</td><td>HIT · Bullish</td><td>支持計費支柱</td></tr>
+            <tr class="up"><td>Horizon 1 交付</td><td>已交付並被 Microsoft 接受</td><td>HIT</td><td>敘事由簡報變事實</td></tr>
+            <tr class="mix"><td>ARR 措辭</td><td>Contracted US$4bn；operating US$1bn（8/26，季後）</td><td>上修；ARR ≠ GAAP</td><td>支持合約、未等於損益表</td></tr>
+            <tr class="down"><td>大型普通股融資會唔會發生</td><td>當季發股 US$2.11bn＋可轉債 US$3.00bn</td><td>DID happen</td><td>削弱資本紀律</td></tr>
+            <tr class="mix"><td>總營收 vs ~US$140m</td><td>US$137.2m</td><td>大致符合、唔係驚喜</td><td>中性</td></tr>
+            <tr class="mix"><td>FCF 燒幅</td><td>−167 vs Q3 −1,280</td><td>收窄但仍負</td><td>紅線未解除</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Q4 vs Q3 完整對照（US$ million）</h2>
+      <p class="muted" style="margin-top:-6px">來源：同一份 8-K EX-99.1。FCF = OCF − PPE − 硬件。現金 5,895.6 同受限 1,724.0 係 2026-06-30 資產負債表。</p>
+      <div style="overflow-x:auto;margin-top:12px">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th class="num">Q4 FY26</th>
+              <th class="num">Q3 FY26</th>
+              <th>判斷</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="down"><td>總營收</td><td class="num">137.2</td><td class="num">144.8</td><td>Headline 弱；拆礦部分被 AI 抵銷</td></tr>
+            <tr class="down"><td>Bitcoin</td><td class="num">66.7</td><td class="num">111.2</td><td>主動拆產能，可解釋</td></tr>
+            <tr class="up"><td>AI Cloud ★</td><td class="num">70.5</td><td class="num">33.6</td><td>強（QoQ +110%）</td></tr>
+            <tr class="up"><td>AI 佔營收</td><td class="num">51.4%</td><td class="num">23.2%</td><td>結構拐點</td></tr>
+            <tr class="down"><td>Adj. EBITDA</td><td class="num">19.2</td><td class="num">59.5</td><td>弱；margin 14% vs 41%</td></tr>
+            <tr class="down"><td>GAAP 淨利</td><td class="num">(684.0)</td><td class="num">(247.8)</td><td>含減值 450.4、HFS FV 跌 102.1</td></tr>
+            <tr class="down"><td>減值</td><td class="num">450.4</td><td class="num">—</td><td>轉型會計；唔好當核心經營 miss</td></tr>
+            <tr class="down"><td>持作出售公允值變動</td><td class="num">102.1 下跌</td><td class="num">—</td><td>同上，低質量虧損來源</td></tr>
+            <tr class="down"><td>SG&amp;A</td><td class="num">128.3</td><td class="num">81.8</td><td>重；對營收約 94%</td></tr>
+            <tr class="mix"><td>OCF</td><td class="num">1,811.1</td><td class="num">75.3</td><td>低質量：遞延收入 +1,722.2</td></tr>
+            <tr class="mix"><td>FCF ★</td><td class="num">(167)</td><td class="num">(1,280)</td><td>燒幅收窄，仍負</td></tr>
+            <tr class="mix"><td>期末現金＋受限</td><td class="num">7,619.5</td><td class="num">2,213.3</td><td>融資堆積</td></tr>
+            <tr class="mix"><td>其中現金及等價物</td><td class="num">5,895.6</td><td class="num">—</td><td>未計受限仍低於有息負債</td></tr>
+            <tr class="mix"><td>受限現金</td><td class="num">1,724.0</td><td class="num">—</td><td>唔好當成可動用流動性</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>FY26 vs FY25（全年）</h2>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th class="num">FY26</th>
+              <th class="num">FY25</th>
+              <th>判斷</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="up"><td>總營收</td><td class="num">707.0</td><td class="num">501.0</td><td>+41%；分母用嚟計 P/S 22.6×</td></tr>
+            <tr class="up"><td>AI Cloud</td><td class="num">128.8</td><td class="num">16.4</td><td>約 8×；全年仍細過單季 contracted 敘事</td></tr>
+            <tr class="mix"><td>Bitcoin</td><td class="num">578.2</td><td class="num">484.6</td><td>全年仍係主引擎；Q4 已經唔係</td></tr>
+            <tr class="down"><td>GAAP 淨利</td><td class="num">(702.6)</td><td class="num">86.9</td><td>由盈轉虧；減值主導</td></tr>
+            <tr class="down"><td>減值</td><td class="num">638.8</td><td class="num">7.2</td><td>轉型會計，低質量</td></tr>
+            <tr class="down"><td>Adj. EBITDA</td><td class="num">245.7</td><td class="num">269.7</td><td>全年倒退；投資期食 margin</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin:10px 0 0">全年 AI 128.8 證明拐點發生喺下半年。P/S 用市值 ~US$16.0B ÷ FY26 707.0 = 22.6×。EV ~US$17.9B（市值＋淨負債 ~1.94B）÷ 707.0 = EV/S 25.3×。</p>
+    </section>
+
+    <section class="panel">
+      <h2>ARR、融資同電話會議線索</h2>
+      <div class="grid-2">
+        <div class="box warn">
+          <h3>ARR 腳註（非 GAAP）</h3>
+          <p>Contracted ARR US$4bn 對應 2026 產能。Operating ARR US$1bn 截至 2026-08-26，Horizon 1 接受<strong>之後</strong>，所以唔係 6 月 30 日 P&amp;L。公司寫明已確認收入可以明顯低過 ARR。Q4 GAAP AI 年化約 282，同 1bn operating 仍有差距。</p>
+        </div>
+        <div class="box pass">
+          <h3>GPU 融資結構</h3>
+          <p>投資級 US$3.6bn、加權 6.0%，Microsoft 相關、連預付覆蓋約 96% GPU capex。非投資級 US$2.8bn，含 Blue Owl／PIMCO 牽頭 Mackenzie US$2.4bn、固定 9.0%。Mirantis／Nostrum 收購<strong>已完成</strong>。呢啲係官方資本結構，唔係線索。</p>
+        </div>
+        <div class="box warn" style="grid-column:1/-1">
+          <h3>電話會議轉述 · 標「線索」</h3>
+          <p>有轉述話年底好多產能會遲上線，GAAP 收入影響主要落喺之後嗰季。本地<strong>無官方逐字稿</strong>，所以只當線索，唔好覆寫 8-K KPI，亦唔好當成已經證成 Bear 路徑。以之後官方 8-K／IR 為準。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="filters sans" id="filters">
+        <button class="active" data-f="all">全部</button>
+        <button data-f="support">支持</button>
+        <button data-f="neutral">中性</button>
+        <button data-f="weaken">削弱</button>
+      </div>
+      <div class="ev-grid" id="evidence">
+        <article class="ev support" data-k="support">
+          <div class="type">計費 KPI<span class="impact support">支持</span></div>
+          <h3>AI 70.5、mix 51%、QoQ +110% — Preview HIT</h3>
+          <p>上份 Preview 要求 ≥50 或 +40% QoQ，實際 70.5 同 +110%，而且首次超過 mining 66.7。呢條係高質量確認：數字已入帳、財政期 FY26 Q4、USD US GAAP、來源 8-K EX-99.1。計費支柱由未成立升到部分成立；仍然唔等於 contracted 4bn 已經變成現金。</p>
+        </article>
+        <article class="ev support" data-k="support">
+          <div class="type">交付<span class="impact support">支持</span></div>
+          <h3>Horizon 1 已交付並接受</h3>
+          <p>Microsoft 相關產能由簡報變成已交付資產，解除上份「會唔會延期」嘅核心不確定性。Horizon 2 調試中、3–4 目標 2026 年曆 Q4，仲未入呢季損益。對敘事係高質量；對當季營收只解釋到 70.5 點解跳，解釋唔到點解總營收仍然 137.2。</p>
+        </article>
+        <article class="ev weaken" data-k="weaken">
+          <div class="type">稀釋／資本<span class="impact weaken">削弱</span></div>
+          <h3>發股 2.11bn 已發生；股數 394.1M</h3>
+          <p>Preview 擔心嘅大型普通股融資 DID happen，另加可轉債 3.00bn、設施 938。10-K 封面 394,058,648 股；yfinance 357.4M 過時，已棄用。流動性換嚟嘅係攤薄同淨負債 ~1.94B，唔係經營自我融資。對持倉：成本 60 被進一步稀釋，加倉更無紀律。</p>
+        </article>
+        <article class="ev weaken" data-k="weaken">
+          <div class="type">現金流質量<span class="impact weaken">削弱</span></div>
+          <h3>OCF 1,811 幾乎係預付；FCF 仍 −167</h3>
+          <p>遞延收入 +1,722.2 解釋咗絕大部分經營現金流入。客戶先俾錢、收入未賺完，所以唔可以讀成「已經賺到嘅現金利潤」。FCF 由 −1,280 收到 −167 係改善，紅線要現金低於債務並且 FCF 為負——兩樣仍然同時成立。</p>
+        </article>
+        <article class="ev weaken" data-k="weaken">
+          <div class="type">GAAP 盈利<span class="impact weaken">削弱</span></div>
+          <h3>淨虧 684.0；減值 450.4；HFS FV 跌 102.1</h3>
+          <p>Q4 淨虧被轉型會計主導，全年減值 638.8 vs FY25 嘅 7.2。SG&amp;A 128.3 vs 81.8，Adj. EBITDA margin 14% vs 41%。Headline／GAAP 係低質量轉型季：唔好宣稱 EPS beat，亦唔好把減值當成 GPU 單位經濟已經失敗——單位 COGS 仍約 13%。</p>
+        </article>
+        <article class="ev neutral" data-k="neutral">
+          <div class="type">ARR／共識<span class="impact neutral">中性</span></div>
+          <h3>Operating ARR 1bn 係 8/26 非 GAAP；共識只係 aggregator</h3>
+          <p>US$1bn operating ARR 用季後日期，禁止當成 6/30 已入帳。yfinance 營收共識約 135.6 略低過官方 137.2，但係 aggregator，唔構成 beat 敘事。呢兩樣都唔改 HUD：現價仍只係 vs Base +1%。</p>
+        </article>
+        <article class="ev neutral" data-k="neutral">
+          <div class="type">股價反應<span class="impact neutral">中性</span></div>
+          <h3>40.53 vs 上份 44.06 vs 成本 60</h3>
+          <p>市場似乎同時 price in 計費開始，同罰稀釋、減值、ARR 尚未變成等額 GAAP。呢個反應同「計費確認 + 稀釋確認」一致，<strong>未證明</strong> Bear 路徑（部署再滑、再輪大額發股）。貼近新 Base 唔等於便宜到可以加倉。</p>
+        </article>
+        <article class="ev neutral" data-k="neutral">
+          <div class="type">線索 · 電話會議<span class="impact neutral">中性</span></div>
+          <h3>「年底產能遲上線」— 標線索，無官方逐字稿</h3>
+          <p>轉述話好多 12 月季度產能會遲、GAAP 主要跟下一季。本地無官方 transcript，所以呢句唔入確認表，亦唔覆寫 8-K。若之後官方 8-K 證實 Horizon 2–4 滑出 2026 Q4 超過一個完整季度，先觸發 F2 失效條件。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>股價、估值同持倉</h2>
+      <div class="grid-2">
+        <div class="box warn">
+          <h3>市場在 price 咩</h3>
+          <p>現價 40.53 低過上份報告 44.06，亦低過成本約 60。官方 394.1M 股 × 40.53 ≈ 市值 16.0B，P/S 22.6× FY26 707.0。市場接受 Horizon 1 同計費跳升，同時對發股、減值、7% GAAP／contracted 缺口打折。呢個定價合理，未證明 Bear 已經發生。</p>
+        </div>
+        <div class="box fail">
+          <h3>對行動</h3>
+          <p><strong>現價相對 Base +1%，續抱、唔好加倉。</strong>Skill 3 因計費同 Horizon 1 上調 Base，亦上調稀釋同淨負債；現價大約喺新 Base 附近，仍然唔係加倉價。摊薄只會喺失效時擴大損失。下一個 checkpoint：Horizon 2–4 係咪真係 2026 年曆 Q4 交付，同 2026-12-31 前後 operating ARR 有冇靠近 4bn。</p>
+        </div>
       </div>
     </section>
   </div>
-  <p class="footer">Q3 共識本地無存檔，不宣稱 EPS beat。此分析僅供研究參考，不構成投資建議。</p>
+
+  <p class="footer">官方優先：SEC 8-K EX-99.1 accession 0001878848-26-000051 + 10-K 0001878848-26-000052（filing 2026-08-27，期終 2026-06-30，USD US GAAP，validation_status: verified）。現價 yfinance delayed 2026-08-28。棄用 yfinance 357.4M 股數同營收共識 beat 敘事。電話會議無本地官方逐字稿，只當線索。此分析僅供研究參考，不構成投資建議。</p>
 </div>
+<script>
+document.getElementById('filters').addEventListener('click', ev => {
+  const b = ev.target.closest('button'); if (!b) return;
+  document.querySelectorAll('#filters button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  const f = b.dataset.f;
+  document.querySelectorAll('#evidence .ev').forEach(card => {
+    card.style.display = (f === 'all' || card.dataset.k === f) ? '' : 'none';
+  });
+});
+</script>
 <section id="page-comments" data-page="/iren/earnings-review.html"></section>
 <script src="../assets/page-comments.js" defer></script>
-</body></html>
+</body>
+</html>
