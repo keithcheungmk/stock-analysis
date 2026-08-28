@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IREN One-Pager · 2026-08-28</title>
+<style>
+  :root {
+    --bg:#f3efe6; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --teal-deep:#134e4a; --watch:#c2410c; --watch-soft:#ffedd5;
+    --fail:#b91c1c; --fail-soft:#fee2e2; --pass:#15803d; --pass-soft:#dcfce7;
+    --info:#1d4ed8; --info-soft:#dbeafe; --shadow:0 16px 44px rgba(28,25,23,.1);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;color:var(--ink);background:radial-gradient(circle at 10% 0%,#d8f3ee 0,transparent 32%),radial-gradient(circle at 90% 8%,#ffe4cc 0,transparent 28%),var(--bg);line-height:1.5}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .deck{min-height:100%;display:flex;flex-direction:column;max-width:1180px;margin:0 auto;padding:18px 18px 16px}
+  .progress{height:4px;background:#e7e0d5;border-radius:999px;overflow:hidden;margin-bottom:14px}
+  .progress>span{display:block;height:100%;width:25%;background:linear-gradient(90deg,#0f766e,#f59e0b);transition:width .25s ease}
+  .slide{display:none;animation:rise .28s ease}
+  .slide.on{display:block}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .status-box{background:linear-gradient(165deg,#fff7ed,#ffedd5 55%,#fdba74);border:1px solid #fb923c;border-radius:28px;padding:22px;box-shadow:var(--shadow)}
+  .status-box.fail{background:linear-gradient(165deg,#fef2f2,#fee2e2 55%,#fecaca);border:1px solid #fca5a5}
+  .eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--watch);font-weight:800}
+  .status-box.fail .eyebrow,.status-box.fail .status-title{color:var(--fail)}
+  .status-title{font-size:2rem;font-weight:800;color:var(--watch);margin:10px 0 8px;line-height:1.15}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 52%,#115e59);color:#fff;border-radius:28px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.9rem}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .badge{display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.8rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{color:var(--muted);font-size:.78rem;font-weight:700}
+  .kpi .value{font-size:1.45rem;font-weight:800;margin-top:4px}
+  .kpi.ok{border-top:5px solid var(--pass)}.kpi.warn{border-top:5px solid var(--watch)}.kpi.fail{border-top:5px solid var(--fail)}.kpi.teal{border-top:5px solid var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 6px;font-size:1.22rem}
+  .sub{margin:0 0 14px;color:var(--muted);font-size:.92rem}
+  .thesis{background:linear-gradient(90deg,#fff7ed,#ffedd5);border:1px solid #fdba74;border-radius:18px;padding:16px 18px}
+  .thesis.fail{background:linear-gradient(90deg,#fef2f2,#fee2e2);border:1px solid #fca5a5}
+  .thesis p{margin:0 0 10px}.thesis p:last-child{margin:0}
+  .fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.fact-grid{grid-template-columns:1fr}}
+  .fact{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;min-height:132px}
+  .fact.ok{border-left:6px solid var(--pass)}.fact.warn{border-left:6px solid var(--watch)}.fact.bad{border-left:6px solid var(--fail)}
+  .fact .n{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:var(--muted)}
+  .fact h3{margin:4px 0 8px;font-size:1.02rem}
+  .fact p{margin:0;color:var(--muted);font-size:.9rem}
+  .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.val-grid{grid-template-columns:1fr}}
+  .val{border-radius:20px;padding:16px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left}
+  .val.bear{border-top:6px solid var(--fail)}.val.base{border-top:6px solid var(--watch)}.val.bull{border-top:6px solid var(--pass)}
+  .val.on{box-shadow:var(--shadow);transform:translateY(-2px)}
+  .val .tag{font-size:.75rem;font-weight:800;letter-spacing:.08em}
+  .val .px{font-size:2rem;font-weight:800;margin:6px 0}
+  .val p{margin:0;color:var(--muted);font-size:.88rem}
+  .note{margin-top:14px;background:var(--info-soft);border:1px solid #bfdbfe;border-radius:16px;padding:14px 16px}
+  .math{margin-top:12px;background:#f0fdfa;border:1px dashed #99f6e4;border-radius:16px;padding:14px 16px;font-size:.9rem}
+  .math strong{color:var(--teal)}
+  .timeline{display:grid;gap:10px}
+  .event{display:grid;grid-template-columns:168px 1fr auto;gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+  @media(max-width:860px){.event{grid-template-columns:1fr}}
+  .when{font-weight:800;font-size:.82rem;color:var(--teal-deep)}
+  .dir{font-size:.75rem;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap}
+  .dir.high{background:var(--watch-soft);color:var(--watch)}.dir.risk{background:var(--fail-soft);color:var(--fail)}.dir.mid{background:var(--info-soft);color:var(--info)}.dir.low{background:#f5f5f4;color:var(--muted)}
+  .kill{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px}
+  @media(max-width:860px){.kill{grid-template-columns:1fr}}
+  .kill div{background:linear-gradient(180deg,#fef2f2,#fff 50%);border:1px solid #fecaca;border-radius:16px;padding:14px}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:8px}
+  .dots{display:flex;gap:8px}
+  .dot{width:10px;height:10px;border-radius:999px;border:0;background:#d6d3d1;cursor:pointer}
+  .dot.on{background:var(--teal);width:28px}
+  button.navbtn{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;cursor:pointer}
+  button.navbtn:disabled{opacity:.4;cursor:default}
+  .foot{color:var(--muted);font-size:.78rem;margin-top:8px}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .hud-note{margin:8px 0 0;font-size:.82rem;color:var(--muted)}
+  .action-bar{margin-top:12px}
+  .action-pill{display:inline-flex;padding:10px 16px;border-radius:999px;background:#1c1917;color:#fff;font-weight:800;font-size:.88rem}
+  .muted{color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="deck">
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+  <div class="stage">
+
+    <section class="slide on" data-slide="0">
+      <div class="hero">
+        <div class="status-box fail sans">
+          <div class="eyebrow">One-Pager · Update · Q4 FY26</div>
+          <div class="status-title">續抱／唔好加倉</div>
+          <p style="margin:0;color:var(--fail);font-weight:700">F1 FAIL 紅線 1 · 非正式 50／130 · 唔係正式 WATCH</p>
+          <p style="margin:12px 0 0;color:var(--muted);font-size:.9rem">持倉 1,080 @ ~US$60 · 浮虧約 32% · 現價 vs Base +1%</p>
+        </div>
+        <div class="hero-main sans">
+          <h1>IREN · IREN Limited</h1>
+          <p>2026-08-28 · FY2026-Q4／FY26 · 期終 2026-06-30 · USD · US GAAP verified</p>
+          <p style="margin-top:6px">SEC 8-K 0001878848-26-000051 EX-99.1 + 10-K 0001878848-26-000052</p>
+          <div class="badges">
+            <span class="badge">AI Cloud US$70.5m +110%</span>
+            <span class="badge">FCF ≈ −US$167m</span>
+            <span class="badge">續抱／唔好加倉</span>
+          </div>
+        </div>
+      </div>
+      <section class="hud sans" id="decision-hud">
+        <h2>Decision HUD <span class="hud-tag">現價 vs Base +1%</span></h2>
+        <p class="hud-note">現價相對 Base 溢價約 <strong>+1%</strong>（US$40.53 vs US$40）→ 接近公允，唔好加倉。區間係 F3 研究情景，<strong>唔係</strong>公司指引。棄用 yfinance 357.4M 股同 Q3 現金／負債。</p>
+        <div class="hud-grid">
+          <div class="hud-cell"><div class="l">現價（延遲 2026-08-28）</div><div class="v">US$40.53</div><div class="s">hist close 2026-08-27 · 市值 ~US$16.0B · 10-K 394,058,648 股</div></div>
+          <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">16 / 40 / 80</div><div class="s">F3 研究情景，非指引</div></div>
+          <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+1%</div><div class="s">接近公允 · 唔好加倉</div></div>
+          <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 22.6×</div><div class="s">FY26 US$707.0m · EV/S 25.3× · EV ≈ US$17.9B</div></div>
+        </div>
+        <div class="hud-drivers">
+          <span>★ Q4 GAAP AI Cloud US$70.5m（+110% QoQ）</span>
+          <span>★ operating ARR US$1bn（2026-08-26，NON-GAAP ≠ P&amp;L）</span>
+          <span>★ Q4 研究 FCF ≈ −US$167m（OCF 1811.1 − PPE 1328.9 − 硬件 649.3）</span>
+          <span>★ Q4 發股 US$2.11bn + 可轉債 US$3.00bn</span>
+          <span>★ 淨負債 ~US$1.94B（7.84 − 5.90）</span>
+        </div>
+        <p class="hud-note">官方：8-K 0001878848-26-000051 EX-99.1 + 10-K 0001878848-26-000052 · 期末 2026-06-30 · USD US GAAP · verified。</p>
+      </section>
+      <div class="action-bar sans">
+        <span class="action-pill">現價相對 Base 溢價約 +1%（US$40.53 vs US$40），接近公允，唔好加倉。</span>
+      </div>
+      <div class="panel">
+        <h2 class="sans">Thesis</h2>
+        <div class="thesis fail sans">
+          <p><strong>合約支柱已經驗證。</strong>Q4 GAAP AI Cloud US$70.5m（+110% QoQ）首次超過 Bitcoin US$66.7m，佔營收約 51%。Horizon 1 已交付並被 Microsoft 接受。呢啲係 8-K／10-K 入帳同官方確認，唔使賭社媒。</p>
+          <p><strong>計費仍然只係部分成立。</strong>GAAP AI 年化約 US$282m，只約佔 contracted ARR US$4bn 嘅 7%。operating ARR US$1bn 截至 2026-08-26，官方腳註寫明 NON-GAAP，唔等於損益表。Headline 營收 US$137.2m、YoY −27%，轉型季唔好當成雲公司規模。</p>
+          <p><strong>FCF 同自我融資未成立。</strong>Q4 研究 FCF ≈ −US$167m，正 OCF 幾乎係客戶預付。最大裂痕係用發股 US$2.11bn、可轉債 US$3.00bn 去 bridging。無受限現金 US$5.90B 仍低過有息負債 US$7.84B；F1 紅線 1 FAIL（非正式 50／130）。</p>
+          <p><strong>現價相對 Base 溢價約 +1%（US$40.53 vs US$40），接近公允，唔好加倉。</strong>續抱 1,080 股 @ ~US$60；浮虧約 32% 係沉沒成本。成本要靠 Bull US$80 先回本，唔好喺約等於 Base 嘅價位攤薄。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="1">
+      <div class="kpis sans">
+        <div class="kpi teal"><div class="label">現價 · delayed 8/28</div><div class="value">US$40.53</div></div>
+        <div class="kpi ok"><div class="label">Q4 AI Cloud · +110%</div><div class="value">US$70.5m</div></div>
+        <div class="kpi warn"><div class="label">operating ARR · NON-GAAP</div><div class="value">US$1bn</div></div>
+        <div class="kpi fail"><div class="label">Q4 研究 FCF</div><div class="value">−US$167m</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">而家最重要嘅 5 個事實</h2>
+        <p class="sub">Update · Q4 FY26 之後。來源：SEC 8-K EX-99.1 + 10-K（期末 2026-06-30，USD，US GAAP verified）。ARR 腳註：非 GAAP。</p>
+        <div class="fact-grid">
+          <article class="fact ok">
+            <div class="n sans">01 · 計費拐點</div>
+            <h3 class="sans">AI Cloud US$70.5m · 佔比 51%</h3>
+            <p>QoQ +110%，首次超過 Bitcoin US$66.7m。連續兩季翻倍，證明計費開始，唔係只簽紙。年化約 US$282m 對市值 ~US$16.0B 仍然細。</p>
+          </article>
+          <article class="fact ok">
+            <div class="n sans">02 · 交付／ARR</div>
+            <h3 class="sans">Horizon 1 已交付 Microsoft</h3>
+            <p>contracted ARR US$4bn；operating ARR US$1bn（截至 2026-08-26）。官方腳註：ARR 非 GAAP，已確認收入可以明顯較低。Operating ARR 含季後 Horizon 1，唔好直接當 6 月 30 日損益表。</p>
+          </article>
+          <article class="fact warn">
+            <div class="n sans">03 · Headline</div>
+            <h3 class="sans">總營收 US$137.2m · YoY −27%</h3>
+            <p>拆 ASIC／mining 可解釋，但投資人買增長股。Headline 連續兩季低於 US$150m，會壓住 trailing 倍數。唔好當成雲收入 miss。</p>
+          </article>
+          <article class="fact bad">
+            <div class="n sans">04 · 現金</div>
+            <h3 class="sans">FCF ≈ −US$167m · OCF 靠預付</h3>
+            <p>OCF US$1,811.1m − PPE 1,328.9 − 硬件 649.3。遞延收入 +US$1,722.2m 撐住經營現金流。燒幅較 Q3 收窄，紅線未解除。</p>
+          </article>
+          <article class="fact bad" style="grid-column:1/-1">
+            <div class="n sans">05 · 稀釋／減值</div>
+            <h3 class="sans">官方 394,058,648 股 · ASIC 減值 US$450.4m</h3>
+            <p>Q4 發股 US$2.11bn + 可轉債 US$3.00bn。棄用 yfinance 357.4M。全年 ASIC 減值 638.8；持作出售公允值再跌 US$102.1m。唔好當成無關非現金。淨負債 ~US$1.94B（7.84 − 5.90）。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="2">
+      <div class="kpis sans">
+        <div class="kpi teal"><div class="label">現價錨</div><div class="value">US$40.53</div></div>
+        <div class="kpi warn"><div class="label">Framework 3 Base</div><div class="value">US$40</div></div>
+        <div class="kpi"><div class="label">Bear – Bull</div><div class="value">US$16–80</div></div>
+        <div class="kpi fail"><div class="label">期望值 · 建倉區</div><div class="value">US$44 · 22–32</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">估值摘要 · Framework 3</h2>
+        <p class="sub">只引用 F3，無 compact 倍數模型。FY2027E EV/S − 淨負債 ÷ 攤薄股數。點擊情景。現價相對 Base 溢價約 +1%，接近公允，唔好加倉。成本 ~US$60 要靠 Bull 先回本。</p>
+        <div class="val-grid sans" id="valGrid">
+          <button class="val bear" data-val="bear" type="button">
+            <div class="tag">BEAR · 25% · −61%</div>
+            <div class="px">US$16</div>
+            <p>FY27E US$1.4B · 6× · 450M 股 · 淨負債 US$3.0B。</p>
+          </button>
+          <button class="val base on" data-val="base" type="button">
+            <div class="tag">BASE · 50% · 現價 +1%</div>
+            <div class="px">US$40</div>
+            <p>FY27E US$2.8B · 7× · 420M 股 · 淨負債 US$2.2B。</p>
+          </button>
+          <button class="val bull" data-val="bull" type="button">
+            <div class="tag">BULL · 25% · +97%</div>
+            <div class="px">US$80</div>
+            <p>FY27E US$4.5B · 8× · 410M 股 · 淨負債 US$1.5B。</p>
+          </button>
+        </div>
+        <div class="math sans"><strong>Base 算術：</strong>EV = 2.8B × 7 = US$19.6B；權益 = 19.6 − 2.2 = US$17.4B；÷ 420M ≈ <strong>US$41.4</strong>，研究情景四捨五入 <strong>US$40</strong>。期望值 25／50／25 ≈ US$44（0.25×16 + 0.50×40 + 0.25×80），唔夠加倉。建倉區仍係 US$22–32。</div>
+        <div class="note sans" id="valNote">Base 係主參考：現價 US$40.53 相對 Base US$40 溢價約 +1%，接近公允。FY2027E 係研究假設，唔係公司指引。成本 US$60 介乎 Base 同 Bull，要靠牛市路徑先回本。</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="3">
+      <div class="panel">
+        <h2 class="sans">股價催化劑 · 未來 1–2 季</h2>
+        <p class="sub">窗口 2026-08-28 至約 2027-Q1。只列會改寫倍數或現金路徑嘅事件。已發生嘅唔再寫成即將公布。</p>
+        <div class="timeline sans">
+          <div class="event">
+            <div class="when">已發生 2026-08-27<br>官方 8-K／10-K</div>
+            <div>
+              <strong>Q4 FY26／FY26 業績已印</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">AI US$70.5m；發股 US$2.11bn。已消化中，唔好再當近端催化劑。</div>
+            </div>
+            <span class="dir low">已發生</span>
+          </div>
+          <div class="event">
+            <div class="when">已發生 2026-08-13<br>官方接受</div>
+            <div>
+              <strong>Horizon 1 交付 Microsoft</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">利多已部分 price in；operating ARR 去到 US$1bn。交付接受 ≠ 等額 GAAP 即時入帳。</div>
+            </div>
+            <span class="dir low">已發生</span>
+          </div>
+          <div class="event">
+            <div class="when">2026 年曆 Q4<br>官方目標</div>
+            <div>
+              <strong>Horizon 2–4 交付</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">接受函／開始 bill。滑期超過一個完整季度就係失效候選。呢個先係下一個估值閘。</div>
+            </div>
+            <span class="dir high">雙向 · 最高</span>
+          </div>
+          <div class="event">
+            <div class="when">2026-12-31<br>官方目標日</div>
+            <div>
+              <strong>US$4bn operating ARR 目標</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">operating ARR vs contracted。記住 ARR ≠ GAAP 收入；腳註寫明已確認可以明顯較低。</div>
+            </div>
+            <span class="dir high">雙向 · 高</span>
+          </div>
+          <div class="event">
+            <div class="when">FY2027-Q1 業績<br>電話會議轉述</div>
+            <div>
+              <strong>GAAP AI 有冇反映年底產能</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">公司轉述指好多產能遲上線、收入主要落後一季。要睇 AI 有冇再翻倍，而唔係 headline EPS。</div>
+            </div>
+            <span class="dir high">雙向 · 高</span>
+          </div>
+          <div class="event">
+            <div class="when">持續<br>融資觀察</div>
+            <div>
+              <strong>再融資／ATM／可轉債</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">單季 &gt;US$1B 普通股而 AI 停滯 → 失效。NVIDIA 3,000 萬股 @ US$70 仍價外（現價 40.53）。</div>
+            </div>
+            <span class="dir risk">偏空 · 高</span>
+          </div>
+        </div>
+        <div class="kill sans">
+          <div>
+            <h3 style="margin:0 0 6px">失效 1</h3>
+            未來兩季 AI Cloud 收入連續持平／倒退（QoQ ≤ 0%）→ 計費支柱停滯，Base US$40 守唔住。
+          </div>
+          <div>
+            <h3 style="margin:0 0 6px">失效 2</h3>
+            Horizon 2–4 官方時間表滑出 2026 年曆 Q4 超過一個完整季度。
+          </div>
+          <div>
+            <h3 style="margin:0 0 6px">失效 3</h3>
+            再一次公開大型普通股融資（&gt;US$1B）而當季 AI 收入停滯 → 退出而唔係攤薄。
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav sans">
+    <div class="dots" id="dots"></div>
+    <div class="btns">
+      <button class="navbtn" id="prev" type="button">上一頁</button>
+      <button class="navbtn" id="next" type="button">下一頁</button>
+    </div>
+  </div>
+  <p class="foot sans">估值只引用 Framework 3（2026-08-28）。現價 delayed／hist close，唔當 live。官方股數 394,058,648（10-K），棄用 yfinance 357.4M。持倉 1,080 @ ~US$60。此分析僅供研究參考，不構成投資建議。← → 翻頁</p>
+</div>
+<script>
+  const slides = [...document.querySelectorAll(".slide")];
+  const bar = document.getElementById("bar");
+  const dots = document.getElementById("dots");
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  let i = 0;
+  slides.forEach((_, idx) => {
+    const b = document.createElement("button");
+    b.className = "dot" + (idx === 0 ? " on" : "");
+    b.type = "button";
+    b.setAttribute("aria-label", "第 " + (idx + 1) + " 頁");
+    b.addEventListener("click", () => go(idx));
+    dots.appendChild(b);
+  });
+  function go(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, idx) => s.classList.toggle("on", idx === i));
+    [...dots.children].forEach((d, idx) => d.classList.toggle("on", idx === i));
+    bar.style.width = ((i + 1) / slides.length * 100) + "%";
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+  }
+  prev.addEventListener("click", () => go(i - 1));
+  next.addEventListener("click", () => go(i + 1));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === "PageDown") go(i + 1);
+    if (e.key === "ArrowLeft" || e.key === "PageUp") go(i - 1);
+  });
+  const notes = {
+    bear: "Bear：現價下行約 61%。Horizon 2–4 再滑 ≥2 季；FY2027E 營收 US$1.4B；再發股。6× EV/S · 450M · 淨負債 US$3.0B。公式 (1.4×6 − 3.0)／450M ≈ US$12，情景取 US$16。",
+    base: "Base 係主參考：現價 US$40.53 相對 Base US$40 溢價約 +1%，接近公允，唔好加倉。算術：2.8B × 7 − 2.2B ÷ 420M ≈ US$41.4，四捨五入 US$40。建倉區 US$22–32 要 FCF 收窄或價格補折扣。",
+    bull: "Bull 上行約 97%。接近官方 US$4bn ARR 進入損益表；FY2027E 營收 US$4.5B。8× · 410M · 淨負債 US$1.5B。公式 (4.5×8 − 1.5)／410M ≈ US$84，情景取 US$80。成本 US$60 要靠呢條路徑先回本。"
+  };
+  document.getElementById("valGrid").addEventListener("click", (e) => {
+    const btn = e.target.closest(".val");
+    if (!btn) return;
+    document.querySelectorAll(".val").forEach((el) => el.classList.toggle("on", el === btn));
+    document.getElementById("valNote").textContent = notes[btn.dataset.val];
+  });
+  go(0);
+</script>
+<section id="page-comments" data-page="/iren/one-pager.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
