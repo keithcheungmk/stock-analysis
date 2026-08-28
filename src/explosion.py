@@ -188,12 +188,12 @@ def detect_explosion(
     
     if eps_explosion:
         explanation_parts.append(
-            f"EPS explosion TRIGGERED: Q{last_q} actual ${last_actual:.2f} vs consensus ${last_consensus:.2f} "
+            f"EPS explosion TRIGGERED: {last_q} actual ${last_actual:.2f} vs consensus ${last_consensus:.2f} "
             f"({last_surprise:+.1f}% surprise, threshold ±{EPS_BEAT_THRESHOLD_PCT}%)"
         )
     elif eps_data:
         explanation_parts.append(
-            f"EPS: Q{last_q} surprise {last_surprise:+.1f}% (below {EPS_BEAT_THRESHOLD_PCT}% threshold)"
+            f"EPS: {last_q} surprise {last_surprise:+.1f}% (below {EPS_BEAT_THRESHOLD_PCT}% threshold)"
         )
     else:
         explanation_parts.append("EPS data unavailable from yfinance")
