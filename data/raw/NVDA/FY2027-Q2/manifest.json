@@ -1,0 +1,104 @@
+{
+  "schema_version": 2,
+  "company": "NVIDIA Corporation",
+  "ticker": "NVDA",
+  "fiscal_period": "FY2027-Q2",
+  "period_end": "2026-07-26",
+  "currency": "USD",
+  "accounting_basis": [
+    "US_GAAP",
+    "Non_GAAP"
+  ],
+  "cik": "0001045810",
+  "authority": "Official company IR and SEC EDGAR",
+  "event_page": "https://nvidianews.nvidia.com/news/releases",
+  "retrieved_at": "2026-08-28T09:23:23.313100+00:00",
+  "validation_status": "partial",
+  "bootstrap": "catalog_snapshot",
+  "files": [
+    {
+      "path": "ir-IR-official-ir-nvidia-announces-financial-results-for-second-quarter-fiscal-2027.html",
+      "type": "earnings_release",
+      "source_tier": "official",
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+      "source_authority": "Company IR",
+      "validation_status": "verified",
+      "mime_type": "text/html",
+      "period_end": "2026-07-26",
+      "filing_form": "IR",
+      "accession_number": "official-ir",
+      "filing_date": "2026-08-26",
+      "catalog_note": "URL catalog snapshot; run download_official_research.py to fetch body and sha256"
+    },
+    {
+      "path": "sec-10-Q-0001045810-26-000075-nvda-20260726.html",
+      "type": "regulatory_filing",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+      "source_authority": "SEC EDGAR",
+      "validation_status": "verified",
+      "mime_type": "text/html",
+      "period_end": "2026-07-26",
+      "filing_form": "10-Q",
+      "accession_number": "0001045810-26-000075",
+      "filing_date": "2026-08-26",
+      "catalog_note": "URL catalog snapshot; run download_official_research.py to fetch body and sha256"
+    },
+    {
+      "path": "sec-8-K-0001045810-26-000073-nvda-20260826.html",
+      "type": "event_filing",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/nvda-20260826.htm",
+      "source_authority": "SEC EDGAR",
+      "validation_status": "verified",
+      "mime_type": "text/html",
+      "period_end": "2026-08-26",
+      "filing_form": "8-K",
+      "accession_number": "0001045810-26-000073",
+      "filing_date": "2026-08-26",
+      "catalog_note": "URL catalog snapshot; run download_official_research.py to fetch body and sha256"
+    },
+    {
+      "path": "sec-8-K-0001045810-26-000073-q2fy27cfocommentary.html",
+      "type": "earnings_release",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/q2fy27cfocommentary.htm",
+      "source_authority": "SEC EDGAR",
+      "validation_status": "verified",
+      "mime_type": "text/html",
+      "period_end": "2026-08-26",
+      "filing_form": "8-K",
+      "accession_number": "0001045810-26-000073",
+      "filing_date": "2026-08-26",
+      "catalog_note": "URL catalog snapshot; run download_official_research.py to fetch body and sha256"
+    },
+    {
+      "path": "sec-8-K-0001045810-26-000073-q2fy27pr.html",
+      "type": "earnings_release",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/q2fy27pr.htm",
+      "source_authority": "SEC EDGAR",
+      "validation_status": "verified",
+      "mime_type": "text/html",
+      "period_end": "2026-08-26",
+      "filing_form": "8-K",
+      "accession_number": "0001045810-26-000073",
+      "filing_date": "2026-08-26",
+      "catalog_note": "URL catalog snapshot; run download_official_research.py to fetch body and sha256"
+    }
+  ],
+  "unavailable_sources": [
+    {
+      "type": "official_transcript",
+      "status": "not_part_of_standard_official_package",
+      "substitute": "webcast_metadata"
+    }
+  ],
+  "pending_sources": [
+    {
+      "reason": "local_body_not_fetched_in_bootstrap",
+      "hint": "Run scripts/download_official_research.py with SEC_USER_AGENT"
+    }
+  ],
+  "release_date": "2026-08-26"
+}
