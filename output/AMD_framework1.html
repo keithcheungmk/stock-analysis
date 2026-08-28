@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AMD Framework 1 初篩</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--pass:#15803d;--pass-soft:#dcfce7;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:260px 1fr;gap:16px}@media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#f0fdf4,#dcfce7 70%,#bbf7d0);border:1px solid #86efac;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:3.2rem;font-weight:800;color:var(--pass);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px;padding:14px;background:rgba(255,255,255,.12);border-radius:16px;border:1px solid rgba(255,255,255,.15)}
+  .hud div{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem}
+  .hud strong{display:block;font-size:1rem;margin-top:2px}
+  .badge{display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;font-family:"Avenir Next","PingFang TC",sans-serif;background:var(--watch-soft);color:var(--watch);margin-top:12px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}@media(max-width:860px){.kpis,.hud{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow);border-top:4px solid var(--teal)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.25rem;font-weight:800;margin-top:4px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;margin-top:16px;box-shadow:var(--shadow)}
+  h2{margin:0 0 12px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px;background:var(--pass-soft);border:1px solid #86efac;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout p{margin:0 0 8px}.callout p:last-child{margin:0}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div style="font-family:Avenir Next,PingFang TC,sans-serif;font-size:.78rem;font-weight:700;color:var(--pass)">FRAMEWORK 1</div>
+      <div class="score-num">PASS</div>
+      <div style="color:var(--muted);font-weight:600">95 / 130</div>
+      <div style="margin-top:10px;font-size:.85rem">三條紅線未觸發</div>
+    </div>
+    <div class="hero-main">
+      <h1>AMD · Framework 1 基本面初篩</h1>
+      <p>Advanced Micro Devices · 2026-08-27 · Q2 2026（2026-06-27）· SEC 8-K + 10-Q</p>
+      <div class="hud">
+        <div>現價<strong>US$480.93</strong><span style="opacity:.8"> delayed 8/27</span></div>
+        <div>估值尺<strong>Bear 240 · Base 390 · Bull 620</strong></div>
+        <div>溢價／折讓<strong>+23% vs Base</strong></div>
+        <div>驅動 KPI<strong>DC +107% · FCF margin 14%</strong></div>
+      </div>
+      <span class="badge">溢價約 23% 下：僅觀察／唔好加倉（持倉未確認）</span>
+    </div>
+  </section>
+  <div class="kpis">
+    <div class="kpi"><div class="label">Data Center</div><div class="value">US$6.7B</div><div class="note">YoY +107%</div></div>
+    <div class="kpi"><div class="label">總營收 Q2</div><div class="value">US$11.5B</div><div class="note">YoY +50%</div></div>
+    <div class="kpi"><div class="label">FCF margin</div><div class="value">14%</div><div class="note">Q1 25% → 回落</div></div>
+    <div class="kpi"><div class="label">Q3 指引</div><div class="value">~US$13B</div><div class="note">±US$0.3B</div></div>
+  </div>
+  <section class="panel">
+    <h2>初篩結論</h2>
+    <div class="callout">
+      <p><strong>PASS（95／130）。</strong>Data Center US$6.7B（+107% YoY）驗證 AI＋伺服器主線；現金遠超債務，FCF 為正，三條紅線均未觸發。</p>
+      <p>最大風險：現價 US$480.93 高於 F3 Base US$390 約 23%；Helios 本季稍後 ramp 但 Q2 幾乎未入帳；Q2 FCF margin 14% 較 Q1 25% 回落。</p>
+      <p>對行動：基本面支持續觀察，但溢價下<strong>唔好加倉</strong>；待 Helios 出貨與 Q3 財報驗證。</p>
+    </div>
+  </section>
+  <p class="footer">來源：SEC 8-K EX-99.1（2026-08-04）；現價 yfinance delayed。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>
