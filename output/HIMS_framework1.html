@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HIMS Framework 1 初篩</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:3.4rem;font-weight:800;line-height:1;color:var(--fail);margin:8px 0 0}
+  .score-den{font-size:1.05rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .warn{color:var(--watch);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .danger{color:var(--fail);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#7f1d1d;color:#fff;border-color:#7f1d1d}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--fail-soft);color:var(--fail);border-radius:999px;padding:8px 14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 1</div>
+      <div class="score-num">FAIL</div>
+      <div class="score-den">紅線 1 觸發 · 不評 13 維</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge fail">流動性 0.62× 可轉債 且 Q2 FCF 為負</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>HIMS · Framework 1 基本面初篩</h1>
+      <p>Hims &amp; Hers Health, Inc. · 截至 2026-08-28 · 最新季 2026-Q2（期終 2026-06-30）· USD · US GAAP／Non-GAAP · SEC 8-K EX-99.1 + 10-Q</p>
+      <div class="badges">
+        <span class="badge">現價 US$31.66 delayed</span>
+        <span class="badge">市值 ~US$7.39B</span>
+        <span class="badge">主對照：TDOC／LFMD／GDRX</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">F3 pending</span></h2>
+    <p class="muted" style="margin:0">官方流動性只有可轉債 <strong>0.62 倍</strong>（現金覆蓋折讓），Q2 官方 FCF 為負。2.87× P/S 係買緊尚未自我融資嘅增長 → 僅觀察，唔好加倉。暫定規尺，非 target price。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/27）</div><div class="v">US$31.66</div><div class="s">市值 ~US$7.39B · NY close</div></div>
+      <div class="hud-cell"><div class="l">暫定規尺（非目標價）</div><div class="v">P/S 2.87×</div><div class="s">PEG trailing 不可用 · yfinance fwd 2.15</div></div>
+      <div class="hud-cell"><div class="l">現金覆蓋 vs 可轉債</div><div class="v">0.62×</div><div class="s">官方流動性 US$841m / 債 US$1,365m</div></div>
+      <div class="hud-cell"><div class="l">Q2 官方 FCF</div><div class="v">−US$68.2m</div><div class="s">H1 −US$15.2m · TTM 仍 +US$61.6m</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ 訂戶 2.891m（+19% YoY）</span>
+      <span>★ 月均每訂戶 US$92（+21%）</span>
+      <span>★ 美國已入帳 US$621.8m（+16%）</span>
+      <span>★ 毛利率 64%（去年 76%）</span>
+      <span>★ Q2 官方 FCF −US$68.2m</span>
+    </div>
+    <div class="action">流動性對可轉債折讓（0.62×）且當季 FCF 為負：僅觀察／唔好加倉（F3 pending）</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">現價（延遲 8/27）</div><div class="value">US$31.66</div><div class="note">高於 MA20 · 低於 MA50 · 一年 −28%</div></div>
+    <div class="kpi green"><div class="label">Q2 2026 營收</div><div class="value">US$753.2m</div><div class="note">YoY +38% · 美國 +16%</div></div>
+    <div class="kpi orange"><div class="label">訂戶／ARPU</div><div class="value">2.89m · $92</div><div class="note">+19%／+21% · 含 Eucalyptus</div></div>
+    <div class="kpi red"><div class="label">官方流動性／可轉債</div><div class="value">0.62×</div><div class="note">US$841m vs US$1,365m · Q2 FCF 負</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>初篩結論</h2>
+      <div class="callout fail verdict">
+        <p><strong>FAIL。</strong>破產／流動性紅線要「現金低於總債務」而且「自由現金流（FCF，Free Cash Flow）為負」同時成立。2026-06-30 公司自己定義嘅流動性（現金＋短期可出售投資）US$841.0m 對可轉債帳面 US$1,365.3m（0.62 倍）；最近一季官方 FCF −US$68.2m。兩項都中 → 立即 FAIL，停止 13 維度評分。</p>
+        <p>正在被驗證嘅支柱仍然係平台已入帳增長：Q2 營收 US$753.2m（+38%），美國線 +16% 由 Q1 的 −8% 重新加速，訂戶 2.891m、月均每訂戶營收 US$92。呢啲係 8-K EX-99.1 數字，唔使賭路演——但增長叙事<strong>唔可以翻案</strong>紅線。</p>
+        <p>仍未成立嘅路徑係自我融資。H1 官方 FCF −US$15.2m；連續兩季 GAAP 虧損（Q1 −US$92.1m、Q2 −US$86.3m）；毛利率由 76% 跌到 64%。6 月交割 Eucalyptus（會計購買價 US$968.5m）把國際營收推到 US$131.4m，同時留下遞延應付同商譽。</p>
+        <p>最大裂痕係「增速 ≠ 現金」。官方流動性只有可轉債 <strong>0.62 倍</strong>，現價 2.87× P/S 係買緊尚未自我融資嘅增長。對行動含義：<strong>僅觀察，唔好加倉</strong>。未有 Framework 3，唔寫目標價或建倉區。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>致命紅線掃描</h2>
+      <div class="grid-3">
+        <div class="box" style="background:linear-gradient(180deg,#fef2f2,#fff)">
+          <h3><span class="danger">① 流動性 — 觸發</span></h3>
+          <p>10-Q 自己定義流動性 US$841m（現金 US$610m＋短期 AFS US$231m）對可轉債帳面 US$1,365m。Q2 官方 FCF −US$68.2m，H1 −US$15.2m。兩項同時成立。TTM FCF 仍約 +US$62m 只係語境，唔解除紅線。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">② 衰退陷阱 — 安全</span></h3>
+          <p>Q2 YoY +38%，高過 TDOC −4%、LFMD −4%、GDRX −1%（同業平均約 −3%）。GAAP 淨利率雖負，第一項「增速低於同業」不成立。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#fff7ed,#fff)">
+          <h3><span class="warn">③ 估值泡沫 — 未否決</span></h3>
+          <p>Trailing PEG 不可用（TTM 虧損）。P/S 2.87× 低過自身 52 週高位隱含約 5.9×，配 +38% 增長。貴，但未觸發「無增長泡沫」。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>官方 TTM（USD million）</h2>
+      <p class="muted">四季 8-K EX-99.1。FCF = 經營現金流 − 購置物業設備／無形 − 網站及內部使用軟件。</p>
+      <table>
+        <thead><tr><th>項目</th><th>Q3 2025</th><th>Q4 2025</th><th>Q1 2026</th><th>Q2 2026</th><th>TTM</th></tr></thead>
+        <tbody>
+          <tr><td>營收</td><td>599.0</td><td>617.8</td><td>608.1</td><td>753.2</td><td><strong>2,578.1</strong></td></tr>
+          <tr><td>GAAP 淨利</td><td>15.8</td><td>20.6</td><td>(92.1)</td><td>(86.3)</td><td><strong>(142.0)</strong></td></tr>
+          <tr><td>官方 FCF</td><td>79.4</td><td>(2.6)</td><td>53.0</td><td>(68.2)</td><td><strong>61.6</strong></td></tr>
+          <tr><td>毛利率</td><td>74%</td><td>72%</td><td>65%</td><td>64%</td><td>—</td></tr>
+          <tr><td>訂戶期末（千）</td><td>2,471</td><td>2,511</td><td>2,584</td><td>2,891</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="filters sans" id="filters">
+        <button class="active" data-f="all">全部</button>
+        <button data-f="support">支持</button>
+        <button data-f="neutral">中性</button>
+        <button data-f="weaken">削弱</button>
+      </div>
+      <div class="ev-grid" id="evidence"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Adversarial 同下一步</h2>
+      <div class="grid-3">
+        <div class="box" style="border-top:4px solid var(--pass)">
+          <h3>最強支持</h3>
+          <p>Q2 營收 US$753.2m、+38% YoY，遠高過 TDOC／LFMD／GDRX 負增長。美國已入帳 +16% 由 Q1 −8% 重新加速。訂戶 2.891m、ARPU US$92。FY2026 營收指引上修到 US$3.1–3.3B。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--fail)">
+          <h3>最強反證</h3>
+          <p>流動性 0.62× 可轉債；Q2 FCF −US$68.2m。連續兩季 GAAP 虧損。毛利率一年跌 12pp。應收 US$32m→US$375m。Eucalyptus 遞延應付加 earn-out 超過 US$0.8B。yfinance TTM FCF US$849m 已棄用。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--watch)">
+          <h3>最易失效</h3>
+          <p>下一季官方 FCF 轉正而且現金＋短期投資重新高過可轉債。若只係營收繼續快、現金仍低過債、FCF 再負一季，FAIL 維持。</p>
+        </div>
+      </div>
+      <div class="callout info" style="margin-top:14px">
+        <strong>FAIL → 重新評估。</strong>下一份 10-Q／8-K 需<strong>同時</strong>：（1）官方流動性 ≥ 可轉債帳面（而家缺口約 US$524m）；（2）最近一季官方 FCF ≥ 0。未解除之前唔做 13 維、唔入 Framework 2 正式評級。若強制深挖：Eucalyptus 有幾多已入帳、應收同遞延收購應付點變成現金。Q3 指引 US$880–900m；yfinance 日曆 2026-11-09（時點 unverified）。
+      </div>
+    </section>
+  </div>
+
+  <p class="footer">官方優先：SEC 8-K EX-99.1 + 10-Q（2026-08-10，2026-Q2）。同業：TDOC／LFMD／GDRX 官方稿。市況 yfinance delayed（2026-08-27）。衝突嘅 aggregator FCF 已棄用。第三方電話會議 Eucalyptus ~US$40m 未入帳。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const evidence=[
+{k:"support",type:"營收／KPI",title:"Q2 營收 US$753.2m，+38% YoY",body:"2026-Q2 官方 EX-99.1：總營收 US$753.214m 對上年 US$544.833m。美國 US$621.8m（+16%）、Rest of World US$131.4m（+1,641%）。同業 TDOC −4%、LFMD −4%、GDRX −1%。呢條撐住紅線 2 唔觸發，但國際增速含 6 月交割嘅 Eucalyptus，唔好當成全部有機。"},
+{k:"support",type:"訂閱",title:"訂戶 2.891m，ARPU US$92",body:"期末訂戶 +19% YoY；月均每平均訂戶營收 US$92（+21%）。Q1 美國營收仲係 −8%、ARPU US$80，Q2 國內重新加速。訂閱型估值驅動 KPI 用呢兩個數，唔用未入帳指引。"},
+{k:"neutral",type:"估值",title:"TTM P/S 2.87×，trailing PEG 不可用",body:"市值 US$7.39B / 官方 TTM 營收 US$2.578B ≈ 2.87×，低過 52 週高位隱含約 5.9×。TTM GAAP 淨虧約 US$142m，trailing PEG 不可用；yfinance forward PEG 2.15 近但未過 2.5 紅線。紅線 3 未觸發，F3 pending 唔寫目標價。"},
+{k:"weaken",type:"流動性",title:"官方流動性 0.62× 可轉債",body:"10-Q 自己寫 principal sources of liquidity US$841.0m（現金 US$609.8m＋短期 AFS US$231.2m）。可轉債帳面 US$1,365.3m（2030 本金 US$1.0B + 2032 本金 US$402.5m）。現金低過債成立。2032 轉換價 US$29.53，現價已略為價內。"},
+{k:"weaken",type:"現金流",title:"Q2 官方 FCF −US$68.2m",body:"公司調節：OCF −US$35.9m − capex/軟件 US$32.3m。H1 −US$15.2m。TTM 仍 +US$61.6m 只因為 2025-Q3 嘅 +US$79.4m。規則用最近一季，同 ORCL／MRVL 一致。yfinance TTM FCF US$849m 已棄用。"},
+{k:"weaken",type:"收購／工作資本",title:"Eucalyptus US$968.5m 同應收暴增",body:"10-Q：購買價 US$968.5m，預付現金 US$225m，遞延 US$683.9m 分六期。應收由 YE2025 US$32.1m 去到 US$375.3m；H1 應收增加 US$329m 幾乎食晒經營現金。第三方電話會議稱 Q2 貢獻約 US$40m，未印喺 8-K，唔入帳。"},
+{k:"weaken",type:"盈利質量",title:"毛利率 76%→64%，連續兩季虧損",body:"Q2 GAAP 淨虧 US$86.3m（淨利率 −11.5%），Q1 −US$92.1m。Adj EBITDA 仍正（US$60.3m）但低過上年 US$82.2m。Q2 調節含法律或有 US$47.5m 同收購成本 US$28.8m。減重改品牌 GLP-1 係官方承認嘅毛利率壓力。"},
+];
+const evRoot=document.getElementById('evidence');
+function render(filter){
+  evRoot.innerHTML=evidence.filter(e=>filter==='all'||e.k===filter).map(e=>`
+  <article class="ev ${e.k}"><div class="type">${e.type}<span class="impact ${e.k}">${e.k==='support'?'支持':e.k==='weaken'?'削弱':'中性'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+});
+</script>
+</body>
+</html>
