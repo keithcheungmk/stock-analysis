@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MRVL Framework 1 初篩</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:3.4rem;font-weight:800;line-height:1;color:var(--watch);margin:8px 0 0}
+  .score-den{font-size:1.05rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .warn{color:var(--watch);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .danger{color:var(--fail);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#9a3412;color:#fff;border-color:#9a3412}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 1</div>
+      <div class="score-num">WATCH</div>
+      <div class="score-den">65 / 130 · 三條紅線未觸發</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge" style="background:var(--watch-soft);color:var(--watch);border:0">現金 0.79× 債務</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>MRVL · Framework 1 基本面初篩</h1>
+      <p>Marvell Technology, Inc. · 截至 2026-08-28 · 最新季 FY2027-Q2（期終 2026-08-01）· USD · US GAAP／Non-GAAP · SEC 8-K EX-99.1 · 10-Q 未申報</p>
+      <div class="badges">
+        <span class="badge">現價 US$241.45 delayed</span>
+        <span class="badge">市值 ~US$217B</span>
+        <span class="badge">持倉未確認</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">F3 pending</span></h2>
+    <p class="muted" style="margin:0">暫定規尺，<strong>非 target price</strong>。PEG 1.45 對 AVGO／NVDA 約 0.4–0.6 屬溢價；P/S 23× 同 AVGO 打平、貴過 AMD → 僅觀察，唔好加倉。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/28）</div><div class="v">US$241.45</div><div class="s">市值 ~US$217.0B · NY close</div></div>
+      <div class="hud-cell"><div class="l">估值尺（可核對倍數）</div><div class="v">P/S 23.0× · PEG 1.45</div><div class="s">H1 FCF vs 市值 ~0.4%（年化 ~0.9%）</div></div>
+      <div class="hud-cell"><div class="l">溢價／折讓</div><div class="v">PEG 溢價 vs AVGO／NVDA</div><div class="s">P/S 對齊 AVGO 23.4×、貴過 AMD 18.8×</div></div>
+      <div class="hud-cell"><div class="l">驅動 KPI</div><div class="v">DC +46% · FCF US$0.48B</div><div class="s">Google 認股權證最多 ~6.7% 稀釋</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ DC 已入帳 US$2.172B（+46% · 79% mix）</span>
+      <span>★ Q2 官方 FCF US$478.8m（OCF−capex）</span>
+      <span>★ GAAP 淨利率 11.2%（Q1 1.4% → 改善）</span>
+      <span>★ 現金 US$3.93B vs 債 US$4.96B</span>
+      <span>★ Google 認股權證 58.97m 股 @ US$206.58</span>
+    </div>
+    <div class="action">PEG 溢價下：僅觀察／唔好加倉（F3 pending · 持倉未確認）</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">Q2 總營收</div><div class="value">US$2.739B</div><div class="note">YoY +37% · QoQ +13% · 紀錄高</div></div>
+    <div class="kpi green"><div class="label">Data Center</div><div class="value">US$2.172B</div><div class="note">YoY +46% · 佔比 79%</div></div>
+    <div class="kpi orange"><div class="label">Q2 官方 FCF</div><div class="value">US$479m</div><div class="note">OCF 605.5 − capex 126.7</div></div>
+    <div class="kpi red"><div class="label">現金／有息債</div><div class="value">0.79×</div><div class="note">US$3.93B vs US$4.96B</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>初篩結論</h2>
+      <div class="callout watch verdict">
+        <p><strong>WATCH（65／130）。</strong>三條致命紅線都未觸發：雖然現金低過有息債務，但當季官方口徑自由現金流（經營現金流減購置物業設備）為正；營收 +37% 雖然慢過 NVDA／AMD，GAAP 淨利率為正且由 Q1 回升；PEG 1.45 同 P/S 23× 未去到「無增長泡沫」門檻。</p>
+        <p>正在被驗證嘅支柱係 Data Center 已入帳：US$2.172B、+46% YoY、mix 去到 79%，同連續六季高過自身指引中位。呢啲係 8-K EX-99.1 數字，唔使賭路演。</p>
+        <p>仍未成立嘅路徑係「custom／Google TPU-attach 已入帳到可以對得住 23× 銷售倍數」。管理層講下半年 custom 顯著加速；認股權證歸屬要等 discretionary 採購（每 US$500m 一檔），Q2 期終 2026-08-01 尚未包括 8 月 18 日嘅 Google 認股權證。</p>
+        <p>最大裂痕係槓桿同稀釋。現金只有債務 0.79 倍；H1 官方 FCF 對市值約 0.4%。PEG 1.45 對 AVGO／NVDA 約 0.4–0.6 屬溢價 → <strong>僅觀察，唔好加倉</strong>。未有 Framework 3，唔寫目標價或建倉區。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>致命紅線掃描</h2>
+      <div class="grid-3">
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">① 流動性 — 安全</span></h3>
+          <p>現金 US$3.93B &lt; 有息債 US$4.96B，但 Q2 FCF US$478.8m 為正。兩項要同時成立先 FAIL。10-Q 未出，數字嚟自 8-K 簡明表。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">② 衰退陷阱 — 安全</span></h3>
+          <p>增速低過 AMD／AVGO／NVDA，但 GAAP 淨利率 11.2% 為正，Q1→Q2 上升而非連跌。第二項唔成立。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#fff7ed,#fff)">
+          <h3><span class="warn">③ 估值泡沫 — 未否決</span></h3>
+          <p>PEG 1.45 &lt; 2.5。P/S 23.0× 同 AVGO 23.4× 接近。有 +37% 已入帳增長。貴，但未觸發紅線。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>13 維度評分</h2>
+      <table>
+        <thead><tr><th>維度</th><th>證據</th><th>分</th><th>依據</th></tr></thead>
+        <tbody>
+          <tr><td>現金 vs 債務</td><td>0.79×</td><td>0</td><td>現金低於債務</td></tr>
+          <tr><td>營收增長</td><td>Q2 +37% vs 同業更高</td><td>0</td><td>低於同業平均</td></tr>
+          <tr><td>淨利潤率</td><td>GAAP 11.2%</td><td>5</td><td>10%–25%；TTM 含出售一次性</td></tr>
+          <tr><td>估值（PEG）</td><td>1.45；P/S 23×</td><td>5</td><td>PEG 1–1.5</td></tr>
+          <tr><td>TAM</td><td>AI custom＋光學／交換</td><td>10</td><td>&gt; US$100B</td></tr>
+          <tr><td>需求 KPI</td><td>DC +46% vs AMD／NVDA DC 三位數</td><td>0</td><td>低於同行</td></tr>
+          <tr><td>ROE</td><td>帳面 ~14%；調整後 ~7–8%</td><td>0</td><td>一次性扭曲後 &lt;8%</td></tr>
+          <tr><td>自由現金流</td><td>Q2 US$479m；Q1 US$483m</td><td>5</td><td>正但未穩步增長</td></tr>
+          <tr><td>護城河</td><td>custom／光學；Google 協議</td><td>5</td><td>有壁壘、客戶集中</td></tr>
+          <tr><td>行業趨勢</td><td>AI 基建互联</td><td>10</td><td>核心主線</td></tr>
+          <tr><td>管理層</td><td>六季 beat；資本結構變複雜</td><td>5</td><td>執行同稀釋並存</td></tr>
+          <tr><td>相對 S&amp;P 500</td><td>10 年 +2012% vs SPY +315%</td><td>10</td><td>大幅跑贏</td></tr>
+          <tr><td>預期 vs 實際</td><td>六季高過指引中位</td><td>10</td><td>連續超預期</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:10px">合計 65／130。需求 KPI 用 Data Center 已入帳營收替代「用戶增長」，因為 Marvell 唔係訂閱用戶模式。</p>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="filters sans" id="filters">
+        <button class="active" data-f="all">全部</button>
+        <button data-f="support">支持</button>
+        <button data-f="neutral">中性</button>
+        <button data-f="weaken">削弱</button>
+      </div>
+      <div class="ev-grid" id="evidence"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Adversarial 同下一步</h2>
+      <div class="grid-3">
+        <div class="box" style="border-top:4px solid var(--pass)">
+          <h3>最強支持</h3>
+          <p>DC US$2.172B（+46%、79% mix）；六季高過指引中位；Q3 指引中位 US$3.15B。Google custom 協議覆蓋 TPU attach 產品線。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--fail)">
+          <h3>最強反證</h3>
+          <p>現金低過債；DC 慢過 NVDA／AMD；認股權證最多約 6.7% 稀釋且現價已價內。Custom 加速主要係前瞻，唔係 Q2 帳。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--watch)">
+          <h3>失效假設</h3>
+          <p>2H custom／Google 出貨慢、或者下一季 FCF 轉負（現金已經低過債，紅線 1 會重新可觸發）。</p>
+        </div>
+      </div>
+      <div class="callout info" style="margin-top:14px">
+        <strong>WATCH → PASS 量化閘：</strong>（1）現金 ≥ 有息債且 FCF 維持正；（2）官方營收 YoY 追近 AVGO／AMD（差距收窄到 10 個百分點內）或 DC 增速明顯收窄同 GPU 名差距；（3）調整後 TTM 淨利率企穩雙位數、ROE &gt;8%。Framework 2 必挖：Google custom 入帳節奏；增長質素 vs 槓桿／稀釋。最近催化：Investor Day 2026-10-06；Q2 10-Q 仍待申報。
+      </div>
+    </section>
+  </div>
+
+  <p class="footer">官方優先：SEC 8-K EX-99.1（2026-08-27，accession 0001835632-26-000022）＋ IR Financial and Business Results PDF。期後：8-K items 1.01／3.02（2026-08-19）Google 認股權證。同業 AMD／NVDA 用本倉已核對 F1；AVGO 增速／倍數為 yfinance aggregator。現價 yfinance delayed 2026-08-28 US$241.45。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const evidence=[
+{k:"support",type:"分部／KPI",title:"Data Center US$2.172B，+46% YoY，佔比 79%",body:"EX-99.1：Q2 Data Center US$2,171.5m vs 上年 US$1,490.5m、上季 US$1,832.7m。Communications and other US$567.8m（+10% YoY、−3% QoQ）。Mix 由上年 74% 升到 79%。呢個係已入帳，唔係 bookings。對 thesis 意思：增長引擎已經喺 DC，但 46% 仍然慢過 AMD DC +107% 同 NVDA DC +117%，所以需求 KPI 得 0 分。"},
+{k:"support",type:"指引",title:"連續六季高過自身指引中位；Q2 高 US$39m",body:"Q2 營收 US$2.739B，高過 5 月 27 日指引中位 US$39m。往回 Q1 FY27、Q4–Q1 FY26 同樣寫「above the mid-point」。Q3 指引中位 US$3.150B +/-5%。執行紀錄支持「預期 vs 實際」10 分，但指引本身唔當已入帳收入。"},
+{k:"weaken",type:"資產負債",title:"現金 US$3.93B 對有息債 US$4.96B（0.79×）",body:"2026-08-01 簡明表：現金 US$3,932.8m，短期債 US$0，長期債 US$4,962.9m。紅線 1 要「現金低過債而且 FCF 負」——而家 FCF 正所以未 FAIL，但現金維度只能 0 分。yfinance 現金／債務同官方衝突，棄用 aggregator。"},
+{k:"weaken",type:"稀釋",title:"Google 認股權證最多 58.97m 股 @ US$206.58",body:"2026-08-18／19 8-K：7 月 29 日同 Google 訂 custom 協議（TPU 生態 attach：推論加速、儲存／網絡／記憶體控制器、near-memory compute）。8 月 18 日發行最多 58,970,907 股認股權證，行使價 US$206.58。約 136 萬股按時間歸屬；其餘每 US$500m custom 採購歸屬一檔，直至 FY2033。相對約 8.77 億普通股約 6.7%。Q2 期終 8 月 1 日，呢筆係期後事項。現價已價內，分子風險真實。"},
+{k:"neutral",type:"現金流",title:"Q2 官方口徑 FCF US$478.8m，同 Q1 幾乎打平",body:"OCF US$605.5m − 購置 PPE US$126.7m。Q1 OCF US$638.8m − PPE US$155.7m = US$483.1m。H1 FCF US$961.9m 對市值 US$217B 只有約 0.4% 半年。正現金流救咗紅線 1，但收益率撐唔起高倍數，所以 FCF 維度 5 分而非 10。"},
+{k:"weaken",type:"盈利質量",title:"Q1 GAAP 淨利只有 US$34.5m；TTM 被出售抬高",body:"Q2 GAAP 淨利 US$308.0m（淨利率 11.2%）已經回穩。Q3 FY26 GAAP US$1.901B 含出售汽車乙太網予 Infineon 現金 US$2.5B。帳面 TTM ROE ~14% 唔可信；調整後約 7–8%，ROE 維度 0 分。Non-GAAP Q2 淨利 US$865.9m 只作對照，評分用 GAAP。"},
+{k:"neutral",type:"覆蓋",title:"FY2027-Q2 10-Q 未申報；IR 簡報已核對 hash",body:"六季 manifest 通過驗證。最新季 validation_status: partial，pending Form 10-Q。資產負債同現金流用 8-K 簡明表。官方逐字稿唔喺標準包。FY2026-Q2 資料夾誤配到一份 Q2 FY27 IR PDF，唔用嚟引 FY26 數字。"},
+];
+const evRoot=document.getElementById('evidence');
+function render(filter){
+  evRoot.innerHTML=evidence.filter(e=>filter==='all'||e.k===filter).map(e=>`
+  <article class="ev ${e.k}"><div class="type">${e.type}<span class="impact ${e.k}">${e.k==='support'?'支持':e.k==='weaken'?'削弱':'中性'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# One-shot CLI config for MRVL — do not replace global config.yaml
+default_symbol: MRVL
+history_period: 3mo
+history_interval: 1d
+
+peers:
+  - AVGO
+  - NVDA
+  - AMD
+
+technical:
+  ma_windows: [20, 50, 200]
+  rsi_period: 14
+  macd:
+    fast: 12
+    slow: 26
+    signal: 9
+
+output_dir: output
