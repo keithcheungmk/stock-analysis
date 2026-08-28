@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TSLA 估值卡 · Framework 3</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:920px;margin:0 auto;padding:24px 16px 72px}
+  h1{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.7rem;margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 16px}
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.hero{grid-template-columns:1fr}}
+  .big{border-radius:22px;padding:18px;color:#fff;box-shadow:var(--shadow)}
+  .big.navy{background:linear-gradient(145deg,#134e4a,#0f766e)}
+  .big.warn{background:linear-gradient(145deg,#7c2d12,#c2410c)}
+  .big .l{font-size:.72rem;opacity:.85;font-weight:800;letter-spacing:.06em;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .big .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.1rem;font-weight:800;margin:4px 0}
+  .big .d{font-size:.88rem;opacity:.92}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:14px;box-shadow:var(--shadow)}
+  .toggles{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .toggles button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
+  .toggles button.on{background:#134e4a;color:#fff;border-color:#134e4a}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{border:1px solid var(--line);border-radius:12px;padding:10px;border-top:3px solid var(--teal);font-size:.78rem}
+  .kpi .l{color:var(--muted);font-weight:700}.kpi .v{font-weight:800;font-size:1rem;margin-top:2px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:700px){.val-grid{grid-template-columns:1fr}}
+  .val{border-radius:18px;padding:14px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .val.bear{border-top:6px solid var(--fail)}
+  .val.base{border-top:6px solid var(--watch)}
+  .val.bull{border-top:6px solid var(--pass)}
+  .val.on{box-shadow:var(--shadow);transform:translateY(-2px)}
+  .val .tag{font-size:.72rem;font-weight:800;letter-spacing:.08em}
+  .val .px{font-size:1.8rem;font-weight:800;margin:6px 0}
+  .val p{margin:0;color:var(--muted);font-size:.82rem}
+  .ruler{margin:16px 0 8px;position:relative;height:44px}
+  .track{height:10px;background:#e7e0d5;border-radius:999px;position:relative;margin-top:18px}
+  .seg{position:absolute;height:100%;border-radius:999px}
+  .mark{position:absolute;top:-22px;font-size:.68rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;transform:translateX(-50%);white-space:nowrap}
+  .pin{position:absolute;top:-6px;width:4px;height:22px;background:#134e4a;border-radius:4px;transform:translateX(-50%)}
+  .note{margin-top:12px;background:var(--info-soft);border:1px solid #93c5fd;border-radius:14px;padding:12px 14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.88rem}
+  .warnbox{margin-top:12px;background:var(--watch-soft);border:1px solid #fdba74;border-radius:14px;padding:12px 14px;font-size:.88rem}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  @media(max-width:700px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.fail{border-left:5px solid var(--fail)}
+  .disc{font-size:.78rem;color:var(--muted);margin-top:18px;text-align:center}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <p class="sans" style="color:var(--teal);font-weight:800;margin:0 0 8px">估值卡 · 只展示 Framework 3 · 無另起 compact 倍數模型</p>
+  <h1>TSLA · L1–L4 SOTP</h1>
+  <p class="sub">判定：對 Base 偏貴。行動：僅觀察／唔好加倉。官方 2026-Q2 verified；唔用 323× trailing P/E。</p>
+
+  <div class="hero" id="decision-hud">
+    <div class="big navy sans">
+      <div class="l" id="priceLabel">現價錨 · yfinance delayed 2026-08-26</div>
+      <div class="v" id="priceNow">US$345.82</div>
+      <div class="d" id="priceGap">對 Base US$157 約 +120%</div>
+    </div>
+    <div class="big warn sans">
+      <div class="l">行動</div>
+      <div class="v" style="font-size:1.55rem">唔好加倉</div>
+      <div class="d">現價相對 Base 溢價約 120%（US$346 vs US$157）</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="toggles sans" id="priceToggle">
+      <button class="on" data-p="delayed" type="button">delayed US$345.82</button>
+    </div>
+    <div class="kpis sans">
+      <div class="kpi"><div class="l">市值</div><div class="v">~US$1.366T</div></div>
+      <div class="kpi"><div class="l">Bear</div><div class="v">US$63</div></div>
+      <div class="kpi"><div class="l">Base</div><div class="v">US$157</div></div>
+      <div class="kpi"><div class="l">Bull</div><div class="v">US$402</div></div>
+    </div>
+    <div class="ruler sans" id="ruler"></div>
+    <p style="font-size:.78rem;color:var(--muted)">尺：Bear US$63 → Bull US$402。針係現價。Base SOTP 約 US$0.62T。</p>
+  </div>
+
+  <div class="card">
+    <h2 class="sans" style="margin:0 0 10px;font-size:1.1rem">情景（點擊對照）</h2>
+    <div class="val-grid" id="valGrid">
+      <button class="val bear" data-val="bear" type="button">
+        <div class="tag">BEAR · L3/L4 = 0</div>
+        <div class="px">US$63</div>
+        <p>汽車 2.0× · 儲能 3.0× · 服務 4.0× · 期權清零 · 股權 US$0.25T</p>
+      </button>
+      <button class="val base on" data-val="base" type="button">
+        <div class="tag">BASE · 主參考</div>
+        <div class="px">US$157</div>
+        <p>汽車 4.0× · 儲能 6.0× · 服務 8.0× · L3 US$80B · L4 US$40B</p>
+      </button>
+      <button class="val bull" data-val="bull" type="button">
+        <div class="tag">BULL · 研究情景</div>
+        <div class="px">US$402</div>
+        <p>汽車 8.0× · 儲能 12.0× · 服務 15.0× · L3 US$400B · L4 US$200B</p>
+      </button>
+    </div>
+    <div class="note" id="valNote"></div>
+    <div class="warnbox">
+      現價 US$345.82／市值 ~US$1.37T 約係 Base SOTP 嘅 2.2×，已接近 Bull 八成。市場已 price in 大部分 L3／L4 可選性。L3／L4 已入帳收入 = US$0，期權桶唔係 DCF。
+    </div>
+    <div class="grid-2">
+      <div class="box fail"><strong>EPS 爆發 — 未觸發</strong><p style="margin:6px 0 0;color:var(--muted);font-size:.88rem">定義 C：beat &gt;15%。Q2 非 GAAP US$0.33 vs US$0.54（−39%）。</p></div>
+      <div class="box fail"><strong>股價爆發 — 未觸發</strong><p style="margin:6px 0 0;color:var(--muted);font-size:.88rem">定義 C：3 個月 &gt;+30%。−21.5%（US$440 → US$346）。</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="sans" style="margin:0 0 8px;font-size:1.1rem">官方錨（TTM，EX-99.1 四季加總）</h2>
+    <table>
+      <thead><tr><th>層</th><th class="num">已入帳收入</th><th>來源</th></tr></thead>
+      <tbody>
+        <tr><td>L1 汽車</td><td class="num">US$75.6B</td><td>25Q3–26Q2</td></tr>
+        <tr><td>L1 儲能</td><td class="num">US$12.8B</td><td>同期 Energy</td></tr>
+        <tr><td>L2 服務及其他</td><td class="num">US$15.2B</td><td>含 FSD，官方未拆</td></tr>
+        <tr><td>L3 Robotaxi／L4 Optimus</td><td class="num">US$0</td><td>無獨立收入行</td></tr>
+        <tr><td>Q2 官方 FCF／2026 capex</td><td class="num">−US$1.09B / &gt;US$25B</td><td>EX-99.1／10-Q</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="disc">卡片只係 F3 展示層。每股用 3.95B 股市值口徑。delayed 唔當 live。未確認持倉。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const F3 = {
+  delayed: 345.82,
+  bear: 63, base: 157, bull: 402,
+  lo: 50, hi: 430,
+  notes: {
+    bear: "Bear：當貴價車廠。L3／L4 期權清零。對現價約 −82%。適用於交付跌穿同業、除積分 GM 跌、capex 壓垮 FCF。",
+    base: "Base 係主參考：L1 維持增長但 FCF 被 >US$25B capex 壓住；L2 值軟件溢價但未拆帳；L3／L4 只值中等期權。現價溢價約 +120%，唔支持買入。",
+    bull: "Bull：Robotaxi 開始可核對入帳、Cybercab 車隊、Optimus 外售路徑清晰。現價已接近呢個情景嘅八成，未確認前唔當可追目標。"
+  }
+};
+let scenario = "base";
+function pct(target, px){ const v=(target/px-1)*100; return (v>=0?"+":"")+v.toFixed(0)+"%"; }
+function render(){
+  const px = F3.delayed;
+  document.getElementById("priceGap").textContent = "對 Base US$157 約 "+pct(F3.base, px)+" · 對 Bear "+pct(F3.bear, px)+" · 對 Bull "+pct(F3.bull, px);
+  document.getElementById("valNote").textContent = F3.notes[scenario];
+  const span = F3.hi - F3.lo;
+  const pos = p => Math.min(100, Math.max(0, (p-F3.lo)/span*100));
+  document.getElementById("ruler").innerHTML = `
+    <div class="track">
+      <div class="seg" style="left:${pos(50)}%;width:${pos(80)-pos(50)}%;background:#fecaca"></div>
+      <div class="seg" style="left:${pos(140)}%;width:${pos(175)-pos(140)}%;background:#fdba74"></div>
+      <div class="seg" style="left:${pos(370)}%;width:${pos(430)-pos(370)}%;background:#86efac"></div>
+      <div class="pin" style="left:${pos(px)}%"></div>
+    </div>
+    <div class="mark" style="left:${pos(px)}%">現價 ${px.toFixed(0)}</div>
+  `;
+}
+document.getElementById("valGrid").addEventListener("click", e=>{
+  const b=e.target.closest(".val"); if(!b) return;
+  document.querySelectorAll(".val").forEach(x=>x.classList.toggle("on", x===b));
+  scenario=b.dataset.val; render();
+});
+render();
+</script>
+<section id="page-comments" data-page="/tsla/valuation.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

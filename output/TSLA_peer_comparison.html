@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TSLA 同業比較</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;background:var(--info-soft);border:1px solid #93c5fd}
+  .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  @media(max-width:960px){.grid{grid-template-columns:1fr 1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff}
+  .box.p1{border-top:4px solid var(--pass)}.box.p2{border-top:4px solid var(--teal)}.box.p3{border-top:4px solid var(--info)}.box.p4{border-top:4px solid var(--watch)}.box.p5{border-top:4px solid var(--fail)}
+  .rank{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.78rem;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .chart{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end;height:160px;margin:12px 0 8px}
+  .bar-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:end;gap:6px}
+  .bar{width:100%;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#14b8a6,#0f766e);min-height:8px}
+  .bar.warn{background:linear-gradient(180deg,#fb923c,#c2410c)}
+  .bar-label,.bar-val{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  .bar-label{color:var(--muted)}.bar-val{font-weight:800}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 4 · 若只能選一間</div>
+      <div class="verdict-title">今次唔選<br>現價只宜觀察</div>
+      <p class="sans muted" style="margin:12px 0 0">質量／量贏車廠，但 vs Base +120%。唔係追 US$346 嘅指令。</p>
+    </div>
+    <div class="hero-main">
+      <h1>TSLA vs BYD / GM + Robotaxi / Humanoid</h1>
+      <p>三層：L1 賣車錨、L3 Robotaxi 進度、L4 人形。唔好把七城覆蓋當成已審計 Robotaxi 收入。</p>
+      <div class="badges">
+        <span class="badge">tesla_peers.yaml</span>
+        <span class="badge">官方 Tesla verified</span>
+        <span class="badge">BYD H1 財務 8/28 待刊</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2 class="sans" style="margin:0 0 6px;font-size:1.05rem">Decision HUD</h2>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/26）</div><div class="v">US$345.82</div><div class="s">P/S 13.2×</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">63 / 157 / 402</div><div class="s">F3 SOTP</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+120%</div><div class="s">偏貴 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">GM／BYD P/S</div><div class="v">0.42× / ~1.1×</div><div class="s">只比 L1</div></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>一句話</h2>
+    <div class="callout sans">Tesla 量同 FSD 訂閱贏傳統車廠，但現價已收咗平台溢價。市場最易看錯嘅係把七城／Cybercab 讀成同 Waymo 一樣有可審計出行收入——Tesla 官方包入帳仍係 US$0。</div>
+  </section>
+
+  <section class="panel">
+    <h2>角色同排序</h2>
+    <div class="grid">
+      <div class="box p1"><div class="rank">1 · 質量／量</div><h3>TSLA</h3><p>平台。交付 +25%、FSD 1.48m。L3 未入帳、Q2 FCF 負。觀察唔追。</p></div>
+      <div class="box p2"><div class="rank">2 · 值博率</div><h3>GM</h3><p>P/S ~0.42×。量弱、Cruise 歷史折損。便宜但唔係同一張選擇權。</p></div>
+      <div class="box p3"><div class="rank">3 · 待補數</div><h3>BYD</h3><p>純電規模。H1 交付 −15.7%；財務 8/28 待刊。只比 L1。</p></div>
+      <div class="box p4"><div class="rank">4 · 進度參考</div><h3>Waymo</h3><p>無安全員多城。車隊／英里唔用 Tesla 官方包數字。唔排序買入。</p></div>
+      <div class="box p5"><div class="rank">5 · 只宜觀察</div><h3>人形組</h3><p>Figure／Agility／Boston Dynamics／Unitree／1X。Optimus 無外售。唔構成估值驅動 KPI。</p></div>
+    </div>
+    <h3 style="margin-top:16px">L1 汽車錨 P/S（方向，曆法／來源唔對齊）</h3>
+    <div class="chart">
+      <div class="bar-wrap"><div class="bar-val">13.2×</div><div class="bar warn" style="height:100%"></div><div class="bar-label">TSLA</div></div>
+      <div class="bar-wrap"><div class="bar-val">~1.1×</div><div class="bar" style="height:8%"></div><div class="bar-label">BYD</div></div>
+      <div class="bar-wrap"><div class="bar-val">0.42×</div><div class="bar" style="height:3%"></div><div class="bar-label">GM</div></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>L1 汽車錨</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>公司</th><th>商業質量</th><th>增長</th><th>現金流</th><th>估值</th></tr></thead>
+        <tbody>
+          <tr><td>TSLA</td><td>高（垂直整合、FSD）</td><td>高（營收 +26%、交付 +25%）</td><td>中低（OCF 正、Q2 FCF 負）</td><td class="num">低 · 13.2×</td></tr>
+          <tr><td>GM</td><td>中</td><td>低（+1.9%、美銷 −4.2%）</td><td>中（週期）</td><td class="num">高 · 0.42×</td></tr>
+          <tr><td>BYD</td><td>高</td><td>近季弱（H1 交付 −15.7%）</td><td>待 8/28</td><td class="num">中 · ~1.1×</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>L3 Robotaxi（Tesla 官方 vs 線索）</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>對手</th><th>最近可核對進度</th><th>來源</th></tr></thead>
+        <tbody>
+          <tr><td>Tesla</td><td>七城 live；灣區安全員；TX／FL unsupervised ramping；Cybercab 投產；入帳 US$0</td><td>官方 EX-99.1／10-Q</td></tr>
+          <tr><td>Waymo</td><td>無安全員多城 — 車隊／英里唔用本包數字</td><td>公開敘事</td></tr>
+          <tr><td>Zoox / Cruise / Apollo Go / Pony.ai</td><td>試點、重組或地域唔重疊</td><td>unverified／第三方</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <p class="footer">Ford／Rivian 只作 F1 輔助。人形行全部唔構成 Tesla 估值驅動 KPI。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>
