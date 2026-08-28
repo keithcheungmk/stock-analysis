@@ -1,0 +1,27 @@
+# X 輕量追蹤 — MRVL adversarial review 用
+# 高噪音；任何數字必須 IR／SEC 交叉。digest ≤8／次覆核。
+
+accounts:
+  - handle: Marvell
+    role: official
+    note: "產品／資料中心／custom silicon；財務以 IR／SEC 為準"
+  - handle: MarvellSemi
+    role: official
+    note: "備用官方帳；產品多於財務"
+  - handle: nvidia
+    role: peer
+    note: "同業 AI silicon read-through；唔覆寫 MRVL 官方數字"
+  - handle: AMD
+    role: peer
+    note: "同業 data-center read-through；唔覆寫 MRVL 官方數字"
+
+digest_rules:
+  max_items_per_review: 8
+  tiers:
+    confirmed: "其後或同時有 IR／SEC 證實"
+    narrative: "敘事性發言，未證實 — 只入 Review Memo"
+    noise: "不納入報告正文"
+  exclude:
+    - "純政治、文化戰爭、個人生活"
+    - "無日期／無產品或交易內容的玩笑帖"
+    - "要求用帖文覆寫 10-Q／8-K 數字"

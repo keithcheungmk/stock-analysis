@@ -1,0 +1,20 @@
+as_of: "2026-08-27T19:00:00+08:00"
+sec:
+  submissions_url: "https://data.sec.gov/submissions/CIK{cik}.json"
+  archives_base: "https://www.sec.gov/Archives/edgar/data"
+  requests_per_second: 2
+
+companies:
+  ORCL:
+    name: Oracle Corporation
+    cik: "0001341439"
+    ir_url: "https://investor.oracle.com/"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: FY2025-Q3, period_end: "2025-02-28", release_date: "2025-03-10"}
+      - {label: FY2025-Q4, period_end: "2025-05-31", release_date: "2025-06-11"}
+      - {label: FY2026-Q1, period_end: "2025-08-31", release_date: "2025-09-09"}
+      - {label: FY2026-Q2, period_end: "2025-11-30", release_date: "2025-12-10"}
+      - {label: FY2026-Q3, period_end: "2026-02-28", release_date: "2026-03-10"}
+      - {label: FY2026-Q4, period_end: "2026-05-31", release_date: "2026-06-10"}

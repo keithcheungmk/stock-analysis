@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORCL One-Pager · 2026-08-27</title>
+<style>
+  :root {
+    --bg:#f3efe6; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --teal-deep:#134e4a; --watch:#c2410c; --watch-soft:#ffedd5;
+    --fail:#b91c1c; --fail-soft:#fee2e2; --pass:#15803d; --pass-soft:#dcfce7;
+    --info:#1d4ed8; --info-soft:#dbeafe; --shadow:0 16px 44px rgba(28,25,23,.1);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;color:var(--ink);line-height:1.5;background:radial-gradient(circle at 10% 0%,#d8f3ee 0,transparent 32%),radial-gradient(circle at 90% 8%,#ffe4cc 0,transparent 28%),var(--bg)}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .deck{min-height:100%;display:flex;flex-direction:column;max-width:1180px;margin:0 auto;padding:18px}
+  .progress{height:4px;background:#e7e0d5;border-radius:999px;overflow:hidden;margin-bottom:14px}
+  .progress>span{display:block;height:100%;width:25%;background:#b91c1c;transition:width .25s ease}
+  .slide{display:none}.slide.on{display:block}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .status-box{background:linear-gradient(165deg,#fef2f2,#fee2e2 55%,#fecaca);border:1px solid #fca5a5;border-radius:28px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fail);font-weight:800}
+  .status-title{font-size:2rem;font-weight:800;color:var(--fail);margin:10px 0 8px;line-height:1.15}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 52%,#991b1b);color:#fff;border-radius:28px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.9rem}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .badge{display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.8rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{color:var(--muted);font-size:.78rem;font-weight:700}
+  .kpi .value{font-size:1.35rem;font-weight:800;margin-top:4px}
+  .kpi.ok{border-top:5px solid var(--pass)}.kpi.warn{border-top:5px solid var(--watch)}.kpi.fail{border-top:5px solid var(--fail)}.kpi.teal{border-top:5px solid var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 6px;font-size:1.22rem}
+  .sub{margin:0 0 14px;color:var(--muted);font-size:.92rem}
+  .thesis{background:linear-gradient(90deg,#fef2f2,#fee2e2);border:1px solid #fca5a5;border-radius:18px;padding:16px 18px}
+  .thesis p{margin:0 0 10px}.thesis p:last-child{margin:0}
+  .fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.fact-grid{grid-template-columns:1fr}}
+  .fact{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px}
+  .fact.ok{border-left:6px solid var(--pass)}.fact.warn{border-left:6px solid var(--watch)}.fact.bad{border-left:6px solid var(--fail)}
+  .fact .n{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:var(--muted)}
+  .fact h3{margin:4px 0 8px;font-size:1.02rem}
+  .fact p{margin:0;color:var(--muted);font-size:.9rem}
+  .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.val-grid{grid-template-columns:1fr}}
+  .val{border-radius:20px;padding:16px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left}
+  .val.bear{border-top:6px solid var(--fail)}.val.base{border-top:6px solid var(--watch)}.val.bull{border-top:6px solid var(--pass)}
+  .val.on{box-shadow:var(--shadow)}
+  .val .px{font-size:2rem;font-weight:800;margin:6px 0}
+  .note{margin-top:14px;background:var(--info-soft);border:1px solid #bfdbfe;border-radius:16px;padding:14px 16px}
+  .timeline{display:grid;gap:10px}
+  .event{display:grid;grid-template-columns:168px 1fr auto;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+  @media(max-width:860px){.event{grid-template-columns:1fr}}
+  .when{font-weight:800;font-size:.82rem;color:var(--teal-deep)}
+  .dir{font-size:.75rem;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap}
+  .dir.high{background:var(--watch-soft);color:var(--watch)}.dir.risk{background:var(--fail-soft);color:var(--fail)}
+  .kill{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  @media(max-width:860px){.kill{grid-template-columns:1fr}}
+  .kill div{background:linear-gradient(180deg,#fef2f2,#fff 50%);border:1px solid #fecaca;border-radius:16px;padding:14px}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+  .dots{display:flex;gap:8px}
+  .dot{width:10px;height:10px;border-radius:999px;border:0;background:#d6d3d1;cursor:pointer}
+  .dot.on{background:var(--fail);width:28px}
+  button.navbtn{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;cursor:pointer}
+  button.navbtn:disabled{opacity:.4}
+  .foot{color:var(--muted);font-size:.78rem;margin-top:8px}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+
+</style>
+</head>
+<body>
+<div class="deck">
+  <div class="progress"><span id="bar"></span></div>
+  <div class="stage">
+    <section class="slide on" data-slide="0">
+      <div class="hero">
+        <div class="status-box sans">
+          <div class="eyebrow">One-Pager · First</div>
+          <div class="status-title">FAIL</div>
+          <p style="margin:0;color:var(--fail);font-weight:700">現價較 Base +14% · 僅觀察</p>
+          <p style="margin:12px 0 0;color:var(--muted);font-size:.9rem">紅線 1：現金 &lt; 票據 且 Q4 FCF 為負</p>
+        </div>
+        <div class="hero-main sans">
+          <h1>ORCL · Oracle</h1>
+          <p>2026-08-27 · delayed last US$147.87 · 市值約 US$426B · FY2026-Q4 截至 2026-05-31 · USD · US GAAP</p>
+          <div class="badges">
+            <span class="badge">IaaS 已入帳</span>
+            <span class="badge">現金流未通過</span>
+            <span class="badge">先前 85 分已作廢</span>
+          </div>
+        </div>
+      </div>
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +14%</span></h2>
+    <p class="muted" style="margin:0">現價較 Base 溢價 <strong>+14%</strong> → 僅觀察，唔好加倉。權威來源：Framework 3 觀察區間（研究情景，非指引）。F1 紅線已 FAIL。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/27）</div><div class="v">US$147.87</div><div class="s">市值 ~US$425.9B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">80 / 130 / 180</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+14%</div><div class="s">偏貴 · 僅觀察</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 6.32×</div><div class="s">Fwd P/E 18.4× · TTM FCF yield −5.6%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 IaaS US$5.79B（+93%）</span>
+      <span>★ Q4 官方 FCF −US$1.87B</span>
+      <span>★ RPO US$638B（12 個月約 12%）</span>
+      <span>★ 現金 US$31.9B vs 票據 US$129.5B</span>
+    </div>
+  </section>
+      <div class="kpis sans">
+        <div class="kpi teal"><div class="label">現價 delayed</div><div class="value">US$147.87</div></div>
+        <div class="kpi ok"><div class="label">Q4 營收 / IaaS</div><div class="value">+21% / +93%</div></div>
+        <div class="kpi fail"><div class="label">Q4 單季 FCF</div><div class="value">−US$1.87B</div></div>
+        <div class="kpi warn"><div class="label">F3 Base 觀察價</div><div class="value">~US$130</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">Thesis</h2>
+        <div class="thesis sans">
+          <p>增長支柱正在被驗證：Cloud Infrastructure 已入帳 US$5.79B（+93%），RPO US$638B。呢啲係 8-K／10-K，唔使賭路演。</p>
+          <p>自我融資路徑未成立。用 10-Q／10-K 年累計差額，FY2026 四季單季 FCF 全部為負；最近一季約 −US$1.87B。現金＋有價證券只有有息票據的 0.25 倍。</p>
+          <p>最大裂痕係紅線 1 機械 FAIL。先前把 TTM 表差額當成單季 FCF、刊出 WATCH 85，計算錯，已作廢。</p>
+          <p>未確認持倉。估值上現價高過 Base ~US$130，到 Bear ~US$80 嘅下行大過到 Bull ~US$180 嘅上行。僅觀察，唔好加倉。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="1">
+      <div class="kpis sans">
+        <div class="kpi teal"><div class="label">現價</div><div class="value">US$147.87</div></div>
+        <div class="kpi ok"><div class="label">Q4 IaaS</div><div class="value">US$5.79B</div></div>
+        <div class="kpi ok"><div class="label">RPO</div><div class="value">US$638B</div></div>
+        <div class="kpi fail"><div class="label">FY FCF</div><div class="value">−US$23.7B</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">而家最重要嘅 5 個事實</h2>
+        <p class="sub">來源：SEC 8-K EX-99.1（2026-06-10）＋ 10-K／10-Q。First 模式，無先前 one-pager。</p>
+        <div class="fact-grid">
+          <article class="fact ok"><div class="n sans">01 · 增長</div><h3 class="sans">Q4 總營收 US$19.18B（+21%）；IaaS +93%</h3><p>斜率高過 MSFT／SAP／IBM 同 Azure／AWS。增長係真，救唔返紅線。</p></article>
+          <article class="fact ok"><div class="n sans">02 · 能見度</div><h3 class="sans">RPO US$638B；預付／BYOH US$75B</h3><p>12 個月內約確認 12%。有預付，但唔等於當季現金已覆蓋 capex。</p></article>
+          <article class="fact warn"><div class="n sans">03 · 單位經濟</div><h3 class="sans">經營利潤率 32%；Cloud＋software 成本率 31.2%</h3><p>利潤率企穩，但 IaaS mix 令雲成本率由 Q1 27.9% 升上來。</p></article>
+          <article class="fact bad"><div class="n sans">04 · 現金流</div><h3 class="sans">Q4 FCF 約 −US$1.87B；五季全負</h3><p>先前 +US$1.05B 係 TTM 表誤用。紅線 1 因此觸發。</p></article>
+          <article class="fact bad" style="grid-column:1/-1"><div class="n sans">05 · 資本結構</div><h3 class="sans">現金 US$31.9B vs 票據 US$129.5B；FY27 再籌約 US$40B；ATM 最多 US$20B</h3><p>10-K 年結日尚未按 ATM 售股。S&amp;P BBB− 係第三方，無 8-K。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="2">
+      <div class="kpis sans">
+        <div class="kpi teal"><div class="label">現價</div><div class="value">US$147.87</div></div>
+        <div class="kpi warn"><div class="label">Skill 3 Base</div><div class="value">US$130</div></div>
+        <div class="kpi"><div class="label">Bear – Bull</div><div class="value">US$80–180</div></div>
+        <div class="kpi fail"><div class="label">判定</div><div class="value">偏貴 · 唔建倉</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">估值摘要 · Skill 3</h2>
+        <p class="sub">Forward P/E 錨官方 FY2027 non-GAAP EPS US$8.05。F1 FAIL → 觀察估值，唔係買入 setup。撳情景對照。</p>
+        <div class="val-grid sans" id="valGrid">
+          <button class="val bear" data-val="bear" type="button"><div class="tag">BEAR · −46%</div><div class="px">US$80</div><p>約 12× US$6.5 EPS；FCF 維持深負、ATM 開印。</p></button>
+          <button class="val base on" data-val="base" type="button"><div class="tag">BASE · −12%</div><div class="px">US$130</div><p>交到 US$90B／US$8.05 但 FCF 仍負；16×。</p></button>
+          <button class="val bull" data-val="bull" type="button"><div class="tag">BULL · +22%</div><div class="px">US$180</div><p>單季 FCF 轉正、ATM 少用；22× US$8.05。</p></button>
+        </div>
+        <div class="note" id="valNote">現價 18.4× 官方 EPS 指引，已經反映大部分增長，未反映 FCF 轉正。Reward／risk 不吸引。紅線解除前唔開建倉區間。</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="3">
+      <div class="panel">
+        <h2 class="sans">催化劑 · 未來 1–2 季</h2>
+        <p class="sub">真正改寫定價嘅係 FCF／ATM／指引，唔係再講一次 RPO。</p>
+        <div class="timeline sans">
+          <div class="event">
+            <div class="when">yfinance 日曆<br>2026-09-10</div>
+            <div><strong>FY2027-Q1 財報</strong><div style="color:var(--muted);font-size:.88rem;margin-top:4px">盯當季 FCF、IaaS、ATM、US$90B。EPS 落喺 US$1.72–1.76 只係普通符合。</div></div>
+            <span class="dir high">雙向 · 高</span>
+          </div>
+          <div class="event">
+            <div class="when">財報後 10-Q</div>
+            <div><strong>年累計現金流重算單季 FCF</strong><div style="color:var(--muted);font-size:.88rem;margin-top:4px">≥ 0 先重開紅線 1；再深過 −US$5B 推向 Broken。</div></div>
+            <span class="dir risk">機械閘 · 高</span>
+          </div>
+          <div class="event">
+            <div class="when">FY2027 內</div>
+            <div><strong>ATM 最多 US$20B 實際發行</strong><div style="color:var(--muted);font-size:.88rem;margin-top:4px">年結日尚未售股。Take-down 係稀釋由計劃變事實。</div></div>
+            <span class="dir risk">偏下修 · 高</span>
+          </div>
+        </div>
+        <div class="kill sans">
+          <div><h3 style="margin:0 0 6px">失效 1</h3>官方下修 FY2027 營收 US$90B，或披露重大雲合約取消／長期延期。</div>
+          <div><h3 style="margin:0 0 6px">失效 2</h3>當季 FCF 再深過 −US$5B 且 ATM 大額發行 → thesis Broken，停用 Base US$130。</div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="nav sans">
+    <div class="dots" id="dots"></div>
+    <div class="btns">
+      <button class="navbtn" id="prev" type="button">上一頁</button>
+      <button class="navbtn" id="next" type="button">下一頁</button>
+    </div>
+  </div>
+  <p class="foot sans">估值來自 Skill 3（2026-08-27）。未核對持倉。Canvas 投影片本雲端環境無 Mac canvases 目錄，GitHub Pages 用呢份 4 頁 HTML。此分析僅供研究參考，不構成投資建議。← → 翻頁</p>
+</div>
+<script>
+const slides=[...document.querySelectorAll(".slide")];
+const bar=document.getElementById("bar");
+const dots=document.getElementById("dots");
+const prev=document.getElementById("prev");
+const next=document.getElementById("next");
+let i=0;
+slides.forEach((_,idx)=>{
+  const b=document.createElement("button");
+  b.className="dot"+(idx===0?" on":"");
+  b.type="button";
+  b.addEventListener("click",()=>go(idx));
+  dots.appendChild(b);
+});
+function go(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,idx)=>s.classList.toggle("on",idx===i));
+  [...dots.children].forEach((d,idx)=>d.classList.toggle("on",idx===i));
+  bar.style.width=((i+1)/slides.length*100)+"%";
+  prev.disabled=i===0;
+  next.disabled=i===slides.length-1;
+}
+prev.onclick=()=>go(i-1);
+next.onclick=()=>go(i+1);
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight"||e.key==="PageDown") go(i+1);
+  if(e.key==="ArrowLeft"||e.key==="PageUp") go(i-1);
+});
+const notes={
+  bear:"Bear：現價下行約 46%。適用於 FCF 維持深負＋ATM 開印。紅線未解除時呢條係主要下行錨。",
+  base:"Base 係主參考：現價仍貴約 12%。交到官方指引但現金流未修好。唔係建倉價。",
+  bull:"Bull 上行約 22%，要單季 FCF 轉正。Reward／risk 細過 1，唔吸引。",
+};
+document.getElementById("valGrid").addEventListener("click",e=>{
+  const btn=e.target.closest(".val"); if(!btn) return;
+  document.querySelectorAll(".val").forEach(el=>el.classList.toggle("on",el===btn));
+  document.getElementById("valNote").textContent=notes[btn.dataset.val];
+});
+go(0);
+</script>
+</body>
+</html>

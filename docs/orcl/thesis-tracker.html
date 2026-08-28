@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORCL Thesis Tracker</title>
+<style>
+  :root {
+    --bg:#f3efe6; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 14px 40px rgba(28,25,23,.09);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;color:var(--ink);line-height:1.55;background:radial-gradient(circle at 8% 0%,#d8f3ee 0,transparent 30%),radial-gradient(circle at 92% 6%,#ffe4cc 0,transparent 26%),var(--bg)}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 80px}
+  .hero{display:grid;grid-template-columns:320px 1fr;gap:16px}
+  @media(max-width:900px){.hero{grid-template-columns:1fr}}
+  .status-box{background:linear-gradient(165deg,#fef2f2,#fee2e2 55%,#fecaca);border:1px solid #fca5a5;border-radius:28px;padding:24px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fail);font-weight:800}
+  .status-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.7rem;font-weight:800;color:var(--fail);margin:10px 0 0;line-height:1.2}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 50%,#115e59);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.2rem;font-weight:800;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.red{border-top:4px solid var(--fail)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{background:linear-gradient(90deg,#fff7ed,#ffedd5);border:1px solid #fdba74;border-radius:16px;padding:14px 16px}
+  .callout p{margin:0 0 10px}.callout p:last-child{margin:0}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#7f1d1d;color:#fff;border-color:#7f1d1d}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}.ev.weaken{border-left-color:var(--fail)}.ev.neutral{border-left-color:var(--watch)}
+  .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .impact.support{background:var(--pass-soft);color:var(--pass)}.impact.weaken{background:var(--fail-soft);color:var(--fail)}.impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;background:var(--fail-soft);color:var(--fail);font-weight:800;font-size:.82rem}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="status-box">
+      <div class="eyebrow">Thesis Tracker</div>
+      <div class="status-title">Weakening</div>
+      <div style="margin-top:12px"><span class="badge">僅觀察</span></div>
+    </div>
+    <div class="hero-main">
+      <h1>ORCL · 投資 thesis 追蹤</h1>
+      <p>增長支柱正在被驗證，自我融資未成立。Framework 1 已因紅線 1 FAIL。持倉未確認。</p>
+    </div>
+  </section>
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +14%</span></h2>
+    <p class="muted" style="margin:0">現價較 Base 溢價 <strong>+14%</strong> → 僅觀察，唔好加倉。權威來源：Framework 3 觀察區間（研究情景，非指引）。F1 紅線已 FAIL。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/27）</div><div class="v">US$147.87</div><div class="s">市值 ~US$425.9B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">80 / 130 / 180</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+14%</div><div class="s">偏貴 · 僅觀察</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 6.32×</div><div class="s">Fwd P/E 18.4× · TTM FCF yield −5.6%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 IaaS US$5.79B（+93%）</span>
+      <span>★ Q4 官方 FCF −US$1.87B</span>
+      <span>★ RPO US$638B（12 個月約 12%）</span>
+      <span>★ 現金 US$31.9B vs 票據 US$129.5B</span>
+    </div>
+  </section>
+  <div class="kpis">
+    <div class="kpi green"><div class="label">增長支柱</div><div class="value">IaaS +93%</div></div>
+    <div class="kpi teal"><div class="label">能見度</div><div class="value">RPO US$638B</div></div>
+    <div class="kpi red"><div class="label">現金流支柱</div><div class="value">F1 FAIL</div></div>
+    <div class="kpi orange"><div class="label">估值支柱</div><div class="value">已壓縮但仍偏貴</div></div>
+  </div>
+  <section class="panel">
+    <h2>Thesis 結論</h2>
+    <div class="callout">
+      <p>原始 thesis 係企業軟件底倉加 AI IaaS 加速度，RPO 證明需求，股價回落後值得重新定價。</p>
+      <p>正在被驗證：IaaS 五季加速、RPO US$638B、Q4 營收 +21%。呢啲係 8-K／10-K，唔係路演。</p>
+      <p>仍未成立：自我融資。四季加五季單季 FCF 全負，現金只有票據 0.25 倍。最大裂痕係紅線 1 機械 FAIL，唔係差 5 分。</p>
+      <p>對行動：現價較 Base 溢價 +14%。F1 FAIL + F2 現金流未通過。持倉未確認 → <strong>僅觀察，唔好加倉</strong>。</p>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>證據卡</h2>
+    <div class="filters" id="filters">
+      <button class="active" data-f="all">全部</button>
+      <button data-f="support">支持</button>
+      <button data-f="neutral">中性</button>
+      <button data-f="weaken">削弱</button>
+    </div>
+    <div class="ev-grid" id="evidence"></div>
+  </section>
+  <section class="panel">
+    <h2>裂痕同行動</h2>
+    <div class="grid-2">
+      <div class="box"><h3>結構性，唔係噪音</h3><p class="muted">公司主動加 capex／槓桿搶 AI。可以因預付而延後壓力，但而家唔好當成單季意外。</p></div>
+      <div class="box"><h3>下一個 checkpoint</h3><p class="muted">FY2027-Q1 財報／10-Q。若 FCF ≥ 0 先重開 F1 紅線；若再深過 −US$5B 或 ATM 大額發行，推向 Broken。</p></div>
+    </div>
+  </section>
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const evidence=[
+{k:"support",type:"分部",title:"Q4 IaaS US$5.79B +93%",body:"連續五季加速，第二曲線已入帳。基數仍細過 AWS 單季 US$42B，斜率可以跌，但而家唔係故事。"},
+{k:"support",type:"合約質量",title:"大型 AI 合約預付／BYOH US$75B",body:"8-K 證明並非 100% Oracle 墊 GPU。仍未量化整個 US$638B RPO 已收現金比例，所以只支持「最差假設唔成立」，唔等於現金流通過。"},
+{k:"neutral",type:"能見度",title:"RPO US$638B，12 個月約 12%",body:"合約真實，大部分唔喺未來一年變現金。能見度支柱成立一半：有單，未有現金時間表。"},
+{k:"neutral",type:"指引",title:"FY27 US$90B 同再籌 US$40B 綁埋",body:"增長指引支持 IaaS 叙事，融資指引同時承認自我融資未成立。中性係因為兩句喺同一份 8-K。"},
+{k:"weaken",type:"現金流",title:"Q4 FCF 約 −US$1.87B，紅線 FAIL",body:"五季單季 FCF 全負，FY −US$23.7B。合約覆蓋 capex 嘅假設喺現金表未成立。呢條否決初篩。"},
+{k:"weaken",type:"資本結構",title:"現金 US$31.9B vs 票據 US$129.5B",body:"Q3 現金曾到 US$39B 主要靠融資，Q4 回落。ATM 最多 US$20B 已備好、年結日尚未售股。"},
+{k:"weaken",type:"評級",title:"S&P BBB− 屬第三方",body:"無 8-K，唔改帳面。反映信用市場睇同一張表。OpenAI 佔 RPO 傳聞同樣 LEAD_ONLY。"},
+];
+const root=document.getElementById('evidence');
+function render(f){
+  root.innerHTML=evidence.filter(e=>f==='all'||e.k===f).map(e=>`
+  <article class="ev ${e.k}"><div class="muted">${e.type}<span class="impact ${e.k}">${e.k==='support'?'支持':e.k==='weaken'?'削弱':'中性'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').onclick=ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+};
+</script>
+<section id="page-comments" data-page="/orcl/thesis-tracker.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

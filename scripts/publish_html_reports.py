@@ -18,7 +18,16 @@ DOCS = ROOT / "docs"
 SKIP_OVERWRITE = {
     DOCS / "spcx" / "index.html",
     DOCS / "spcx" / "valuation-model.html",
-    DOCS / "tsla" / "index.html",
+    DOCS / "orcl" / "index.html",
+}
+
+# Tesla Pages 目錄對齊 NVDA：只露出同一套 8 頁。底稿仍留喺 output/。
+HIDE_DOCS_SLUGS = {
+    "TSLA": {
+        "earnings-review",
+        "interactive-brief",
+        "valuation-model",
+    },
 }
 
 LABELS = (
@@ -29,7 +38,11 @@ LABELS = (
     ("earnings_review", "Earnings Review"),
     ("valuation_model", "估值模型"),
     ("interactive_brief", "Interactive Brief"),
-    ("one-pager", "One-pager"),
+    ("one_pager", "one pager"),
+    ("one-pager", "one pager"),
+    ("valuation", "估值卡"),
+    ("peer_comparison", "同業比較"),
+    ("catalyst_calendar", "催化劑日曆"),
     ("index", "報告目錄"),
 )
 
@@ -186,7 +199,7 @@ def ticker_index_html(ticker: str, items: list[dict[str, str]], updated: str) ->
 def hub_html(pages: dict[str, list[dict[str, str]]]) -> str:
     extra = {
         "SPCX": [("./spcx/", "Position Brief（手機投影片）")],
-        "TSLA": [("./tsla/", "Position Brief（手機投影片）")],
+        "ORCL": [("./orcl/", "報告目錄")],
     }
     preferred = ("TSLA", "NVDA", "SPCX", "IREN", "RKLB", "RDW", "MRNA")
     tickers = [t for t in preferred if t in pages] + [t for t in pages if t not in preferred]
@@ -276,8 +289,13 @@ def main() -> None:
         dest_dir = DOCS / ticker.lower()
         dest_dir.mkdir(parents=True, exist_ok=True)
         kept: list[dict[str, str]] = []
+        hide = HIDE_DOCS_SLUGS.get(ticker.upper(), set())
         for item in items:
             dest = Path(item["dest"])
+            if dest.stem in hide:
+                if dest.exists():
+                    dest.unlink()
+                continue
             if dest in SKIP_OVERWRITE:
                 kept.append(item)
                 continue

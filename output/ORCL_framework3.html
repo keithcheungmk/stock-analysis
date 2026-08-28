@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORCL Framework 3 估值</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.1rem;font-weight:800;line-height:1.2;color:var(--fail);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi.red{border-top:4px solid var(--fail)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.green{border-top:4px solid var(--pass)}.kpi.teal{border-top:4px solid var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;background:var(--fail-soft);border:1px solid #fca5a5;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.val-grid{grid-template-columns:1fr}}
+  .val{border-radius:18px;padding:16px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left}
+  .val.bear{border-top:6px solid var(--fail)}.val.base{border-top:6px solid var(--watch)}.val.bull{border-top:6px solid var(--pass)}
+  .val.on{box-shadow:var(--shadow)}
+  .val .px{font-size:2rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin:6px 0}
+  .muted{color:var(--muted);font-size:.9rem}
+  .ruler{height:14px;border-radius:999px;background:linear-gradient(90deg,#fecaca,#fdba74,#86efac);position:relative;margin:18px 0 8px}
+  .pin{position:absolute;top:-6px;width:4px;height:26px;background:#1c1917;border-radius:4px}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);margin-right:6px}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 3 · 觀察估值</div>
+      <div class="score-num">現價偏貴<br>唔係買點</div>
+    </div>
+    <div class="hero-main">
+      <h1>ORCL · Framework 3 估值</h1>
+      <p>承接 F1 FAIL、F2 現金流未通過。主方法：官方 FY2027 non-GAAP EPS US$8.05 嘅 Forward P/E。區間係研究情景，唔係建議成交價。</p>
+      <div style="margin-top:14px"><span class="badge">現價 US$147.87 delayed</span><span class="badge">只觀察</span></div>
+    </div>
+  </section>
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +14%</span></h2>
+    <p class="muted" style="margin:0">現價較 Base 溢價 <strong>+14%</strong> → 僅觀察，唔好加倉。權威來源：Framework 3 觀察區間（研究情景，非指引）。F1 紅線已 FAIL。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/27）</div><div class="v">US$147.87</div><div class="s">市值 ~US$425.9B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">80 / 130 / 180</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+14%</div><div class="s">偏貴 · 僅觀察</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 6.32×</div><div class="s">Fwd P/E 18.4× · TTM FCF yield −5.6%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 IaaS US$5.79B（+93%）</span>
+      <span>★ Q4 官方 FCF −US$1.87B</span>
+      <span>★ RPO US$638B（12 個月約 12%）</span>
+      <span>★ 現金 US$31.9B vs 票據 US$129.5B</span>
+    </div>
+  </section>
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">現價</div><div class="value">US$147.87</div></div>
+    <div class="kpi red"><div class="label">Bear</div><div class="value">~US$80</div></div>
+    <div class="kpi orange"><div class="label">Base</div><div class="value">~US$130</div></div>
+    <div class="kpi green"><div class="label">Bull</div><div class="value">~US$180</div></div>
+  </div>
+  <section class="panel">
+    <h2>結論</h2>
+    <div class="callout"><p style="margin:0 0 8px"><strong>現價較 Base 溢價 +14%，僅觀察，唔好加倉。</strong>F1 未過紅線，呢頁唔係建倉框架。現價 forward P/E 約 18.4×（147.87／8.05），已經反映大部分官方增長指引。到 Bear 約 −46%，到 Bull 約 +22%，值搏率唔吸引。</p>
+    <p style="margin:0">建倉條件：紅線 1 解除（當季 FCF ≥ 0 或現金 &gt; 票據）<strong>而且</strong>現價回到 Base 附近之後，先重新討論。</p></div>
+    <p class="muted">價格尺：Bear US$80 · Base US$130 · 現價 · Bull US$180</p>
+    <div class="ruler"><span class="pin" style="left:68%"></span></div>
+  </section>
+  <section class="panel">
+    <h2>三情景（撳卡睇前提）</h2>
+    <div class="val-grid">
+      <button class="val bear on" data-k="bear"><div class="tag">BEAR</div><div class="px">US$80</div><p>12× 約 US$6.5 EPS 或低 P/S；FCF 維持深負、ATM 開印。</p></button>
+      <button class="val base" data-k="base"><div class="tag">BASE</div><div class="px">US$130</div><p>交到 US$90B／US$8.05，但 FCF 仍負；市場只畀 16×。</p></button>
+      <button class="val bull" data-k="bull"><div class="tag">BULL</div><div class="px">US$180</div><p>單季 FCF 轉正、ATM 少用；22× US$8.05 或 P/S ~6×。</p></button>
+    </div>
+    <p class="muted" id="detail" style="margin-top:14px">Bear：融資壓力把倍數壓去低十倍。現價並未完全 price in 呢條，但亦未提供安全邊際。</p>
+  </section>
+  <section class="panel">
+    <h2>方法</h2>
+    <p>主：Forward P/E 錨 8-K FY2027 EPS US$8.05。輔：P/S（FY26 US$67.36B → 6.32×；FY27 US$90B → 4.73×）。唔用 DCF 做主錨：近端 FCF 深負，FY27 淨 capex 官方未列表。</p>
+  </section>
+  <p class="footer">現價 yfinance delayed 2026-08-27。持倉未確認。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const d={
+bear:"Bear：FY27 交唔到 US$90B 或 EPS 約 US$6.5；FCF 維持數十億美元負；ATM 開始發行。觀察價約 US$80（−46%）。",
+base:"Base：交到營收 US$90B、EPS US$8.05；IaaS 仍快但 FCF 仍負。16× ≈ US$129。現價高過 Base 約 12%。",
+bull:"Bull：IaaS 單位經濟改善、單季 FCF 轉正或接近零、ATM 少用。22× US$8.05 ≈ US$177。現價到呢度約 +22%。"
+};
+document.querySelectorAll('.val').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.val').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById('detail').textContent=d[b.dataset.k];
+});
+</script>
+</body>
+</html>

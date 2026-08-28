@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORCL Framework 1 初篩</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:3.4rem;font-weight:800;line-height:1;color:var(--fail);margin:8px 0 0}
+  .score-den{font-size:1.05rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .warn{color:var(--watch);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .danger{color:var(--fail);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#7f1d1d;color:#fff;border-color:#7f1d1d}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 1</div>
+      <div class="score-num">FAIL</div>
+      <div class="score-den">紅線 1 觸發 · 不評 13 維</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge fail">現金 &lt; 票據 且 Q4 FCF 為負</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>ORCL · Framework 1 基本面初篩</h1>
+      <p>Oracle Corporation · 截至 2026-08-27 · 最新季 FY2026-Q4（期終 2026-05-31）· USD · US GAAP · SEC 8-K EX-99.1 + 10-K／10-Q</p>
+      <div class="badges">
+        <span class="badge">現價 US$147.87 delayed</span>
+        <span class="badge">市值 ~US$426B</span>
+        <span class="badge">先前 85／130 WATCH 已作廢</span>
+      </div>
+    </div>
+  </section>
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +14%</span></h2>
+    <p class="muted" style="margin:0">現價較 Base 溢價 <strong>+14%</strong> → 僅觀察，唔好加倉。權威來源：Framework 3 觀察區間（研究情景，非指引）。F1 紅線已 FAIL。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/27）</div><div class="v">US$147.87</div><div class="s">市值 ~US$425.9B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">80 / 130 / 180</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+14%</div><div class="s">偏貴 · 僅觀察</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 6.32×</div><div class="s">Fwd P/E 18.4× · TTM FCF yield −5.6%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q4 IaaS US$5.79B（+93%）</span>
+      <span>★ Q4 官方 FCF −US$1.87B</span>
+      <span>★ RPO US$638B（12 個月約 12%）</span>
+      <span>★ 現金 US$31.9B vs 票據 US$129.5B</span>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">現價（延遲 8/27）</div><div class="value">US$147.87</div><div class="note">52 週高位 US$345.72 · −57%</div></div>
+    <div class="kpi green"><div class="label">Q4 總營收</div><div class="value">US$19.18B</div><div class="note">YoY +21% · IaaS +93%</div></div>
+    <div class="kpi red"><div class="label">現金＋有價證券</div><div class="value">US$31.89B</div><div class="note">有息票據 US$129.5B · 0.25×</div></div>
+    <div class="kpi red"><div class="label">最近一季官方 FCF</div><div class="value">−US$1.87B</div><div class="note">FY／TTM −US$23.7B · 四季全負</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>初篩結論</h2>
+      <div class="callout fail verdict">
+        <p><strong>FAIL。</strong>破產／流動性紅線要「現金低於總債務」而且「自由現金流為負」同時成立。2026-05-31 現金＋有價證券 US$31.89B 對有息票據 US$129.54B（0.25 倍）；最近一季官方口徑 FCF（OCF−capex，由 10-Q／10-K 年累計差額）約 −US$1.87B。兩項都中 → 立即 FAIL，停止 13 維度評分。先前把 trailing-four-quarter 表嘅 TTM 差額當成單季 FCF、得出約 +US$1.05B 同 WATCH 85 分，<strong>計算錯，已作廢</strong>。</p>
+        <p>正在被驗證嘅支柱仍然係 Cloud Infrastructure 已入帳：IaaS 營收 US$5.79B（+93%），剩餘履約義務（RPO）US$638B。呢啲係 8-K／10-K 數字，唔使賭路演——但增長叙事<strong>唔可以翻案</strong>紅線。</p>
+        <p>仍未成立嘅路徑係自我融資。FY2026 四季單季 FCF 全部為負（約 −0.4／−10.0／−11.5／−1.9B）。公司確認 FY2027 總營收 US$90B，同時寫明再籌約 US$40B 債＋股（含最多 US$20B ATM）。8-K 稱大型 AI 合約入面預付或客戶自帶 GPU 部分合計 US$75B，減少自籌壓力，但 Q4 當季仍然倒貼 capex。</p>
+        <p>最大裂痕係「RPO 爆發 ≠ 現金爆發」。12 個月內只確認約 12% RPO 入帳。對行動含義：現價較 Base 溢價 <strong>+14%</strong>，初篩已否決。持倉未確認 → <strong>僅觀察，唔好加倉</strong>。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>致命紅線掃描</h2>
+      <div class="grid-3">
+        <div class="box" style="background:linear-gradient(180deg,#fef2f2,#fff)">
+          <h3><span class="danger">① 流動性 — 觸發</span></h3>
+          <p>現金＋有價證券 US$31.89B，有息票據 US$129.54B。Q4 推算 FCF 約 −US$1.87B（全年 OCF US$31,977m−Q3 年累計 US$17,357m；capex US$55,663m−US$39,170m）。兩項同時成立。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">② 衰退陷阱 — 安全</span></h3>
+          <p>Q4 YoY +21%，高過 MSFT +18%、SAP +9%、IBM +1.1%。GAAP 淨利率約 22% 且為正。救唔返紅線 1。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#fff7ed,#fff)">
+          <h3><span class="warn">③ 估值泡沫 — 未否決</span></h3>
+          <p>官方口徑 PEG 約 1.02–1.41，P/S 6.32× 低過自身 52 週高位隱含約 14.8×。有增長支持。紅線 1 已否決，呢條只係記錄。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>當季 FCF 點計（方法更正）</h2>
+      <p class="muted">官方沒有單獨印「Q4 現金流量表」。用 10-Q／10-K 年累計相減。TTM 表嘅相鄰兩欄差額係「今年該季對上年該季」，唔好再當單季。</p>
+      <table>
+        <thead><tr><th>期間</th><th>年累計 OCF</th><th>年累計 capex</th><th>當季 FCF</th><th>來源</th></tr></thead>
+        <tbody>
+          <tr><td>FY2026-Q1</td><td>8,140</td><td>8,502</td><td>−362</td><td>Q1 10-Q</td></tr>
+          <tr><td>FY2026-Q2</td><td>10,206</td><td>20,535</td><td>−9,967</td><td>Q2 10-Q</td></tr>
+          <tr><td>FY2026-Q3</td><td>17,357</td><td>39,170</td><td>−11,484</td><td>Q3 10-Q</td></tr>
+          <tr><td>FY2026 全年／Q4</td><td>31,977</td><td>55,663</td><td>−1,873</td><td>10-K</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:10px">單位 USD million。FY／TTM FCF −US$23,686m（EX-99.1 trailing-four-quarter 表）。</p>
+    </section>
+
+    <section class="panel">
+      <h2>13 維度評分</h2>
+      <div class="callout fail"><strong>不評分。</strong>任何紅線觸發即 FAIL，停止 13 維。增長、TAM、ROE 等語境唔構成分數，亦唔把作廢嘅 85 分當仍然有效。</div>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="filters sans" id="filters">
+        <button class="active" data-f="all">全部</button>
+        <button data-f="support">支持</button>
+        <button data-f="neutral">中性</button>
+        <button data-f="weaken">削弱</button>
+      </div>
+      <div class="ev-grid" id="evidence"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Adversarial 同下一步</h2>
+      <div class="grid-3">
+        <div class="box" style="border-top:4px solid var(--pass)">
+          <h3>最強支持</h3>
+          <p>IaaS +93% 同 RPO US$638B 已經入帳／合約化。Q4 總營收仍然快過 MSFT／SAP／IBM。GAAP 淨利率同 ROE 都喺高位。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--fail)">
+          <h3>最強反證</h3>
+          <p>現金只有票據四分一；最近一季 FCF 約 −US$1.87B；TTM −US$23.7B。FY2027 要再籌約 US$40B。S&amp;P 7 月降至 BBB−（第三方）。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--watch)">
+          <h3>解除條件</h3>
+          <p>下一份 10-Q：當季官方 FCF ≥ 0，或現金＋有價證券高過有息票據。ATM 大額售股、大型 AI 合約延遲提貨會令裂縫加深。</p>
+        </div>
+      </div>
+      <div class="callout info" style="margin-top:14px">
+        <strong>FAIL → 重新評估。</strong>量化閘：最近一季官方 FCF ≥ 0，或現金＋有價證券 &gt; 有息票據（缺口約 US$98B）。最近催化：FY2027-Q1 財報（yfinance 日曆 2026-09-10；IR 未見獨立定日稿）。官方 Q1 指引營收 +27–29%、Cloud +58–64%、non-GAAP EPS US$1.72–1.76。Framework 2 可深挖執行拐點，但<strong>唔翻案</strong>紅線。
+      </div>
+    </section>
+  </div>
+
+  <p class="footer">官方優先：SEC 8-K EX-99.1（2026-06-10）+ 10-K（2026-06-22）+ 10-Q。同業：MSFT／AMZN／SAP／IBM 官方稿。市況 yfinance delayed（2026-08-27 last US$147.87）。S&amp;P BBB− 為第三方評級。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const evidence=[
+{k:"weaken",type:"現金流",title:"Q4 官方口徑 FCF 約 −US$1.87B，紅線 1 觸發",body:"10-K 全年 OCF US$31,977m、capex US$55,663m；減 Q3 10-Q 年累計 OCF US$17,357m、capex US$39,170m，得出 Q4 約 −US$1.87B。FY2026 四季 FCF 全部為負。先前用 TTM 表相減得出 +US$1.05B 係錯方法，WATCH 85 已作廢。"},
+{k:"weaken",type:"資產負債",title:"現金 US$31.9B 對有息票據 US$129.5B",body:"10-K：現金等價物 US$31.29B、有價證券 US$0.61B；票據 US$7.20B＋US$122.34B。現金只有債務 0.25 倍。yfinance 債務含經營租賃，紅線用官方票據。兩項同時成立先觸發，而家已經同時成立。"},
+{k:"support",type:"分部／KPI",title:"Q4 IaaS US$5.79B，按年 +93%",body:"EX-99.1：Cloud Infrastructure 由上年約 US$3.00B 升到 US$5.79B。同期 Microsoft Azure +43%、Amazon AWS +37%（官方分部）。增長斜率係三家最快，但救唔返流動性紅線。"},
+{k:"support",type:"合約",title:"RPO US$638B，按年 +363%；預付／自帶 GPU US$75B",body:"10-K：剩餘履約義務由 US$138B 升到 US$638B；未來 12 個月約確認 12%。8-K 稱大型 AI 合約入面，客戶預付或自帶硬件部分合計 US$75B，減少自籌壓力。呢個係能見度，唔等於當季現金已覆蓋 capex。"},
+{k:"support",type:"損益",title:"Q4 營收 +21%，GAAP 淨利率約 22%",body:"總營收 US$19.18B vs US$15.90B。MSFT 同季 +18%、SAP +9%、IBM +1.1%。GAAP 經營利潤率 32%。衰退紅線不成立——但 Framework 1 已經被紅線 1 否決。"},
+{k:"neutral",type:"指引／稀釋",title:"FY2027 營收 US$90B，同時再籌約 US$40B",body:"8-K：確認全年營收 US$90B，non-GAAP EPS US$8.05；Q1 營收 +27–29%。同一份稿寫 FY2027 再籌約 US$40B 債＋股，含已公布 US$20B ATM。10-K 年結日尚未按 ATM 售股。"},
+{k:"weaken",type:"評級／集中度",title:"S&P 7/9 降至 BBB−；OpenAI 佔 RPO 屬第三方",body:"EDGAR 無對應 8-K。10-K 只保證無單一客戶佔總營收 10%。第三方唔覆寫帳面，亦唔係今次 FAIL 嘅機械原因——機械原因係現金同當季 FCF。"},
+];
+const evRoot=document.getElementById('evidence');
+function render(filter){
+  evRoot.innerHTML=evidence.filter(e=>filter==='all'||e.k===filter).map(e=>`
+  <article class="ev ${e.k}"><div class="type">${e.type}<span class="impact ${e.k}">${e.k==='support'?'支持':e.k==='weaken'?'削弱':'中性'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+});
+</script>
+<section id="page-comments" data-page="/orcl/framework1.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+{
+  "schema_version": 2,
+  "company": "Oracle Corporation",
+  "ticker": "ORCL",
+  "fiscal_period": "FY2026-Q1",
+  "period_end": "2025-08-31",
+  "authority": "Official company IR and SEC EDGAR",
+  "event_page": "https://investor.oracle.com/",
+  "files": [
+    {
+      "path": "sec-10-q-0001193125-25-200095-orcl-20250831.html",
+      "type": "regulatory_filing",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525200095/orcl-20250831.htm",
+      "source_authority": "SEC EDGAR",
+      "sha256": "97f1bf7e5033da42c30a7c824cede973ff092bd6dca9702df8371373760835bd",
+      "size_bytes": 2625821,
+      "mime_type": "text/html",
+      "period_end": "2025-08-31",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "retrieved_at": "2026-08-27T11:06:04.164281+00:00",
+      "validation_status": "verified",
+      "filing_form": "10-Q",
+      "accession_number": "0001193125-25-200095",
+      "filing_date": "2025-09-10"
+    },
+    {
+      "path": "sec-8-k-0001193125-25-199175-orcl-20250909.html",
+      "type": "event_filing",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525199175/orcl-20250909.htm",
+      "source_authority": "SEC EDGAR",
+      "sha256": "5ca98c0953579c5905ac1c8ad7f74cabdabd9ee9db15abc5546577b414dd7b40",
+      "size_bytes": 52859,
+      "mime_type": "text/html",
+      "period_end": "2025-08-31",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "retrieved_at": "2026-08-27T11:06:04.164281+00:00",
+      "validation_status": "verified",
+      "filing_form": "8-K",
+      "accession_number": "0001193125-25-199175",
+      "filing_date": "2025-09-09"
+    },
+    {
+      "path": "sec-8-k-0001193125-25-199175-orcl-ex99_1.html",
+      "type": "earnings_release",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312525199175/orcl-ex99_1.htm",
+      "source_authority": "SEC EDGAR",
+      "sha256": "4c524eb6f8db327a015cbba7def400988210ec8fb393abf856d304337f5f36bf",
+      "size_bytes": 1230848,
+      "mime_type": "text/html",
+      "period_end": "2025-08-31",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "retrieved_at": "2026-08-27T11:06:04.164281+00:00",
+      "validation_status": "verified",
+      "filing_form": "8-K",
+      "accession_number": "0001193125-25-199175",
+      "filing_date": "2025-09-09"
+    }
+  ],
+  "currency": "USD",
+  "accounting_basis": [
+    "US_GAAP",
+    "Non_GAAP"
+  ],
+  "cik": "0001341439",
+  "release_date": "2025-09-09",
+  "retrieved_at": "2026-08-27T11:06:04.164281+00:00",
+  "unavailable_sources": [
+    {
+      "type": "official_transcript",
+      "status": "not_part_of_standard_official_package",
+      "substitute": "webcast_metadata"
+    }
+  ],
+  "pending_sources": [],
+  "validation_status": "complete"
+}
