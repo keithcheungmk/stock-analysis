@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORCL 催化劑日曆</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--teal-deep:#134e4a;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--fail);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .event{display:grid;grid-template-columns:170px 1fr auto;gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:10px}
+  @media(max-width:860px){.event{grid-template-columns:1fr}}
+  .when{font-weight:800;font-size:.82rem;color:var(--teal-deep);font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dir{font-size:.75rem;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap;font-family:"Avenir Next","PingFang TC",sans-serif;height:fit-content}
+  .dir.high{background:var(--fail-soft);color:var(--fail)}.dir.mid{background:var(--info-soft);color:var(--info)}.dir.low{background:#f5f5f4;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.warn{border-left:5px solid var(--watch)}.box.fail{border-left:5px solid var(--fail)}.box.ok{border-left:5px solid var(--pass)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 5 · F1 FAIL</div>
+      <div class="verdict-title">等 Q1 FCF 閘<br>財報前唔追</div>
+      <p class="sans muted" style="margin:12px 0 0">未確認持倉。僅觀察／唔好加倉。</p>
+    </div>
+    <div class="hero-main">
+      <h1>ORCL · 催化劑地圖</h1>
+      <p>真正改寫定價嘅唔係「再講一次 RPO 好大」，而係 FY2027-Q1 出唔出到當季 FCF、ATM 有冇開始印股票、IaaS／指引有冇裂縫。</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>事件</h2>
+    <div class="event">
+      <div class="when">2026-09-10<br>yfinance；IR 未定日</div>
+      <div><strong>FY2027-Q1 財報＋電話會</strong><div class="muted">當季 FCF、IaaS、RPO、ATM 股數、有冇改 US$90B／US$8.05。紅線 1 可唔可以解除嘅機械閘。</div></div>
+      <span class="dir high">最高 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">Q1 10-Q<br>財報後數日</div>
+      <div><strong>年累計現金流、票據、股數</strong><div class="muted">用年累計差額重算單季 FCF；ATM 註釋。F1 紅線機械判定靠呢份文件。</div></div>
+      <span class="dir high">高 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">FY2027 內<br>無精確日</div>
+      <div><strong>ATM 最多 US$20B 實際發行</strong><div class="muted">424B5 之後有冇 take-down；10-Q 披露。稀釋由計劃變事實。</div></div>
+      <span class="dir high">高 · 偏空</span>
+    </div>
+    <div class="event">
+      <div class="when">2026 餘下</div>
+      <div><strong>8-K「唔預期再發額外債」</strong><div class="muted">若突然再出債券 8-K＝指引失信。官方已講 FY2027 再籌約 US$40B。</div></div>
+      <span class="dir mid">中 · 中性偏正若守住</span>
+    </div>
+    <div class="event">
+      <div class="when">同業窗口</div>
+      <div><strong>MSFT／AMZN／SAP 雲增速</strong><div class="muted">Azure／AWS 若明顯減速，OCI 溢價難獨存。只作 read-through。</div></div>
+      <span class="dir mid">中 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">無官方日</div>
+      <div><strong>S&P BBB−（2026-07-09 第三方）</strong><div class="muted">無 8-K 唔改帳面。跌穿投資級先係結構事件。</div></div>
+      <span class="dir mid">中 · 偏空若再降</span>
+    </div>
+    <div class="event">
+      <div class="when">已過去</div>
+      <div><strong>FY2026-Q4、424B5 公布</strong><div class="muted">已 price in。盯執行而唔係再公布。</div></div>
+      <span class="dir low">低 · 已反映</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>誤判同行動</h2>
+    <div class="grid-2">
+      <div class="box warn"><h3 class="sans">市場高估</h3><p>單季 non-GAAP EPS beat（Q4 已 beat 過股價照跌）；RPO 再加幾千億而無現金流；工地／客戶名傳媒。</p></div>
+      <div class="box fail"><h3 class="sans">市場低估</h3><p>10-Q「當季 FCF 轉正或再惡化」對紅線嘅機械含義；預付 GPU US$75B 放慢令 OCF 質量即時變差；ATM 稀釋。</p></div>
+      <div class="box ok" style="grid-column:1/-1"><h3 class="sans">而家點做</h3><p>Q1 財報前：僅觀察、唔追高。FCF 轉正＋指引守住先可重新開 F1，唔係即場加倉。FCF 深負或指引裂→維持 FAIL。</p></div>
+    </div>
+  </section>
+  <p class="footer">Q1 日期：yfinance 日曆 2026-09-10（`unverified`，IR 未見獨立定日稿）。官方：8-K EX-99.1、10-K、10-Q。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/orcl/catalyst-calendar.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

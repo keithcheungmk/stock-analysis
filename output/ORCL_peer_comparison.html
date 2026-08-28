@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORCL 同業比較</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--fail);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;background:var(--fail-soft);border:1px solid #fca5a5}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:960px){.grid{grid-template-columns:1fr 1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff}
+  .box.p1{border-top:4px solid var(--pass)}.box.p2{border-top:4px solid var(--teal)}.box.p3{border-top:4px solid var(--watch)}.box.p4{border-top:4px solid var(--fail)}
+  .rank{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.78rem;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 4 · F1 FAIL</div>
+      <div class="verdict-title">MSFT 質量錨<br>ORCL 只宜觀察</div>
+      <p class="sans muted" style="margin:12px 0 0">排序係研究配置，唔係買入指令。</p>
+    </div>
+    <div class="hero-main">
+      <h1>ORCL vs MSFT / SAP / IBM</h1>
+      <p>最大分野：邊個可以用經營現金流起 AI 雲、邊個要用票據同 ATM。ORCL IaaS +93% 唔等於 MSFT 質量。</p>
+      <div class="badges">
+        <span class="badge">ORCL F1 FAIL</span>
+        <span class="badge">官方 EX-99.1</span>
+        <span class="badge">價格 delayed 8/27</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>一句話</h2>
+    <div class="callout sans">ORCL 斜率最快（IaaS +93%）、現金流最差（FY FCF −US$23.7B）。市場最易把 RPO 同 IaaS 斜率當成 Microsoft 質量，又把 IBM 低增速當成「便宜就可以買」。</div>
+  </section>
+
+  <section class="panel">
+    <h2>角色同排序</h2>
+    <div class="grid">
+      <div class="box p1"><div class="rank">1 · 核心質量</div><h3>MSFT</h3><p>雲＋訂閱生態。總營收 +18%，Azure +43%。自我融資 AI 雲質量錨。</p></div>
+      <div class="box p2"><div class="rank">2 · 應用護城河</div><h3>SAP</h3><p>ERP 轉換成本真實。總 +9%、雲 +22%。輕 capex，唔會食晒敘事。</p></div>
+      <div class="box p3"><div class="rank">3 · 只宜觀察</div><h3>ORCL</h3><p>總 +21%、IaaS +93%。RPO US$638B 但 F1 FAIL、FCF 未通過。等紅線解除。</p></div>
+      <div class="box p4"><div class="rank">4 · 值搏陷阱</div><h3>IBM</h3><p>+1.1% 唔配成長股倍數。低 P/S 係低增長正確折現。</p></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>核心比較</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>公司</th><th>商業質量</th><th>增長質量</th><th>現金流質量</th><th>估值吸引力</th><th>最大亮點</th><th>最大風險</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>MSFT</td><td>高</td><td>高（+18%／Azure +43%）</td><td>高</td><td>中（貴得合理）</td><td>生態＋規模</td><td>監管／高基數減速</td></tr>
+          <tr><td>ORCL</td><td>中高／中</td><td>高（+21%／IaaS +93%）</td><td><strong>低</strong></td><td>中（倍數壓縮、紅線未解）</td><td>RPO、IaaS 斜率</td><td>槓桿、稀釋、大合約</td></tr>
+          <tr><td>SAP</td><td>高</td><td>中（+9%／雲 +22%）</td><td>中高</td><td>中</td><td>ERP 黏性</td><td>雲轉型速度</td></tr>
+          <tr><td>IBM</td><td>中</td><td>低（+1.1%）</td><td>中</td><td>看似高、實則陷阱</td><td>穩定現金叙事</td><td>結構性低增長</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:12px">官方：ORCL EX-99.1 FY2026-Q4；MSFT 8-K 2026-07-29；SAP 6-K；IBM 8-K。AWS US$42.2B +37% 只作 IaaS 對照，唔硬塞入軟件平均。</p>
+  </section>
+
+  <section class="panel">
+    <h2>配置建議（研究，非持倉）</h2>
+    <div class="grid" style="grid-template-columns:1fr 1fr">
+      <div class="box p1"><h3 class="sans">核心首選</h3><p>MSFT — 質量、增長、現金流三項最完整。</p></div>
+      <div class="box p3"><h3 class="sans">唔宜追高</h3><p>ORCL、IBM — ORCL 要等紅線解除；IBM 唔係 AI 雲進攻倉。</p></div>
+    </div>
+  </section>
+  <p class="footer">ORCL Framework 1 已 FAIL；Peer 排序唔等於建議買 ORCL。若只能選一間長持：MSFT。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>
