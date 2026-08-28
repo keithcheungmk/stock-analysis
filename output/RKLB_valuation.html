@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RKLB 估值卡 · Framework 3</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:920px;margin:0 auto;padding:24px 16px 72px}
+  h1{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.7rem;margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 16px}
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.hero{grid-template-columns:1fr}}
+  .big{border-radius:22px;padding:18px;color:#fff;box-shadow:var(--shadow)}
+  .big.navy{background:linear-gradient(145deg,#134e4a,#0f766e)}
+  .big.warn{background:linear-gradient(145deg,#7c2d12,#c2410c)}
+  .big .l{font-size:.72rem;opacity:.85;font-weight:800;letter-spacing:.06em;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .big .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.1rem;font-weight:800;margin:4px 0}
+  .big .d{font-size:.88rem;opacity:.92}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:14px;box-shadow:var(--shadow)}
+  .hud{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-size:.72rem;font-weight:800;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+  @media(max-width:700px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;border-top:3px solid var(--watch);font-size:.78rem}
+  .hud-cell .l{color:var(--muted);font-weight:700}.hud-cell .v{font-weight:800;font-size:1rem;margin-top:2px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .hud-drivers span{font-size:.72rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:5px 8px}
+  .hud-note{margin:8px 0 0;font-size:.78rem;color:var(--muted)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{border:1px solid var(--line);border-radius:12px;padding:10px;border-top:3px solid var(--teal);font-size:.78rem}
+  .kpi .l{color:var(--muted);font-weight:700}.kpi .v{font-weight:800;font-size:1rem;margin-top:2px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:700px){.val-grid{grid-template-columns:1fr}}
+  .val{border-radius:18px;padding:14px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .val.bear{border-top:6px solid var(--fail)}
+  .val.base{border-top:6px solid var(--watch)}
+  .val.bull{border-top:6px solid var(--pass)}
+  .val.on{box-shadow:var(--shadow);transform:translateY(-2px)}
+  .val .tag{font-size:.72rem;font-weight:800;letter-spacing:.08em}
+  .val .px{font-size:1.8rem;font-weight:800;margin:6px 0}
+  .val p{margin:0;color:var(--muted);font-size:.82rem}
+  .ruler{margin:16px 0 8px;position:relative;height:44px}
+  .track{height:10px;background:#e7e0d5;border-radius:999px;position:relative;margin-top:18px}
+  .seg{position:absolute;height:100%;border-radius:999px}
+  .mark{position:absolute;top:-22px;font-size:.68rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;transform:translateX(-50%);white-space:nowrap}
+  .pin{position:absolute;top:-6px;width:4px;height:22px;background:#134e4a;border-radius:4px;transform:translateX(-50%)}
+  .note{margin-top:12px;background:var(--info-soft);border:1px solid #93c5fd;border-radius:14px;padding:12px 14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.88rem}
+  .warnbox{margin-top:12px;background:var(--watch-soft);border:1px solid #fdba74;border-radius:14px;padding:12px 14px;font-size:.88rem}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .disc{font-size:.78rem;color:var(--muted);margin-top:18px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="sans" style="color:var(--teal);font-weight:800;margin:0 0 8px">估值卡 · 只展示 Framework 3 · FY2027E EV/S</p>
+  <h1>RKLB · FY2027E EV/Sales</h1>
+  <p class="sub">判定：高估。行動：現價相對 Base +18%，唔好加倉。官方 2026-Q2 verified；Iridium 營收未計入三情景。</p>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +18%</span></h2>
+    <p class="hud-note">現價相對 Base 溢價約 <strong>+18%</strong> → 唔好加倉。ATM／bridge 未入 639.1M 股假設。</p>
+    <div class="hud-grid sans">
+      <div class="hud-cell"><div class="l">現價 2026-08-26</div><div class="v">US$66.18</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">28 / 56 / 101</div></div>
+      <div class="hud-cell"><div class="l">vs Base</div><div class="v">+18%</div></div>
+      <div class="hud-cell"><div class="l">NTM P/S</div><div class="v">~48×</div></div>
+    </div>
+    <div class="hud-drivers sans">
+      <span>★ Q2 營收 US$234.1M</span>
+      <span>★ Backlog US$2.36B</span>
+      <span>★ Q3 GM 29–31%</span>
+      <span>★ H1 OCF −US$134.4M</span>
+      <span>★ Neutron Q4 2026 送墊</span>
+    </div>
+  </section>
+
+  <div class="hero sans" style="margin-top:14px">
+    <div class="big navy">
+      <div class="l" id="priceLabel">F3 價格錨 · 2026-08-26 收市</div>
+      <div class="v" id="priceNow">US$66.18</div>
+      <div class="d" id="priceGap">對 Base US$56 約 +18%</div>
+    </div>
+    <div class="big warn">
+      <div class="l">行動</div>
+      <div class="v" style="font-size:1.55rem">唔好加倉</div>
+      <div class="d">建倉觀察區 US$48–58</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="kpis sans">
+      <div class="kpi"><div class="l">Bear</div><div class="v">US$28</div></div>
+      <div class="kpi"><div class="l">Base</div><div class="v">US$56</div></div>
+      <div class="kpi"><div class="l">Bull</div><div class="v">US$101</div></div>
+      <div class="kpi"><div class="l">R/R</div><div class="v">~0.9×</div></div>
+    </div>
+    <div class="ruler sans" id="ruler"></div>
+    <p class="sub" style="font-size:.78rem;margin-top:8px">尺：Bear US$28 → Bull US$101。針係現價 US$66.18。</p>
+  </div>
+
+  <div class="card">
+    <h2 class="sans" style="margin:0 0 10px;font-size:1.1rem">情景（點擊對照）</h2>
+    <div class="val-grid" id="valGrid">
+      <button class="val bear" data-val="bear" type="button">
+        <div class="tag">BEAR</div>
+        <div class="px">US$28</div>
+        <p>FY27E US$1.05B · 15× EV/S · Neutron 滑期 · vs 現價 −58%</p>
+      </button>
+      <button class="val base on" data-val="base" type="button">
+        <div class="tag">BASE</div>
+        <div class="px">US$56</div>
+        <p>FY27E US$1.34B · 25× EV/S · 送墊 · vs 現價 −15%</p>
+      </button>
+      <button class="val bull" data-val="bull" type="button">
+        <div class="tag">BULL</div>
+        <div class="px">US$101</div>
+        <p>FY27E US$1.64B · 38× EV/S · 毛利修復 · vs 現價 +53%</p>
+      </button>
+    </div>
+    <div class="note" id="valNote"></div>
+    <div class="warnbox">
+      現價 NTM P/S ~48×、TTM ~67×。若用 Base 25× 反推，隱含 FY27 營收約 US$1.95B——高過 Bull US$1.64B。市場用接近 Bull 倍數買 Base 路徑，或已 price in Neutron／Iridium 成功。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="sans" style="margin:0 0 8px;font-size:1.1rem">方法與錨點</h2>
+    <table>
+      <thead><tr><th>項目</th><th class="num">數字</th><th>來源</th></tr></thead>
+      <tbody>
+        <tr><td>淨現金（約）</td><td class="num">US$2.38B</td><td>10-Q 2026-06-30</td></tr>
+        <tr><td>已發行股（模型）</td><td class="num">639.1M</td><td>Skill 3；ATM 未入</td></tr>
+        <tr><td>NTM 營收（官方錨）</td><td class="num">~US$872M</td><td>TTM + Q3 指引中位</td></tr>
+        <tr><td>Q3 營收指引</td><td class="num">250–265M</td><td>8-K EX-99.1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="disc">卡片只係 F3 展示層，禁止另起倍數模型。delayed 價格可快速變動，唔當 live。未確認持倉。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const F3 = {
+  px: 66.18,
+  bear: 28, base: 56, bull: 101,
+  lo: 20, hi: 110,
+  notes: {
+    bear: "Bear：FY27E 營收 US$1.05B、15× EV/S → US$28。對現價約 −58%。Neutron 送墊滑出、GM 停在 29–31%。",
+    base: "Base 係主參考：FY27E US$1.34B、25× → US$56。對現價約 −15%。要 Q3 GM／Neutron 送墊確認先討論建倉 US$48–58。",
+    bull: "Bull：FY27E US$1.64B、38× → US$101。對現價約 +53%。需要指引上沿同系統轉化。現價未確認前唔當可追目標。"
+  }
+};
+let scenario = "base";
+function pct(target, px){ const v=(target/px-1)*100; return (v>=0?"+":"")+v.toFixed(0)+"%"; }
+function render(){
+  const px = F3.px;
+  document.getElementById("priceGap").textContent = "對 Base US$56 約 "+pct(F3.base, px)+" · 對 Bear "+pct(F3.bear, px)+" · 對 Bull "+pct(F3.bull, px);
+  document.getElementById("valNote").textContent = F3.notes[scenario];
+  const span = F3.hi - F3.lo;
+  const pos = p => Math.min(100, Math.max(0, (p-F3.lo)/span*100));
+  document.getElementById("ruler").innerHTML = `
+    <div class="track">
+      <div class="seg" style="left:${pos(F3.bear)}%;width:2%;background:#fecaca"></div>
+      <div class="seg" style="left:${pos(F3.base)}%;width:2%;background:#fdba74"></div>
+      <div class="seg" style="left:${pos(F3.bull)}%;width:2%;background:#86efac"></div>
+      <div class="pin" style="left:${pos(px)}%"></div>
+    </div>
+    <div class="mark" style="left:${pos(px)}%">現價 ${px.toFixed(2)}</div>
+  `;
+}
+document.getElementById("valGrid").addEventListener("click", e=>{
+  const b=e.target.closest(".val"); if(!b) return;
+  document.querySelectorAll(".val").forEach(x=>x.classList.toggle("on", x===b));
+  scenario=b.dataset.val; render();
+});
+render();
+</script>
+<section id="page-comments" data-page="/rklb/valuation.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

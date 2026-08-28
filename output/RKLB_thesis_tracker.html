@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RKLB Thesis Tracker</title>
+<style>
+  :root {
+    --bg: #f3efe6;
+    --ink: #1c1917;
+    --muted: #78716c;
+    --card: #fffdf8;
+    --line: #e7e0d5;
+    --teal: #0f766e;
+    --teal-deep: #134e4a;
+    --watch: #c2410c;
+    --watch-soft: #ffedd5;
+    --fail: #b91c1c;
+    --fail-soft: #fee2e2;
+    --pass: #15803d;
+    --pass-soft: #dcfce7;
+    --info: #1d4ed8;
+    --shadow: 0 14px 40px rgba(28, 25, 23, 0.09);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Iowan Old Style", "Songti TC", "Noto Serif TC", "PingFang TC", serif;
+    color: var(--ink);
+    line-height: 1.55;
+    background:
+      radial-gradient(circle at 8% 0%, #d8f3ee 0, transparent 30%),
+      radial-gradient(circle at 92% 6%, #ffe4cc 0, transparent 26%),
+      radial-gradient(circle at 50% 100%, #fde68a22 0, transparent 40%),
+      var(--bg);
+  }
+  .sans { font-family: "Avenir Next", "PingFang TC", "Noto Sans TC", sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 18px 80px; }
+  .hero { display: grid; grid-template-columns: 320px 1fr; gap: 16px; }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+  .status-box {
+    background: linear-gradient(165deg, #fff7ed, #ffedd5 55%, #fdba74);
+    border: 1px solid #fb923c;
+    border-radius: 28px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .eyebrow {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--watch);
+    font-weight: 800;
+  }
+  .status-title {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--watch);
+    margin: 10px 0 0;
+    line-height: 1.2;
+  }
+  .hero-main {
+    background: linear-gradient(135deg, #134e4a, #0f766e 50%, #115e59);
+    color: #fff;
+    border-radius: 28px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+  }
+  .hero-main h1 { margin: 0 0 8px; font-size: 1.85rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .hero-main p { margin: 0; opacity: 0.92; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .badge {
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+    display: inline-flex; align-items: center;
+    padding: 7px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
+    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.18);
+  }
+  .badge.watch { background: var(--watch-soft); color: var(--watch); border: 0; }
+  .badge.pass { background: var(--pass-soft); color: var(--pass); border: 0; }
+  .badge.fail { background: var(--fail-soft); color: var(--fail); border: 0; }
+  .badge.ink { background: #fff; color: var(--teal-deep); border: 0; }
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+  @media (max-width: 900px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+    padding: 16px; box-shadow: var(--shadow);
+  }
+  .kpi .label { font-family: "Avenir Next", "PingFang TC", sans-serif; color: var(--muted); font-size: 0.75rem; font-weight: 700; }
+  .kpi .value { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 1.25rem; font-weight: 800; margin-top: 6px; }
+  .kpi .note { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+  .kpi.pass { border-top: 4px solid var(--pass); }
+  .kpi.warn { border-top: 4px solid var(--watch); }
+  .kpi.fail { border-top: 4px solid var(--fail); }
+  .sections { display: grid; gap: 16px; margin-top: 18px; }
+  .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: 26px;
+    padding: 24px; box-shadow: var(--shadow);
+  }
+  h2 { margin: 0 0 6px; font-size: 1.2rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .section-sub { margin: 0 0 16px; color: var(--muted); font-size: 0.92rem; }
+  h3 { margin: 0 0 8px; font-size: 0.98rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .verdict {
+    border-radius: 18px; padding: 16px 18px;
+    background: linear-gradient(90deg, #fff7ed, #ffedd5);
+    border: 1px solid #fdba74;
+    font-family: "Avenir Next", "PingFang TC", sans-serif;
+  }
+  .verdict p { margin: 0 0 10px; }
+  .verdict p:last-child { margin-bottom: 0; }
+  .pillar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .pillar-grid { grid-template-columns: 1fr; } }
+  .pillar { border-radius: 18px; padding: 16px; border: 1px solid var(--line); background: #fff; min-height: 118px; }
+  .pillar.ok { border-left: 6px solid var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 42%); }
+  .pillar.bad { border-left: 6px solid var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 42%); }
+  .pillar .code { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; color: var(--muted); }
+  .pillar .title { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; font-size: 1.05rem; margin-top: 4px; }
+  .pillar .kpi { border: 0; box-shadow: none; padding: 0; background: transparent; margin-top: 8px; color: var(--muted); font-size: 0.9rem; }
+  .pillar .state { display: inline-flex; margin-top: 10px; font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 0.75rem; font-weight: 800; border-radius: 999px; padding: 4px 10px; }
+  .state.up { background: var(--pass-soft); color: var(--pass); }
+  .state.down { background: var(--fail-soft); color: var(--fail); }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 7px 12px; cursor: pointer; font: inherit; font-size: 0.8rem; font-weight: 700; }
+  .chip.on { background: #ccfbf1; border-color: #99f6e4; color: var(--teal); }
+  .evidence-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .evidence-grid { grid-template-columns: 1fr; } }
+  .ev { border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; background: #fff; border-left-width: 6px; min-height: 168px; }
+  .ev.support { border-left-color: var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 38%); }
+  .ev.neutral { border-left-color: #a8a29e; background: linear-gradient(180deg, #fafaf9, #fff 38%); }
+  .ev.weaken { border-left-color: var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 38%); }
+  .ev-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .ev-type { color: var(--muted); font-size: 0.75rem; font-weight: 700; }
+  .pill { border-radius: 999px; padding: 3px 10px; font-size: 0.72rem; font-weight: 800; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .pill.support { background: var(--pass-soft); color: var(--pass); }
+  .pill.neutral { background: #f5f5f4; color: #57534e; }
+  .pill.weaken { background: var(--fail-soft); color: var(--fail); }
+  .ev-title { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; margin-top: 8px; }
+  .ev-note { color: var(--muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.55; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+  .box { border: 1px solid var(--line); border-radius: 18px; padding: 16px; background: #fff; }
+  .box.pass { border-left: 6px solid var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 40%); }
+  .box.warn { border-left: 6px solid var(--watch); background: linear-gradient(180deg, #fff7ed, #fff 40%); }
+  .box.fail { border-left: 6px solid var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 40%); }
+  .box.info { border-left: 6px solid var(--info); background: linear-gradient(180deg, #eff6ff, #fff 40%); }
+  .action-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .action-grid { grid-template-columns: 1fr; } }
+  .footer { margin-top: 18px; color: var(--muted); font-size: 0.82rem; font-family: "Avenir Next", "PingFang TC", sans-serif; }
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:900px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .hud-note{margin:8px 0 0;font-size:.82rem;color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif}
+  .action-bar{margin-top:12px}
+  .action-pill{display:inline-flex;padding:10px 16px;border-radius:999px;background:#1c1917;color:#fff;font-weight:800;font-size:.88rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="status-box">
+      <div class="eyebrow">Skill 6 · Thesis Tracker</div>
+      <div class="status-title">Mixed / Needs Monitoring</div>
+      <div class="badges">
+        <span class="badge watch">唔好加倉</span>
+        <span class="badge pass">A 改善</span>
+        <span class="badge fail">B/C 未成立 · D 削弱</span>
+      </div>
+      <p class="sans" style="margin:14px 0 0;color:var(--muted);font-size:0.86rem">未確認持倉 → 僅觀察</p>
+    </div>
+    <div class="hero-main">
+      <h1>RKLB · 投資 Thesis 狀態報告</h1>
+      <p>Rocket Lab Corporation · 2026-08-27 · Q2 官方業績 + 8/13 Iridium／ATM 8-K</p>
+      <div class="badges">
+        <span class="badge ink">F1：WATCH 70/130</span>
+        <span class="badge">Skill 3：高估 · Base US$56</span>
+        <span class="badge">現價 US$66.18 delayed</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +18%</span></h2>
+    <p class="hud-note">現價相對 Base 溢價約 <strong>+18%</strong>（US$66.18 vs US$56）→ 唔好加倉。ATM／bridge 未入 Skill 3 639.1M 股假設。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 2026-08-26）</div><div class="v">US$66.18</div><div class="s">市值約 US$42.3B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">28 / 56 / 101</div><div class="s">F3 FY2027E EV/S · 2026-08-14</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+18%</div><div class="s">偏高 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">NTM P/S ~48×</div><div class="s">TTM ~67× · Iridium 營收未計</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q2 營收 US$234.1M（+62% YoY）</span>
+      <span>★ Backlog US$2.36B（+137% YoY）</span>
+      <span>★ Q3 GAAP GM 指引 29–31%</span>
+      <span>★ H1 OCF −US$134.4M</span>
+      <span>★ Neutron Q4 2026 送墊（8-K EX-99.1）</span>
+    </div>
+    <p class="hud-note">官方：8-K EX-99.1／10-Q 2026-Q2 · 期末 2026-06-30 · USD US GAAP · verified。</p>
+  </section>
+  <div class="action-bar">
+    <span class="action-pill">現價相對 Base 溢價約 +18%，唔好加倉。</span>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi pass"><div class="label">Q2 營收</div><div class="value">US$234.1M</div><div class="note">YoY +62%</div></div>
+    <div class="kpi pass"><div class="label">Backlog</div><div class="value">US$2.36B</div><div class="note">YoY +137%</div></div>
+    <div class="kpi fail"><div class="label">H1 OCF</div><div class="value">−US$134.4M</div><div class="note">現金 US$2.13B</div></div>
+    <div class="kpi fail"><div class="label">ATM 剩餘上限</div><div class="value">US$1.94B</div><div class="note">8-K 2026-08-13</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>Thesis 結論（詳細）</h2>
+      <div class="verdict">
+        <p>成長支柱正在被驗證：Q2 營收 US$234.1M（+62% YoY）、backlog US$2.36B，Q3 營收指引再升至 US$250–265M。紀錄季度唔係噪音，Launch → Space Systems／國防嘅需求路徑仍然成立。</p>
+        <p>Neutron 同 Iridium 兩條第二曲線仍未成立。前者只係 Q4 2026 送墊目標；後者 HSR 已過、S-4 已交、投票 9/24，但官方預期交割要到 2027 中，期間唔貢獻 Skill 3 營收。</p>
+        <p>最大裂痕由「交易條款未見」轉成「融資路徑已落地」：H1 OCF −US$134.4M，ATM 剩餘上限 US$1.94B，bridge US$3.6B。現金 US$2.13B 係抗風險，唔係經營自給。</p>
+        <p>狀態 Mixed／Needs Monitoring。現價 delayed US$66.18 仍高於 Skill 3 Base US$56 同建倉帶 US$48–58。未確認持倉 → 唔好加倉。股價由 80 跌到 66 只係估值收窄，唔係加倉訊號。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>原始 thesis 四支柱</h2>
+      <p class="section-sub">以 Electron／系統訂單證明可重複發射商，再用 Neutron 中型可回收同 Iridium 垂直整合做成太空應用平台；規模化後現金流同倍數先對得住。</p>
+      <div class="pillar-grid">
+        <article class="pillar ok">
+          <div class="code">PILLAR A</div>
+          <div class="title">需求／成長</div>
+          <div class="kpi">營收、backlog、Q3 指引</div>
+          <span class="state up">改善中</span>
+        </article>
+        <article class="pillar bad">
+          <div class="code">PILLAR B</div>
+          <div class="title">Neutron 第二曲線</div>
+          <div class="kpi">Q4 2026 送墊、首飛</div>
+          <span class="state down">未驗證</span>
+        </article>
+        <article class="pillar bad">
+          <div class="code">PILLAR C</div>
+          <div class="title">Iridium 垂直整合</div>
+          <div class="kpi">投票、S-4、2027 中交割</div>
+          <span class="state down">延後中</span>
+        </article>
+        <article class="pillar bad">
+          <div class="code">PILLAR D</div>
+          <div class="title">資金紀律</div>
+          <div class="kpi">OCF、ATM、bridge</div>
+          <span class="state down">削弱中</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>最新證據卡</h2>
+      <p class="section-sub">每張含完整解讀。可按影響篩選。</p>
+      <div class="filters" id="filters">
+        <button class="chip on" data-f="all">全部</button>
+        <button class="chip" data-f="support">支持</button>
+        <button class="chip" data-f="neutral">中性</button>
+        <button class="chip" data-f="weaken">削弱</button>
+      </div>
+      <div class="evidence-grid" id="evidence"></div>
+    </section>
+
+    <section class="panel">
+      <h2>狀態同裂痕</h2>
+      <div class="split">
+        <div class="box pass">
+          <h3>最強支持</h3>
+          <p>Q2 營收 +62% YoY、backlog US$2.36B、Q3 營收指引 US$250–265M。支柱 A 改善中。</p>
+        </div>
+        <div class="box fail">
+          <h3>最大裂痕</h3>
+          <p>H1 OCF −US$134.4M；ATM 上限 US$1.94B；bridge US$3.6B。現金充裕靠融資，唔係經營自給。</p>
+        </div>
+      </div>
+      <div class="split" style="margin-top:12px">
+        <div class="box warn">
+          <h3>Iridium 點睇</h3>
+          <p>監管進度真實（HSR／S-4／FCC），但交割在 2027 中。投票否決或 S-4 長期唔生效，先算路徑破壞；而家係延後，唔係已擁有訂閱現金流。</p>
+        </div>
+        <div class="box info">
+          <h3>失效條件</h3>
+          <p><strong>再削弱：</strong>Q3 GAAP GM 低於 29% 且營收失速，或 ATM 明顯動用。<br>
+          <strong>Broken：</strong>Neutron 送墊滑出 2026-Q4 無替代日期；或 Iridium 股東否決而融資路徑失控。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>投資行動</h2>
+      <div class="action-grid">
+        <div class="box warn">
+          <h3>建議</h3>
+          <p><strong>唔好加倉</strong><br>未確認持倉 → 僅觀察</p>
+        </div>
+        <div class="box">
+          <h3>下一個 checkpoint</h3>
+          <p>9/24 投票；Q3 GM／EBITDA；Neutron Q4 送墊；ATM 有無動用</p>
+        </div>
+        <div class="box">
+          <h3>下一步技能</h3>
+          <p>ATM／交割後重跑 Skill 3<br>Q3 前後 → Skill 8<br>日曆 → one-pager</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <p class="footer">來源：SEC 8-K EX-99.1（2026-08-10，截至 2026-06-30，unaudited）；8-K 0001753926-26-001463（2026-08-13）；S-4/A（2026-08-24）。現價 yfinance delayed 2026-08-26 close。Pending：IR presentation、官方 transcript、S-4/A 全文未入庫。未核對 IB 持倉。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+  const evidence = [
+    ["support", "財報", "Q2 營收 US$234.1M（+62% YoY）", "官方紀錄季度，Q3 指引再升至 US$250–265M。頂線加速同近端轉化仍然喺，唔係 8 月中之後先出現嘅新故事。對支柱 A（需求／成長）屬直接支持，但唔等於盈利或現金流已通過。"],
+    ["support", "KPI", "Backlog US$2.36B（+137% YoY）；90+ 發射", "需求可見度繼續加厚，季內另有 >US$437M 新發射合約（含季後簽署）。多數仍係多年期交付，所以 backlog 創高只驗證需求支柱，唔驗證即季 FCF。Space Force SB-AMTI 官方寫 US$397M。"],
+    ["neutral", "產品", "Neutron Stage 1 tank 仍對齊 Q4 2026 送墊", "相對 8/14 狀態無升級：未送墊、未首飛、未貢獻營收。管理層口徑維持目標，但 Q3 盈利指引轉差令「準時飛就能撐倍數」嘅容錯下降。對支柱 B 屬未驗證，不是破壞。"],
+    ["neutral", "併購", "HSR 屆滿；S-4 已交；Iridium 投票 9/24", "美國反壟斷等待期 2026-08-12 屆滿，S-4 已交但未生效，FCC 申請已交。官方預期交割 2027 中。呢啲係執行進度，唔係交割。Skill 3 三情景營收仍排除 Iridium，正確。"],
+    ["weaken", "指引", "Q3 GAAP GM 29–31%；Adj. EBITDA −US$17–23M", "Q2 GAAP 毛利率 36.1% 之後，近端指引明顯轉差。單位經濟改善唔可以線性外推。對支柱 A 嘅頂線支持仍然在，但盈利質量被近端 mix／成本警告削弱。"],
+    ["weaken", "現金流", "H1 經營現金流 −US$134.4M；現金 US$2.13B", "現金充裕主要靠融資／股本，唔係經營自我融資。Q2 紀錄營收之後 OCF 仍大額為負，直接削弱「規模化後現金流轉正」呢條路徑。"],
+    ["weaken", "資本結構", "ATM 剩餘上限 US$1.94B（唔加碼）", "8/13 8-K：新 ATM 只承接 May 2026 未售額，唔係加碼。用途寫明 Iridium 現金對價同減 bridge，而且唔以交割為條件。一動用就改 Skill 3 嘅 639.1M 股假設，侵蝕每股 Base US$56。"],
+    ["weaken", "融資", "US$3.6B bridge；Iridium loan US$1.775B", "364 日 senior secured bridge 已有承諾。擬保留 Iridium term loan 以減 bridge，但要貸方同意、未保證。交割會同時帶入槓桿同稀釋；呢條係 8/14 之後新落地嘅結構裂痕。"],
+    ["neutral", "估值", "現價 US$66.18 vs Skill 3 Base US$56", "Delayed 2026-08-26 close，較 8/14 嘅 US$80.10 回落。Reward／risk 由約 0.4× 改善到約 0.9×，仍低於 1，亦未入建倉帶 US$48–58。股價下跌唔等於 thesis 通過，只係估值過熱程度收窄。"],
+  ];
+  const label = { support: "支持", neutral: "中性", weaken: "削弱" };
+  const root = document.getElementById("evidence");
+  function render(filter) {
+    root.innerHTML = evidence
+      .filter(([impact]) => filter === "all" || impact === filter)
+      .map(([impact, type, title, note]) => `
+        <article class="ev ${impact}">
+          <div class="ev-top">
+            <span class="ev-type">${type}</span>
+            <span class="pill ${impact}">${label[impact]}</span>
+          </div>
+          <div class="ev-title">${title}</div>
+          <div class="ev-note">${note}</div>
+        </article>
+      `).join("");
+  }
+  render("all");
+  document.querySelectorAll("#filters .chip").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      document.querySelectorAll("#filters .chip").forEach((c) => c.classList.remove("on"));
+      chip.classList.add("on");
+      render(chip.dataset.f);
+    });
+  });
+</script>
+</body>
+</html>

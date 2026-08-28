@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RKLB 催化劑日曆</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--teal-deep:#134e4a;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .hud-note{margin:8px 0 0;font-size:.82rem;color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif}
+  .action-bar{margin-top:12px}
+  .action-pill{display:inline-flex;padding:10px 16px;border-radius:999px;background:#1c1917;color:#fff;font-weight:800;font-size:.88rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .event{display:grid;grid-template-columns:170px 1fr auto;gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:10px}
+  @media(max-width:860px){.event{grid-template-columns:1fr}}
+  .when{font-weight:800;font-size:.82rem;color:var(--teal-deep);font-family:"Avenir Next","PingFang TC",sans-serif}
+  .dir{font-size:.75rem;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap;font-family:"Avenir Next","PingFang TC",sans-serif;height:fit-content}
+  .dir.high{background:var(--watch-soft);color:var(--watch)}.dir.mid{background:var(--info-soft);color:var(--info)}.dir.low{background:#f5f5f4;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.warn{border-left:5px solid var(--watch)}.box.fail{border-left:5px solid var(--fail)}.box.ok{border-left:5px solid var(--pass)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 5 · 未來 1–2 季</div>
+      <div class="verdict-title">等 9/24 投票<br>同 Q3 GM 閘</div>
+      <p class="sans muted" style="margin:12px 0 0">未確認持倉。僅觀察／唔好加倉。</p>
+    </div>
+    <div class="hero-main">
+      <h1>RKLB · 催化劑地圖</h1>
+      <p>真正改倍數嘅唔係再一次營收 beat，而係 Q3 GAAP 毛利率能否守住指引、Neutron 送墊有冇實物進度，同 Iridium 條款／ATM 實際動用會唔會改 Skill 3 股數。</p>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +18%</span></h2>
+    <p class="hud-note">現價相對 Base 溢價約 <strong>+18%</strong>（US$66.18 vs US$56）→ 唔好加倉。ATM／bridge 未入 Skill 3 639.1M 股假設。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 2026-08-26）</div><div class="v">US$66.18</div><div class="s">市值約 US$42.3B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">28 / 56 / 101</div><div class="s">F3 FY2027E EV/S · 2026-08-14</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+18%</div><div class="s">偏高 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">NTM P/S ~48×</div><div class="s">TTM ~67× · Iridium 營收未計</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q2 營收 US$234.1M（+62% YoY）</span>
+      <span>★ Backlog US$2.36B（+137% YoY）</span>
+      <span>★ Q3 GAAP GM 指引 29–31%</span>
+      <span>★ H1 OCF −US$134.4M</span>
+      <span>★ Neutron Q4 2026 送墊（8-K EX-99.1）</span>
+    </div>
+    <p class="hud-note">官方：8-K EX-99.1／10-Q 2026-Q2 · 期末 2026-06-30 · USD US GAAP · verified。</p>
+  </section>
+  <div class="action-bar">
+    <span class="action-pill">現價相對 Base 溢價約 +18%，唔好加倉。</span>
+  </div>
+
+  <section class="panel">
+    <h2>事件</h2>
+    <div class="event">
+      <div class="when">2026-09-24<br>8-K 2026-08-13</div>
+      <div><strong>Iridium 股東特別會</strong><div class="muted">合併協議投票。否決 → 交易破裂風險；通過 → 仍要 S-4 生效同 2027 中交割。Skill 3 三情景營收仍排除 Iridium。</div></div>
+      <span class="dir high">高 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">約 2026-11 上旬<br>yfinance；以 IR 為準</div>
+      <div><strong>Q3 2026 業績</strong><div class="muted">對住營收指引 US$250–265M；GAAP GM 29–31%、Adj. EBITDA −US$17–23M 指引。毛利率 miss 會直接壓倍數。</div></div>
+      <span class="dir high">最高 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">2026-Q4<br>8-K EX-99.1</div>
+      <div><strong>Neutron 送墊</strong><div class="muted">Stage 1 tank 仍對齊 Q4 2026 送墊。滑出而無新日期 → thesis invalidation。未送墊就唔改 Base 倍數。</div></div>
+      <span class="dir high">高 · 雙向</span>
+    </div>
+    <div class="event">
+      <div class="when">持續<br>8-K 0001753926-26-001463</div>
+      <div><strong>ATM 動用／S-4 生效</strong><div class="muted">ATM 剩餘上限 US$1.94B，唔以交割為條件。實際售股會改 639.1M 股假設；S-4 生效先係 Iridium 交割前置。</div></div>
+      <span class="dir mid">中 · 稀釋</span>
+    </div>
+    <div class="event">
+      <div class="when">預期 2027 中<br>官方指引</div>
+      <div><strong>Iridium 交割</strong><div class="muted">Bridge US$3.6B 已承諾；term loan US$1.775B（2026-06-30）。近兩季只係窗外匯報，唔計入 Skill 3 營收。</div></div>
+      <span class="dir low">敘事 · 遠端</span>
+    </div>
+    <div class="event">
+      <div class="when">2026-08-12<br>已發生</div>
+      <div><strong>HSR 等候期屆滿</strong><div class="muted">監管一步完成。對近端 KPI 中性；市場最易高估為「快交割」。</div></div>
+      <span class="dir low">已消化</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>誤判同行動</h2>
+    <div class="grid-2">
+      <div class="box warn"><h3 class="sans">市場高估</h3><p>HSR 過咗就當快交割；backlog 創高當即季 FCF；Neutron 口徑當已收入；股價由 80 跌到 66 當加倉訊號。</p></div>
+      <div class="box fail"><h3 class="sans">市場低估</h3><p>Q3 GM 指引下修、ATM 實際動用、bridge 槓桿同 Iridium collar 稀釋對每股嘅影響。</p></div>
+      <div class="box ok" style="grid-column:1/-1"><h3 class="sans">而家點做</h3><p>9/24 投票同 Q3 業績前：僅觀察。現價相對 Base +18%，唔追。建倉帶 US$48–58 要 Neutron／GM 確認先討論。無持倉，唔寫減倉。</p></div>
+    </div>
+  </section>
+  <p class="footer">來源：8-K EX-99.1（2026-Q2）、8-K 0001753926-26-001463（2026-08-13）。Q3 日期：yfinance／第三方日曆，IR 尚未確認。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/rklb/catalyst-calendar.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
