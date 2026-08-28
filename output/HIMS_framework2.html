@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HIMS Framework 2 執行深挖</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#7f1d1d}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.83rem}
+  th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.7rem;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .qa{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff;margin-bottom:10px}
+  .qa h3{color:var(--fail)}
+  .verdict{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;color:#7f1d1d}
+  .starred{color:var(--fail);font-weight:800}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">⚠️ <strong>前提：F1 紅線已 FAIL，本頁唔翻案。</strong>F1 紅線 1（流動性）同時觸發兩個條件（覆蓋率 0.62×＋Q2 官方 FCF 負數），13 維度評分已跳過。本頁淨係評估業務執行質量，跟 RDW 先例處理。</div>
+
+  <section class="hero-main">
+    <h1>HIMS Framework 2 · 執行深挖</h1>
+    <p>窗口 Q3 2025 – Q2 2026（5 季）· 官方數字逐季覆核 SEC EDGAR 8-K EX-99.1 · 數據截至 2026-08-28</p>
+    <div class="badges"><span class="badge">對住 F1（FAIL）</span><span class="badge">跟 RDW 先例：唔翻案</span></div>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>5 季官方 KPI</h2>
+      <table>
+        <thead><tr><th>指標</th><th>Q3 2025</th><th>Q4 2025</th><th>Q1 2026</th><th>Q2 2026</th></tr></thead>
+        <tbody>
+          <tr><td>總營收</td><td>$599.0m</td><td>$617.8m</td><td>$608.1m</td><td>$753.2m</td></tr>
+          <tr><td>美國營收</td><td>n/d</td><td>$554.1m</td><td>$529.9m</td><td>$621.8m</td></tr>
+          <tr><td>海外／RoW 營收</td><td>n/d</td><td>$63.7m</td><td>$78.2m</td><td>$131.4m</td></tr>
+          <tr><td>訂閱用戶</td><td>2.471m</td><td>2.511m</td><td>2.584m</td><td>2.891m</td></tr>
+          <tr><td>月度 ARPU</td><td>$80</td><td>$83</td><td>$80</td><td>$92</td></tr>
+          <tr><td class="starred">毛利率</td><td>74%</td><td>72%</td><td>65%</td><td>64%</td></tr>
+          <tr><td>GAAP 淨利</td><td>$15.8m</td><td>$20.6m</td><td>$(92.1)m</td><td>$(86.3)m</td></tr>
+          <tr><td>經營現金流</td><td>$148.7m</td><td>$61.3m</td><td>$89.4m</td><td>n/d</td></tr>
+          <tr><td class="starred">官方 FCF</td><td>$79.4m</td><td>$(2.6)m</td><td>$53.0m</td><td>$(68.2)m</td></tr>
+          <tr><td>現金＋短債投資</td><td>$629.7m</td><td>$577.5m</td><td>$750.9m</td><td>$841.0m</td></tr>
+          <tr><td class="starred">可轉換優先債</td><td>$971.0m</td><td>$972.6m</td><td>$974.1m</td><td>$1,365.3m</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:8px">Q2 2026 大幅跳升主要係新增 2032 年到期批次（面值 $402.5m，換股價 $29.53，現價已輕微價內），用作 Eucalyptus 收購融資。</p>
+    </section>
+
+    <section class="panel">
+      <h2>回答 F1 兩條必須深挖問題</h2>
+      <div class="qa">
+        <h3>Q1：+38% Q2 增長，幾多來自 Eucalyptus 併購，幾多係美國自然增長？</h3>
+        <p class="muted">美國本土業務 +16% YoY（官方口徑）——同 2025 全年 +59%、Q3 2025 +49% 相比，放緩咗超過三分之二。海外 RoW +1,641% YoY 基數細，Eucalyptus 6 月完成收購即時併表，貢獻 RoW 收入絕大部分增量。<strong>結論：headline +38% 主要係一次性併購併表效應，美國核心業務有機增長實際正喺放緩緊</strong>，同毛利率連跌四季互相印證。</p>
+      </div>
+      <div class="qa">
+        <h3>Q2：Eucalyptus $683.9m 遞延收購款（18 個月分期）點樣影響流動性？</h3>
+        <p class="muted">呢筆遞延分期<strong>未反映</strong>喺 Q2 期末現金餘額，未來 18 個月會隨每期兌現而持續消耗本已 0.62× 嘅流動性覆蓋率。公司 2026-07 另開 $400m 應收帳款融資，側面印證管理層本身意識到需要額外流動性緩衝。<strong>結論：呢係明確惡化因子，係對 F1 FAIL 判斷嘅進一步確認，唔係反駁。</strong></p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>執行質量 5 維度評分（僅供參考）</h2>
+      <table>
+        <thead><tr><th>維度</th><th>評級</th><th>理由</th></tr></thead>
+        <tbody>
+          <tr><td>收入增長真實性</td><td>部分確認</td><td>美國 +16% 真實但放緩；headline +38% 主要係併購效應</td></tr>
+          <tr><td>毛利率趨勢</td><td>未通過</td><td>連跌四季 74%→64%</td></tr>
+          <tr><td>現金流紀律</td><td>未通過</td><td>Q2 官方 FCF 轉負，OCF 逐季走弱</td></tr>
+          <tr><td>資產負債表彈性</td><td>未通過</td><td>可轉換債單季 +40%，覆蓋率 0.62×</td></tr>
+          <tr><td>管理層資本配置</td><td>需要監察</td><td>併購邏輯合理，但融資結構反映內部現金緊張</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>F2 淨結論</h2>
+      <div class="verdict">業務執行拐點部分確認（美國核心業務仍有真實但放緩嘅增長），現金流／資產負債表 thesis 未通過——F1 紅線 1 FAIL 判斷經 F2 深挖後獲進一步確認，非翻案。</div>
+    </section>
+
+    <section class="panel">
+      <h2>確認／推翻條件</h2>
+      <p class="muted"><strong>確認流動性風險惡化：</strong>Q3 2026（約 2026-11 中）官方 FCF 再次負數，或覆蓋率跌穿 0.55×。<br><strong>緩解訊號（非翻案）：</strong>Q3 2026 官方 FCF 轉正<strong>同時</strong>覆蓋率回升到 0.70× 以上——兩個條件須同時滿足。</p>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>

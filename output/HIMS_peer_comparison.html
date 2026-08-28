@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HIMS 同業比較</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#7f1d1d}
+  .hero-main{background:linear-gradient(135deg,#1e3a8a,#1d4ed8 58%,#1e40af);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .rank{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff;margin-bottom:10px}
+  .rank .num{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.4rem;color:var(--teal);min-width:32px}
+  .callout{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .starred{color:var(--fail);font-weight:800}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">背景提醒：HIMS 嘅 Framework 1 = FAIL（流動性紅線同時觸發兩個條件）。本頁比較結果不代表 HIMS 值得配置，純粹係相對質量對照。</div>
+
+  <section class="hero-main">
+    <h1>HIMS 同業比較（TDOC／LFMD／GDRX）</h1>
+    <p>四間都身處遠程醫療／健康電商賽道，但財務體質差異明顯：HIMS 增長最快但槓桿最高，其餘三間增長偏弱但冇觸發流動性紅線。</p>
+    <div class="badges"><span class="badge">數據截至 2026-08-28</span><span class="badge">HIMS 現價 US$31.66</span></div>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>角色定位</h2>
+      <table>
+        <thead><tr><th>公司</th><th>賽道角色</th><th>商業模式</th><th>估值語言</th><th>一句定位</th></tr></thead>
+        <tbody>
+          <tr><td><strong>HIMS</strong></td><td>高增長敘事股（增長已放緩）</td><td>訂閱式遠程醫療＋自家藥房＋2026 併購 Eucalyptus</td><td>P/S</td><td>體量最大、headline 增長最快，但流動性已 FAIL</td></tr>
+          <tr><td><strong>TDOC</strong></td><td>老牌龍頭、增長停滯</td><td>綜合遠程醫療</td><td>EV/Sales</td><td>現金充裕但收入連續下滑</td></tr>
+          <tr><td><strong>GDRX</strong></td><td>成熟現金流機器</td><td>藥品比價／PBM 折扣＋訂閱</td><td>P/S、FCF Yield</td><td>體量最細但盈利穩定，FCF margin 全組最高</td></tr>
+          <tr><td><strong>LFMD</strong></td><td>細盤轉型股</td><td>遠程醫療＋GLP-1／體重管理</td><td>P/S</td><td>無債，但正經歷產品結構轉型嘅現金消耗</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>同業核心比較表（Q2 2026）</h2>
+      <table>
+        <thead><tr><th>公司</th><th>營收</th><th>YoY</th><th>GAAP 淨利</th><th>OCF</th><th>FCF</th><th>現金</th><th>總債務</th></tr></thead>
+        <tbody>
+          <tr><td><strong>HIMS</strong></td><td>$753.2m</td><td class="starred">+38%*</td><td>$(86.3)m</td><td>n/d</td><td class="starred">$(68.2)m</td><td>$841.0m</td><td>$1,365.3m</td></tr>
+          <tr><td><strong>TDOC</strong></td><td>$606.9m</td><td>-4%</td><td>$(38.9)m</td><td>$64.7m</td><td>$35.7m</td><td>$774.3m</td><td>$996.7m</td></tr>
+          <tr><td><strong>GDRX</strong></td><td>$200.4m</td><td>-1%</td><td>$8.5m</td><td>$80.8m</td><td>~$79.3m</td><td>$296.1m</td><td>$492.5m</td></tr>
+          <tr><td><strong>LFMD</strong></td><td>$47.3m</td><td>-3.5%</td><td>$(7.9)m</td><td>$(6.9)m</td><td>$(8.6)m</td><td>$25.1m</td><td>$0</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:6px">*美國自然增長實際只有 +16%，餘下增量主要係 Eucalyptus 併購併表效應（詳見 Framework 2）。</p>
+    </section>
+
+    <section class="panel">
+      <h2>流動性覆蓋率對照（現金／短債投資 ÷ 有息債務）</h2>
+      <table>
+        <thead><tr><th>公司</th><th>覆蓋率</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr><td>LFMD</td><td>N/A（零債務）</td><td>唯一無槓桿風險，但現金基數細</td></tr>
+          <tr><td>GDRX</td><td>0.60×</td><td>但 FCF 為正且穩定，唔屬紅線情境</td></tr>
+          <tr><td>TDOC</td><td>0.78×</td><td>現金充裕，FCF 為正，未觸發流動性紅線</td></tr>
+          <tr><td class="starred">HIMS</td><td class="starred">0.62×</td><td class="starred">全組最低，同時 FCF 為負——F1 紅線 1 觸發點</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>投資排序（僅供研究對照，非配置建議）</h2>
+      <div class="rank"><div class="num">1</div><div><strong>GDRX</strong> — 全組唯一同時做到「盈利＋正 FCF＋上調指引」，風險回報最平衡</div></div>
+      <div class="rank"><div class="num">2</div><div><strong>TDOC</strong> — 收入下滑但現金儲備最厚，防守性強，冇流動性風險</div></div>
+      <div class="rank"><div class="num">3</div><div><strong>LFMD</strong> — 零負債，體量細，需監察 GLP-1 轉型陣痛期現金消耗</div></div>
+      <div class="rank"><div class="num">4</div><div><strong>HIMS</strong> — 增長 headline 最搶眼，但流動性已 FAIL，風險回報最唔對稱</div></div>
+    </section>
+
+    <section class="panel">
+      <h2>配置建議</h2>
+      <div class="callout">呢四間入面冇一間屬於「核心持股候選」——TDOC／LFMD／GDRX 增長動能偏弱，HIMS 增長動能夠強但流動性未過關。若一定要揀防守性最強嘅一間做觀察名單首選：<strong>GDRX</strong>（正 FCF＋上調指引＋冇觸發任何紅線）。<strong>HIMS 喺流動性缺口收窄之前，唔應該被視為呢組同業入面嘅優先選項</strong>，即使佢收入規模同增長 headline 全組最大。</div>
+    </section>
+  </div>
+
+  <p class="footer">TDOC／LFMD／GDRX 數字來自 2026-07 底至 2026-08 初公佈嘅官方 Q2 2026 業績稿。HIMS 數字對住 SEC EDGAR CIK 1773751 之 8-K EX-99.1 原文覆核。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>
