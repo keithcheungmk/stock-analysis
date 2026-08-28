@@ -237,6 +237,20 @@
     font-size: 0.82rem;
     font-family: "Avenir Next", "PingFang TC", sans-serif;
   }
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .hud-note{margin:8px 0 0;font-size:.82rem;color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif}
+  .action-bar{margin-top:12px}
+  .action-pill{display:inline-flex;padding:10px 16px;border-radius:999px;background:#1c1917;color:#fff;font-weight:800;font-size:.88rem;font-family:"Avenir Next","PingFang TC",sans-serif}
 </style>
 </head>
 <body>
@@ -262,6 +276,28 @@
       </div>
     </div>
   </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +18%</span></h2>
+    <p class="hud-note">現價相對 Base 溢價約 <strong>+18%</strong>（US$66.18 vs US$56）→ 唔好加倉。ATM／bridge 未入 Skill 3 639.1M 股假設。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 2026-08-26）</div><div class="v">US$66.18</div><div class="s">市值約 US$42.3B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">28 / 56 / 101</div><div class="s">F3 FY2027E EV/S · 2026-08-14</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+18%</div><div class="s">偏高 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">NTM P/S ~48×</div><div class="s">TTM ~67× · Iridium 營收未計</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q2 營收 US$234.1M（+62% YoY）</span>
+      <span>★ Backlog US$2.36B（+137% YoY）</span>
+      <span>★ Q3 GAAP GM 指引 29–31%</span>
+      <span>★ H1 OCF −US$134.4M</span>
+      <span>★ Neutron Q4 2026 送墊（8-K EX-99.1）</span>
+    </div>
+    <p class="hud-note">官方：8-K EX-99.1／10-Q 2026-Q2 · 期末 2026-06-30 · USD US GAAP · verified。</p>
+  </section>
+  <div class="action-bar">
+    <span class="action-pill">現價相對 Base 溢價約 +18%，唔好加倉。</span>
+  </div>
 
   <div class="kpis">
     <div class="kpi teal"><div class="label">股價（延遲）</div><div class="value">US$74.48</div></div>
