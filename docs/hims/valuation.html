@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HIMS 估值計算機</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:900px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:12px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.82rem;margin-bottom:16px;color:#7f1d1d}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 6px;font-size:1.4rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-top:14px}
+  h2{margin:0 0 12px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .presets button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .presets button.bear{color:var(--fail)}.presets button.base{color:var(--watch)}.presets button.bull{color:var(--pass)}
+  .slider-row{margin-bottom:18px}
+  .slider-row label{display:flex;justify-content:space-between;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;font-size:.85rem;margin-bottom:6px}
+  input[type=range]{width:100%}
+  .result{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+  @media(max-width:600px){.result{grid-template-columns:1fr}}
+  .rbox{border-radius:16px;padding:16px;text-align:center;background:#fff;border:1px solid var(--line)}
+  .rbox .l{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .rbox .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.7rem;margin-top:4px}
+  .rbox .v.pos{color:var(--pass)}.rbox .v.neg{color:var(--fail)}
+  .footer{margin-top:16px;color:var(--muted);font-size:.8rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">⚠️ F1 = FAIL，呢個計算機只係方便睇唔同假設下嘅估值敏感度，唔係買入工具。簡化模型：P/S × 營收 ÷ 攤薄股數。</div>
+  <div class="hero-main"><h1>HIMS 估值計算機</h1><p>P/S 情景法 · 現價 US$31.66</p></div>
+
+  <div class="panel">
+    <h2>快速情景</h2>
+    <div class="presets">
+      <button class="bear" onclick="setPreset(2700,257,1.3)">Bear</button>
+      <button class="base" onclick="setPreset(2800,238,2.5)">Base</button>
+      <button class="bull" onclick="setPreset(2900,233,3.5)">Bull</button>
+    </div>
+
+    <div class="slider-row">
+      <label><span>FY2026 營收 (US$m)</span><span id="revVal">2800</span></label>
+      <input type="range" id="rev" min="2500" max="3100" step="10" value="2800" oninput="calc()">
+    </div>
+    <div class="slider-row">
+      <label><span>攤薄股數 (百萬)</span><span id="shVal">238</span></label>
+      <input type="range" id="sh" min="230" max="270" step="1" value="238" oninput="calc()">
+    </div>
+    <div class="slider-row">
+      <label><span>P/S 倍數</span><span id="mulVal">2.5×</span></label>
+      <input type="range" id="mul" min="1.0" max="4.0" step="0.1" value="2.5" oninput="calc()">
+    </div>
+
+    <div class="result">
+      <div class="rbox"><div class="l">隱含市值</div><div class="v" id="mcap">$7.00B</div></div>
+      <div class="rbox"><div class="l">隱含每股價值</div><div class="v" id="price">$29.41</div></div>
+      <div class="rbox" style="grid-column:1/-1"><div class="l">vs 現價 US$31.66</div><div class="v" id="pct">-7.1%</div></div>
+    </div>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+
+<script>
+function setPreset(rev, sh, mul){
+  document.getElementById('rev').value = rev;
+  document.getElementById('sh').value = sh;
+  document.getElementById('mul').value = mul;
+  calc();
+}
+function calc(){
+  const rev = parseFloat(document.getElementById('rev').value);
+  const sh = parseFloat(document.getElementById('sh').value);
+  const mul = parseFloat(document.getElementById('mul').value);
+  document.getElementById('revVal').textContent = rev.toFixed(0);
+  document.getElementById('shVal').textContent = sh.toFixed(0);
+  document.getElementById('mulVal').textContent = mul.toFixed(1) + '×';
+
+  const mcapM = rev * mul;
+  const price = (mcapM / sh);
+  const current = 31.66;
+  const pct = ((price - current) / current) * 100;
+
+  document.getElementById('mcap').textContent = '$' + (mcapM/1000).toFixed(2) + 'B';
+  const priceEl = document.getElementById('price');
+  priceEl.textContent = '$' + price.toFixed(2);
+  const pctEl = document.getElementById('pct');
+  pctEl.textContent = (pct>=0?'+':'') + pct.toFixed(1) + '%';
+  pctEl.className = 'v ' + (pct>=0?'pos':'neg');
+}
+calc();
+</script>
+<section id="page-comments" data-page="/hims/valuation.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
