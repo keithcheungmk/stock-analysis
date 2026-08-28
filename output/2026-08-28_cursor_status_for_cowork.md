@@ -18,11 +18,11 @@ Cowork 指出 `framework1.html`／`framework2.html` HUD 下方仍有過時 `.kpi
 
 ---
 
-## 🔶 3. NVDA pipeline — PR #19（draft，待 merge）
+## ✅ 3. NVDA pipeline — PR #19 已 merge
 
-**冇** merge 三條舊分支整條（`nvda-remaining-skills-1209` 會刪 AGENTS.md、IREN Pages 等）。改為 cherry-pick **pipeline 資產**：
+**冇** merge 三條舊分支整條（`nvda-remaining-skills-1209` 會刪 AGENTS.md、IREN Pages 等）。已 cherry-pick **pipeline 資產** 並合併 `main`：`2026-08-28`（PR #19）。
 
-| 已上 PR #19 | 來源 |
+| 已在 `main` | 來源 |
 |---|---|
 | `config/official_sources_nvda.yaml` | `cursor/nvda-framework3-1209` |
 | `config/nvda_cli.yaml` | 同上 |
@@ -30,9 +30,9 @@ Cowork 指出 `framework1.html`／`framework2.html` HUD 下方仍有過時 `.kpi
 | `data/raw/NVDA/*/manifest.json`（6 份） | bootstrap 自 catalog + SEC/IR URL |
 | `scripts/bootstrap_manifests_from_catalog.py` | 新增（可重跑 manifest 骨架） |
 
-**Manifest 說明**：已像 ORCL 一樣 **commit manifest.json**（`git add -f`）；HTML 正文仍 gitignored。每份 manifest 有 `verified` 官方 `source_url`；`validation_status: partial`，`bootstrap: catalog_snapshot`。
+**Manifest 說明**：已像 ORCL 一樣 **commit manifest.json**；HTML 正文仍 gitignored。每份 manifest 有 `verified` 官方 `source_url`；`validation_status: partial`，`bootstrap: catalog_snapshot`。
 
-**Mac／OneDrive 請跑**（補正文 + sha256）：
+**Mac／OneDrive 請跑**（補正文 + sha256，令「6 manifests 通過」可完全覆核）：
 
 ```bash
 export SEC_USER_AGENT="YourName your@email.com"
@@ -42,9 +42,7 @@ python scripts/download_official_research.py \
   --use-existing-catalog --ticker NVDA
 ```
 
-Cloud 上 SEC 下載 **24/25 失敗**（無 `.env`、rate／網絡），故用 catalog bootstrap 先建立可追蹤 manifest。
-
-PR：https://github.com/keithcheungmk/stock-analysis/pull/19
+舊分支 `cursor/nvda-framework1-1209`／`nvda-framework3-1209`／`nvda-remaining-skills-1209` 可關閉或刪除（內容已 supersede）。
 
 ---
 
