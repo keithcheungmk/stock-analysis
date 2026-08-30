@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RDW Catalyst Calendar</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#1e3a8a}
+  .hero-main{background:linear-gradient(135deg,#3730a3,#4338ca 58%,#312e81);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .timeline{display:grid;gap:10px}
+  .event{display:grid;grid-template-columns:170px 1fr;gap:14px;border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  @media(max-width:700px){.event{grid-template-columns:1fr}}
+  .event.high{border-left-color:var(--fail)}
+  .event.mid{border-left-color:var(--watch)}
+  .event.low{border-left-color:#a8a29e}
+  .event .date{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;color:var(--ink)}
+  .event .tag{display:inline-block;font-size:.7rem;font-weight:800;border-radius:999px;padding:2px 8px;margin-top:4px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .tag.high{background:var(--fail-soft);color:var(--fail)}
+  .tag.mid{background:var(--watch-soft);color:var(--watch)}
+  .tag.low{background:#f1f5f9;color:#64748b}
+  .event h3{margin:0 0 4px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">🆕 本頁為 RDW 首次建立嘅 Catalyst Calendar。</div>
+
+  <section class="hero-main">
+    <h1>RDW Catalyst Calendar</h1>
+    <p>持倉：4,400 股＠US$18（現價 US$10.87，浮虧 -39.6%）· 數據截至 2026-08-30</p>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>優先級說明</h2>
+      <table>
+        <thead><tr><th>級別</th><th>定義</th></tr></thead>
+        <tbody>
+          <tr><td><strong>P1</strong></td><td>可能改變 F1／F3 判定：H2 backlog 轉化進度、Q3 2026 業績、後續 ATM 稀釋幅度</td></tr>
+          <tr><td><strong>P2</strong></td><td>影響評分但未必單獨變判定：Defense Tech 訂單流、產能擴張進度、行業系統性風險</td></tr>
+          <tr><td><strong>P3</strong></td><td>背景參考：未有足夠公開細節嘅計劃，繼續追蹤但唔納入本輪估值假設</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>時間軸</h2>
+      <div class="timeline">
+        <div class="event high"><div><div class="date">持續進行中</div><span class="tag high">P1</span></div><div><h3>H2 2026 backlog 轉化</h3><p class="muted">需兌現約 US$236–286M 以達 FY2026 指引 US$450–500M 下限至中位；F1 升級至 WATCH 嘅最直接路徑，若不及預期 Bear 情景（US$7.06）風險上升。</p></div></div>
+        <div class="event high"><div><div class="date">約 2026-11（未確認）</div><span class="tag high">P1</span></div><div><h3>Q3 2026 業績發布</h3><p class="muted">全季度關鍵檢查點：毛利率能否維持 25%+、FCF 有無改善跡象、backlog 轉化進度；直接影響 F1 能否升級 WATCH。日期為估算，非官方確認。</p></div></div>
+        <div class="event high"><div><div class="date">不定期</div><span class="tag high">P1</span></div><div><h3>進一步 ATM 增發</h3><p class="muted">公司近季靠融資堆積現金（流通股 192M→249M，+30%）；若繼續大幅稀釋，Bear 情景攤薄股數 ~255M 機率上升，直接侵蝕每股價值。</p></div></div>
+        <div class="event mid"><div><div class="date">持續進行中</div><span class="tag mid">P2</span></div><div><h3>Defense Tech 訂單流（Penguin／Stalker）</h3><p class="muted">Edge Autonomy 整合後主力產品線；支撐「雙引擎」敘事，累積效應影響需求 KPI 評分。</p></div></div>
+        <div class="event mid"><div><div class="date">持續進行中</div><span class="tag mid">P2</span></div><div><h3>Indiana／Alabama 產能擴張</h3><p class="muted">影響能否承接 backlog 轉化嘅執行能力；延誤會拖累 H2 交付。</p></div></div>
+        <div class="event low"><div><div class="date">提及於既有 thesis tracker</div><span class="tag low">P3</span></div><div><h3>"Starfall" 相關計劃</h3><p class="muted">現有資料為背景參考級別，未有足夠公開細節確認具體財務影響，列為觀察項而非確定性催化劑。</p></div></div>
+        <div class="event low"><div><div class="date">不定期</div><span class="tag low">P2</span></div><div><h3>政府預算週期／NASA、國防採購決策</h3><p class="muted">行業系統性風險；非公司自身可控。</p></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>對倉位嘅時間表提醒</h2>
+      <p>Q3 2026 業績（約 11 月，日期未確認）係未來 3 個月內最重要嘅單一檢查點；喺此之前，backlog 轉化嘅中期更新（如有）同任何新增 ATM 公告都值得留意。呢張日曆本身唔構成「加倉」或「減倉」訊號，只係框架化緊要事件嘅時間結構。</p>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>

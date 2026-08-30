@@ -6,494 +6,98 @@
 <title>RDW Thesis Tracker</title>
 <style>
   :root {
-    --bg: #f3efe6;
-    --ink: #1c1917;
-    --muted: #78716c;
-    --card: #fffdf8;
-    --line: #e7e0d5;
-    --teal: #0f766e;
-    --teal-deep: #134e4a;
-    --watch: #c2410c;
-    --watch-soft: #ffedd5;
-    --fail: #b91c1c;
-    --fail-soft: #fee2e2;
-    --pass: #15803d;
-    --pass-soft: #dcfce7;
-    --info: #1d4ed8;
-    --info-soft: #dbeafe;
-    --shadow: 0 14px 40px rgba(28, 25, 23, 0.09);
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: "Iowan Old Style", "Songti TC", "Noto Serif TC", "PingFang TC", serif;
-    color: var(--ink);
-    line-height: 1.55;
-    background:
-      radial-gradient(circle at 8% 0%, #d8f3ee 0, transparent 30%),
-      radial-gradient(circle at 92% 6%, #ffe4cc 0, transparent 26%),
-      radial-gradient(circle at 50% 100%, #fde68a22 0, transparent 40%),
-      var(--bg);
-  }
-  .sans { font-family: "Avenir Next", "PingFang TC", "Noto Sans TC", sans-serif; }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 18px 80px; }
-
-  .hero {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 16px;
-  }
-  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
-
-  .status-box {
-    background: linear-gradient(165deg, #fff7ed, #ffedd5 55%, #fdba74);
-    border: 1px solid #fb923c;
-    border-radius: 28px;
-    padding: 24px;
-    box-shadow: var(--shadow);
-  }
-  .eyebrow {
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--watch);
-    font-weight: 800;
-  }
-  .status-title {
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-    font-size: 1.7rem;
-    font-weight: 800;
-    color: var(--watch);
-    margin: 10px 0 0;
-    line-height: 1.2;
-  }
-  .hero-main {
-    background: linear-gradient(135deg, #134e4a, #0f766e 50%, #115e59);
-    color: #fff;
-    border-radius: 28px;
-    padding: 28px;
-    box-shadow: var(--shadow);
-  }
-  .hero-main h1 {
-    margin: 0 0 8px;
-    font-size: 1.85rem;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
-  .hero-main p { margin: 0; opacity: 0.92; }
-
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .badge {
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-    display: inline-flex;
-    align-items: center;
-    padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    background: rgba(255,255,255,0.14);
-    border: 1px solid rgba(255,255,255,0.18);
-  }
-  .badge.watch { background: var(--watch-soft); color: var(--watch); border: 0; }
-  .badge.pass { background: var(--pass-soft); color: var(--pass); border: 0; }
-  .badge.fail { background: var(--fail-soft); color: var(--fail); border: 0; }
-  .badge.ink { background: #fff; color: var(--teal-deep); border: 0; }
-
-  .kpi-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 16px;
-  }
-  @media (max-width: 900px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
-  .kpi {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 16px;
-    box-shadow: var(--shadow);
-  }
-  .kpi .label { font-family: "Avenir Next", "PingFang TC", sans-serif; color: var(--muted); font-size: 0.75rem; font-weight: 700; }
-  .kpi .value { font-family: "Avenir Next", "PingFang TC", sans-serif; font-size: 1.25rem; font-weight: 800; margin-top: 6px; }
-  .kpi .note { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
-  .kpi.pass { border-top: 4px solid var(--pass); }
-  .kpi.warn { border-top: 4px solid var(--watch); }
-  .kpi.fail { border-top: 4px solid var(--fail); }
-  .kpi.teal { border-top: 4px solid var(--teal); }
-
-  .sections { display: grid; gap: 16px; margin-top: 18px; }
-  .panel {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 26px;
-    padding: 24px;
-    box-shadow: var(--shadow);
-  }
-  h2 {
-    margin: 0 0 6px;
-    font-size: 1.2rem;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
-  .section-sub { margin: 0 0 16px; color: var(--muted); font-size: 0.92rem; }
-  h3 {
-    margin: 0 0 8px;
-    font-size: 0.98rem;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
-
-  .verdict {
-    border-radius: 18px;
-    padding: 16px 18px;
-    background: linear-gradient(90deg, #fff7ed, #ffedd5);
-    border: 1px solid #fdba74;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
-
-  .pillar-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  @media (max-width: 900px) { .pillar-grid { grid-template-columns: 1fr; } }
-  .pillar {
-    border-radius: 18px;
-    padding: 16px;
-    border: 1px solid var(--line);
-    background: #fff;
-    min-height: 118px;
-  }
-  .pillar.ok {
-    border-left: 6px solid var(--pass);
-    background: linear-gradient(180deg, #f0fdf4, #fff 42%);
-  }
-  .pillar.bad {
-    border-left: 6px solid var(--fail);
-    background: linear-gradient(180deg, #fef2f2, #fff 42%);
-  }
-  .pillar .code {
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-  }
-  .pillar .title { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; font-size: 1.05rem; margin-top: 4px; }
-  .pillar .kpi { border: 0; box-shadow: none; padding: 0; background: transparent; margin-top: 8px; color: var(--muted); font-size: 0.9rem; }
-  .pillar .state {
-    display: inline-flex;
-    margin-top: 10px;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-    font-size: 0.75rem;
-    font-weight: 800;
-    border-radius: 999px;
-    padding: 4px 10px;
-  }
-  .state.up { background: var(--pass-soft); color: var(--pass); }
-  .state.down { background: var(--fail-soft); color: var(--fail); }
-
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 14px;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
-  .chip {
-    border: 1px solid var(--line);
-    background: #fff;
-    border-radius: 999px;
-    padding: 7px 12px;
-    cursor: pointer;
-    font: inherit;
-    font-size: 0.8rem;
-    font-weight: 700;
-  }
-  .chip.on { background: #ccfbf1; border-color: #99f6e4; color: var(--teal); }
-
-  .evidence-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  @media (max-width: 900px) { .evidence-grid { grid-template-columns: 1fr; } }
-  .ev {
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 14px 16px;
-    background: #fff;
-    border-left-width: 6px;
-  }
-  .ev.support { border-left-color: var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 38%); }
-  .ev.neutral { border-left-color: #a8a29e; background: linear-gradient(180deg, #fafaf9, #fff 38%); }
-  .ev.weaken { border-left-color: var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 38%); }
-  .ev-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    align-items: center;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
-  .ev-type { color: var(--muted); font-size: 0.75rem; font-weight: 700; }
-  .pill {
-    border-radius: 999px;
-    padding: 3px 10px;
-    font-size: 0.72rem;
-    font-weight: 800;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
-  .pill.support { background: var(--pass-soft); color: var(--pass); }
-  .pill.neutral { background: #f5f5f4; color: #57534e; }
-  .pill.weaken { background: var(--fail-soft); color: var(--fail); }
-  .ev-title { font-family: "Avenir Next", "PingFang TC", sans-serif; font-weight: 800; margin-top: 8px; }
-  .ev-note { color: var(--muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.55; }
-  .verdict p { margin: 0 0 10px; }
-  .verdict p:last-child { margin-bottom: 0; }
-  .ev { min-height: 168px; }
-
-  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
-  .box {
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 16px;
-    background: #fff;
-  }
-  .box.pass { border-left: 6px solid var(--pass); background: linear-gradient(180deg, #f0fdf4, #fff 40%); }
-  .box.warn { border-left: 6px solid var(--watch); background: linear-gradient(180deg, #fff7ed, #fff 40%); }
-  .box.fail { border-left: 6px solid var(--fail); background: linear-gradient(180deg, #fef2f2, #fff 40%); }
-  .box.info { border-left: 6px solid var(--info); background: linear-gradient(180deg, #eff6ff, #fff 40%); }
-
-  .fcf-chart {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    align-items: end;
-    height: 150px;
-    margin-top: 12px;
-  }
-  .bar-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    justify-content: flex-end;
-    gap: 6px;
-  }
-  .bar {
-    width: 100%;
-    border-radius: 10px 10px 4px 4px;
-    min-height: 8px;
-    background: linear-gradient(180deg, #fb7185, #b91c1c);
-  }
-  .bar-val, .bar-label {
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-    font-size: 0.72rem;
-  }
-  .bar-val { font-weight: 800; }
-  .bar-label { color: var(--muted); }
-
-  .action-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  @media (max-width: 900px) { .action-grid { grid-template-columns: 1fr; } }
-
-  .footer {
-    margin-top: 18px;
-    color: var(--muted);
-    font-size: 0.82rem;
-    font-family: "Avenir Next", "PingFang TC", sans-serif;
-  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .pillar{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff;margin-bottom:12px;border-left:6px solid #a8a29e}
+  .pillar.pass{border-left-color:var(--pass)}
+  .pillar.mid{border-left-color:var(--watch)}
+  .pillar.fail{border-left-color:var(--fail)}
+  .pillar .status{display:inline-block;font-size:.72rem;font-weight:800;border-radius:999px;padding:3px 10px;font-family:"Avenir Next","PingFang TC",sans-serif;margin-bottom:6px}
+  .status.pass{background:var(--pass-soft);color:var(--pass)}
+  .status.mid{background:var(--watch-soft);color:var(--watch)}
+  .status.fail{background:var(--fail-soft);color:var(--fail)}
+  .callout{background:var(--watch-soft);border:1px solid #fdba74;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#9a3412}
 </style>
 </head>
 <body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
 <div class="wrap">
-  <section class="hero">
-    <div class="status-box">
-      <div class="eyebrow">Skill 6 · Thesis Tracker</div>
-      <div class="status-title">Mixed / Needs Monitoring</div>
-      <div class="badges">
-        <span class="badge watch">僅觀察</span>
-        <span class="badge pass">A/B/C 改善</span>
-        <span class="badge fail">D 資金紀律削弱</span>
-      </div>
-      <p class="sans" style="margin:14px 0 0;color:var(--muted);font-size:0.86rem">已持倉可續抱 · 唔好加倉</p>
-    </div>
-    <div class="hero-main">
-      <h1>RDW · 投資 Thesis 狀態報告</h1>
-      <p>Redwire Corporation · 2026-08-06 · 對照 Q2 官方業績同 Framework 1／2</p>
-      <div class="badges">
-        <span class="badge ink">F1：FAIL 60/130</span>
-        <span class="badge">F2：執行拐點部分確認</span>
-        <span class="badge">會計：US GAAP + Non-GAAP</span>
-      </div>
+  <section class="hero-main">
+    <h1>RDW · Thesis Tracker（重做）</h1>
+    <p>判定：Mixed／需持續監察 · 數據截至 2026-08-30</p>
+    <div class="badges">
+      <span class="badge">4 支柱中 1 確認、2 部分確認、1 未通過</span>
+      <span class="badge">持倉 4,400 股＠US$18（浮虧 -39.6%）</span>
     </div>
   </section>
 
-  <div class="kpi-row">
-    <div class="kpi pass"><div class="label">Q2 營收</div><div class="value">US$117.1M</div><div class="note">YoY +89.6%</div></div>
-    <div class="kpi pass"><div class="label">GAAP 毛利率</div><div class="value">27.8%</div><div class="note">由 −30.9% 修復</div></div>
-    <div class="kpi fail"><div class="label">Q2 FCF</div><div class="value">−US$35.3M</div><div class="note">較 Q1 轉差</div></div>
-    <div class="kpi warn"><div class="label">股數</div><div class="value">192→249M</div><div class="note">約半年 +30%</div></div>
-  </div>
-
   <div class="sections">
     <section class="panel">
-      <h2>Thesis 結論（詳細）</h2>
-      <div class="verdict">
-        <p>Q2 顯示成長同毛利修復 thesis 正在被驗證：營收 YoY +89.6%、GAAP 毛利率由上年同期深度負值修復至 27.8%，Defense Tech backlog 亦近乎倍增，說明需求同單位經濟唔再只係管理層敘事。</p>
-        <p>但「靠經營現金自我融資」呢條路徑仍未成立。近五季 FCF 全數為負，而且最新一季由 Q1 的 −US$12.7M 再惡化至 −US$35.3M，證明營收爆發尚未轉成可持續現金流。</p>
-        <p>同步地，流通股約由 192M 升至 249M（約半年 +30%），現金／流動性暴增主要靠融資同股本，而唔係經營自給；呢個係目前最大結構裂痕，會直接侵蝕每股經濟同回報。</p>
-        <p>因此狀態維持 Mixed／Needs Monitoring：業務執行改善值得跟，但唔好把紀錄營收誤讀成 thesis 全面通過，更唔應據此加倉。</p>
+      <h2>一句總結</h2>
+      <p>執行拐點（毛利率、backlog、成長）已經真實確認，但論點嘅「裂縫」——資本紀律／現金流品質——仍未修補；持倉決策應鎖定喺呢一項嘅進展，而唔係已經確認嘅增長敘事。</p>
+    </section>
+
+    <section class="panel">
+      <h2>四支柱追蹤</h2>
+      <div class="pillar pass">
+        <span class="status pass">✅ 大致確認</span>
+        <h3>A. 需求／增長</h3>
+        <p class="muted">Q2 YoY +89.6%，五季持續加速（-21%→+51%→+56%→+58%→+90%）。Backlog 創高 US$542.1M，book-to-bill 1.42（健康）。<strong>證據強度：高</strong>——連續 5 季同向數據，非單季波動。</p>
+      </div>
+      <div class="pillar mid">
+        <span class="status mid">🟡 部分確認</span>
+        <h3>B. 盈利質量</h3>
+        <p class="muted">GAAP 毛利率由 -30.9%（25Q2）修復至 27.8%（26Q2），趨勢明確。但 Adj. EBITDA 仍為負（-3.2M，雖持續收窄）。<strong>證據強度：中</strong>——方向正確，但未轉正前唔能夠當「已解決」。</p>
+      </div>
+      <div class="pillar mid">
+        <span class="status mid">🟡 部分確認</span>
+        <h3>C. Defense Tech 第二引擎</h3>
+        <p class="muted">Edge Autonomy 整合後 Penguin／Stalker 產品線提供第二收入來源。公開資料對個別合約規模嘅細節有限，難以獨立驗證第二引擎嘅財務重要性。<strong>證據強度：中低</strong>——敘事合理，但量化證據不足。</p>
+      </div>
+      <div class="pillar fail">
+        <span class="status fail">❌ 未通過（論點嘅「裂縫」）</span>
+        <h3>D. 資本紀律</h3>
+        <p class="muted">FCF 連續 5 季為負（-93.5→-27.8→-30.1→-12.7→-35.3，Q2 轉差）。現金堆積（US$95M→US$558M）主要靠融資／股本而非經營現金流（ATM 淨所得 US$487.9M）。流通股 192M→249M，稀釋約 +30%。<strong>證據強度：高（負面）</strong>——呢項係論點最脆弱一環，亦係 F1 未達 WATCH 門檻嘅主因。</p>
       </div>
     </section>
 
     <section class="panel">
-      <h2>原始 thesis 四支柱</h2>
-      <p class="section-sub">由太空硬件供應商轉型為 Space + Defense Tech 雙引擎；以 backlog 轉化同毛利率修復，證明規模化後 Adj. EBITDA／FCF 可轉正。</p>
-      <div class="pillar-grid">
-        <article class="pillar ok">
-          <div class="code">PILLAR A</div>
-          <div class="title">需求／成長</div>
-          <div class="kpi">Backlog、B2B、FY US$450–500M</div>
-          <span class="state up">改善中</span>
-        </article>
-        <article class="pillar ok">
-          <div class="code">PILLAR B</div>
-          <div class="title">盈利質量</div>
-          <div class="kpi">GAAP GM、Adj. EBITDA</div>
-          <span class="state up">改善中</span>
-        </article>
-        <article class="pillar ok">
-          <div class="code">PILLAR C</div>
-          <div class="title">Defense 第二曲線</div>
-          <div class="kpi">Defense backlog／營收 mix</div>
-          <span class="state up">改善中</span>
-        </article>
-        <article class="pillar bad">
-          <div class="code">PILLAR D</div>
-          <div class="title">資金紀律</div>
-          <div class="kpi">FCF、股數、ATM／融資</div>
-          <span class="state down">削弱中</span>
-        </article>
-      </div>
+      <h2>本輪 refresh 檢查</h2>
+      <p>WebSearch 未搵到 2026-08-07 之後有改變上述任何一項判定嘅新公開資訊；四支柱狀態相對 2026-08-06 版本不變。</p>
     </section>
 
     <section class="panel">
-      <h2>最新證據卡</h2>
-      <p class="section-sub">卡片式證據；每張含完整解讀。可按影響篩選。</p>
-      <div class="filters" id="filters">
-        <button class="chip on" data-f="all">全部</button>
-        <button class="chip" data-f="support">支持</button>
-        <button class="chip" data-f="neutral">中性</button>
-        <button class="chip" data-f="weaken">削弱</button>
-      </div>
-      <div class="evidence-grid" id="evidence"></div>
+      <h2>下一個檢查點</h2>
+      <p>Q3 2026 業績（約 11 月，未確認日期）將係支柱 B（Adj. EBITDA 能否轉正）同支柱 D（FCF 能否改善、稀釋速度會否放緩）嘅關鍵驗證時機。若兩者其中之一明確轉正，論點嘅「裂縫」有機會開始修補，屆時應重新評估 F1 判定同持倉策略。</p>
     </section>
 
     <section class="panel">
-      <h2>FCF 五季走勢（刺穿「逐季變好」假象）</h2>
-      <p class="section-sub">單位 US$ million。由 25Q2→26Q1 曾收窄，但 26Q2 再惡化至 −35.3。</p>
-      <div class="fcf-chart" id="fcfChart"></div>
-    </section>
-
-    <section class="panel">
-      <h2>狀態同裂痕</h2>
-      <div class="split">
-        <div class="box pass">
-          <h3>最強支持</h3>
-          <p>毛利率 −30.9%→27.8%；Defense Tech backlog 約 US$111M→US$220M。支柱 A／B／C 改善中。</p>
-        </div>
-        <div class="box fail">
-          <h3>最大裂痕</h3>
-          <p>五季 FCF 皆負（最新季轉差）；股數約半年 +30%。流動性變強主要靠融資，唔係經營自給。</p>
-        </div>
-      </div>
-      <div class="split" style="margin-top:12px">
-        <div class="box warn">
-          <h3>Balance sheet 點睇</h3>
-          <p>現金／流動性同減債明顯變強（抗風險↑）；但屬「融資強化」，未等於基本面全面轉好。</p>
-        </div>
-        <div class="box info">
-          <h3>失效條件</h3>
-          <p><strong>再削弱：</strong>連續兩季 GM&lt;20%，或 backlog 連續兩季下降。<br>
-          <strong>Broken：</strong>FY 低於 US$450M 且毛利率再轉負；或再大幅增發而 FCF／backlog 無改善。</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel">
-      <h2>投資行動</h2>
-      <div class="action-grid">
-        <div class="box warn">
-          <h3>建議</h3>
-          <p><strong>僅觀察</strong><br>已持倉可續抱，唔好加倉</p>
-        </div>
-        <div class="box">
-          <h3>下一個 checkpoint</h3>
-          <p>H2 轉化、Q3 GM≥25%、EBITDA 近 0、股數停擴張</p>
-        </div>
-        <div class="box">
-          <h3>下一步技能</h3>
-          <p>估值 → Skill 3<br>transcript → Skill 8<br>催化劑 → Skill 5</p>
-        </div>
-      </div>
+      <h2>對倉位嘅含義</h2>
+      <p>現時 -39.6% 浮虧主要反映 2025 年估值重估，而非論點本身崩壞——支柱 A（需求／增長）依然穩固。但支柱 D 未修補之前，呢個論點仍不足以支持加倉；亦冇證據顯示應該止蝕離場，因為業務底子並非惡化。</p>
+      <div class="callout" style="margin-top:10px">持倉決策應鎖定 Q3 業績呢個具體檢查點，而唔係現時嘅帳面盈虧。</div>
     </section>
   </div>
 
-  <p class="footer">來源：RDW Q2 2026 官方 IR；Framework 1／2（2026-08-06）。未核對最新 IB 成本價。此分析僅供研究參考，不構成投資建議。</p>
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
 </div>
-
-<script>
-  const evidence = [
-    ["support", "財報", "Q2 營收 US$117.1M（+89.6% YoY）", "官方公佈紀錄季度營收，並 beat 市場共識。增速遠高於主對照太空股近季水平，顯示頂線加速唔係單一項目噪音，而係 backlog 開始轉入確認收入。對 thesis 支柱 A（需求／成長）屬直接支持。"],
-    ["support", "KPI", "GAAP 毛利率 27.8%（vs 25Q2 −30.9%）", "上年同期毛利率深度為負，主要受項目 EAC／整合成本拖累；今季轉正並創紀錄，代表 mix 同執行質量明顯改善。呢個係單位經濟修復最硬嘅證據，直接支持支柱 B（盈利質量）。"],
-    ["support", "KPI", "Adj. EBITDA −US$3.2M（由 −27.4）", "虧損收窄幅度大，已接近打平，路徑可見。但 Non-GAAP 仍未轉正，而且公司同步加大 R&D，說明盈利拐點只係「接近」，仲未可以當完成。對 thesis 屬有條件支持。"],
-    ["support", "KPI", "Backlog US$542.1M；B2B 1.42", "合約 backlog 創高，季度 book-to-bill 高於 1，LTM 亦維持健康。需求可見度上升，但 FY 指引隐含 H2 仍需再確認約 US$236–286M 營收，轉化執行仍係關鍵風險。"],
-    ["support", "分部", "Defense Tech backlog ~倍增至 US$220M", "相對 YE2025 的約 US$111M，Defense Tech 近乎倍增，顯示 Edge Autonomy 整合後第二曲線有可驗證訂單，而唔只係敘事。Space backlog 亦溫和上升，雙引擎結構開始喺數據上成型。"],
-    ["neutral", "指引", "FY 指引維持 US$450–500M（未上調）", "即使 Q2 強勁，管理層只係重申而非上調全年營收指引。解讀上屬「執行改善但未敢更進取」，對 thesis 唔破壞，亦唔構成額外強化；H2 轉化壓力仍然存在。"],
-    ["weaken", "現金流", "Q2 FCF −35.3；五季皆負，較 Q1 轉差", "FCF 由 25Q2 的 −93.5 一度收窄至 26Q1 的 −12.7，但 26Q2 再惡化至 −35.3。結論唔係「逐季變好」，而係波動中仍全數為負。營收同毛利改善尚未被現金流確認，直接削弱支柱 D。"],
-    ["weaken", "資本結構", "股數約 192M→249M（+30%）", "約半年內股本大幅擴張，同期現金由約 US$95M 升至 US$558M，流動性改善主要靠融資／股本而非經營 FCF。Balance sheet 更抗風險，但每股 thesis 被稀釋；呢個係最大結構裂痕。"],
-    ["weaken", "篩選", "F1 FAIL 60/130（紅線全過）", "三條致命紅線均未觸發，但總分停在 60，差 5 分未入 WATCH。意思係業務改善真實，惟盈利、FCF、相對回報同需求相對同業等維度仍拖後腿，唔應把 Q2 beat 當成初篩已過。"],
-  ];
-  const label = { support: "支持", neutral: "中性", weaken: "削弱" };
-  const root = document.getElementById("evidence");
-  function render(filter) {
-    root.innerHTML = evidence
-      .filter(([impact]) => filter === "all" || impact === filter)
-      .map(([impact, type, title, note]) => `
-        <article class="ev ${impact}" data-impact="${impact}">
-          <div class="ev-top">
-            <span class="ev-type">${type}</span>
-            <span class="pill ${impact}">${label[impact]}</span>
-          </div>
-          <div class="ev-title">${title}</div>
-          <div class="ev-note">${note}</div>
-        </article>
-      `).join("");
-  }
-  render("all");
-  document.querySelectorAll("#filters .chip").forEach((chip) => {
-    chip.addEventListener("click", () => {
-      document.querySelectorAll("#filters .chip").forEach((c) => c.classList.remove("on"));
-      chip.classList.add("on");
-      render(chip.dataset.f);
-    });
-  });
-
-  const fcf = [
-    { label: "25Q2", value: -93.5 },
-    { label: "25Q3", value: -27.8 },
-    { label: "25Q4", value: -30.1 },
-    { label: "26Q1", value: -12.7 },
-    { label: "26Q2", value: -35.3 },
-  ];
-  const maxAbs = Math.max(...fcf.map((d) => Math.abs(d.value)));
-  document.getElementById("fcfChart").innerHTML = fcf.map((d) => {
-    const h = Math.round((Math.abs(d.value) / maxAbs) * 110);
-    return `<div class="bar-wrap"><div class="bar-val">${d.value}</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${d.label}</div></div>`;
-  }).join("");
-</script>
 </body>
 </html>
