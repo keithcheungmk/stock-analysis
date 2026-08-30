@@ -16,13 +16,13 @@ OUTPUT = ROOT / "output"
 DOCS = ROOT / "docs"
 
 SKIP_OVERWRITE = {
-    DOCS / "spcx" / "index.html",
-    DOCS / "spcx" / "valuation-model.html",
     DOCS / "orcl" / "index.html",
     DOCS / "iren" / "index.html",
 }
 
-# Tesla／IREN 目錄對齊 NVDA：只露出同一套 8 頁。底稿仍留喺 output/。
+# Tesla／IREN／SPCX 目錄對齊 NVDA／HIMS：只露出同一套標準頁。底稿仍留喺 output/。
+# SPCX 2026-08-30 重做：移除舊版 SKIP_OVERWRITE（docs/spcx/index.html 同 valuation-model.html
+# 之前係手動維護嘅自訂 slide-deck 首頁），改用同 TSLA/IREN 一致嘅自動生成 hub + HIDE_DOCS_SLUGS 機制。
 HIDE_DOCS_SLUGS = {
     "TSLA": {
         "earnings-review",
@@ -30,6 +30,11 @@ HIDE_DOCS_SLUGS = {
         "valuation-model",
     },
     "IREN": {
+        "earnings-review",
+        "interactive-brief",
+        "valuation-model",
+    },
+    "SPCX": {
         "earnings-review",
         "interactive-brief",
         "valuation-model",

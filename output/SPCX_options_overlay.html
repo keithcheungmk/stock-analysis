@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPCX Options Overlay</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#7f1d1d}
+  .badge-extra{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;background:#f1f5f9;color:#475569;border-radius:999px;padding:4px 10px;margin-bottom:12px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .rank{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff;margin-bottom:10px}
+  .rank .num{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.2rem;color:var(--watch);min-width:28px}
+  .callout{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#7f1d1d;font-weight:700}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="badge-extra">額外頁面 · 唔屬於 HIMS／NVDA 標準 9 頁，因應真實持倉保留</div>
+  <div class="notice">⚠️ <strong>本輪最重要更新：</strong>距到期只剩 19 日，兩張 put 要轉為 OTM 分別需要股價急升 +37.9%（195）／+20.1%（170）——assignment 應該由「機率高」升級為「近乎確定嘅基準情景」嚟做風險管理。</div>
+
+  <section class="hero-main">
+    <h1>SPCX Options Overlay · 現倉管理</h1>
+    <p>目的：Repair／Assignment 管理（唔係新開 Income 賣方）· 現價 US$141.50</p>
+    <div class="badges"><span class="badge">現股 827＠US$137</span><span class="badge">到期 2026-09-18（19 日後）</span></div>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>持倉現況</h2>
+      <table>
+        <thead><tr><th>倉</th><th>Strike</th><th>Premium</th><th>到期</th><th>距到期</th><th>內在價值 @141.50</th><th>有效買入成本</th></tr></thead>
+        <tbody>
+          <tr><td>Short put</td><td>195</td><td>US$35</td><td>2026-09-18</td><td><strong>19 日</strong></td><td>US$53.5</td><td><strong>US$160</strong></td></tr>
+          <tr><td>Short put</td><td>170</td><td>US$20</td><td>2026-09-18</td><td><strong>19 日</strong></td><td>US$28.5</td><td><strong>US$150</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:8px">若全部 assignment：再買 200 股，現金流出約 US$36,500，總股數 1,027；混合成本會被拉高。</p>
+    </section>
+
+    <section class="panel">
+      <h2>結構選擇（建議排序 A &gt; B ≫ D &gt; C）</h2>
+      <div class="rank"><div class="num">A</div><div><strong>買回兩張 put（優先）</strong> — 19 日內時間價值已經唔多，唔想喺 150–160 被吸貨</div></div>
+      <div class="rank"><div class="num">B</div><div><strong>只買回 195，留 170</strong> — 仍願意喺 ~150 接 100 股</div></div>
+      <div class="rank"><div class="num">D</div><div><strong>Roll out／down</strong> — 唔優先，往往要付借方或下移 strike 仍 ITM</div></div>
+      <div class="rank"><div class="num">C</div><div><strong>持有等 assignment</strong> — 違反「唔好加倉」，最差選項</div></div>
+    </section>
+
+    <section class="panel">
+      <h2>風險數字（@ US$141.50）</h2>
+      <table>
+        <thead><tr><th>項目</th><th>195 put</th><th>170 put</th><th>合計</th></tr></thead>
+        <tbody>
+          <tr><td>義務買入現金</td><td>US$19,500</td><td>US$17,000</td><td>US$36,500</td></tr>
+          <tr><td>已收 premium</td><td>US$3,500</td><td>US$2,000</td><td>US$5,500</td></tr>
+          <tr><td>紙上內在虧損</td><td>~US$1,850</td><td>~US$850</td><td>~US$2,700</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:8px">較 08-21（@ US$135.86）時嘅約 US$9,300 大幅收窄——現價上升令帳面虧損收窄，但 assignment 機率本身冇下降，因為兩者仍深度 ITM。</p>
+    </section>
+
+    <section class="panel">
+      <h2>情景管理</h2>
+      <table>
+        <thead><tr><th>情景</th><th>動作</th></tr></thead>
+        <tbody>
+          <tr><td>股價喺 9/9 解禁後上升並企穩 &gt;170 但仍 &lt;195</td><td>至少處理 195；評估 170 是否仍要買回</td></tr>
+          <tr><td>股價 &gt;195（19 日內機率甚低）</td><td>可考慮讓剩餘 theta，但唔好再賣新 put</td></tr>
+          <tr><td>股價因 9/9 解禁供給壓力跌向 110–120</td><td>更應盡快減低 assignment 規模</td></tr>
+          <tr><td>接近 9/18</td><td>唔好賭最後兩日奇蹟；預留現金或預先平倉</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>結論</h2>
+      <div class="callout">呢筆期權交易而家嘅正確目的係止損式管理義務，唔係繼續收租。距到期只剩 19 日，兩張 put 距離轉 OTM 分別需要 +37.9%／+20.1% 嘅急升，現實中應該當 assignment 幾乎確定嚟準備。優先買回（尤其 195）；留意 2026-09-09 鎖定期解禁（到期前 9 日）可能帶嚟嘅短期波動。</div>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。執行前請用券商即時 bid／ask 重算買回成本同保證金。</p>
+</div>
+</body>
+</html>
