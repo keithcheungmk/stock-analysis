@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPCX Catalyst Calendar</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#7f1d1d}
+  .hero-main{background:linear-gradient(135deg,#3730a3,#4338ca 58%,#312e81);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .timeline{display:grid;gap:10px}
+  .event{display:grid;grid-template-columns:170px 1fr;gap:14px;border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  @media(max-width:700px){.event{grid-template-columns:1fr}}
+  .event.high{border-left-color:var(--fail)}
+  .event.mid{border-left-color:var(--watch)}
+  .event.low{border-left-color:#a8a29e}
+  .event .date{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;color:var(--ink)}
+  .event .tag{display:inline-block;font-size:.7rem;font-weight:800;border-radius:999px;padding:2px 8px;margin-top:4px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .tag.high{background:var(--fail-soft);color:var(--fail)}
+  .tag.mid{background:var(--watch-soft);color:var(--watch)}
+  .tag.low{background:#f1f5f9;color:#64748b}
+  .event h3{margin:0 0 4px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">⚠️ <strong>本輪最大更新：</strong>鎖定期解禁時間表由 2026-08-21 版本嘅「P3 未證實雜訊」升級為「P1 具體事件」——已查到有確實日期同股數嘅分階段解禁時間表。</div>
+
+  <section class="hero-main">
+    <h1>SPCX Catalyst Calendar</h1>
+    <p>持倉含義：現股 827；short put 到期 2026-09-18 ← 19 日後，最近端事件風險</p>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>IPO 鎖定期解禁時間表（本輪新查）</h2>
+      <table>
+        <thead><tr><th>日期</th><th>批次</th><th>股數</th><th>狀態</th></tr></thead>
+        <tbody>
+          <tr><td>2026-08-06</td><td>Q2 業績觸發（20%）</td><td>最多 9.115 億</td><td>✅ 已解禁</td></tr>
+          <tr><td>2026-08-06</td><td>股價觸發獎勵</td><td>最多 4.558 億</td><td>✗ 未觸發</td></tr>
+          <tr><td>2026-08-20</td><td>Day 70（7%）</td><td>最多 3.19 億</td><td>✅ 已解禁</td></tr>
+          <tr style="background:var(--fail-soft)"><td><strong>2026-09-09</strong></td><td><strong>Day 90（7%）</strong></td><td><strong>最多 3.19 億</strong></td><td><strong>▶ 下一個，10 日後</strong></td></tr>
+          <tr><td>2026-09-10</td><td>Day 91（Rule 144）</td><td>最多 0.591 億</td><td>即將</td></tr>
+          <tr><td>2026-09-24</td><td>Day 105（7%）</td><td>最多 3.284 億</td><td>即將</td></tr>
+          <tr><td>2026-10-09</td><td>Day 120（7%）</td><td>最多 3.284 億</td><td>即將</td></tr>
+          <tr><td>2026-10-24</td><td>Day 135（7%）</td><td>最多 3.284 億</td><td>即將</td></tr>
+          <tr><td>約 2026-11</td><td>Q3 業績觸發（28%）</td><td>最多約 13 億</td><td>盈利觸發</td></tr>
+          <tr><td>2026-12-08</td><td>Day 180（完全解禁）</td><td>最多 7.976 億</td><td>即將</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:8px">截至 2026-08 底約 14% 股份可流通，其餘 ~86% 分階段釋出至 2027 年 6 月（含 2027-06-12 Musk 持股批次，最多 64.2 億股，全組最大單一波次）。</p>
+    </section>
+
+    <section class="panel">
+      <h2>Catalyst 時間線（完整優先排序）</h2>
+      <div class="timeline">
+        <div class="event high"><div><div class="date">2026-09-18（19 日後）</div><span class="tag high">P0 最高</span></div><div><h3>Short put 到期／assignment</h3><p class="muted">被迫加倉 vs 研究建倉區；唔係基本面，但改變每股成本同名義。</p></div></div>
+        <div class="event high"><div><div class="date">2026-09-09（10 日後）</div><span class="tag high">P1 最高</span></div><div><h3>Day 90 鎖定期解禁（7%，3.19 億股）</h3><p class="muted">就喺 put 到期前 9 日，兩件事疊加可能製造額外波動。</p></div></div>
+        <div class="event high"><div><div class="date">約 2026-10／11</div><span class="tag high">P1</span></div><div><h3>Q3 2026 業績（觸發約 28% 解禁）</h3><p class="muted">用戶、AI 收入可持續性、capex；Beat 但 FCF 惡化仍可跌，業績+解禁疊加波動。</p></div></div>
+        <div class="event mid"><div><div class="date">09-24／10-09／10-24</div><span class="tag mid">P1</span></div><div><h3>Day 105／120／135 鎖定期解禁</h3><p class="muted">持續供給流。</p></div></div>
+        <div class="event mid"><div><div class="date">2026-12-08</div><span class="tag mid">P2</span></div><div><h3>180 日完全解禁</h3><p class="muted">最大單一非盈利觸發批次之一。</p></div></div>
+        <div class="event low"><div><div class="date">持續</div><span class="tag low">P2</span></div><div><h3>Starship 試飛／可重複使用里程碑</h3><p class="muted">偏多（成功）／偏空（事故），Space 成本曲線。</p></div></div>
+        <div class="event low"><div><div class="date">季報／零散</div><span class="tag low">P2</span></div><div><h3>AI GW 上架同 Cloud Agreements 轉收入</h3><p class="muted">「contracted」≠「cash」，需連續驗證。</p></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>未來 3 週（對住 9/18 puts 同 9/9 解禁）</h2>
+      <p class="muted">現價 vs 195／170：兩張均 ITM（@US$141.50）→ assignment 機率極高，19 日內要分別急升 +37.9%／+20.1% 先會轉 OTM。2026-09-09 解禁（3.19 億股）先於 put 到期 9 日發生——留意解禁後短期供給壓力會唔會拉低股價。</p>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/spcx/catalyst-calendar.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
