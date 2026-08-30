@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPCX One-Pager</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:900px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:12px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.82rem;margin-bottom:16px}
+  .hero{display:grid;grid-template-columns:200px 1fr;gap:16px}
+  @media(max-width:700px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:20px;box-shadow:var(--shadow);text-align:center}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.2rem;font-weight:800;color:var(--watch)}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 6px;font-size:1.4rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92;font-size:.92rem}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-top:14px}
+  h2{margin:0 0 12px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.88rem}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+  .kpi .l{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.72rem}
+  .kpi .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.05rem;margin-top:2px}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}
+  th,td{text-align:left;padding:6px;border-bottom:1px solid var(--line)}
+  .timeline-mini{display:grid;gap:8px;margin-top:8px}
+  .ev-mini{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;font-size:.85rem}
+  .footer{margin-top:16px;color:var(--muted);font-size:.8rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .action{background:var(--watch-soft);border:1px solid #fdba74;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#9a3412;font-weight:700}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">格式偏離說明：One-pager skill 建議主交付係 Cursor Canvas PPT，Cowork 呢個 session 冇呢個工具鏈，改用呢頁 4 段式互動 HTML 摘要代替（取代舊版 interactive-brief.html），內容同 <code>output/SPCX_2026-08-30_one_pager.md</code> 一致。</div>
+
+  <section class="hero">
+    <div class="score-box"><div class="sans" style="font-size:.78rem;color:var(--watch);font-weight:700">STATUS</div><div class="score-num">WATCH</div><div class="muted">75 / 130</div></div>
+    <div class="hero-main">
+      <h1>SPCX One-Pager</h1>
+      <p>現價 US$141.50 vs Base US$91（-35.7%）· Bear US$68／Bull US$182 · 數據截至 2026-08-30</p>
+    </div>
+  </section>
+
+  <div class="panel">
+    <div class="action">續抱現股、唔好加倉；優先處理 19 日後到期嘅 short put assignment 風險。</div>
+  </div>
+
+  <div class="panel">
+    <h2>1 · 結論</h2>
+    <p class="muted">Connectivity 已係十億級盈利引擎（Q2 營業利潤 US$1.66B、用戶 12.0M），AI 收入單季由 US$0.82B 暴增至 US$2.56B，但 AI／總 capex 令 H1 近似 FCF 達 -US$25.0B，估值倍數（~74.6× 年化 P/S）遠超 Base SOTP 估值。現價落喺「續抱」區間，但兩張 short put 距到期只剩 19 日，assignment 應視為近乎確定，需要主動管理。</p>
+  </div>
+
+  <div class="panel">
+    <h2>2 · 事實</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="l">Q2 2026 總營收</div><div class="v">US$7,814m（+92%）</div></div>
+      <div class="kpi"><div class="l">Connectivity 營業利潤</div><div class="v">US$1,656m</div></div>
+      <div class="kpi"><div class="l">Starlink 用戶</div><div class="v">12.0M</div></div>
+      <div class="kpi"><div class="l">H1 近似 FCF</div><div class="v">-US$25.0B</div></div>
+      <div class="kpi"><div class="l">年化 P/S</div><div class="v">~74.6×</div></div>
+      <div class="kpi"><div class="l">未來 3 月解禁</div><div class="v">~20 億股</div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>3 · 估值（引用 Framework 3）</h2>
+    <table>
+      <thead><tr><th>情景</th><th>目標價</th><th>vs 現價</th></tr></thead>
+      <tbody>
+        <tr><td>Bear</td><td>US$68</td><td>-51.9%</td></tr>
+        <tr><td>Base</td><td>US$91</td><td>-35.7%</td></tr>
+        <tr><td>Bull</td><td>US$182</td><td>+28.6%</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin-top:6px">風險回報不對稱（Bear 跌幅遠大於 Bull 升幅），現價偏貴，建倉區為 ≤US$95。</p>
+  </div>
+
+  <div class="panel">
+    <h2>4 · 催化劑（1–2 季）</h2>
+    <div class="timeline-mini">
+      <div class="ev-mini"><strong>2026-09-09</strong> — Day 90 鎖定期解禁（7%，約 3.19 億股），距 put 到期僅 9 日</div>
+      <div class="ev-mini"><strong>2026-09-18</strong> — Short put 到期（19 日後），assignment 風險極高</div>
+      <div class="ev-mini"><strong>約 2026-10／11</strong> — Q3 2026 業績，觸發約 28% 鎖定期解禁</div>
+      <div class="ev-mini"><strong>2026-12-08</strong> — 180 日完全解禁（最多 7.976 億股）</div>
+    </div>
+    <p class="muted" style="margin-top:8px"><strong>倉位提醒：</strong>現股 827 股續抱；options 建議優先買回 195 strike put，詳見 Options Overlay 頁。</p>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>

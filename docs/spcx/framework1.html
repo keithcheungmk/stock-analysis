@@ -19,18 +19,13 @@
   @media(max-width:860px){.hero{grid-template-columns:1fr}}
   .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
   .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
-  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:4rem;font-weight:800;line-height:1;color:var(--watch);margin:8px 0 0}
-  .score-den{font-size:1.1rem;color:var(--muted);font-weight:600}
-  .meter{height:10px;background:rgba(255,255,255,.7);border-radius:999px;overflow:hidden;margin-top:14px;border:1px solid #fdba74}
-  .meter>span{display:block;height:100%;width:57.7%;background:linear-gradient(90deg,#f97316,#eab308)}
-  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:3.4rem;font-weight:800;line-height:1;color:var(--watch);margin:8px 0 0}
+  .score-den{font-size:1.05rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
   .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .hero-main p{margin:0;opacity:.92}
   .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
-  .badge.watch{background:var(--watch-soft);color:var(--watch);border-color:transparent}
-  .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
-  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
   @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
@@ -41,124 +36,127 @@
   .sections{display:grid;gap:16px;margin-top:18px}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
   h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
-  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
-  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
-  .verdict p{margin:0 0 10px}
-  .verdict p:last-child{margin-bottom:0}
-  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  .score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  @media(max-width:860px){.grid-2,.grid-3,.score-grid{grid-template-columns:1fr}}
-  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
-  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .dim{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left-width:5px}
-  .dim.s10{border-left-color:var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 40%)}
-  .dim.s5{border-left-color:var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 40%)}
-  .dim.s0{border-left-color:var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 40%)}
-  .dim-top{display:flex;justify-content:space-between;gap:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .dim-name{font-weight:800}
-  .pill{border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:800}
-  .pill.s10{background:var(--pass-soft);color:var(--pass)}.pill.s5{background:var(--watch-soft);color:var(--watch)}.pill.s0{background:var(--fail-soft);color:var(--fail)}
-  .dim-evidence{color:var(--muted);font-size:.9rem;margin:8px 0 4px}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;color:var(--muted)}
   .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .muted{color:var(--muted);font-size:.9rem}
+  .starred{color:var(--watch);font-weight:800}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
 </style>
 </head>
 <body>
 <a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
 
 <div class="wrap">
+  <div class="notice">🔄 <strong>本頁 2026-08-30 重做</strong>，格式對齊 HIMS／NVDA 9 頁標準。核心財務數字沿用 2026-08-21 已驗證嘅 2026-Q2 官方業績（冇新一季），本輪只 refresh 現價／市值，並新增鎖定期解禁時間表發現。</div>
+
   <section class="hero">
     <div class="score-box">
       <div class="eyebrow">Framework 1</div>
       <div class="score-num">WATCH</div>
       <div class="score-den">75 / 130</div>
-      <div class="meter"><span></span></div>
       <div class="badges" style="margin-top:10px">
-        <span class="badge pass">紅線全過</span>
-        <span class="badge watch">低於 PASS 85</span>
+        <span class="badge" style="background:var(--watch-soft);color:var(--watch)">估值泡沫：未否決（高風險觀察）</span>
       </div>
     </div>
     <div class="hero-main">
       <h1>SPCX · Framework 1 基本面初篩</h1>
-      <p>Space Exploration Technologies Corp. · 2026-08-21 · Q2 2026（2026-06-30）· USD · US GAAP · SEC 8-K EX-99.1 + 10-Q</p>
+      <p>Space Exploration Technologies Corp. · 截至 2026-08-30 · 最新季 2026-Q2（期終 2026-06-30）· USD · US GAAP · SEC 8-K EX-99.1 + 10-Q</p>
       <div class="badges">
-        <span class="badge">現價 US$135.86 delayed</span>
-        <span class="badge">持倉 827 @ ~US$137</span>
-        <span class="badge">Short put 195／170 · 9/18</span>
+        <span class="badge">現價 US$141.50（08-28）</span>
+        <span class="badge">市值 ~US$1.865T</span>
+        <span class="badge">持倉 827 股 + short put 195/170</span>
       </div>
     </div>
   </section>
 
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">WATCH · 續抱不加倉</span></h2>
+    <p class="muted" style="margin:0">Connectivity 已是十億級盈利引擎，但 AI／總 capex 令 FCF 極負，估值倍數約 74.6× 年化 P/S。現價落喺續抱區間（US$95–150），但短倉 put 距到期只剩 19 日，assignment 風險應視為近乎確定。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（08-28 收市）</div><div class="v">US$141.50</div><div class="s">市值 ~US$1.865T</div></div>
+      <div class="hud-cell"><div class="l">年化 P/S</div><div class="v">~74.6×</div><div class="s">H1 年化營收 ~US$25B</div></div>
+      <div class="hud-cell"><div class="l">現金 vs 債務</div><div class="v">~4.3×</div><div class="s">US$100.0B vs US$23.3B</div></div>
+      <div class="hud-cell"><div class="l">H1 近似 FCF</div><div class="v">−US$25.0B</div><div class="s">OCF US$3.47B − PPE US$28.48B</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Starlink 用戶 12.0M（去年 6.0M）</span>
+      <span>★ Connectivity 營業利潤 US$1.66B</span>
+      <span>★ AI 收入 US$2.56B（Q1 僅 US$0.82B）</span>
+      <span>★ 營收 YoY +92%</span>
+      <span>★ 短倉 put 19 日後到期</span>
+    </div>
+    <div class="action">紅線全過但估值透支：續抱現股／唔好加倉（WATCH 75/130，不變）</div>
+  </section>
+
   <div class="kpis">
-    <div class="kpi teal"><div class="label">現價（延遲 8/16）</div><div class="value">US$135.86</div><div class="note">市值 ~US$1.79T</div></div>
-    <div class="kpi green"><div class="label">Q2 營收</div><div class="value">US$7.81B</div><div class="note">YoY +92%</div></div>
-    <div class="kpi green"><div class="label">Connectivity 營業利潤</div><div class="value">US$1.66B</div><div class="note">Starlink 12.0M 用戶</div></div>
-    <div class="kpi orange"><div class="label">現金＋有價證券</div><div class="value">~US$100B</div><div class="note">債務＋租賃 ~US$23.3B</div></div>
+    <div class="kpi teal"><div class="label">現價（08-28）</div><div class="value">US$141.50</div><div class="note">較 08-21（135.86）+4.2%</div></div>
+    <div class="kpi green"><div class="label">Q2 2026 營收</div><div class="value">US$7,814m</div><div class="note">YoY +92%</div></div>
+    <div class="kpi orange"><div class="label">Starlink 用戶／ARPU</div><div class="value">12.0M · $66</div><div class="note">用戶倍增，ARPU 較去年回落後企穩</div></div>
+    <div class="kpi red"><div class="label">H1 近似 FCF</div><div class="value">−US$25.0B</div><div class="note">AI capex 單季 US$15.8B</div></div>
   </div>
 
   <div class="sections">
     <section class="panel">
-      <h2>初篩結論</h2>
-      <div class="callout watch verdict">
-        <p><strong>WATCH（75／130）。</strong>最大亮點係 Connectivity 已係十億級盈利引擎（Q2 營業利潤 US$1.66B），Starlink 用戶由 6.0M 倍增至 12.0M，現金堡壘約 US$100B 遠超債務 ~US$23.3B，三條致命紅線均未觸發。</p>
-        <p>最大風險係 AI 同總 capex 令自由現金流極負（H1 近似 FCF ~−US$25B），加上 GAAP 淨虧 US$541M 同約 72× 年化 P/S，估值已大幅透支近端已入帳收入。高增長（+92% YoY）支持唔做機械 FAIL，但倍數極高係主風險。</p>
-        <p>Adversarial 最強反證：Q2 單季 AI capex US$15.8B 吞噬 OCF，市值對收入倍數仍處 70×+ 區間。最可能失效假設：AI／Starship 投資長期無法轉成足夠高質量 FCF，同時估值倍數壓縮。</p>
-        <p>對行動含義：業務質量支持續抱核心倉，但現價 US$135.86 同 deep ITM short put 結構唔支持加倉；升級 PASS 需 FCF 缺口收窄、P/S 回落至可辯護區間、Connectivity＋AI 收入質量連續兩季驗證。</p>
-      </div>
+      <h2>致命紅線</h2>
+      <table>
+        <thead><tr><th>紅線</th><th>結果</th><th>理由</th></tr></thead>
+        <tbody>
+          <tr><td>1. 破產／流動性風險</td><td style="color:var(--pass);font-weight:800">安全</td><td>現金＋有價證券 ~US$100.0B ≫ 債務＋租賃 ~US$23.3B（~4.3×），即使 FCF 大額負都未同時觸發兩項</td></tr>
+          <tr><td>2. 衰退陷阱</td><td style="color:var(--pass);font-weight:800">安全</td><td>Q2 YoY +92%，「增速低於同業」不成立</td></tr>
+          <tr><td>3. 估值泡沫</td><td style="color:var(--watch);font-weight:800">未否決（高風險觀察）</td><td>年化 P/S ~74.6×，但有 +92% 高增長同 Connectivity 盈利支持，唔符合機械否決條件</td></tr>
+        </tbody>
+      </table>
     </section>
 
     <section class="panel">
-      <h2>致命紅線掃描</h2>
-      <div class="grid-3">
-        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
-          <h3><span class="safe">① 流動性 — 安全</span></h3>
-          <p>現金＋MS ~US$100B 遠超債務＋租賃 ~US$23.3B（約 4×）。即使 H1 近似 FCF ~−US$25B，兩項須同時成立先觸發 → 未觸發。</p>
-        </div>
-        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
-          <h3><span class="safe">② 衰退陷阱 — 安全</span></h3>
-          <p>Q2 營收 YoY +92%（US$4,071m→US$7,814m）。淨利率雖負（−6.9%），「增速低於同業」第一項不成立。</p>
-        </div>
-        <div class="box" style="background:linear-gradient(180deg,#fff7ed,#fff)">
-          <h3>③ 估值泡沫 — 未否決（高風險觀察）</h3>
-          <p>GAAP 虧損 → PEG 不可用；P/S ~72×。有高增長同 Connectivity 盈利支持，唔符合機械否決，但列入估值主風險。</p>
-        </div>
-      </div>
+      <h2>13 維度評分（不變，合計 75/130）</h2>
+      <table>
+        <thead><tr><th>維度</th><th>分數</th><th>依據</th></tr></thead>
+        <tbody>
+          <tr><td>現金 vs 債務</td><td class="starred">10</td><td>現金遠超債務 2 倍以上</td></tr>
+          <tr><td>營收增長</td><td class="starred">10</td><td>Q2 YoY +92%</td></tr>
+          <tr><td>淨利潤率</td><td>0</td><td>虧損</td></tr>
+          <tr><td>估值（PEG）</td><td>0</td><td>PEG 不可用；P/S ~74.6×</td></tr>
+          <tr><td>TAM</td><td class="starred">10</td><td>發射＋星座＋AI 基礎設施 &gt; US$100B</td></tr>
+          <tr><td>需求 KPI</td><td class="starred">10</td><td>用戶倍增至 12.0M</td></tr>
+          <tr><td>ROE</td><td>0</td><td>持續淨虧</td></tr>
+          <tr><td>自由現金流</td><td>0</td><td>不穩定且為負</td></tr>
+          <tr><td>護城河</td><td class="starred">10</td><td>發射主導、全球星座、垂直整合</td></tr>
+          <tr><td>行業趨勢</td><td class="starred">10</td><td>太空／LEO／AI 基建</td></tr>
+          <tr><td>管理層能力</td><td>5</td><td>執行強；但控制權公司、關聯方、巨型收購</td></tr>
+          <tr><td>相對 S&P 500</td><td>5</td><td>上市約 2.5 個月，累計略高於發行價</td></tr>
+          <tr><td>預期 vs 實際</td><td>5</td><td>僅一季公開對照</td></tr>
+        </tbody>
+      </table>
     </section>
 
     <section class="panel">
-      <h2>13 維度評分卡</h2>
-      <div class="score-grid">
-        <div class="dim s10"><div class="dim-top"><span class="dim-name">現金 vs 債務</span><span class="pill s10">10</span></div><div class="dim-evidence">現金＋MS ~US$100B；債務＋租賃 ~US$23.3B</div></div>
-        <div class="dim s10"><div class="dim-top"><span class="dim-name">營收增長</span><span class="pill s10">10</span></div><div class="dim-evidence">Q2 YoY +92%，明顯高於發射／太空同業</div></div>
-        <div class="dim s0"><div class="dim-top"><span class="dim-name">淨利潤率</span><span class="pill s0">0</span></div><div class="dim-evidence">Q2 淨虧 US$541m／營收 ≈ −6.9%</div></div>
-        <div class="dim s0"><div class="dim-top"><span class="dim-name">估值（PEG）</span><span class="pill s0">0</span></div><div class="dim-evidence">PEG 不可用；P/S ~72× 嚴重透支</div></div>
-        <div class="dim s10"><div class="dim-top"><span class="dim-name">TAM</span><span class="pill s10">10</span></div><div class="dim-evidence">發射＋星座＋AI 基礎設施 > US$100B</div></div>
-        <div class="dim s10"><div class="dim-top"><span class="dim-name">需求 KPI</span><span class="pill s10">10</span></div><div class="dim-evidence">Starlink 6.0M→12.0M YoY；ARPU US$66</div></div>
-        <div class="dim s0"><div class="dim-top"><span class="dim-name">ROE</span><span class="pill s0">0</span></div><div class="dim-evidence">持續淨虧，低於 8% 且為負</div></div>
-        <div class="dim s0"><div class="dim-top"><span class="dim-name">自由現金流</span><span class="pill s0">0</span></div><div class="dim-evidence">H1 近似 FCF −US$25B；Q2 AI capex US$15.8B</div></div>
-        <div class="dim s10"><div class="dim-top"><span class="dim-name">護城河</span><span class="pill s10">10</span></div><div class="dim-evidence">發射主導、全球星座、垂直整合</div></div>
-        <div class="dim s10"><div class="dim-top"><span class="dim-name">行業趨勢</span><span class="pill s10">10</span></div><div class="dim-evidence">太空／LEO／AI 基建符合主題</div></div>
-        <div class="dim s5"><div class="dim-top"><span class="dim-name">管理層能力</span><span class="pill s5">5</span></div><div class="dim-evidence">執行強；控制權公司、關聯方、巨型收購風險</div></div>
-        <div class="dim s5"><div class="dim-top"><span class="dim-name">相對 S&P 500</span><span class="pill s5">5</span></div><div class="dim-evidence">上市約 2 個月；IPO US$135→US$135.86，樣本極短</div></div>
-        <div class="dim s5"><div class="dim-top"><span class="dim-name">預期 vs 實際</span><span class="pill s5">5</span></div><div class="dim-evidence">首份公眾季報；僅一季公開對照</div></div>
-      </div>
+      <h2>本輪 refresh 檢查（08-21 → 08-30）</h2>
+      <p class="muted">WebSearch 查核未發現足以改變判斷嘅新 8-K／新聞。<strong>本輪新發現：</strong>IPO 後嘅分階段鎖定期解禁時間表遠比之前「低重要度雜訊」歸類具體同密集——2026-09-09（7%）、09-24、10-09、10-24 陸續解禁，Q3 業績觸發約 28%，2026-12-08 完全解禁——已升級寫入 Catalyst Calendar。</p>
     </section>
 
     <section class="panel">
-      <h2>Adversarial 同下一步</h2>
-      <div class="grid-3">
-        <div class="box" style="border-top:4px solid var(--pass)"><h3>最強支持</h3><p>Connectivity 營業利潤 US$1.66B、用戶 12.0M、現金堡壘 US$100B、營收 +92% YoY。</p></div>
-        <div class="box" style="border-top:4px solid var(--fail)"><h3>最強反證</h3><p>AI capex Q2 US$15.8B 令 FCF 極負；P/S ~72× 對已入帳收入倍數極高；GAAP 仍虧。</p></div>
-        <div class="box" style="border-top:4px solid var(--watch)"><h3>最易失效</h3><p>AI／Starship 投資長期無法轉成高質量 FCF，同時估值倍數從 70×+ 壓縮。</p></div>
-      </div>
-      <div class="callout info" style="margin-top:14px">升級條件：（1）單季 FCF 明顯收窄；（2）P/S 回落至可辯護區間；（3）Connectivity＋AI 收入質量連續兩季驗證。→ 繼續 Framework 2。</div>
+      <h2>Adversarial check</h2>
+      <p class="muted"><strong>最強支持：</strong>Connectivity 營業利潤 US$1.66B、用戶 12.0M、現金堡壘 US$100B。<strong>最強反證：</strong>AI capex（單季 US$15.8B）令 FCF 極負，市值倍數 74.6×。<strong>最可能令結論失效嘅假設：</strong>AI／Starship 投資長期無法轉成足夠高質量自由現金流，同時估值倍數壓縮＋鎖定期解禁供給壓力疊加。</p>
     </section>
   </div>
 
-  <p class="footer">來源：SEC 8-K EX-99.1 + Form 10-Q（2026-08-04）；現價 yfinance delayed（2026-08-21）。此分析僅供研究參考，不構成投資建議。</p>
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
 </div>
 <section id="page-comments" data-page="/spcx/framework1.html"></section>
 <script src="../assets/page-comments.js" defer></script>

@@ -3,170 +3,101 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SPCX Framework 2 深度增長分析</title>
+<title>SPCX Framework 2 執行深挖</title>
 <style>
-  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
   *{box-sizing:border-box}
   body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
   .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
   .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
-  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
-  @media(max-width:860px){.hero{grid-template-columns:1fr}}
-  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
-  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
-  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.35rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
-  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
-  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .hero-main p{margin:0;opacity:.92}
   .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
-  .badge.watch{background:var(--watch-soft);color:var(--watch);border:0}.badge.pass{background:var(--pass-soft);color:var(--pass);border:0}.badge.fail{background:var(--fail-soft);color:var(--fail);border:0}
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
-  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
-  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
-  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
-  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.2rem;font-weight:800;margin-top:4px}
-  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
   .sections{display:grid;gap:16px;margin-top:18px}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
   h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .callout{border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
-  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
-  .verdict p{margin:0 0 10px}.verdict p:last-child{margin-bottom:0}
-  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
-  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
-  .box.pass{border-left:5px solid var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 45%)}
-  .box.warn{border-left:5px solid var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 45%)}
-  .box.fail{border-left:5px solid var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 45%)}
-  .pill{display:inline-flex;border-radius:999px;padding:3px 10px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .pill.pass{background:var(--pass-soft);color:var(--pass)}.pill.warn{background:var(--watch-soft);color:var(--watch)}.pill.fail{background:var(--fail-soft);color:var(--fail)}
-  table{width:100%;border-collapse:collapse;font-size:.86rem}
-  th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem}
-  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
-  tr.up td:last-child{color:var(--pass);font-weight:700} tr.down td:last-child{color:var(--fail);font-weight:700} tr.mix td:last-child{color:var(--watch);font-weight:700}
-  .chart{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end;height:170px;margin:12px 0 8px}
-  .bar-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;gap:6px}
-  .bar{width:100%;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#14b8a6,#0f766e);min-height:8px}
-  .bar.ai{background:linear-gradient(180deg,#fb7185,#b91c1c)}
-  .bar-label,.bar-val{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}.bar-label{color:var(--muted)}.bar-val{font-weight:800}
-  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.83rem}
+  th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.7rem;color:var(--muted)}
   .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .qa{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff;margin-bottom:10px}
+  .qa h3{color:var(--watch)}
+  .verdict{background:var(--pass-soft);border:1px solid #86efac;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;color:#15803d}
+  .starred{color:var(--watch);font-weight:800}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <section class="hero">
-    <div class="verdict-box">
-      <div class="eyebrow">Framework 2 判定</div>
-      <div class="verdict-title">Connectivity 通過<br>AI 部分通過 · FCF 未通過</div>
-      <div class="badges" style="margin-top:12px">
-        <span class="badge pass">Starlink 通過</span>
-        <span class="badge watch">AI 待驗證</span>
-        <span class="badge fail">現金流未通過</span>
-      </div>
-      <p class="sans muted" style="margin:12px 0 0">承接 F1 WATCH 75/130 · 續抱唔好加倉</p>
-    </div>
-    <div class="hero-main">
-      <h1>SPCX · Framework 2 深度增長分析</h1>
-      <p>SpaceX · 五季：2025-Q2 → 2026-Q2 · 官方 8-K EX-99.1 + 10-Q（2026-08-04）</p>
-      <div class="badges">
-        <span class="badge">Core KPI：Connectivity + Starlink Subscribers</span>
-        <span class="badge">827 @ ~US$137 · put 195/170</span>
-      </div>
-    </div>
-  </section>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
 
-  <div class="kpis">
-    <div class="kpi teal"><div class="label">Connectivity 收入</div><div class="value">US$4.29B</div><div class="muted">Q2 · YoY +66%</div></div>
-    <div class="kpi green"><div class="label">Starlink 用戶</div><div class="value">12.0M</div><div class="muted">6.0M→12.0M YoY</div></div>
-    <div class="kpi green"><div class="label">AI 收入</div><div class="value">US$2.56B</div><div class="muted">QoQ +213%</div></div>
-    <div class="kpi red"><div class="label">AI Capex</div><div class="value">US$15.8B</div><div class="muted">H1 近似 FCF −US$25B</div></div>
-  </div>
+<div class="wrap">
+  <div class="notice">🔄 本頁 2026-08-30 重做，格式對齊 HIMS／NVDA。核心 KPI 數字沿用 2026-08-21 已驗證版本（冇新一季）。</div>
+
+  <section class="hero-main">
+    <h1>SPCX Framework 2 · 執行深挖</h1>
+    <p>對住 F1（WATCH 75/130）· Connectivity／Starlink thesis 通過；AI 部分通過；現金流／價格未通過</p>
+    <div class="badges"><span class="badge">續抱不加倉</span><span class="badge">優先處理 9/18 short put</span></div>
+  </section>
 
   <div class="sections">
     <section class="panel">
-      <h2>深度分析結論</h2>
-      <div class="callout watch verdict">
-        <p>Connectivity 已經係自我造血引擎：Q2 收入 US$4.29B、營業利潤 US$1.66B（分部利潤率 ~38.6%）、Starlink 用戶 12.0M，唔再係「未來 Starlink」而係已規模化訂閱＋政府／企業平台。Enterprise & gov Q2 US$1.81B 抵消 ARPU 由 US$85 降至 US$66 嘅壓力。</p>
-        <p>AI 增長 thesis 部分通過：收入 QoQ 由 US$0.82B 暴增至 US$2.56B，Adj. EBITDA 改善至合計 US$3.54B，Cloud Agreements 貢獻增量基礎設施收入約 US$1.6B。但需連續季驗證是否可重複，而非集中確認收入。</p>
-        <p>現金流／價格 thesis 未通過：合計 capex（尤其 AI US$15.8B／季）令 H1 近似 FCF ~−US$25B（OCF US$3.5B vs PPE US$28.5B）。現價 US$135.86、市值 ~US$1.79T 對已入帳收入倍數仍未通過嚴格買入驗證。</p>
-        <p>行動：有現股 → 續抱、唔好加倉；優先處理 9/18 short put assignment 風險（195／170 deep ITM）。現價唔追，把精力放喺期權結構管理而唔係加碼。</p>
+      <h2>回答 F1 兩條必挖問題</h2>
+      <div class="qa">
+        <h3>Connectivity 單位經濟</h3>
+        <p class="muted">ARPU 由 2025-Q2 嘅 US$85 降至 US$66（2026-Q1／Q2），但用戶倍增同企業／政府收入爆發（Q2 Enterprise & gov US$1.81B）抵消；分部營業利潤率約 38.6%。</p>
+      </div>
+      <div class="qa">
+        <h3>AI 收入質量</h3>
+        <p class="muted">Q2 AI solutions & infrastructure US$2.19B（Q1 僅 US$0.48B）；官方指 Cloud Agreements 貢獻增量基礎設施收入約 US$1.6B。需連續季驗證是否可重複，而非集中確認收入。</p>
       </div>
     </section>
 
     <section class="panel">
-      <h2>承接 Framework 1 必挖問題</h2>
-      <div class="grid-2">
-        <div class="box pass">
-          <h3>Connectivity 單位經濟</h3>
-          <p>ARPU US$85→US$66，但用戶倍增同企業／政府收入爆發（Q2 E&G US$1.81B）抵消；分部營業利潤率 ~38.6%，已過「純投入」階段。</p>
-        </div>
-        <div class="box warn">
-          <h3>AI 收入質量</h3>
-          <p>Q2 AI solutions US$2.19B（Q1 僅 US$0.48B）；Cloud Agreements ~US$1.6B 增量。需連續兩季驗證可重複性，警惕一次性協議確認。</p>
-        </div>
-      </div>
+      <h2>5 季關鍵 KPI</h2>
+      <table>
+        <thead><tr><th>KPI</th><th>25Q2</th><th>26Q1</th><th>26Q2</th><th>趨勢</th></tr></thead>
+        <tbody>
+          <tr><td>總營收</td><td>4,071</td><td>4,694</td><td>7,814</td><td>改善</td></tr>
+          <tr><td>Space 收入</td><td>746</td><td>619</td><td>962</td><td>改善</td></tr>
+          <tr><td>Connectivity 收入</td><td>2,588</td><td>3,257</td><td>4,291</td><td>改善</td></tr>
+          <tr><td>AI 收入</td><td>737</td><td>818</td><td>2,561</td><td>改善</td></tr>
+          <tr><td>Starlink 用戶（M）</td><td>6.0</td><td>10.3</td><td>12.0</td><td>改善</td></tr>
+          <tr><td>Starlink ARPU（US$）</td><td>85</td><td>66</td><td>66</td><td>惡化後企穩</td></tr>
+          <tr><td class="starred">Connectivity 營業利潤</td><td>923</td><td>1,188</td><td>1,656</td><td>改善</td></tr>
+          <tr><td>AI 營業虧損</td><td>(1,524)</td><td>(2,469)</td><td>(1,257)</td><td>改善（仍虧）</td></tr>
+          <tr><td>合計 Adj. EBITDA</td><td>1,214</td><td>1,127</td><td>3,538</td><td>改善</td></tr>
+          <tr><td>淨虧損</td><td>(1,008)</td><td>n/a</td><td>(541)</td><td>改善</td></tr>
+          <tr><td class="starred">Space／Conn／AI Capex</td><td>946/1,130/749</td><td>1,052/1,332/7,723</td><td>1,174/1,367/15,828</td><td>AI capex 惡化</td></tr>
+        </tbody>
+      </table>
     </section>
 
     <section class="panel">
-      <h2>關鍵 KPI 三季儀表板（US$ million）</h2>
-      <div style="overflow-x:auto">
-        <table>
-          <thead><tr><th>維度</th><th>KPI</th><th class="num">25Q2</th><th class="num">26Q1</th><th class="num">26Q2</th><th>趨勢</th></tr></thead>
-          <tbody>
-            <tr class="up"><td>成長</td><td>總營收</td><td class="num">4,071</td><td class="num">4,694</td><td class="num">7,814</td><td>改善</td></tr>
-            <tr class="up"><td>成長</td><td>Connectivity</td><td class="num">2,588</td><td class="num">3,257</td><td class="num">4,291</td><td>改善</td></tr>
-            <tr class="up"><td>成長</td><td>AI 收入</td><td class="num">737</td><td class="num">818</td><td class="num">2,561</td><td>改善</td></tr>
-            <tr class="up"><td>成長</td><td>Starlink 用戶（M）</td><td class="num">6.0</td><td class="num">10.3</td><td class="num">12.0</td><td>改善</td></tr>
-            <tr class="mix"><td>單位經濟</td><td>ARPU（US$/月）</td><td class="num">85</td><td class="num">66</td><td class="num">66</td><td>惡化後企穩</td></tr>
-            <tr class="up"><td>盈利</td><td>Connectivity 營業利潤</td><td class="num">923</td><td class="num">1,188</td><td class="num">1,656</td><td>改善</td></tr>
-            <tr class="mix"><td>盈利</td><td>AI 營業虧損</td><td class="num">(1,524)</td><td class="num">(2,469)</td><td class="num">(1,257)</td><td>改善（仍虧）</td></tr>
-            <tr class="up"><td>盈利</td><td>Adj. EBITDA</td><td class="num">1,214</td><td class="num">1,127</td><td class="num">3,538</td><td>改善</td></tr>
-            <tr class="down"><td>現金流</td><td>AI Capex</td><td class="num">749</td><td class="num">7,723</td><td class="num">15,828</td><td>惡化</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <h3 style="margin-top:16px">Connectivity 收入三季趨勢（US$ B）</h3>
-      <div class="chart" id="connChart"></div>
-    </section>
-
-    <section class="panel">
-      <h2>五大維度動態判斷</h2>
-      <div class="grid-2">
-        <div class="box pass"><div style="display:flex;justify-content:space-between"><h3>1. 敘事</h3><span class="pill pass">質變確認</span></div><p>唔再係「未來 Starlink」，而係已規模化訂閱＋政府／企業；AI 係新曲線。</p></div>
-        <div class="box pass"><div style="display:flex;justify-content:space-between"><h3>2. 單位經濟</h3><span class="pill pass">Connectivity 強</span></div><p>分部利潤率 ~38.6%；AI 毛利結構改善中但仍靠巨額折舊前 Adj. EBITDA 敘事。</p></div>
-        <div class="box warn"><div style="display:flex;justify-content:space-between"><h3>3. 護城河</h3><span class="pill warn">部分確認</span></div><p>發射＋星座確認；AI 護城河取決於產能交付同 Cursor 整合。</p></div>
-        <div class="box pass"><div style="display:flex;justify-content:space-between"><h3>4. 營運槓桿</h3><span class="pill pass">改善</span></div><p>合計由大額營業虧損收窄至 Q2 僅 US$143m 營業虧損。</p></div>
-        <div class="box fail" style="grid-column:1/-1"><div style="display:flex;justify-content:space-between"><h3>5. 真實現金流</h3><span class="pill fail">未通過</span></div><p>H1 OCF US$3.5B vs PPE US$28.5B；AI capex US$15.8B／季吞噬現金。刺穿「自我融資」敘事嘅核心反證。</p></div>
-      </div>
+      <h2>5 大維度</h2>
+      <p class="muted">1. <strong>敘事：</strong>質變確認——已規模化訂閱＋政府／企業，AI 係新曲線。 2. <strong>單位經濟：</strong>Connectivity 強；AI 毛利結構改善中但仍靠巨額折舊前 Adj. EBITDA 敘事。 3. <strong>護城河：</strong>發射＋星座確認；AI 護城河部分確認。 4. <strong>營運槓桿：</strong>合計營業虧損收窄至 Q2 僅 US$143m——改善。 5. <strong>現金流：</strong>H1 OCF US$3.5B vs PPE US$28.5B——<strong>未通過</strong>。</p>
     </section>
 
     <section class="panel">
       <h2>Bull / Bear / 行動</h2>
-      <div class="grid-3">
-        <div class="box pass"><h3>Bull Case</h3><p>Starlink 繼續線性加用戶＋政府多年約；AI 合約轉穩定租金；Starship 降成本拉高發射與星座經濟。</p></div>
-        <div class="box fail"><h3>Bear Case</h3><p>AI capex 失控、關聯方／收購稀釋、ARPU 再跌、估值從 70×+ 壓縮。</p></div>
-        <div class="box warn"><h3>行動</h3><p><strong>續抱、唔好加倉。</strong>現價唔追；先處理 deep ITM short puts（195／170，9/18）。</p></div>
-      </div>
-      <div class="callout info" style="margin-top:14px">
-        <strong>確認：</strong>用戶續增且 ARPU 企穩；Connectivity 利潤率維持；AI 收入連續兩季無大幅倒退；FCF 缺口收窄。<br>
-        <strong>失效：</strong>Starlink 淨增失速＋ARPU 再跌；AI 收入回落顯示 Q2 不可重複；再融資依賴上升。
-      </div>
+      <p class="muted"><strong>Bull：</strong>Starlink 繼續線性加用戶＋政府多年約；AI 合約轉穩定租金；Starship 降成本。<strong>Bear：</strong>AI capex 失控、關聯方稀釋、估值壓縮；<strong>本輪新增：</strong>未來 3 個月密集鎖定期解禁帶嚟持續供給壓力。<strong>行動：</strong>現價唔追；續抱現股；唔好加倉；先處理 deep ITM short puts。</p>
+    </section>
+
+    <section class="panel">
+      <h2>F2 淨結論</h2>
+      <div class="verdict">Connectivity／Starlink thesis 通過；AI 增長 thesis 部分通過；現金流／價格 thesis 未通過。</div>
     </section>
   </div>
-  <p class="footer">來源：SEC 8-K EX-99.1 + Form 10-Q（2026-08-04）。現價 yfinance delayed（2026-08-21）。此分析僅供研究參考，不構成投資建議。</p>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
 </div>
-<script>
-  const conn = [{label:"25Q2",value:2.588},{label:"26Q1",value:3.257},{label:"26Q2",value:4.291}];
-  const max = Math.max(...conn.map(d=>d.value));
-  document.getElementById("connChart").innerHTML = conn.map(d=>{
-    const h = Math.round((d.value/max)*130);
-    return `<div class="bar-wrap"><div class="bar-val">${d.value.toFixed(2)}B</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${d.label}</div></div>`;
-  }).join("");
-</script>
 </body>
 </html>
