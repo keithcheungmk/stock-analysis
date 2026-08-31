@@ -2,7 +2,7 @@
 # last_updated: YYYY-MM-DD
 
 meta:
-  last_updated: "2026-08-28"
+  last_updated: "2026-08-31"
   next_earnings_estimate: "2026-10-21"  # yfinance；以 Tesla IR 為準
 
 explosion_thresholds:

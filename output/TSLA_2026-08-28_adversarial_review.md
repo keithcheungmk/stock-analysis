@@ -1,6 +1,6 @@
 # TSLA Adversarial Review Memo
 
-- 覆核時間：2026-08-28（Asia/Hong_Kong）
+- 覆核時間：2026-08-31（Asia/Hong_Kong）
 - Ticker：TSLA／Tesla, Inc.；IR `https://ir.tesla.com/`
 - 報告 as-of：財務 2026-Q2；催化劑刷新至 2026-09-03 發佈會
 
@@ -50,6 +50,6 @@ Electrek／We Talk Tesla／Motor1 交叉：邀請場、21+、RSVP 8/30、直播�
 
 ## Verdict impact
 
-**維持。** 微調催化劑日期同 Street／SOTP 分軌。唔重評 F1，唔改 F3 Base／Bull／Bear。行動維持僅觀察／唔好加倉。現價 vs Base **+120%**。
+**維持。** 微調催化劑日期同 Street／SOTP 分軌；輕量 refresh 現價 US$365.83（8/31 delayed）、vs Base **+133%**（Base US$157 唔改）。行動維持僅觀察／唔好加倉。
 
 *此分析僅供研究參考，不構成投資建議。*
