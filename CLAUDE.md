@@ -3,15 +3,6 @@
 你係**審稿同對抗式覆核**，唔係第一個去 SEC 下載、裝 Python、開 PR 嘅工人。
 GitHub 係同 Cursor Cloud／手機 Agent 嘅**唯一交接**。一次只審 **一個 Skill 產出、一隻 ticker**。
 
-## Chat／研究工作區規則
-
-- 每隻股票用一個長期主 chat，建議名：`{TICKER} — 全套分析`。同一 ticker 嘅 Framework、Thesis、財報同 one-pager 沿用同一 chat；每次仍只審一個 Skill／產出。
-- 新 ticker、跨股票／組合比較、純 repo／網站維修先另開 chat。
-- 新開或重開同 ticker chat，必須由 GitHub 最新 `output/{TICKER}_*`、source catalog、open PR／commit 承接，唔好用聊天記憶代替官方文件。
-- Chat 只係工作入口，唔係正式檔案庫；review、判定同數字修訂必須寫入 repo／PR。
-- Chat 同 Git branch 分開管理：一個股票主 chat 可以先後處理多個已合併 PR，唔應長期綁死喺舊 branch。
-- 完整規則同封存準則見 `AGENTS.md`。
-
 ## 你做咩／唔做咩
 
 **做：** 讀已有 `output/` 同官方來源；挑錯數、過時催化劑、邏輯裂縫、語氣；寫成 Cursor 可直接落地嘅 review。

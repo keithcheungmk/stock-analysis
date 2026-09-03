@@ -90,17 +90,6 @@ GitHub 係唯一交接。一次一個 Skill、一隻 ticker。
 
 電話可直接貼：`{TICKER} 做 Framework 1，官方優先，繁中，寫入 output/ 並開 PR`。F1 之後：`{TICKER} 做 Framework 2，只深挖 F1 列出嘅兩條問題`。
 
-### 建議 chat 結構
-
-- 一個 repo；每隻股票一個長期主 chat，命名 `{TICKER} — 全套分析`
-- 同一 ticker 嘅 Framework 1 → 2 → 3、Thesis、財報等沿用同一 chat，但每次只跑一個 Skill
-- 新 ticker、跨股票／組合比較、純網站／repo 維修先另開 chat
-- Chat 唔係正式記憶庫；以已 commit 嘅 `output/`、source catalog 同 PR 為準
-- 一個股票 chat 可以先後用多條短期 branch／PR；唔好將 chat 同永久 branch 綁死
-- 一次性 README／repo 導覽或已完成維修 chat 可以封存
-
-詳細 agent 規則見 `AGENTS.md`；Claude Cowork 見 `CLAUDE.md`。
-
 ## 在 Cursor 使用
 
 專案 Skill 位於 `.cursor/skills/analyze-stock/SKILL.md`，專案規則位於 `.cursor/rules/stock-analysis.mdc`。可在 Cursor Agent 對話輸入：
