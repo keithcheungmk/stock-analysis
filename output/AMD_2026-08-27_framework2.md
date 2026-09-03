@@ -8,7 +8,7 @@
 
 ## 一句結論
 
-Data Center 已由「增長故事」變成「已入帳翻倍引擎」（Q2 US$6.7B，+107% YoY，佔總營收約 58%），EPYC 同 Instinct 需求官方確認強勁。但 Helios 仍係「本季稍後出貨」，Q2 幾乎未入帳；Q2 FCF margin **14%** 較 Q1 **25%** 明顯回落。現價 US$480.93 高於 Skill 3 Base US$390 → 增長質量支持續抱 thesis，但唔支持加倉。
+Data Center 已由「增長故事」變成「已入帳翻倍引擎」（Q2 US$6.7B，+107% YoY，佔總營收約 58%），EPYC 同 Instinct 需求官方確認強勁。但 Helios 仍係「本季稍後出貨」，Q2 幾乎未入帳；Q2 FCF margin **14%** 較 Q1 **25%** 明顯回落。現價 US$458.11 高於 Skill 3 Base US$390 → 增長質量支持續抱 thesis，但唔支持加倉。
 
 ## 承接 Framework 1（PASS 95／130）
 

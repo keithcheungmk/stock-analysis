@@ -4,7 +4,7 @@
 - **總分：** **95 / 130**
 - **數據截至：** 2026-08-27
 - **最新官方季度：** 2026-Q2（期終 2026-06-27，USD，US GAAP／Non-GAAP；SEC 8-K EX-99.1＋Form 10-Q，2026-08-04，`validation_status: verified`）
-- **現價：** US$480.93（yfinance delayed，2026-08-27 close，America/New_York）；市值約 US$778B（yfinance）
+- **現價：** US$458.11（yfinance delayed，2026-09-03 close，America/New_York）；市值約 US$742B（按約 1.62B 股粗算）
 - **持倉：** **未確認**（用戶未提供股數／成本）
 - **核心結論：** Data Center 翻倍（US$6.7B，+107% YoY）驗證 AI＋伺服器主線；三條紅線未觸發。但現價對 Skill 3 Base US$390 仍有溢價，且 Q2 FCF margin 回落至 14%（Q1 25%），行動上**僅觀察／唔好加倉**（待確認持倉）。
 
@@ -37,7 +37,7 @@ Q2 總營收 US$11.5B，YoY **+50%**（對比 2025-Q2 US$7.7B 級）。淨利潤
 
 - PEG（yfinance）約 **1.03** → 低於 2.5 機械門檻
 - Trailing P/E 極高（~121×），但配合 50%+ 營收增速同 Data Center 翻倍
-- 現價 US$480.93 對 F3 Base US$390 約 **+23% 溢價** → 列入估值風險，唔構成紅線 FAIL
+- 現價 US$458.11 對 F3 Base US$390 約 **+17% 溢價** → 列入估值風險，唔構成紅線 FAIL
 
 ## 13 維度評分
 
@@ -62,7 +62,7 @@ Q2 總營收 US$11.5B，YoY **+50%**（對比 2025-Q2 US$7.7B 級）。淨利潤
 ## Adversarial check
 
 - **最強支持：** Data Center US$6.7B（+107%）；總營收 US$11.5B；Q3 指引 US$13B ±0.3B（+41% YoY）
-- **最強反證：** 現價高於 F3 Base ~23%；Q2 FCF margin 13.5–14% vs Q1 25%；Helios Q2 幾乎未入帳
+- **最強反證：** 現價高於 F3 Base ~17%；Q2 FCF margin 13.5–14% vs Q1 25%；Helios Q2 幾乎未入帳
 - **最可能令結論失效嘅假設：** Instinct 出貨不及 NVDA 節奏、Helios 延遲、毛利率被競爭壓縮
 
 ## 下一步

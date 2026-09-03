@@ -1,8 +1,8 @@
 # Skill 3：AMD Framework 3 — 估值模型與倉位
 
 - **數據截至：** 2026-08-27
-- **現價：** US$480.93（yfinance delayed／previous close）
-- **市值：** 約 US$778B（yfinance）
+- **現價：** US$458.11（yfinance delayed／2026-09-03 close）
+- **市值：** 約 US$742B（按 1.62B 攤薄股粗算）
 - **承接：** F1 PASS 95／130；F2 Data Center 通過、Helios／FCF 部分通過、價格未通過
 - **持倉：** **未確認**
 
@@ -24,21 +24,21 @@ AMD 係「EPYC 伺服器 CPU 份額提升＋Instinct AI 加速器第二供應商
 | Embedded | US$4B | 5× | US$20B |
 | **合計企業粗值** | | | **約 US$416B** |
 
-加淨現金／調整後約 **US$420–450B** 股本價值；現市值 ~US$778B ≈ Base 嘅 **~1.7–1.9×**。
+加淨現金／調整後約 **US$420–450B** 股本價值；現市值 ~US$742B ≈ Base 嘅 **~1.6–1.8×**。
 
 ## Bull / Base / Bear（每股情景）
 
 假設攤薄後約 **1.62B** 股（與 yfinance 市值／股價隱含一致；以 10-Q 實際股數為準）。
 
-| 情景 | 核心業務前提 | 隱含市值 | 參考每股 | vs US$480.93 |
+| 情景 | 核心業務前提 | 隱含市值 | 參考每股 | vs US$458.11 |
 |---|---|---:|---:|---|
-| **Bear** | Helios 延遲；DC 增速放緩；倍數壓縮至「可交易高增長」 | US$390B | ~US$240 | −50% |
-| **Base** | DC 維持強增長；Helios 漸進 ramp；FCF margin 企穩 15–18% | US$630B | ~US$390 | −19% |
-| **Bull** | Instinct 份額快速提升；EPYC 繼續搶 Intel；FCF 改善 | US$1.0T | ~US$620 | +29% |
+| **Bear** | Helios 延遲；DC 增速放緩；倍數壓縮至「可交易高增長」 | US$390B | ~US$240 | −48% |
+| **Base** | DC 維持強增長；Helios 漸進 ramp；FCF margin 企穩 15–18% | US$630B | ~US$390 | −15% |
+| **Bull** | Instinct 份額快速提升；EPYC 繼續搶 Intel；FCF 改善 | US$1.0T | ~US$620 | +35% |
 
 ## 現價已經反映什麼
 
-US$480.93／~US$778B 已經反映：**Data Center 翻倍已發生＋AI 第二供應商敘事＋Lisa Su 執行溢價**，而唔係「純 CPU 周期股」定價。對 Base 情景仍有 **約 +23% 溢價** → **現價偏貴（research view）**。
+US$458.11／~US$742B 已經反映：**Data Center 翻倍已發生＋AI 第二供應商敘事＋Lisa Su 執行溢價**，而唔係「純 CPU 周期股」定價。對 Base 情景仍有 **約 +17% 溢價** → **現價偏貴（research view）**。
 
 ## 行動區間（研究情景）
 

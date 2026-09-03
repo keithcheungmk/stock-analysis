@@ -4,7 +4,7 @@
 - **模式：** B · Earnings Review（財報已出）
 - **事件：** Q2 2026 業績（2026-08-04 IR／8-K／10-Q）；官方逐字稿未入庫
 - **承接：** F1 PASS 95／130；F2 DC 通過、Helios／FCF 部分通過；Thesis Mixed／僅觀察
-- **股價（延遲）：** US$480.93（2026-08-27）；52w range US$149–585（yfinance）
+- **股價（延遲）：** US$458.11（2026-09-03）；52w range US$149–585（yfinance）
 - **來源優先：** 官方 8-K EX-99.1／10-Q
 
 ## Earnings Review 結論
@@ -39,7 +39,7 @@ AI 基建 capex 週期下，市場交易「AMD 能否做 NVDA 之外嘅第二供
 
 ## 對估值同行動
 
-- Skill 3：維持「現價貴過 Base ~23%」；唔因單季 DC beat 上修加倉區去追價  
+- Skill 3：維持「現價貴過 Base ~17%」；唔因單季 DC beat 上修加倉區去追價
 - 行動：**僅觀察／唔好加倉**（持倉未確認）  
 - 下季要見到：Helios 量化、FCF margin 企穩、Q3 貼 US$13B 指引
 
