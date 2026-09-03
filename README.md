@@ -146,6 +146,11 @@ Mac 係完整檔案庫（唔係淨係睇網頁）：
 3. 第一次設定 raw 連結：`./scripts/link_onedrive_raw.sh`
 4. 私人經紀檔只留本機，永遠唔上 GitHub
 
+連結工具如發現 `data/raw` 只包含 Git 可復原嘅 catalog manifests，會先將
+呢批路徑標記為本機 `skip-worktree`，再連去 OneDrive；如發現任何非 Git
+文件就會停止，避免覆蓋本機研究資料。OneDrive manifests 係 Mac 分析時嘅
+本機真相，Git catalog 則保留畀 Cloud Agent 重建來源。
+
 手機／MacBook Air **睇報告**請用瀏覽器開：  
 https://keithcheungmk.github.io/stock-analysis/
 

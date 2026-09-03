@@ -93,6 +93,68 @@ EXISTING_MAPPINGS = {
 }
 
 
+# Files manually saved in the OneDrive inbox. Kaleidoscope PDFs are convenient
+# rendered copies of SEC filings, so keep them as third-party copies rather than
+# incorrectly promoting them above the canonical SEC HTML already in each period.
+ARCHIVE_MAPPINGS = {
+    "10q iren 08-28-2025.pdf": {
+        "ticker": "IREN", "period": "FY2025-Q4", "destination": "third-party-filing-copy-10-k-2025-08-28.pdf",
+        "document_type": "filing_copy", "source_tier": "third_party", "source_authority": "Kaleidoscope (kscope.io)",
+        "filing_form": "10-K", "filing_date": "2025-08-28", "source_url": None,
+    },
+    "10q iren 11-06-2025.pdf": {
+        "ticker": "IREN", "period": "FY2026-Q1", "destination": "third-party-filing-copy-10-q-2025-11-06.pdf",
+        "document_type": "filing_copy", "source_tier": "third_party", "source_authority": "Kaleidoscope (kscope.io)",
+        "filing_form": "10-Q", "filing_date": "2025-11-06", "source_url": None,
+    },
+    "10q iren 02-05-2026.pdf": {
+        "ticker": "IREN", "period": "FY2026-Q2", "destination": "third-party-filing-copy-10-q-2026-02-05.pdf",
+        "document_type": "filing_copy", "source_tier": "third_party", "source_authority": "Kaleidoscope (kscope.io)",
+        "filing_form": "10-Q", "filing_date": "2026-02-05", "source_url": None,
+    },
+    "10q iren 05-08-2026.pdf": {
+        "ticker": "IREN", "period": "FY2026-Q3", "destination": "third-party-filing-copy-10-q-2026-05-08.pdf",
+        "document_type": "filing_copy", "source_tier": "third_party", "source_authority": "Kaleidoscope (kscope.io)",
+        "filing_form": "10-Q", "filing_date": "2026-05-08", "source_url": None,
+    },
+    "10q rklb 05-08-2025.pdf": {
+        "ticker": "RKLB", "period": "2025-Q1", "destination": "third-party-filing-copy-10-q-2025-05-08.pdf",
+        "document_type": "filing_copy", "source_tier": "third_party", "source_authority": "Kaleidoscope (kscope.io)",
+        "filing_form": "10-Q", "filing_date": "2025-05-08", "source_url": None,
+    },
+    "10Q rklb 08-07-2025.pdf": {
+        "ticker": "RKLB", "period": "2025-Q2", "destination": "third-party-filing-copy-10-q-2025-08-07.pdf",
+        "document_type": "filing_copy", "source_tier": "third_party", "source_authority": "Kaleidoscope (kscope.io)",
+        "filing_form": "10-Q", "filing_date": "2025-08-07", "source_url": None,
+    },
+    "form 10Q rklb 11-10-2025.pdf": {
+        "ticker": "RKLB", "period": "2025-Q3", "destination": "third-party-filing-copy-10-q-2025-11-10.pdf",
+        "document_type": "filing_copy", "source_tier": "third_party", "source_authority": "Kaleidoscope (kscope.io)",
+        "filing_form": "10-Q", "filing_date": "2025-11-10", "source_url": None,
+    },
+    "form 10K rklb 26-02-2026.pdf": {
+        "ticker": "RKLB", "period": "2025-Q4", "destination": "third-party-filing-copy-10-k-2026-02-26.pdf",
+        "document_type": "filing_copy", "source_tier": "third_party", "source_authority": "Kaleidoscope (kscope.io)",
+        "filing_form": "10-K", "filing_date": "2026-02-26", "source_url": None,
+    },
+    "rklb_10Q filled 5-07-2026.pdf": {
+        "ticker": "RKLB", "period": "2026-Q1", "destination": "third-party-filing-copy-10-q-2026-05-07.pdf",
+        "document_type": "filing_copy", "source_tier": "third_party", "source_authority": "Kaleidoscope (kscope.io)",
+        "filing_form": "10-Q", "filing_date": "2026-05-07", "source_url": None,
+    },
+    "Rocket Lab Announces First Quarter 2026 Financial Results_ Surpasses All Guidance Metrics Including Revenue, Margin, and Adjusted EBITDA; Posts Record $200M Quarterly Revenue and over $2.2B Backlog; Guides Another Record Revenue.pdf": {
+        "ticker": "RKLB", "period": "2026-Q1", "destination": "ir-q1-2026-earnings-release.pdf",
+        "document_type": "earnings_release", "source_tier": "official", "source_authority": "Official company IR",
+        "filing_form": None, "filing_date": "2026-05-07", "source_url": "https://investors.rocketlabcorp.com/node/12416/pdf",
+    },
+    "Rocket Lab Iridium Acquisition Investor Presentation PDF.pdf": {
+        "ticker": "RKLB", "period": "_events", "destination": "ir-iridium-acquisition-investor-presentation.pdf",
+        "document_type": "investor_presentation", "source_tier": "official", "source_authority": "Official company IR",
+        "filing_form": None, "filing_date": "2026-06-29", "source_url": "https://investors.rocketlabcorp.com/static-files/70a090f6-58db-4893-bfc0-c31396b152b1",
+    },
+}
+
+
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -189,6 +251,61 @@ def import_file(
         encoding="utf-8",
     )
     return status
+
+
+def archive_inbox_file(source: Path, raw_root: Path, mapping: dict[str, Any]) -> str:
+    if not is_pdf(source):
+        raise ValueError(f"{source.name}: not a valid PDF header")
+    digest = sha256_file(source)
+    target_directory = raw_root / mapping["ticker"] / mapping["period"]
+    manifest_path = target_directory / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    timestamp = datetime.now(timezone.utc).isoformat()
+
+    existing = next(
+        (entry for entry in manifest["files"] if entry.get("sha256") == digest),
+        None,
+    )
+    if existing:
+        source.unlink()
+        return "matched_existing"
+
+    destination = target_directory / mapping["destination"]
+    if destination.exists() and sha256_file(destination) != digest:
+        destination = destination.with_name(
+            f"{destination.stem}--{digest[:8]}{destination.suffix}"
+        )
+    os.replace(source, destination)
+    entry = {
+        "path": destination.name,
+        "type": mapping["document_type"],
+        "source_tier": mapping["source_tier"],
+        "source_url": mapping["source_url"],
+        "source_authority": mapping["source_authority"],
+        "source_original_path": f"_manual-inbox/{source.name}",
+        "sha256": digest,
+        "size_bytes": destination.stat().st_size,
+        "mime_type": "application/pdf",
+        "filing_date": mapping["filing_date"],
+        "imported_at": timestamp,
+        "ingestion_method": "manual_inbox_reviewed",
+        "validation_status": "verified",
+    }
+    for key in ("period_end", "currency", "accounting_basis"):
+        if manifest.get(key) is not None:
+            entry[key] = manifest[key]
+    if mapping["filing_form"]:
+        entry["filing_form"] = mapping["filing_form"]
+    manifest["files"].append(entry)
+    manifest["files"] = sorted(
+        manifest["files"], key=lambda item: item["path"].casefold()
+    )
+    manifest["retrieved_at"] = timestamp
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return "imported"
 
 
 def promote_existing(
@@ -308,6 +425,7 @@ def main() -> int:
     counts = {
         "imported": 0,
         "matched_existing": 0,
+        "archived": 0,
         "promoted_existing": 0,
         "unmapped": 0,
     }
@@ -316,6 +434,15 @@ def main() -> int:
             counts["promoted_existing"] += 1
             print(f"promoted_existing: {relative_path}")
     for source in sorted(args.inbox.glob("*.pdf")):
+        archive_mapping = ARCHIVE_MAPPINGS.get(source.name)
+        if archive_mapping:
+            status = archive_inbox_file(source, args.root, archive_mapping)
+            counts["archived" if status == "imported" else status] += 1
+            print(
+                f"{status}: {source.name} -> "
+                f"{archive_mapping['ticker']}/{archive_mapping['period']}"
+            )
+            continue
         mapping = MAPPINGS.get(source.name)
         if not mapping:
             counts["unmapped"] += 1

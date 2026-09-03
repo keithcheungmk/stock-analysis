@@ -57,9 +57,37 @@ if [[ -L "$RAW_LINK" ]]; then
   echo "Replacing existing symlink ($current)"
   rm "$RAW_LINK"
 elif [[ -d "$RAW_LINK" ]]; then
-  echo "ERROR: $RAW_LINK is a real directory (not a symlink)."
-  echo "Move or rename it first, then re-run. Refusing to overwrite local raw data."
-  exit 1
+  # Newer clones can contain Git-tracked cloud catalog manifests under data/raw.
+  # They are not the Mac's canonical raw library and can legitimately differ
+  # from the newer OneDrive manifests. Only replace the directory when every
+  # file can be recovered from Git, then hide those tracked paths locally.
+  while IFS= read -r -d '' source_file; do
+    repo_relative="${source_file#"$REPO_ROOT"/}"
+    if ! git -C "$REPO_ROOT" ls-files --error-unmatch -- "$repo_relative" >/dev/null 2>&1; then
+      echo "ERROR: refusing to replace data/raw because it contains a non-Git file:"
+      echo "  $source_file"
+      exit 1
+    fi
+  done < <(find "$RAW_LINK" -type f -print0)
+
+  backup_root="$(mktemp -d "${TMPDIR:-/tmp}/stock-analysis-raw.XXXXXX")"
+  backup="$backup_root/repo-raw"
+  mv "$RAW_LINK" "$backup"
+  if ! ln -s "$DEST" "$RAW_LINK"; then
+    mv "$backup" "$RAW_LINK"
+    exit 1
+  fi
+
+  while IFS= read -r -d '' source_file; do
+    repo_relative="data/raw/${source_file#"$backup"/}"
+    git -C "$REPO_ROOT" update-index --skip-worktree -- "$repo_relative"
+  done < <(find "$backup" -type f -print0)
+
+  rm -rf "$backup_root"
+  echo "Kept Git catalog manifests in Git and marked them skip-worktree locally."
+  echo "Linked: $RAW_LINK -> $DEST"
+  test -f "$RAW_LINK/TSLA/2026-Q2/manifest.json" && echo "OK: sample manifest readable"
+  exit 0
 elif [[ -e "$RAW_LINK" ]]; then
   echo "ERROR: unexpected path at $RAW_LINK"
   exit 1
