@@ -3,6 +3,17 @@
 GitHub 係**唯一交接面**。一次任務只跑 **一個 Skill、一隻 ticker**。
 Claude Cowork 負責審稿；唔好同 Cowork 平行改同一批未 push 嘅檔。
 
+## Chat／研究工作區規則
+
+- **一個 repo；每隻股票一個長期主 chat。** 同一 ticker 嘅 Framework 1 → 2 → 3、同業、催化劑、Thesis、期權、財報同 one-pager，盡量沿用同一個 chat，唔好每個 Skill 開新 chat。
+- 「一次一個 Skill」仍然生效：同一主 chat 係延續研究脈絡，**唔代表一次過跑晒全套**。
+- 建議 chat 名：`{TICKER} — 全套分析`。例如 `NVDA — 全套分析`、`SPCX — 全套分析`。
+- 只有以下工作另開 chat：新 ticker；跨股票／組合比較；純 repo／網站／CI 維修；舊 chat 已過長而要重開。
+- 重開同 ticker chat 時，先讀 GitHub 上最新 `output/{TICKER}_*`、source catalog、open PR／最新 commit，再繼續；**唔靠舊 chat 記憶重估數字**。
+- 跨股票 chat 唔應該成為任何單一 ticker 嘅主研究紀錄；結果要分別回寫適當 `output/` 或獨立 portfolio／peer report。
+- 一個 chat 唔等於一條永久 branch。每個邏輯改動仍用獨立 branch／PR；合併後，下次任務先同步最新 `main`，避免長期 branch 漂移。
+- 可封存一次性 repo 導覽、README 摘要、已完成網站修復等 chat；**唔刪研究記憶，因為正式記錄必須落 GitHub**。
+
 ## 你係邊個
 
 你係執行者：下載官方文件、跑 CLI、按 Skill 寫研究底稿、發佈互動頁、commit、push、開／更新 PR。
