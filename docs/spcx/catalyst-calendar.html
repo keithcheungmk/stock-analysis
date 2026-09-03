@@ -16,17 +16,47 @@
   .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
   .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
   .notice{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#7f1d1d}
-  .hero-main{background:linear-gradient(135deg,#3730a3,#4338ca 58%,#312e81);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
-  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .notice.ok{background:var(--info-soft);border-color:#93c5fd;color:#1e3a8a}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.2rem;font-weight:800;line-height:1.15;color:var(--watch);margin:8px 0 0}
+  .score-den{font-size:.95rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.2rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
   .sections{display:grid;gap:16px;margin-top:18px}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
   h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .muted{color:var(--muted);font-size:.9rem}
   .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
-  table{width:100%;border-collapse:collapse;font-size:.85rem}
-  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
   th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  tr.next{background:var(--fail-soft)}
   .timeline{display:grid;gap:10px}
   .event{display:grid;grid-template-columns:170px 1fr;gap:14px;border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
   @media(max-width:700px){.event{grid-template-columns:1fr}}
@@ -38,61 +68,125 @@
   .tag.high{background:var(--fail-soft);color:var(--fail)}
   .tag.mid{background:var(--watch-soft);color:var(--watch)}
   .tag.low{background:#f1f5f9;color:#64748b}
-  .event h3{margin:0 0 4px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.warn{border-left:5px solid var(--watch)}.box.fail{border-left:5px solid var(--fail)}.box.ok{border-left:5px solid var(--pass)}
+  .cite{font-size:.78rem;color:var(--muted);margin-top:10px}
 </style>
 </head>
 <body>
 <a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
 
 <div class="wrap">
-  <div class="notice">⚠️ <strong>本輪最大更新：</strong>鎖定期解禁時間表由 2026-08-21 版本嘅「P3 未證實雜訊」升級為「P1 具體事件」——已查到有確實日期同股數嘅分階段解禁時間表。</div>
+  <div class="notice">⚠️ <strong>過時項（vs 2026-08-30 Pages）：</strong>倒數「10 日後／19 日後」已過時，而家係 <strong>6 日後／15 日後</strong>。日數基準係 424B4「招股書日 2026-06-11」，唔係上市日 6/12，亦唔係第 90 個交易日。Musk 批次跟原文 <strong>最多 6.4B</strong>，唔再用 64.2 億。「約 14% 可流通」係研究估算，唔係招股書一行。可賣 ≠ 必賣。</div>
 
-  <section class="hero-main">
-    <h1>SPCX Catalyst Calendar</h1>
-    <p>持倉含義：現股 827；short put 到期 2026-09-18 ← 19 日後，最近端事件風險</p>
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Skill 5 · 九月窗口</div>
+      <div class="score-num">9/9 解禁<br>再 9/18 put</div>
+      <div class="score-den">現價 vs F3 Base 溢價約 +55% · 續抱唔加倉</div>
+    </div>
+    <div class="hero-main">
+      <h1>SPCX · 催化劑地圖</h1>
+      <p>未來兩季改倉位節奏嘅係 Day 90 解禁疊 short put 到期，之後先至係 Q3 業績兼最多 1.3B 盈利觸發解禁。市場最易把 9/9 當成「當日必賣」或「第 90 個交易日」。</p>
+      <div class="badges">
+        <span class="badge">截至 2026-09-03 HKT</span>
+        <span class="badge">現股 827 · put 195/170 @ 9/18</span>
+        <span class="badge">424B4 已核對</span>
+      </div>
+    </div>
   </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">WATCH · 續抱不加倉</span></h2>
+    <p class="muted" style="margin:0">估值尺沿用 2026-08-30 Framework 3，本頁<strong>唔另估 target price</strong>。現價只作 delayed 刷新。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（09-02 收市，delayed）</div><div class="v">US$140.71</div><div class="s">08-30 稿用 08-28 US$141.50</div></div>
+      <div class="hud-cell"><div class="l">F3 估值尺</div><div class="v">68 / 91 / 182</div><div class="s">Bear · Base · Bull（每股，F3）</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">溢價 +54.6%</div><div class="s">等價 Base 低過現價約 −35.3%</div></div>
+      <div class="hud-cell"><div class="l">下一批供給</div><div class="v">319.0M</div><div class="s">2026-09-09 Day 90 · 424B4 verified</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Starlink 12.0M · ARPU US$66（2026-Q2）</span>
+      <span>★ Connectivity 營業利潤 US$1.66B</span>
+      <span>★ AI 已入帳 US$2.56B</span>
+      <span>★ H1 近似 FCF −US$25.0B</span>
+      <span>★ Short put 15 日後到期</span>
+    </div>
+    <div class="action">現價 US$140.71 相對 F3 Base US$91 溢價約 +55% → 續抱／唔好加倉；9/9 解禁同 9/18 put 到期前唔追。</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi orange"><div class="label">Day 90 解禁</div><div class="value">09-09 · 6 日後</div><div class="note">最多 319.0M · excl. affiliates</div></div>
+    <div class="kpi red"><div class="label">Short put 到期</div><div class="value">09-18 · 15 日後</div><div class="note">195／170 仍深 ITM @140.71</div></div>
+    <div class="kpi teal"><div class="label">轉 OTM 要升</div><div class="value">+38.6% / +20.8%</div><div class="note">先至離開 195／170</div></div>
+    <div class="kpi green"><div class="label">Q3 解禁機制</div><div class="value">最多 1.3B</div><div class="note">業績後第二個完整交易日 · IR 未排期</div></div>
+  </div>
 
   <div class="sections">
     <section class="panel">
-      <h2>IPO 鎖定期解禁時間表（本輪新查）</h2>
-      <table>
-        <thead><tr><th>日期</th><th>批次</th><th>股數</th><th>狀態</th></tr></thead>
-        <tbody>
-          <tr><td>2026-08-06</td><td>Q2 業績觸發（20%）</td><td>最多 9.115 億</td><td>✅ 已解禁</td></tr>
-          <tr><td>2026-08-06</td><td>股價觸發獎勵</td><td>最多 4.558 億</td><td>✗ 未觸發</td></tr>
-          <tr><td>2026-08-20</td><td>Day 70（7%）</td><td>最多 3.19 億</td><td>✅ 已解禁</td></tr>
-          <tr style="background:var(--fail-soft)"><td><strong>2026-09-09</strong></td><td><strong>Day 90（7%）</strong></td><td><strong>最多 3.19 億</strong></td><td><strong>▶ 下一個，10 日後</strong></td></tr>
-          <tr><td>2026-09-10</td><td>Day 91（Rule 144）</td><td>最多 0.591 億</td><td>即將</td></tr>
-          <tr><td>2026-09-24</td><td>Day 105（7%）</td><td>最多 3.284 億</td><td>即將</td></tr>
-          <tr><td>2026-10-09</td><td>Day 120（7%）</td><td>最多 3.284 億</td><td>即將</td></tr>
-          <tr><td>2026-10-24</td><td>Day 135（7%）</td><td>最多 3.284 億</td><td>即將</td></tr>
-          <tr><td>約 2026-11</td><td>Q3 業績觸發（28%）</td><td>最多約 13 億</td><td>盈利觸發</td></tr>
-          <tr><td>2026-12-08</td><td>Day 180（完全解禁）</td><td>最多 7.976 億</td><td>即將</td></tr>
-        </tbody>
-      </table>
-      <p class="muted" style="margin-top:8px">截至 2026-08 底約 14% 股份可流通，其餘 ~86% 分階段釋出至 2027 年 6 月（含 2027-06-12 Musk 持股批次，最多 64.2 億股，全組最大單一波次）。</p>
+      <h2>核心敘事同敏感變數</h2>
+      <p>主敘事仍然係發射入口 + Starlink 現金引擎 + AI 高 capex 期權。Thesis Tracker（08-30）Mixed：支柱 A 已有 Q2 官方驗證；支柱 C 收入爆發但未轉 FCF；裂縫 D 係估值透支 + 資本強度，<strong>分階段 lock-up 係 D 嘅供給維度</strong>。</p>
+      <p class="muted">9/9–9/18 只驗證供給消化同 assignment，唔驗證用戶／AI 基本面。真正改 F3 倍數嘅係下一份季報嘅用戶 × ARPU、AI 已入帳、近似 FCF。</p>
     </section>
 
     <section class="panel">
-      <h2>Catalyst 時間線（完整優先排序）</h2>
+      <h2>IPO 鎖定期（424B4 已核對）</h2>
+      <p class="muted">日數基準：<strong>Prospectus Dated June 11, 2026</strong>（定價日）。IR：上市 6/12、交割 6/15（含 greenshoe 638,888,888 股）。可賣 ≠ 必賣。Goldman 可書面提早釋放；09-03 前無新 8-K 豁免。</p>
+      <table>
+        <thead><tr><th>日期／觸發</th><th>批次</th><th>最多股數</th><th>狀態（09-03）</th><th>validation</th></tr></thead>
+        <tbody>
+          <tr><td>2026-08-06</td><td>Q2 後第二個完整交易日（20%，excl. affiliates）</td><td>911.5M</td><td>✅ 已解禁</td><td>verified · 424B4</td></tr>
+          <tr><td>2026-08-06 條件</td><td>Additional Release：10 日內至少 5 日收市 ≥ US$175.50</td><td>455.8M</td><td>✗ 未觸發 → 滾入 12/8</td><td>條件 verified；未觸發＝research</td></tr>
+          <tr><td>2026-08-20</td><td>Day 70（7%，excl. affiliates）</td><td>319.0M</td><td>✅ 已解禁</td><td>verified · 424B4</td></tr>
+          <tr class="next"><td><strong>2026-09-09</strong></td><td><strong>Day 90（7%，excl. affiliates）</strong></td><td><strong>319.0M</strong></td><td><strong>▶ 6 日後</strong></td><td><strong>verified</strong></td></tr>
+          <tr><td>2026-09-10</td><td>Day 91 affiliates 補位（Rule 144）</td><td>59.1M</td><td>7 日後</td><td>verified · 424B4</td></tr>
+          <tr><td>2026-09-24</td><td>Day 105（7%）</td><td>328.4M</td><td>21 日後</td><td>verified · 424B4</td></tr>
+          <tr><td>2026-10-09</td><td>Day 120（7%）</td><td>328.4M</td><td>36 日後</td><td>verified · 424B4</td></tr>
+          <tr><td>2026-10-24</td><td>Day 135（7%）</td><td>328.4M</td><td>51 日後</td><td>verified · 424B4</td></tr>
+          <tr><td>Q3 後第二個完整交易日</td><td>28% of 180-day block</td><td>1.3B</td><td>IR 未宣布業績日</td><td>機制 verified</td></tr>
+          <tr><td>2026-12-08</td><td>Day 180 剩餘（Extra 未觸發）</td><td>797.6M</td><td>96 日後</td><td>verified · 424B4</td></tr>
+          <tr><td>2027-06-12</td><td>Musk 366 日（無 early release）</td><td>6.4B</td><td>窗口外</td><td>verified · 424B4</td></tr>
+        </tbody>
+      </table>
+      <p class="cite">來源：424B4 accession 0001628280-26-042639，CIK 0001181412，Shares Eligible for Future Sale（約 p.259）。S-1／S-1A 見 <code>data/raw/SPCX/_ipo/manifest.json</code>；定價稿以 424B4 為準。52 週低位 2026-08-03 US$104.83 用於判定 Extra 未觸發（delayed／行情站，唔覆寫官方股數）。</p>
+    </section>
+
+    <section class="panel">
+      <h2>Catalyst 時間線（優先排序）</h2>
       <div class="timeline">
-        <div class="event high"><div><div class="date">2026-09-18（19 日後）</div><span class="tag high">P0 最高</span></div><div><h3>Short put 到期／assignment</h3><p class="muted">被迫加倉 vs 研究建倉區；唔係基本面，但改變每股成本同名義。</p></div></div>
-        <div class="event high"><div><div class="date">2026-09-09（10 日後）</div><span class="tag high">P1 最高</span></div><div><h3>Day 90 鎖定期解禁（7%，3.19 億股）</h3><p class="muted">就喺 put 到期前 9 日，兩件事疊加可能製造額外波動。</p></div></div>
-        <div class="event high"><div><div class="date">約 2026-10／11</div><span class="tag high">P1</span></div><div><h3>Q3 2026 業績（觸發約 28% 解禁）</h3><p class="muted">用戶、AI 收入可持續性、capex；Beat 但 FCF 惡化仍可跌，業績+解禁疊加波動。</p></div></div>
-        <div class="event mid"><div><div class="date">09-24／10-09／10-24</div><span class="tag mid">P1</span></div><div><h3>Day 105／120／135 鎖定期解禁</h3><p class="muted">持續供給流。</p></div></div>
-        <div class="event mid"><div><div class="date">2026-12-08</div><span class="tag mid">P2</span></div><div><h3>180 日完全解禁</h3><p class="muted">最大單一非盈利觸發批次之一。</p></div></div>
-        <div class="event low"><div><div class="date">持續</div><span class="tag low">P2</span></div><div><h3>Starship 試飛／可重複使用里程碑</h3><p class="muted">偏多（成功）／偏空（事故），Space 成本曲線。</p></div></div>
-        <div class="event low"><div><div class="date">季報／零散</div><span class="tag low">P2</span></div><div><h3>AI GW 上架同 Cloud Agreements 轉收入</h3><p class="muted">「contracted」≠「cash」，需連續驗證。</p></div></div>
+        <div class="event high"><div><div class="date">2026-09-18（15 日後）</div><span class="tag high">P0 倉位</span></div><div><h3>Short put 到期／assignment（195／170）</h3><p class="muted">KPI：現價 vs F3 建倉區 ≤US$95。唔係基本面，但改成本同名義。@140.71 要急升 +38.6%／+20.8% 先 OTM。</p></div></div>
+        <div class="event high"><div><div class="date">2026-09-09（6 日後）</div><span class="tag high">P1 供給</span></div><div><h3>Day 90 解禁最多 319.0M</h3><p class="muted">KPI：解禁可流通供給。就喺 put 到期前 9 日。可賣 ≠ 必賣。</p></div></div>
+        <div class="event mid"><div><div class="date">2026-09-10（7 日後）</div><span class="tag mid">P1 細批</span></div><div><h3>Day 91 affiliates 最多 59.1M</h3><p class="muted">唔好同 9/9 加總成「一日必賣 3.78 億」。</p></div></div>
+        <div class="event high"><div><div class="date">約 10 下旬–11 月中</div><span class="tag high">P1 基本面</span></div><div><h3>Q3 2026 業績 + 最多 1.3B 解禁</h3><p class="muted">KPI：用戶×ARPU、AI 已入帳、FCF。IR 未排期。Beat 但 FCF 惡化仍可跌。</p></div></div>
+        <div class="event mid"><div><div class="date">09-24／10-09／10-24</div><span class="tag mid">P1 供給流</span></div><div><h3>Day 105／120／135 各最多 328.4M</h3><p class="muted">持續供給。若 9/18 已 assignment，打喺更大名義上。</p></div></div>
+        <div class="event mid"><div><div class="date">2026-12-08</div><span class="tag mid">P2</span></div><div><h3>Day 180 剩餘最多 797.6M</h3><p class="muted">Extra 455.8M 未觸發，剩餘用大數。誤當 328.4M＝少計。</p></div></div>
+        <div class="event low"><div><div class="date">持續／季報</div><span class="tag low">P2 敘事</span></div><div><h3>Starship、Starlink 夥伴、AI 轉收入</h3><p class="muted">近端倍數弱。contracted ≠ cash。日常發射＝雜訊。</p></div></div>
       </div>
     </section>
 
     <section class="panel">
-      <h2>未來 3 週（對住 9/18 puts 同 9/9 解禁）</h2>
-      <p class="muted">現價 vs 195／170：兩張均 ITM（@US$141.50）→ assignment 機率極高，19 日內要分別急升 +37.9%／+20.1% 先會轉 OTM。2026-09-09 解禁（3.19 億股）先於 put 到期 9 日發生——留意解禁後短期供給壓力會唔會拉低股價。</p>
+      <h2>九月窗口：9/9 前 → 9/9–10 → 9/18 前</h2>
+      <div class="grid-2">
+        <div class="box warn"><h3>9/9 前</h3><p class="muted">溢價約 +55%，續抱上限 US$150。盯解禁前量價同 Form 144 線索。唔追、唔新開賣 put。</p></div>
+        <div class="box fail"><h3>9/9–9/10</h3><p class="muted">319.0M 法律上可賣 + 59.1M 補位。價跌可以只係消化供給，唔等於支柱 A／C 失效。</p></div>
+        <div class="box warn"><h3>9/18 前</h3><p class="muted">解禁若壓價，assignment 現金義務唔變。研究判斷仍然係：150–160 唔係 F3 建倉區。</p></div>
+        <div class="box ok"><h3>9/18 後到 9/24</h3><p class="muted">若雙 assignment → 約 1,027 股、現金約 US$36,500（舊稿）。Day 105 會打到更大名義。Q3 大概率後於呢兩張 put。</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>誤判、thesis、行動</h2>
+      <div class="grid-2">
+        <div class="box warn"><h3>市場高估</h3><p class="muted">9/9 當日必賣 3.19 億；「第 90 個交易日」；Starship 短訊可以對冲供給；Q3 beat 等於解禁無害。</p></div>
+        <div class="box fail"><h3>市場低估</h3><p class="muted">9/24–10/24 三條 328.4M 連續流；未觸發嘅 455.8M 滾入 12/8 嘅 797.6M；Q3 1.3B 先係 180-day 最大單批（約 4× 9/9）。</p></div>
+        <div class="box ok" style="grid-column:1/-1"><h3>而家點做</h3><p>現價相對 F3 Base 溢價約 +55% → <strong>續抱現股、等待 9/9 同 9/18、唔好加倉、唔追</strong>。Q3 連續驗證用戶＋AI＋FCF 缺口收窄，先討論回調後加倉。Assignment 或 Q3 失效 → 重新評估。解禁後價跌本身 ≠ 自動加倉。</p></div>
+      </div>
     </section>
   </div>
 
-  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+  <p class="footer">424B4：https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm · F3 2026-08-30 · 現價 delayed 2026-09-02。此分析僅供研究參考，不構成投資建議。</p>
 </div>
 <section id="page-comments" data-page="/spcx/catalyst-calendar.html"></section>
 <script src="../assets/page-comments.js" defer></script>
