@@ -110,22 +110,22 @@
 
 分數結構：10 分 12 項；5 分 0 項；0 分 1 項（現金 vs 債務）。
 
-## 估值驅動 KPI（Decision HUD 共用；F3 pending）
+## 估值驅動 KPI（Decision HUD 共用；F3 已出）
 
-未有 Framework 3，**禁止 target price／建倉區**。暫定規尺：
+Framework 3 權威：Bear **US$205**／Base **US$355**／Bull **US$545**。現價 US$357.16 對 Base **+0.6% 溢價**。
 
 | KPI | 最新官方數 | 方向 | 點樣郁倍數 | 來源 |
 |---|---|---|---|---|
 | 現價 | US$357.16 delayed 9/03 | 業績後兩日由 367.24 跌到 357.16 | 市值 ~US$1.699T | yfinance |
-| P/S（官方 TTM 營收） | **19.1×** | 略高過 NVDA／AMD ~18× | 倍數尺；非 target | 1,699／89.104 |
-| PEG | 0.42（yfinance）／0.53（官方 trailing） | 遠低於 2.5 | 增長調整倍數 | yfinance；官方增速 |
-| TTM 官方 FCF vs 市值 | US$39.4B／US$1.699T ≈ **2.3%** | 改善（四季 FCF 連升） | FCF yield 尺 | 四季 EX-99.1 |
-| AI 半導體營收 | US$16.7B，+221% YoY，+54% QoQ | 改善 | 增長能否撐 19× P/S | EX-99.1 CEO |
-| Q3 官方 FCF | US$13.665B（OCF 14,197 − capex 532） | 改善 | 去槓桿同 FCF yield | EX-99.1 |
-| GAAP 淨利率 | 44.2%（Q2 42.0% → 改善） | 改善 | 盈利質量 vs PEG | EX-99.1 |
-| 現金／有息債 | 0.40×（US$24.0B／US$59.4B） | 覆蓋弱、但 FCF 正 | 槓桿折讓 | 簡明資產負債 |
+| Bear / Base / Bull | 205 / 355 / 545 | F3 中心價 | FY2027 Non-GAAP P/E | `AVGO_2026-09-04_framework3.md` |
+| 現價 vs Base | **+0.6%** | 持平 | 行動第一句 | 357.16／355 |
+| ★ 總營收 | US$29,591m（+86%） | 改善 | FY26 錨／FY27 起點 | EX-99.1 |
+| ★ AI 半導體營收 | US$16.7B，+221% YoY，+54% QoQ | 改善 | 分拆 FY27 AI 桶 | EX-99.1 CEO |
+| ★ Q3 官方 FCF | US$13.665B（OCF 14,197 − capex 532） | 改善 | FCF yield 同槓桿折讓 | EX-99.1 |
+| ★ GAAP 毛利率 | 69.1%（Q2 69.5% 微降） | 高位微降 | 約束 NM | EX-99.1 |
+| ★ 應收／自算 DSO | US$13,707m／~42 日 | 金額脹、DSO 未失控 | 約束 FCF margin | 簡明資產負債 |
 
-**行動（第一句必須引用溢價／折讓）：** 官方 TTM P/S 19.1× 對 NVDA／AMD 近期約 18× 有約 **5% 溢價**（對本倉 NVDA F1 當時 16.8× 溢價更大），PEG 0.4–0.5 並無泡沫紅線 → **僅觀察，唔好把 F1 PASS 當成建倉區**。F3 pending，呢條唔係目標價。
+**行動（第一句必須引用溢價／折讓）：** 現價對 Base 約 **+0.6% 溢價** → **僅觀察，唔好把 F1 PASS 當成建倉區**。
 
 ## Adversarial check
 
