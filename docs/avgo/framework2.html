@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AVGO Framework 2 深度增長</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.watch{background:var(--watch-soft);color:var(--watch);border-color:transparent}
+  .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.25rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .callout.pass{background:var(--pass-soft);border:1px solid #86efac}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.pass{border-left:5px solid var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 45%)}
+  .box.warn{border-left:5px solid var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 45%)}
+  .box.fail{border-left:5px solid var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 45%)}
+  .pill{display:inline-flex;border-radius:999px;padding:3px 10px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .pill.pass{background:var(--pass-soft);color:var(--pass)}
+  .pill.warn{background:var(--watch-soft);color:var(--watch)}
+  .pill.fail{background:var(--fail-soft);color:var(--fail)}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem}
+  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
+  tr.up td:last-child{color:var(--pass);font-weight:700}
+  tr.mix td:last-child{color:var(--watch);font-weight:700}
+  tr.down td:last-child{color:var(--fail);font-weight:700}
+  .chart{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end;height:170px;margin:12px 0 8px}
+  .bar-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;gap:6px}
+  .bar{width:100%;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#14b8a6,#0f766e);min-height:8px}
+  .bar.warn{background:linear-gradient(180deg,#fb923c,#c2410c)}
+  .bar-label,.bar-val{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  .bar-label{color:var(--muted)}
+  .bar-val{font-weight:800}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#134e4a;color:#fff;border-color:#134e4a}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .dim-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Framework 2 判定</div>
+      <div class="verdict-title">增長 thesis 通過<br>現金流／槓桿／應收 部分通過</div>
+      <div class="badges" style="margin-top:12px">
+        <span class="badge pass">可入 F3</span>
+        <span class="badge watch">僅觀察</span>
+        <span class="badge watch">唔好加倉</span>
+      </div>
+      <p class="sans muted" style="margin:12px 0 0">唔再打 130 分。只答 F1 兩條必挖題。承接 PASS 120／130。</p>
+    </div>
+    <div class="hero-main">
+      <h1>AVGO · Framework 2 深度增長質量</h1>
+      <p>Broadcom Inc. · 五季 FY2025-Q3 → FY2026-Q3 · 截至 2026-09-04 · USD · US GAAP／Non-GAAP · SEC 8-K EX-99.1 + Q2 10-Q／FY25 10-K · Q3 10-Q 未申報</p>
+      <div class="badges">
+        <span class="badge">核心 KPI：AI 半導體 + 官方 FCF</span>
+        <span class="badge">現價 US$357.16 delayed</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">F3 pending · 暫定規尺</span></h2>
+    <p class="muted" style="margin:0">官方 TTM P/S 19.1× 對 NVDA／AMD 近期約 18× 有約 <strong>5% 溢價</strong>（對本倉 NVDA F1 當時 16.8× 溢價更大）。未有 Framework 3，<strong>唔寫 target price</strong>。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 9/03）</div><div class="v">US$357.16</div><div class="s">市值 ~US$1.699T · NY close</div></div>
+      <div class="hud-cell"><div class="l">暫定倍數尺</div><div class="v">P/S 19.1× · PEG 0.42–0.53</div><div class="s">非 target price · F3 pending</div></div>
+      <div class="hud-cell"><div class="l">溢價／折讓</div><div class="v">P/S 溢價 ~5%</div><div class="s">對 NVDA／AMD ~18×；低過 MRVL F1 當時 23×</div></div>
+      <div class="hud-cell"><div class="l">TTM FCF yield</div><div class="v">~2.3%</div><div class="s">官方 FCF US$39.4B／市值 US$1.70T</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ 總營收 US$29.6B（+86% YoY）</span>
+      <span>★ AI 半導體 US$16.7B（+221% · +54% QoQ）</span>
+      <span>★ Q3 官方 FCF US$13.7B（收入 46%）</span>
+      <span>★ GAAP 毛利率 69.1%</span>
+      <span>★ 應收 US$13.7B／自算 DSO ~42 日</span>
+    </div>
+    <div class="action">P/S 19.1× 對 NVDA／AMD ~18× 有約 5% 溢價：僅觀察、唔好加倉（F3 pending，唔係目標價）</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi green"><div class="label">AI 半導體 Q3 FY26</div><div class="value">US$16.7B</div><div class="note">+221% YoY · +54% QoQ · 已入帳</div></div>
+    <div class="kpi green"><div class="label">官方 FCF</div><div class="value">US$13.7B</div><div class="note">五季連升 · 收入 46%</div></div>
+    <div class="kpi orange"><div class="label">應收／自算 DSO</div><div class="value">42 日</div><div class="note">US$13.7B · 年結 36 日</div></div>
+    <div class="kpi red"><div class="label">現金／有息債</div><div class="value">0.40×</div><div class="note">FCF 轉負即觸發紅線 1</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>Thesis 結論</h2>
+      <div class="callout watch verdict">
+        <p><strong>增長已經喺損益表成立；現金流只係部分成立。</strong>正在被驗證嘅支柱係客製 AI 加速器同網絡已經入帳：CEO 喺 EX-99.1 寫明 Q3 AI 半導體 US$16.7B、+221% YoY、+54% QoQ，仲高過上季指引 US$16.0B。用官方半導體分部減呢條 AI 評論，非 AI 半導體連續四季都喺約 US$4.1B——增量幾乎全部係 AI 線，唔使賭路演。</p>
+        <p>仍未成立嘅路徑，係「增長全部轉成可以還清淨負債嘅現金堡壘」同「客製 XPU 可以按客戶／產品拆開睇」。8-K 把 custom accelerators 同 networking 寫喺同一句，冇獨立列。FY2026-Q3 10-Q 仍未申報，所以 Q3 嘅保理、客戶條款、頭五名終端客戶比重都仲係未知。</p>
+        <p>最大裂痕唔係盈利能力——GAAP 營業利潤率由 36.9% 去到 53.9%，官方 FCF 五季 7.0→13.7（十億）——而係槓桿保險絲：現金 US$24.0B 仍然低過有息債 US$59.4B。紅線 1 要「現金低過債 <em>而且</em> FCF 負」；而家第一項已成立，所以單季 FCF 轉負就會重新可觸發。應收由年結 US$7.1B 去到 US$13.7B，但自算 DSO 只係 36→42 日，Q2 10-Q 仲歸因保理減少。</p>
+        <p>對行動含義：增長線通過，值得入 Framework 3；官方 TTM P/S 19.1× 對 NVDA／AMD 近期約 18× 有約 <strong>5% 溢價</strong> → <strong>僅觀察、唔好加倉</strong>。未確認持倉，只准觀察。Q4 要睇 AI US$21.7B 會唔會入帳，同 FCF 會唔會守住正數。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>承接 Framework 1 兩條必挖</h2>
+      <div class="grid-2">
+        <div class="box warn">
+          <h3>① 客製 AI 入帳質素／集中 · 部分拆開</h3>
+          <p>入帳質素硬：Q3 AI US$16.7B 已印喺業績稿，beat Q2 指引 US$16.0B。非 AI 半導體約 US$4.1B 持平，所以 +54% QoQ 唔係一次性非 AI 出貨。Q4 指引 US$21.7B 嘅 QoQ 增量（約 +US$5.0B）同 Q3 嘅 +US$5.9B 相近，更似延續而唔係預支。指引仍然 <strong>唔當已入帳</strong>。</p>
+          <p>產品同客戶拆未過關。8-K 只講「custom AI accelerators and networking」。FY2025 10-K 頭五名終端客戶約 40%；Q2 FY26 10-Q 升到約 <strong>45%</strong>，單一經銷商佔淨營收 <strong>42%</strong>（上年 29%）。第三方逐字稿把 XPU 講成 73% of AI，屬 unverified，唔覆寫官方。</p>
+          <p class="muted">門檻：Q4 已入帳 AI ≥ US$20B，且 10-Q／8-K 能量化 XPU vs 網絡或確認重複出貨。</p>
+        </div>
+        <div class="box warn">
+          <h3>② 槓桿 × 應收 × 紅線 1 · 路徑未轉負</h3>
+          <p>五季官方 FCF 7.0／7.5／8.0／10.3／13.7（十億），全部為正且連升。Q3 零回購、還債 US$5.6B、股息 US$3.1B；現金升到 US$24.0B 主要係經營造血。淨負債由年結約 US$49.0B 降到 <strong>US$35.4B</strong>，現金／債 0.17× → 0.40×。</p>
+          <p>應收 US$13.7B 看起來嚇人，自算 DSO 只係 ~42 日（Q2 高位 44 日）。Q2 10-Q：上升原因包括收入、賬期、<strong>保理出售減少</strong>（Q2 只賣 US$600m vs 上年 US$1,750m）。九個月應收增加 US$6.5B，對上 OCF US$33.0B。要食晒 Q3 嗰 US$13.7B FCF 緩衝，先至會轉負。</p>
+          <p class="muted">結構風險仍在：現金已經低過債，任何一季 FCF 轉負就重新觸發紅線 1。Q3 10-Q 未出。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>12 行 KPI · 五季窗口</h2>
+      <p class="muted" style="margin-top:-6px">USD million。官方 FCF = OCF − PPE。AI 半導體係 CEO 已入帳評論，唔係獨立分部。DSO 自算（應收／（營收／91 日））。Q4 指引未入帳。★ = 估值驅動。</p>
+      <div style="overflow-x:auto;margin-top:12px">
+        <table>
+          <thead>
+            <tr>
+              <th>KPI</th>
+              <th class="num">FY25 Q3</th><th class="num">FY25 Q4</th><th class="num">FY26 Q1</th>
+              <th class="num">FY26 Q2</th><th class="num">FY26 Q3</th>
+              <th>趨勢</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="up"><td>★ 總營收</td><td class="num">15,952</td><td class="num">18,015</td><td class="num">19,311</td><td class="num">22,187</td><td class="num">29,591</td><td>改善</td></tr>
+            <tr class="up"><td>營收 YoY</td><td class="num">+22%</td><td class="num">+28%</td><td class="num">+29%</td><td class="num">+48%</td><td class="num">+86%</td><td>改善</td></tr>
+            <tr class="up"><td>半導體解決方案</td><td class="num">9,166</td><td class="num">11,072</td><td class="num">12,515</td><td class="num">15,009</td><td class="num">20,839</td><td>改善</td></tr>
+            <tr class="up"><td>★ AI 半導體</td><td class="num">5,200</td><td class="num">+74% YoY</td><td class="num">8,400</td><td class="num">10,800</td><td class="num">16,700</td><td>改善</td></tr>
+            <tr class="up"><td>基礎設施軟件</td><td class="num">6,786</td><td class="num">6,943</td><td class="num">6,796</td><td class="num">7,178</td><td class="num">8,752</td><td>Q3 加速</td></tr>
+            <tr class="mix"><td>★ GAAP 毛利率</td><td class="num">67.1%</td><td class="num">68.0%</td><td class="num">68.1%</td><td class="num">69.5%</td><td class="num">69.1%</td><td>Q3 微降</td></tr>
+            <tr class="up"><td>GAAP 營業利潤率</td><td class="num">36.9%</td><td class="num">41.7%</td><td class="num">44.3%</td><td class="num">48.6%</td><td class="num">53.9%</td><td>改善</td></tr>
+            <tr class="up"><td>★ 官方 FCF</td><td class="num">7,024</td><td class="num">7,466</td><td class="num">8,010</td><td class="num">10,262</td><td class="num">13,665</td><td>連升</td></tr>
+            <tr class="mix"><td>★ 應收／自算 DSO</td><td class="num">6.5B／37</td><td class="num">7.1B／36</td><td class="num">8.5B／40</td><td class="num">10.8B／44</td><td class="num">13.7B／42</td><td>金額脹</td></tr>
+            <tr class="mix"><td>現金／有息債</td><td class="num">0.17×</td><td class="num">0.25×</td><td class="num">0.21×</td><td class="num">0.30×</td><td class="num">0.40×</td><td>仍 &lt;1</td></tr>
+            <tr class="up"><td>攤薄股數（m）</td><td class="num">4,860</td><td class="num">4,889</td><td class="num">4,888</td><td class="num">4,876</td><td class="num">4,887</td><td>持平</td></tr>
+            <tr class="mix"><td>回購（庫存股）</td><td class="num">—</td><td class="num">—</td><td class="num">7,850</td><td class="num">600</td><td class="num">0</td><td>Q3 停手</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">Q4 FY25 AI 8-K 只寫 +74% YoY、冇印美元；F1 把 US$8.2B 當成 Q4 實際，嗰句其實係當時對 Q1 FY26 嘅指引。Non-GAAP 毛利率 78.4%→75.0%，Q3 被 AI mix 拉低。Q3 10-Q 未申報。</p>
+
+      <div class="grid-2" style="margin-top:16px">
+        <div>
+          <h3>AI 半導體（US$B）</h3>
+          <div class="chart" id="aiChart"></div>
+        </div>
+        <div>
+          <h3>官方 FCF（US$B）</h3>
+          <div class="chart" id="fcfChart"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>五大維度</h2>
+      <div class="grid-2">
+        <div class="box pass">
+          <div class="dim-top"><h3>1. 敘事</h3><span class="pill pass">通過</span></div>
+          <p>AI 半導體五季 US$5.2B → US$16.7B，佔 Q3 總營收 56%、半導體 80%。Q3 beat 自身 AI 指引。通過係因為已入帳美元同分部 mix，唔係因為單季 beat 或者 Q4 指引。</p>
+        </div>
+        <div class="box pass">
+          <div class="dim-top"><h3>2. 單位經濟</h3><span class="pill pass">通過</span></div>
+          <p>GAAP 毛利率 67.1% → 69.1%；營業利潤率 36.9% → 53.9%。Q2 半導體分部營業利潤 US$9.3B。Non-GAAP 毛利率跌到 75.0% 係 mix，唔係未入帳 ARR 故事。</p>
+        </div>
+        <div class="box warn">
+          <div class="dim-top"><h3>3. 護城河</h3><span class="pill warn">部分通過</span></div>
+          <p>客製 XPU + 乙太網 + 軟件 US$8.8B（+29%）。反證：頭五名終端客戶 ~45%、單一經銷商 42%、8-K 自己寫 significant customers 風險。壁壘同集中度同一張合約。</p>
+        </div>
+        <div class="box pass">
+          <div class="dim-top"><h3>4. 營運槓桿</h3><span class="pill pass">通過</span></div>
+          <p>OpEx／營收約 30.2% → 15.2%；營業利潤 +171% vs 營收 +86%。Q3 capex US$532m 仍只佔收入 1.8%。費用冇失控。</p>
+        </div>
+        <div class="box warn" style="grid-column:1/-1">
+          <div class="dim-top"><h3>5. 現金流</h3><span class="pill warn">部分通過</span></div>
+          <p>五季官方 FCF 全部為正且連升，Q3 融資淨流出（還債 + 股息），所以唔係未通過。部分通過係因為現金仍 0.40× 債、應收九個月 +US$6.5B、Q3 保理未披露——紅線 1 嘅保險絲仍然裸露，只係而家電流遠低過熔斷值。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="filters sans" id="filters">
+        <button class="active" data-f="all">全部</button>
+        <button data-f="support">支持</button>
+        <button data-f="neutral">中性</button>
+        <button data-f="weaken">削弱</button>
+      </div>
+      <div class="ev-grid" id="evidence"></div>
+    </section>
+
+    <section class="panel">
+      <h2>支持 vs 裂痕</h2>
+      <div class="grid-2">
+        <div class="box pass">
+          <h3>支持增長 thesis</h3>
+          <p>五季 AI 加速、Q3 beat 指引、非 AI 半導體持平所以增量係 AI、營業利潤率擴張到 54%、FCF 連升到 US$13.7B、淨負債下降、軟件仍然 US$8.8B。呢條線夠入 Framework 3。</p>
+        </div>
+        <div class="box fail">
+          <h3>裂痕（集中度／紅線 1）</h3>
+          <p>8-K 拆唔開 XPU vs 網絡；頭五名終端客戶已到 ~45%；現金 0.40× 債令 FCF 轉負即觸發紅線 1；應收美元翻倍；Non-GAAP 毛利率因 AI mix 由 78% 去到 75%；Q3 10-Q 未出。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Bull / Bear / 行動</h2>
+      <div class="grid-3">
+        <div class="box pass">
+          <h3>Bull</h3>
+          <p>Q4 AI 按指引逼近 US$21.7B；DSO 留喺 40 日附近；FCF ≥ US$10B；10-Q 顯示保理回升或應收慢過營收；淨負債繼續降。</p>
+        </div>
+        <div class="box fail">
+          <h3>Bear</h3>
+          <p>超大規模把增量轉走；Q4 入帳明顯低過指引；DSO ≥55、FCF 接近零或轉負；毛利率再被記憶體 mix 食；頭五名客戶再集中。</p>
+        </div>
+        <div class="box warn">
+          <h3>行動</h3>
+          <p><strong>僅觀察、唔好加倉。</strong>P/S 19.1× 對 NVDA／AMD ~18× 有約 5% 溢價。F3 最敏感兩條：AI 已入帳增速，同 FCF／淨槓桿。唔現場計目標價。</p>
+        </div>
+      </div>
+      <div class="callout info" style="margin-top:14px">
+        <strong>確認（FY2026-Q4 ＋ Q3 10-Q）：</strong>AI 已入帳 ≥ US$20B；官方 FCF ≥ US$10B 或 FCF／營收 ≥35%；自算 DSO ≤48 日；頭五名終端客戶 ≤50%。<br>
+        <strong>失效：</strong>任何一季官方 FCF 轉負（紅線 1）；Q4 AI &lt; US$18B 且歸因客戶轉向；DSO ≥55；頭五名 ≥55%。
+      </div>
+    </section>
+  </div>
+
+  <p class="footer">官方優先：各季 SEC 8-K EX-99.1；FY2026-Q3 accession 0001730168-26-000076（2026-09-02）；FY2026-Q2 10-Q（2026-06-09）；FY2025 10-K（2025-12-18）。FY2026-Q3 10-Q 截至 2026-09-04 未申報。現價 yfinance delayed 2026-09-03 US$357.16。第三方逐字稿（XPU mix、FY27／FY28 AI 總數）unverified，唔覆寫 8-K。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const ai=[
+  {label:"FY25 Q3",value:5.2},
+  {label:"FY25 Q4",value:null,note:"+74%"},
+  {label:"FY26 Q1",value:8.4},
+  {label:"FY26 Q2",value:10.8},
+  {label:"FY26 Q3",value:16.7},
+];
+const fcf=[
+  {label:"FY25 Q3",value:7.0},
+  {label:"FY25 Q4",value:7.5},
+  {label:"FY26 Q1",value:8.0},
+  {label:"FY26 Q2",value:10.3},
+  {label:"FY26 Q3",value:13.7},
+];
+function bars(id, rows){
+  const nums=rows.filter(r=>r.value!=null).map(r=>r.value);
+  const max=Math.max(...nums);
+  document.getElementById(id).innerHTML=rows.map(r=>{
+    if(r.value==null){
+      return `<div class="bar-wrap"><div class="bar-val">${r.note||"—"}</div><div class="bar warn" style="height:24px;opacity:.45"></div><div class="bar-label">${r.label}</div></div>`;
+    }
+    const h=Math.max(8,Math.round((r.value/max)*130));
+    return `<div class="bar-wrap"><div class="bar-val">${r.value}</div><div class="bar${r.warn?' warn':''}" style="height:${h}px"></div><div class="bar-label">${r.label}</div></div>`;
+  }).join('');
+}
+bars('aiChart',ai);
+bars('fcfChart',fcf);
+
+const evidence=[
+{k:"support",type:"分部／KPI",title:"AI 半導體 US$16.7B，+221% YoY，+54% QoQ",body:"EX-99.1 Hock Tan：Q3 AI semiconductor revenue of $16.7 billion grew 221% year-over-year, and 54% quarter-over-quarter。呢句印喺業績稿，唔係第三方逐字稿。對 thesis：增長引擎已經入帳。Q2 指引 Q3 AI US$16.0B，實際 beat。Q4 指引 US$21.7B 仍然係前瞻，唔當已入帳。"},
+{k:"support",type:"財報",title:"非 AI 半導體約 US$4.1B 持平，增量幾乎全係 AI",body:"半導體分部 US$20,839m 減 AI 評論 US$16.7B ≈ US$4.1B，同 Q1／Q2 嘅約 US$4.1–4.2B 同一水平。換句話說 +54% QoQ 唔係一次性非 AI 出貨，亦唔係把軟件塞入半導體。基礎設施軟件仍有 US$8.8B（+29%），mix 30%。"},
+{k:"support",type:"現金流",title:"五季官方 FCF 7.0→13.7B，Q3 還債 US$5.6B",body:"官方定義：OCF − PPE。序列 7,024／7,466／8,010／10,262／13,665。Q3 融資淨流出 US$8.7B（還債 + 股息，零回購、零新借），所以現金升到 US$24.0B 主要係經營造血。淨負債由年結約 US$49B 降到 US$35.4B。"},
+{k:"support",type:"單位經濟",title:"GAAP 營業利潤率 36.9% → 53.9%",body:"毛利率 67.1% → 69.1%；營業費用絕對值仲略降。Q2 10-Q 半導體分部營業利潤 US$9,281m vs 上年 US$4,806m。OpEx／營收約 30% → 15%。呢個已經喺規模上改善，唔係未入帳 ARR。"},
+{k:"neutral",type:"指引",title:"Q4 總營收約 US$34.8B；AI US$21.7B",body:"業績稿：fourth quarter revenue guidance of approximately $34.8 billion；CEO 預期 AI semiconductor revenue to accelerate to $21.7 billion, up 236% year-over-year。QoQ 增量約 +US$5.0B，對上 Q3 嘅 +US$5.9B，更似延續。指引唔當已入帳。Non-GAAP 營業利潤指引約 66%。"},
+{k:"neutral",type:"覆蓋",title:"FY2026-Q3 10-Q 未申報；保理數字停喺 Q2",body:"SEC submissions 截至 2026-09-04 最新仍係 9/02 8-K。Q3 應收、債務、FCF 用簡明表，validation_status: partial。Q2 10-Q：當季保理出售 US$600m vs 上年 US$1,750m，管理層把應收上升部分歸因保理減少。Q3 保理未知。"},
+{k:"weaken",type:"客戶集中",title:"頭五名終端客戶 ~45%；單一經銷商 42%",body:"FY2025 10-K：頭五名終端客戶約 40%、經銷商 48%。Q2 FY26 10-Q：頭五名約 45%；直接銷售畀一個半導體經銷商客戶佔淨營收 42%（上年同期 29%）；經銷商渠道 YTD 56%。8-K 冇點名 XPU 客戶，亦冇拆網絡。壁壘同集中度係同一張合約。"},
+{k:"weaken",type:"紅線 1 結構",title:"現金 0.40× 有息債；FCF 轉負即觸發",body:"2026-08-02：現金 US$23,975m，有息債 US$59,419m。紅線 1 要兩項同時成立——而家 FCF 正所以未 FAIL。但第一項已成立，所以任何一季官方 FCF 轉負就會重新可觸發。應收 US$13.7B、自算 DSO ~42 日。要食晒 Q3 嗰 US$13.7B 緩衝先至轉負，唔係下季基線，但保險絲仍然裸露。"}
+];
+const evRoot=document.getElementById('evidence');
+function render(filter){
+  evRoot.innerHTML=evidence.filter(e=>filter==='all'||e.k===filter).map(e=>`
+  <article class="ev ${e.k}"><div class="type">${e.type}<span class="impact ${e.k}">${e.k==='support'?'支持':e.k==='weaken'?'削弱':'中性'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+});
+</script>
+<section id="page-comments" data-page="/avgo/framework2.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
