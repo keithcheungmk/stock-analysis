@@ -7,97 +7,247 @@
 <style>
   :root {
     --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
-    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
-    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
-    --shadow:0 12px 40px rgba(28,25,23,.08);
+    --teal:#0f766e; --teal-deep:#134e4a; --watch:#c2410c; --watch-soft:#ffedd5;
+    --fail:#b91c1c; --fail-soft:#fee2e2; --pass:#15803d; --pass-soft:#dcfce7;
+    --info:#1d4ed8; --info-soft:#dbeafe; --shadow:0 12px 40px rgba(28,25,23,.08);
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
   .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
   .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .status-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .status-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.85rem;font-weight:800;line-height:1.2;color:var(--watch);margin:8px 0 0}
+  .status-den{font-size:.95rem;color:var(--muted);font-weight:600;margin-top:8px}
   .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
-  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .hero-main p{margin:0;opacity:.92}
   .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
-  .sections{display:grid;gap:16px;margin-top:18px}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.15rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
   h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   h3{margin:0 0 8px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .muted{color:var(--muted);font-size:.9rem}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif;background:var(--watch-soft);border:1px solid #fdba74}
+  .callout p{margin:0 0 10px}.callout p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-4{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.pass{border-left:5px solid var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 45%)}
+  .box.warn{border-left:5px solid var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 45%)}
+  .box.fail{border-left:5px solid var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 45%)}
+  .box.ok{border-left:5px solid var(--teal)}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#7c2d12;color:#fff;border-color:#7c2d12}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 38%)}
+  .ev.weaken{border-left-color:var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 38%)}
+  .ev.neutral{border-left-color:var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 38%)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .chart{display:flex;align-items:flex-end;gap:10px;height:140px;padding:8px 4px 0}
+  .bar{flex:1;background:#fecaca;border-radius:8px 8px 0 0;position:relative;min-height:8px}
+  .bar span{position:absolute;top:-22px;left:0;right:0;text-align:center;font-size:.72rem;font-weight:700;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .bar em{position:absolute;bottom:-22px;left:0;right:0;text-align:center;font-size:.68rem;color:var(--muted);font-style:normal;font-family:"Avenir Next","PingFang TC",sans-serif}
   .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
-  .pillar{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff;margin-bottom:12px;border-left:6px solid #a8a29e}
-  .pillar.pass{border-left-color:var(--pass)}
-  .pillar.mid{border-left-color:var(--watch)}
-  .pillar.fail{border-left-color:var(--fail)}
-  .pillar .status{display:inline-block;font-size:.72rem;font-weight:800;border-radius:999px;padding:3px 10px;font-family:"Avenir Next","PingFang TC",sans-serif;margin-bottom:6px}
-  .status.pass{background:var(--pass-soft);color:var(--pass)}
-  .status.mid{background:var(--watch-soft);color:var(--watch)}
-  .status.fail{background:var(--fail-soft);color:var(--fail)}
-  .callout{background:var(--watch-soft);border:1px solid #fdba74;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#9a3412}
+  .cite{font-size:.78rem;color:var(--muted);margin-top:10px}
 </style>
 </head>
 <body>
 <a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
 
 <div class="wrap">
-  <section class="hero-main">
-    <h1>RDW · Thesis Tracker（重做）</h1>
-    <p>判定：Mixed／需持續監察 · 數據截至 2026-08-30</p>
-    <div class="badges">
-      <span class="badge">4 支柱中 1 確認、2 部分確認、1 未通過</span>
-      <span class="badge">持倉 4,400 股＠US$18（浮虧 -39.6%）</span>
+  <section class="hero">
+    <div class="status-box">
+      <div class="eyebrow">Skill 6 · Thesis Tracker</div>
+      <div class="status-title">Mixed</div>
+      <div class="status-den">需持續監察 · 現價 vs Base −9.0% · F1 門檻未達型 FAIL</div>
+      <p class="sans muted" style="margin:12px 0 0">增長／毛利已入帳；FCF 同 ATM 剩餘容量未閉合。持倉 4,400 股＠約 US$23.68。</p>
+    </div>
+    <div class="hero-main">
+      <h1>RDW · 投資 thesis 追蹤</h1>
+      <p>Redwire Corporation · 截至 2026-09-04（HKT）· 最新官方季度 2026-Q2 8-K／10-Q · 承接 F1 FAIL 60／130（門檻未達型，非 HIMS 流動性 FAIL）、F2 部分確認、F3 Base US$11.40</p>
+      <div class="badges">
+        <span class="badge">現價 US$10.37 delayed 9/03</span>
+        <span class="badge">對 Base −9.0% 折讓</span>
+        <span class="badge">最大閘：Q3 業績／H2 轉化</span>
+      </div>
     </div>
   </section>
 
-  <div class="sections">
-    <section class="panel">
-      <h2>一句總結</h2>
-      <p>執行拐點（毛利率、backlog、成長）已經真實確認，但論點嘅「裂縫」——資本紀律／現金流品質——仍未修補；持倉決策應鎖定喺呢一項嘅進展，而唔係已經確認嘅增長敘事。</p>
-    </section>
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base −9.0%</span></h2>
+    <p class="muted" style="margin:0">估值尺沿用 Framework 3（2026-08-30），本頁<strong>唔另估 target price</strong>。現價對 Base 約 <strong>−9.0% 折讓</strong> → <strong>續抱、唔好加倉</strong>。持倉已確認 4,400 股＠約 US$23.68（浮虧約 −56.2%）。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 9/03）</div><div class="v">US$10.37</div><div class="s">市值 ~US$2.59B · NY close</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">7.06 / 11.40 / 19.15</div><div class="s">F3 P/S 每股目標 · 唔另估</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">−9.0%</div><div class="s">折讓 · 續抱唔加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">TTM P/S ≈ 6.1×</div><div class="s">TTM US$426.3M · 非 target</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q2 營收 US$117.1M（+89.6% YoY）</span>
+      <span>★ GAAP 毛利率 27.8%（近端 mid-20s）</span>
+      <span>★ Adj. EBITDA −US$3.2M</span>
+      <span>★ Q2 FCF ≈ −US$35.3M</span>
+      <span>★ 股數 249.99M／ATM 剩餘 US$350.4M</span>
+    </div>
+    <div class="action">現價對 F3 Base 約 −9.0% 折讓：續抱、唔好加倉；折讓係 FCF／稀釋折價，唔係攤平訊號</div>
+  </section>
 
-    <section class="panel">
-      <h2>四支柱追蹤</h2>
-      <div class="pillar pass">
-        <span class="status pass">✅ 大致確認</span>
-        <h3>A. 需求／增長</h3>
-        <p class="muted">Q2 YoY +89.6%，五季持續加速（-21%→+51%→+56%→+58%→+90%）。Backlog 創高 US$542.1M，book-to-bill 1.42（健康）。<strong>證據強度：高</strong>——連續 5 季同向數據，非單季波動。</p>
-      </div>
-      <div class="pillar mid">
-        <span class="status mid">🟡 部分確認</span>
-        <h3>B. 盈利質量</h3>
-        <p class="muted">GAAP 毛利率由 -30.9%（25Q2）修復至 27.8%（26Q2），趨勢明確。但 Adj. EBITDA 仍為負（-3.2M，雖持續收窄）。<strong>證據強度：中</strong>——方向正確，但未轉正前唔能夠當「已解決」。</p>
-      </div>
-      <div class="pillar mid">
-        <span class="status mid">🟡 部分確認</span>
-        <h3>C. Defense Tech 第二引擎</h3>
-        <p class="muted">Edge Autonomy 整合後 Penguin／Stalker 產品線提供第二收入來源。公開資料對個別合約規模嘅細節有限，難以獨立驗證第二引擎嘅財務重要性。<strong>證據強度：中低</strong>——敘事合理，但量化證據不足。</p>
-      </div>
-      <div class="pillar fail">
-        <span class="status fail">❌ 未通過（論點嘅「裂縫」）</span>
-        <h3>D. 資本紀律</h3>
-        <p class="muted">FCF 連續 5 季為負（-93.5→-27.8→-30.1→-12.7→-35.3，Q2 轉差）。現金堆積（US$95M→US$558M）主要靠融資／股本而非經營現金流（ATM 淨所得 US$487.9M）。流通股 192M→249M，稀釋約 +30%。<strong>證據強度：高（負面）</strong>——呢項係論點最脆弱一環，亦係 F1 未達 WATCH 門檻嘅主因。</p>
-      </div>
-    </section>
-
-    <section class="panel">
-      <h2>本輪 refresh 檢查</h2>
-      <p>WebSearch 未搵到 2026-08-07 之後有改變上述任何一項判定嘅新公開資訊；四支柱狀態相對 2026-08-06 版本不變。</p>
-    </section>
-
-    <section class="panel">
-      <h2>下一個檢查點</h2>
-      <p>Q3 2026 業績（約 11 月，未確認日期）將係支柱 B（Adj. EBITDA 能否轉正）同支柱 D（FCF 能否改善、稀釋速度會否放緩）嘅關鍵驗證時機。若兩者其中之一明確轉正，論點嘅「裂縫」有機會開始修補，屆時應重新評估 F1 判定同持倉策略。</p>
-    </section>
-
-    <section class="panel">
-      <h2>對倉位嘅含義</h2>
-      <p>現時 -39.6% 浮虧主要反映 2025 年估值重估，而非論點本身崩壞——支柱 A（需求／增長）依然穩固。但支柱 D 未修補之前，呢個論點仍不足以支持加倉；亦冇證據顯示應該止蝕離場，因為業務底子並非惡化。</p>
-      <div class="callout" style="margin-top:10px">持倉決策應鎖定 Q3 業績呢個具體檢查點，而唔係現時嘅帳面盈虧。</div>
-    </section>
+  <div class="kpis">
+    <div class="kpi green"><div class="label">★ Q2 已入帳營收</div><div class="value">US$117.1M</div><div class="note">+89.6% YoY · H1 US$214.0M · 增長支柱</div></div>
+    <div class="kpi teal"><div class="label">★ GAAP 毛利率</div><div class="value">27.8%</div><div class="note">對照 25Q2 −30.9% · 近端指引 mid-20s</div></div>
+    <div class="kpi orange"><div class="label">Q3 業績日</div><div class="value">IR 未掛</div><div class="note">約 11 月 · H2 仍需 US$236–286M</div></div>
+    <div class="kpi red"><div class="label">★ Q2 FCF／ATM 剩餘</div><div class="value">−US$35.3M</div><div class="note">June ATM 仲有 US$350.4M 容量</div></div>
   </div>
 
-  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+  <section class="panel">
+    <h2>Thesis 結論</h2>
+    <div class="callout sans">
+      <p>原始理由——Redwire 由太空硬件轉型做 <strong>Space + Defense Tech 雙引擎</strong>，靠 backlog 轉化同毛利率修復證明規模化，最終令 Adj. EBITDA／FCF 轉正、唔再靠 ATM 養公司——<strong>增長同毛利拐點仍然成立，但「靠經營現金自我融資」喺 08-30 到 09-04 仍然未閉合。</strong> 最新已入帳數字未變：Q2 營收 US$117.1M（+89.6%）、GAAP 毛利率 27.8%、backlog US$542.1M。10-Q 確認 Defense Tech 已係較大分部（US$61.9M vs Space US$55.2M），分部 Adj. EBITDA <strong>+US$14.1M</strong>。</p>
+      <p>仍未成立嘅路徑，係 H2 要把約 US$236–286M 轉入損益表去守住 FY2026 指引 US$450–500M，以及把 Adj. EBITDA（−US$3.2M）同五季負 FCF 變成可持續現金。08-25 相位陣列投資、08-12 Kanematsu、08-06 Starfall <strong>全部冇披露美元</strong>，唔當已入帳，亦修補唔到支柱 D。</p>
+      <p>最大裂痕仍然係資本紀律：Q2 FCF 約 −US$35.3M；現金 US$557.7M 主要來自 ATM。正面變化只係節奏——08-30 之後未見新 424B5；08-03 股數 249.99M，相對 6/30 只多約 0.3%。June ATM 剩餘 <strong>US$350.4M</strong> 仍在。</p>
+      <p>對行動：thesis <strong>Mixed</strong>，所以 −56% 浮虧唔等於 Broken，9% 折讓亦唔等於可以攤平。現價對 Base 約 <strong>−9.0% 折讓</strong> → <strong>續抱、唔好加倉</strong>。即使 Bull US$19.15 仍低過成本 US$23.68，唔好把「等到回本」當時間表。</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>四條支柱</h2>
+    <p class="muted" style="margin-top:-8px">標 ★ 嘅係估值驅動，會郁 F3 Base／P/S。本頁唔重做目標價。F1 係門檻未達型 FAIL（60／130），<strong>唔係</strong> HIMS 嗰種流動性紅線 FAIL。</p>
+    <div class="grid-4">
+      <div class="box pass"><h3>A. 需求／成長 ★</h3><p>Backlog 同 B2B &gt;1，H2 轉化可達 FY 指引。KPI：Q2 營收 US$117.1M；backlog US$542.1M、B2B 1.42；H2 需約 US$236–286M。</p></div>
+      <div class="box warn"><h3>B. 盈利質量 ★</h3><p>毛利率企穩 mid-20s+，EBITDA 收窄至轉正。KPI：GAAP GM 27.8%（唔好外推峰值）；Adj. EBITDA −US$3.2M。</p></div>
+      <div class="box warn"><h3>C. Defense 第二曲線</h3><p>UAS／RF 要喺分部表而唔係簡報。10-Q：Defense 營收 US$61.9M、分部 Adj. EBITDA +US$14.1M。新 IR 稿無金額＝中性。</p></div>
+      <div class="box fail"><h3>D. 資金紀律 ★</h3><p>擴張唔靠無限 ATM。KPI：Q2 FCF ≈ −US$35.3M；股數 249.99M；June ATM 剩餘 US$350.4M。近窗無新大額增發，保險絲未拆。</p></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>證據卡</h2>
+    <div class="filters sans" id="filters">
+      <button class="active" data-f="all">全部</button>
+      <button data-f="support">支持</button>
+      <button data-f="neutral">中性</button>
+      <button data-f="weaken">削弱</button>
+    </div>
+    <div class="ev-grid" id="evidence"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Skill 5 檢查點（而家）</h2>
+    <p class="muted" style="margin-top:-8px">沿用 08-30 催化劑日曆，唔另揀靚數。Q3 日期 IR 未掛。</p>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>#</th><th>檢查點</th><th>確認</th><th>失效</th><th>而家</th><th>狀態</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>H2 轉化 vs FY US$450–500M</td><td>守住全年下限 US$450M</td><td>全年明顯低過 US$450M</td><td>H1 US$214.0M；H2 仍需約 US$236–286M</td><td>未發生（P1）</td></tr>
+          <tr><td>2</td><td>Q3 毛利率</td><td>≥25% 或守住 mid-20s</td><td>連續兩季 GM 跌穿 20%</td><td>Q2 27.8%</td><td>而家過線；Q3 未發生</td></tr>
+          <tr><td>3</td><td>Adj. EBITDA</td><td>轉正或再收窄</td><td>擴闊到 −US$27M 量級</td><td>Q2 −US$3.2M</td><td>接近、未完成</td></tr>
+          <tr><td>4</td><td>FCF／ATM</td><td>FCF 收窄；股數無跳升</td><td>再大幅 ATM 而 FCF 無改善</td><td>FCF −US$35.3M；無新 424B5</td><td>裂縫未修</td></tr>
+          <tr><td>5</td><td>Defense 訂單流</td><td>有金額嘅跟進訂單</td><td>分部連續兩季倒退</td><td>Q2 US$61.9M／backlog US$220.2M</td><td>部分確認</td></tr>
+          <tr><td>6</td><td>Q3 業績日</td><td>官方 IR 公布</td><td>—</td><td>第三方估 11 月；IR 未掛</td><td>未確認</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cite">Starfall／相位陣列／Kanematsu 只作敘事備註，唔當本季通過證據。</p>
+  </section>
+
+  <section class="panel">
+    <h2>支持 vs 裂痕</h2>
+    <div class="grid-2">
+      <div>
+        <h3>FCF（US$M，五季皆負）</h3>
+        <div class="chart" id="fcfChart"></div>
+      </div>
+      <div class="box fail" style="margin-top:28px">
+        <h3>裂痕性質</h3>
+        <p><strong>階段性壓力／執行中未完成</strong>。未到結構性惡化或 Broken。最強支持：Q2 紀錄營收、毛利修復、Defense 分部 Adj. EBITDA +US$14.1M。最大裂痕：負 FCF + ATM 剩餘 US$350.4M。08-30 之後無新季報，股價跌唔改 Mixed。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>失效條件同行動</h2>
+    <div class="grid-2">
+      <div class="box fail">
+        <h3>判定 Broken（沿用 F1／F2／F3／Skill 5）</h3>
+        <p>FY2026 營收明顯低過 US$450M <strong>同時</strong>毛利率再度轉負；或再大幅 ATM 而 FCF 無改善、backlog 停滯。再削弱線：連續兩季 GM 跌穿 20%，或 backlog 連續兩季下降。唔好用 −56% 浮虧合理化續抱。</p>
+      </div>
+      <div class="box warn">
+        <h3>而家點做</h3>
+        <p>現價對 Base 約 <strong>−9.0% 折讓</strong> → <strong>續抱、唔好加倉</strong>。F1 門檻未達型 FAIL 同支柱 D 未修，折讓係風險折價。成本 US$23.68 高過 F3 Bull US$19.15，「回本」唔喺估值情景內。縮倉屬組合風險預算，唔等於 thesis Broken。近端盯有冇新 8-K／424B5；最大閘係 Q3 業績。</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="footer">官方優先：2026-Q2 8-K EX-99.1 accession 0001819810-26-000121（filed 2026-08-05）；10-Q 0001819810-26-000124（filed 2026-08-06，cover 股數 249,992,609 as of 2026-08-03）。08-30 至 09-04 無新公司 8-K／424B5。IR：相位陣列 2026-08-25、Kanematsu 2026-08-12（均無美元）。價格 yfinance delayed 2026-09-03 收市 US$10.37。估值只引用 F3 Base US$11.40。持倉 4,400＠約 US$23.68（broker 2026-09-04）。x_access: degraded。此分析僅供研究參考，不構成投資建議。</p>
 </div>
+<script>
+const evidence=[
+{k:"neutral",type:"監管文件",title:"08-30 之後無新公司 8-K／10-Q／424B5",body:"呢次 refresh 冇新一季 KPI。支柱 A／B 嘅已入帳證據同 08-06／08-30 一樣，狀態唔因為股價由 US$10.87 跌到 US$10.37 而自動轉弱或轉強。下一步會改數嘅係 Q3 業績／10-Q。verified 最新申報日；Q3 pending。"},
+{k:"support",type:"財報",title:"Q2 營收 US$117.1M（+89.6% YoY）；H1 US$214.0M",body:"頂線拐點仍在。FY 指引維持 US$450–500M，未上修亦未撤回。H2 算術上仍要約 US$236–286M。call 稱 midpoint 可見度 ~90% 屬前瞻，唔當已入帳。未過關條件係 Q3 節奏明顯低過守住全年下限。verified · 8-K EX-99.1。"},
+{k:"support",type:"KPI",title:"GAAP 毛利率 27.8%；Adj. EBITDA −US$3.2M",body:"毛利由 25Q2 −30.9% 修復係單位經濟最硬證據。CFO 近端只指引 low-to-mid 20s，27.8% 唔好直線外推——F3 已用 mid-20s。EBITDA 接近打平但仍負，未完成轉正。對支柱 B 屬有條件支持。"},
+{k:"support",type:"KPI",title:"Backlog US$542.1M；B2B 1.42；LTM 1.52",body:"合約可見度仍高。Skill 5 P1 仍係 H2 轉化，而唔係再刷 backlog 高位。連續兩季 backlog 下跌先再削弱。verified。"},
+{k:"support",type:"分部／10-Q",title:"Defense Q2 營收 US$61.9M、分部 Adj. EBITDA +US$14.1M",body:"08-30 tracker 話第二引擎量化證據中低——10-Q 分部表把呢句升級：Defense 已係較大收入腿，而且分部盈利已正（Space −US$4.2M）。公司合計 Adj. EBITDA 仍負，因為企業費用同 Space 仍拖。支持「第二曲線存在」，唔支持「集團已賺錢」。"},
+{k:"neutral",type:"IR／產品",title:"08-25 相位陣列「戰略投資」，無披露美元",body:"官方確認 RF／PWSA 相關產品線加碼，跟住 Longmont 產能升級。無新訂單、無 8-K 財務影響。錢大概率出自 ATM 堆起嘅現金同 IRAD，等於把支柱 D 嘅乾火藥用於支柱 C。金額 n/a。"},
+{k:"neutral",type:"IR／渠道",title:"08-12 Kanematsu 日本 teaming，無美元",body:"商業代表協議，覆蓋電源／微重力／機器人。7/8 簽約、8/12 公布。無獨家、無已入帳。對 A／C 係渠道選項，唔改 FY 指引路徑。verified 存在。"},
+{k:"neutral",type:"長線敘事",title:"SpaceMD × Starfall 2028、最多 32 PIL-BOX",body:"Skill 5 列 P3。2028 任務唔解決 2026 H2 轉化或近端 FCF。現金承諾未量化。verified 存在；近端財務 n/a。"},
+{k:"weaken",type:"現金流",title:"Q2 FCF ≈ −US$35.3M；庫存 US$85.4M（YE25 US$55.8M）",body:"五季 FCF 全負，Q2 較 Q1 −US$12.7M 轉差。10-Q：H1 OCF −US$31.6M、PPE US$13.3M；庫存再升約 US$29.5M。call 預期 Q3 庫存再升。第三方把 FCF 寫成 −24.9 至 −35.3 區間——棄用 aggregator，沿用 F2 −US$35.3M。"},
+{k:"weaken",type:"資本結構",title:"股數 249.99M；June ATM 剩餘 US$350.4M",body:"H1 ATM 發行 40.3M 股、所得約 US$550.6M。近窗（08-03 至 09-04）未見新 424B5，股數只多約 0.3%，顯示大額 ATM 暫停而非關閉。剩餘容量隨時可再開。結構裂痕未修。"},
+{k:"support",type:"資產負債",title:"Term loan US$50M；權證 202,069 張訂 9/02 到期",body:"去槓桿同簡化資本結構係真。權證相對 250M 股可忽略。呢啲抵銷唔到負 FCF 同 ATM 剩餘容量，所以只係弱支持。10-Q verified；到期後無 8-K。"},
+{k:"weaken",type:"篩選",title:"F1 FAIL 60／130（門檻未達型，紅線全過）",body:"同 HIMS 流動性 FAIL 完全唔同：三條致命紅線安全，只差 5 分未入 WATCH。08-30 之後冇新季報，唔重跑、唔改 60 分。未達門檻＝唔好加倉，唔等於要止蝕。"},
+{k:"neutral",type:"市場／持倉",title:"現價 US$10.37 對 Base −9.0%；成本 US$23.68 浮虧 −56.2%",body:"股價唔等於 thesis。折讓由 −4.9% 擴到 −9.0%，值搏率略改善，但仍未通過 FCF 驗證，唔構成加倉。成本高過 F3 Bull US$19.15，回本唔喺 Base／Bull 內。Broker screenshot 約 US$10.62 同 9/03 收市屬同一區間。"}
+];
+const evRoot=document.getElementById('evidence');
+function render(filter){
+  evRoot.innerHTML=evidence.filter(e=>filter==='all'||e.k===filter).map(e=>`
+  <article class="ev ${e.k}"><div class="type">${e.type}<span class="impact ${e.k}">${e.k==='support'?'支持':e.k==='weaken'?'削弱':'中性'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+});
+const fcf=[93.5,27.8,30.1,12.7,35.3];
+const labels=['25Q2','25Q3','25Q4','26Q1','26Q2'];
+const max=Math.max(...fcf);
+const chart=document.getElementById('fcfChart');
+chart.innerHTML=fcf.map((v,i)=>`<div class="bar" style="height:${Math.max(8,(v/max)*120)}px"><span>−${v}</span><em>${labels[i]}</em></div>`).join('');
+</script>
 </body>
 </html>
