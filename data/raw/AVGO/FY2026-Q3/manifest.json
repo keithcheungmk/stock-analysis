@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "company": "Broadcom Inc.",
+  "ticker": "AVGO",
+  "fiscal_period": "FY2026-Q3",
+  "period_end": "2026-08-02",
+  "currency": "USD",
+  "accounting_basis": [
+    "US_GAAP",
+    "Non_GAAP"
+  ],
+  "cik": "0001730168",
+  "authority": "Official company IR and SEC EDGAR",
+  "event_page": "https://investors.broadcom.com/",
+  "retrieved_at": "2026-09-04T10:55:15.459868+00:00",
+  "validation_status": "partial",
+  "bootstrap": "catalog_snapshot",
+  "files": [
+    {
+      "path": "sec-8-K-0001730168-26-000076-avgo-08022026x8kxex99.html",
+      "type": "earnings_release",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm",
+      "source_authority": "SEC EDGAR",
+      "validation_status": "verified",
+      "mime_type": "text/html",
+      "period_end": "2026-09-02",
+      "filing_form": "8-K",
+      "accession_number": "0001730168-26-000076",
+      "filing_date": "2026-09-02",
+      "catalog_note": "URL catalog snapshot; run download_official_research.py to fetch body and sha256"
+    },
+    {
+      "path": "sec-8-K-0001730168-26-000076-avgo-20260902.html",
+      "type": "event_filing",
+      "source_tier": "official",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-20260902.htm",
+      "source_authority": "SEC EDGAR",
+      "validation_status": "verified",
+      "mime_type": "text/html",
+      "period_end": "2026-09-02",
+      "filing_form": "8-K",
+      "accession_number": "0001730168-26-000076",
+      "filing_date": "2026-09-02",
+      "catalog_note": "URL catalog snapshot; run download_official_research.py to fetch body and sha256"
+    }
+  ],
+  "unavailable_sources": [
+    {
+      "type": "official_transcript",
+      "status": "not_part_of_standard_official_package",
+      "substitute": "webcast_metadata"
+    }
+  ],
+  "pending_sources": [
+    {
+      "reason": "local_body_not_fetched_in_bootstrap",
+      "hint": "Run scripts/download_official_research.py with SEC_USER_AGENT"
+    },
+    {
+      "type": "regulatory_filing",
+      "status": "not_filed_or_not_located_as_of_catalog",
+      "note": "FY2026-Q3 Form 10-Q not filed as of 2026-09-04; use 8-K EX-99.1 condensed statements"
+    }
+  ],
+  "release_date": "2026-09-02"
+}
