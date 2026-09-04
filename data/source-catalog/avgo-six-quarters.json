@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-09-04T18:50:00+08:00",
+  "generated_at": "2026-09-04T10:54:50.906335+00:00",
+  "companies": {
+    "AVGO": {
+      "name": "Broadcom Inc.",
+      "cik": "0001730168",
+      "ir_url": "https://investors.broadcom.com/",
+      "currency": "USD",
+      "accounting_basis": [
+        "US_GAAP",
+        "Non_GAAP"
+      ],
+      "periods": [
+        {
+          "label": "FY2025-Q2",
+          "period_end": "2025-05-04",
+          "release_date": "2025-06-05",
+          "filings": [
+            {
+              "accession_number": "0001730168-25-000061",
+              "form": "8-K",
+              "filing_date": "2025-06-05",
+              "report_date": "2025-06-05",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000061/0001730168-25-000061-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000061/avgo-20250605.htm",
+                  "name": "avgo-20250605.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000061/avgo-05042025x8kxex99.htm",
+                  "name": "avgo-05042025x8kxex99.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001730168-25-000064",
+              "form": "10-Q",
+              "filing_date": "2025-06-11",
+              "report_date": "2025-05-04",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000064/0001730168-25-000064-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000064/avgo-20250504.htm",
+                  "name": "avgo-20250504.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.broadcom.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2025-Q3",
+          "period_end": "2025-08-03",
+          "release_date": "2025-09-04",
+          "filings": [
+            {
+              "accession_number": "0001730168-25-000094",
+              "form": "8-K",
+              "filing_date": "2025-09-04",
+              "report_date": "2025-09-04",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000094/0001730168-25-000094-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000094/avgo-20250904.htm",
+                  "name": "avgo-20250904.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000094/avgo-08032025x8kxex99.htm",
+                  "name": "avgo-08032025x8kxex99.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001730168-25-000098",
+              "form": "10-Q",
+              "filing_date": "2025-09-10",
+              "report_date": "2025-08-03",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000098/0001730168-25-000098-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000098/avgo-20250803.htm",
+                  "name": "avgo-20250803.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.broadcom.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2025-Q4",
+          "period_end": "2025-11-02",
+          "release_date": "2025-12-11",
+          "filings": [
+            {
+              "accession_number": "0001730168-25-000116",
+              "form": "8-K",
+              "filing_date": "2025-12-11",
+              "report_date": "2025-12-11",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000116/0001730168-25-000116-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000116/avgo-20251211.htm",
+                  "name": "avgo-20251211.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000116/avgo-11022025x8kxex99.htm",
+                  "name": "avgo-11022025x8kxex99.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001730168-25-000121",
+              "form": "10-K",
+              "filing_date": "2025-12-18",
+              "report_date": "2025-11-02",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/0001730168-25-000121-index.html",
+              "documents": [
+                {
+                  "description": "10-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/avgo-20251102.htm",
+                  "name": "avgo-20251102.htm",
+                  "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.broadcom.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2026-Q1",
+          "period_end": "2026-02-01",
+          "release_date": "2026-03-04",
+          "filings": [
+            {
+              "accession_number": "0001730168-26-000011",
+              "form": "8-K",
+              "filing_date": "2026-03-04",
+              "report_date": "2026-03-04",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000011/0001730168-26-000011-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000011/avgo-20260304.htm",
+                  "name": "avgo-20260304.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000011/avgo-02012026x8kxex99.htm",
+                  "name": "avgo-02012026x8kxex99.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001730168-26-000016",
+              "form": "10-Q",
+              "filing_date": "2026-03-11",
+              "report_date": "2026-02-01",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000016/0001730168-26-000016-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000016/avgo-20260201.htm",
+                  "name": "avgo-20260201.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.broadcom.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2026-Q2",
+          "period_end": "2026-05-03",
+          "release_date": "2026-06-03",
+          "filings": [
+            {
+              "accession_number": "0001730168-26-000051",
+              "form": "8-K",
+              "filing_date": "2026-06-03",
+              "report_date": "2026-06-03",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000051/0001730168-26-000051-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000051/avgo-20260603.htm",
+                  "name": "avgo-20260603.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000051/avgo-05032026x8kxex99.htm",
+                  "name": "avgo-05032026x8kxex99.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001730168-26-000054",
+              "form": "10-Q",
+              "filing_date": "2026-06-09",
+              "report_date": "2026-05-03",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000054/0001730168-26-000054-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000054/avgo-20260503.htm",
+                  "name": "avgo-20260503.htm",
+                  "type": "10-Q",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.broadcom.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2026-Q3",
+          "period_end": "2026-08-02",
+          "release_date": "2026-09-02",
+          "filings": [
+            {
+              "accession_number": "0001730168-26-000076",
+              "form": "8-K",
+              "filing_date": "2026-09-02",
+              "report_date": "2026-09-02",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/0001730168-26-000076-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-20260902.htm",
+                  "name": "avgo-20260902.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm",
+                  "name": "avgo-08022026x8kxex99.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investors.broadcom.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ],
+          "pending_sources": [
+            {
+              "type": "regulatory_filing",
+              "status": "not_filed_or_not_located_as_of_catalog",
+              "note": "FY2026-Q3 Form 10-Q not filed as of 2026-09-04; balance sheet and cash flow from 8-K EX-99.1 condensed statements"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
