@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AVGO 催化劑日曆</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --teal-deep:#134e4a; --watch:#c2410c; --watch-soft:#ffedd5;
+    --fail:#b91c1c; --fail-soft:#fee2e2; --pass:#15803d; --pass-soft:#dcfce7;
+    --info:#1d4ed8; --info-soft:#dbeafe; --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.85rem;font-weight:800;line-height:1.2;color:var(--watch);margin:8px 0 0}
+  .score-den{font-size:.95rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.15rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif;background:var(--watch-soft);border:1px solid #fdba74}
+  .callout p{margin:0 0 10px}.callout p:last-child{margin-bottom:0}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  tr.next{background:var(--fail-soft)}
+  .timeline{display:grid;gap:10px}
+  .event{display:grid;grid-template-columns:170px 1fr;gap:14px;border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  @media(max-width:700px){.event{grid-template-columns:1fr}}
+  .event.high{border-left-color:var(--fail)}
+  .event.mid{border-left-color:var(--watch)}
+  .event.low{border-left-color:#a8a29e}
+  .event .date{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;color:var(--ink)}
+  .event .tag{display:inline-block;font-size:.7rem;font-weight:800;border-radius:999px;padding:2px 8px;margin-top:4px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .tag.high{background:var(--fail-soft);color:var(--fail)}
+  .tag.mid{background:var(--watch-soft);color:var(--watch)}
+  .tag.low{background:#f1f5f9;color:#64748b}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.warn{border-left:5px solid var(--watch)}.box.fail{border-left:5px solid var(--fail)}.box.ok{border-left:5px solid var(--pass)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .cite{font-size:.78rem;color:var(--muted);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Skill 5 · 未來 1–2 季</div>
+      <div class="score-num">等 Q4 入帳<br>10-Q 前唔追</div>
+      <div class="score-den">現價 vs F3 Base +0.6% · 僅觀察</div>
+    </div>
+    <div class="hero-main">
+      <h1>AVGO · 催化劑地圖</h1>
+      <p>真正改倍數嘅唔係再一次 AI headline，而係 FY2026-Q4 把 AI 半導體指引 US$21.7B 變成已入帳，以及遲來嘅 Q3 10-Q 會唔會把客戶集中／保理寫壞。</p>
+      <div class="badges">
+        <span class="badge">截至 2026-09-04 HKT</span>
+        <span class="badge">Q3 10-Q 未申報</span>
+        <span class="badge">唔另估目標價</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +0.6%</span></h2>
+    <p class="muted" style="margin:0">估值尺沿用 Framework 3，本頁<strong>唔另估 target price</strong>。現價對 Base 約 <strong>+0.6% 溢價</strong>（持平）→ <strong>僅觀察、唔好建倉</strong>。持倉未確認。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 9/03）</div><div class="v">US$357.16</div><div class="s">市值 ~US$1.699T · NY close</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">205 / 355 / 545</div><div class="s">FY2027 Non-GAAP P/E 中心價</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+0.6%</div><div class="s">合理 · 僅觀察</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">TTM P/S 19.1×</div><div class="s">FCF yield ~2.3% · Street fwd PE 棄用做輸入</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ 總營收 US$29.6B（+86% YoY）</span>
+      <span>★ AI 半導體 US$16.7B（+221% · +54% QoQ）</span>
+      <span>★ Q3 官方 FCF US$13.7B（收入 46%）</span>
+      <span>★ GAAP 毛利率 69.1%</span>
+      <span>★ 應收 US$13.7B／自算 DSO ~42 日</span>
+    </div>
+    <div class="action">現價對 Base 約 +0.6% 溢價：僅觀察、唔好建倉；Q4 財報前唔追（持倉未確認）</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi red"><div class="label">最大閘</div><div class="value">FY26-Q4 業績</div><div class="note">期終 11/01 · 口頭 12/09 盤後</div></div>
+    <div class="kpi orange"><div class="label">近端文件</div><div class="value">Q3 10-Q</div><div class="note">截至 09-04 未申報</div></div>
+    <div class="kpi teal"><div class="label">Q4 AI 指引</div><div class="value">US$21.7B</div><div class="note">未入帳 · +236% YoY</div></div>
+    <div class="kpi green"><div class="label">確認門檻</div><div class="value">AI ≥US$20B</div><div class="note">兼 FCF ≥US$10B · DSO ≤48</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>一句話結論</h2>
+      <div class="callout">
+        <p>未來兩季唯一同時驗證 AI 入帳質素、FCF 保險絲同 FY2027 Base 嘅閘，係 <strong>FY2026-Q4 財報</strong>。官方 outlook 期終 <strong>2026-11-01</strong>；IR 日曆頁尚未掛公布日，Q3 業績會 IR 口頭稱 <strong>2026-12-09 盤後</strong>。</p>
+        <p>市場最易看錯兩點：把「Q4 總營收約 US$34.8B 略低過街貨」當成 AI 已經轉差——AI 指引 US$21.7B 仍未入帳；又把未印喺 8-K 嘅 FY2027／FY2028 AI TAM 約 US$115B／US$230B 當成 Q4 必須交出嘅成績表。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>核心敘事同敏感變數</h2>
+      <p>主敘事：Broadcom 已經係超大規模客製 AI 加速器＋網絡嘅最大已入帳贏家，軟件做緩衝。Q3 總營收 US$29,591m（+86%）、AI 半導體 US$16.7B（beat 指引 US$16.0B）。市場而家交易嘅，唔係「AI 係咪真」，而係 Q4 指引年化（約 US$86.8B AI）可唔可以守成 F3 Base，定係要跟 Street 平均收入約 US$173B 嗰條未有全年指引嘅加速。</p>
+      <p class="muted">雜訊：單日盤後、「總營收略低過 US$35.0B 街貨」、分析員目標價約 US$526、Hugging Face 標題黨。Q3 10-Q 未出，客戶集中／保理仍停喺 Q2：頭五名終端約 45%、單一經銷商 42%。</p>
+    </section>
+
+    <section class="panel">
+      <h2>Catalyst 時間線（優先排序）</h2>
+      <div class="timeline">
+        <div class="event high"><div><div class="date">未來數日內</div><span class="tag high">高 · 10-Q pending</span></div><div><h3>FY2026-Q3 Form 10-Q</h3><p class="muted">KPI：★ 應收／DSO、頭五名終端客戶。保理、經銷商 42%、有冇 XPU vs 網絡拆。SEC 截至 09-04 未申報。按 Q2 節奏約業績後 6 日。唔改已入帳營收，但可改倍數折讓。</p></div></div>
+        <div class="event low"><div><div class="date">2026-09-08</div><span class="tag low">低至中 · unverified</span></div><div><h3>Goldman Sachs Communacopia</h3><p class="muted">KPI：只影響敘事、唔郁近端倍數。IR 日曆頁尚未掛 2026 場；只見於業績會 IR 口頭（第三方逐字稿）。唔使為會議追價。</p></div></div>
+        <div class="event low"><div><div class="date">09-21 記錄／09-30 派息</div><span class="tag low">低 · 已公布</span></div><div><h3>季度股息 US$0.65</h3><p class="muted">KPI：★ 官方 FCF 用途。EX-99.1 verified。Q3 已派 US$3,103m。例行派息，已 price in。</p></div></div>
+        <div class="event mid"><div><div class="date">2026-10-06</div><span class="tag mid">中 · MRVL 官方</span></div><div><h3>Marvell Investor Day</h3><p class="muted">KPI：custom 已入帳 vs 未入帳（對照 AVGO ★ AI）。MRVL IR verified。唔係 AVGO 自己嘅 P&amp;L；Google warrant 仍要收入門檻。</p></div></div>
+        <div class="event mid"><div><div class="date">約 10-15／10-22</div><span class="tag mid">中／低 · 日期未確認</span></div><div><h3>TSMC Q3 · Intel Q3</h3><p class="muted">TSMC：先進製程／CoWoS 供應，間接撐 AI 出貨。Intel：旁證。日期 yfinance／行業日曆，unverified。</p></div></div>
+        <div class="event mid"><div><div class="date">約 11-03</div><span class="tag mid">中 · Helios</span></div><div><h3>AMD CY Q3 ＋ Helios 入帳</h3><p class="muted">KPI：同業 DC 已入帳。Helios 主要對 NVIDIA GPU，唔等於 AVGO 失效。若仍幾乎未入帳，市場可能誤讀成「AI capex 全面減速」。日期 unverified。</p></div></div>
+        <div class="event mid"><div><div class="date">2026-11-01</div><span class="tag mid">中 · 會計錨</span></div><div><h3>FY2026-Q4 期終</h3><p class="muted">KPI：★ 總營收／AI 入帳截止日。EX-99.1 outlook verified。呢日唔係公布日。</p></div></div>
+        <div class="event high"><div><div class="date">約 11-17</div><span class="tag high">中高 · 板塊</span></div><div><h3>NVIDIA FY2027-Q3</h3><p class="muted">KPI：DC vs 指引 US$108.0B ±2%；ASIC 流失措辭。Hugging Face 預期 2027 H1 交割，呢份季報唔入帳協同。NVDA 8-K 承諾繼續支援其他矽供應商。日期 unverified。</p></div></div>
+        <div class="event high"><div><div class="date">2026-12-09 盤後</div><span class="tag high">最高 · 口頭日期</span></div><div><h3>Broadcom FY2026-Q4 業績</h3><p class="muted">KPI：★ AI vs US$21.7B、★ 營收 vs 約 US$34.8B、★ FCF、★ GM、★ DSO。AI ≥US$20B 只係入場券。日期＝業績會 IR 口頭，IR 頁未掛；期終同指引 verified。</p></div></div>
+        <div class="event mid"><div><div class="date">Q4 稿／其後 10-K</div><span class="tag mid">中 · 資本結構</span></div><div><h3>還債／回購／派息</h3><p class="muted">KPI：★ FCF、現金／有息債。Q3 還債 US$5,628m、回購 0、股息 US$3,103m；現金只有債 0.40×。續還債先至收窄紅線 1 保險絲。</p></div></div>
+        <div class="event low"><div><div class="date">持續至 2027 H1</div><span class="tag low">敘事 · 近端低</span></div><div><h3>NVIDIA × Hugging Face 監管／交割</h3><p class="muted">約 US$11.9B + 最多約 US$1.0B 留任。未交割 ≠ 封殺 AVGO。協議 verified；交割 pending。</p></div></div>
+      </div>
+      <p class="cite">AVGO 8-K EX-99.1 accession 0001730168-26-000076（2026-09-02）。NVDA Hugging Face 8-K 0001045810-26-000078（2026-09-03）。Apple 合作 8-K 0001193125-26-295589（2026-07-06）已發生，只作背景。MRVL Investor Day：官方 IR 2026-10-06。</p>
+    </section>
+
+    <section class="panel">
+      <h2>事件排序、誤判、行動</h2>
+      <div class="grid-2">
+        <div class="box fail"><h3>最重要三個</h3><p class="muted">① Q4 業績驗證 AI US$21.7B 入帳同 FCF。② Q3 10-Q 客戶集中／保理。③ NVDA Q3 板塊定價——協議唔等於即季封殺客製。</p></div>
+        <div class="box warn"><h3>市場高估</h3><p class="muted">總營收指引略低過街貨（9/03 已消化一輪）；FY27／FY28 AI TAM（8-K 冇印）；Goldman 語氣；Hugging Face 標題黨；分析員目標價 ~US$526。</p></div>
+        <div class="box fail"><h3>市場低估</h3><p class="muted">10-Q 集中度再升；停回購＋還債 US$5.6B 嘅資本配置轉向；Helios 若仍未入帳被誤讀成需求崩；非 AI 半導體約 US$4.1B 持平、冇第二條腿。</p></div>
+        <div class="box ok"><h3>Skill 6 檢查點</h3><p class="muted">Q4 AI vs US$21.7B；FCF vs US$10B／35%；DSO vs 48／55 日；頭五名 vs 50／55%；Q1 FY27 指引係延續定失速。Apple 2031 合約唔當本季通過證據。</p></div>
+        <div class="box warn" style="grid-column:1/-1"><h3>而家點做</h3><p>現價對 Base 約 <strong>+0.6% 溢價</strong> → <strong>僅觀察、唔好建倉、Q4 財報前唔追</strong>。10-Q 同 Goldman 會議都唔構成買點。若 Q4 全部確認（AI ≥US$20B、FCF ≥US$10B 或 margin ≥35%、DSO ≤48、頭五名 ≤50%）先討論當時重算 Base 同建倉觀察區 US$250–300——確認 ≠ 市價可追。失效：AI 明顯低過 US$18B、FCF 轉負、DSO ≥55。無確認持倉，唔提供減倉指令。</p></div>
+      </div>
+    </section>
+  </div>
+
+  <p class="footer">官方優先：Broadcom 8-K EX-99.1 2026-09-02；Q3 10-Q 截至 2026-09-04 未申報。HUD 沿用 F3 Base US$355、現價 US$357.16 delayed（2026-09-03）。Q4 公布日以公司 IR 為準。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+</body>
+</html>
