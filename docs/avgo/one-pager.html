@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AVGO One-Pager · 2026-09-04</title>
+<style>
+  :root {
+    --bg:#f3efe6; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --teal-deep:#134e4a; --watch:#c2410c; --watch-soft:#ffedd5;
+    --fail:#b91c1c; --fail-soft:#fee2e2; --pass:#15803d; --pass-soft:#dcfce7;
+    --info:#1d4ed8; --info-soft:#dbeafe; --shadow:0 16px 44px rgba(28,25,23,.1);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;color:var(--ink);background:radial-gradient(circle at 10% 0%,#d8f3ee 0,transparent 32%),radial-gradient(circle at 90% 8%,#ffe4cc 0,transparent 28%),var(--bg);line-height:1.5}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .deck{min-height:100%;display:flex;flex-direction:column;max-width:1180px;margin:0 auto;padding:18px 18px 16px}
+  .progress{height:4px;background:#e7e0d5;border-radius:999px;overflow:hidden;margin-bottom:14px}
+  .progress>span{display:block;height:100%;width:25%;background:#0f766e;transition:width .25s ease}
+  .slide{display:none;animation:rise .28s ease}
+  .slide.on{display:block}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .status-box{background:#fff7ed;border:1px solid #fdba74;border-radius:28px;padding:22px}
+  .eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--watch);font-weight:800}
+  .status-title{font-size:2rem;font-weight:800;color:var(--watch);margin:10px 0 8px;line-height:1.15}
+  .hero-main{background:#134e4a;color:#fff;border-radius:28px;padding:26px}
+  .hero-main h1{margin:0 0 8px;font-size:1.9rem}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .badge{display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.8rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px}
+  .kpi .label{color:var(--muted);font-size:.78rem;font-weight:700}
+  .kpi .value{font-size:1.45rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.ok{border-top:5px solid var(--pass)}.kpi.warn{border-top:5px solid var(--watch)}.kpi.fail{border-top:5px solid var(--fail)}.kpi.teal{border-top:5px solid var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px;margin-top:16px}
+  h2{margin:0 0 6px;font-size:1.22rem}
+  .sub{margin:0 0 14px;color:var(--muted);font-size:.92rem}
+  .thesis{background:#fff7ed;border:1px solid #fdba74;border-radius:18px;padding:16px 18px}
+  .thesis p{margin:0 0 10px}.thesis p:last-child{margin:0}
+  .fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.fact-grid{grid-template-columns:1fr}}
+  .fact{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;min-height:132px}
+  .fact.ok{border-left:6px solid var(--pass)}.fact.warn{border-left:6px solid var(--watch)}.fact.bad{border-left:6px solid var(--fail)}
+  .fact .n{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:var(--muted)}
+  .fact h3{margin:4px 0 8px;font-size:1.02rem}
+  .fact p{margin:0;color:var(--muted);font-size:.9rem}
+  .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.val-grid{grid-template-columns:1fr}}
+  .val{border-radius:20px;padding:16px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left}
+  .val.bear{border-top:6px solid var(--fail)}.val.base{border-top:6px solid var(--watch)}.val.bull{border-top:6px solid var(--pass)}
+  .val.on{outline:2px solid #0f766e;transform:translateY(-2px)}
+  .val .tag{font-size:.75rem;font-weight:800;letter-spacing:.08em}
+  .val .px{font-size:2rem;font-weight:800;margin:6px 0}
+  .val p{margin:0;color:var(--muted);font-size:.88rem}
+  .note{margin-top:14px;background:var(--info-soft);border:1px solid #bfdbfe;border-radius:16px;padding:14px 16px}
+  .ruler{margin:16px 0 8px;position:relative;height:52px}
+  .track{height:10px;background:#e7e0d5;border-radius:999px;position:relative;margin-top:22px;overflow:hidden}
+  .track>i{display:block;height:100%;width:43.5%;background:#fdba74}
+  .pin{position:absolute;top:-6px;width:4px;height:22px;background:#134e4a;border-radius:4px;transform:translateX(-50%);left:43.5%}
+  .mark{position:absolute;top:-20px;font-size:.68rem;font-weight:800;transform:translateX(-50%);white-space:nowrap}
+  .timeline{display:grid;gap:10px}
+  .event{display:grid;grid-template-columns:168px 1fr auto;gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+  @media(max-width:860px){.event{grid-template-columns:1fr}}
+  .when{font-weight:800;font-size:.82rem;color:var(--teal-deep)}
+  .dir{font-size:.75rem;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap}
+  .dir.high{background:var(--watch-soft);color:var(--watch)}.dir.risk{background:var(--fail-soft);color:var(--fail)}.dir.mid{background:var(--info-soft);color:var(--info)}.dir.low{background:#f5f5f4;color:var(--muted)}
+  .kill{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  @media(max-width:860px){.kill{grid-template-columns:1fr}}
+  .kill div{background:#fef2f2;border:1px solid #fecaca;border-radius:16px;padding:14px}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:8px}
+  .dots{display:flex;gap:8px}
+  .dot{width:10px;height:10px;border-radius:999px;border:0;background:#d6d3d1;cursor:pointer}
+  .dot.on{background:var(--teal);width:28px}
+  button.navbtn{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;cursor:pointer}
+  button.navbtn:disabled{opacity:.4;cursor:default}
+  .foot{color:var(--muted);font-size:.78rem;margin-top:8px}
+  .muted{color:var(--muted);font-size:.9rem}
+  a{color:#0f766e;font-weight:700}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+
+<div class="deck">
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+  <div class="stage">
+
+    <section class="slide on" data-slide="0">
+      <div class="hero">
+        <div class="status-box sans">
+          <div class="eyebrow">One-Pager · First · PASS 120／130</div>
+          <div class="status-title">僅觀察</div>
+          <p style="margin:0;color:var(--watch);font-weight:700">Thesis Intact · F3 合理 · 現價已反映 Base</p>
+          <p style="margin:12px 0 0;color:var(--muted);font-size:.9rem">F1 PASS · F2 增長通過、現金部分通過 · Skill 4 質量第二 · 持倉未確認</p>
+        </div>
+        <div class="hero-main sans">
+          <h1>AVGO · Broadcom</h1>
+          <p>2026-09-04（HKT）· FY2026-Q3 期終 2026-08-02 · USD · US GAAP／Non-GAAP unaudited · 8-K EX-99.1 filed 2026-09-02 · Q3 10-Q 未申報</p>
+          <div class="badges">
+            <span class="badge">現價 US$357.16 delayed 9/03</span>
+            <span class="badge">Base US$355</span>
+            <span class="badge">Q4 AI US$21.7B 未入帳</span>
+          </div>
+        </div>
+      </div>
+      <section class="hud sans" id="decision-hud">
+        <h2>Decision HUD <span class="hud-tag">現價 vs Base +0.6%</span></h2>
+        <p class="muted" style="margin:0">估值尺沿用 Framework 3，本頁<strong>唔另估 target price</strong>。可調驅動見 <a href="./valuation.html">估值卡</a>。</p>
+        <div class="hud-grid">
+          <div class="hud-cell"><div class="l">現價（延遲 9/03）</div><div class="v">US$357.16</div><div class="s">市值 ~US$1.699T · NY close</div></div>
+          <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">205 / 355 / 545</div><div class="s">FY2027 Non-GAAP P/E 中心價</div></div>
+          <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+0.6%</div><div class="s">合理 · 僅觀察</div></div>
+          <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">TTM P/S 19.1×</div><div class="s">FCF yield ~2.3% · 唔另估 target</div></div>
+        </div>
+        <div class="hud-drivers">
+          <span>★ 總營收 US$29.6B（+86% YoY）</span>
+          <span>★ AI 半導體 US$16.7B（+221% · +54% QoQ）</span>
+          <span>★ Q3 官方 FCF US$13.7B（收入 46%）</span>
+          <span>★ GAAP 毛利率 69.1%</span>
+          <span>★ 應收 US$13.7B／自算 DSO ~42 日</span>
+        </div>
+        <div class="action">現價對 Base 約 +0.6% 溢價 → 僅觀察、唔好建倉（持倉未確認）</div>
+      </section>
+      <div class="panel">
+        <h2 class="sans">Thesis</h2>
+        <div class="thesis sans">
+          <p>增長支柱已經被損益表驗證：Q3 總營收 US$29,591m（+86% YoY）、AI 半導體 US$16.7B（+221%、+54% QoQ，beat 上季指引 US$16.0B）；非 AI 半導體約 US$4.1B 持平，增量幾乎全部係 AI 線。軟件 US$8.752B（+29%）做緩衝。F1 PASS 120／130、F2 增長通過、Skill 6 Intact。</p>
+          <p>仍未成立嘅路徑，係 Q4 把 AI 指引 US$21.7B 變成已入帳之後仲可以再加速去 Street FY2027 收入約 US$173B，以及客製 XPU 按客戶／產品拆開、證明唔係一至兩間超大規模預支。8-K 把 accelerators 同 networking 寫喺同一句；Q3 10-Q 仍未申報。F3 Base 只係守住 Q4 run-rate 一年（AI 約 US$85B、收入約 US$138B、24× → US$355）。</p>
+          <p>最大裂痕係槓桿保險絲同集中度未知：現金 US$23,975m 只有有息債 US$59,419m 嘅 0.40×。紅線 1 第一項已成立，任何一季官方 FCF 轉負就會重新可觸發。F2 現金流只係部分通過。</p>
+          <p>現價對 Base 約 <strong>+0.6% 溢價</strong> → <strong>僅觀察、唔好建倉</strong>。Thesis Intact 證明質量，唔證明買點。Base 上行幾乎係零、Bear 下行約 43%。持倉未確認。下一個最大閘係 FY2026-Q4；近端只觀察 Q3 10-Q。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="1">
+      <div class="kpis sans">
+        <div class="kpi teal"><div class="label">現價錨 · 09-03 delayed</div><div class="value">US$357.16</div><div class="note">對 Base +0.6%</div></div>
+        <div class="kpi ok"><div class="label">Q3 營收 · +86% YoY</div><div class="value">US$29.6B</div><div class="note">verified · 8-K EX-99.1</div></div>
+        <div class="kpi ok"><div class="label">AI 半導體 · +221%</div><div class="value">US$16.7B</div><div class="note">+54% QoQ · beat US$16.0B</div></div>
+        <div class="kpi warn"><div class="label">官方 FCF · 現金／債 0.40×</div><div class="value">US$13.7B</div><div class="note">收入 46% · 紅線 1 保險絲</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">而家最重要嘅 5 個事實</h2>
+        <p class="sub">First 模式。來源：SEC 8-K EX-99.1（2026-09-02，unaudited）。Q4 指引未入帳。Q3 10-Q pending。</p>
+        <div class="fact-grid">
+          <article class="fact ok">
+            <div class="n sans">01 · 成長已入帳</div>
+            <h3 class="sans">營收 US$29.6B；AI US$16.7B beat US$16.0B</h3>
+            <p>非 AI 半導體約 US$4.1B 持平，QoQ 爆炸唔係一次性非 AI 出貨。軟件 US$8.752B（+29%）證明唔係單一 AI 客戶故事。XPU vs 網絡仍未拆；紀錄營收本身唔等於 thesis 全面通過。</p>
+          </article>
+          <article class="fact ok">
+            <div class="n sans">02 · 現金機器</div>
+            <h3 class="sans">FCF 五季連升至 US$13.7B（46%）</h3>
+            <p>Q3 還債 US$5,628m、股息 US$3,103m、回購 US$0。確認線 Q4 ≥US$10B 或 margin ≥35%——單季已過。呢張卡支持「而家未轉負」，唔係「紅線 1 已拆彈」。</p>
+          </article>
+          <article class="fact bad">
+            <div class="n sans">03 · 槓桿保險絲</div>
+            <h3 class="sans">現金 US$24.0B／有息債 US$59.4B = 0.40×</h3>
+            <p>覆蓋由 0.17× 改善到 0.40×，淨負債約 US$35.4B。現金已經低過債，單季官方 FCF 轉負即觸發紅線 1。F3 用 24× 而唔用 28–30×，就係扣呢層。</p>
+          </article>
+          <article class="fact warn">
+            <div class="n sans">04 · 集中度未知</div>
+            <h3 class="sans">Q2 頭五名 ~45%；經銷商 42%；DSO ~42 日</h3>
+            <p>應收 US$13.7B，週轉未失控（低過 48／55 日線）。Q3 10-Q 仍未申報——近端觀察閘，唔構成買點。Apple 2031 合約無美元，唔當本季通過證據。</p>
+          </article>
+          <article class="fact warn" style="grid-column:1/-1">
+            <div class="n sans">05 · 價格已反映 Base</div>
+            <h3 class="sans">現價對 Base +0.6%；Q4 AI US$21.7B 仍未入帳</h3>
+            <p>Q4 指引總營收約 US$34.8B、Non-GAAP 營業利潤約 66% 全部未入帳。9/03 放量跌消化嘅係總營收略低過街貨約 US$35.0B（差額不到 1%），唔係 AI 指引被撤回。Street FY2027 收入約 US$173B 同 TAM US$115B／US$230B 冇印喺 8-K。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="2">
+      <div class="kpis sans">
+        <div class="kpi teal"><div class="label">現價錨</div><div class="value">US$357.16</div></div>
+        <div class="kpi warn"><div class="label">Framework 3 Base</div><div class="value">US$355</div></div>
+        <div class="kpi"><div class="label">Bear – Bull 中心</div><div class="value">US$205–545</div></div>
+        <div class="kpi fail"><div class="label">判定 · 建倉區</div><div class="value">合理 · 250–300 要確認</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">估值摘要 · Framework 3</h2>
+        <p class="sub">FY2027 公司 Non-GAAP P/E（收入 × NM ÷ 預計攤薄股數）。只引用 F3，無 compact 模型。點擊情景。尺：Bear 下沿 170 → Bull 上沿 600；針係現價。</p>
+        <div class="val-grid sans" id="valGrid">
+          <button class="val bear" data-val="bear" type="button">
+            <div class="tag">BEAR · 30% · −43%</div>
+            <div class="px">US$205</div>
+            <p>收入 US$113B · AI US$65B · EPS 11.30 · 18×。區間 170–230。</p>
+          </button>
+          <button class="val base on" data-val="base" type="button">
+            <div class="tag">BASE · 50% · −0.6%</div>
+            <div class="px">US$355</div>
+            <p>收入 US$138B · AI US$85B · EPS 14.87 · 24×。區間 325–385。</p>
+          </button>
+          <button class="val bull" data-val="bull" type="button">
+            <div class="tag">BULL · 20% · +53%</div>
+            <div class="px">US$545</div>
+            <p>收入 US$162B · AI US$105B · EPS 18.20 · 30×。區間 490–600。</p>
+          </button>
+        </div>
+        <div class="ruler sans" id="ruler">
+          <span class="mark" style="left:8.1%">170</span>
+          <span class="mark" style="left:16.3%">205</span>
+          <span class="mark" style="left:43.0%">355</span>
+          <span class="mark" style="left:43.5%;top:28px;color:#134e4a">現價 357</span>
+          <span class="mark" style="left:87.2%">545</span>
+          <span class="mark" style="left:100%">600</span>
+          <div class="track"><i></i><span class="pin" title="現價 US$357.16"></span></div>
+        </div>
+        <div class="note" id="valNote">現價對 Base 約 +0.6% 溢價（持平）。若畀 24×，隱含 FY2027 EPS 約 US$14.88、收入約 US$138B——剛好等於 Base。Street 平均 US$173B／分析員目標約 US$526 接近 Bull，唔當估值。概率加權 US$348（−2.6%）。</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="3">
+      <div class="panel">
+        <h2 class="sans">股價催化劑 · 未來 1–2 季</h2>
+        <p class="sub">窗口 2026-09-04 至約 2026-12 下旬。只列會改寫 F3 倍數或現金路徑嘅事件。沿用 Skill 5。</p>
+        <div class="timeline sans">
+          <div class="event">
+            <div class="when">近端 · pending<br>IR／SEC 尚未掛出</div>
+            <div>
+              <strong>FY2026-Q3 Form 10-Q</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">頭五名 vs 50／55%、經銷商、保理、有冇 XPU vs 網絡拆。唔改 Q3 已入帳營收，但可以改增長質量評級。唔構成買點。</div>
+            </div>
+            <span class="dir high">雙向 · 高</span>
+          </div>
+          <div class="event">
+            <div class="when">2026-11-01 verified<br>約 12/09 盤後 unverified</div>
+            <div>
+              <strong>Broadcom FY2026-Q4 · AI vs US$21.7B</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">最大閘。確認 ≥US$20B；失效明顯低過 US$18B。一齊睇 FCF ≥US$10B 或 35%、DSO ≤48、Q1 FY27 指引延續定失速。公布日 IR 日曆頁尚未掛出。</div>
+            </div>
+            <span class="dir high">雙向 · 最高</span>
+          </div>
+          <div class="event">
+            <div class="when">約 2026-11-17<br>NVDA IR 未核對</div>
+            <div>
+              <strong>NVIDIA FY2027-Q3</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">板塊定價。Hugging Face 預期 2027 上半年交割，呢份季報唔會入帳協同，亦唔等於封殺客製矽。</div>
+            </div>
+            <span class="dir mid">中 · 板塊</span>
+          </div>
+          <div class="event">
+            <div class="when">2026-09-21／09-30<br>已 price in</div>
+            <div>
+              <strong>季度股息每股 US$0.65</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">例行派息，唔改 AI 桶。Q3 已派同等股息 US$3,103m。</div>
+            </div>
+            <span class="dir low">低 · 雜訊</span>
+          </div>
+        </div>
+        <div class="kill sans">
+          <div>
+            <h3 style="margin:0 0 6px">失效 1</h3>
+            任何一季官方 FCF 轉負；或 Q4 AI 已入帳明顯低過 US$18B，管理層把差額歸因客戶延後／轉向而無網絡補上。
+          </div>
+          <div>
+            <h3 style="margin:0 0 6px">失效 2</h3>
+            自算 DSO ≥55 日或應收單季增加超過該季營收增量；或 10-Q 頭五名 ≥55% 兼半導體增速回落到同業。
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav sans">
+    <div class="dots" id="dots"></div>
+    <div class="btns">
+      <button class="navbtn" id="prev" type="button">上一頁</button>
+      <button class="navbtn" id="next" type="button">下一頁</button>
+    </div>
+  </div>
+  <p class="foot sans">估值只引用 Framework 3（2026-09-04）。未核對 IB 持倉。delayed 唔當 live。pending：Q3 10-Q。約定序列 F1–F6＋one-pager 完成；未跑 Skill 7／8。此分析僅供研究參考，不構成投資建議。← → 翻頁</p>
+</div>
+<script>
+  const slides = [...document.querySelectorAll(".slide")];
+  const bar = document.getElementById("bar");
+  const dots = document.getElementById("dots");
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  let i = 0;
+  slides.forEach((_, idx) => {
+    const b = document.createElement("button");
+    b.className = "dot" + (idx === 0 ? " on" : "");
+    b.type = "button";
+    b.setAttribute("aria-label", "第 " + (idx + 1) + " 頁");
+    b.addEventListener("click", () => go(idx));
+    dots.appendChild(b);
+  });
+  function go(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, idx) => s.classList.toggle("on", idx === i));
+    [...dots.children].forEach((d, idx) => d.classList.toggle("on", idx === i));
+    bar.style.width = ((i + 1) / slides.length * 100) + "%";
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+  }
+  prev.addEventListener("click", () => go(i - 1));
+  next.addEventListener("click", () => go(i + 1));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === "PageDown") go(i + 1);
+    if (e.key === "ArrowLeft" || e.key === "PageUp") go(i - 1);
+  });
+  const notes = {
+    bear: "Bear：現價下行約 43%。Q4 AI 未能按指引入帳或 FY2027 回到 Q3 run-rate；DSO ≥55 或單季 FCF 接近零。區間 US$170–230。",
+    base: "Base 係主參考：現價對 Base 約 +0.6% 溢價（持平）。Q4 AI 按指引附近入帳，FY2027 只守住 Q4 run-rate。建倉觀察區 US$250–300 要全部 F2 確認。概率加權 US$348。",
+    bull: "Bull 上行約 53%。要 Q4 入帳之後 FY2027 再加速（AI 約 US$105B，仍低過 unverified US$115B）兼 FCF margin 守住。未確認前唔當可追目標。"
+  };
+  document.getElementById("valGrid").addEventListener("click", (e) => {
+    const btn = e.target.closest(".val");
+    if (!btn) return;
+    document.querySelectorAll(".val").forEach((el) => el.classList.toggle("on", el === btn));
+    document.getElementById("valNote").textContent = notes[btn.dataset.val];
+  });
+  go(0);
+</script>
+<section id="page-comments" data-page="/avgo/one-pager.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
