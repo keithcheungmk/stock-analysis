@@ -1,1 +1,208 @@
-<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AMD 估值卡</title><style>:root{--bg:#f4f1ea;--card:#fffdf8;--ink:#1c1917;--muted:#78716c;--line:#e7e0d5;--teal:#0f766e;--orange:#c2410c;--red:#b91c1c;--green:#15803d}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 12% 0,#dff7f3,transparent 28%),var(--bg);color:var(--ink);font:16px/1.55 "Iowan Old Style","PingFang TC",serif}.wrap{max-width:980px;margin:auto;padding:28px 18px 72px}.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;margin-top:14px}.hud{background:#134e4a;color:#fff}.hudgrid,.scenarios{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.hudgrid div,.scenario{border-radius:14px;padding:14px}.hudgrid div{background:#ffffff18}.hud strong{display:block;font:800 1.1rem "Avenir Next","PingFang TC",sans-serif}.scenario{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--teal)}h1,h2{font-family:"Avenir Next","PingFang TC",sans-serif}h1{margin:0}.track{height:18px;border-radius:999px;background:linear-gradient(90deg,#fee2e2 0 25%,#ffedd5 25% 63%,#dcfce7 63%);position:relative;margin:55px 10px 28px}.marker{position:absolute;left:58%;top:-12px;width:4px;height:42px;background:#1c1917}.marker:before{content:"現價 458";position:absolute;white-space:nowrap;top:-30px;left:-38px;font:bold 13px "Avenir Next","PingFang TC",sans-serif}.labels{display:flex;justify-content:space-between;color:var(--muted)}.callout{background:#ffedd5;border:1px solid #fdba74;border-radius:14px;padding:14px}@media(max-width:720px){.hudgrid,.scenarios{grid-template-columns:1fr 1fr}}</style></head><body><div class="wrap"><section class="panel hud"><h1>AMD · Decision HUD</h1><div class="hudgrid"><div>現價<strong>US$458.11</strong><small>9/3 delayed</small></div><div>估值尺<strong>240 · 390 · 620</strong><small>Bear · Base · Bull</small></div><div>相對 Base<strong>+17%</strong><small>估值仍偏貴</small></div><div>驅動<strong>DC / Helios / FCF</strong><small>Q2 官方包</small></div></div></section><section class="panel"><h2>價格位置</h2><div class="track"><span class="marker"></span></div><div class="labels"><span>Bear 240</span><span>Base 390</span><span>Bull 620</span></div><p class="callout">現價高過 Base 約 17%，所以即使由原報告 US$480.93 回落，仍未進入研究建倉區；行動維持僅觀察。</p></section><div class="scenarios"><div class="scenario"><strong>Bear</strong><h2>US$240</h2><p>Helios 延遲、倍數收縮。</p></div><div class="scenario"><strong>Base</strong><h2>US$390</h2><p>DC 強增長、FCF 15–18%。</p></div><div class="scenario"><strong>Bull</strong><h2>US$620</h2><p>Instinct 份額快速提升。</p></div><div class="scenario"><strong>現價</strong><h2>US$458.11</h2><p>介乎 Base 與 Bull，安全邊際不足。</p></div></div><section class="panel"><h2>三個重估開關</h2><ol><li>Helios 由「已投產／部署」轉化成可量化收入。</li><li>Data Center 增長同毛利率保持，唔靠單一大客戶。</li><li>FCF margin 由 Q2 14% 回升並維持。</li></ol></section><p style="color:var(--muted)">數據截至 2026-09-03。此分析僅供研究參考，不構成投資建議。</p></div></body></html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AMD 估值卡 · Framework 3</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#fee2e2 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:920px;margin:0 auto;padding:24px 16px 72px}
+  h1{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.7rem;margin:0 0 6px}
+  h2{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.1rem;margin:0 0 10px}
+  .sub{color:var(--muted);margin:0 0 16px}
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.hero{grid-template-columns:1fr}}
+  .big{border-radius:22px;padding:18px;color:#fff;box-shadow:var(--shadow)}
+  .big.navy{background:linear-gradient(145deg,#7f1d1d,#b91c1c)}
+  .big.warn{background:linear-gradient(145deg,#7c2d12,#c2410c)}
+  .big.good{background:linear-gradient(145deg,#065f46,#0f766e)}
+  .big .l{font-size:.72rem;opacity:.85;font-weight:800;letter-spacing:.06em;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .big .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.1rem;font-weight:800;margin:4px 0}
+  .big .d{font-size:.88rem;opacity:.92}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:14px;box-shadow:var(--shadow)}
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .presets button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
+  .presets button.on{background:#7f1d1d;color:#fff;border-color:#7f1d1d}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{border:1px solid var(--line);border-radius:12px;padding:10px;border-top:3px solid var(--teal);font-size:.78rem}
+  .kpi .l{color:var(--muted);font-weight:700}.kpi .v{font-weight:800;font-size:1rem;margin-top:2px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .kpi .s{color:var(--muted);font-size:.72rem;margin-top:2px}
+  .ctrl{margin-bottom:12px}
+  .ctrl-head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+  .ctrl-head label{font-weight:700;font-size:.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .ctrl-head output{font-weight:800;color:var(--teal);font-family:"Avenir Next","PingFang TC",sans-serif}
+  input[type=range]{width:100%;accent-color:var(--teal)}
+  .note{margin-top:12px;background:var(--info-soft);border:1px solid #93c5fd;border-radius:14px;padding:12px 14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.88rem}
+  .warnbox{margin-top:12px;background:var(--watch-soft);border:1px solid #fdba74;border-radius:14px;padding:12px 14px;font-size:.88rem}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .disc{font-size:.78rem;color:var(--muted);margin-top:18px;text-align:center}
+  .hud-tag{display:inline-flex;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#991b1b;background:#fee2e2;border-radius:999px;padding:3px 10px;margin-left:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="sans" style="color:var(--teal);font-weight:800;margin:0 0 8px">估值卡 · 只展示 Framework 3 · 無另起倍數模型</p>
+  <h1>AMD · FY2027 Non-GAAP P/E</h1>
+  <p class="sub">判定：高估（現價已高過 Bull）。行動：僅觀察／唔好建倉／唔好新開賣 put。官方 2026-Q2 verified；Helios $ 未量化；Street FY2027 唔做輸入。</p>
+
+  <section class="card" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +74.8%</span></h2>
+    <div class="kpis sans">
+      <div class="kpi"><div class="l">現價</div><div class="v">US$629.26</div><div class="s">delayed 9/24 · ~US$1.027T</div></div>
+      <div class="kpi"><div class="l">Base（權威）</div><div class="v">US$360</div><div class="s">47× EPS 7.63</div></div>
+      <div class="kpi"><div class="l">現價 vs Base</div><div class="v">+74.8%</div><div class="s">高估 · 應減倉勿賣 put</div></div>
+      <div class="kpi"><div class="l">Bear / Bull</div><div class="v">180 / 505</div><div class="s">52w 高 638 · 9/25</div></div>
+    </div>
+    <p class="sub" style="margin:12px 0 0">估值驅動（F2 ★）：總營收 US$11.54B · Data Center US$6.72B · 官方 FCF US$1.56B（14%） · Non-GAAP GM 56% · Helios $ 官方未量化。</p>
+  </section>
+
+  <div class="hero" style="margin-top:14px">
+    <div class="big navy sans">
+      <div class="l">模型產出 vs 現價</div>
+      <div class="v" id="outPx">US$360</div>
+      <div class="d" id="outGap">對現價約 −42.8% · 預設 Base</div>
+    </div>
+    <div class="big warn sans" id="actBox">
+      <div class="l">行動</div>
+      <div class="v" style="font-size:1.55rem">僅觀察</div>
+      <div class="d">現價對 Base 約 +74.8% 溢價，唔好建倉、唔好新開賣 put</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>① 官方 KPI 錨點（唔好用滑桿覆寫呢啲已入帳數）</h2>
+    <div class="kpis sans">
+      <div class="kpi"><div class="l">Q2 總營收</div><div class="v">US$11.536B</div><div class="s">+50% · 已入帳</div></div>
+      <div class="kpi"><div class="l">Data Center</div><div class="v">US$6.718B</div><div class="s">+107% · 佔 58%</div></div>
+      <div class="kpi"><div class="l">官方 FCF</div><div class="v">US$1.558B</div><div class="s">收入 14% · OCF−capex</div></div>
+      <div class="kpi"><div class="l">Q3 指引（未入帳）</div><div class="v">US$13.0B ±0.3</div><div class="s">Non-GAAP GM ~56%</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>② 情景滑桿（預設 = 報告 Base）</h2>
+    <div class="presets sans" id="presets">
+      <button type="button" data-p="bear">Bear 30%</button>
+      <button type="button" data-p="base" class="on">Base 50%</button>
+      <button type="button" data-p="bull">Bull 20%</button>
+    </div>
+    <div class="ctrl"><div class="ctrl-head"><label>FY2027 Data Center（十億）</label><output id="o_dc">35.5</output></div>
+      <input id="dc" type="range" min="22" max="55" step="0.5" value="35.5" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>Client + Gaming（十億）</label><output id="o_cg">16.2</output></div>
+      <input id="cg" type="range" min="12" max="20" step="0.1" value="16.2" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>Embedded（十億）</label><output id="o_emb">4.3</output></div>
+      <input id="emb" type="range" min="3" max="6" step="0.1" value="4.3" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>Non-GAAP 淨利率 %</label><output id="o_nm">23.5</output></div>
+      <input id="nm" type="range" min="16" max="28" step="0.5" value="23.5" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>攤薄股數（十億，含認股權證情景）</label><output id="o_sh">1.72</output></div>
+      <input id="sh" type="range" min="1.65" max="1.90" step="0.004" value="1.724" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>FY2027 P/E 倍數</label><output id="o_pe">47</output></div>
+      <input id="pe" type="range" min="22" max="70" step="1" value="47" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>FCF margin %（交叉）</label><output id="o_fcf">16</output></div>
+      <input id="fcf" type="range" min="8" max="26" step="1" value="16" /></div>
+    <div class="kpis sans" style="margin-top:14px">
+      <div class="kpi"><div class="l">FY27 收入</div><div class="v" id="k_rev">US$56.0B</div></div>
+      <div class="kpi"><div class="l">Non-GAAP EPS</div><div class="v" id="k_eps">US$7.63</div></div>
+      <div class="kpi"><div class="l">FCF</div><div class="v" id="k_fcf">US$9.0B</div></div>
+      <div class="kpi"><div class="l">遠期 P/S</div><div class="v" id="k_ps">11.0×</div></div>
+    </div>
+    <div class="note" id="valNote"></div>
+    <div class="warnbox">
+      現價約 83× Street FY2026 EPS US$7.58、40.4× Street FY2027 EPS US$15.57。Street FY2027 收入平均 US$88.1B（低 US$61B／高 US$116B）<strong>唔入滑桿預設</strong>。Helios／GW 美元禁止做輸入。把 DC 拉到 50+ 只係敏感度，唔等於官方。Meta 認股權證上限 160m；Base 40m 係研究假設，官方未披露首檔股數。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>官方錨 vs 第三方</h2>
+    <table>
+      <thead><tr><th>項目</th><th class="num">數字</th><th>來源</th></tr></thead>
+      <tbody>
+        <tr><td>TTM 收入／GAAP NI／FCF</td><td class="num">41.3／6.4／7.7B</td><td>官方 TTM 至 Q2'26</td></tr>
+        <tr><td>現金＋短投 vs 總債</td><td class="num">13.1 vs 3.2B</td><td>8-K Selected Data</td></tr>
+        <tr><td>Q2 GAAP／Non-GAAP EPS</td><td class="num">1.38／1.66</td><td>EX-99.1；股數 1,632／1,659m</td></tr>
+        <tr><td>FY26／FY27 street EPS</td><td class="num">~7.58／~15.57</td><td>第三方；FY27 範圍極闊</td></tr>
+        <tr><td>Q3 指引</td><td class="num">13.0B ±0.3 · NG GM 56%</td><td>官方；未入帳</td></tr>
+        <tr><td>52 週高</td><td class="num">638.00 · 2026-09-25</td><td>yfinance daily High</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="disc">卡片只係 F3 展示層，禁止另起 compact 倍數模型。delayed 價格可快速變動，唔當 live。未確認持倉。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const SPOT = 629.26;
+const PRESETS = {
+  bear: {dc:27.5, cg:14.8, emb:3.7, nm:20.5, sh:1.684, pe:32, fcf:12},
+  base: {dc:35.5, cg:16.2, emb:4.3, nm:23.5, sh:1.724, pe:47, fcf:16},
+  bull: {dc:46.0, cg:17.5, emb:4.5, nm:25.0, sh:1.844, pe:55, fcf:20}
+};
+const ids = ["dc","cg","emb","nm","sh","pe","fcf"];
+function num(id){ return parseFloat(document.getElementById(id).value); }
+function setPreset(name){
+  const p = PRESETS[name];
+  ids.forEach(k => { document.getElementById(k).value = p[k]; });
+  document.querySelectorAll('#presets button').forEach(b => b.classList.toggle('on', b.dataset.p===name));
+  render();
+}
+function render(){
+  const dc=num('dc'), cg=num('cg'), emb=num('emb'), nm=num('nm'), sh=num('sh'), pe=num('pe'), fcfm=num('fcf');
+  document.getElementById('o_dc').textContent = dc.toFixed(1);
+  document.getElementById('o_cg').textContent = cg.toFixed(1);
+  document.getElementById('o_emb').textContent = emb.toFixed(1);
+  document.getElementById('o_nm').textContent = nm.toFixed(1);
+  document.getElementById('o_sh').textContent = sh.toFixed(2);
+  document.getElementById('o_pe').textContent = pe;
+  document.getElementById('o_fcf').textContent = fcfm;
+  const rev = dc + cg + emb;
+  const ni = rev * nm / 100;
+  const eps = ni / sh;
+  const px = eps * pe;
+  const fcf = rev * fcfm / 100;
+  const mkt = px * sh;
+  const ps = mkt / rev;
+  const gap = (px / SPOT - 1) * 100;
+  const gapSpot = (SPOT / 360 - 1) * 100;
+  document.getElementById('k_rev').textContent = 'US$' + rev.toFixed(1) + 'B';
+  document.getElementById('k_eps').textContent = 'US$' + eps.toFixed(2);
+  document.getElementById('k_fcf').textContent = 'US$' + fcf.toFixed(1) + 'B';
+  document.getElementById('k_ps').textContent = ps.toFixed(1) + '×';
+  document.getElementById('outPx').textContent = 'US$' + Math.round(px);
+  const sign = gap>=0?'+':'';
+  document.getElementById('outGap').textContent = '對現價約 ' + sign + gap.toFixed(1) + '% · 滑桿重算';
+  const act = document.getElementById('actBox');
+  if (Math.abs(px - 360) < 8 && Math.abs(dc-35.5)<1) {
+    act.className = 'big warn sans';
+    act.innerHTML = '<div class="l">行動</div><div class="v" style="font-size:1.55rem">僅觀察</div><div class="d">現價對 Base 約 +74.8% 溢價，唔好建倉、唔好新開賣 put</div>';
+  } else if (px + 1 < SPOT * 0.85) {
+    act.className = 'big good sans';
+    act.innerHTML = '<div class="l">敏感度</div><div class="v" style="font-size:1.55rem">低過現價</div><div class="d">模型價低過現價 ≥15%。呢個唔自動等於建倉——要 F2 確認。</div>';
+  } else if (px > SPOT * 1.05) {
+    act.className = 'big good sans';
+    act.innerHTML = '<div class="l">敏感度</div><div class="v" style="font-size:1.55rem">高過現價</div><div class="d">要 Helios $ 同 FCF 先成立。報告行動仍係僅觀察。</div>';
+  } else {
+    act.className = 'big warn sans';
+    act.innerHTML = '<div class="l">行動</div><div class="v" style="font-size:1.55rem">僅觀察</div><div class="d">現價對 Base 約 +' + gapSpot.toFixed(1) + '% 溢價，報告唔改行動</div>';
+  }
+  document.getElementById('valNote').textContent =
+    '收入 US$' + rev.toFixed(1) + 'B（DC ' + dc.toFixed(1) + ' + C+G ' + cg.toFixed(1) + ' + Emb ' + emb.toFixed(1) +
+    '）× NM ' + nm.toFixed(1) + '% ÷ ' + sh.toFixed(3) + 'B 股 = EPS US$' + eps.toFixed(2) +
+    ' × ' + pe + '× = US$' + Math.round(px) + '。FCF 約 US$' + fcf.toFixed(1) + 'B（' + fcfm +
+    '%）。報告權威仍係 Bear 180／Base 360／Bull 505。';
+}
+document.querySelectorAll('#presets button').forEach(b => b.onclick = () => setPreset(b.dataset.p));
+ids.forEach(id => document.getElementById(id).addEventListener('input', render));
+render();
+</script>
+</body>
+</html>
