@@ -1,6 +1,6 @@
 {
   "ticker": "AMD",
-  "as_of": "2026-08-27",
+  "as_of": "2026-09-25",
   "periods": [
     "2025-Q1",
     "2025-Q2",
@@ -11,5 +11,22 @@
   ],
   "complete_count": 6,
   "pending_sources": 0,
-  "validation": "validate_raw_manifests.py --root data/raw/AMD passed"
+  "unavailable_sources": [
+    "official_transcript (not_part_of_standard_official_package)"
+  ],
+  "validation": "validate_raw_manifests.py --root data/raw/AMD passed on 2026-09-25; coverage-config against all 10 holdings not runnable in this cloud checkout (other holdings raw bodies absent)",
+  "latest_reported_quarter": "2026-Q2",
+  "post_quarter_official_events": [
+    "2026-09-08 Citi Global TMT Conference — official attendance: https://ir.amd.com/news-events/press-releases/detail/1289/amd-to-report-fiscal-second-quarter-2026-financial-results and https://ir.amd.com/news-events/ir-calendar/detail/20260908-citis-2026-global-tmt-conference (no 8-K of remarks)",
+    "2026-09-11 Goldman Sachs Communacopia + Technology Conference — official attendance: same 2026-07-08 IR release and https://ir.amd.com/news-events/ir-calendar/detail/20260911-goldman-sachs-communacopia-technology-conference (no 8-K of remarks)"
+  ],
+  "key_official_urls": {
+    "q2_2026_8k_ex991": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000121/q22026991.htm",
+    "q2_2026_10q": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm",
+    "aai_2026": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era",
+    "anthropic_mi450": "https://ir.amd.com/news-events/press-releases/detail/1292/amd-and-anthropic-announce-strategic-partnership-to-deploy-up-to-2-gigawatts-of-amd-instinct-mi450-series-gpus",
+    "openai_6gw": "https://ir.amd.com/news-events/press-releases/detail/1260/amd-and-openai-announce-strategic-partnership-to-deploy-6-gigawatts-of-amd-gpus",
+    "meta_6gw": "https://ir.amd.com/news-events/press-releases/detail/1279/amd-and-meta-announce-expanded-strategic-partnership-to-deploy-6-gigawatts-of-amd-gpus",
+    "meta_warrant_8k": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000045/amd-20260223.htm"
+  }
 }
