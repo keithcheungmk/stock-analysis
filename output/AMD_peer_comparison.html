@@ -1,1 +1,264 @@
-<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AMD 同業比較</title><style>:root{--bg:#f4f1ea;--card:#fffdf8;--ink:#1c1917;--muted:#78716c;--line:#e7e0d5;--teal:#0f766e;--orange:#c2410c}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 12% 0,#dff7f3,transparent 28%),var(--bg);color:var(--ink);font:16px/1.55 "Iowan Old Style","PingFang TC",serif}.wrap{max-width:1080px;margin:auto;padding:28px 18px 72px}.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;margin-top:14px}.hud{background:#134e4a;color:#fff}.hudgrid,.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.hudgrid div{background:#ffffff18;border-radius:12px;padding:10px}.hud strong{display:block;font:800 1.05rem "Avenir Next","PingFang TC",sans-serif}.card{border-left:5px solid var(--teal);background:#fff;border-radius:14px;padding:15px}h1,h2{font-family:"Avenir Next","PingFang TC",sans-serif}h1{margin:0}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.callout{background:#ffedd5;border:1px solid #fdba74;border-radius:14px;padding:14px}@media(max-width:760px){.hudgrid,.cards{grid-template-columns:1fr 1fr}table{font-size:.82rem}}</style></head><body><div class="wrap"><section class="panel hud"><h1>AMD · Peer Comparison</h1><div class="hudgrid"><div>現價<strong>US$458.11</strong><small>9/3 delayed</small></div><div>估值尺<strong>240 · 390 · 620</strong><small>F3</small></div><div>相對 Base<strong>+17%</strong><small>仍偏貴</small></div><div>KPI<strong>DC +107%</strong><small>Helios／FCF 待驗證</small></div></div></section><section class="panel"><h2>一句話結論</h2><p class="callout">AMD 係 CPU＋GPU 雙引擎追趕者，增長彈性高過成熟玩家，但 CUDA 生態、Helios 執行同估值安全邊際令佢暫時唔適合追價。現價較 Base 高 17%，所以配置上仍係僅觀察。</p></section><section class="panel"><h2>角色與比較</h2><table><tr><th>公司</th><th>角色</th><th>商業質量</th><th>增長質量</th><th>估值判斷</th></tr><tr><td>NVDA</td><td>AI 平台龍頭</td><td>最高；CUDA 定價權</td><td>高，利潤與 FCF 最強</td><td>值得溢價，但要防預期過滿</td></tr><tr><td>AMD</td><td>CPU＋GPU 追趕者</td><td>高；EPYC 已證明</td><td>高但 Helios 未完全入帳</td><td>相對 Base 仍偏貴</td></tr><tr><td>AVGO</td><td>網路＋定制 ASIC</td><td>高；收入較多元</td><td>高但唔係同質 GPU</td><td>以現金流／ASIC 曝險校準</td></tr><tr><td>INTC</td><td>x86／Foundry 復甦賭注</td><td>中低；重資產</td><td>轉折型、可見度較弱</td><td>低質折價有原因</td></tr></table></section><div class="cards"><div class="card"><strong>商業質量首選</strong><p>NVDA：軟硬件生態同 FCF 最完整。</p></div><div class="card"><strong>進攻型首選</strong><p>AMD：若 Helios 量化入帳，重估彈性最大。</p></div><div class="card"><strong>多元 AI 曝險</strong><p>AVGO：網路與定制 ASIC，唔應硬比 GPU 倍數。</p></div><div class="card"><strong>只宜觀察</strong><p>INTC：需要製造同盈利同步修復。</p></div></div><section class="panel"><h2>如果只揀一間</h2><p>長期核心質量揀 NVDA；若目標係份額提升嘅進攻彈性，AMD 先等現價接近 Base 或 Helios／FCF 同時驗證。AMD 唔係「平價 NVDA」，而係另一套風險回報。</p></section><p style="color:var(--muted)">同業價格只作延遲相對參考；官方財務優先。此分析僅供研究參考，不構成投資建議。</p></div></body></html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AMD 同業比較</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#fee2e2 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.05rem;font-weight:800;line-height:1.15;color:var(--fail);margin:8px 0 0}
+  .score-den{font-size:1rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.25rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:960px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.p1{border-top:4px solid var(--pass)}.box.p2{border-top:4px solid var(--teal)}.box.p3{border-top:4px solid var(--watch)}.box.p4{border-top:4px solid #a16207}.box.p5{border-top:4px solid var(--fail)}
+  .rank{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.78rem;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#991b1b;background:#fee2e2;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #b91c1c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#fef2f2;border:1px solid #fecaca;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--fail-soft);color:var(--fail);border-radius:999px;padding:8px 14px}
+  .chart{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end;height:170px;margin:12px 0 8px}
+  .bar-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:end;gap:6px}
+  .bar{width:100%;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#14b8a6,#0f766e);min-height:8px}
+  .bar.amd{background:linear-gradient(180deg,#fb923c,#c2410c)}
+  .bar-label,.bar-val{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  .bar-label{color:var(--muted)}.bar-val{font-weight:800}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.on{background:#134e4a;color:#fff;border-color:#134e4a}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:860px){.cards{grid-template-columns:1fr}}
+  .ecard{border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:#fff;border-left:5px solid var(--teal)}
+  .ecard.support{border-left-color:var(--pass)}
+  .ecard.warn{border-left-color:var(--watch)}
+  .ecard.hurt{border-left-color:var(--fail)}
+  .pill{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.7rem;font-weight:800;border-radius:999px;padding:2px 8px;margin-bottom:6px}
+  .pill.support{background:var(--pass-soft);color:var(--pass)}
+  .pill.warn{background:var(--watch-soft);color:var(--watch)}
+  .pill.hurt{background:var(--fail-soft);color:var(--fail)}
+  a{color:#0f766e;font-weight:700}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Skill 4 · 若只能選一間</div>
+      <div class="score-num">NVIDIA（質量）</div>
+      <div class="score-den">AMD 排第三 · 現價最不值博</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge" style="background:var(--fail-soft);color:var(--fail);border:0">vs Base +74.8%</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>AMD vs NVDA / AVGO / MRVL / INTC</h1>
+      <p>用戶指定組。TSM 係代工鏟子、唔納入正式排序。財政日曆唔對齊：AMD／INTC 日曆 Q2 約 6/27；NVDA FY27-Q2 7/26；MRVL 8/1；AVGO FY26-Q3 8/2。只可比方向。</p>
+      <div class="badges">
+        <span class="badge">現價 US$629.26 delayed 9/24</span>
+        <span class="badge">Base US$360</span>
+        <span class="badge">閘門維持應減倉勿賣 put</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +74.8%</span></h2>
+    <p class="muted" style="margin:0">現價對 Base 約 <strong>+74.8% 溢價</strong>（US$629.26／US$360），而且已經高過 Bull US$505 約 25% → <strong>僅觀察、唔好建倉、唔好新開賣 put</strong>。權威來源：<a href="./framework3.html">Framework 3</a>。同業比較唔另估 target price。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 9/24）</div><div class="v">US$629.26</div><div class="s">9/25 收 630.63 · 市值 ~US$1.029T</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">180 / 360 / 505</div><div class="s">FY2027 Non-GAAP P/E · F3 權威</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+74.8%</div><div class="s">高估 · 應減倉勿賣 put</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">TTM P/S 24.9×</div><div class="s">貴過 NVDA 17.9×／AVGO 18.9× 約 6–7 圈</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ 總營收 US$11.54B（+50% YoY）</span>
+      <span>★ Data Center US$6.72B（+107% · 佔 58%）</span>
+      <span>★ Q2 官方 FCF US$1.56B（margin 14%）</span>
+      <span>★ Non-GAAP GM 56%</span>
+      <span>★ Helios $ 官方未量化</span>
+    </div>
+    <div class="action">現價對 Base 約 +74.8% 溢價：僅觀察、唔好建倉、唔好新開賣 put（持倉未確認）</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi red"><div class="label">AMD vs 自身 Base</div><div class="value">+74.8%</div><div class="note">US$629.26／US$360 · 已高過 Bull</div></div>
+    <div class="kpi green"><div class="label">NVDA vs 自身 Base</div><div class="value">約 −25%</div><div class="note">US$225.07／US$300 · 折讓≠即買</div></div>
+    <div class="kpi orange"><div class="label">AVGO vs 自身 Base</div><div class="value">約 −0.6%</div><div class="note">US$352.81／US$355 · 貼住合理</div></div>
+    <div class="kpi teal"><div class="label">官方 TTM P/S</div><div class="value">24.9×</div><div class="note">NVDA 17.9× · AVGO 18.9× · 貴 6–7 圈</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>一句結論</h2>
+      <div class="callout fail verdict">
+        <p><strong>現價對 Base 約 +74.8% 溢價 → 僅觀察、唔好把「組內 DC 增速第二」當成建倉區。</strong>正在被驗證嘅支柱，係 AMD Q2 已入帳質量：總營收 US$11,536m（+50%）、Data Center US$6,718m（+107%、佔 58%、分部營業利潤 US$2,103m）。呢兩條令 AMD 穩佔挑戰者第一，而且比 MRVL／INTC 嘅單位經濟同已入帳規模明顯更強。</p>
+        <p>仍未成立嘅路徑，係把 Instinct／Helios 當成已經可以平替 NVIDIA 嘅 CUDA 現金機器。Data Center 一季 US$89.0B 仍然約係 AMD DC 嘅 13 倍；NVIDIA 毛利率 75%、TTM 官方 FCF US$126.9B。Helios 官方仍然無一美元。F3 Base 只用官方路徑 FY2027 收入 US$56B，低過 Street 平均約 US$88B。</p>
+        <p>最大裂痕有兩層。對 AMD 自己：Q2 FCF margin 14%、雙 160m 認股權證、現價已高過 Bull US$505 約 25%。對相對估值：官方 TTM P/S 上 AMD 24.9× 同 MRVL 24.9× 打平、貴過 NVDA 17.9×／AVGO 18.9× 約 6–7 圈，但 delayed 價對<strong>各自 F3 Base</strong> 係 AMD +74.8%、NVDA 約 −25%、AVGO 約 −0.6%、MRVL 約 −3%。</p>
+        <p>對行動含義：F1 PASS 90／130 同 F2 增長通過證明質量排第三，唔證明買點。閘門維持應減倉勿賣 put；買 call 閘維持合理或偏貴。若只能選一間長持，揀 NVIDIA。持倉未確認，唔寫減倉股數。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>角色同排序</h2>
+      <div class="grid">
+        <div class="box p1"><div class="rank">1 · 核心質量</div><h3>NVDA</h3><p>平台龍頭。DC US$89.0B、GM 75%、TTM FCF US$126.9B。對自身 Base 約 −25%，但 DSO／Q2 FCF 裂縫 → 觀察唔追。</p></div>
+        <div class="box p2"><div class="rank">2 · ASIC 衛星</div><h3>AVGO</h3><p>AI 半導體 US$16.7B +221%；FCF 收入 46%。質量第二，現價對 Base 約 −0.6%。Q3 10-Q 頭五名約 55%。</p></div>
+        <div class="box p3"><div class="rank">3 · 挑戰者</div><h3>AMD</h3><p>DC US$6.718B +107%。規模細一個零，對自身 Base +74.8%，Helios 未入帳。</p></div>
+        <div class="box p4"><div class="rank">4 · 轉折觀察</div><h3>MRVL</h3><p>DC US$2.172B +46%。對自身 Base 約 −3%（折讓已收），現金 0.79× 債。</p></div>
+        <div class="box p5"><div class="rank">5 · 只宜觀察</div><h3>INTC</h3><p>DCAI +59% 但 GAAP 虧 US$11.0B、Foundry 經營虧 US$2.1B；期後 US$95 增發。</p></div>
+      </div>
+      <h3 style="margin-top:16px">已入帳 AI／DC 線規模（US$B，曆法唔對齊）</h3>
+      <div class="chart" id="aiChart"></div>
+      <p class="muted">INTC DCAI 同 AMD DC 都含 CPU，唔等於 GPU／XPU。AVGO 用 AI 半導體（非 ASC 280 分部）。TSM 唔入正式組。</p>
+    </section>
+
+    <section class="panel">
+      <h2>核心比較</h2>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr><th>公司</th><th>最新官方季</th><th class="num">總營收</th><th>AI／DC 線</th><th>毛利率</th><th>FCF</th><th>TTM P/S</th><th>vs 自身 F3</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>AMD</td><td>CY Q2 6/27</td><td class="num">11.5B +50%</td><td>DC 6.72B +107%</td><td>GAAP 54%</td><td>1.56B（14%）</td><td>24.9×</td><td>+74.8% vs 360</td></tr>
+            <tr><td>NVDA</td><td>FY27 Q2 7/26</td><td class="num">96.2B +106%</td><td>DC 89.0B +117%</td><td>GAAP 75.0%</td><td>Q2 21.3B（TTM 126.9B）</td><td>17.9×</td><td>約 −25% vs 300</td></tr>
+            <tr><td>AVGO</td><td>FY26 Q3 8/2</td><td class="num">29.6B +86%</td><td>AI 16.7B +221%</td><td>GAAP 69.1%</td><td>13.7B（46%）</td><td>18.9×</td><td>約 −0.6% vs 355</td></tr>
+            <tr><td>MRVL</td><td>FY27 Q2 8/1</td><td class="num">2.74B +37%</td><td>DC 2.17B +46%</td><td>GAAP 53.1%</td><td>0.48B；現金&lt;債</td><td>24.9×</td><td>約 −3% vs 271</td></tr>
+            <tr><td>INTC</td><td>CY Q2 6/27</td><td class="num">16.1B +25%</td><td>DCAI 6.26B +59%</td><td>GAAP 40.4%</td><td>adjusted FCF −8.4B</td><td>約 11.4×</td><td>本倉無 F3</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">官方 TTM P/S 用 9/25 市值／已驗證 TTM 營收。AMD 貴過 NVDA／AVGO 約 6–7 圈，同 MRVL 打平但質量高一截。AVGO／NVDA Non-GAAP 是否含 SBC 唔同，forward P/E 唔好直接平均。yfinance TTM FCF、AMD PEG 0.63 已棄用。</p>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="filters" id="filters">
+        <button class="on" data-f="all" type="button">全部</button>
+        <button data-f="support" type="button">支持</button>
+        <button data-f="warn" type="button">中性</button>
+        <button data-f="hurt" type="button">削弱</button>
+      </div>
+      <div class="cards" id="cards">
+        <article class="ecard support" data-k="support">
+          <div class="pill support">支持 · 分部</div>
+          <h3>AMD DC US$6.72B，+107%／佔 58%</h3>
+          <p>呢條係估值驅動 KPI，分拆 F3 DC 桶。五季由 US$3.24B 去到 US$6.72B，分部營業利潤 US$2,103m（31%）。證明主引擎已切換，唔再係 Client／Gaming 周期股。Instinct 已入帳一截；Helios 子項仍未拆。支持「質量第三」，唔支持而家 24.9× 已經便宜。</p>
+        </article>
+        <article class="ecard support" data-k="support">
+          <div class="pill support">支持 · 規模對照</div>
+          <h3>NVDA DC 仍約 13× AMD DC</h3>
+          <p>NVIDIA 一季 DC US$89.0B、GAAP GM 75%、TTM 官方 FCF US$126.9B。AMD +107% 同 NVDA +117% 睇落接近，但美元增量同現金機器仍喺另一個數量級。把挑戰者增速當成已經可以平替平台，係呢組最易睇錯嘅地方。</p>
+        </article>
+        <article class="ecard warn" data-k="warn">
+          <div class="pill warn">中性 · 同業包</div>
+          <h3>AVGO Base 355／Bull 545；NVDA／MRVL 有 Pages</h3>
+          <p>AVGO 全套截至 2026-09-04，現價對自身 Base 約 −0.6%。NVDA F3（2026-08-27）Base 300，9/25 收 US$225 約 −25%。MRVL F3（2026-08-28）Base 271，折讓由 −23% 收到約 −3%。數字標日期引用，本頁唔重跑各家 Framework。</p>
+        </article>
+        <article class="ecard warn" data-k="warn">
+          <div class="pill warn">中性 · 倍數</div>
+          <h3>AMD 同 MRVL TTM P/S 都係 24.9×</h3>
+          <p>市值用 9/25 delayed、營收用已驗證 TTM。倍數打平，質量差好遠：AMD 係 PASS 90／130 兼淨現金；MRVL 係 WATCH 65／130、現金 0.79× 債、Distributor A 44%。P/S 接近 ≠ 值博率接近。AMD 貴過 NVDA／AVGO 先係真正溢價。</p>
+        </article>
+        <article class="ecard hurt" data-k="hurt">
+          <div class="pill hurt">削弱 · 估值</div>
+          <h3>對自身 Base +74.8%，已高過 Bull</h3>
+          <p>F3 只用官方路徑 FY2027 收入 US$56B。現價若用 Base 47× 隱含收入約 US$98B，接近 Street 上修版。9/16–9/25 抽到新高，比較像倍數擴張，而唔係 Q2 之後有新嘅已入帳美元。Skill 4 確認相對同業亦貴，唔另改目標價。</p>
+        </article>
+        <article class="ecard hurt" data-k="hurt">
+          <div class="pill hurt">削弱 · 現金／稀釋</div>
+          <h3>FCF 14%；雙 160m 認股權證</h3>
+          <p>Q2 官方 FCF US$1,558m，margin 由 Q1 25% 跌到 14%。NVDA／AVGO TTM FCF yield 約 2.3%，AMD 只有 0.75%。Meta 同 OpenAI 認股權證各最多 160m；F3 Bull 股數只計 Meta。8/17 票據 US$4.75B 會改寫 Q2 現金 4.06× 快照。Helios 成功反而攤薄。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>誰該享有溢價／配置</h2>
+      <div class="callout info">
+        <p style="margin:0 0 10px">最值得溢價：<strong>NVDA</strong>（平台＋現金機器）。AVGO 值得 ASIC／網絡溢價，但 F3 已經畀完，現價貼住 Base。看似最便宜但合理折價：<strong>INTC</strong>。最易被吹捧：<strong>AMD 增速</strong>同把 Street FY2027 US$88B 當成已官方化。</p>
+        <p style="margin:0">核心持股首選仍係 NVDA，但未確認持倉、F2 現金未過關 → <strong>僅觀察、唔好加倉</strong>。進攻型題材係 AMD，等 Helios $ 入帳兼現價回到 Base 附近。長持只選一間：<strong>NVDA</strong>。閘門維持應減倉勿賣 put。下一步：Q3 8-K；唔重做 F3。</p>
+      </div>
+    </section>
+  </div>
+  <p class="footer">AMD：8-K EX-99.1 2026-08-04（CY26-Q2）。NVDA：8-K／10-Q 2026-08-26。AVGO：8-K 2026-09-02、10-Q 2026-09-09／10。MRVL：8-K 2026-08-27、10-Q 2026-08-28。INTC：8-K EX-99.1 2026-07-23。HUD 現價沿用 F3 9/24 收市 US$629.26；同業 9/25 收市。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const rows=[
+  {l:"NVDA DC",v:89.0,amd:false},
+  {l:"AVGO AI",v:16.7,amd:false},
+  {l:"AMD DC",v:6.72,amd:true},
+  {l:"INTC DCAI",v:6.26,amd:false},
+  {l:"MRVL DC",v:2.17,amd:false}
+];
+const max=Math.max(...rows.map(r=>r.v));
+document.getElementById("aiChart").innerHTML=rows.map(r=>{
+  const h=Math.max(8,Math.round(r.v/max*140));
+  return `<div class="bar-wrap"><div class="bar-val">${r.v}</div><div class="bar${r.amd?" amd":""}" style="height:${h}px"></div><div class="bar-label">${r.l}</div></div>`;
+}).join("");
+document.getElementById("filters").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#filters button").forEach(x=>x.classList.toggle("on",x===b));
+  const f=b.dataset.f;
+  document.querySelectorAll("#cards .ecard").forEach(c=>{
+    c.classList.toggle("hidden", f!=="all" && c.dataset.k!==f);
+  });
+});
+</script>
+<section id="page-comments" data-page="/amd/peer-comparison.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
