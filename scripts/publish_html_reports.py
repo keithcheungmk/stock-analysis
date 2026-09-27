@@ -20,6 +20,8 @@ SKIP_OVERWRITE = {
     DOCS / "iren" / "index.html",
     # Tesla hub 八粒掣順序已對齊 NVDA；publish 唔好用 collect_pages 重排。
     DOCS / "tsla" / "index.html",
+    # AMD 首頁帶 Decision HUD（Skill 9 驗收尺）；publish 唔好洗走。
+    DOCS / "amd" / "index.html",
 }
 
 # Tesla／IREN／SPCX 目錄對齊 NVDA／HIMS：只露出同一套標準頁。底稿仍留喺 output/。

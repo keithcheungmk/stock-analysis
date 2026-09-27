@@ -6,35 +6,55 @@
 <title>AMD · 互動報告</title>
 <style>
   body { margin:0; min-height:100vh; font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;
-    background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),#f4f1ea; color:#1c1917;
+    background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#fecaca 0,transparent 22%),#f4f1ea; color:#1c1917;
     padding:24px 16px 64px; }
   .wrap { max-width:440px; margin:0 auto; }
   h1 { font-family:"Avenir Next","PingFang TC",sans-serif; font-size:1.4rem; margin:0 0 8px; }
   p { color:#78716c; line-height:1.5; }
   .badge { display:inline-block; margin-left:6px; font-size:.72rem; font-weight:800;
-    font-family:"Avenir Next","PingFang TC",sans-serif; background:#0f766e; color:#fff;
+    font-family:"Avenir Next","PingFang TC",sans-serif; background:#b91c1c; color:#fff;
     border-radius:999px; padding:3px 8px; vertical-align:middle; }
+  .hud { background:#fffdf8; border:1px solid #e7e0d5; border-radius:20px; padding:14px 14px 12px; margin:14px 0 18px; }
+  .hud h2 { font-family:"Avenir Next","PingFang TC",sans-serif; font-size:.95rem; margin:0 0 8px; }
+  .hud-tag { display:inline-flex; font-size:.68rem; font-weight:800; letter-spacing:.04em; color:#991b1b; background:#fee2e2; border-radius:999px; padding:2px 8px; margin-left:6px; font-family:"Avenir Next","PingFang TC",sans-serif; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .cell { border:1px solid #e7e0d5; border-top:3px solid #b91c1c; border-radius:12px; padding:8px 10px; background:#fff; }
+  .cell .l { font-size:.68rem; color:#78716c; font-weight:700; font-family:"Avenir Next","PingFang TC",sans-serif; }
+  .cell .v { font-weight:800; font-size:.95rem; margin-top:2px; font-family:"Avenir Next","PingFang TC",sans-serif; }
+  .cell .s { font-size:.7rem; color:#78716c; margin-top:2px; }
+  .action { margin-top:10px; font-family:"Avenir Next","PingFang TC",sans-serif; font-weight:800; font-size:.82rem; color:#b91c1c; background:#fee2e2; border-radius:12px; padding:8px 10px; }
   a { display:block; margin-top:12px; text-decoration:none; color:#fff; background:#0f766e;
     border-radius:999px; padding:14px 16px; font-weight:800; text-align:center;
     font-family:"Avenir Next","PingFang TC",sans-serif; }
+  a.primary { background:#7f1d1d; }
   a.secondary { background:#fff; color:#0f766e; border:1px solid #e7e0d5; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>AMD 互動報告 <span class="badge">更新 2026-09-27</span></h1>
-  <p>用瀏覽器打開。頁底可以留意見，下次會跟住改。</p>
-    <a href="./catalyst-calendar.html">催化劑日曆</a>
-    <a href="./earnings-review.html">Earnings Review</a>
+  <p>Skill 9 One-pager 已刷新。舊 240／390／620 作廢。用瀏覽器打開。頁底可以留意見。</p>
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +74.8%</span></h2>
+    <div class="grid">
+      <div class="cell"><div class="l">現價（延遲 9/24）</div><div class="v">US$629.26</div><div class="s">52w 高 639 · 市值 ~US$1.027T</div></div>
+      <div class="cell"><div class="l">Bear / Base / Bull</div><div class="v">180 / 360 / 505</div><div class="s">F3 · 舊尺作廢</div></div>
+      <div class="cell"><div class="l">現價 vs Base</div><div class="v">+74.8%</div><div class="s">高估 · 已高過 Bull</div></div>
+      <div class="cell"><div class="l">閘門</div><div class="v">應減倉</div><div class="s">勿賣 put · 買 call 偏貴</div></div>
+    </div>
+    <div class="action">現價對 Base 約 +74.8% 溢價 → 僅觀察、唔好建倉、唔好新開賣 put。持倉未確認。</div>
+  </section>
+    <a class="primary" href="./one-pager.html">one pager（Skill 9）</a>
+    <a href="./interactive-brief.html">Interactive Brief</a>
     <a href="./framework1.html">Framework 1 初篩</a>
     <a href="./framework2.html">Framework 2 深度增長</a>
     <a href="./framework3.html">Framework 3 估值</a>
-    <a href="./interactive-brief.html">Interactive Brief</a>
-    <a href="./one-pager.html">one pager</a>
-    <a href="./peer-comparison.html">同業比較</a>
-    <a href="./skill7-option-strategy.html">期權策略</a>
-    <a href="./thesis-tracker.html">Thesis Tracker</a>
     <a href="./valuation.html">估值卡</a>
+    <a href="./peer-comparison.html">同業比較</a>
+    <a href="./catalyst-calendar.html">催化劑日曆</a>
+    <a href="./thesis-tracker.html">Thesis Tracker</a>
+    <a href="./skill7-option-strategy.html">期權策略</a>
+    <a href="./earnings-review.html">Earnings Review（舊尺，已退役）</a>
   <a class="secondary" href="../">全部報告目錄</a>
   <p style="margin-top:24px;font-size:.82rem;color:#78716c">此分析僅供研究參考，不構成投資建議。</p>
 </div>

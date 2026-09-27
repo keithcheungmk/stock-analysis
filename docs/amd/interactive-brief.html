@@ -3,57 +3,87 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AMD · Position Brief · 2026-08-27</title>
+<title>AMD · Interactive Brief · 2026-09-27</title>
 <style>
-  :root{--navy:#0b1f33;--muted:#5b6b7c;--line:#d7dee7;--card:#fff;--teal:#0e7c66;--amber:#b45309;--amber-soft:#fff4e5;--shadow:0 10px 30px rgba(11,31,51,.08)}
-  *{box-sizing:border-box}body{margin:0;font-family:"Avenir Next","PingFang TC",sans-serif;background:#f7f9fc;color:var(--navy);line-height:1.55}
-  .shell{max-width:900px;margin:0 auto;padding:20px 16px 80px}
-  .slide{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;margin-bottom:16px;box-shadow:var(--shadow)}
-  h1{font-size:1.8rem;margin:0 0 8px}h2{font-size:1.2rem;margin:0 0 12px}
-  .hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px;background:#e6f5f1;border-radius:16px;margin:14px 0}
-  .hud div{font-size:.78rem}.hud strong{display:block;font-size:1rem;margin-top:2px}
-  .badge{display:inline-block;padding:8px 14px;border-radius:999px;background:var(--amber-soft);color:var(--amber);font-weight:800;font-size:.85rem}
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}@media(max-width:700px){.grid,.hud{grid-template-columns:1fr}}
-  .kpi{border:1px solid var(--line);border-radius:16px;padding:14px}
-  .kpi .v{font-size:1.3rem;font-weight:800}
-  .footer{color:var(--muted);font-size:.82rem;margin-top:20px}
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--fail:#b91c1c;--fail-soft:#fee2e2;--watch:#c2410c;--pass:#15803d}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0,#dff7f3,transparent 28%),radial-gradient(circle at 90% 8%,#fecaca,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .shell{max-width:920px;margin:0 auto;padding:20px 16px 80px}
+  .slide{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;margin-bottom:14px}
+  h1{font-size:1.7rem;margin:0 0 6px}h2{font-size:1.15rem;margin:0 0 10px}
+  .hud{margin-top:12px}
+  .hud-tag{display:inline-flex;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#991b1b;background:#fee2e2;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+  @media(max-width:700px){.hud-grid,.grid{grid-template-columns:1fr}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:10px;background:#fff;border-top:3px solid var(--fail)}
+  .hud-cell .l{font-size:.7rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-weight:800;font-size:.98rem;margin-top:3px}
+  .hud-cell .s{color:var(--muted);font-size:.75rem;margin-top:3px}
+  .drivers{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .drivers span{font-size:.74rem;font-weight:700;background:#fef2f2;border:1px solid #fecaca;border-radius:999px;padding:5px 9px}
+  .badge{display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;background:var(--fail-soft);color:var(--fail);font-weight:800;font-size:.85rem}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .kpi{border:1px solid var(--line);border-radius:16px;padding:12px}
+  .kpi .v{font-size:1.25rem;font-weight:800}
+  .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .links a{display:inline-flex;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);color:#0f766e;text-decoration:none;font-size:.8rem;font-weight:800}
+  .footer{color:var(--muted);font-size:.82rem;margin-top:8px}
+  .muted{color:var(--muted);font-size:.9rem}
+  a{color:#0f766e;font-weight:700}
 </style>
 </head>
 <body>
 <a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
 
 <div class="shell">
-  <section class="slide">
-    <h1>AMD · One-pager</h1>
-    <p style="color:var(--muted)">2026-08-27 · Q2 2026 官方包 verified · 持倉未確認</p>
-    <div class="hud">
-      <div>現價<strong>US$458.11</strong></div>
-      <div>估值尺<strong>Bear 240 · Base 390 · Bull 620</strong></div>
-      <div>溢價／折讓<strong>+17% vs Base</strong></div>
-      <div>F1<strong>PASS 95/130</strong></div>
+  <section class="slide" id="decision-hud">
+    <h1 class="sans">AMD · Interactive Brief</h1>
+    <p class="muted">2026-09-27 · Skill 9 合成頁 · 估值只引用 F3 · 舊 240／390／620 作廢 · 持倉未確認</p>
+    <h2 class="sans">Decision HUD <span class="hud-tag">現價 vs Base +74.8%</span></h2>
+    <p class="muted" style="margin:0">本頁<strong>唔另估 target price</strong>。完整翻頁見 <a href="./one-pager.html">one-pager</a>。</p>
+    <div class="hud-grid sans">
+      <div class="hud-cell"><div class="l">現價（延遲 9/24）</div><div class="v">US$629.26</div><div class="s">9/25 High 639 · 市值 ~US$1.027T</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">180 / 360 / 505</div><div class="s">FY2027 Non-GAAP P/E 中心價</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+74.8%</div><div class="s">高估 · 已高過 Bull 約 24.6%</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">TTM P/S 24.9×</div><div class="s">FCF yield 0.75%</div></div>
     </div>
-    <p class="badge">溢價約 17% 下：僅觀察／唔好加倉</p>
+    <div class="drivers sans">
+      <span>★ 總營收 US$11.54B（+50%）</span>
+      <span>★ Data Center US$6.72B（+107%）</span>
+      <span>★ 官方 FCF US$1.56B（14%）</span>
+      <span>★ Non-GAAP GM 56%</span>
+      <span>★ Helios $ 官方未量化</span>
+    </div>
+    <p class="badge sans">現價對 Base 約 +74.8% 溢價 → 僅觀察、唔好建倉、唔好新開賣 put</p>
   </section>
   <section class="slide">
-    <h2>Thesis（一句）</h2>
-    <p>Data Center 翻倍（US$6.7B，+107%）驗證 AI＋伺服器主線；Helios 本季稍後 ramp 未入帳；現價高於 Base → 唔追價。</p>
+    <h2 class="sans">一句話</h2>
+    <p>F1 PASS 90、增長通過、Thesis Mixed 證明質量，唔證明買點。Helios 官方零美元；閘門維持應減倉、勿賣現金擔保認沽；買認購閘合理或偏貴。</p>
   </section>
   <section class="slide">
-    <h2>關鍵 KPI</h2>
-    <div class="grid">
-      <div class="kpi"><div style="color:var(--muted);font-size:.8rem">Data Center Q2</div><div class="v">US$6.7B</div><div style="color:var(--teal);font-weight:700">+107% YoY</div></div>
-      <div class="kpi"><div style="color:var(--muted);font-size:.8rem">總營收 Q2</div><div class="v">US$11.5B</div><div>+50% YoY</div></div>
-      <div class="kpi"><div style="color:var(--muted);font-size:.8rem">FCF margin</div><div class="v">14%</div><div style="color:var(--amber)">Q1 25% → 回落</div></div>
-      <div class="kpi"><div style="color:var(--muted);font-size:.8rem">Q3 指引</div><div class="v">~US$13B</div><div>±US$0.3B</div></div>
+    <h2 class="sans">關鍵 KPI（2026-Q2 · USD · verified）</h2>
+    <div class="grid sans">
+      <div class="kpi"><div class="muted" style="font-size:.8rem">Data Center</div><div class="v">US$6.72B</div><div style="color:var(--pass);font-weight:700">+107% YoY · 佔 58%</div></div>
+      <div class="kpi"><div class="muted" style="font-size:.8rem">總營收</div><div class="v">US$11.54B</div><div>+50% YoY · 8-K EX-99.1</div></div>
+      <div class="kpi"><div class="muted" style="font-size:.8rem">官方 FCF</div><div class="v">14%</div><div style="color:var(--watch);font-weight:700">US$1.56B · Q1 25% 回落</div></div>
+      <div class="kpi"><div class="muted" style="font-size:.8rem">Q3 指引</div><div class="v">~US$13B</div><div>±0.3B · 官方前瞻未入帳</div></div>
     </div>
   </section>
   <section class="slide">
-    <h2>催化劑（1–2 季）</h2>
-    <p><strong>P0：</strong>Helios 出貨／入帳</p>
-    <p><strong>P1：</strong>Q3 業績 vs US$13B 指引（日期未官方確認，第三方估 11 月初）</p>
-    <p><strong>P2：</strong>NVDA read-through、EPYC 設計勝</p>
+    <h2 class="sans">催化劑／期權</h2>
+    <p><strong>最大閘：</strong>Q3 財報約 2026-11-03 盤後（IR 未確認）。入場券 ≥US$12.7B；改 Base 要 Helios／Instinct $。</p>
+    <p><strong>黑窗：</strong>2026-10-27 至 11-03。有條件備兌認購只限已確認持倉且決定減倉：2026-10-23、700–705、張數 ≤ 持股×1/2÷100。不賣 put、不買 call。</p>
+    <div class="links sans">
+      <a href="./one-pager.html">one-pager</a>
+      <a href="./framework3.html">F3</a>
+      <a href="./thesis-tracker.html">Thesis</a>
+      <a href="./catalyst-calendar.html">催化劑</a>
+      <a href="./skill7-option-strategy.html">期權</a>
+      <a href="./peer-comparison.html">同業</a>
+    </div>
   </section>
-  <p class="footer">來源：SEC 8-K（2026-08-04）。此分析僅供研究參考，不構成投資建議。</p>
+  <p class="footer sans">來源：SEC 8-K EX-99.1（2026-08-04，accession 0000002488-26-000121）。HUD 現價 2026-09-24 US$629.26。此分析僅供研究參考，不構成投資建議。</p>
 </div>
 <section id="page-comments" data-page="/amd/interactive-brief.html"></section>
 <script src="../assets/page-comments.js" defer></script>

@@ -1,5 +1,353 @@
-<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AMD One Pager</title><style>:root{--bg:#f4f1ea;--card:#fffdf8;--ink:#1c1917;--muted:#78716c;--line:#e7e0d5;--teal:#0f766e;--orange:#c2410c;--red:#b91c1c;--green:#15803d}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 12% 0,#dff7f3,transparent 28%),var(--bg);color:var(--ink);font:16px/1.55 "Iowan Old Style","PingFang TC",serif}.wrap{max-width:1050px;margin:auto;padding:28px 18px 72px}.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;margin-top:14px}.hero{display:grid;grid-template-columns:260px 1fr;gap:12px}.status{border-top:6px solid var(--orange)}.hud{background:#134e4a;color:#fff}.hudgrid,.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.hudgrid div{background:#ffffff18;border-radius:12px;padding:10px}.hud strong{display:block;font:800 1.05rem "Avenir Next","PingFang TC",sans-serif}.fact{background:#fff;border-left:5px solid var(--teal);border-radius:14px;padding:14px}h1,h2{font-family:"Avenir Next","PingFang TC",sans-serif}h1{margin:0}.callout{background:#ffedd5;border:1px solid #fdba74;border-radius:14px;padding:14px}.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.event{border:1px solid var(--line);border-radius:14px;padding:14px}@media(max-width:760px){.hero{grid-template-columns:1fr}.hudgrid,.facts{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:1fr}}</style></head><body>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AMD One-Pager · 2026-09-27</title>
+<style>
+  :root {
+    --bg:#f3efe6; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --teal-deep:#134e4a; --watch:#c2410c; --watch-soft:#ffedd5;
+    --fail:#b91c1c; --fail-soft:#fee2e2; --pass:#15803d; --pass-soft:#dcfce7;
+    --info:#1d4ed8; --info-soft:#dbeafe; --shadow:0 16px 44px rgba(28,25,23,.1);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;color:var(--ink);background:radial-gradient(circle at 10% 0%,#d8f3ee 0,transparent 32%),radial-gradient(circle at 90% 8%,#fecaca 0,transparent 28%),var(--bg);line-height:1.5}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .deck{min-height:100%;display:flex;flex-direction:column;max-width:1180px;margin:0 auto;padding:18px 18px 16px}
+  .progress{height:4px;background:#e7e0d5;border-radius:999px;overflow:hidden;margin-bottom:14px}
+  .progress>span{display:block;height:100%;width:25%;background:#b91c1c;transition:width .25s ease}
+  .slide{display:none;animation:rise .28s ease}
+  .slide.on{display:block}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .status-box{background:#fef2f2;border:1px solid #fca5a5;border-radius:28px;padding:22px}
+  .eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fail);font-weight:800}
+  .status-title{font-size:2rem;font-weight:800;color:var(--fail);margin:10px 0 8px;line-height:1.15}
+  .hero-main{background:#7f1d1d;color:#fff;border-radius:28px;padding:26px}
+  .hero-main h1{margin:0 0 8px;font-size:1.9rem}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .badge{display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.8rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#991b1b;background:#fee2e2;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #b91c1c}
+  .hud-cell .l{font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-size:.78rem;font-weight:700;background:#fef2f2;border:1px solid #fecaca;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-weight:800;background:var(--fail-soft);color:var(--fail);border-radius:999px;padding:8px 14px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px}
+  .kpi .label{color:var(--muted);font-size:.78rem;font-weight:700}
+  .kpi .value{font-size:1.45rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.ok{border-top:5px solid var(--pass)}.kpi.warn{border-top:5px solid var(--watch)}.kpi.fail{border-top:5px solid var(--fail)}.kpi.teal{border-top:5px solid var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px;margin-top:16px}
+  h2{margin:0 0 6px;font-size:1.22rem}
+  .sub{margin:0 0 14px;color:var(--muted);font-size:.92rem}
+  .thesis{background:#fef2f2;border:1px solid #fca5a5;border-radius:18px;padding:16px 18px}
+  .thesis p{margin:0 0 10px}.thesis p:last-child{margin:0}
+  .fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.fact-grid{grid-template-columns:1fr}}
+  .fact{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;min-height:132px}
+  .fact.ok{border-left:6px solid var(--pass)}.fact.warn{border-left:6px solid var(--watch)}.fact.bad{border-left:6px solid var(--fail)}
+  .fact .n{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:var(--muted)}
+  .fact h3{margin:4px 0 8px;font-size:1.02rem}
+  .fact p{margin:0;color:var(--muted);font-size:.9rem}
+  .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.val-grid{grid-template-columns:1fr}}
+  .val{border-radius:20px;padding:16px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left}
+  .val.bear{border-top:6px solid var(--fail)}.val.base{border-top:6px solid var(--watch)}.val.bull{border-top:6px solid var(--pass)}
+  .val.on{outline:2px solid #b91c1c;transform:translateY(-2px)}
+  .val .tag{font-size:.75rem;font-weight:800;letter-spacing:.08em}
+  .val .px{font-size:2rem;font-weight:800;margin:6px 0}
+  .val p{margin:0;color:var(--muted);font-size:.88rem}
+  .note{margin-top:14px;background:var(--info-soft);border:1px solid #bfdbfe;border-radius:16px;padding:14px 16px}
+  .ruler{margin:16px 0 8px;position:relative;height:52px}
+  .track{height:10px;background:#e7e0d5;border-radius:999px;position:relative;margin-top:22px;overflow:hidden}
+  .track>i{display:block;height:100%;width:95.85%;background:#fca5a5}
+  .pin{position:absolute;top:-6px;width:4px;height:22px;background:#7f1d1d;border-radius:4px;transform:translateX(-50%);left:95.85%}
+  .mark{position:absolute;top:-20px;font-size:.68rem;font-weight:800;transform:translateX(-50%);white-space:nowrap}
+  .timeline{display:grid;gap:10px}
+  .event{display:grid;grid-template-columns:168px 1fr auto;gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+  @media(max-width:860px){.event{grid-template-columns:1fr}}
+  .when{font-weight:800;font-size:.82rem;color:var(--teal-deep)}
+  .dir{font-size:.75rem;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap}
+  .dir.high{background:var(--watch-soft);color:var(--watch)}.dir.risk{background:var(--fail-soft);color:var(--fail)}.dir.mid{background:var(--info-soft);color:var(--info)}.dir.low{background:#f5f5f4;color:var(--muted)}
+  .kill{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  @media(max-width:860px){.kill{grid-template-columns:1fr}}
+  .kill div{background:#fef2f2;border:1px solid #fecaca;border-radius:16px;padding:14px}
+  .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .links a{display:inline-flex;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);color:#0f766e;text-decoration:none;font-size:.8rem;font-weight:800}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:8px}
+  .dots{display:flex;gap:8px}
+  .dot{width:10px;height:10px;border-radius:999px;border:0;background:#d6d3d1;cursor:pointer}
+  .dot.on{background:var(--fail);width:28px}
+  button.navbtn{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;cursor:pointer}
+  button.navbtn:disabled{opacity:.4;cursor:default}
+  .foot{color:var(--muted);font-size:.78rem;margin-top:8px}
+  .muted{color:var(--muted);font-size:.9rem}
+  a{color:#0f766e;font-weight:700}
+</style>
+</head>
+<body>
 <a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
-<div class="wrap"><section class="hero"><div class="panel status"><span style="color:var(--orange);font-weight:800">MIXED / PASS 95</span><h2>僅觀察</h2><p>F1 通過，但價格同 Helios／FCF 驗證未通過。</p></div><div class="panel hud"><h1>AMD · 投資一頁</h1><div class="hudgrid"><div>現價<strong>US$458.11</strong><small>9/3 delayed</small></div><div>估值尺<strong>240 · 390 · 620</strong><small>Bear · Base · Bull</small></div><div>相對 Base<strong>+17%</strong><small>唔好追價</small></div><div>核心驅動<strong>DC / Helios / FCF</strong><small>Q2 官方</small></div></div></div></section><section class="panel"><h2>投資結論</h2><div class="callout">AMD 已由 PC 周期股轉成 Data Center 雙引擎資產，Q2 Data Center US$6.7B、按年增 107% 係最強驗證。Helios 已投產並開始部署，但研究上仍要等可量化收入，唔可以將合作公告當成完成入帳。Q2 FCF margin 由 Q1 25% 回落至 14%，顯示增長質量仍需連續驗證。現價較 Base US$390 高 17%，所以行動維持僅觀察／唔好加倉。</div></section><section class="panel"><h2>五個最重要事實</h2><div class="facts"><div class="fact"><strong>US$11.5B</strong><p>Q2 總收入，+50% YoY。</p></div><div class="fact"><strong>US$6.7B</strong><p>Data Center，+107% YoY。</p></div><div class="fact"><strong>US$13B ±0.3B</strong><p>Q3 官方收入指引。</p></div><div class="fact"><strong>14%</strong><p>Q2 FCF margin；較 Q1 25% 回落。</p></div></div></section><section class="panel"><h2>估值與行動</h2><p><strong>Bear US$240：</strong>Helios 延遲、倍數收縮。 <strong>Base US$390：</strong>DC 強增長、Helios 漸進 ramp、FCF 15–18%。 <strong>Bull US$620：</strong>Instinct 份額快速提升。研究建倉區係 ≤US$390 並同時滿足業務條件；未確認持倉，所以唔寫加減倉股數。</p></section><section class="panel"><h2>未來檢查點</h2><div class="timeline"><div class="event"><strong>9 月 8／11 日</strong><p>兩場官方投資者會議；等量化部署訊號。</p></div><div class="event"><strong>Q3 Helios</strong><p>由 production／go-live 轉成收入與客戶證據。</p></div><div class="event"><strong>Q3 業績</strong><p>收入守住指引、FCF margin 回升、Q4 outlook。</p></div></div></section><p style="color:var(--muted)">數據截至 2026-09-03；持倉未確認。此分析僅供研究參考，不構成投資建議。</p></div><section id="page-comments" data-page="/amd/one-pager.html"></section>
+
+<div class="deck">
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+  <div class="stage">
+
+    <section class="slide on" data-slide="0">
+      <div class="hero">
+        <div class="status-box sans">
+          <div class="eyebrow">One-Pager · Update · PASS 90／130</div>
+          <div class="status-title">僅觀察</div>
+          <p style="margin:0;color:var(--fail);font-weight:700">Thesis Mixed · F3 高估 · 現價已高過 Bull</p>
+          <p style="margin:12px 0 0;color:var(--muted);font-size:.9rem">F1 PASS · F2 增長通過、現金部分通過 · Skill 4 質量第三 · 持倉未確認</p>
+        </div>
+        <div class="hero-main sans">
+          <h1>AMD · Advanced Micro Devices</h1>
+          <p>2026-09-27（HKT）· 2026-Q2 期終 2026-06-27 · USD · US GAAP／Non-GAAP unaudited · 8-K EX-99.1 filed 2026-08-04 · Q3 尚未公布</p>
+          <div class="badges">
+            <span class="badge">現價 US$629.26 delayed 9/24</span>
+            <span class="badge">Base US$360</span>
+            <span class="badge">舊 240／390／620 作廢</span>
+          </div>
+        </div>
+      </div>
+      <section class="hud sans" id="decision-hud">
+        <h2>Decision HUD <span class="hud-tag">現價 vs Base +74.8%</span></h2>
+        <p class="muted" style="margin:0">估值尺沿用 Framework 3，本頁<strong>唔另估 target price</strong>。可調驅動見 <a href="./valuation.html">估值卡</a>。</p>
+        <div class="hud-grid">
+          <div class="hud-cell"><div class="l">現價（延遲 9/24）</div><div class="v">US$629.26</div><div class="s">9/25 收 630.63 · High 639 · 市值 ~US$1.027T</div></div>
+          <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">180 / 360 / 505</div><div class="s">FY2027 Non-GAAP P/E 中心價</div></div>
+          <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+74.8%</div><div class="s">高估 · 已高過 Bull 約 24.6%</div></div>
+          <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">TTM P/S 24.9×</div><div class="s">FCF yield 0.75% · Street fwd PE 棄用</div></div>
+        </div>
+        <div class="hud-drivers">
+          <span>★ 總營收 US$11.54B（+50% YoY）</span>
+          <span>★ Data Center US$6.72B（+107% · 佔 58%）</span>
+          <span>★ Q2 官方 FCF US$1.56B（margin 14%）</span>
+          <span>★ Non-GAAP GM 56%</span>
+          <span>★ Helios $ 官方未量化</span>
+        </div>
+        <div class="action">現價對 Base 約 +74.8% 溢價，而且已經高過 Bull US$505 → 僅觀察、唔好建倉、唔好新開賣 put（持倉未確認）</div>
+      </section>
+      <div class="panel">
+        <h2 class="sans">Thesis</h2>
+        <div class="thesis sans">
+          <p>增長支柱已經被損益表驗證：2026-Q2 總營收 US$11,536m（+50% YoY）、Data Center US$6,718m（+107%、佔 58%、分部營業利潤 US$2,103m），近三季營收超自身指引中位。F1 PASS 90／130、F2 增長通過、Skill 4 組內質量第三、Skill 6 Mixed。08-27 到 09-27 冇新一季損益表，股價由 US$458 抽到 US$629 唔等於 thesis 升級 Intact。</p>
+          <p>仍未成立嘅路徑，係 Helios／Instinct 美元被 8-K 量化，以及 FCF 質量由 Q2 14% 回到至少 18%。Q2 只寫「begins to ramp」；9/8 「Q4 大級跳」屬 unverified，冇改 Q3 指引約 US$13.0B ±0.3B。F3 Base 只用官方路徑 FY2027 收入 US$56B／EPS US$7.63 × 47× → US$360。Street 約 US$88B 冇印喺 8-K。</p>
+          <p>最大裂痕係估值同時間表一齊過熱：現價對 Base +74.8%，已經高過 Bull US$505 約 25%。官方 TTM P/S 24.9× 貴過 NVDA／AVGO 約 6–7 圈。Base 上行 −43%、Bear −71%、連 Bull 都低過現價約 20%。</p>
+          <p>現價對 Base 約 <strong>+74.8% 溢價</strong> → <strong>僅觀察、唔好建倉、唔好新開賣 put</strong>。持倉閘維持應減倉、勿賣現金擔保認沽；買認購閘維持合理或偏貴。持倉未確認，唔寫減倉股數。下一個最大閘係 Q3 財報（估約 11/03 盤後）；黑窗 10-27 至 11-03。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="1">
+      <div class="kpis sans">
+        <div class="kpi fail"><div class="label">現價錨 · 09-24 delayed</div><div class="value">US$629.26</div><div class="note">對 Base +74.8% · 舊尺作廢</div></div>
+        <div class="kpi ok"><div class="label">Q2 營收 · +50% YoY</div><div class="value">US$11.5B</div><div class="note">verified · 8-K EX-99.1</div></div>
+        <div class="kpi ok"><div class="label">Data Center · +107%</div><div class="value">US$6.72B</div><div class="note">佔 58% · 分部 OP US$2.10B</div></div>
+        <div class="kpi warn"><div class="label">官方 FCF · margin 14%</div><div class="value">US$1.56B</div><div class="note">Q1 25% → 回落 · 仍正</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">What changed · 相對舊一頁 08-27／09-03</h2>
+        <p class="sub">Update 模式。舊 Bear 240／Base 390／Bull 620 同現價 US$458.11、F1 書面 95／130 <strong>全部退役</strong>。來源：Q2 8-K／10-Q verified。無新一季帳面。</p>
+        <div class="fact-grid">
+          <article class="fact bad">
+            <div class="n sans">01 · 估值尺換檔</div>
+            <h3 class="sans">180／360／505；現價對 Base +74.8%</h3>
+            <p>舊一頁 +17% vs 390、行動僅觀察。而家已高過新 Bull 505 約 25%。唔因為股價由 458 升到 629 就上修 Base——Q2 帳面同一個季度，Helios 未量化。</p>
+          </article>
+          <article class="fact ok">
+            <div class="n sans">02 · 增長維持</div>
+            <h3 class="sans">DC US$6,718m +107% 未被撤回</h3>
+            <p>Helios 官方仍然無一美元。9/8、9/11 無 8-K。8/31 HUMAIN go-live 係 MI355X，唔係 Helios／MI450。增長通過、第二曲線 at risk。</p>
+          </article>
+          <article class="fact warn">
+            <div class="n sans">03 · 閘門已改、本輪不變</div>
+            <h3 class="sans">應減倉，勿賣現金擔保認沽</h3>
+            <p>買認購閘：合理或偏貴。F3 已改；Skill 4／6／7 無新官方帳面，唔還原。未確認持倉 → 唔寫減倉股數；行動 badge 仍係僅觀察／唔好加倉。</p>
+          </article>
+          <article class="fact warn">
+            <div class="n sans">04 · FCF／稀釋未閉合</div>
+            <h3 class="sans">FCF 14%；雙 160m；票據 US$4.75B</h3>
+            <p>TTM 官方 FCF US$7,736m、yield 0.75%。Meta／OpenAI 各最多 160m @ US$0.01。8/17 票據會改寫 Q2 現金 4.06× 債快照。</p>
+          </article>
+          <article class="fact warn" style="grid-column:1/-1">
+            <div class="n sans">05 · 催化劑／期權／同業而家先齊</div>
+            <h3 class="sans">Q3 估 11-03；黑窗 10-27 至 11-03；有條件 10-23 CC 700–705</h3>
+            <p>只喺已確認持倉且決定減倉先可賣備兌認購；張數 ≤ 持股×1/2÷100；被指派接受、不展期。不賣現金擔保認沽、不買 call。Skill 4：NVDA ≫ AVGO > AMD > MRVL ≫ INTC，AMD 官方路徑估值最貴。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="2">
+      <div class="kpis sans">
+        <div class="kpi teal"><div class="label">現價錨</div><div class="value">US$629.26</div></div>
+        <div class="kpi fail"><div class="label">Framework 3 Base</div><div class="value">US$360</div></div>
+        <div class="kpi"><div class="label">Bear – Bull 中心</div><div class="value">US$180–505</div></div>
+        <div class="kpi fail"><div class="label">判定 · 建倉區</div><div class="value">高估 · 280–360 要確認</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">估值摘要 · Framework 3</h2>
+        <p class="sub">FY2027 公司 Non-GAAP P/E。只引用 F3，無 compact 模型。點擊情景。尺：150 → 650；針係現價（已穿出 Bull）。舊 240／390／620 唔入尺。</p>
+        <div class="val-grid sans" id="valGrid">
+          <button class="val bear" data-val="bear" type="button">
+            <div class="tag">BEAR · 30% · −71%</div>
+            <div class="px">US$180</div>
+            <p>收入 US$46B · DC US$27.5B · EPS 5.60 · 32×。區間 150–210。</p>
+          </button>
+          <button class="val base on" data-val="base" type="button">
+            <div class="tag">BASE · 50% · −43%</div>
+            <div class="px">US$360</div>
+            <p>收入 US$56B · DC US$35.5B · EPS 7.63 · 47×。區間 330–390。</p>
+          </button>
+          <button class="val bull" data-val="bull" type="button">
+            <div class="tag">BULL · 20% · −20%</div>
+            <div class="px">US$505</div>
+            <p>收入 US$68B · DC US$46B · EPS 9.22 · 55×。區間 460–550。</p>
+          </button>
+        </div>
+        <div class="ruler sans" id="ruler">
+          <span class="mark" style="left:0%">150</span>
+          <span class="mark" style="left:6%">180</span>
+          <span class="mark" style="left:42%">360</span>
+          <span class="mark" style="left:71%">505</span>
+          <span class="mark" style="left:95.85%;top:28px;color:#7f1d1d">現價 629</span>
+          <span class="mark" style="left:100%">650</span>
+          <div class="track"><i></i><span class="pin" title="現價 US$629.26"></span></div>
+        </div>
+        <div class="note" id="valNote">現價對 Base 約 +74.8% 溢價，而且已經高過 Bull 約 24.6%。若畀 47×，隱含 FY2027 EPS 約 US$13.39、收入約 US$98B——遠高過官方路徑 US$56B。Street 平均 US$88B／分析員目標約 US$617 接近舊 Bull 620，唔當估值。概率加權 US$335（−46.8%）。</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="3">
+      <div class="panel">
+        <h2 class="sans">催化劑 · 黑窗 · 期權 · 風險</h2>
+        <p class="sub">窗口 2026-09-27 至約 2027-02。沿用 Skill 5／7，唔另揀靚數、唔另造 strike。</p>
+        <div class="timeline sans">
+          <div class="event">
+            <div class="when">2026-10-27 至 11-03<br>若估 11/03</div>
+            <div>
+              <strong>期權黑窗（財報前 5 個交易日）</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">唔好新開備兌認購。IR 確認日一出即平移。現價已高過 Bull → 黑窗外亦禁止新開賣 put。研究規則，唔係經紀指令。</div>
+            </div>
+            <span class="dir risk">風控 · 高</span>
+          </div>
+          <div class="event">
+            <div class="when">約 2026-11-03 盤後<br>IR 未確認</div>
+            <div>
+              <strong>AMD 2026-Q3 財報（最大閘）</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">入場券：營收 ≥US$12.7B。真正改 Base：8-K 首次量化 Helios 或 Instinct 美元／GW，兼 FCF margin ≥18%、DSO ≤58。日期 unverified；Q3 指引約 US$13.0B ±0.3B 未入帳。</div>
+            </div>
+            <span class="dir high">雙向 · 最高</span>
+          </div>
+          <div class="event">
+            <div class="when">同一份 Q3 8-K／10-Q</div>
+            <div>
+              <strong>Helios $ 首次量化；票據 US$4.75B 入表</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">仍然無 $ 而且把量產再推 Q4／2027＝失效。Q2 現金 4.06× 債會過時。Meta／OpenAI 第一 GW 出貨仍係前瞻。</div>
+            </div>
+            <span class="dir high">雙向 · 最高</span>
+          </div>
+          <div class="event">
+            <div class="when">有條件 · 2026-10-23</div>
+            <div>
+              <strong>備兌認購 700–705（只引用 Skill 7）</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">只喺已確認持倉且決定減倉。張數 ≤ 持股×1/2÷100。被指派接受、不展期。不賣現金擔保認沽、不買 call、不裸賣、不代下單。未確認 → 唔好新開任何期權。</div>
+            </div>
+            <span class="dir mid">減倉工具</span>
+          </div>
+        </div>
+        <div class="kill sans">
+          <div>
+            <h3 style="margin:0 0 6px">失效 1</h3>
+            Q3 明顯低過 US$12.7B，或把差額歸因 Helios 延後而無 EPYC 補上；或 8-K 仍然無 Helios／Instinct $ 兼再推 Q4／2027。
+          </div>
+          <div>
+            <h3 style="margin:0 0 6px">失效 2</h3>
+            官方 FCF margin ≤14% 而且應付回落超過約 US$1B，或單季轉負；或 DC YoY &lt; +40% 且 GAAP GM 跌穿 52%；或大客戶 GW 協議被修訂／取消。
+          </div>
+        </div>
+        <p class="sub" style="margin-top:16px">各 Skill 頁（同一 HUD：US$629.26 · 180／360／505 · +74.8%）</p>
+        <div class="links sans">
+          <a href="./framework1.html">F1 初篩</a>
+          <a href="./framework2.html">F2 深度增長</a>
+          <a href="./framework3.html">F3 估值</a>
+          <a href="./valuation.html">估值卡</a>
+          <a href="./peer-comparison.html">同業比較</a>
+          <a href="./catalyst-calendar.html">催化劑日曆</a>
+          <a href="./thesis-tracker.html">Thesis Tracker</a>
+          <a href="./skill7-option-strategy.html">期權策略</a>
+          <a href="./interactive-brief.html">Interactive Brief</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav sans">
+    <div class="dots" id="dots"></div>
+    <div class="btns">
+      <button class="navbtn" id="prev" type="button">上一頁</button>
+      <button class="navbtn" id="next" type="button">下一頁</button>
+    </div>
+  </div>
+  <p class="foot sans">估值只引用 Framework 3（2026-09-25）。舊 240／390／620 作廢。未核對 IB 持倉。delayed 唔當 live。pending：Q3 業績日。閘門本輪不變。約定序列 F1–F7＋one-pager 完成；未跑 Skill 8 preview。此分析僅供研究參考，不構成投資建議。← → 翻頁</p>
+</div>
+<script>
+  const slides = [...document.querySelectorAll(".slide")];
+  const bar = document.getElementById("bar");
+  const dots = document.getElementById("dots");
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  let i = 0;
+  slides.forEach((_, idx) => {
+    const b = document.createElement("button");
+    b.className = "dot" + (idx === 0 ? " on" : "");
+    b.type = "button";
+    b.setAttribute("aria-label", "第 " + (idx + 1) + " 頁");
+    b.addEventListener("click", () => go(idx));
+    dots.appendChild(b);
+  });
+  function go(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, idx) => s.classList.toggle("on", idx === i));
+    [...dots.children].forEach((d, idx) => d.classList.toggle("on", idx === i));
+    bar.style.width = ((i + 1) / slides.length * 100) + "%";
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+  }
+  prev.addEventListener("click", () => go(i - 1));
+  next.addEventListener("click", () => go(i + 1));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === "PageDown") go(i + 1);
+    if (e.key === "ArrowLeft" || e.key === "PageUp") go(i - 1);
+  });
+  const notes = {
+    bear: "Bear：現價下行約 71%。Q3 miss US$12.7B 或 Helios 再無 $；FCF margin ≤14% 且應付回落。區間 US$150–210。",
+    base: "Base 係主參考：現價對 Base 約 +74.8% 溢價。官方路徑 FY2027 收入 US$56B、EPS US$7.63 × 47×。建倉觀察區 US$280–360 要全部 F2 確認。概率加權 US$335。",
+    bull: "Bull 仍低過現價約 20%。要 Q3 貼近上限、8-K 量化 Helios、FCF 約 20%，兼扣滿額 Meta 160m。收入仍低過 Street US$88B。未確認前唔當可追目標。"
+  };
+  document.getElementById("valGrid").addEventListener("click", (e) => {
+    const btn = e.target.closest(".val");
+    if (!btn) return;
+    document.querySelectorAll(".val").forEach((el) => el.classList.toggle("on", el === btn));
+    document.getElementById("valNote").textContent = notes[btn.dataset.val];
+  });
+  go(0);
+</script>
+<section id="page-comments" data-page="/amd/one-pager.html"></section>
 <script src="../assets/page-comments.js" defer></script>
-</body></html>
+</body>
+</html>
