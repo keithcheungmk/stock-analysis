@@ -56,6 +56,7 @@ LABELS = (
     ("valuation", "估值卡"),
     ("peer_comparison", "同業比較"),
     ("catalyst_calendar", "催化劑日曆"),
+    ("skill7_option_strategy", "期權策略"),
     ("index", "報告目錄"),
 )
 

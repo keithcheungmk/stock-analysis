@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AMD 期權策略</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --teal-deep:#134e4a; --watch:#c2410c; --watch-soft:#ffedd5;
+    --fail:#b91c1c; --fail-soft:#fee2e2; --pass:#15803d; --pass-soft:#dcfce7;
+    --info:#1d4ed8; --info-soft:#dbeafe; --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#fee2e2 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fb923c;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.55rem;font-weight:800;line-height:1.2;color:var(--watch);margin:8px 0 0}
+  .score-den{font-size:.95rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#991b1b;background:#fee2e2;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #b91c1c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#fef2f2;border:1px solid #fecaca;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--fail-soft);color:var(--fail);border-radius:999px;padding:8px 14px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.15rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif;background:var(--watch-soft);border:1px solid #fdba74}
+  .callout.fail{background:var(--fail-soft);border-color:#fca5a5}
+  .callout p{margin:0 0 10px}.callout p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.pass{border-left:5px solid var(--pass)}
+  .box.warn{border-left:5px solid var(--watch)}
+  .box.fail{border-left:5px solid var(--fail)}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#7f1d1d;color:#fff;border-color:#7f1d1d}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 38%)}
+  .ev.weaken{border-left-color:var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 38%)}
+  .ev.neutral{border-left-color:var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 38%)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .cite{font-size:.78rem;color:var(--muted);margin-top:10px}
+  a{color:#0f766e;font-weight:700}
+  .ban{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .ban span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:800;background:#fee2e2;color:#991b1b;border-radius:999px;padding:6px 10px}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Skill 7 · 期權策略</div>
+      <div class="score-num">有條件可開<br>備兌認購</div>
+      <div class="score-den">未確認持倉 → 唔好新開。閘門不變。</div>
+    </div>
+    <div class="hero-main">
+      <h1>AMD · 減倉用 covered call</h1>
+      <p>週五美股收高、VIX 14.87；AMD 收 630.63、貼住 52 週高 639。目的係減倉，唔係增收。週末＝週五收市快照，唔代下單。</p>
+      <div class="badges">
+        <span class="badge">截至 2026-09-27 HKT</span>
+        <span class="badge">鏈上 9/25 收市</span>
+        <span class="badge">唔另估目標價</span>
+        <span class="badge">10-23 · 700–705</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +74.8%</span></h2>
+    <p class="muted" style="margin:0">估值尺沿用 <a href="./framework3.html">Framework 3</a>，本頁<strong>唔另估 target price</strong>。現價對 Base 約 <strong>+74.8% 溢價</strong>（US$629.26／US$360），而且已經高過 Bull US$505 約 25% → <strong>應減倉，勿賣現金擔保認沽</strong>。持倉未確認。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 9/24）</div><div class="v">US$629.26</div><div class="s">9/25 收 630.63 · High 639.00</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">180 / 360 / 505</div><div class="s">FY2027 Non-GAAP P/E 中心價</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+74.8%</div><div class="s">高估 · 應減倉勿賣 put</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">TTM P/S 24.9×</div><div class="s">FCF yield 0.75% · Street fwd PE 棄用</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ 總營收 US$11.54B（+50% YoY）</span>
+      <span>★ Data Center US$6.72B（+107% · 佔 58%）</span>
+      <span>★ Q2 官方 FCF US$1.56B（margin 14%）</span>
+      <span>★ Non-GAAP GM 56%</span>
+      <span>★ Helios $ 官方未量化</span>
+    </div>
+    <div class="action">現價對 Base 約 +74.8% 溢價：應減倉，勿賣現金擔保認沽；有確認持倉先考慮 10-23 700–705 備兌認購或直接賣出部分現股</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi orange"><div class="label">可新開？</div><div class="value">有條件 covered call</div><div class="note">未確認持倉＝唔開</div></div>
+    <div class="kpi teal"><div class="label">主選到期／行權價</div><div class="value">10-23 · 700–705</div><div class="note">自算 Δ 0.26–0.27 · 28 DTE</div></div>
+    <div class="kpi red"><div class="label">張數</div><div class="value">≤ 持股 × 1/2 ÷ 100</div><div class="note">跨 11-20 再減半；唔寫股數</div></div>
+    <div class="kpi green"><div class="label">閘門</div><div class="value">本輪不變</div><div class="note">應減倉勿賣 put · 買 call 偏貴</div></div>
+  </div>
+
+  <section class="panel">
+    <h2>大市、策略、閘門</h2>
+    <div class="callout">
+      <p>週五（2026-09-25）SPY 771.35（+0.54%）、QQQ 744.50（+0.46%），VIX 回落到 14.87。AMD 收 630.63、當日 High 639.00＝52 週高，五日仍 +12.6%。今日週末無新成交。來源 yfinance，擷取 2026-09-27T01:09Z。</p>
+      <p>交易目的係<strong>減倉</strong>，唔係增收。若已確認持倉並決定減倉，用備兌認購（covered call）做「升先減」工具。若要即時削下行，<strong>直接賣出部分現股更乾淨</strong>——權利金 mid 約 2% 幾乎唔對沖跌去 Base 360。</p>
+    </div>
+    <div class="ban">
+      <span>不賣現金擔保認沽</span>
+      <span>不買認購</span>
+      <span>不裸賣認購</span>
+      <span>不代下單</span>
+      <span>被指派不展期</span>
+    </div>
+    <div class="grid-2" style="margin-top:14px">
+      <div class="box warn">
+        <h3>持倉閘 · 不變</h3>
+        <p><strong>應減倉，勿賣現金擔保認沽。</strong>現價已高過 Bull 505，行權價必須高過 52 週高 639（F3 寫過 delayed 638，本頁用 9/25 High 639）。備兌認購只准當減倉工具，唔准 overwrite 續抱。</p>
+      </div>
+      <div class="box fail">
+        <h3>買認購閘 · 不變</h3>
+        <p><strong>合理或偏貴。</strong>買認購要嚴重低估（F3）＋技術低位兩樣齊。而家對 Base +74.8%、RSI14 73.00 超買——兩樣都唔齊。不買認購、不裸賣認購。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>策略候選（可篩選）</h2>
+    <div class="filters" id="filters">
+      <button class="active" data-f="all">全部</button>
+      <button data-f="support">推薦／可用</button>
+      <button data-f="neutral">備選</button>
+      <button data-f="weaken">否決</button>
+    </div>
+    <div class="ev-grid" id="evidence"></div>
+  </section>
+
+  <section class="panel">
+    <h2>主選結構 · 2026-10-23 備兌認購</h2>
+    <p class="muted">yfinance 鏈上 2026-09-25 收市快照。Delta 係研究 Black–Scholes 自算（S=630.63，r=4% 假設，σ=該合約 IV），<strong>唔係券商即時 Greeks</strong>。待下單前按即時報價。張數只寫比例。</p>
+    <table>
+      <thead><tr><th>Strike</th><th>last</th><th>bid</th><th>ask</th><th>mid</th><th>spread</th><th>OI／量</th><th>IV</th><th>自算 Δ</th><th>有效賣出</th></tr></thead>
+      <tbody>
+        <tr><td>670</td><td>21.55</td><td>19.95</td><td>22.00</td><td>20.98</td><td>9.8%</td><td>193／95</td><td>53.1%</td><td>0.38</td><td>690.98</td></tr>
+        <tr><td>680</td><td>17.95</td><td>16.95</td><td>19.10</td><td>18.02</td><td>11.9%</td><td>720／77</td><td>53.1%</td><td>0.34</td><td>698.02</td></tr>
+        <tr><td><strong>700</strong></td><td>13.20</td><td>12.70</td><td>14.25</td><td><strong>13.47</strong></td><td>11.5%</td><td>2797／213</td><td>53.6%</td><td><strong>0.27</strong></td><td><strong>713.48</strong></td></tr>
+        <tr><td><strong>705</strong></td><td>12.75</td><td>11.75</td><td>13.05</td><td><strong>12.40</strong></td><td>10.5%</td><td>2478／168</td><td>53.6%</td><td><strong>0.26</strong></td><td><strong>717.40</strong></td></tr>
+        <tr><td>710</td><td>12.10</td><td>11.15</td><td>12.15</td><td>11.65</td><td>8.6%</td><td>144／183</td><td>54.0%</td><td>0.24</td><td>721.65</td></tr>
+      </tbody>
+    </table>
+    <p class="cite">主選 700–705（Δ 0.25–0.30）。想減多用 670–680（Δ 0.34–0.38）。流動性後備：10-16 月約 680–690（spread 約 5%，但已到 21 DTE）。跨財報備選：11-20 740–760，張數 ≤ 持股 × 1/4 ÷ 100。10-30 到期落喺黑窗，否決。</p>
+  </section>
+
+  <section class="panel">
+    <h2>風險回報（10-23 US$700，每張研究例）</h2>
+    <table>
+      <thead><tr><th>項目</th><th>數值／判斷</th></tr></thead>
+      <tbody>
+        <tr><td>Premium（mid）</td><td>US$13.47／股；bid 12.70／ask 14.25／last 13.20。待即時報價</td></tr>
+        <tr><td>Breakeven（對週五標記）</td><td>630.63 − 13.47 ＝ 617.16。對 Base 360 仍溢價約 71%</td></tr>
+        <tr><td>Max profit（被指派）</td><td>約 US$8,284／張＝賣喺約 713</td></tr>
+        <tr><td>Max loss</td><td>正股下行減權利金。到 Base 360 仍約虧 US$257／股。唔封下行</td></tr>
+        <tr><td>張數</td><td>最多 ⌊持股 × 1/2 ÷ 100⌋。持倉未確認，唔寫股數</td></tr>
+        <tr><td>保證金</td><td>低（備兌）。唔開新短 put</td></tr>
+      </tbody>
+    </table>
+    <div class="grid-2" style="margin-top:14px">
+      <div class="box fail">
+        <h3>直接賣出現股</h3>
+        <p>即時、確定削下行。放棄 700 之上上行。更對齊「應減倉」閘門。若目標係風險預算，呢個更乾淨。</p>
+      </div>
+      <div class="box warn">
+        <h3>備兌認購減倉</h3>
+        <p>只喺再升到 700 附近先減；可能到期仍價外、減倉失敗。收約 2% mid 唔等於已經減險。兩者可並用：先直接減一截，餘倉最多一半寫 10-23。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>管理、展期、硬禁</h2>
+    <div class="grid-2">
+      <div class="box pass">
+        <h3>買入平倉／接受指派</h3>
+        <p>權利金浮盈 50–70%，或剩約 21 DTE：<strong>買入平倉</strong>（buy-to-close）。被指派就接受，當原定減倉完成。股價繼續衝高：接受 cap，唔好買返 call 再追。</p>
+      </div>
+      <div class="box fail">
+        <h3>不展期</h3>
+        <p>展到 11 月／財報後＝等同黑窗內或跨事件新開。即使能收淨權利金，今次都禁止。指派後<strong>不賣現金擔保認沽</strong>；wheel 停，除非 Q4 入帳 Helios $ 兼 Base 上調。</p>
+      </div>
+    </div>
+    <p class="cite" style="margin-top:12px">黑窗（若估 11/03 盤後）：2026-10-27 至 11-03，唔好新開備兌認購。IR 確認日一出即平移。RSI14 9/25＝73.00（≥65 優先減倉取向；超買不可單獨開閘）。10-23 平值 IV 約 52.9%，20 日實現波幅約 56%——IV 低慎賣未觸發。</p>
+  </section>
+
+  <p class="footer">官方優先：2026-Q2 8-K EX-99.1 accession 0000002488-26-000121。估值只引用 F3 Bear 180／Base 360／Bull 505。期權鏈／IV／RSI／SPY／QQQ／VIX：yfinance delayed，2026-09-25 週五收市，擷取 2026-09-27T01:09Z。Delta 研究自算。IR Calendar 2026-09-27 空白；Q3 業績日第三方估 11/03，unverified。持倉未確認。不賣現金擔保認沽、不買認購、不裸賣認購、不代下單。此分析僅供研究參考，不構成投資建議。期權可損失全部權利金；備兌認購不限制正股下行虧損。</p>
+</div>
+<script>
+const evidence=[
+{k:"support",type:"主選",title:"備兌認購 2026-10-23，行權價 700–705",body:"28 DTE，黑窗（10/27–11/03）前結束。自算 Delta 約 0.27／0.26，落喺 Keith 0.25–0.30。行權價高過 52 週高 639。OI 2.5k–2.8k。目的係減倉：被指派就接受、不展期。張數最多持股 × 1/2 ÷ 100。週五 mid 13.47／12.40，spread 約 10–12%，週一要用限價，待即時報價。"},
+{k:"support",type:"比較",title:"直接賣出部分現股往往更對齊閘門",body:"現價對 Base +74.8%、已高過 Bull。備兌認購只收約 2% mid，到 Base 360 仍要蝕約四成。若目標係即時削下行，直接賣一截更乾淨。covered call 適合「只喺 700 附近先肯減」。兩者可並用：先直接減，餘倉最多一半寫 10-23。"},
+{k:"neutral",type:"想減多",title:"同一到期、行權價 670–680",body:"自算 Delta 約 0.38–0.34，落喺擇時團隊「想減多可 0.35–0.40」。仍高過 52 週高 639。權利金更高、更易被指派，上行更早被 cap。張數上限一樣係持股一半。spread 都闊，限價。"},
+{k:"neutral",type:"流動性後備",title:"2026-10-16 月約 680–690",body:"spread 約 5%、OI 深過 10-23 週選。自算 Delta 0.31–0.27。缺點：已到約 21 DTE 管理線，幾乎無管理窗口。只喺週一 10-23 盤口壞掉先用。"},
+{k:"neutral",type:"跨財報備選",title:"2026-11-20，行權價 740–760，張數再減半",body:"56 DTE，平值 IV 約 60% 已含事件溢價，spread 約 2.5% 較窄。自算 Delta 0.30–0.26。跨 Q3 缺口，張數最多持股 × 1/4 ÷ 100。唔係主選。IR 仍未確認 11/03。"},
+{k:"weaken",type:"否決",title:"2026-10-30 任何行權價",body:"35 DTE 看起來更接近 30–45 日默認帶，但到期日落喺財報黑窗內。新開呢張等於把倉帶入「財報前 5 日不新開」窗口。否決。"},
+{k:"weaken",type:"硬禁",title:"不賣現金擔保認沽",body:"Thesis／F3 閘門係應減倉。賣現金擔保認沽＝喺高過 Bull 嘅位置加槓桿接貨。指派後都唔好再賣 put 接貨。Wheel 喺此停，除非 Q4 8-K 入帳 Helios 收入而且 Base 上調。"},
+{k:"weaken",type:"硬禁",title:"不買認購、不裸賣認購",body:"買認購閘係合理或偏貴：現價對 Base +74.8%，RSI 73 係技術高位，唔係嚴重低估＋技術低位。裸賣認購無限上行，Keith 規則禁止。不代下單。"}
+];
+const evRoot=document.getElementById('evidence');
+function render(filter){
+  evRoot.innerHTML=evidence.filter(e=>filter==='all'||e.k===filter).map(e=>`
+  <article class="ev ${e.k}"><div class="type">${e.type}<span class="impact ${e.k}">${e.k==='support'?'推薦':e.k==='weaken'?'否決':'備選'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+});
+</script>
+<section id="page-comments" data-page="/amd/skill7-option-strategy.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

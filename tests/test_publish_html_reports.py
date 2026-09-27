@@ -23,6 +23,16 @@ class PublishHtmlReportsTests(TestCase):
             "earnings-review",
         )
 
+    def test_skill7_option_strategy_slug(self) -> None:
+        self.assertEqual(
+            slug_and_label("AMD_skill7_option_strategy", "AMD"),
+            ("skill7-option-strategy", "期權策略"),
+        )
+        self.assertEqual(
+            slug_and_label("AMD_2026-09-27_skill7_option_strategy", "AMD")[0],
+            "skill7-option-strategy",
+        )
+
     def test_comment_script_depth(self) -> None:
         docs = Path(__file__).resolve().parents[1] / "docs"
         self.assertEqual(comment_script_src(docs / "index.html"), "assets/page-comments.js")
