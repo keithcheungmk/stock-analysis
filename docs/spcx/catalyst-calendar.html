@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SPCX Catalyst Calendar</title>
+<title>SPCX Catalyst Calendar · 2026-10-10</title>
 <style>
   :root {
     --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
@@ -15,13 +15,12 @@
   body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
   .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
   .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
-  .notice{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#7f1d1d}
-  .notice.ok{background:var(--info-soft);border-color:#93c5fd;color:#1e3a8a}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#1e3a8a}
   .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
   @media(max-width:860px){.hero{grid-template-columns:1fr}}
   .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
   .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
-  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.2rem;font-weight:800;line-height:1.15;color:var(--watch);margin:8px 0 0}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.85rem;font-weight:800;line-height:1.15;color:var(--watch);margin:8px 0 0}
   .score-den{font-size:.95rem;color:var(--muted);font-weight:600;margin-top:8px}
   .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
   .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
@@ -44,7 +43,7 @@
   @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
   .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
-  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.2rem;font-weight:800;margin-top:4px}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.15rem;font-weight:800;margin-top:4px}
   .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
   .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
   .sections{display:grid;gap:16px;margin-top:18px}
@@ -56,13 +55,15 @@
   table{width:100%;border-collapse:collapse;font-size:.82rem}
   th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
   th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
-  tr.next{background:var(--fail-soft)}
+  tr.next{background:var(--watch-soft)}
+  tr.done{color:#78716c}
   .timeline{display:grid;gap:10px}
   .event{display:grid;grid-template-columns:170px 1fr;gap:14px;border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
   @media(max-width:700px){.event{grid-template-columns:1fr}}
   .event.high{border-left-color:var(--fail)}
   .event.mid{border-left-color:var(--watch)}
   .event.low{border-left-color:#a8a29e}
+  .event.done{border-left-color:#a8a29e;opacity:.72}
   .event .date{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;color:var(--ink)}
   .event .tag{display:inline-block;font-size:.7rem;font-weight:800;border-radius:999px;padding:2px 8px;margin-top:4px;font-family:"Avenir Next","PingFang TC",sans-serif}
   .tag.high{background:var(--fail-soft);color:var(--fail)}
@@ -79,114 +80,115 @@
 <a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
 
 <div class="wrap">
-  <div class="notice">⚠️ <strong>過時項（vs 2026-08-30 Pages）：</strong>倒數「10 日後／19 日後」已過時，而家係 <strong>6 日後／15 日後</strong>。日數基準係 424B4「招股書日 2026-06-11」，唔係上市日 6/12，亦唔係第 90 個交易日。Musk 批次跟原文 <strong>最多 6.4B</strong>，唔再用 64.2 億。「約 14% 可流通」係研究估算，唔係招股書一行。可賣 ≠ 必賣。</div>
+  <div class="notice">✅ <strong>九月 P0 已退役：</strong>9/9 Day 90 同 9/18 put <strong>已到期／已過</strong>，唔再係即時閘。10/09 Day 120（最多 328.4M）已過——可賣 ≠ 必賣。而家 P0：<strong>10/24 Day 135</strong>、<strong>Q3（日期 unverified）</strong>、<strong>12/8 Day 180</strong>、<strong>FCC／Grain 800 MHz</strong>。F3 尺維持 68／91／182，唔另估。</div>
 
   <section class="hero">
     <div class="score-box">
-      <div class="eyebrow">Skill 5 · 九月窗口</div>
-      <div class="score-num">9/9 解禁<br>再 9/18 put</div>
-      <div class="score-den">現價 vs F3 Base 溢價約 +55% · 續抱唔加倉</div>
+      <div class="eyebrow">Skill 5 · 十月窗口</div>
+      <div class="score-num">10/24 · Q3<br>12/8 · FCC</div>
+      <div class="score-den">現價 vs F3 Base 溢價約 +79% · 續抱唔加倉</div>
     </div>
     <div class="hero-main">
       <h1>SPCX · 催化劑地圖</h1>
-      <p>未來兩季改倉位節奏嘅係 Day 90 解禁疊 short put 到期，之後先至係 Q3 業績兼最多 1.3B 盈利觸發解禁。市場最易把 9/9 當成「當日必賣」或「第 90 個交易日」。</p>
+      <p>九月解禁＋put 窗已過。未來兩季改節奏嘅係 Day 135／Q3 業績兼最多 1.3B 解禁、Day 180 剩餘批，同 Grain 低頻譜要 FCC 批。Street 目標只係對照，唔改 F3。</p>
       <div class="badges">
-        <span class="badge">截至 2026-09-03 HKT</span>
-        <span class="badge">現股 827 · put 195/170 @ 9/18</span>
-        <span class="badge">424B4 已核對</span>
+        <span class="badge">截至 2026-10-10 HKT</span>
+        <span class="badge">現價 US$162.57（10-09 收市）</span>
+        <span class="badge">424B4 已核對 · F3 鎖定</span>
       </div>
     </div>
   </section>
 
   <section class="hud" id="decision-hud">
     <h2>Decision HUD <span class="hud-tag">WATCH · 續抱不加倉</span></h2>
-    <p class="muted" style="margin:0">估值尺沿用 2026-08-30 Framework 3，本頁<strong>唔另估 target price</strong>。現價只作 delayed 刷新。</p>
+    <p class="muted" style="margin:0">估值尺沿用 2026-08-30 Framework 3，本頁<strong>唔另估 target price</strong>。現價只作 delayed 刷新。本輪只改 P0 頁；F1–F3 舊頁現價未同步。</p>
     <div class="hud-grid">
-      <div class="hud-cell"><div class="l">現價（09-02 收市，delayed）</div><div class="v">US$140.71</div><div class="s">08-30 稿用 08-28 US$141.50</div></div>
-      <div class="hud-cell"><div class="l">F3 估值尺</div><div class="v">68 / 91 / 182</div><div class="s">Bear · Base · Bull（每股，F3）</div></div>
-      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">溢價 +54.6%</div><div class="s">等價 Base 低過現價約 −35.3%</div></div>
-      <div class="hud-cell"><div class="l">下一批供給</div><div class="v">319.0M</div><div class="s">2026-09-09 Day 90 · 424B4 verified</div></div>
+      <div class="hud-cell"><div class="l">現價（10-09 收市，delayed）</div><div class="v">US$162.57</div><div class="s">52w 高 ~225.64／低 ~104.83</div></div>
+      <div class="hud-cell"><div class="l">F3 估值尺</div><div class="v">68 / 91 / 182</div><div class="s">Bear · Base · Bull（每股，F3 鎖定至官方 Q3）</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">溢價 +78.6%</div><div class="s">約 +79%；等價 Base 低過現價約 −44.0%</div></div>
+      <div class="hud-cell"><div class="l">下一批供給</div><div class="v">328.4M</div><div class="s">2026-10-24 Day 135 · 424B4 verified</div></div>
     </div>
     <div class="hud-drivers">
       <span>★ Starlink 12.0M · ARPU US$66（2026-Q2）</span>
       <span>★ Connectivity 營業利潤 US$1.66B</span>
       <span>★ AI 已入帳 US$2.56B</span>
       <span>★ H1 近似 FCF −US$25.0B</span>
-      <span>★ Short put 15 日後到期</span>
+      <span>★ Grain 800 MHz 待 FCC</span>
     </div>
-    <div class="action">現價 US$140.71 相對 F3 Base US$91 溢價約 +55% → 續抱／唔好加倉；9/9 解禁同 9/18 put 到期前唔追。</div>
+    <div class="action">現價 US$162.57 相對 F3 Base US$91 溢價約 +79% → 續抱現股、唔開新 CSP；已高過舊續抱上限 150，但仍低過 trim 180。</div>
   </section>
 
   <div class="kpis">
-    <div class="kpi orange"><div class="label">Day 90 解禁</div><div class="value">09-09 · 6 日後</div><div class="note">最多 319.0M · excl. affiliates</div></div>
-    <div class="kpi red"><div class="label">Short put 到期</div><div class="value">09-18 · 15 日後</div><div class="note">195／170 仍深 ITM @140.71</div></div>
-    <div class="kpi teal"><div class="label">轉 OTM 要升</div><div class="value">+38.6% / +20.8%</div><div class="note">先至離開 195／170</div></div>
-    <div class="kpi green"><div class="label">Q3 解禁機制</div><div class="value">最多 1.3B</div><div class="note">業績後第二個完整交易日 · IR 未排期</div></div>
+    <div class="kpi orange"><div class="label">Day 135 解禁</div><div class="value">10-24 · 14 日後</div><div class="note">最多 328.4M · 424B4</div></div>
+    <div class="kpi red"><div class="label">Q3 2026 業績</div><div class="value">日期 unverified</div><div class="note">第三方約 11/03 或 11/17 · IR 未排期</div></div>
+    <div class="kpi teal"><div class="label">Day 180 剩餘</div><div class="value">12-08 · 59 日後</div><div class="note">最多 797.6M（Extra 未觸發）</div></div>
+    <div class="kpi green"><div class="label">Grain 800 MHz</div><div class="value">10-08 公布</div><div class="note">最多 14 MHz 成對 · 要 FCC</div></div>
   </div>
 
   <div class="sections">
     <section class="panel">
       <h2>核心敘事同敏感變數</h2>
-      <p>主敘事仍然係發射入口 + Starlink 現金引擎 + AI 高 capex 期權。Thesis Tracker（08-30）Mixed：支柱 A 已有 Q2 官方驗證；支柱 C 收入爆發但未轉 FCF；裂縫 D 係估值透支 + 資本強度，<strong>分階段 lock-up 係 D 嘅供給維度</strong>。</p>
-      <p class="muted">9/9–9/18 只驗證供給消化同 assignment，唔驗證用戶／AI 基本面。真正改 F3 倍數嘅係下一份季報嘅用戶 × ARPU、AI 已入帳、近似 FCF。</p>
+      <p>主敘事仍然係發射入口 + Starlink 現金引擎 + AI 高 capex 期權。Thesis Tracker（08-30）Mixed：支柱 A 已有 Q2 官方驗證；支柱 C 收入爆發但未轉 FCF；裂縫 D 係估值透支 + 資本強度，<strong>分階段 lock-up 仍係 D 嘅供給維度</strong>。</p>
+      <p>10/08 Grain 全國 800 MHz 低頻譜協議（Starlink Mobile 混合架構）係新監管／護城河線索，<strong>未改已入帳收入或 F3 倍數</strong>。H1 近似 FCF 仍引用 <strong>−US$25.0B</strong>（2026-H1 10-Q）。傳聞約 US$40B 借貸買 NVIDIA 芯片＝<code>unverified</code>，唔入帳。</p>
+      <p class="muted">9/9–9/18 只驗證咗供給消化同舊 put 到期，唔驗證用戶／AI 基本面。真正改 F3 倍數嘅仍然係下一份<strong>官方</strong>季報嘅用戶 × ARPU、AI 已入帳、近似 FCF。</p>
     </section>
 
     <section class="panel">
-      <h2>IPO 鎖定期（424B4 已核對）</h2>
-      <p class="muted">日數基準：<strong>Prospectus Dated June 11, 2026</strong>（定價日）。IR：上市 6/12、交割 6/15（含 greenshoe 638,888,888 股）。可賣 ≠ 必賣。Goldman 可書面提早釋放；09-03 前無新 8-K 豁免。</p>
+      <h2>IPO 鎖定期（424B4 已核對 · 截至 10-10）</h2>
+      <p class="muted">日數基準：<strong>Prospectus Dated June 11, 2026</strong>（定價日）。IR：上市 6/12、交割 6/15（含 greenshoe 638,888,888 股）。可賣 ≠ 必賣。Goldman 可書面提早釋放。</p>
       <table>
-        <thead><tr><th>日期／觸發</th><th>批次</th><th>最多股數</th><th>狀態（09-03）</th><th>validation</th></tr></thead>
+        <thead><tr><th>日期／觸發</th><th>批次</th><th>最多股數</th><th>狀態（10-10）</th><th>validation</th></tr></thead>
         <tbody>
-          <tr><td>2026-08-06</td><td>Q2 後第二個完整交易日（20%，excl. affiliates）</td><td>911.5M</td><td>✅ 已解禁</td><td>verified · 424B4</td></tr>
-          <tr><td>2026-08-06 條件</td><td>Additional Release：10 日內至少 5 日收市 ≥ US$175.50</td><td>455.8M</td><td>✗ 未觸發 → 滾入 12/8</td><td>條件 verified；未觸發＝research</td></tr>
-          <tr><td>2026-08-20</td><td>Day 70（7%，excl. affiliates）</td><td>319.0M</td><td>✅ 已解禁</td><td>verified · 424B4</td></tr>
-          <tr class="next"><td><strong>2026-09-09</strong></td><td><strong>Day 90（7%，excl. affiliates）</strong></td><td><strong>319.0M</strong></td><td><strong>▶ 6 日後</strong></td><td><strong>verified</strong></td></tr>
-          <tr><td>2026-09-10</td><td>Day 91 affiliates 補位（Rule 144）</td><td>59.1M</td><td>7 日後</td><td>verified · 424B4</td></tr>
-          <tr><td>2026-09-24</td><td>Day 105（7%）</td><td>328.4M</td><td>21 日後</td><td>verified · 424B4</td></tr>
-          <tr><td>2026-10-09</td><td>Day 120（7%）</td><td>328.4M</td><td>36 日後</td><td>verified · 424B4</td></tr>
-          <tr><td>2026-10-24</td><td>Day 135（7%）</td><td>328.4M</td><td>51 日後</td><td>verified · 424B4</td></tr>
-          <tr><td>Q3 後第二個完整交易日</td><td>28% of 180-day block</td><td>1.3B</td><td>IR 未宣布業績日</td><td>機制 verified</td></tr>
-          <tr><td>2026-12-08</td><td>Day 180 剩餘（Extra 未觸發）</td><td>797.6M</td><td>96 日後</td><td>verified · 424B4</td></tr>
+          <tr class="done"><td>2026-08-06</td><td>Q2 後第二個完整交易日（20%，excl. affiliates）</td><td>911.5M</td><td>✅ 已解禁</td><td>verified · 424B4</td></tr>
+          <tr class="done"><td>2026-08-06 條件</td><td>Additional Release：10 日內至少 5 日收市 ≥ US$175.50</td><td>455.8M</td><td>✗ 未觸發 → 滾入 12/8</td><td>條件 verified；未觸發＝research</td></tr>
+          <tr class="done"><td>2026-08-20</td><td>Day 70（7%，excl. affiliates）</td><td>319.0M</td><td>✅ 已解禁</td><td>verified · 424B4</td></tr>
+          <tr class="done"><td>2026-09-09</td><td>Day 90（7%，excl. affiliates）</td><td>319.0M</td><td>✅ 已解禁 · 退役 P0</td><td>verified</td></tr>
+          <tr class="done"><td>2026-09-10</td><td>Day 91 affiliates 補位（Rule 144）</td><td>59.1M</td><td>✅ 已解禁</td><td>verified · 424B4</td></tr>
+          <tr class="done"><td>2026-09-24</td><td>Day 105（7%）</td><td>328.4M</td><td>✅ 已解禁</td><td>verified · 424B4</td></tr>
+          <tr class="done"><td>2026-10-09</td><td>Day 120（7% of ~180-day lock）</td><td>328.4M</td><td>✅ 已解禁 · 可賣 ≠ 必賣</td><td>verified · 424B4</td></tr>
+          <tr class="next"><td><strong>2026-10-24</strong></td><td><strong>Day 135（7%）</strong></td><td><strong>328.4M</strong></td><td><strong>▶ 14 日後 · 而家 P0</strong></td><td><strong>verified</strong></td></tr>
+          <tr><td>Q3 後第二個完整交易日</td><td>28% of 180-day block</td><td>1.3B</td><td>IR 未宣布業績日 · 第三方約 11/03 或 11/17＝unverified</td><td>機制 verified</td></tr>
+          <tr><td>2026-12-08</td><td>Day 180 剩餘（Extra 未觸發）</td><td>797.6M</td><td>59 日後 · P0</td><td>verified · 424B4</td></tr>
           <tr><td>2027-06-12</td><td>Musk 366 日（無 early release）</td><td>6.4B</td><td>窗口外</td><td>verified · 424B4</td></tr>
         </tbody>
       </table>
-      <p class="cite">來源：424B4 accession 0001628280-26-042639，CIK 0001181412，Shares Eligible for Future Sale（約 p.259）。S-1／S-1A 見 <code>data/raw/SPCX/_ipo/manifest.json</code>；定價稿以 424B4 為準。52 週低位 2026-08-03 US$104.83 用於判定 Extra 未觸發（delayed／行情站，唔覆寫官方股數）。</p>
+      <p class="cite">來源：424B4 accession 0001628280-26-042639，CIK 0001181412，Shares Eligible for Future Sale。52 週低位 2026-08-03 US$104.83 用於判定 Extra 未觸發（delayed／行情站，唔覆寫官方股數）。Day 120＝2026-10-09，最多約 328.4M Class A（7% of ~180-day lock）。</p>
     </section>
 
     <section class="panel">
       <h2>Catalyst 時間線（優先排序）</h2>
       <div class="timeline">
-        <div class="event high"><div><div class="date">2026-09-18（15 日後）</div><span class="tag high">P0 倉位</span></div><div><h3>Short put 到期／assignment（195／170）</h3><p class="muted">KPI：現價 vs F3 建倉區 ≤US$95。唔係基本面，但改成本同名義。@140.71 要急升 +38.6%／+20.8% 先 OTM。</p></div></div>
-        <div class="event high"><div><div class="date">2026-09-09（6 日後）</div><span class="tag high">P1 供給</span></div><div><h3>Day 90 解禁最多 319.0M</h3><p class="muted">KPI：解禁可流通供給。就喺 put 到期前 9 日。可賣 ≠ 必賣。</p></div></div>
-        <div class="event mid"><div><div class="date">2026-09-10（7 日後）</div><span class="tag mid">P1 細批</span></div><div><h3>Day 91 affiliates 最多 59.1M</h3><p class="muted">唔好同 9/9 加總成「一日必賣 3.78 億」。</p></div></div>
-        <div class="event high"><div><div class="date">約 10 下旬–11 月中</div><span class="tag high">P1 基本面</span></div><div><h3>Q3 2026 業績 + 最多 1.3B 解禁</h3><p class="muted">KPI：用戶×ARPU、AI 已入帳、FCF。IR 未排期。Beat 但 FCF 惡化仍可跌。</p></div></div>
-        <div class="event mid"><div><div class="date">09-24／10-09／10-24</div><span class="tag mid">P1 供給流</span></div><div><h3>Day 105／120／135 各最多 328.4M</h3><p class="muted">持續供給。若 9/18 已 assignment，打喺更大名義上。</p></div></div>
-        <div class="event mid"><div><div class="date">2026-12-08</div><span class="tag mid">P2</span></div><div><h3>Day 180 剩餘最多 797.6M</h3><p class="muted">Extra 455.8M 未觸發，剩餘用大數。誤當 328.4M＝少計。</p></div></div>
-        <div class="event low"><div><div class="date">持續／季報</div><span class="tag low">P2 敘事</span></div><div><h3>Starship、Starlink 夥伴、AI 轉收入</h3><p class="muted">近端倍數弱。contracted ≠ cash。日常發射＝雜訊。</p></div></div>
+        <div class="event high"><div><div class="date">2026-10-24（14 日後）</div><span class="tag high">P0 供給</span></div><div><h3>Day 135 解禁最多 328.4M</h3><p class="muted">KPI：解禁可流通供給。可賣 ≠ 必賣。唔開新 CSP 賭消化。</p></div></div>
+        <div class="event high"><div><div class="date">約 11/03 或 11/17</div><span class="tag high">P0 基本面</span></div><div><h3>Q3 2026 業績 + 最多 1.3B 解禁</h3><p class="muted">KPI：用戶×ARPU、AI 已入帳、FCF。IR 未排期。第三方日期＝<strong>unverified</strong>。Beat 但 FCF 惡化仍可跌。F3 鎖到官方數先改。</p></div></div>
+        <div class="event high"><div><div class="date">2026-12-08（59 日後）</div><span class="tag high">P0 供給</span></div><div><h3>Day 180 剩餘最多 797.6M</h3><p class="muted">Extra 455.8M 未觸發，剩餘用大數。誤當 328.4M＝少計。</p></div></div>
+        <div class="event high"><div><div class="date">2026-10-08 起 · 待 FCC</div><span class="tag high">P0 監管</span></div><div><h3>Grain 全國 800 MHz 低頻譜協議</h3><p class="muted">最多約 14 MHz 成對；Starlink Mobile 混合地面＋衛星。官方未披露代價。傳媒 WSJ／Axios 報約 US$8B 現金＝unverified。要 FCC 批准先算落地。</p></div></div>
+        <div class="event done"><div><div class="date">2026-10-09</div><span class="tag low">已過</span></div><div><h3>Day 120 解禁最多 328.4M</h3><p class="muted">已過。可賣 ≠ 必賣。唔再當即時 P0。</p></div></div>
+        <div class="event done"><div><div class="date">2026-09-09／09-18</div><span class="tag low">退役 P0</span></div><div><h3>Day 90 解禁＋ short put 已到期</h3><p class="muted">九月窗口關閉。2026-09-18 兩張 put <strong>已到期</strong>。Assignment／股數等 Keith 帳戶確認。唔再倒數「19 日」。</p></div></div>
+        <div class="event low"><div><div class="date">持續／季報</div><span class="tag low">P2 敘事</span></div><div><h3>Starship、Starlink 夥伴、AI 轉收入</h3><p class="muted">近端倍數弱。contracted ≠ cash。約 US$40B NVIDIA 借貸傳聞＝unverified。</p></div></div>
       </div>
     </section>
 
     <section class="panel">
-      <h2>九月窗口：9/9 前 → 9/9–10 → 9/18 前</h2>
+      <h2>十月窗口：10/24 → Q3 → 12/8 → FCC</h2>
       <div class="grid-2">
-        <div class="box warn"><h3>9/9 前</h3><p class="muted">溢價約 +55%，續抱上限 US$150。盯解禁前量價同 Form 144 線索。唔追、唔新開賣 put。</p></div>
-        <div class="box fail"><h3>9/9–9/10</h3><p class="muted">319.0M 法律上可賣 + 59.1M 補位。價跌可以只係消化供給，唔等於支柱 A／C 失效。</p></div>
-        <div class="box warn"><h3>9/18 前</h3><p class="muted">解禁若壓價，assignment 現金義務唔變。研究判斷仍然係：150–160 唔係 F3 建倉區。</p></div>
-        <div class="box ok"><h3>9/18 後到 9/24</h3><p class="muted">若雙 assignment → 約 1,027 股、現金約 US$36,500（舊稿）。Day 105 會打到更大名義。Q3 大概率後於呢兩張 put。</p></div>
+        <div class="box warn"><h3>而家到 10/24</h3><p class="muted">溢價約 +79%，已高過舊續抱上限 150、仍低過 trim 180。盯 Day 135 量價同 Form 144 線索。唔追、唔新開賣 put。</p></div>
+        <div class="box fail"><h3>Q3（日期未官方）</h3><p class="muted">第三方約 11/03 或 11/17 只係線索。官方季報先可以討論改 F3。用戶＋AI＋FCF 三條要一齊睇；單計 beat 唔夠。</p></div>
+        <div class="box warn"><h3>12/8 Day 180</h3><p class="muted">剩餘最多 797.6M。Q3 1.3B 若先至釋放，12/8 仍係 180-day 尾批，唔好當細數。</p></div>
+        <div class="box ok"><h3>FCC／Grain</h3><p class="muted">協議已公布、牌照未轉。批准／條件／buildout 先係落地。價錢跟官方「未披露」，唔把傳媒金額寫進 SOTP。</p></div>
       </div>
     </section>
 
     <section class="panel">
-      <h2>誤判、thesis、行動</h2>
+      <h2>誤判、對照、行動</h2>
       <div class="grid-2">
-        <div class="box warn"><h3>市場高估</h3><p class="muted">9/9 當日必賣 3.19 億；「第 90 個交易日」；Starship 短訊可以對冲供給；Q3 beat 等於解禁無害。</p></div>
-        <div class="box fail"><h3>市場低估</h3><p class="muted">9/24–10/24 三條 328.4M 連續流；未觸發嘅 455.8M 滾入 12/8 嘅 797.6M；Q3 1.3B 先係 180-day 最大單批（約 4× 9/9）。</p></div>
-        <div class="box ok" style="grid-column:1/-1"><h3>而家點做</h3><p>現價相對 F3 Base 溢價約 +55% → <strong>續抱現股、等待 9/9 同 9/18、唔好加倉、唔追</strong>。Q3 連續驗證用戶＋AI＋FCF 缺口收窄，先討論回調後加倉。Assignment 或 Q3 失效 → 重新評估。解禁後價跌本身 ≠ 自動加倉。</p></div>
+        <div class="box warn"><h3>市場高估</h3><p class="muted">Street OW（Barclays US$254、MS US$300、GS US$230）可以當 F3 Bull；Grain 一公布就等於 Mobile 已入帳；9/9／9/18 仲係即時風險。</p></div>
+        <div class="box fail"><h3>市場低估</h3><p class="muted">H1 近似 FCF 仍 −US$25.0B；Q3 1.3B 先係 180-day 最大單批；12/8 797.6M；FCC 可以拖；未確認嘅 AI capex／借貸傳聞。</p></div>
+        <div class="box ok" style="grid-column:1/-1"><h3>而家點做</h3><p>現價相對 F3 Base 溢價約 +79% → <strong>續抱現股、唔開新 CSP、未確認前唔開新 CC</strong>。已高過舊續抱上限 150，但仍低過 trim 180，未觸發 F3 減倉線。Q3 官方連續驗證用戶＋AI＋FCF 缺口收窄，先討論係咪改尺。解禁後價跌本身 ≠ 自動加倉。</p></div>
       </div>
     </section>
   </div>
 
-  <p class="footer">424B4：https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm · F3 2026-08-30 · 現價 delayed 2026-09-02。此分析僅供研究參考，不構成投資建議。</p>
+  <p class="footer">424B4：https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm · Grain FCC narrative 2026-10-08 · Grain PR 2026-10-08 · F3 2026-08-30 · 現價 delayed 2026-10-09。此分析僅供研究參考，不構成投資建議。</p>
 </div>
 <section id="page-comments" data-page="/spcx/catalyst-calendar.html"></section>
 <script src="../assets/page-comments.js" defer></script>

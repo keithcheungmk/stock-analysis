@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SPCX One-Pager</title>
+<title>SPCX One-Pager · 2026-10-10</title>
 <style>
   :root {
     --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
@@ -15,7 +15,7 @@
   body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
   .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
   .wrap{max-width:900px;margin:0 auto;padding:28px 18px 72px}
-  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:12px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.82rem;margin-bottom:16px}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:12px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.82rem;margin-bottom:16px;color:#1e3a8a}
   .hero{display:grid;grid-template-columns:200px 1fr;gap:16px}
   @media(max-width:700px){.hero{grid-template-columns:1fr}}
   .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:20px;box-shadow:var(--shadow);text-align:center}
@@ -23,6 +23,17 @@
   .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
   .hero-main h1{margin:0 0 6px;font-size:1.4rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .hero-main p{margin:0;opacity:.92;font-size:.92rem}
+  .hud{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:700px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-top:14px}
   h2{margin:0 0 12px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
   .muted{color:var(--muted);font-size:.88rem}
@@ -43,23 +54,42 @@
 <a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
 
 <div class="wrap">
-  <div class="notice">格式偏離說明：One-pager skill 建議主交付係 Cursor Canvas PPT，Cowork 呢個 session 冇呢個工具鏈，改用呢頁 4 段式互動 HTML 摘要代替（取代舊版 interactive-brief.html），內容同 <code>output/SPCX_2026-08-30_one_pager.md</code> 一致。</div>
+  <div class="notice">輕量刷新 · 2026-10-10 HKT。F3 Bear／Base／Bull <strong>維持 68／91／182</strong>，唔另估、唔用 Street 目標改尺。9/18 put 敘事已關閉。內容對住 <code>output/SPCX_2026-10-10_one_pager.md</code>。</div>
 
   <section class="hero">
-    <div class="score-box"><div class="sans" style="font-size:.78rem;color:var(--watch);font-weight:700">STATUS</div><div class="score-num">WATCH</div><div class="muted">75 / 130</div></div>
+    <div class="score-box"><div class="sans" style="font-size:.78rem;color:var(--watch);font-weight:700">STATUS</div><div class="score-num">WATCH</div><div class="muted">75 / 130 · F3 鎖定</div></div>
     <div class="hero-main">
       <h1>SPCX One-Pager</h1>
-      <p>現價 US$141.50 vs Base US$91（-35.7%）· Bear US$68／Bull US$182 · 數據截至 2026-08-30</p>
+      <p>現價 US$162.57 vs Base US$91（溢價約 +79%）· Bear US$68／Bull US$182 · 截至 2026-10-10</p>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">WATCH · 續抱不加倉</span></h2>
+    <p class="muted" style="margin:0">估值尺沿用 2026-08-30 Framework 3，本頁<strong>唔另估 target price</strong>。現價只作 delayed 刷新。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（10-09 收市，delayed）</div><div class="v">US$162.57</div><div class="s">52w 高 ~225.64／低 ~104.83</div></div>
+      <div class="hud-cell"><div class="l">F3 估值尺</div><div class="v">68 / 91 / 182</div><div class="s">Bear · Base · Bull（鎖定至官方 Q3）</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">溢價 +78.6%</div><div class="s">約 +79%；等價 Base 低過現價約 −44.0%</div></div>
+      <div class="hud-cell"><div class="l">倉位尺</div><div class="v">高過 150／低過 180</div><div class="s">舊續抱上限已破；未到 trim</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Starlink 12.0M · ARPU US$66（2026-Q2）</span>
+      <span>★ Connectivity 營業利潤 US$1.66B</span>
+      <span>★ AI 已入帳 US$2.56B</span>
+      <span>★ H1 近似 FCF −US$25.0B</span>
+      <span>★ 9/18 put 已到期 · assignment 待確認</span>
     </div>
   </section>
 
   <div class="panel">
-    <div class="action">續抱現股、唔好加倉；優先處理 19 日後到期嘅 short put assignment 風險。</div>
+    <div class="action">現價 US$162.57 相對 F3 Base US$91 溢價約 +79% → 續抱現股、唔開新 CSP；已高過舊續抱上限 150，但仍低過 trim 180。新 CC 要 Keith 確認。</div>
   </div>
 
   <div class="panel">
     <h2>1 · 結論</h2>
-    <p class="muted">Connectivity 已係十億級盈利引擎（Q2 營業利潤 US$1.66B、用戶 12.0M），AI 收入單季由 US$0.82B 暴增至 US$2.56B，但 AI／總 capex 令 H1 近似 FCF 達 -US$25.0B，估值倍數（~74.6× 年化 P/S）遠超 Base SOTP 估值。現價落喺「續抱」區間，但兩張 short put 距到期只剩 19 日，assignment 應視為近乎確定，需要主動管理。</p>
+    <p class="muted">Connectivity 已係十億級盈利引擎（Q2 營業利潤 US$1.66B、用戶 12.0M），AI 收入單季由 US$0.82B 暴增至 US$2.56B，但 AI／總 capex 令 H1 近似 FCF 仍係 <strong>−US$25.0B</strong>。F3 Base／Bull 未改。現價 US$162.57 已高過舊續抱區間上限 150，但仍低過 trim 180，未觸發減倉線。</p>
+    <p class="muted">9/18 兩張 short put <strong>已到期</strong>；assignment 同而家股數等 Keith 帳戶確認，唔再倒數「19 日」。10/08 Grain 800 MHz 協議要 FCC；官方未披露代價。Street（Barclays OW US$254、MS OW US$300、GS US$230）只係對照，<strong>唔覆寫</strong> 68／91／182。</p>
   </div>
 
   <div class="panel">
@@ -69,33 +99,34 @@
       <div class="kpi"><div class="l">Connectivity 營業利潤</div><div class="v">US$1,656m</div></div>
       <div class="kpi"><div class="l">Starlink 用戶</div><div class="v">12.0M</div></div>
       <div class="kpi"><div class="l">H1 近似 FCF</div><div class="v">-US$25.0B</div></div>
-      <div class="kpi"><div class="l">年化 P/S</div><div class="v">~74.6×</div></div>
-      <div class="kpi"><div class="l">未來 3 月解禁</div><div class="v">~20 億股</div></div>
+      <div class="kpi"><div class="l">9/18 put</div><div class="v">已到期</div></div>
+      <div class="kpi"><div class="l">下一批解禁</div><div class="v">10-24 · 328.4M</div></div>
     </div>
+    <p class="muted" style="margin-top:10px">傳聞約 US$40B 借貸買 NVIDIA 芯片＝<strong>unverified</strong>。Q3 業績日期第三方約 11/03 或 11/17＝<strong>unverified</strong>。Grain 代價：官方未披露；傳媒 WSJ／Axios 約 US$8B＝unverified。</p>
   </div>
 
   <div class="panel">
-    <h2>3 · 估值（引用 Framework 3）</h2>
+    <h2>3 · 估值（引用 Framework 3 · 鎖定）</h2>
     <table>
-      <thead><tr><th>情景</th><th>目標價</th><th>vs 現價</th></tr></thead>
+      <thead><tr><th>情景</th><th>目標價</th><th>vs 現價 US$162.57</th></tr></thead>
       <tbody>
-        <tr><td>Bear</td><td>US$68</td><td>-51.9%</td></tr>
-        <tr><td>Base</td><td>US$91</td><td>-35.7%</td></tr>
-        <tr><td>Bull</td><td>US$182</td><td>+28.6%</td></tr>
+        <tr><td>Bear</td><td>US$68</td><td>−58.2%</td></tr>
+        <tr><td>Base</td><td>US$91</td><td>−44.0%</td></tr>
+        <tr><td>Bull</td><td>US$182</td><td>+12.0%</td></tr>
       </tbody>
     </table>
-    <p class="muted" style="margin-top:6px">風險回報不對稱（Bear 跌幅遠大於 Bull 升幅），現價偏貴，建倉區為 ≤US$95。</p>
+    <p class="muted" style="margin-top:6px">現價相對 Base <strong>溢價約 +79%</strong>。建倉區仍係 ≤US$95；舊續抱 US$95–150 已破上限；trim／鎖定 ≥US$180。Street 254／300／230 唔改呢三個數。官方 Q3 出齊先討論重估。</p>
   </div>
 
   <div class="panel">
     <h2>4 · 催化劑（1–2 季）</h2>
     <div class="timeline-mini">
-      <div class="ev-mini"><strong>2026-09-09</strong> — Day 90 鎖定期解禁（7%，約 3.19 億股），距 put 到期僅 9 日</div>
-      <div class="ev-mini"><strong>2026-09-18</strong> — Short put 到期（19 日後），assignment 風險極高</div>
-      <div class="ev-mini"><strong>約 2026-10／11</strong> — Q3 2026 業績，觸發約 28% 鎖定期解禁</div>
-      <div class="ev-mini"><strong>2026-12-08</strong> — 180 日完全解禁（最多 7.976 億股）</div>
+      <div class="ev-mini"><strong>2026-10-24</strong> — Day 135 解禁（最多 328.4M）· 而家 P0</div>
+      <div class="ev-mini"><strong>Q3 2026</strong> — 業績＋最多 1.3B 解禁 · 日期 unverified（約 11/03 或 11/17）</div>
+      <div class="ev-mini"><strong>2026-12-08</strong> — Day 180 剩餘（最多 797.6M；Extra 未觸發）</div>
+      <div class="ev-mini"><strong>FCC／Grain</strong> — 2026-10-08 公布全國 800 MHz（~14 MHz 成對）；要批准</div>
     </div>
-    <p class="muted" style="margin-top:8px"><strong>倉位提醒：</strong>現股 827 股續抱；options 建議優先買回 195 strike put，詳見 Options Overlay 頁。</p>
+    <p class="muted" style="margin-top:8px"><strong>倉位提醒：</strong>續抱現股；9/18 已到期、assignment／股數 pending Keith；唔開新 CSP；新 CC 要 Keith 確認。9/9 同 9/18 退役，唔再當即時窗。</p>
   </div>
 
   <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
