@@ -53,7 +53,9 @@ class PublishHtmlReportsTests(TestCase):
     def test_amd_index_hud_is_protected(self) -> None:
         docs = Path(__file__).resolve().parents[1] / "docs"
         amd_index = docs / "amd" / "index.html"
+        rklb_index = docs / "rklb" / "index.html"
         self.assertIn(amd_index, SKIP_OVERWRITE)
+        self.assertIn(rklb_index, SKIP_OVERWRITE)
         html = amd_index.read_text(encoding="utf-8")
         self.assertIn("US$629.26", html)
         self.assertIn("180 / 360 / 505", html)

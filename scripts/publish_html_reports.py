@@ -20,6 +20,8 @@ SKIP_OVERWRITE = {
     DOCS / "iren" / "index.html",
     # Tesla hub 八粒掣順序已對齊 NVDA；publish 唔好用 collect_pages 重排。
     DOCS / "tsla" / "index.html",
+    # RKLB hub 去重 one-pager 雙連結；publish 唔好用 collect_pages 重排。
+    DOCS / "rklb" / "index.html",
     # AMD 首頁帶 Decision HUD（Skill 9 驗收尺）；publish 唔好洗走。
     DOCS / "amd" / "index.html",
 }
