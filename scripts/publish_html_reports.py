@@ -401,8 +401,8 @@ BASE_CSS = """
   .lede{color:#78716c;line-height:1.55;margin:0 0 18px}
   .pill{display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;border-radius:999px;padding:3px 9px;
     vertical-align:middle;background:#e7e5e4;color:#44403c}
-  .pill.pass{background:#dcfce7;color:#15803d}.pill.watch{background:#ffedd5;color:#c2410c}
-  .pill.fail{background:#fee2e2;color:#b91c1c}.pill.date{background:#0f766e;color:#fff}
+  .pill.v-pass{background:#dcfce7;color:#15803d}.pill.v-watch{background:#ffedd5;color:#c2410c}
+  .pill.v-fail{background:#fee2e2;color:#b91c1c}.pill.date{background:#0f766e;color:#fff}
   .prem.hot{color:#b91c1c}.prem.warm{color:#c2410c}.prem.cool{color:#15803d}.prem.fair{color:#44403c}.prem.na{color:#a8a29e}
   .note{margin-top:22px;color:#78716c;font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif;line-height:1.5}
 """
@@ -417,7 +417,7 @@ def verdict_pill(verdict: str, score: str) -> str:
         text = "F1 FAIL · 紅線"
     else:
         text = f"F1 {verdict}"
-    return f'<span class="pill {verdict.lower()}">{text}</span>'
+    return f'<span class="pill v-{verdict.lower()}">{text}</span>'
 
 
 def hud_block(summary: dict) -> str:
