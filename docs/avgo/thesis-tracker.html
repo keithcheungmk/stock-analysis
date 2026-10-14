@@ -250,6 +250,7 @@ const labels=['FY25Q3','Q4','FY26Q1','Q2','Q3'];
 const max=Math.max(...fcf);
 document.getElementById('fcfChart').innerHTML=fcf.map((v,i)=>`<div class="bar" style="height:${Math.round(v/max*110)}px"><span>${v}</span><em>${labels[i]}</em></div>`).join('');
 </script>
+</div>
 <section id="page-comments" data-page="/avgo/thesis-tracker.html"></section>
 <script src="../assets/page-comments.js" defer></script>
 </body>

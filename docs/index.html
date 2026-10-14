@@ -3,165 +3,116 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Stock Analysis · 手機互動報告</title>
+<title>Stock Analysis · 互動報告</title>
 <style>
-  body { margin:0; min-height:100vh; font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;
     background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),
       radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),#f4f1ea;
-    color:#1c1917; padding:24px 16px 72px; }
-  .wrap { max-width:720px; margin:0 auto; }
-  h1 { font-family:"Avenir Next","PingFang TC",sans-serif; font-size:1.55rem; margin:0 0 8px; }
-  .lede { color:#78716c; line-height:1.55; margin:0 0 22px; }
-  .grid { display:grid; gap:14px; }
-  .card { background:#fffdf8; border:1px solid #e7e0d5; border-radius:22px; padding:18px 16px;
-    box-shadow:0 12px 40px rgba(28,25,23,.08); }
-  h2 { font-family:"Avenir Next","PingFang TC",sans-serif; margin:0 0 8px; font-size:1.05rem; }
-  .badge { display:inline-block; margin-left:6px; font-size:.72rem; font-weight:800;
-    background:#0f766e; color:#fff; border-radius:999px; padding:3px 8px; vertical-align:middle; }
-  a { display:block; margin-top:10px; text-decoration:none; color:#fff; background:#0f766e;
-    border-radius:999px; padding:12px 16px; font-weight:800; text-align:center;
-    font-family:"Avenir Next","PingFang TC",sans-serif; }
-  .note { margin-top:22px; color:#78716c; font-size:.82rem; font-family:"Avenir Next","PingFang TC",sans-serif; }
+    color:#1c1917;padding:24px 16px 72px}
+  .sans,h1,h2,.pill,.tk,.px,.prem,.upd,.legend,.reports a,.back{font-family:"Avenir Next","PingFang TC",sans-serif}
+  h1{font-size:1.5rem;margin:0 0 6px}
+  .lede{color:#78716c;line-height:1.55;margin:0 0 18px}
+  .pill{display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;border-radius:999px;padding:3px 9px;
+    vertical-align:middle;background:#e7e5e4;color:#44403c}
+  .pill.pass{background:#dcfce7;color:#15803d}.pill.watch{background:#ffedd5;color:#c2410c}
+  .pill.fail{background:#fee2e2;color:#b91c1c}.pill.date{background:#0f766e;color:#fff}
+  .prem.hot{color:#b91c1c}.prem.warm{color:#c2410c}.prem.cool{color:#15803d}.prem.fair{color:#44403c}.prem.na{color:#a8a29e}
+  .note{margin-top:22px;color:#78716c;font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif;line-height:1.5}
+
+  .wrap{max-width:1120px;margin:0 auto}
+  .legend{color:#78716c;font-size:.8rem;margin:-8px 0 16px}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  @media(max-width:480px){.tiles{grid-template-columns:1fr 1fr;gap:10px}}
+  .tile{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;background:#fffdf8;border:1px solid #e7e0d5;
+    border-radius:18px;padding:14px;box-shadow:0 10px 30px rgba(28,25,23,.07);transition:transform .12s,box-shadow .12s}
+  .tile:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(28,25,23,.12);border-color:#99f6e4}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:6px}
+  .tk{font-size:1.25rem;font-weight:800;color:#0f766e}
+  .px{font-size:1.05rem;font-weight:800}
+  .px.muted{color:#a8a29e}
+  .prem{font-size:.86rem;font-weight:800}
+  .upd{font-size:.72rem;color:#78716c}
 </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>手機互動報告</h1>
-    <p class="lede">用 Safari／Chrome 打開呢頁。每張報告頁底可以留意見；下次分析會跟住改。唔使睇任何程式碼。</p>
-    <div class="grid">
-    <article class="card">
-      <h2>TSLA <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./tsla/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./tsla/framework1.html">Framework 1 初篩</a>
-      <a href="./tsla/framework2.html">Framework 2 深度增長</a>
-      <a href="./tsla/framework3.html">Framework 3 估值</a>
-      <a href="./tsla/one-pager.html">one pager</a>
-      <a href="./tsla/peer-comparison.html">同業比較</a>
-      <a href="./tsla/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./tsla/valuation.html">估值卡</a>
-    </article>
-    <article class="card">
-      <h2>NVDA <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./nvda/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./nvda/framework1.html">Framework 1 初篩</a>
-      <a href="./nvda/framework2.html">Framework 2 深度增長</a>
-      <a href="./nvda/framework3.html">Framework 3 估值</a>
-      <a href="./nvda/one-pager.html">one pager</a>
-      <a href="./nvda/peer-comparison.html">同業比較</a>
-      <a href="./nvda/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./nvda/valuation.html">估值卡</a>
-    </article>
-    <article class="card">
-      <h2>SPCX <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./spcx/">Position Brief（手機投影片）</a>
-      <a href="./spcx/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./spcx/framework1.html">Framework 1 初篩</a>
-      <a href="./spcx/framework2.html">Framework 2 深度增長</a>
-      <a href="./spcx/framework3.html">Framework 3 估值</a>
-      <a href="./spcx/one-pager.html">one pager</a>
-      <a href="./spcx/options-overlay.html">options overlay</a>
-      <a href="./spcx/peer-comparison.html">同業比較</a>
-      <a href="./spcx/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./spcx/valuation.html">估值卡</a>
-    </article>
-    <article class="card">
-      <h2>IREN <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./iren/">報告目錄</a>
-      <a href="./iren/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./iren/framework1.html">Framework 1 初篩</a>
-      <a href="./iren/framework2.html">Framework 2 深度增長</a>
-      <a href="./iren/framework3.html">Framework 3 估值</a>
-      <a href="./iren/one-pager.html">one pager</a>
-      <a href="./iren/peer-comparison.html">同業比較</a>
-      <a href="./iren/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./iren/valuation.html">估值卡</a>
-    </article>
-    <article class="card">
-      <h2>RKLB <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./rklb/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./rklb/framework1.html">Framework 1 初篩</a>
-      <a href="./rklb/framework2.html">Framework 2 深度增長</a>
-      <a href="./rklb/framework3.html">Framework 3 估值</a>
-      <a href="./rklb/one-pager.html">one pager</a>
-      <a href="./rklb/peer-comparison.html">同業比較</a>
-      <a href="./rklb/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./rklb/valuation.html">估值卡</a>
-    </article>
-    <article class="card">
-      <h2>RDW <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./rdw/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./rdw/framework1.html">Framework 1 初篩</a>
-      <a href="./rdw/framework2.html">Framework 2 深度增長</a>
-      <a href="./rdw/framework3.html">Framework 3 估值</a>
-      <a href="./rdw/one-pager.html">one pager</a>
-      <a href="./rdw/peer-comparison.html">同業比較</a>
-      <a href="./rdw/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./rdw/valuation.html">估值卡</a>
-    </article>
-    <article class="card">
-      <h2>MRNA <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./mrna/framework1.html">Framework 1 初篩</a>
-    </article>
-    <article class="card">
-      <h2>AMD <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./amd/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./amd/earnings-review.html">Earnings Review</a>
-      <a href="./amd/framework1.html">Framework 1 初篩</a>
-      <a href="./amd/framework2.html">Framework 2 深度增長</a>
-      <a href="./amd/framework3.html">Framework 3 估值</a>
-      <a href="./amd/interactive-brief.html">Interactive Brief</a>
-      <a href="./amd/one-pager.html">one pager</a>
-      <a href="./amd/peer-comparison.html">同業比較</a>
-      <a href="./amd/skill7-option-strategy.html">期權策略</a>
-      <a href="./amd/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./amd/valuation.html">估值卡</a>
-    </article>
-    <article class="card">
-      <h2>AVGO <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./avgo/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./avgo/framework1.html">Framework 1 初篩</a>
-      <a href="./avgo/framework2.html">Framework 2 深度增長</a>
-      <a href="./avgo/framework3.html">Framework 3 估值</a>
-      <a href="./avgo/one-pager.html">one pager</a>
-      <a href="./avgo/peer-comparison.html">同業比較</a>
-      <a href="./avgo/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./avgo/valuation.html">估值卡</a>
-    </article>
-    <article class="card">
-      <h2>HIMS <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./hims/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./hims/framework1.html">Framework 1 初篩</a>
-      <a href="./hims/framework2.html">Framework 2 深度增長</a>
-      <a href="./hims/framework3.html">Framework 3 估值</a>
-      <a href="./hims/one-pager.html">one pager</a>
-      <a href="./hims/peer-comparison.html">同業比較</a>
-      <a href="./hims/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./hims/valuation.html">估值卡</a>
-    </article>
-    <article class="card">
-      <h2>MRVL <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./mrvl/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./mrvl/framework1.html">Framework 1 初篩</a>
-      <a href="./mrvl/framework2.html">Framework 2 深度增長</a>
-      <a href="./mrvl/framework3.html">Framework 3 估值</a>
-      <a href="./mrvl/one-pager.html">one pager</a>
-      <a href="./mrvl/peer-comparison.html">同業比較</a>
-      <a href="./mrvl/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./mrvl/valuation.html">估值卡</a>
-    </article>
-    <article class="card">
-      <h2>ORCL <span class="badge">更新 2026-10-14</span></h2>
-      <a href="./orcl/">報告目錄</a>
-      <a href="./orcl/catalyst-calendar.html">催化劑日曆</a>
-      <a href="./orcl/earnings-review.html">Earnings Review</a>
-      <a href="./orcl/framework1.html">Framework 1 初篩</a>
-      <a href="./orcl/framework2.html">Framework 2 深度增長</a>
-      <a href="./orcl/framework3.html">Framework 3 估值</a>
-      <a href="./orcl/one-pager.html">one pager</a>
-      <a href="./orcl/peer-comparison.html">同業比較</a>
-      <a href="./orcl/thesis-tracker.html">Thesis Tracker</a>
-      <a href="./orcl/valuation.html">估值卡</a>
-    </article>
+    <h1>互動報告</h1>
+    <p class="lede">撳入任何一隻股票，先睇估值同全部報告。每張報告頁底可以留意見。</p>
+    <p class="legend">顏色：綠＝現價低過 Base（折讓）· 橙／紅＝現價高過 Base（溢價）· 灰＝接近 Base 或未有估值尺</p>
+    <div class="tiles">
+      <a class="tile" href="./tsla/">
+        <div class="row"><span class="tk">TSLA</span><span class="pill watch">F1 WATCH 75</span></div>
+        <div class="px">US$382.70</div>
+        <div class="prem hot">現價 vs Base +143.8%</div>
+        <div class="upd">更新 2026-10-11 · 8 份報告</div>
+      </a>
+      <a class="tile" href="./nvda/">
+        <div class="row"><span class="tk">NVDA</span><span class="pill pass">F1 PASS 115</span></div>
+        <div class="px muted">—</div>
+        <div class="prem na">估值見估值卡</div>
+        <div class="upd">更新 2026-08-27 · 8 份報告</div>
+      </a>
+      <a class="tile" href="./spcx/">
+        <div class="row"><span class="tk">SPCX</span><span class="pill watch">F1 WATCH 75</span></div>
+        <div class="px">US$162.57</div>
+        <div class="prem hot">現價 vs Base +78.6%</div>
+        <div class="upd">更新 2026-10-10 · 9 份報告</div>
+      </a>
+      <a class="tile" href="./iren/">
+        <div class="row"><span class="tk">IREN</span><span class="pill fail">F1 FAIL 50</span></div>
+        <div class="px">US$35.19</div>
+        <div class="prem cool">現價 vs Base −12%</div>
+        <div class="upd">更新 2026-10-12 · 8 份報告</div>
+      </a>
+      <a class="tile" href="./rklb/">
+        <div class="row"><span class="tk">RKLB</span><span class="pill watch">F1 WATCH 70</span></div>
+        <div class="px">US$68.21</div>
+        <div class="prem warm">現價 vs Base +21.8%</div>
+        <div class="upd">更新 2026-10-11 · 8 份報告</div>
+      </a>
+      <a class="tile" href="./rdw/">
+        <div class="row"><span class="tk">RDW</span><span class="pill fail">F1 FAIL 60</span></div>
+        <div class="px">US$9.16</div>
+        <div class="prem cool">現價 vs Base −19.6%</div>
+        <div class="upd">更新 2026-10-14 · 8 份報告</div>
+      </a>
+      <a class="tile" href="./mrna/">
+        <div class="row"><span class="tk">MRNA</span><span class="pill watch">F1 WATCH 75</span></div>
+        <div class="px muted">—</div>
+        <div class="prem na">估值見估值卡</div>
+        <div class="upd">更新 2026-08-27 · 1 份報告</div>
+      </a>
+      <a class="tile" href="./amd/">
+        <div class="row"><span class="tk">AMD</span><span class="pill pass">F1 PASS 90</span></div>
+        <div class="px">US$629.26</div>
+        <div class="prem hot">現價 vs Base +74.8%</div>
+        <div class="upd">更新 2026-09-27 · 11 份報告</div>
+      </a>
+      <a class="tile" href="./avgo/">
+        <div class="row"><span class="tk">AVGO</span><span class="pill pass">F1 PASS 120</span></div>
+        <div class="px">US$357.16</div>
+        <div class="prem fair">現價 vs Base +0.6%</div>
+        <div class="upd">更新 2026-10-14 · 8 份報告</div>
+      </a>
+      <a class="tile" href="./hims/">
+        <div class="row"><span class="tk">HIMS</span><span class="pill fail">F1 FAIL · 紅線</span></div>
+        <div class="px">US$31.66</div>
+        <div class="prem fair">現價 vs Base −7.1%</div>
+        <div class="upd">更新 2026-08-28 · 8 份報告</div>
+      </a>
+      <a class="tile" href="./mrvl/">
+        <div class="row"><span class="tk">MRVL</span><span class="pill watch">F1 WATCH 65</span></div>
+        <div class="px">US$241.45</div>
+        <div class="prem cool">現價 vs Base −11.0%</div>
+        <div class="upd">更新 2026-08-28 · 8 份報告</div>
+      </a>
+      <a class="tile" href="./orcl/">
+        <div class="row"><span class="tk">ORCL</span><span class="pill fail">F1 FAIL · 紅線</span></div>
+        <div class="px">US$143.20</div>
+        <div class="prem warm">現價 vs Base +10.2%</div>
+        <div class="upd">更新 2026-10-14 · 9 份報告</div>
+      </a>
     </div>
     <p class="note">網址：https://keithcheungmk.github.io/stock-analysis/ · 合併到 main 之後先會更新。<br>Mac 保留完整研究檔案（git pull + OneDrive raw）。此分析僅供研究參考，不構成投資建議。</p>
   </div>

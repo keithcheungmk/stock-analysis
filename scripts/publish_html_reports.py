@@ -8,23 +8,54 @@ Always run this after writing a report. Delivery is the Pages URL, never source 
 from __future__ import annotations
 
 import datetime as dt
+import html as html_lib
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "output"
 DOCS = ROOT / "docs"
 
-SKIP_OVERWRITE = {
-    DOCS / "orcl" / "index.html",
-    DOCS / "iren" / "index.html",
-    # Tesla hub 八粒掣順序已對齊 NVDA；publish 唔好用 collect_pages 重排。
-    DOCS / "tsla" / "index.html",
-    # RKLB hub 去重 one-pager 雙連結；publish 唔好用 collect_pages 重排。
-    DOCS / "rklb" / "index.html",
-    # AMD 首頁帶 Decision HUD（Skill 9 驗收尺）；publish 唔好洗走。
-    DOCS / "amd" / "index.html",
+# Ticker index pages are always regenerated. Hand-written summary blocks survive between
+# these markers; AMD／IREN／ORCL legacy pages are migrated into markers on first run.
+CURATED_START = "<!-- curated:start -->"
+CURATED_END = "<!-- curated:end -->"
+LEGACY_CURATED_TICKERS = {"AMD", "IREN", "ORCL"}
+SKIP_OVERWRITE: set[Path] = set()
+
+REPORT_ORDER = (
+    "one-pager",
+    "valuation",
+    "framework3",
+    "framework1",
+    "framework2",
+    "thesis-tracker",
+    "catalyst-calendar",
+    "peer-comparison",
+    "skill7-option-strategy",
+    "options-overlay",
+    "interactive-brief",
+    "valuation-model",
+    "earnings-review",
+)
+# Most authoritative page wins when several HUDs share the latest commit date.
+HUD_PRIORITY = (
+    "valuation",
+    "one-pager",
+    "framework3",
+    "thesis-tracker",
+    "catalyst-calendar",
+    "framework1",
+    "framework2",
+    "peer-comparison",
+)
+LABEL_OVERRIDES = {
+    ("ORCL", "earnings-review"): "FY2027-Q1 財報複盤",
+    ("AMD", "earnings-review"): "Earnings Review（舊尺，已退役）",
+    ("SPCX", "options-overlay"): "期權 Overlay",
 }
+HUB_ORDER = ("TSLA", "NVDA", "SPCX", "IREN", "RKLB", "RDW", "MRNA")
 
 # Tesla／IREN／SPCX 目錄對齊 NVDA／HIMS：只露出同一套標準頁。底稿仍留喺 output/。
 # SPCX 2026-08-30 重做：移除舊版 SKIP_OVERWRITE（docs/spcx/index.html 同 valuation-model.html
@@ -79,9 +110,53 @@ def slug_and_label(stem: str, ticker: str) -> tuple[str, str]:
     return slug or "report", rest.replace("_", " ")
 
 
+_GIT_DATES: dict[str, str] | None = None
+
+
+def _git(*args: str) -> str:
+    try:
+        return subprocess.run(
+            ["git", *args], cwd=ROOT, capture_output=True, text=True, check=True
+        ).stdout
+    except (OSError, subprocess.CalledProcessError):
+        return ""
+
+
+def git_dates(refresh: bool = False) -> dict[str, str]:
+    """Last commit date per docs/ file; uncommitted changes count as today.
+
+    File mtimes are unreliable (fresh clones / OneDrive sync reset them), so the
+    "更新" badges come from git history instead.
+    """
+    global _GIT_DATES
+    if _GIT_DATES is not None and not refresh:
+        return _GIT_DATES
+    dates: dict[str, str] = {}
+    current = ""
+    for line in _git("log", "--format=@%cs", "--name-only", "--", "docs").splitlines():
+        if line.startswith("@"):
+            current = line[1:]
+        elif line and line not in dates:
+            dates[line] = current
+    today = dt.date.today().isoformat()
+    for line in _git("status", "--porcelain", "--untracked-files=all", "--", "docs").splitlines():
+        path = line[3:].strip().strip('"')
+        if path:
+            dates[path] = today
+    _GIT_DATES = dates
+    return dates
+
+
 def file_updated(path: Path) -> str:
     if not path.exists():
         return dt.date.today().isoformat()
+    try:
+        rel = path.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        rel = ""
+    found = git_dates().get(rel)
+    if found:
+        return found
     return dt.datetime.fromtimestamp(path.stat().st_mtime, tz=dt.timezone.utc).date().isoformat()
 
 
@@ -157,6 +232,7 @@ def scan_docs_pages() -> dict[str, list[dict[str, str]]]:
                 if label == slug.replace("-", "_"):
                     label = slug.replace("-", " ").title()
                 href = f"./{ticker_dir.name}/{html.name}"
+                label = LABEL_OVERRIDES.get((ticker, slug), label)
             items.append(
                 {
                     "dest": str(html),
@@ -171,118 +247,336 @@ def scan_docs_pages() -> dict[str, list[dict[str, str]]]:
     return live
 
 
-def ticker_index_html(ticker: str, items: list[dict[str, str]], updated: str) -> str:
-    links = "\n".join(
-        f'    <a href="./{Path(item["dest"]).name}">{item["label"]}</a>'
-        for item in items
-        if Path(item["dest"]).stem != "index"
+def _text(fragment: str) -> str:
+    return re.sub(r"\s+", " ", html_lib.unescape(re.sub(r"<[^>]+>", "", fragment))).strip()
+
+
+def extract_hud(html: str) -> dict | None:
+    """Pull the Decision HUD (tag + label/value/sub cells) out of a report page."""
+    match = re.search(
+        r'<section[^>]*(?:id="decision-hud"|class="hud[" ])[^>]*>(.*?)</section>', html, re.S
     )
+    if not match:
+        return None
+    section = match.group(1)
+    tag = re.search(r'class="hud-tag"[^>]*>(.*?)</span>', section, re.S)
+    cells = []
+    for cell in re.finditer(
+        r'class="l">(.*?)</div>\s*<div class="v">(.*?)</div>(?:\s*<div class="s">(.*?)</div>)?',
+        section,
+        re.S,
+    ):
+        cells.append(
+            {"l": _text(cell.group(1)), "v": _text(cell.group(2)), "s": _text(cell.group(3) or "")}
+        )
+    if not cells:
+        return None
+    return {"tag": _text(tag.group(1)) if tag else "", "cells": cells[:4]}
+
+
+_PCT = re.compile(r"([+−-])\s?(\d+(?:\.\d+)?)%")
+
+
+def hud_premium(hud: dict | None) -> tuple[str, float] | None:
+    """Return (display text, signed value) for 現價 vs Base, if the HUD states one."""
+    if not hud:
+        return None
+    candidates = [c["v"] for c in hud["cells"] if re.search(r"Base|溢價|折讓", c["l"] + c["v"])]
+    candidates.append(hud["tag"])
+    for text in candidates:
+        found = _PCT.search(text)
+        if found:
+            sign, number = found.groups()
+            value = float(number) * (-1 if sign in "−-" else 1)
+            shown = f"{'+' if value >= 0 else '−'}{number}%"
+            return shown, value
+    return None
+
+
+def hud_price(hud: dict | None) -> str:
+    if not hud:
+        return ""
+    for cell in hud["cells"]:
+        if "現價" in cell["l"] and "vs" not in cell["l"]:
+            return cell["v"]
+    return ""
+
+
+def extract_f1(ticker_dir: Path) -> tuple[str, str]:
+    page = ticker_dir / "framework1.html"
+    if not page.exists():
+        return "", ""
+    html = page.read_text(encoding="utf-8")
+    verdict = re.search(r">\s*(PASS|WATCH|FAIL)\s*<", html)
+    score = re.search(r"(?<![\d/] )(?<![\d/])(\d{1,3})\s*[/／]\s*130(?!\s*[/／])", html)
+    return (verdict.group(1) if verdict else "", score.group(1) if score else "")
+
+
+def read_curated(ticker: str, index_path: Path) -> str:
+    if not index_path.exists():
+        return ""
+    html = index_path.read_text(encoding="utf-8")
+    if CURATED_START in html and CURATED_END in html:
+        return html.split(CURATED_START, 1)[1].split(CURATED_END, 1)[0].lstrip("\n").rstrip()
+    if ticker in LEGACY_CURATED_TICKERS and "</h1>" in html:
+        body = html.split("</h1>", 1)[1]
+        cut = re.search(r"\n\s*<a [^>]*href=\"\./", body)
+        return body[: cut.start()].strip("\n") if cut else ""
+    return ""
+
+
+def pick_hud(items: list[dict[str, str]]) -> tuple[dict, dict[str, str]] | None:
+    """Newest HUD wins; ties go to the more authoritative page."""
+    best = None
+    for item in items:
+        slug = Path(item["dest"]).stem
+        if slug == "index":
+            continue
+        hud = extract_hud(Path(item["dest"]).read_text(encoding="utf-8"))
+        if not hud:
+            continue
+        rank = HUD_PRIORITY.index(slug) if slug in HUD_PRIORITY else len(HUD_PRIORITY)
+        key = (item.get("updated", ""), -rank)
+        if best is None or key > best[0]:
+            best = (key, hud, item)
+    return (best[1], best[2]) if best else None
+
+
+def ordered_reports(items: list[dict[str, str]]) -> list[dict[str, str]]:
+    reports = [i for i in items if Path(i["dest"]).stem != "index"]
+
+    def key(item: dict[str, str]) -> tuple[int, str]:
+        slug = Path(item["dest"]).stem
+        return (REPORT_ORDER.index(slug) if slug in REPORT_ORDER else len(REPORT_ORDER), slug)
+
+    return sorted(reports, key=key)
+
+
+def ticker_summary(ticker: str, items: list[dict[str, str]]) -> dict:
+    ticker_dir = DOCS / ticker.lower()
+    index_path = ticker_dir / "index.html"
+    curated = read_curated(ticker, index_path)
+    curated_hud = extract_hud(curated) if curated else None
+    picked = pick_hud(items)
+    hud = curated_hud or (picked[0] if picked else None)
+    verdict, score = extract_f1(ticker_dir)
+    reports = ordered_reports(items)
+    updated = max((r.get("updated") or "2000-01-01") for r in reports) if reports else ""
+    return {
+        "ticker": ticker,
+        "curated": curated,
+        "curated_has_hud": bool(curated_hud),
+        "hud": hud,
+        "hud_source": None if curated_hud or not picked else picked[1],
+        "verdict": verdict,
+        "score": score,
+        "updated": updated,
+        "reports": reports,
+        "premium": hud_premium(hud),
+        "price": hud_price(hud),
+    }
+
+
+def premium_class(premium: tuple[str, float] | None) -> str:
+    if not premium:
+        return "na"
+    value = premium[1]
+    if value >= 50:
+        return "hot"
+    if value >= 10:
+        return "warm"
+    if value <= -10:
+        return "cool"
+    return "fair"
+
+
+BASE_CSS = """
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;
+    background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),
+      radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),#f4f1ea;
+    color:#1c1917;padding:24px 16px 72px}
+  .sans,h1,h2,.pill,.tk,.px,.prem,.upd,.legend,.reports a,.back{font-family:"Avenir Next","PingFang TC",sans-serif}
+  h1{font-size:1.5rem;margin:0 0 6px}
+  .lede{color:#78716c;line-height:1.55;margin:0 0 18px}
+  .pill{display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;border-radius:999px;padding:3px 9px;
+    vertical-align:middle;background:#e7e5e4;color:#44403c}
+  .pill.pass{background:#dcfce7;color:#15803d}.pill.watch{background:#ffedd5;color:#c2410c}
+  .pill.fail{background:#fee2e2;color:#b91c1c}.pill.date{background:#0f766e;color:#fff}
+  .prem.hot{color:#b91c1c}.prem.warm{color:#c2410c}.prem.cool{color:#15803d}.prem.fair{color:#44403c}.prem.na{color:#a8a29e}
+  .note{margin-top:22px;color:#78716c;font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif;line-height:1.5}
+"""
+
+
+def verdict_pill(verdict: str, score: str) -> str:
+    if not verdict:
+        return '<span class="pill">F1 未做</span>'
+    if score:
+        text = f"F1 {verdict} {score}"
+    elif verdict == "FAIL":
+        text = "F1 FAIL · 紅線"
+    else:
+        text = f"F1 {verdict}"
+    return f'<span class="pill {verdict.lower()}">{text}</span>'
+
+
+def hud_block(summary: dict) -> str:
+    hud = summary["hud"]
+    if not hud:
+        return (
+            '  <section class="hud" id="decision-hud">\n'
+            '    <h2>估值 <span class="hud-tag">未有 Decision HUD</span></h2>\n'
+            '    <p class="src">呢隻股票嘅報告頁未有估值尺，請睇下面「估值卡」或 Framework 3。</p>\n'
+            "  </section>"
+        )
+    cells = "\n".join(
+        f'      <div class="cell"><div class="l">{html_lib.escape(c["l"])}</div>'
+        f'<div class="v">{html_lib.escape(c["v"])}</div>'
+        + (f'<div class="s">{html_lib.escape(c["s"])}</div>' if c["s"] else "")
+        + "</div>"
+        for c in hud["cells"]
+    )
+    source = summary["hud_source"]
+    src = ""
+    if source:
+        name = Path(source["dest"]).name
+        src = (
+            f'\n    <p class="src">估值數字來自 <a href="./{name}">{html_lib.escape(source["label"])}</a>'
+            f'（更新 {source.get("updated", "")}）。</p>'
+        )
+    tag = f' <span class="hud-tag">{html_lib.escape(hud["tag"])}</span>' if hud["tag"] else ""
+    return (
+        '  <section class="hud" id="decision-hud">\n'
+        f"    <h2>估值{tag}</h2>\n"
+        f'    <div class="grid">\n{cells}\n    </div>{src}\n'
+        "  </section>"
+    )
+
+
+def ticker_index_html(ticker: str, summary: dict) -> str:
     dest = DOCS / ticker.lower() / "index.html"
-    html = f"""<!DOCTYPE html>
+    curated = summary["curated"]
+    blocks = []
+    if curated:
+        blocks.append(f"  {CURATED_START}\n{curated}\n  {CURATED_END}")
+    if not summary["curated_has_hud"]:
+        blocks.append(hud_block(summary))
+    reports = "\n".join(
+        f'    <a href="./{Path(r["dest"]).name}"><span class="name">{html_lib.escape(r["label"])}</span>'
+        f'<span class="when">更新 {r.get("updated", "")}</span></a>'
+        for r in summary["reports"]
+    )
+    page = f"""<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{ticker} · 互動報告</title>
-<style>
-  body {{ margin:0; min-height:100vh; font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;
-    background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),#f4f1ea; color:#1c1917;
-    padding:24px 16px 64px; }}
-  .wrap {{ max-width:440px; margin:0 auto; }}
-  h1 {{ font-family:"Avenir Next","PingFang TC",sans-serif; font-size:1.4rem; margin:0 0 8px; }}
-  p {{ color:#78716c; line-height:1.5; }}
-  .badge {{ display:inline-block; margin-left:6px; font-size:.72rem; font-weight:800;
-    font-family:"Avenir Next","PingFang TC",sans-serif; background:#0f766e; color:#fff;
-    border-radius:999px; padding:3px 8px; vertical-align:middle; }}
-  a {{ display:block; margin-top:12px; text-decoration:none; color:#fff; background:#0f766e;
-    border-radius:999px; padding:14px 16px; font-weight:800; text-align:center;
-    font-family:"Avenir Next","PingFang TC",sans-serif; }}
-  a.secondary {{ background:#fff; color:#0f766e; border:1px solid #e7e0d5; }}
+<style>{BASE_CSS}
+  .wrap{{max-width:980px;margin:0 auto}}
+  .back{{display:inline-flex;margin-bottom:14px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;
+    color:#0f766e;font-weight:700;font-size:.85rem;text-decoration:none}}
+  .head{{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px}}
+  .head h1{{margin:0 6px 0 0}}
+  .hud{{background:#fffdf8;border:1px solid #e7e0d5;border-radius:20px;padding:16px;margin:0 0 16px;
+    box-shadow:0 12px 40px rgba(28,25,23,.08)}}
+  .hud h2{{font-size:1rem;margin:0 0 10px}}
+  .hud-tag{{display:inline-flex;font-size:.7rem;font-weight:800;color:#9a3412;background:#ffedd5;border-radius:999px;
+    padding:2px 9px;margin-left:6px;font-family:"Avenir Next","PingFang TC",sans-serif}}
+  .hud .grid{{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}}
+  @media(max-width:760px){{.hud .grid{{grid-template-columns:1fr 1fr}}}}
+  .cell{{border:1px solid #e7e0d5;border-top:3px solid #0f766e;border-radius:12px;padding:10px 12px;background:#fff}}
+  .cell .l{{font-size:.72rem;color:#78716c;font-weight:700;font-family:"Avenir Next","PingFang TC",sans-serif}}
+  .cell .v{{font-weight:800;font-size:1.05rem;margin-top:3px;font-family:"Avenir Next","PingFang TC",sans-serif}}
+  .cell .s{{font-size:.74rem;color:#78716c;margin-top:3px}}
+  .action{{margin-top:10px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.86rem;color:#134e4a;
+    background:#ccfbf1;border-radius:12px;padding:9px 12px}}
+  .fail{{background:#fee2e2;border:1px solid #fca5a5;border-radius:16px;padding:12px 14px;color:#7f1d1d;
+    font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.88rem;margin:0 0 16px}}
+  .src{{margin:10px 0 0;font-size:.8rem;color:#78716c;font-family:"Avenir Next","PingFang TC",sans-serif}}
+  .src a{{color:#0f766e;font-weight:700}}
+  .curated > p, .wrap > p{{color:#78716c;line-height:1.5}}
+  h2.sec{{font-size:1rem;margin:20px 0 10px}}
+  .reports{{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}}
+  .reports a{{display:flex;flex-direction:column;gap:3px;text-decoration:none;color:#fff;background:#0f766e;border-radius:16px;
+    padding:12px 14px;font-weight:800}}
+  .reports a:hover{{background:#115e59}}
+  .reports .when{{font-size:.72rem;font-weight:600;opacity:.8}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>{ticker} 互動報告 <span class="badge">更新 {updated}</span></h1>
-  <p>用瀏覽器打開。頁底可以留意見，下次會跟住改。</p>
-{links}
-  <a class="secondary" href="../">全部報告目錄</a>
-  <p style="margin-top:24px;font-size:.82rem;color:#78716c">此分析僅供研究參考，不構成投資建議。</p>
+  <a class="back" href="../">← 全部股票</a>
+  <div class="head"><h1>{ticker}</h1>{verdict_pill(summary["verdict"], summary["score"])}<span class="pill date">更新 {summary["updated"]}</span></div>
+{chr(10).join(blocks)}
+  <h2 class="sec">報告</h2>
+  <div class="reports">
+{reports}
+  </div>
+  <p class="note">此分析僅供研究參考，不構成投資建議。</p>
 </div>
 </body>
 </html>
 """
-    return inject_comments(html, dest)
+    return inject_comments(page, dest)
 
 
-def hub_html(pages: dict[str, list[dict[str, str]]]) -> str:
-    extra = {
-        "SPCX": [("./spcx/", "Position Brief（手機投影片）")],
-        "IREN": [("./iren/", "報告目錄")],
-        "ORCL": [("./orcl/", "報告目錄")],
-    }
-    preferred = ("TSLA", "NVDA", "SPCX", "IREN", "RKLB", "RDW", "MRNA")
-    tickers = [t for t in preferred if t in pages] + [t for t in pages if t not in preferred]
-    cards = []
-    for ticker in tickers:
-        items = pages[ticker]
-        updated = max((item.get("updated") or "2000-01-01") for item in items)
-        links: list[tuple[str, str]] = list(extra.get(ticker, []))
-        links.extend((item["href"], item["label"]) for item in items if Path(item["dest"]).stem != "index")
-        seen: set[str] = set()
-        unique: list[tuple[str, str]] = []
-        for href, label in links:
-            if href in seen:
-                continue
-            seen.add(href)
-            unique.append((href, label))
-        anchors = "\n".join(f'      <a href="{href}">{label}</a>' for href, label in unique)
-        cards.append(
-            f"""    <article class="card">
-      <h2>{ticker} <span class="badge">更新 {updated}</span></h2>
-{anchors}
-    </article>"""
+def hub_html(summaries: list[dict]) -> str:
+    tiles = []
+    for s in summaries:
+        premium = s["premium"]
+        prem_text = f"現價 vs Base {premium[0]}" if premium else ("估值見估值卡" if not s["hud"] else s["hud"]["tag"] or "估值見報告")
+        price = f'<div class="px">{html_lib.escape(s["price"])}</div>' if s["price"] else '<div class="px muted">—</div>'
+        tiles.append(
+            f"""      <a class="tile" href="./{s["ticker"].lower()}/">
+        <div class="row"><span class="tk">{s["ticker"]}</span>{verdict_pill(s["verdict"], s["score"])}</div>
+        {price}
+        <div class="prem {premium_class(premium)}">{html_lib.escape(prem_text)}</div>
+        <div class="upd">更新 {s["updated"]} · {len(s["reports"])} 份報告</div>
+      </a>"""
         )
-    body = "\n".join(cards)
     hub_path = DOCS / "index.html"
-    html = f"""<!DOCTYPE html>
+    page = f"""<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Stock Analysis · 手機互動報告</title>
-<style>
-  body {{ margin:0; min-height:100vh; font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;
-    background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),
-      radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),#f4f1ea;
-    color:#1c1917; padding:24px 16px 72px; }}
-  .wrap {{ max-width:720px; margin:0 auto; }}
-  h1 {{ font-family:"Avenir Next","PingFang TC",sans-serif; font-size:1.55rem; margin:0 0 8px; }}
-  .lede {{ color:#78716c; line-height:1.55; margin:0 0 22px; }}
-  .grid {{ display:grid; gap:14px; }}
-  .card {{ background:#fffdf8; border:1px solid #e7e0d5; border-radius:22px; padding:18px 16px;
-    box-shadow:0 12px 40px rgba(28,25,23,.08); }}
-  h2 {{ font-family:"Avenir Next","PingFang TC",sans-serif; margin:0 0 8px; font-size:1.05rem; }}
-  .badge {{ display:inline-block; margin-left:6px; font-size:.72rem; font-weight:800;
-    background:#0f766e; color:#fff; border-radius:999px; padding:3px 8px; vertical-align:middle; }}
-  a {{ display:block; margin-top:10px; text-decoration:none; color:#fff; background:#0f766e;
-    border-radius:999px; padding:12px 16px; font-weight:800; text-align:center;
-    font-family:"Avenir Next","PingFang TC",sans-serif; }}
-  .note {{ margin-top:22px; color:#78716c; font-size:.82rem; font-family:"Avenir Next","PingFang TC",sans-serif; }}
+<title>Stock Analysis · 互動報告</title>
+<style>{BASE_CSS}
+  .wrap{{max-width:1120px;margin:0 auto}}
+  .legend{{color:#78716c;font-size:.8rem;margin:-8px 0 16px}}
+  .tiles{{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}}
+  @media(max-width:480px){{.tiles{{grid-template-columns:1fr 1fr;gap:10px}}}}
+  .tile{{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;background:#fffdf8;border:1px solid #e7e0d5;
+    border-radius:18px;padding:14px;box-shadow:0 10px 30px rgba(28,25,23,.07);transition:transform .12s,box-shadow .12s}}
+  .tile:hover{{transform:translateY(-2px);box-shadow:0 14px 36px rgba(28,25,23,.12);border-color:#99f6e4}}
+  .row{{display:flex;align-items:center;justify-content:space-between;gap:6px}}
+  .tk{{font-size:1.25rem;font-weight:800;color:#0f766e}}
+  .px{{font-size:1.05rem;font-weight:800}}
+  .px.muted{{color:#a8a29e}}
+  .prem{{font-size:.86rem;font-weight:800}}
+  .upd{{font-size:.72rem;color:#78716c}}
 </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>手機互動報告</h1>
-    <p class="lede">用 Safari／Chrome 打開呢頁。每張報告頁底可以留意見；下次分析會跟住改。唔使睇任何程式碼。</p>
-    <div class="grid">
-{body}
+    <h1>互動報告</h1>
+    <p class="lede">撳入任何一隻股票，先睇估值同全部報告。每張報告頁底可以留意見。</p>
+    <p class="legend">顏色：綠＝現價低過 Base（折讓）· 橙／紅＝現價高過 Base（溢價）· 灰＝接近 Base 或未有估值尺</p>
+    <div class="tiles">
+{chr(10).join(tiles)}
     </div>
     <p class="note">網址：https://keithcheungmk.github.io/stock-analysis/ · 合併到 main 之後先會更新。<br>Mac 保留完整研究檔案（git pull + OneDrive raw）。此分析僅供研究參考，不構成投資建議。</p>
   </div>
 </body>
 </html>
 """
-    return inject_comments(html, hub_path)
+    return inject_comments(page, hub_path)
+
+
+def build_summaries(live: dict[str, list[dict[str, str]]]) -> list[dict]:
+    tickers = [t for t in HUB_ORDER if t in live] + sorted(t for t in live if t not in HUB_ORDER)
+    return [ticker_summary(t, live[t]) for t in tickers]
 
 
 def sweep_inject_comments() -> int:
@@ -307,32 +601,31 @@ def main() -> None:
     for ticker, items in pages.items():
         dest_dir = DOCS / ticker.lower()
         dest_dir.mkdir(parents=True, exist_ok=True)
-        kept: list[dict[str, str]] = []
         hide = HIDE_DOCS_SLUGS.get(ticker.upper(), set())
         for item in items:
             dest = Path(item["dest"])
+            if dest.stem == "index":
+                continue
             if dest.stem in hide:
                 if dest.exists():
                     dest.unlink()
                 continue
             if dest in SKIP_OVERWRITE:
-                kept.append(item)
                 continue
             html = Path(item["src"]).read_text(encoding="utf-8")
             html = inject_home_link(html)
             html = inject_comments(html, dest)
             dest.write_text(html, encoding="utf-8")
-            kept.append(item)
             copied += 1
-        pages[ticker] = kept
-        ticker_index = dest_dir / "index.html"
-        if ticker_index not in SKIP_OVERWRITE:
-            updated = max((file_updated(Path(i["dest"])) for i in kept), default=dt.date.today().isoformat())
-            ticker_index.write_text(ticker_index_html(ticker, kept, updated), encoding="utf-8")
     n_comments = sweep_inject_comments()
+    git_dates(refresh=True)
     live = scan_docs_pages()
-    (DOCS / "index.html").write_text(hub_html(live), encoding="utf-8")
-    print(f"published {copied} html pages into {DOCS}; comment widgets {n_comments}")
+    summaries = build_summaries(live)
+    for summary in summaries:
+        index_path = DOCS / summary["ticker"].lower() / "index.html"
+        index_path.write_text(ticker_index_html(summary["ticker"], summary), encoding="utf-8")
+    (DOCS / "index.html").write_text(hub_html(summaries), encoding="utf-8")
+    print(f"published {copied} html pages into {DOCS}; comment widgets {n_comments}; tickers {len(summaries)}")
 
 
 if __name__ == "__main__":
