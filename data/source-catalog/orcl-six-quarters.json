@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "as_of": "2026-08-27T19:00:00+08:00",
-  "generated_at": "2026-08-27T11:05:52.194403+00:00",
+  "as_of": "2026-10-14T12:00:00+08:00",
+  "generated_at": "2026-10-14T02:07:55.007158+00:00",
   "companies": {
     "ORCL": {
       "name": "Oracle Corporation",
@@ -13,61 +13,6 @@
         "Non_GAAP"
       ],
       "periods": [
-        {
-          "label": "FY2025-Q3",
-          "period_end": "2025-02-28",
-          "release_date": "2025-03-10",
-          "filings": [
-            {
-              "accession_number": "0000950170-25-036295",
-              "form": "8-K",
-              "filing_date": "2025-03-10",
-              "report_date": "2025-03-10",
-              "index_url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025036295/0000950170-25-036295-index.html",
-              "documents": [
-                {
-                  "description": "8-K",
-                  "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025036295/orcl-20250310.htm",
-                  "name": "orcl-20250310.htm",
-                  "type": "8-K",
-                  "document_type": "event_filing"
-                },
-                {
-                  "description": "EX-99.1",
-                  "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025036295/orcl-ex99_1.htm",
-                  "name": "orcl-ex99_1.htm",
-                  "type": "EX-99.1",
-                  "document_type": "earnings_release"
-                }
-              ]
-            },
-            {
-              "accession_number": "0000950170-25-037143",
-              "form": "10-Q",
-              "filing_date": "2025-03-11",
-              "report_date": "2025-02-28",
-              "index_url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025037143/0000950170-25-037143-index.html",
-              "documents": [
-                {
-                  "description": "10-Q",
-                  "url": "https://www.sec.gov/Archives/edgar/data/1341439/000095017025037143/orcl-20250228.htm",
-                  "name": "orcl-20250228.htm",
-                  "type": "10-Q",
-                  "document_type": "regulatory_filing"
-                }
-              ]
-            }
-          ],
-          "ir_documents": [],
-          "ir_page": "https://investor.oracle.com/",
-          "unavailable_sources": [
-            {
-              "type": "official_transcript",
-              "status": "not_part_of_standard_official_package",
-              "substitute": "webcast_metadata"
-            }
-          ]
-        },
         {
           "label": "FY2025-Q4",
           "period_end": "2025-05-31",
@@ -328,6 +273,61 @@
                   "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526277521/orcl-20260531.htm",
                   "name": "orcl-20260531.htm",
                   "type": "10-K",
+                  "document_type": "regulatory_filing"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://investor.oracle.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "FY2027-Q1",
+          "period_end": "2026-08-31",
+          "release_date": "2026-09-10",
+          "filings": [
+            {
+              "accession_number": "0001193125-26-387905",
+              "form": "8-K",
+              "filing_date": "2026-09-10",
+              "report_date": "2026-09-10",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/0001193125-26-387905-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm",
+                  "name": "orcl-20260910.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-ex99_1.htm",
+                  "name": "orcl-ex99_1.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            },
+            {
+              "accession_number": "0001193125-26-389274",
+              "form": "10-Q",
+              "filing_date": "2026-09-11",
+              "report_date": "2026-08-31",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526389274/0001193125-26-389274-index.html",
+              "documents": [
+                {
+                  "description": "10-Q",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526389274/orcl-20260831.htm",
+                  "name": "orcl-20260831.htm",
+                  "type": "10-Q",
                   "document_type": "regulatory_filing"
                 }
               ]
