@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-08-16T01:20:00+08:00",
+  "as_of": "2026-10-21T00:00:00+08:00",
   "generated_at": "2026-08-15T17:20:27.417500+00:00",
   "companies": {
     "SPCX": {
@@ -148,6 +148,50 @@
               "type": "official_transcript",
               "status": "not_part_of_standard_official_package",
               "substitute": "webcast_metadata"
+            }
+          ]
+        },
+        {
+          "label": "2026-Q3",
+          "period_end": "2026-09-30",
+          "release_date": "2026-10-20",
+          "filings": [
+            {
+              "accession_number": "0001628280-26-066482",
+              "form": "8-K",
+              "filing_date": "2026-10-20",
+              "report_date": "2026-10-20",
+              "index_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/0001628280-26-066482-index.html",
+              "documents": [
+                {
+                  "description": "8-K",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spcx-20261020.htm",
+                  "name": "spcx-20261020.htm",
+                  "type": "8-K",
+                  "document_type": "event_filing"
+                },
+                {
+                  "description": "EX-99.1",
+                  "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm",
+                  "name": "spaceexplorationtechnologi.htm",
+                  "type": "EX-99.1",
+                  "document_type": "earnings_release"
+                }
+              ]
+            }
+          ],
+          "ir_documents": [],
+          "ir_page": "https://ir.spacex.com/",
+          "unavailable_sources": [
+            {
+              "type": "official_transcript",
+              "status": "not_part_of_standard_official_package",
+              "substitute": "webcast_metadata"
+            },
+            {
+              "type": "form_10q",
+              "status": "not_filed_as_of_2026-10-21",
+              "substitute": "8-K_EX-99.1_earnings_release"
             }
           ]
         }

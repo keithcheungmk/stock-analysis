@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPCX · Q3 FY2026 財報複盤</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.7rem;font-weight:800;line-height:1.2;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.7rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.watch{background:var(--watch-soft);color:var(--watch);border-color:transparent}
+  .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.25rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .callout.pass{background:var(--pass-soft);border:1px solid #86efac}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.pass{border-left:5px solid var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 45%)}
+  .box.warn{border-left:5px solid var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 45%)}
+  .box.fail{border-left:5px solid var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 45%)}
+  table{width:100%;border-collapse:collapse;font-size:.84rem}
+  th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
+  tr.up td:last-child{color:var(--pass);font-weight:700}
+  tr.mix td:last-child{color:var(--watch);font-weight:700}
+  tr.down td:last-child{color:var(--fail);font-weight:700}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#134e4a;color:#fff;border-color:#134e4a}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  .ev p{margin:8px 0 0;color:#44403c;font-size:.9rem}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .action{background:var(--watch-soft);border:1px solid #fdba74;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#9a3412;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Skill 8 · Mode Review</div>
+      <div class="score-num">混合質量 beat</div>
+      <div class="badges" style="margin-top:12px">
+        <span class="badge pass">首季公眾公司盈利</span>
+        <span class="badge watch">FCF 仍深負</span>
+        <span class="badge fail">F3 68／91／182 鎖定</span>
+      </div>
+      <p class="sans muted" style="margin:12px 0 0">官方 8-K 2026-10-20 · 唔另估 target</p>
+    </div>
+    <div class="hero-main">
+      <h1>SPCX · Q3 FY2026 財報複盤</h1>
+      <p>期終 2026-09-30 · 公布 2026-10-20 盤後 · USD US GAAP unaudited · 8-K EX-99.1 accession 0001628280-26-066482 · verified。舊日曆把業績日標 unverified（約 11/03 或 11/17）已作廢。</p>
+      <div class="badges">
+        <span class="badge">持倉約 1,660 股</span>
+        <span class="badge">現價 US$147.79 delayed</span>
+        <span class="badge">SI 收入首次 &gt; Connectivity</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2 class="sans">Decision HUD <span class="hud-tag">現價 vs Base +62.4%</span></h2>
+    <p class="muted" style="margin:0">買賣前先睇呢條尺。Bear／Base／Bull 沿用 2026-08-30 Framework 3，<strong>本頁唔另估 target price</strong>。Q3 官方只解鎖可選下一步 F3 refresh。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（10-20 收市，delayed）</div><div class="v">US$147.79</div><div class="s">市值 ~US$2.01T · 13.579B 股</div></div>
+      <div class="hud-cell"><div class="l">F3 估值尺</div><div class="v">68 / 91 / 182</div><div class="s">Bear · Base · Bull（鎖定）</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">溢價 +62.4%</div><div class="s">約 +62%；等價 Base 低過現價約 −38.4%</div></div>
+      <div class="hud-cell"><div class="l">倉位尺</div><div class="v">低過 150／低過 180</div><div class="s">未到 trim；唔寫減倉</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Starlink 13.6M · ARPU US$69（2026-Q3）</span>
+      <span>★ Connectivity 營業利潤 US$2.37B</span>
+      <span>★ SI 已入帳 US$7.56B</span>
+      <span>★ 9M 近似 FCF −US$35.0B</span>
+      <span>★ Nameplate 1.7 GW</span>
+    </div>
+  </section>
+
+  <div class="action">現價 US$147.79 相對 F3 Base US$91 溢價 +62.4% → <strong>續抱現股；勿新開賣認沽（CSP）</strong>。未到 trim 180，唔減倉、唔加倉。新 covered call 要 Keith 確認。</div>
+
+  <div class="kpis">
+    <div class="kpi green"><div class="label">Q3 總營收</div><div class="value">US$14.575B</div><div class="note">+161% YoY · verified</div></div>
+    <div class="kpi teal"><div class="label">GAAP 淨利</div><div class="value">US$4.404B</div><div class="note">上市後首季轉盈</div></div>
+    <div class="kpi green"><div class="label">SI vs Connectivity</div><div class="value">7.56 &gt; 5.25</div><div class="note">SI 首次超過 · US$B</div></div>
+    <div class="kpi red"><div class="label">9M 近似 FCF</div><div class="value">−US$35.0B</div><div class="note">OCF 13.1 − PPE 48.1</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>Review 結論</h2>
+      <div class="callout watch verdict">
+        <p><strong>現價相對 Base 溢價 +62.4%（US$147.79 vs US$91）→ 續抱；勿新開賣認沽。</strong>Q3 官方已入帳營收 US$14.575B（+161% YoY），淨利 US$4.404B，係上市後第一個 GAAP 盈利季度。Connectivity 營業利潤 US$2.367B；SI 收入 US$7.560B 首次超過 Connectivity US$5.248B，並錄得營業利潤 US$431m。</p>
+        <p>正在被驗證嘅支柱係 Connectivity 現金引擎同 SI 已入帳規模。用戶 13.6M、消費 ARPU 回升至 US$69（+5% seq），企業／政府收入 US$2.127B。SI 跳升唔係淨收購：Cursor 由 8/14 至 9/30 只貢獻 US$608m，其餘主要係 cloud services 啟動同 Grok／軟件。</p>
+        <p>仍未成立嘅路徑係自我融資。9M capex US$48.069B（SI 單獨 9M US$39.995B；Q3 合計 US$19.593B），9M 近似 FCF 約 −US$35.0B。Adj. EBITDA US$8.809B 加回收購相關 SBC US$1.217B；淨利亦含利息收入、關聯方 other income 同稅務利益。高增長真，完整高質量轉折未證明。</p>
+        <p>最大裂縫仍係估值溢價加 capex 強度。F3 68／91／182 本輪唔改；Q3 只解鎖可選下一步 refresh。Q3 後第二個完整交易日起最多約 1.3B 股符合解禁資格（約 2026-10-22）——<strong>eligible ≠ must sell</strong>。Musk／Tesla 合併評論＝unverified，唔翻閘。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>官方 KPI（US$ million，除非註明）</h2>
+      <p class="muted" style="margin-top:-6px">來源：同一份 8-K EX-99.1。Adj. EBITDA 係 Non-GAAP。9M 近似 FCF = 官方 OCF − 官方購置 PPE，研究加總。</p>
+      <div style="overflow-x:auto;margin-top:12px">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th class="num">Q3 2026</th>
+              <th class="num">Q2 2026</th>
+              <th class="num">Q3 2025</th>
+              <th>判斷</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="up"><td>總營收</td><td class="num">14,575</td><td class="num">7,814</td><td class="num">5,576</td><td>高質量增長</td></tr>
+            <tr class="up"><td>Space</td><td class="num">1,767</td><td class="num">962</td><td class="num">1,666</td><td>QoQ 強；YoY 溫和</td></tr>
+            <tr class="up"><td>Connectivity</td><td class="num">5,248</td><td class="num">4,291</td><td class="num">3,097</td><td>+69% YoY</td></tr>
+            <tr class="up"><td>SI（前稱 AI）</td><td class="num">7,560</td><td class="num">2,561</td><td class="num">813</td><td>首次超過 Connectivity</td></tr>
+            <tr class="up"><td>營業利潤</td><td class="num">2,791</td><td class="num">(143)</td><td class="num">(273)</td><td>經營轉盈</td></tr>
+            <tr class="up"><td>Connectivity 營業利潤</td><td class="num">2,367</td><td class="num">1,656</td><td class="num">1,190</td><td>+99% YoY</td></tr>
+            <tr class="up"><td>SI 營業利潤</td><td class="num">431</td><td class="num">(1,257)</td><td class="num">(1,722)</td><td>已扣收購 SBC 1,217</td></tr>
+            <tr class="mix"><td>GAAP 淨利</td><td class="num">4,404</td><td class="num">—</td><td class="num">(1,054)</td><td>含 below-the-line</td></tr>
+            <tr class="mix"><td>Adj. EBITDA</td><td class="num">8,809</td><td class="num">3,538</td><td class="num">2,169</td><td>Non-GAAP ≠ 現金</td></tr>
+            <tr class="up"><td>Starlink 消費用戶（M）</td><td class="num">13.6</td><td class="num">12.0</td><td class="num">7.2</td><td>+1.6M seq</td></tr>
+            <tr class="up"><td>消費 ARPU（US$／月）</td><td class="num">69</td><td class="num">66</td><td class="num">83</td><td>+5% seq；YoY 仍低</td></tr>
+            <tr class="mix"><td>Nameplate compute（GW）</td><td class="num">1.7</td><td class="num">1.4</td><td class="num">0.6</td><td>產能 ≠ 收入</td></tr>
+            <tr class="down"><td>Q3 Capex</td><td class="num">19,593</td><td class="num">18,369</td><td class="num">6,880</td><td>SI 單獨 16,444</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin:10px 0 0">9M：營收 US$27,083m；OCF US$13,097m；PPE US$48,069m；近似 FCF 約 −US$34,972m。Cursor 貢獻收入 US$608m（8/14–9/30）。GAAP 收購對價 US$42.5B；收購後服務股權獎勵 US$23.4B（可沒收）。</p>
+    </section>
+
+    <section class="panel">
+      <h2>Beat 質量</h2>
+      <div class="grid-2">
+        <div class="box pass">
+          <h3>高質量部分</h3>
+          <p>已入帳營收、Connectivity 營業利潤、用戶淨增、ARPU 環比回升、SI 規模首次超過 Connectivity、合計營業利潤轉正。呢啲喺同一份 EX-99.1，財政期、幣種、會計基準齊。</p>
+        </div>
+        <div class="box fail">
+          <h3>要折扣／一次性</h3>
+          <p>Adj. EBITDA 加回收購 SBC US$1.217B。淨利含利息收入 US$873m、other income US$1,025m（關聯方 US$561m）、稅務利益 US$390m。SI 收入含大額 cloud 啟動，要連續季先算可重複。9M FCF 深負。</p>
+        </div>
+        <div class="box warn" style="grid-column:1/-1">
+          <h3>指引同電話會議</h3>
+          <p>新聞稿<strong>無定量全年／Q4 指引</strong>。Webcast 2026-10-20 15:30 CT；官方逐字稿未入庫。Musk 提及 Tesla 合併嘅傳媒轉述＝<strong>unverified</strong>，唔覆寫官方 KPI，亦<strong>唔翻閘</strong>。Form 10-Q 截至本頁未見申報。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="filters sans" id="filters">
+        <button class="active" data-f="all">全部</button>
+        <button data-f="support">支持</button>
+        <button data-f="neutral">中性</button>
+        <button data-f="weaken">削弱</button>
+      </div>
+      <div class="ev-grid" id="evidence">
+        <article class="ev support" data-k="support">
+          <div class="type">分部收入<span class="impact support">支持</span></div>
+          <h3>SI US$7.560B 首次超過 Connectivity US$5.248B</h3>
+          <p>Q3 總營收 US$14.575B 入帳，財政期至 2026-09-30，USD US GAAP，來源 8-K EX-99.1。SI 由 Q2 2.561 跳到 7.560，Cursor 只解釋 US$608m，其餘主要係 cloud services 同軟件。對支柱 C 係規模驗證，仍要下一季證明唔係集中確認。</p>
+        </article>
+        <article class="ev support" data-k="support">
+          <div class="type">訂閱 KPI<span class="impact support">支持</span></div>
+          <h3>用戶 13.6M · ARPU US$69 · 營業利潤 US$2.367B</h3>
+          <p>Connectivity +69% YoY、營業利潤 +99% YoY。消費 ARPU 由 US$66 回升 5% 至 US$69，扭轉 Q1–Q2 下跌。口徑改為 consumer subscribers，表格仍列 Q2 12.0M 可對照。支柱 A 被官方強化，唔等於 ARPU 已回到 2025 年 US$83。</p>
+        </article>
+        <article class="ev support" data-k="support">
+          <div class="type">GAAP 盈利<span class="impact support">支持</span></div>
+          <h3>淨利 US$4.404B · 營業利潤 US$2.791B</h3>
+          <p>上市後首個 GAAP 盈利季度，對上 YoY 淨虧 US$1.054m。更乾淨嘅經營錨係營業利潤 US$2.791B，因為淨利含利息收入、關聯方 other income 同稅務利益。支持「規模化已開始賺經營利潤」，唔支持「現金已自給」。</p>
+        </article>
+        <article class="ev weaken" data-k="weaken">
+          <div class="type">現金流<span class="impact weaken">削弱</span></div>
+          <h3>Q3 capex US$19.593B；9M 近似 FCF −US$35.0B</h3>
+          <p>SI 單季 capex US$16.444B、9M SI capex US$39.995B。9M OCF US$13.097B 被 PPE US$48.069B 吞掉。Q2 包 H1 近似 FCF 約 −US$25.0B，缺口再擴大。呢條裂縫 D 未癒合，所以唔因轉盈而加倉。</p>
+        </article>
+        <article class="ev weaken" data-k="weaken">
+          <div class="type">估值／供給<span class="impact weaken">削弱</span></div>
+          <h3>現價 vs Base +62.4%；解禁最多約 1.3B 股資格</h3>
+          <p>F3 Base 仍係 US$91。現價 US$147.79 低過 trim 180，所以唔寫減倉，但溢價仍然大。424B4：Q3 後第二個完整交易日釋放 180-day block 28%，最多約 1.3B 股。2026-10-20 盤後公布 → 約 2026-10-22 起符合資格。可賣 ≠ 必賣。</p>
+        </article>
+        <article class="ev neutral" data-k="neutral">
+          <div class="type">發射／Starship<span class="impact neutral">中性</span></div>
+          <h3>Space US$1.767B；首筆 Starship 收入任務</h3>
+          <p>官方：Flight 14 送 26 顆 Starlink V3，約 10× Falcon 9 Starlink 下行容量增量。Space 營業仍虧 US$7m，客戶發射 12、內部 23。支柱 B 有進度，未量化到可以郁 F3 Base。</p>
+        </article>
+        <article class="ev neutral" data-k="neutral">
+          <div class="type">線索 · 電話會議<span class="impact neutral">中性</span></div>
+          <h3>Musk／Tesla 合併評論 — unverified，唔翻閘</h3>
+          <p>EX-99.1 無合併條款。傳媒轉述標 unverified，唔覆寫官方 KPI，亦唔改續抱／勿新開 CSP 閘門。Grain／800 MHz 協議已寫入新聞稿：預期 2027 上半年交割，要監管批准，未改已入帳收入。</p>
+        </article>
+        <article class="ev neutral" data-k="neutral">
+          <div class="type">F3 鎖定<span class="impact neutral">中性</span></div>
+          <h3>68／91／182 不變；可選下一步 refresh</h3>
+          <p>本頁禁止發明新 target。Q3 提高已入帳年化分母、股數用資產負債表 13.579B，但 Skill 3 重跑要另開 PR。其他 Pages（催化劑／thesis／one-pager）本輪唔改，HUD 現價仍可能顯示 10-10 嘅 US$162.57。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>對估值同持倉</h2>
+      <div class="grid-2">
+        <div class="box warn">
+          <h3>Skill 3</h3>
+          <p>Base US$91、Bear US$68、Bull US$182 <strong>本輪鎖定</strong>。建倉 ≤US$95；減倉 ≥US$180。現價 147.79 喺舊續抱帶內、低過 trim，高過建倉區。Thesis 建議維持 Mixed——本 PR 唔改 Skill 6 檔。</p>
+        </div>
+        <div class="box fail">
+          <h3>行動</h3>
+          <p><strong>現價相對 Base 溢價 +62.4% → 續抱現股；勿新開賣認沽。</strong>持倉約 1,660 股。未到 180，唔減倉。新 CC 要 Keith 確認。下一閘：Q4 SI 會唔會喺冇另一輪巨型確認之下 entrench，同 capex／FCF 缺口方向。</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <p class="footer">官方優先：SEC 8-K EX-99.1 accession 0001628280-26-066482（filing 2026-10-20，期終 2026-09-30，USD US GAAP unaudited；Adj. EBITDA Non-GAAP）。現價 yfinance／Yahoo delayed 2026-10-20 收市 US$147.79。棄用 aggregator 共識 beat 敘事。電話會議無本地官方逐字稿，只當線索。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+document.getElementById('filters').addEventListener('click', ev => {
+  const b = ev.target.closest('button'); if (!b) return;
+  document.querySelectorAll('#filters button').forEach(x => x.classList.toggle('active', x === b));
+  const f = b.getAttribute('data-f');
+  document.querySelectorAll('#evidence .ev').forEach(card => {
+    card.style.display = (f === 'all' || card.getAttribute('data-k') === f) ? '' : 'none';
+  });
+});
+</script>
+</body>
+</html>
