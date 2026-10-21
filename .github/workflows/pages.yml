@@ -15,15 +15,10 @@ permissions:
 
 concurrency:
   group: pages
-  # Do not cancel an in-flight Pages deploy: a cancelled deploy-pages job
-  # unpublishes the live site (this is what took the hub 404).
   cancel-in-progress: false
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
