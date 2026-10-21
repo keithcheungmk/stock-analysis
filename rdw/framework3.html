@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RDW Framework 3 估值模型</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:12px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{background:var(--pass-soft);border:1px solid #86efac;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#166534;font-weight:700}
+  .target-bear{color:var(--fail);font-weight:800}
+  .target-base{color:var(--watch);font-weight:800}
+  .target-bull{color:var(--pass);font-weight:800}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">🆕 本頁為 RDW 首次建立嘅 Framework 3——之前從未有估值模型頁面。</div>
+
+  <section class="hero-main">
+    <h1>RDW · Framework 3 估值模型與定位</h1>
+    <p>現價 US$10.87 · 市值 ~US$2.71B · 流通股 248.96M · 數據截至 2026-08-30</p>
+    <div class="badges">
+      <span class="badge">承接 F1 FAIL 60/130（門檻未達型）</span>
+      <span class="badge">F2 部分確認</span>
+      <span class="badge">持倉 4,400 股＠US$18（浮虧 -39.6%）</span>
+    </div>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>🎯 估值方法選擇</h2>
+      <p><strong>主方法：P/S（Price／Sales）。</strong>冇用 DCF／EV-EBITDA，因為 GAAP／Adj. EBITDA 仍虧損、FCF 五季持續為負，用盈利或現金流做基礎嘅估值方法喺呢個階段唔穩定。呢個亦同 earnings review 入面 CFO 提醒一致：估值必須用<strong>攤薄後股數（約 250M）</strong>同<strong>近端毛利率 mid-20s</strong>，唔可以用單季 27.8% 直線外推。</p>
+    </section>
+
+    <section class="panel">
+      <h2>🧠 核心邏輯</h2>
+      <p>TTM 營收 US$426.3M（25Q3+25Q4+26Q1+26Q2），現價隱含 P/S ≈ 6.4×。公司自身 FY2026 全年指引 US$450–500M（2026-08-05 重申，未上修）。三個情景嘅分野主要喺（1）H2 backlog 能否兌現指引下限／中位／上限；（2）市場願意畀嘅倍數，取決於 Adj. EBITDA／FCF 有冇轉正跡象。</p>
+    </section>
+
+    <section class="panel">
+      <h2>📏 情景輸入（Cowork 自行推算，非官方指引）</h2>
+      <table>
+        <thead><tr><th>情景</th><th>FY2026 營收</th><th>攤薄股數</th><th>P/S 倍數</th><th>邏輯</th></tr></thead>
+        <tbody>
+          <tr><td class="target-bear">Bear</td><td>US$450M（指引下限）</td><td>~255M</td><td>4.0×</td><td>H2 轉化不及預期，FCF 未見改善，市場對稀釋風險要求折讓</td></tr>
+          <tr><td class="target-base">Base</td><td>US$475M（指引中位）</td><td>~250M</td><td>6.0×</td><td>現時倍數大致維持，反映業務改善但現金流未驗證</td></tr>
+          <tr><td class="target-bull">Bull</td><td>US$500M（指引上限）+ Adj. EBITDA 轉正</td><td>~248M</td><td>9.5×</td><td>H2 backlog 順利轉化，EBITDA／FCF 顯著改善，市場重新畀增長溢價</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>📊 目標價</h2>
+      <table>
+        <thead><tr><th>情景</th><th>隱含市值</th><th>每股目標價</th><th>vs 現價</th></tr></thead>
+        <tbody>
+          <tr><td class="target-bear">Bear</td><td>US$1.80B</td><td><strong>US$7.06</strong></td><td class="target-bear">-35.0%</td></tr>
+          <tr><td class="target-base">Base</td><td>US$2.85B</td><td><strong>US$11.40</strong></td><td class="target-base">+4.9%</td></tr>
+          <tr><td class="target-bull">Bull</td><td>US$4.75B</td><td><strong>US$19.15</strong></td><td class="target-bull">+76.2%</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>🪞 同業對照（Mirror Check）</h2>
+      <p>主對照 RKLB（同賽道成長型太空硬件股）現價 US$64.39，F3 Base 目標 US$56（過去 2 週已由 US$80.10 大幅回落）——即 RKLB 現價相對自身 Base 仍有 +15% 溢價。RDW 現價 US$10.87 相對自身 Base US$11.40 反而係 <strong>-4.9% 折讓</strong>，喺兩者之中，RDW 現價相對自身估值模型睇落更貼近合理水平，唔算特別貴。</p>
+    </section>
+
+    <section class="panel">
+      <h2>⚖️ 風險回報</h2>
+      <p>Bull 情景（+76.2%）遠大於 Bear 情景（-35.0%）——呢個同 SPCX／HIMS 嗰種「Bear 遠大於 Bull」嘅不對稱剛好相反，反映 RDW 現價已經隱含相當保守嘅市場預期（未有為 H2 轉化成功定價太多樂觀）。<strong>但呢個唔等於冇風險</strong>：Bear 情景嘅 -35.0% 仍然真實存在，尤其如果 H2 backlog 轉化不及預期同時繼續稀釋。</p>
+    </section>
+
+    <section class="panel">
+      <h2>🧭 定位建議</h2>
+      <p><strong>維持 F1／F2 嘅觀察結論，唔加倉。</strong>現價貼近 Base 情景，估值本身唔算離譜，但 F1 未達 WATCH 門檻、FCF 仍未驗證，喺呢兩點改善之前唔應該加碼。對已持倉者（4,400 股＠$18）：現價浮虧 -39.6% 主要反映 2025 年嘅估值重估，而唔係 Q2 以來嘅業務惡化——H2 業績（約 11 月）將係判斷應唔應該繼續持有嘅關鍵檢查點。</p>
+    </section>
+
+    <section class="panel">
+      <h2>💡 關鍵一句</h2>
+      <div class="callout">RDW 現價相對自己嘅 Base 估值唔算貴，甚至有小幅折讓——問題唔在估值透支，而在 F1 嘅 60/130 仲差 5 分先達 WATCH，同 FCF 仲未驗證轉正嘅路徑。</div>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/rdw/framework3.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

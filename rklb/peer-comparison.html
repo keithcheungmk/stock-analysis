@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RKLB 同業比較</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .verdict-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.45rem;font-weight:800;line-height:1.25;color:var(--watch);margin:8px 0 0}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 58%,#115e59);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .hud-note{margin:8px 0 0;font-size:.82rem;color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif}
+  .action-bar{margin-top:12px}
+  .action-pill{display:inline-flex;padding:10px 16px;border-radius:999px;background:#1c1917;color:#fff;font-weight:800;font-size:.88rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;background:var(--info-soft);border:1px solid #93c5fd}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:960px){.grid{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff}
+  .box.p1{border-top:4px solid var(--pass)}.box.p2{border-top:4px solid var(--teal)}.box.p3{border-top:4px solid var(--watch)}
+  .rank{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.78rem;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  td.num{text-align:right;font-family:"Avenir Next","PingFang TC",sans-serif;font-variant-numeric:tabular-nums}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .chart{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end;height:160px;margin:12px 0 8px}
+  .bar-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:end;gap:6px}
+  .bar{width:100%;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#14b8a6,#0f766e);min-height:8px}
+  .bar-label,.bar-val{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem}
+  .bar-label{color:var(--muted)}.bar-val{font-weight:800}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="verdict-box">
+      <div class="eyebrow">Skill 4 · 發射／太空鏈</div>
+      <div class="verdict-title">RKLB 成長衛星<br>唔同 SPCX 硬比</div>
+      <p class="sans muted" style="margin:12px 0 0">排序係研究配置，唔係追現價指令。</p>
+    </div>
+    <div class="hero-main">
+      <h1>RKLB vs RDW / SPCX</h1>
+      <p>發射執行同 backlog 可比；訂閱平台同 AI capex 故事唔宜用同一 P/S 硬比。財政日曆唔完全對齊，只可比方向。</p>
+      <div class="badges">
+        <span class="badge">RKLB Q2 官方 verified</span>
+        <span class="badge">RDW Q2 IR</span>
+        <span class="badge">SPCX 參考錨</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +18%</span></h2>
+    <p class="hud-note">現價相對 Base 溢價約 <strong>+18%</strong>（US$66.18 vs US$56）→ 唔好加倉。ATM／bridge 未入 Skill 3 639.1M 股假設。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 2026-08-26）</div><div class="v">US$66.18</div><div class="s">市值約 US$42.3B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">28 / 56 / 101</div><div class="s">F3 FY2027E EV/S · 2026-08-14</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+18%</div><div class="s">偏高 · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">NTM P/S ~48×</div><div class="s">TTM ~67× · Iridium 營收未計</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q2 營收 US$234.1M（+62% YoY）</span>
+      <span>★ Backlog US$2.36B（+137% YoY）</span>
+      <span>★ Q3 GAAP GM 指引 29–31%</span>
+      <span>★ H1 OCF −US$134.4M</span>
+      <span>★ Neutron Q4 2026 送墊（8-K EX-99.1）</span>
+    </div>
+    <p class="hud-note">官方：8-K EX-99.1／10-Q 2026-Q2 · 期末 2026-06-30 · USD US GAAP · verified。</p>
+  </section>
+  <div class="action-bar">
+    <span class="action-pill">現價相對 Base 溢價約 +18%，唔好加倉。</span>
+  </div>
+
+  <section class="panel">
+    <h2>一句話</h2>
+    <div class="callout sans">RKLB 係純種高增長發射＋太空系統，backlog 同 Neutron 期權強，但缺 SPCX 級訂閱現金引擎。RDW 規模細、國防轉型，執行改善但 FCF 仍負。三者都未達自我融資增長；RKLB 唔好用 SPCX ~70× P/S 硬比，亦唔係 SPCX 替代品。</div>
+  </section>
+
+  <section class="panel">
+    <h2>角色同排序</h2>
+    <div class="grid">
+      <div class="box p1"><div class="rank">參考 · 平台</div><h3>SPCX</h3><p>發射＋訂閱＋AI capex。質量最高、倍數最貴。Connectivity 利潤引擎；RKLB 唔具備同等訂閱層。</p></div>
+      <div class="box p2"><div class="rank">1 · 成長衛星</div><h3>RKLB</h3><p>F1 WATCH、F2 業務部分通過。Backlog US$2.36B、Neutron／Iridium 第二曲線未成立。現價 vs Base +18% → 觀察唔追。</p></div>
+      <div class="box p3"><div class="rank">2 · 戰術</div><h3>RDW</h3><p>國防／無人轉型，規模細。Q2 營收 US$117.1M（+89.6%）但 FCF 仍負。細市值執行博弈，唔替代 RKLB。</p></div>
+    </div>
+    <h3 style="margin-top:16px">季度營收規模（US$M，曆法唔對齊）</h3>
+    <div class="chart" id="revChart"></div>
+    <p class="muted">SPCX 為平台參考（Q2 US$7.81B）；RKLB／RDW 為最近官方季度營收，唔代表商業模式可比。</p>
+  </section>
+
+  <section class="panel">
+    <h2>核心比較</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>公司</th><th>最新官方季</th><th class="num">季度營收</th><th class="num">Backlog</th><th>現金流</th><th>delayed 價</th><th>估值語言</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>RKLB</strong></td><td>2026-Q2 6/30</td><td class="num">234.1M +62%</td><td class="num">2.36B +137%</td><td>H1 OCF −134.4M；現金 2.13B</td><td>66.18（8/26）</td><td>F3 Base US$56；NTM P/S ~48×</td></tr>
+          <tr><td>RDW</td><td>2026-Q2 6/30</td><td class="num">117.1M +89.6%</td><td class="num">542.1M</td><td>Q2 FCF −35.3M；現金 ~558M</td><td>yfinance delayed</td><td>P/S、訂單；規模細</td></tr>
+          <tr><td>SPCX*</td><td>2026-Q2</td><td class="num">7.81B +92%</td><td>—</td><td>FCF 極負；IPO 現金厚</td><td>yfinance delayed</td><td>SOTP；~70×+ P/S</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">*SPCX 只作太空主題質量錨，唔與 RKLB 硬比 P/S。價格 yfinance delayed；RKLB 錨 2026-08-26 close。</p>
+  </section>
+
+  <section class="panel">
+    <h2>配置含義</h2>
+    <p><strong>RKLB</strong> 適合主題分散嘅成長衛星倉，唔替代 SPCX 平台核心。質量排序：SPCX ≫ RKLB > RDW；估值吸引力三者都唔平。未確認持倉、現價相對 Base +18% → <strong>僅觀察、唔好加倉</strong>。唔好用 SPCX 倍數 justify RKLB 加倉。</p>
+  </section>
+  <p class="footer">RKLB：8-K EX-99.1／10-Q verified。RDW：Q2 2026 IR（2026-08-05）。SPCX：既有 peer 包。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const rows=[{l:"SPCX Q2",v:7810},{l:"RKLB Q2",v:234.1},{l:"RDW Q2",v:117.1}];
+const max=Math.max(...rows.map(r=>r.v));
+document.getElementById("revChart").innerHTML=rows.map(r=>{
+  const h=Math.max(8,Math.round(r.v/max*130));
+  return `<div class="bar-wrap"><div class="bar-val">${r.v>=1000?(r.v/1000).toFixed(1)+"B":r.v+"M"}</div><div class="bar" style="height:${h}px"></div><div class="bar-label">${r.l}</div></div>`;
+}).join("");
+</script>
+<section id="page-comments" data-page="/rklb/peer-comparison.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

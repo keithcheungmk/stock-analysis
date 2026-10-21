@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MRVL Framework 2 深度增長</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.0rem;font-weight:800;line-height:1.15;color:var(--watch);margin:8px 0 0}
+  .score-den{font-size:1.0rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}.grid-5{grid-template-columns:repeat(2,1fr)}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .warn{color:var(--watch);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .danger{color:var(--fail);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+  .pillar{border-left:5px solid #a8a29e;border-radius:12px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-left-width:5px}
+  .pillar.pass{border-left-color:var(--pass)}
+  .pillar.partial{border-left-color:var(--watch)}
+  .pillar.fail{border-left-color:var(--fail)}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 2</div>
+      <div class="score-num">部分通過 / 部分通過</div>
+      <div class="score-den">Data Center thesis · 現金流／稀釋 thesis</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge" style="background:var(--watch-soft);color:var(--watch);border:0">僅觀察，唔好加倉</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>MRVL · Framework 2 深度增長分析</h1>
+      <p>五季窗口 FY2026-Q2 → FY2027-Q2（期終 2025-08-02 至 2026-08-01）· 數據截至 2026-08-28</p>
+      <div class="badges">
+        <span class="badge">核心 KPI：Data Center 已入帳營收</span>
+        <span class="badge">承接 F1 兩條必挖問題</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">F3 已完成</span></h2>
+    <p class="muted" style="margin:0">現價 US$241.45 相對 Framework 3 Base（US$271）<strong>折讓 -11.0%</strong>；Bear US$197／Bull US$359。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 8/28）</div><div class="v">US$241.45</div><div class="s">同 F1／F3 一致</div></div>
+      <div class="hud-cell"><div class="l">Bear／Base／Bull</div><div class="v">US$197 / US$271 / US$359</div><div class="s">見 Framework 3</div></div>
+      <div class="hud-cell"><div class="l">現價相對 Base</div><div class="v">-11.0%</div><div class="s">折讓幅度中性，未算好平</div></div>
+      <div class="hud-cell"><div class="l">驅動 KPI</div><div class="v">DC +46% · FCF US$479m</div><div class="s">有息債務缺口 US$1.03B</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ 總營收 US$2,739.3m（+37% YoY）</span>
+      <span>★ Data Center US$2,171.5m（+46% YoY）</span>
+      <span>★ 經營現金流 US$605.5m</span>
+      <span>★ 官方 FCF US$478.8m</span>
+      <span>★ 有息債務合計 US$4,962.9m</span>
+    </div>
+    <div class="action">現價對 Base 折讓 -11.0%：僅觀察，唔好加倉</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">總營收（Q2 FY27）</div><div class="value">US$2.739B</div><div class="note">+37% YoY · 五季新高</div></div>
+    <div class="kpi green"><div class="label">Data Center</div><div class="value">US$2.172B</div><div class="note">+46% YoY · 五季加速</div></div>
+    <div class="kpi orange"><div class="label">Diluted 股數</div><div class="value">893.3m → 921m</div><div class="note">Q1 FY27 實數 → Q3 FY27 guide，+3.1%</div></div>
+    <div class="kpi red"><div class="label">現金／有息債缺口</div><div class="value">-US$1.03B</div><div class="note">現金 US$3.93B vs 債 US$4.96B</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>一句結論</h2>
+      <div class="callout watch verdict">
+        <p>Data Center 已連續五季雙位數以上 YoY 增長並喺 Q2 FY27 加速到 +46%，但呢個加速主要仍係現有 custom／switching 產品線嘅延續，2026-08-18 先簽落嘅 Google warrant（performance vesting 掛鈎每 US$500m Custom Products 累計收入）<strong>完全未反映</strong>喺呢五季任何一個數字入面。</p>
+        <p>現金流方面，經營現金流同官方 FCF 五季都係正，但金額波動（US$259m–US$509m／季）冇清晰上升軌，而長債喺 Q4 FY26→Q1 FY27 一次過跳升近 US$1.0B（收購 Celestial AI／XConn），加上稀釋股數同一時間由 893.3m guided 升到 921m，增長質素未完全對得住槓桿同稀釋嘅速度。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>承接 Framework 1 · 兩條必挖問題</h2>
+      <div class="grid-2">
+        <div class="box">
+          <h3>1. Google custom／TPU-attach 有幾多已經入帳？</h3>
+          <p class="muted"><strong>實質上係零。</strong>Google warrant 2026-08-18 先簽，performance tranche 由 <strong>FY2027-Q3 先開始計</strong>（240 份，每 US$500m 累計 Custom Products 收入歸屬一份，理論上限約 US$120B 累計收入）。五季窗口入面 DC 分部已由 US$1,490.5m 升到 US$2,171.5m，呢個加速喺 warrant 簽署<strong>之前</strong>已經發生。</p>
+        </div>
+        <div class="box">
+          <h3>2. 增長質素對唔住槓桿同稀釋？</h3>
+          <p class="muted"><strong>部分對唔住。</strong>官方 FCF 五季正但無單調上升；長期債務 Q4 FY26→Q1 FY27 跳升 US$990.5m（對應收購）；現金仍低過總債缺口 US$1,030.1m；diluted 股數兩季 +3.1%，仲未計入 Google warrant 潛在稀釋。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>8–12 KPI 五季摘要</h2>
+      <p class="muted" style="margin-top:-6px">★ = 估值驅動 KPI（F3／HUD 沿用同一批）</p>
+      <table>
+        <thead><tr><th>KPI</th><th>Q2 FY26<br>2025-08-02</th><th>Q3 FY26<br>2025-11-01</th><th>Q4 FY26<br>2026-01-31</th><th>Q1 FY27<br>2026-05-02</th><th>Q2 FY27<br>2026-08-01</th></tr></thead>
+        <tbody>
+          <tr><td>★ 總營收（US$m）</td><td>2,006.1</td><td>2,074.5</td><td>2,218.7</td><td>2,417.8</td><td>2,739.3</td></tr>
+          <tr><td>總營收 YoY</td><td>+58%</td><td>+37%</td><td>+22%</td><td>+28%</td><td>+37%</td></tr>
+          <tr><td>★ Data Center（US$m）</td><td>1,490.5</td><td>1,517.9</td><td>1,651.3</td><td>1,832.7</td><td>2,171.5</td></tr>
+          <tr><td>Data Center YoY</td><td>+69%</td><td>+38%</td><td>+21%</td><td>+27%</td><td>+46%</td></tr>
+          <tr><td>GAAP 淨利率</td><td>9.7%</td><td>91.7%¹</td><td>17.9%</td><td>1.4%</td><td>11.2%</td></tr>
+          <tr><td>★ 經營現金流（US$m）</td><td>461.6</td><td>582.3</td><td>373.7</td><td>638.8</td><td>605.5</td></tr>
+          <tr><td>★ 官方 FCF＝OCF−capex（US$m）</td><td>414.1</td><td>508.8</td><td>259.4</td><td>483.1</td><td>478.8</td></tr>
+          <tr><td>現金（US$m）</td><td>1,224.4</td><td>2,714.5</td><td>2,638.8</td><td>3,843.6</td><td>3,932.8</td></tr>
+          <tr><td>★ 有息債務合計（US$m）</td><td>4,467.2</td><td>4,468.9</td><td>4,470.6</td><td>4,961.3</td><td>4,962.9</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:8px">¹ Q3 FY26 GAAP 淨利／淨利率被出售汽車乙太網業務予 Infineon 嘅 ~US$1.8B 稅前一次性收益扭曲。來源：各季 8-K EX-99.1，全部經 SEC EDGAR 原文核對。</p>
+    </section>
+
+    <section class="panel">
+      <h2>五大維度</h2>
+      <div class="grid-2" style="grid-template-columns:1fr;gap:10px">
+        <div class="pillar partial"><h3>1. 敘事 — 部分通過</h3><p class="muted">Data Center 連續五季雙位數以上 YoY，Q2 FY27 加速到 +46%，屬已入帳分部收入；但「custom／Google TPU-attach 顯著加速」仍係 H2 FY27 前瞻，五季窗口內未見對應數字。</p></div>
+        <div class="pillar partial"><h3>2. 單位經濟 — 部分通過</h3><p class="muted">GAAP 淨利率 Q1 FY27 探底 1.4% 後回升到 Q2 FY27 11.2%，方向改善但基數波動大，Non-GAAP／GAAP 差距持續闊。</p></div>
+        <div class="pillar partial"><h3>3. 護城河 — 部分通過</h3><p class="muted">Google warrant 覆蓋 TPU 生態多條 attach 產品，客戶深度證據強；但合約金額未披露，行使價 US$206.58 已經價內。</p></div>
+        <div class="pillar fail"><h3>4. 營運槓桿 — 未通過</h3><p class="muted">Capex 由 Q2 FY26 US$47.5m 加速到 Q1 FY27 US$155.7m（+228%），增速遠快過營收，OpEx／營收比例未見收斂證據。</p></div>
+        <div class="pillar partial"><h3>5. 現金流 — 部分通過</h3><p class="muted">官方 FCF 五季全部為正，冇一季轉負；但現金上升主要由 Q1 FY27 一次過嘅優先股發行帶動，長債同步跳升 US$990.5m。</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Bull / Bear / 行動</h2>
+      <div class="grid-3">
+        <div class="box" style="border-top:4px solid var(--fail)"><h3>Bear</h3><p class="muted">現金仍低過總債（缺口 US$1.03B）；長債同稀釋股數喺 Q1 FY27 一齊跳升，反映擴張靠槓桿同股本融資。</p></div>
+        <div class="box" style="border-top:4px solid var(--pass)"><h3>Bull</h3><p class="muted">Data Center +46% YoY 加速屬已入帳事實；Google warrant 履約門檻代表管理層對長期 custom 收入有高信心。</p></div>
+        <div class="box" style="border-top:4px solid var(--watch)"><h3>行動</h3><p class="muted">僅觀察，唔好加倉——兩條必挖問題都係「部分驗證」而非「通過」，F1 紅線 1 仍未解決。</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>確認／失效（下兩季，FY2027-Q3／Q4）</h2>
+      <div class="grid-2">
+        <div class="box" style="border-top:4px solid var(--pass)">
+          <h3>確認</h3>
+          <p class="muted">① Custom／Google 相關收入若單獨披露且增速持平或高於 +46%。② 現金追近或反超有息債務，或 FCF 連續兩季企穩 US$450m 以上。③ Diluted 股數增速放緩。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--fail)">
+          <h3>失效</h3>
+          <p class="muted">① 官方 FCF 任何一季轉負，或 capex／營收比繼續擴大。② 現金對債缺口進一步擴闊。③ Q3 FY27 Data Center 增速大幅回落至 +21%（Q4 FY26 水平）以下。</p>
+        </div>
+      </div>
+      <div class="callout info" style="margin-top:14px">
+        <strong>下一步：</strong>增長質量主線部分通過，現金流唔係唯一未 dig 嘅未知 → 可入 Framework 3（已完成，見估值頁）。F3 最敏感變數：(1) H2 FY27 custom 收入能否兌現「顯著加速」；(2) diluted 股數擴張速度。
+      </div>
+    </section>
+  </div>
+
+  <p class="footer">來源：各季 8-K EX-99.1（Q2 FY26 `q226_8kx822025ex-991.htm`、Q3 FY26 `q326_8kx1112025ex-991.htm`、Q4 FY26 `q426_8kx1312026ex-991.htm`、Q1 FY27 `q127_8kx522026ex-991.htm`、Q2 FY27 `q227_8kx812026ex-991.htm`），全部經 SEC EDGAR 原文核對；Google warrant 條款來自 8-K（2026-08-19，accession 0001193125-26-356217）。`data/raw/MRVL` manifest 喺呢個 Mac 本機未同步，另見 cowork review。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/mrvl/framework2.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

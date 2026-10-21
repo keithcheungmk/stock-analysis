@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AVGO 估值卡 · Framework 3</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:920px;margin:0 auto;padding:24px 16px 72px}
+  h1{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.7rem;margin:0 0 6px}
+  h2{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.1rem;margin:0 0 10px}
+  .sub{color:var(--muted);margin:0 0 16px}
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.hero{grid-template-columns:1fr}}
+  .big{border-radius:22px;padding:18px;color:#fff;box-shadow:var(--shadow)}
+  .big.navy{background:linear-gradient(145deg,#134e4a,#0f766e)}
+  .big.warn{background:linear-gradient(145deg,#7c2d12,#c2410c)}
+  .big.good{background:linear-gradient(145deg,#065f46,#0f766e)}
+  .big .l{font-size:.72rem;opacity:.85;font-weight:800;letter-spacing:.06em;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .big .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.1rem;font-weight:800;margin:4px 0}
+  .big .d{font-size:.88rem;opacity:.92}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:14px;box-shadow:var(--shadow)}
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .presets button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
+  .presets button.on{background:#134e4a;color:#fff;border-color:#134e4a}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{border:1px solid var(--line);border-radius:12px;padding:10px;border-top:3px solid var(--teal);font-size:.78rem}
+  .kpi .l{color:var(--muted);font-weight:700}.kpi .v{font-weight:800;font-size:1rem;margin-top:2px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .kpi .s{color:var(--muted);font-size:.72rem;margin-top:2px}
+  .ctrl{margin-bottom:12px}
+  .ctrl-head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+  .ctrl-head label{font-weight:700;font-size:.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .ctrl-head output{font-weight:800;color:var(--teal);font-family:"Avenir Next","PingFang TC",sans-serif}
+  input[type=range]{width:100%;accent-color:var(--teal)}
+  .note{margin-top:12px;background:var(--info-soft);border:1px solid #93c5fd;border-radius:14px;padding:12px 14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.88rem}
+  .warnbox{margin-top:12px;background:var(--watch-soft);border:1px solid #fdba74;border-radius:14px;padding:12px 14px;font-size:.88rem}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .disc{font-size:.78rem;color:var(--muted);margin-top:18px;text-align:center}
+  .hud-tag{display:inline-flex;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <p class="sans" style="color:var(--teal);font-weight:800;margin:0 0 8px">估值卡 · 只展示 Framework 3 · 無另起倍數模型</p>
+  <h1>AVGO · FY2027 Non-GAAP P/E</h1>
+  <p class="sub">判定：合理（現價已反映 Base）。行動：僅觀察／唔好建倉。官方 FY2026-Q3 verified；Q3 10-Q 未申報；Street FY2027 唔做輸入。</p>
+
+  <section class="card" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +0.6%</span></h2>
+    <div class="kpis sans">
+      <div class="kpi"><div class="l">現價</div><div class="v">US$357.16</div><div class="s">delayed 9/03 · ~US$1.699T</div></div>
+      <div class="kpi"><div class="l">Base（權威）</div><div class="v">US$355</div><div class="s">24× EPS 14.87</div></div>
+      <div class="kpi"><div class="l">現價 vs Base</div><div class="v">+0.6%</div><div class="s">合理 · 僅觀察</div></div>
+      <div class="kpi"><div class="l">Bear / Bull</div><div class="v">205 / 545</div><div class="s">研究情景每股</div></div>
+    </div>
+    <p class="sub" style="margin:12px 0 0">估值驅動（F2 ★）：總營收 US$29.6B · AI 半導體 US$16.7B · 官方 FCF US$13.7B · GAAP GM 69.1% · 應收／DSO US$13.7B／42 日。</p>
+  </section>
+
+  <div class="hero" style="margin-top:14px">
+    <div class="big navy sans">
+      <div class="l">模型產出 vs 現價</div>
+      <div class="v" id="outPx">US$355</div>
+      <div class="d" id="outGap">對現價約 −0.6% · 預設 Base</div>
+    </div>
+    <div class="big warn sans" id="actBox">
+      <div class="l">行動</div>
+      <div class="v" style="font-size:1.55rem">僅觀察</div>
+      <div class="d">現價對 Base 約 +0.6% 溢價，唔好建倉</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>① 官方 KPI 錨點（唔好用滑桿覆寫呢啲已入帳數）</h2>
+    <div class="kpis sans">
+      <div class="kpi"><div class="l">Q3 總營收</div><div class="v">US$29.591B</div><div class="s">+86% · 已入帳</div></div>
+      <div class="kpi"><div class="l">AI 半導體</div><div class="v">US$16.7B</div><div class="s">+221% · +54% QoQ</div></div>
+      <div class="kpi"><div class="l">官方 FCF</div><div class="v">US$13.665B</div><div class="s">收入 46% · OCF−capex</div></div>
+      <div class="kpi"><div class="l">Q4 指引（未入帳）</div><div class="v">US$34.8B</div><div class="s">AI US$21.7B · NG op 66%</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>② 情景滑桿（預設 = 報告 Base）</h2>
+    <div class="presets sans" id="presets">
+      <button type="button" data-p="bear">Bear 30%</button>
+      <button type="button" data-p="base" class="on">Base 50%</button>
+      <button type="button" data-p="bull">Bull 20%</button>
+    </div>
+    <div class="ctrl"><div class="ctrl-head"><label>FY2027 AI 半導體（十億）</label><output id="o_ai">85</output></div>
+      <input id="ai" type="range" min="50" max="120" step="1" value="85" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>非 AI 半導體（十億）</label><output id="o_nonai">16.5</output></div>
+      <input id="nonai" type="range" min="12" max="20" step="0.5" value="16.5" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>基礎設施軟件（十億）</label><output id="o_sw">36</output></div>
+      <input id="sw" type="range" min="28" max="45" step="0.5" value="36" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>Non-GAAP 淨利率 %</label><output id="o_nm">53.0</output></div>
+      <input id="nm" type="range" min="45" max="58" step="0.5" value="53" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>Non-GAAP 攤薄股數（十億）</label><output id="o_sh">4.92</output></div>
+      <input id="sh" type="range" min="4.70" max="5.10" step="0.01" value="4.92" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>FY2027 P/E 倍數</label><output id="o_pe">24</output></div>
+      <input id="pe" type="range" min="14" max="34" step="0.5" value="24" /></div>
+    <div class="ctrl"><div class="ctrl-head"><label>FCF margin %（交叉）</label><output id="o_fcf">40</output></div>
+      <input id="fcf" type="range" min="25" max="50" step="1" value="40" /></div>
+    <div class="kpis sans" style="margin-top:14px">
+      <div class="kpi"><div class="l">FY27 收入</div><div class="v" id="k_rev">US$138B</div></div>
+      <div class="kpi"><div class="l">Non-GAAP EPS</div><div class="v" id="k_eps">US$14.87</div></div>
+      <div class="kpi"><div class="l">FCF</div><div class="v" id="k_fcf">US$55B</div></div>
+      <div class="kpi"><div class="l">遠期 P/S</div><div class="v" id="k_ps">12.7×</div></div>
+    </div>
+    <div class="note" id="valNote"></div>
+    <div class="warnbox">
+      現價約 30.7× Street FY2026 EPS US$11.63、18.2× Street FY2027 EPS US$19.57。Street FY2027 收入平均 US$173B（低 US$115B／高 US$200B）<strong>唔入滑桿預設</strong>。未證實 AI TAM 禁止做輸入。把 AI 拉到 115 只係敏感度，唔等於官方。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>官方錨 vs 第三方</h2>
+    <table>
+      <thead><tr><th>項目</th><th class="num">數字</th><th>來源</th></tr></thead>
+      <tbody>
+        <tr><td>TTM 收入／GAAP NI／FCF</td><td class="num">89.1／38.3／39.4B</td><td>官方 TTM 至 Q3 FY26</td></tr>
+        <tr><td>現金 vs 有息債</td><td class="num">24.0 vs 59.4B</td><td>8-K 簡明表；10-Q 未出</td></tr>
+        <tr><td>Q3 GAAP／Non-GAAP EPS</td><td class="num">2.68／3.32</td><td>EX-99.1；股數 4,887／4,937m</td></tr>
+        <tr><td>FY26／FY27 street EPS</td><td class="num">~11.63／~19.57</td><td>第三方；FY27 範圍極闊</td></tr>
+        <tr><td>Q4 指引</td><td class="num">34.8B · AI 21.7B</td><td>官方；未入帳</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="disc">卡片只係 F3 展示層，禁止另起 compact 倍數模型。delayed 價格可快速變動，唔當 live。未確認持倉。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const SPOT = 357.16;
+const PRESETS = {
+  bear: {ai:65, nonai:16, sw:32, nm:50, sh:5.00, pe:18, fcf:32},
+  base: {ai:85, nonai:16.5, sw:36, nm:53, sh:4.92, pe:24, fcf:40},
+  bull: {ai:105, nonai:17, sw:40, nm:54.5, sh:4.85, pe:30, fcf:44}
+};
+const ids = ["ai","nonai","sw","nm","sh","pe","fcf"];
+function num(id){ return parseFloat(document.getElementById(id).value); }
+function setPreset(name){
+  const p = PRESETS[name];
+  ids.forEach(k => { document.getElementById(k).value = p[k]; });
+  document.querySelectorAll('#presets button').forEach(b => b.classList.toggle('on', b.dataset.p===name));
+  render();
+}
+function render(){
+  const ai=num('ai'), nonai=num('nonai'), sw=num('sw'), nm=num('nm'), sh=num('sh'), pe=num('pe'), fcfm=num('fcf');
+  document.getElementById('o_ai').textContent = ai;
+  document.getElementById('o_nonai').textContent = nonai;
+  document.getElementById('o_sw').textContent = sw;
+  document.getElementById('o_nm').textContent = nm.toFixed(1);
+  document.getElementById('o_sh').textContent = sh.toFixed(2);
+  document.getElementById('o_pe').textContent = pe;
+  document.getElementById('o_fcf').textContent = fcfm;
+  const rev = ai + nonai + sw;
+  const ni = rev * nm / 100;
+  const eps = ni / sh;
+  const px = eps * pe;
+  const fcf = rev * fcfm / 100;
+  const mkt = px * sh;
+  const ps = mkt / rev;
+  const gap = (px / SPOT - 1) * 100;
+  const gapSpot = (SPOT / 355 - 1) * 100;
+  document.getElementById('k_rev').textContent = 'US$' + rev.toFixed(1) + 'B';
+  document.getElementById('k_eps').textContent = 'US$' + eps.toFixed(2);
+  document.getElementById('k_fcf').textContent = 'US$' + fcf.toFixed(1) + 'B';
+  document.getElementById('k_ps').textContent = ps.toFixed(1) + '×';
+  document.getElementById('outPx').textContent = 'US$' + Math.round(px);
+  const sign = gap>=0?'+':'';
+  document.getElementById('outGap').textContent = '對現價約 ' + sign + gap.toFixed(1) + '% · 滑桿重算';
+  const act = document.getElementById('actBox');
+  if (Math.abs(px - 355) < 8 && Math.abs(ai-85)<2) {
+    act.className = 'big warn sans';
+    act.innerHTML = '<div class="l">行動</div><div class="v" style="font-size:1.55rem">僅觀察</div><div class="d">現價對 Base 約 +0.6% 溢價，唔好建倉</div>';
+  } else if (px + 1 < SPOT * 0.85) {
+    act.className = 'big good sans';
+    act.innerHTML = '<div class="l">敏感度</div><div class="v" style="font-size:1.55rem">低過現價</div><div class="d">模型價低過現價 ≥15%。呢個唔自動等於建倉——要 F2 確認。</div>';
+  } else if (px > SPOT * 1.2) {
+    act.className = 'big good sans';
+    act.innerHTML = '<div class="l">敏感度</div><div class="v" style="font-size:1.55rem">高過現價</div><div class="d">要經營假設先成立。報告行動仍係僅觀察。</div>';
+  } else {
+    act.className = 'big warn sans';
+    act.innerHTML = '<div class="l">行動</div><div class="v" style="font-size:1.55rem">僅觀察</div><div class="d">現價對 Base 約 +' + gapSpot.toFixed(1) + '% 溢價，報告唔改行動</div>';
+  }
+  document.getElementById('valNote').textContent =
+    '收入 US$' + rev.toFixed(1) + 'B（AI ' + ai + ' + 非AI ' + nonai + ' + 軟件 ' + sw +
+    '）× NM ' + nm.toFixed(1) + '% ÷ ' + sh.toFixed(2) + 'B 股 = EPS US$' + eps.toFixed(2) +
+    ' × ' + pe + '× = US$' + Math.round(px) + '。FCF 約 US$' + fcf.toFixed(1) + 'B（' + fcfm +
+    '%）。報告權威仍係 Bear 205／Base 355／Bull 545。';
+}
+document.querySelectorAll('#presets button').forEach(b => b.onclick = () => setPreset(b.dataset.p));
+ids.forEach(id => document.getElementById(id).addEventListener('input', render));
+render();
+</script>
+<section id="page-comments" data-page="/avgo/valuation.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

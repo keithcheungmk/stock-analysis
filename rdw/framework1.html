@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RDW Framework 1 初篩</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:3.4rem;font-weight:800;line-height:1;color:var(--fail);margin:8px 0 0}
+  .score-den{font-size:1.05rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .badge.watch{background:var(--watch-soft);color:var(--watch);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .warn{color:var(--watch);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .danger{color:var(--fail);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid var(--watch)}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted);font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .hud-note{margin:8px 0 0;font-size:.82rem;color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif}
+  .table-wrap{overflow-x:auto}
+  td.score{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;text-align:right;white-space:nowrap}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 1 · 門檻未達型</div>
+      <div class="score-num">FAIL</div>
+      <div class="score-den">60 / 130 · 差 5 分達 WATCH（65）</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge fail">未達 WATCH 門檻</span>
+        <span class="badge watch">三條紅線安全 · Q3 紅線②高危</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>RDW · Framework 1 基本面初篩（2026-10 重跑）</h1>
+      <p>Redwire Corporation · 數據截至 2026-10-14 · 最新官方季度仍係 2026-Q2（期末 2026-06-30，2026-08-05 發布）· USD · US GAAP · 六季 manifest 驗證通過</p>
+      <div class="badges">
+        <span class="badge">現價 US$9.16（10-13 收市）</span>
+        <span class="badge">市值 ~US$2.29B</span>
+        <span class="badge">同業：RKLB · KTOS · AVAV</span>
+        <span class="badge">持倉 4,400 股＠US$18（浮虧約 −49.1%）</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base −19.6%</span></h2>
+    <p class="hud-note">現價對 F3 Base 折讓約 <strong>−19.6%</strong>（US$9.16 vs US$11.40）→ 但 F1 仍係 FAIL、Q3 有紅線②風險，續抱觀察、唔好加倉。F3 係 2026-08-30 版本，待重跑。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 2026-10-13）</div><div class="v">US$9.16</div><div class="s">市值約 US$2.29B · 08-28 起 −15.7%</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">7.06 / 11.40 / 19.15</div><div class="s">F3 FY2026E P/S · 2026-08-30</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">−19.6%</div><div class="s">高過 Bear +29.7% · 唔好加倉</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">TTM P/S 5.37×</div><div class="s">EV/S ~4.2× · FCF yield −4.6%</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>營收 US$117.1M · +89.6%（含收購效應）</span>
+      <span>H2 指引隱含 +11%～+35%</span>
+      <span>GAAP 毛利率 27.8%</span>
+      <span>Adj. EBITDA −US$3.2M</span>
+      <span>Q2 FCF −US$35.3M · 股數 249.2M</span>
+    </div>
+    <p class="hud-note">官方：8-K EX-99.1／10-Q 2026-Q2 · 期末 2026-06-30 · USD US GAAP（Adj. EBITDA／FCF 為 Non-GAAP）· verified。現價同同業倍數：yfinance 延遲。</p>
+  </section>
+
+  <section class="panel" style="margin-top:16px;border:1px solid #fca5a5;background:linear-gradient(180deg,#fef2f2,#fffdf8)">
+    <h2>🚨 新預警：Q3 業績可能觸發「衰退陷阱」紅線</h2>
+    <p>Q2 嘅 +89.6% 有大量收購效應：Edge Autonomy 喺 2025-06 先併入，Q2 2025 只計咗約兩星期；Space 分部按年其實 <strong>−2.6%</strong>（US$55.2M vs 56.7M）。Q3 2025 已經全季計 Edge（US$103.4M），所以 Q3 起增速會大幅放緩。</p>
+    <p>FY2026 指引 US$450–500M 減 H1 US$214.0M → H2 需 US$236–286M，對比 H2 2025 US$212.2M 只係 <strong>+11%～+35%</strong>（中位 +23%）。同業平均約 +33%。<strong>如果 Q3 2026 營收低過約 US$137M</strong>，而淨利潤率仍負，紅線②就會觸發，RDW 會由「門檻未達型」變成「紅線觸發型」FAIL。</p>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">現價（10-13 收市）</div><div class="value">US$9.16</div><div class="note">市值 ~US$2.29B · 約 250.0M 股</div></div>
+    <div class="kpi green"><div class="label">Q2 2026 營收 YoY</div><div class="value">+89.6%</div><div class="note">US$117.1M · 同業平均 ~+32.7%</div></div>
+    <div class="kpi orange"><div class="label">GAAP 毛利率</div><div class="value">27.8%</div><div class="note">25Q2 為 −30.9%</div></div>
+    <div class="kpi red"><div class="label">TTM FCF</div><div class="value">−US$106.0M</div><div class="note">Q2 單季 −US$35.3M</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>初篩結論</h2>
+      <div class="callout fail verdict">
+        <p><strong>FAIL（門檻未達型）· 60／130，同 08-30 版本一樣。</strong>冇新一季官方數字，Q2 2026 仍然係最新：紀錄營收 US$117.1M、毛利率 27.8%、backlog US$542.1M、流動性 US$607.8M。三條紅線全部安全。</p>
+        <p>未夠分嘅原因冇變：淨利潤率、需求 KPI（backlog 增速 +64.5% 對 RKLB +137%）、ROE、FCF、相對標普回報五項都係 0 分。</p>
+        <p>今次重跑最重要嘅新發現係<strong>增長質素</strong>：表面 +89.6% 主要靠收購，Q3 起收購效應消失，H2 指引隱含增速可能跌穿同業平均。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>本輪重跑檢查（2026-08-30 → 2026-10-14）</h2>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>結果</th><th>來源</th></tr></thead>
+        <tbody>
+          <tr><td>新一季官方數字</td><td><strong>冇</strong>。Q3 2026 業績第三方估 2026-11-04（call 11-05），IR 未確認</td><td>MarketBeat（third-party）</td></tr>
+          <tr><td>SEC 新申報</td><td>9-23 Form 144、9-25 Form 4、10-08 8-K/A（股東大會 say-on-pay 頻率）</td><td>SEC EDGAR</td></tr>
+          <tr><td>大股東減持</td><td>AE Industrial 9-23 以 US$11.34 賣出 929,435 股，之後只剩 147,984 股——保薦人基本退場</td><td>Form 4</td></tr>
+          <tr><td>IR 新聞</td><td>9-24 NITE-STAR IDIQ（15 家共享上限 US$980M，<strong>無保證收入</strong>）；9-30 Sophia Space MOU；10-05 Axiom 第二艙 ROSA 合約；10-12 ISS 最後一對 ROSA 發射</td><td>ir.rdw.com</td></tr>
+          <tr><td>股價</td><td>US$10.87 → US$9.16（−15.7%）；同期 SPY 約 +1.4%</td><td>yfinance</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="muted" style="margin-top:8px">IR 新聞都係訂單／敘事層面，未量化入 backlog，冇改變 Q2 財務數字。股價下跌冇對應官方負面事件。</p>
+    </section>
+
+    <section class="panel">
+      <h2>致命紅線掃描</h2>
+      <div class="grid-3">
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">① 流動性 — 安全</span></h3>
+          <p>現金（含受限）US$557.7M vs 債務 US$48.1M（約 11.6×）。TTM FCF −US$106.0M，但紅線要「現金低過債務」同時成立。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#fff7ed,#fff)">
+          <h3><span class="warn">② 衰退陷阱 — 安全（Q3 高危）</span></h3>
+          <p>Q2 +89.6% vs 同業平均約 +32.7%（RKLB +62.0% 官方；KTOS +30.5%、AVAV +5.7% yfinance）。淨利潤率負，增速一跌穿同業平均即觸發。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">③ 估值泡沫 — 安全</span></h3>
+          <p>虧損致 PEG 不可用。P/S 5.37×（US$2.29B / TTM US$426.3M）；同業 RKLB 53×、KTOS 5.0×、AVAV 3.2×，唔係行業極值。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>13 維度評分</h2>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>維度</th><th>實際數據／證據</th><th>分數</th><th>評分依據</th></tr></thead>
+        <tbody>
+          <tr><td>現金 vs 債務</td><td>US$557.7M vs US$48.1M</td><td class="score">10</td><td>現金 ≥ 債務 2 倍</td></tr>
+          <tr><td>營收增長</td><td>Q2 +89.6%、TTM +63.1% vs 同業 ~32.7%</td><td class="score">10</td><td>高過同業 10pp 以上；有收購效應，Q3 重評</td></tr>
+          <tr><td>淨利潤率</td><td>Q2 −35.0%；TTM −57.3%</td><td class="score">0</td><td>虧損</td></tr>
+          <tr><td>估值（PEG）</td><td>PEG 不可用；P/S 5.37×、EV/S ~4.2×、FCF yield −4.6%</td><td class="score">5</td><td>P/S 補充；同 KTOS 相若，但 FCF yield 負</td></tr>
+          <tr><td>TAM</td><td>太空基建 + 國防 UAS／ISR</td><td class="score">10</td><td>超過 US$100B（行業估算）</td></tr>
+          <tr><td>需求 KPI</td><td>Backlog +64.5% vs RKLB +137%；KTOS／AVAV 未核實</td><td class="score">0</td><td>唔高過同業；缺失數據唔當正面</td></tr>
+          <tr><td>ROE</td><td>約 −18%（近兩期平均股東權益）</td><td class="score">0</td><td>低過 8%</td></tr>
+          <tr><td>自由現金流</td><td>−27.8 / −30.1 / −12.7 / −35.3（US$M，近四季）</td><td class="score">0</td><td>持續為負</td></tr>
+          <tr><td>護城河</td><td>ROSA 100% 成功紀錄、國防認證；非壟斷</td><td class="score">5</td><td>普通護城河</td></tr>
+          <tr><td>行業趨勢</td><td>商業空間站、VLEO、國防無人系統</td><td class="score">10</td><td>完全符合核心趨勢</td></tr>
+          <tr><td>管理層</td><td>Q2 執行創紀錄；反證：material weaknesses 未解決、H1 股權融資 US$566M</td><td class="score">5</td><td>有執行成果，資金紀律未過關</td></tr>
+          <tr><td>相對 S&amp;P 500</td><td>2021-09 起 RDW −25.2% vs SPY +84.2%</td><td class="score">0</td><td>落後約 109pp</td></tr>
+          <tr><td>預期 vs 實際</td><td>Q2 beat；FY 指引重申、未上修</td><td class="score">5</td><td>大致符合</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="muted" style="margin-top:8px"><strong>合計：60／130 → FAIL（門檻未達型，非紅線觸發型）</strong></p>
+    </section>
+
+    <section class="panel">
+      <h2>Adversarial check</h2>
+      <div class="grid-2">
+        <div class="box" style="border-top:4px solid var(--pass)">
+          <h3>最強支持</h3>
+          <p>紀錄營收、毛利率 27.8%、backlog US$542.1M、LTM book-to-bill 1.52；P/S 5.4× 同 KTOS 相若，遠低過 RKLB。</p>
+        </div>
+        <div class="box" style="border-top:4px solid var(--fail)">
+          <h3>最強反證</h3>
+          <p>增長主要靠收購，Space 分部倒退；FCF 連續負；H1 股權融資 US$566M，股數半年 +30%；保薦人 9 月以 US$11.34 基本清倉。</p>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:10px"><strong>最易失效：</strong>Q3 2026 營收低過約 US$137M 而淨利潤率仍負 → 紅線②觸發。</p>
+    </section>
+
+    <section class="panel">
+      <h2>對你倉位嘅含義</h2>
+      <p>現價對 Base 折讓約 −19.6%，但 F1 仍係 FAIL，而且 Q3 有紅線②風險。US$9.16 對平均成本 US$18 浮虧約 <strong>−49.1%</strong>（08-30 時 −39.6%）。過去六星期跌幅冇對應官方負面事件，業務數字未變，但亦冇新證據支持加倉。浮虧唔係攤平嘅理由，亦唔係止蝕嘅理由；等 Q3 驗證有機增長同 FCF。</p>
+      <div class="action">現價 vs Base −19.6% · 續抱觀察 · 唔好加倉</div>
+    </section>
+
+    <section class="panel">
+      <h2>下一步（FAIL → 重新評估條件）</h2>
+      <ul>
+        <li><strong>FCF 轉正</strong>（單季 OCF − capex &gt; 0）→ FCF 維度升到 5 分，總分 65 = WATCH</li>
+        <li><strong>需求 KPI</strong>：backlog 增速高過同業平均 10pp 以上 → 升到 5 分</li>
+        <li><strong>守住紅線②</strong>：Q3 2026 營收 ≥ 約 US$137M（YoY ≥ 同業平均）</li>
+      </ul>
+      <p class="muted">最近催化：Q3 2026 業績（第三方估 2026-11-04，IR 未確認）。全套重跑次序：Framework 2 → Framework 3 → 同業比較 → 催化劑日曆 → Thesis Tracker → One-pager → 估值卡。</p>
+    </section>
+  </div>
+
+  <p class="footer">來源：SEC 8-K EX-99.1（2026-Q2、FY2025）、10-Q 2026-Q2、Form 4、Redwire IR 新聞稿；股價及同業倍數 yfinance 延遲。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/rdw/framework1.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

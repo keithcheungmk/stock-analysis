@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPCX Framework 3 估值模型</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .targets{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:700px){.targets{grid-template-columns:1fr}}
+  .tcard{border-radius:16px;padding:16px;text-align:center;border:1px solid var(--line)}
+  .tcard.bear{background:var(--fail-soft);border-color:#fca5a5}
+  .tcard.base{background:var(--watch-soft);border-color:#fdba74}
+  .tcard.bull{background:var(--pass-soft);border-color:#86efac}
+  .tcard .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.85rem}
+  .tcard .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.6rem;margin-top:6px}
+  .tcard .d{color:var(--muted);font-size:.85rem;margin-top:4px}
+  .callout{background:var(--watch-soft);border:1px solid #fdba74;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#9a3412}
+  .action-table td:first-child{font-weight:700;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">🔄 本頁 2026-08-30 重做，格式對齊 HIMS／NVDA。估值框架沿用 08-21 版本，refresh 現價。</div>
+
+  <section class="hero-main">
+    <h1>SPCX Framework 3 · 估值模型與定位</h1>
+    <p>現價 US$141.50（2026-08-28）· 市值 ~US$1.865T · 主方法：三分部 SOTP + 情景 P/S 校準</p>
+    <div class="badges"><span class="badge">對住 F1（WATCH）+ F2</span><span class="badge">持倉 827 股 + short put 195/170</span></div>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>🎯 方法選擇 &amp; 🧠 核心邏輯</h2>
+      <p class="muted">主方法：三分部 Sum-of-the-Parts（SOTP）＋情景 P/S 校準。唔用單一 trailing P/E（仍虧損）。SPCX 係「發射入口 + Starlink 現金引擎 + AI 高 capex 期權」嘅平台型資產。估值最敏感變數：（1）Starlink 用戶×ARPU；（2）AI 可持續雲收入；（3）市場肯畀幾多平台溢價。</p>
+    </section>
+
+    <section class="panel">
+      <h2>📏 分部輸入（研究情景，非公司指引）</h2>
+      <table>
+        <thead><tr><th>分部</th><th>Base 年化收入假設</th><th>Base 倍數語言</th><th>Base 隱含價值</th></tr></thead>
+        <tbody>
+          <tr><td>Connectivity</td><td>US$18B</td><td>12×（訂閱／高利潤）</td><td>US$216B</td></tr>
+          <tr><td>Space</td><td>US$4B</td><td>8×（增長但虧損）</td><td>US$32B</td></tr>
+          <tr><td>AI</td><td>US$10B</td><td>15×（高增長虧損雲）</td><td>US$150B</td></tr>
+          <tr><td><strong>合計</strong></td><td></td><td></td><td><strong>約 US$400B</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:8px">現市值約 US$1.865T ≈ Base SOTP 嘅 ~4.7×——市場已 price in 遠高於近端已入帳收入嘅長期壟斷／AI 可選性。</p>
+    </section>
+
+    <section class="panel">
+      <h2>📊 Bull / Base / Bear 目標價</h2>
+      <div class="targets">
+        <div class="tcard bear"><div class="l">BEAR</div><div class="v">US$68</div><div class="d">-51.9% vs 現價</div></div>
+        <div class="tcard base"><div class="l">BASE</div><div class="v">US$91</div><div class="d">-35.7% vs 現價</div></div>
+        <div class="tcard bull"><div class="l">BULL</div><div class="v">US$182</div><div class="d">+28.6% vs 現價</div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>⚖️ 風險回報不對稱</h2>
+      <p class="muted">Bear 情景 -51.9% 跌幅遠大於 Bull 情景 +28.6%——極高估值倍數本身就令下行風險不對稱。未來 3 個月密集嘅鎖定期解禁進一步加大呢個不對稱：供給增加會令倍數壓縮嘅機率上升。</p>
+    </section>
+
+    <section class="panel">
+      <h2>🧭 行動區間</h2>
+      <table class="action-table">
+        <thead><tr><th>動作</th><th>區間（每股）</th><th>條件</th></tr></thead>
+        <tbody>
+          <tr><td>建倉／加倉</td><td>≤ US$95</td><td>FCF 缺口開始收窄或 AI 收入連續可驗證</td></tr>
+          <tr><td>續抱</td><td>US$95–150</td><td>thesis 未失效；唔新開賣 put</td></tr>
+          <tr><td>減倉／鎖定</td><td>≥ US$180</td><td>或基本面裂縫出現</td></tr>
+          <tr><td>Thesis invalidation</td><td>持續 &lt; US$70</td><td>同時用戶／AI 收入失速</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top:12px">現價 US$141.50 落喺「續抱」區間（US$95–150），同 08-21 判斷一致，未觸發動作變更。</div>
+    </section>
+
+    <section class="panel">
+      <h2>💡 對你倉位嘅含義</h2>
+      <p class="muted">現股成本 US$137：喺「續抱／唔好加倉」區。Short put 有效成本 US$160／US$150：<strong>高於現價同高於建倉區</strong>。19 日後到期，兩張 put 距離轉 OTM 分別需要股價急升 +37.9%（195）／+20.1%（170）——現實中機率極低，assignment 應視為近乎確定嘅基準情景嚟管理。</p>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/spcx/framework3.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

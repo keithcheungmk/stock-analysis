@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NVDA Thesis Tracker</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:320px 1fr;gap:16px}
+  @media(max-width:900px){.hero{grid-template-columns:1fr}}
+  .status-box{background:linear-gradient(165deg,#fff7ed,#ffedd5 55%,#fdba74);border:1px solid #fb923c;border-radius:28px;padding:24px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--watch);font-weight:800}
+  .status-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.7rem;font-weight:800;color:var(--watch);margin:10px 0 0;line-height:1.2}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 50%,#115e59);color:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.watch{background:var(--watch-soft);color:var(--watch);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.25rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .callout p{margin:0 0 10px}
+  .callout p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-4{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.pass{border-left:5px solid var(--pass);background:linear-gradient(180deg,#f0fdf4,#fff 45%)}
+  .box.warn{border-left:5px solid var(--watch);background:linear-gradient(180deg,#fff7ed,#fff 45%)}
+  .box.fail{border-left:5px solid var(--fail);background:linear-gradient(180deg,#fef2f2,#fff 45%)}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#134e4a;color:#fff;border-color:#134e4a}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="status-box">
+      <div class="eyebrow">Skill 6 · Thesis Tracker</div>
+      <div class="status-title">Mixed / Needs Monitoring</div>
+      <div class="badges" style="margin-top:12px">
+        <span class="badge watch">僅觀察</span>
+        <span class="badge watch">唔好加倉</span>
+        <span class="badge watch">唔追 delayed</span>
+      </div>
+      <p class="sans muted" style="margin:12px 0 0">增長已驗證；現金同 ASIC 替代未過關。未確認持倉。</p>
+    </div>
+    <div class="hero-main">
+      <h1>NVDA · 投資 thesis 追蹤</h1>
+      <p>NVIDIA Corporation · 截至 2026-08-27 · 官方 FY2027-Q2（期終 2026-07-26，USD，US GAAP）· 承接 F1 PASS 115／130、F2 增長通過／現金部分通過、F3 Base US$300</p>
+      <div class="badges">
+        <span class="badge">F3 錨 US$209.66 收市</span>
+        <span class="badge">delayed 約 US$225.51</span>
+        <span class="badge">Q3 閘：DSO／FCF／GM</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi green"><div class="label">Data Center</div><div class="value">US$89.0B</div><div class="note">+117% YoY · 增長支柱通過</div></div>
+    <div class="kpi orange"><div class="label">官方 FCF</div><div class="value">US$21.3B</div><div class="note">Q1 係 US$48.6B · 現金削弱</div></div>
+    <div class="kpi red"><div class="label">DSO</div><div class="value">60 日</div><div class="note">應收 US$63.1B · 五客 70%</div></div>
+    <div class="kpi teal"><div class="label">F3 Base vs 收市</div><div class="value">+43%</div><div class="note">delayed 收窄至約 +33%</div></div>
+  </div>
+
+  <section class="panel">
+    <h2>Thesis 結論</h2>
+    <div class="callout watch sans">
+      <p>原始理由——CUDA／NVLink 把 AI factory 鎖進 NVIDIA，因而應該同時享有超高增長、超高利潤同強勁 FCF——<strong>增長支柱已經被驗證，現金同「無人替代」兩條仍未成立。</strong> Data Center 五季 US$41.1B → US$89.0B，Rubin 量產，Q3 指引 US$108.0B ±2% 而且唔靠中國 DC compute。</p>
+      <p>仍未成立嘅路徑，係增長全部即時轉成現金，以及 ASIC／自研只食邊角。Q2 FCF 腰斬、DSO 60 日、應收 US$63.1B；Broadcom AI 半導體 +143%。PORTS US$105B 把 OpenAI 鎖進 NVIDIA 棧，亦把 FY2029 或有支出寫進 10-Q。</p>
+      <p>最大裂痕係工作資本同客戶融資條款，而唔係 75% 毛利率。Thesis 未壞，所以唔好因為一日跳升就當成確認；亦未完整到值得喺 delayed US$225 追入。</p>
+      <p>對行動：<strong>僅觀察、唔好加倉、唔追價。</strong> 盯 9 月 2 日 AVGO，以及約 11 月嘅 FY2027-Q3 DSO／FCF／Rubin 毛利率。</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>四條支柱</h2>
+    <div class="grid-4">
+      <div class="box pass"><h3>1. 增長</h3><p>DC 已入損益表，Rubin 量產。KPI：DC、Q3 US$108B 達成。</p></div>
+      <div class="box warn"><h3>2. 護城河</h3><p>CUDA 仍轉成收入，但 AVGO 增速更快。KPI：DC vs AVGO AI／AMD DC。</p></div>
+      <div class="box warn"><h3>3. 現金</h3><p>TTM FCF 仍強，Q2 轉換斷裂。KPI：DSO≤55、FCF≥US$30B。</p></div>
+      <div class="box warn"><h3>4. 需求鎖定</h3><p>PORTS／AWS 200 萬顆係遠期可見度，唔係本季帳。KPI：有冇重分類。</p></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>證據卡</h2>
+    <div class="filters sans" id="filters">
+      <button class="active" data-f="all">全部</button>
+      <button data-f="support">支持</button>
+      <button data-f="neutral">中性</button>
+      <button data-f="weaken">削弱</button>
+    </div>
+    <div class="ev-grid" id="evidence"></div>
+  </section>
+
+  <section class="panel">
+    <h2>裂痕、失效、行動</h2>
+    <div class="grid-2">
+      <div class="box fail">
+        <h3>失效條件（未來兩季任一季）</h3>
+        <p>DSO 再 ≥60 或應收再快過 DC；GM &lt;73.5% 兼指引再切；DC 增速跌到同業或以下而無 mix；PORTS 重述為類債務。</p>
+      </div>
+      <div class="box warn">
+        <h3>而家點做</h3>
+        <p>僅觀察。確認要等 Q3 全部 F2 閘。delayed US$225 已離開建倉觀察區 US$180–205。無持倉，唔寫減倉。下一閘：2026-09-02 AVGO，然後 NVDA Q3。</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="footer">官方優先：FY2027-Q2 8-K EX-99.1／EX-99.2 + 10-Q（2026-08-26）；PORTS 8-K（2026-08-17）；AWS Newsroom（2026-08-26）。價格 yfinance delayed。估值只引用 F3，無另起倍數。x_access: degraded。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<script>
+const evidence=[
+{k:"support",type:"分部／KPI",title:"Data Center US$89.0B，五季 US$41.1B → US$89.0B",body:"FY2027-Q2 官方：DC US$89,023m，+117% YoY，佔季收 92%。Hyperscale +102%、ACIE +138%。增長支柱已經喺損益表，唔係低基數反彈。未過關條件係增速跌到同業或以下而無 mix 解釋。"},
+{k:"support",type:"產品節奏",title:"Vera Rubin 官方確認量產",body:"2026-08-26 業績稿：full production；庫存 US$31.6B 為 Q3 導入。Q3 指引 US$108.0B ±2%、GM 74.0% ±50bps。量產支持方向；毛利率回吐約 100bps 仍未入帳，唔當 Q3 已通過。"},
+{k:"support",type:"單位經濟",title:"GAAP 毛利率 75.0%、營業利潤率 66.2%",body:"盈利能力仍然極強，OpEx／營收約 8.7%。F1 115／130 主要食呢條。若 Rubin mix 切穿 73.5% 兼再下修指引，呢張卡會由支持轉削弱。"},
+{k:"support",type:"合約／生態",title:"AWS 2027–2028 再部署約 200 萬顆 GPU",body:"2026-08-26 官方 Newsroom，部署 Blackwell Ultra／Rubin／Rubin Ultra，另規劃 10 萬顆聯邦安全區。支持遠期需求支柱；對近兩季損益幾乎無幫助。唔好把新聞稿當成 Q3 beat。"},
+{k:"neutral",type:"指引／地區",title:"Q3 指引不含中國 DC compute",body:"官方明確不假設任何中國 Data Center compute；Hopper 中國 &lt;1% of DC。降低政策二元風險，同時削咗增量。H200 傳聞維持 unverified。"},
+{k:"neutral",type:"市場",title:"收市 US$209.66 → delayed 約 US$225.51",body:"股價唔等於 thesis。F3 喺收市對 Base 約 +43%；delayed 收窄到約 +33%，並離開 US$180–205 觀察區。升幅更似共識未追上官方指引，唔係 DSO 已修好。"},
+{k:"weaken",type:"工作資本",title:"DSO 45→60 日，應收 US$63.1B",body:"10-Q Note 7：IG 大型建設付款可以 90 日至一年。收入按交付入帳，所以唔係假收入科目；現金支柱要嘅係轉換。Q1 45 日被寫成提前收款、預期回到 51–54 日，Q2 反而更差，唔好再當成單季噪音。"},
+{k:"weaken",type:"現金流",title:"官方 FCF US$21.3B vs Q1 US$48.6B",body:"五季 FCF 仍全正，未到 broken。Q2 用工作資本加現金稅打斷自我融資故事，再用新債 US$25.0B 做約 US$26.0B 股東回饋。下季若 FCF 唔返 ≥US$30B 或 35% margin，削弱會升級。"},
+{k:"weaken",type:"競爭",title:"AVGO AI 半導體 +143% vs NVDA DC +117%",body:"Broadcom FY26-Q2 官方：AI US$10.8B，Q3 指引 US$16.0B。NVIDIA 規模仍約 8×，但增量增速已輸。9 月 2 日若再上修，市場可以去評級 NVDA，即使 NVDA 自己仍然 beat。"},
+{k:"neutral",type:"或有負債",title:"PORTS 擔保上限 US$105B，首期 FY2029",body:"OpenAI 為租戶；違約先觸發，未入當前有息債務。需求鎖定同集中度同一份文件。若被重述為類債務，先由中性轉破壞。"}
+];
+const evRoot=document.getElementById('evidence');
+function render(filter){
+  evRoot.innerHTML=evidence.filter(e=>filter==='all'||e.k===filter).map(e=>`
+  <article class="ev ${e.k}"><div class="type">${e.type}<span class="impact ${e.k}">${e.k==='support'?'支持':e.k==='weaken'?'削弱':'中性'}</span></div>
+  <h3>${e.title}</h3><p class="muted">${e.body}</p></article>`).join('');
+}
+render('all');
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); render(b.dataset.f);
+});
+</script>
+<section id="page-comments" data-page="/nvda/thesis-tracker.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

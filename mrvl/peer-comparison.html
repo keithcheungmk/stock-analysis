@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MRVL 同業比較</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero-main{background:linear-gradient(135deg,#1e3a8a,#1d4ed8 58%,#1e40af);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .rank{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff;margin-bottom:10px}
+  .rank .num{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.4rem;color:var(--teal);min-width:32px}
+  .callout{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="hero-main">
+    <h1>MRVL 同業比較（AVGO／NVDA／AMD）</h1>
+    <p>四間都食緊 AI 基建浪潮，但角色完全唔同：NVDA 定價者、AVGO 最賺錢兼多元化、AMD 追趕者、MRVL 體量最細、槓桿最高。</p>
+    <div class="badges">
+      <span class="badge">數據截至 2026-08-28</span>
+      <span class="badge">AVGO 未有本倉獨立 F1</span>
+    </div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>角色定位</h2>
+      <table>
+        <thead><tr><th>公司</th><th>賽道角色</th><th>商業模式</th><th>估值語言</th><th>一句定位</th></tr></thead>
+        <tbody>
+          <tr><td><strong>NVDA</strong></td><td>平台型龍頭</td><td>全棧 AI compute（GPU＋NVLink＋CUDA）</td><td>Forward P/E、EV/Sales</td><td>AI 基建定價者，規模最大</td></tr>
+          <tr><td><strong>AVGO</strong></td><td>綜合型成熟大廠</td><td>AI 半導體＋軟件（VMware）＋傳統半導體</td><td>EV/EBITDA、P/S</td><td>最賺錢隱形冠軍，AI 引擎最快</td></tr>
+          <tr><td><strong>AMD</strong></td><td>挑戰者／追趕者</td><td>EPYC CPU＋Instinct AI 雙引擎</td><td>Forward P/E、PEG</td><td>份額提升已部分兌現，估值已跑贏 Base</td></tr>
+          <tr><td><strong>MRVL</strong></td><td>轉折股／敘事股</td><td>窄口徑 custom silicon／連接 ASIC</td><td>P/S、PEG</td><td>體量最細、槓桿最高，thesis 未入帳驗證</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>同業核心比較表</h2>
+      <table>
+        <thead><tr><th>公司</th><th>商業質量</th><th>增長質量</th><th>現金流質量</th><th>估值吸引力</th><th>最大亮點</th><th>最大風險</th></tr></thead>
+        <tbody>
+          <tr><td><strong>NVDA</strong></td><td>高</td><td>高（DC +117% YoY）</td><td>高（TTM FCF US$126.9B）</td><td>中高（Base 對現價有折讓）</td><td>AI compute 定價者</td><td>客戶集中、ASIC 競爭</td></tr>
+          <tr><td><strong>AVGO</strong></td><td>高（淨利率 41.9%）</td><td>高（AI 半導體 +143% YoY）</td><td>高（單季 FCF US$10.26B）</td><td>中（現價未獨立核實）</td><td>非 AI 業務提供緩衝</td><td>高槓桿、現價未核實</td></tr>
+          <tr><td><strong>AMD</strong></td><td>中高</td><td>高</td><td>中（FCF margin 14%）</td><td>低（現價 +23% 溢價於 Base）</td><td>EPYC 份額持續搶佔</td><td>Helios 出貨、估值已貴</td></tr>
+          <tr><td><strong>MRVL</strong></td><td>中</td><td>中（部分通過）</td><td>中低</td><td>中（P/S 同 AVGO 相若）</td><td>Google warrant 高上限</td><td>現金低於債、custom 未入帳</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>誰該享有溢價</h2>
+      <p class="muted"><strong>AVGO 最值得 higher multiple：</strong>GAAP 淨利率 41.9% 全組之冠，AI 半導體增速 +143% YoY，但用同 MRVL 相近嘅 P/S 定價，相對質量嚟講最有吸引力。<strong>MRVL 睇似同 AVGO 打平，但折價合理</strong>——現金低過債、盈利波動大。<strong>AMD 最容易被過度追捧</strong>——現價已跑贏自身 Base 情景 23%，Helios 仍待驗證。</p>
+    </section>
+
+    <section class="panel">
+      <h2>投資排序</h2>
+      <div class="rank"><div class="num">1</div><div><strong>AVGO</strong> — 全組最高淨利率、最快 AI 半導體增速，估值倍數同體質最弱嘅 MRVL 相近，相對吸引（現價待獨立核實）</div></div>
+      <div class="rank"><div class="num">2</div><div><strong>NVDA</strong> — 規模同生態壁壘最強，F3 Base 對現價有顯著折讓（PASS 115/130）</div></div>
+      <div class="rank"><div class="num">3</div><div><strong>AMD</strong> — 增長質量紮實（PASS 95/130），但現價已跑贏自身估值模型 Base 23%</div></div>
+      <div class="rank"><div class="num">4</div><div><strong>MRVL</strong> — 增長故事真實但未驗證，現金結構最弱，風險回報最唔對稱</div></div>
+    </section>
+
+    <section class="panel">
+      <h2>配置建議</h2>
+      <div class="callout">核心持股首選：<strong>NVDA</strong>　進攻型配置首選：<strong>AVGO</strong>　估值／值博率最佳：<strong>NVDA</strong>　只宜觀察：<strong>AMD、MRVL</strong><br><br>若只能選一間長持：<strong>NVDA</strong>——四間入面淨係佢有完整、近期覆核過嘅 F3 模型清楚顯示現價對 Base 有折讓，兼且商業質量最強。</div>
+    </section>
+  </div>
+
+  <p class="footer">NVDA／AMD 數字引用本倉 F1／F3（`NVDA_2026-08-27_framework1.md`／`framework3.md`、`AMD_2026-08-27_framework1.md`／`framework3.md`）。AVGO 數字對住官方 2026-06-03 Q2 FY2026 業績稿覆核（Broadcom IR），現價本輪未能獨立核實。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/mrvl/peer-comparison.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

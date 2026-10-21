@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HIMS Catalyst Calendar</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#7f1d1d}
+  .hero-main{background:linear-gradient(135deg,#3730a3,#4338ca 58%,#312e81);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .timeline{display:grid;gap:10px}
+  .event{display:grid;grid-template-columns:170px 1fr;gap:14px;border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  @media(max-width:700px){.event{grid-template-columns:1fr}}
+  .event.high{border-left-color:var(--fail)}
+  .event.mid{border-left-color:var(--watch)}
+  .event.low{border-left-color:#a8a29e}
+  .event .date{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;color:var(--ink)}
+  .event .tag{display:inline-block;font-size:.7rem;font-weight:800;border-radius:999px;padding:2px 8px;margin-top:4px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .tag.high{background:var(--fail-soft);color:var(--fail)}
+  .tag.mid{background:var(--watch-soft);color:var(--watch)}
+  .tag.low{background:#f1f5f9;color:#64748b}
+  .event h3{margin:0 0 4px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">背景：F1 = FAIL。呢個日曆嘅重心唔係「幾時可以加倉」，而係「幾時可以確認流動性缺口有冇改善／惡化」。</div>
+
+  <section class="hero-main">
+    <h1>HIMS Catalyst Calendar</h1>
+    <p>未來 1–2 季真正值得盯：Eucalyptus 遞延付款節奏，同 Q3 2026 業績有冇再次出現負 FCF。</p>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>Catalyst 時間線</h2>
+      <div class="timeline">
+        <div class="event high"><div><div class="date">持續（至約 2027-12）</div><span class="tag high">最高重要度</span></div><div><h3>Eucalyptus 遞延收購款 $683.9m 分期支付</h3><p class="muted">每期實際現金流出會直接侵蝕本已 0.62× 嘅流動性覆蓋率；官方未披露確實分期日程表，需留意下一份 10-Q 附註。</p></div></div>
+        <div class="event high"><div><div class="date">約 2026-11 中（未經 IR 確認）</div><span class="tag high">最高重要度</span></div><div><h3>Q3 2026 業績</h3><p class="muted">官方 FCF 有冇連續第二季負數；美國自然增長有冇維持 +16% 或進一步放緩；毛利率有冇止跌。</p></div></div>
+        <div class="event mid"><div><div class="date">持續</div><span class="tag mid">中重要度</span></div><div><h3>$400m 應收帳款出售融資</h3><p class="muted">2026-07 開通（uncommitted），留意有冇實際動用、動用規模——動用本身已係流動性緊張訊號。</p></div></div>
+        <div class="event mid"><div><div class="date">持續</div><span class="tag mid">中重要度</span></div><div><h3>2032 可轉換債換股動態</h3><p class="muted">現價 $31.66 已高於換股價 $29.53；持續高於會誘使債權人換股（攤薄股東但減輕債務負擔）。</p></div></div>
+        <div class="event high"><div><div class="date">約 2027-02（參考上年 2026-02-23）</div><span class="tag high">高重要度</span></div><div><h3>FY2026 全年業績 + FY2027 首份指引</h3><p class="muted">全年 revenue 有冇落喺 $2.7–2.9B 指引範圍；全年 FCF 總和方向；管理層有冇提出解決流動性缺口嘅具體計劃。</p></div></div>
+        <div class="event low"><div><div class="date">不定期</div><span class="tag low">低重要度</span></div><div><h3>新 8-K 融資／併購申報</h3><p class="muted">監察有冇進一步發債或發股——呢個係 Bear 情景「攤薄」假設嘅直接驗證訊號。</p></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>事件排序與市場誤判</h2>
+      <div class="grid-2">
+        <div class="box"><h3 class="sans">市場最可能低估</h3><p class="muted">Eucalyptus 遞延付款節奏——冇固定公開日程，容易被忽略，但係已簽約嘅確定現金流出。</p></div>
+        <div class="box"><h3 class="sans">市場最可能高估</h3><p class="muted">headline 收入增速嘅可持續性——+38% 大部分係一次性併購效應，Eucalyptus 併表基數效應減退後 YoY 增速大機率明顯回落。</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>行動建議</h2>
+      <p class="muted">Q3 2026 業績（約 11 月中）係下一個關鍵檢查點：若官方 FCF 再次負數，F1 FAIL 狀態維持甚至惡化，唔應該進場；若罕有地同時做到 FCF 轉正＋流動性覆蓋率回升，先值得重新評估（但即使咁樣都只係解除紅線嘅第一步）。</p>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/hims/catalyst-calendar.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

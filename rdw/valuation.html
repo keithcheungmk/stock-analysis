@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RDW 估值計算機</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:900px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:12px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.82rem;margin-bottom:16px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 6px;font-size:1.4rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-top:14px}
+  h2{margin:0 0 12px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .presets button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .presets button.bear{color:var(--fail)}.presets button.base{color:var(--watch)}.presets button.bull{color:var(--pass)}
+  .slider-row{margin-bottom:18px}
+  .slider-row label{display:flex;justify-content:space-between;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;font-size:.85rem;margin-bottom:6px}
+  input[type=range]{width:100%}
+  .result{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+  @media(max-width:600px){.result{grid-template-columns:1fr}}
+  .rbox{border-radius:16px;padding:16px;text-align:center;background:#fff;border:1px solid var(--line)}
+  .rbox .l{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .rbox .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.7rem;margin-top:4px}
+  .rbox .v.pos{color:var(--pass)}.rbox .v.neg{color:var(--fail)}
+  .footer{margin-top:16px;color:var(--muted);font-size:.8rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .posbox{background:var(--watch-soft);border:1px solid #fdba74;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#9a3412;font-size:.85rem;margin-top:14px}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">🆕 本頁為 RDW 首次建立嘅互動估值計算機。模型：FY 營收（US$M）× P/S 倍數 ÷ 攤薄股數（M）。可自行拖動滑桿測試唔同假設。</div>
+  <div class="hero-main"><h1>RDW 估值計算機</h1><p>P/S 情景法 · 現價 US$10.87</p></div>
+
+  <div class="panel">
+    <h2>快速情景（對應 Framework 3 Bear/Base/Bull）</h2>
+    <div class="presets">
+      <button class="bear" onclick="setPreset(450,4.0,255)">Bear</button>
+      <button class="base" onclick="setPreset(475,6.0,250)">Base</button>
+      <button class="bull" onclick="setPreset(500,9.5,248)">Bull</button>
+    </div>
+
+    <div class="slider-row">
+      <label><span>FY2026 營收 (US$M)</span><span id="revVal">475</span></label>
+      <input type="range" id="rev" min="400" max="550" step="5" value="475" oninput="calc()">
+    </div>
+    <div class="slider-row">
+      <label><span>P/S 倍數</span><span id="mulVal">6.0×</span></label>
+      <input type="range" id="mul" min="3" max="11" step="0.1" value="6.0" oninput="calc()">
+    </div>
+    <div class="slider-row">
+      <label><span>攤薄股數 (M)</span><span id="shVal">250</span></label>
+      <input type="range" id="sh" min="245" max="260" step="1" value="250" oninput="calc()">
+    </div>
+
+    <div class="result">
+      <div class="rbox"><div class="l">隱含市值</div><div class="v" id="mcap">$2.85B</div></div>
+      <div class="rbox"><div class="l">隱含每股價值</div><div class="v" id="price">$11.40</div></div>
+      <div class="rbox" style="grid-column:1/-1"><div class="l">vs 現價 US$10.87</div><div class="v" id="pct">+4.9%</div></div>
+    </div>
+
+    <div class="posbox">持倉提醒：4,400 股＠平均成本 US$18。以上情景目標價 vs 你嘅成本價：Bear US$7.06（-60.8%）／Base US$11.40（-36.7%）／Bull US$19.15（+6.4%）——僅 Bull 情景下才略高於你嘅成本。</div>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+
+<script>
+function setPreset(rev, mul, sh){
+  document.getElementById('rev').value = rev;
+  document.getElementById('mul').value = mul;
+  document.getElementById('sh').value = sh;
+  calc();
+}
+function calc(){
+  const rev = parseFloat(document.getElementById('rev').value);
+  const mul = parseFloat(document.getElementById('mul').value);
+  const sh = parseFloat(document.getElementById('sh').value);
+  document.getElementById('revVal').textContent = rev.toFixed(0);
+  document.getElementById('mulVal').textContent = mul.toFixed(1) + '×';
+  document.getElementById('shVal').textContent = sh.toFixed(0);
+
+  const mcapM = rev * mul; // US$M
+  const priceCalc = mcapM / sh; // $/share
+  const current = 10.87;
+  const pct = ((priceCalc - current) / current) * 100;
+
+  document.getElementById('mcap').textContent = '$' + (mcapM/1000).toFixed(2) + 'B';
+  const priceEl = document.getElementById('price');
+  priceEl.textContent = '$' + priceCalc.toFixed(2);
+  const pctEl = document.getElementById('pct');
+  pctEl.textContent = (pct>=0?'+':'') + pct.toFixed(1) + '%';
+  pctEl.className = 'v ' + (pct>=0?'pos':'neg');
+}
+calc();
+</script>
+<section id="page-comments" data-page="/rdw/valuation.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

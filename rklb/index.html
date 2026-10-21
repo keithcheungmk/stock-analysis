@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RKLB · 互動報告</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;
+    background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),
+      radial-gradient(circle at 88% 8%,#dbeafe 0,transparent 24%),#f4f1ea;
+    color:#1c1917;padding:24px 16px 72px}
+  .sans,h1,h2,.pill,.tk,.px,.prem,.upd,.legend,.reports a,.back{font-family:"Avenir Next","PingFang TC",sans-serif}
+  h1{font-size:1.5rem;margin:0 0 6px}
+  .lede{color:#78716c;line-height:1.55;margin:0 0 18px}
+  .pill{display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;border-radius:999px;padding:3px 9px;
+    vertical-align:middle;background:#e7e5e4;color:#44403c}
+  .pill.v-pass{background:#dcfce7;color:#15803d}.pill.v-watch{background:#ffedd5;color:#c2410c}
+  .pill.v-fail{background:#fee2e2;color:#b91c1c}.pill.date{background:#0f766e;color:#fff}
+  .prem.hot{color:#b91c1c}.prem.warm{color:#c2410c}.prem.cool{color:#15803d}.prem.fair{color:#44403c}.prem.na{color:#a8a29e}
+  .note{margin-top:22px;color:#78716c;font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif;line-height:1.5}
+
+  .wrap{max-width:980px;margin:0 auto}
+  .back{display:inline-flex;margin-bottom:14px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;
+    color:#0f766e;font-weight:700;font-size:.85rem;text-decoration:none}
+  .head{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px}
+  .head h1{margin:0 6px 0 0}
+  .hud{background:#fffdf8;border:1px solid #e7e0d5;border-radius:20px;padding:16px;margin:0 0 16px;
+    box-shadow:0 12px 40px rgba(28,25,23,.08)}
+  .hud h2{font-size:1rem;margin:0 0 10px}
+  .hud-tag{display:inline-flex;font-size:.7rem;font-weight:800;color:#9a3412;background:#ffedd5;border-radius:999px;
+    padding:2px 9px;margin-left:6px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:760px){.hud .grid{grid-template-columns:1fr 1fr}}
+  .cell{border:1px solid #e7e0d5;border-top:3px solid #0f766e;border-radius:12px;padding:10px 12px;background:#fff}
+  .cell .l{font-size:.72rem;color:#78716c;font-weight:700;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .cell .v{font-weight:800;font-size:1.05rem;margin-top:3px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .cell .s{font-size:.74rem;color:#78716c;margin-top:3px}
+  .action{margin-top:10px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.86rem;color:#134e4a;
+    background:#ccfbf1;border-radius:12px;padding:9px 12px}
+  .fail{background:#fee2e2;border:1px solid #fca5a5;border-radius:16px;padding:12px 14px;color:#7f1d1d;
+    font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.88rem;margin:0 0 16px}
+  .src{margin:10px 0 0;font-size:.8rem;color:#78716c;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .src a{color:#0f766e;font-weight:700}
+  .curated > p, .wrap > p{color:#78716c;line-height:1.5}
+  h2.sec{font-size:1rem;margin:20px 0 10px}
+  .reports{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+  .reports a{display:flex;flex-direction:column;gap:3px;text-decoration:none;color:#fff;background:#0f766e;border-radius:16px;
+    padding:12px 14px;font-weight:800}
+  .reports a:hover{background:#115e59}
+  .reports .when{font-size:.72rem;font-weight:600;opacity:.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← 全部股票</a>
+  <div class="head"><h1>RKLB</h1><span class="pill v-watch">F1 WATCH 70</span><span class="pill date">更新 2026-10-11</span></div>
+  <section class="hud" id="decision-hud">
+    <h2>估值 <span class="hud-tag">現價 vs Base +21.8%</span></h2>
+    <div class="grid">
+      <div class="cell"><div class="l">現價（10-09 收市，delayed）</div><div class="v">US$68.21</div><div class="s">市值約 US$43.6B</div></div>
+      <div class="cell"><div class="l">Bear / Base / Bull</div><div class="v">28 / 56 / 101</div><div class="s">F3 FY2027E EV/S · 鎖定</div></div>
+      <div class="cell"><div class="l">現價 vs Base</div><div class="v">+21.8%</div><div class="s">約 +22% · 對 Bull −32.5%</div></div>
+      <div class="cell"><div class="l">輔助倍數</div><div class="v">NTM P/S ~48×</div><div class="s">Iridium 營收未計</div></div>
+    </div>
+    <p class="src">估值數字來自 <a href="./catalyst-calendar.html">催化劑日曆</a>（更新 2026-10-11）。</p>
+  </section>
+  <h2 class="sec">報告</h2>
+  <div class="reports">
+    <a href="./one-pager.html"><span class="name">one pager</span><span class="when">更新 2026-10-11</span></a>
+    <a href="./valuation.html"><span class="name">估值卡</span><span class="when">更新 2026-08-28</span></a>
+    <a href="./framework3.html"><span class="name">Framework 3 估值</span><span class="when">更新 2026-08-28</span></a>
+    <a href="./framework1.html"><span class="name">Framework 1 初篩</span><span class="when">更新 2026-08-28</span></a>
+    <a href="./framework2.html"><span class="name">Framework 2 深度增長</span><span class="when">更新 2026-08-28</span></a>
+    <a href="./thesis-tracker.html"><span class="name">Thesis Tracker</span><span class="when">更新 2026-08-28</span></a>
+    <a href="./catalyst-calendar.html"><span class="name">催化劑日曆</span><span class="when">更新 2026-10-11</span></a>
+    <a href="./peer-comparison.html"><span class="name">同業比較</span><span class="when">更新 2026-08-28</span></a>
+  </div>
+  <p class="note">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/rklb/index.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NVDA One-Pager · 2026-08-27</title>
+<style>
+  :root {
+    --bg:#f3efe6; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --teal-deep:#134e4a; --watch:#c2410c; --watch-soft:#ffedd5;
+    --fail:#b91c1c; --fail-soft:#fee2e2; --pass:#15803d; --pass-soft:#dcfce7;
+    --info:#1d4ed8; --info-soft:#dbeafe; --shadow:0 16px 44px rgba(28,25,23,.1);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;color:var(--ink);background:radial-gradient(circle at 10% 0%,#d8f3ee 0,transparent 32%),radial-gradient(circle at 90% 8%,#ffe4cc 0,transparent 28%),var(--bg);line-height:1.5}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .deck{min-height:100%;display:flex;flex-direction:column;max-width:1180px;margin:0 auto;padding:18px 18px 16px}
+  .progress{height:4px;background:#e7e0d5;border-radius:999px;overflow:hidden;margin-bottom:14px}
+  .progress>span{display:block;height:100%;width:25%;background:linear-gradient(90deg,#0f766e,#f59e0b);transition:width .25s ease}
+  .slide{display:none;animation:rise .28s ease}
+  .slide.on{display:block}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .status-box{background:linear-gradient(165deg,#fff7ed,#ffedd5 55%,#fdba74);border:1px solid #fb923c;border-radius:28px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--watch);font-weight:800}
+  .status-title{font-size:2rem;font-weight:800;color:var(--watch);margin:10px 0 8px;line-height:1.15}
+  .hero-main{background:linear-gradient(135deg,#134e4a,#0f766e 52%,#115e59);color:#fff;border-radius:28px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.9rem}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .badge{display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.8rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{color:var(--muted);font-size:.78rem;font-weight:700}
+  .kpi .value{font-size:1.45rem;font-weight:800;margin-top:4px}
+  .kpi.ok{border-top:5px solid var(--pass)}.kpi.warn{border-top:5px solid var(--watch)}.kpi.fail{border-top:5px solid var(--fail)}.kpi.teal{border-top:5px solid var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 6px;font-size:1.22rem}
+  .sub{margin:0 0 14px;color:var(--muted);font-size:.92rem}
+  .thesis{background:linear-gradient(90deg,#fff7ed,#ffedd5);border:1px solid #fdba74;border-radius:18px;padding:16px 18px}
+  .thesis p{margin:0 0 10px}.thesis p:last-child{margin:0}
+  .fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.fact-grid{grid-template-columns:1fr}}
+  .fact{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;min-height:132px}
+  .fact.ok{border-left:6px solid var(--pass)}.fact.warn{border-left:6px solid var(--watch)}.fact.bad{border-left:6px solid var(--fail)}
+  .fact .n{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:var(--muted)}
+  .fact h3{margin:4px 0 8px;font-size:1.02rem}
+  .fact p{margin:0;color:var(--muted);font-size:.9rem}
+  .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.val-grid{grid-template-columns:1fr}}
+  .val{border-radius:20px;padding:16px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left}
+  .val.bear{border-top:6px solid var(--fail)}.val.base{border-top:6px solid var(--watch)}.val.bull{border-top:6px solid var(--pass)}
+  .val.on{box-shadow:var(--shadow);transform:translateY(-2px)}
+  .val .tag{font-size:.75rem;font-weight:800;letter-spacing:.08em}
+  .val .px{font-size:2rem;font-weight:800;margin:6px 0}
+  .val p{margin:0;color:var(--muted);font-size:.88rem}
+  .note{margin-top:14px;background:var(--info-soft);border:1px solid #bfdbfe;border-radius:16px;padding:14px 16px}
+  .timeline{display:grid;gap:10px}
+  .event{display:grid;grid-template-columns:168px 1fr auto;gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+  @media(max-width:860px){.event{grid-template-columns:1fr}}
+  .when{font-weight:800;font-size:.82rem;color:var(--teal-deep)}
+  .dir{font-size:.75rem;font-weight:800;border-radius:999px;padding:4px 10px;white-space:nowrap}
+  .dir.high{background:var(--watch-soft);color:var(--watch)}.dir.risk{background:var(--fail-soft);color:var(--fail)}.dir.mid{background:var(--info-soft);color:var(--info)}.dir.low{background:#f5f5f4;color:var(--muted)}
+  .kill{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  @media(max-width:860px){.kill{grid-template-columns:1fr}}
+  .kill div{background:linear-gradient(180deg,#fef2f2,#fff 50%);border:1px solid #fecaca;border-radius:16px;padding:14px}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:8px}
+  .dots{display:flex;gap:8px}
+  .dot{width:10px;height:10px;border-radius:999px;border:0;background:#d6d3d1;cursor:pointer}
+  .dot.on{background:var(--teal);width:28px}
+  button.navbtn{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;cursor:pointer}
+  button.navbtn:disabled{opacity:.4;cursor:default}
+  .foot{color:var(--muted);font-size:.78rem;margin-top:8px}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="deck">
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+  <div class="stage">
+
+    <section class="slide on" data-slide="0">
+      <div class="hero">
+        <div class="status-box sans">
+          <div class="eyebrow">One-Pager · First</div>
+          <div class="status-title">僅觀察</div>
+          <p style="margin:0;color:var(--watch);font-weight:700">F1 PASS 115／130 · F2 增長通過、現金部分通過 · F3 對 Base 低估（暫定）</p>
+          <p style="margin:12px 0 0;color:var(--muted);font-size:.9rem">F3 錨 US$209.66 · delayed US$225.51 · Base US$300 · 建倉區 180–205 要全部確認</p>
+        </div>
+        <div class="hero-main sans">
+          <h1>NVDA · NVIDIA</h1>
+          <p>2026-08-27 · FY2027-Q2 期終 2026-07-26 · USD · US GAAP unaudited · SEC 8-K／10-Q filed 2026-08-26</p>
+          <div class="badges">
+            <span class="badge">DC US$89.0B +117%</span>
+            <span class="badge">DSO 60 日未過關</span>
+            <span class="badge">唔好加倉／唔追價</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">Thesis</h2>
+        <div class="thesis sans">
+          <p>增長支柱已在損益表：Data Center 五季 US$41.1B → US$89.0B，Rubin 量產，Q3 官方指引 US$108.0B ±2%，而且唔靠中國 DC compute。</p>
+          <p>現金同「無人替代」仍未成立。Q2 官方 FCF 由 US$48.6B 跌到 US$21.3B，DSO 45→60 日；Broadcom AI 半導體 +143% 快過 NVDA DC。</p>
+          <p>最大裂痕係 IG 客戶延長賬期同 PORTS／OpenAI 擔保（cap US$105B，首期 FY2029），而唔係 75% 毛利率本身。</p>
+          <p>未確認持倉。F3 對收市有約 43% Base 空間，但 delayed 已收窄並離開建倉觀察區。僅觀察，等 Q3 確認。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="1">
+      <div class="kpis sans">
+        <div class="kpi teal"><div class="label">收市錨 · 08-26</div><div class="value">US$209.66</div></div>
+        <div class="kpi ok"><div class="label">Q2 營收 · +106% YoY</div><div class="value">US$96.2B</div></div>
+        <div class="kpi ok"><div class="label">Data Center · +117%</div><div class="value">US$89.0B</div></div>
+        <div class="kpi warn"><div class="label">官方 FCF · DSO 60 日</div><div class="value">US$21.3B</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">而家最重要嘅 5 個事實</h2>
+        <p class="sub">來源：SEC 8-K EX-99.1／EX-99.2 + 10-Q（2026-08-26，unaudited）。Q3 指引未入帳。</p>
+        <div class="fact-grid">
+          <article class="fact ok">
+            <div class="n sans">01 · 成長</div>
+            <h3 class="sans">DC US$89.0B；Q3 指引 US$108.0B ±2%</h3>
+            <p>五季連續加速，Rubin 已量產。紀錄營收本身唔等於 thesis 全面通過。</p>
+          </article>
+          <article class="fact ok">
+            <div class="n sans">02 · 單位經濟</div>
+            <h3 class="sans">GAAP GM 75.0%；營業利潤率 66.2%</h3>
+            <p>盈利機器仍在。Q3 指引 GM 74.0% ±50bps 係下一條裂縫。</p>
+          </article>
+          <article class="fact warn">
+            <div class="n sans">03 · 現金</div>
+            <h3 class="sans">FCF US$21.3B；應收 US$63.1B；五客 70%</h3>
+            <p>IG 條款可 90 日至一年。唔係假收入，亦未證明唔係變相融資。</p>
+          </article>
+          <article class="fact warn">
+            <div class="n sans">04 · 競爭</div>
+            <h3 class="sans">AVGO AI +143% on US$10.8B vs DC +117%</h3>
+            <p>規模仍約 8×。9 月 2 日 AVGO Q3（指引 AI US$16B）係近端 read-through。</p>
+          </article>
+          <article class="fact bad" style="grid-column:1/-1">
+            <div class="n sans">05 · 或有／遠期</div>
+            <h3 class="sans">PORTS cap US$105B（FY2029）；AWS 額外約 200 萬顆（2027–2028）</h3>
+            <p>官方文件。前者未入當前債務；後者未入 Q3 帳。新聞稿唔好當成已出貨。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="2">
+      <div class="kpis sans">
+        <div class="kpi teal"><div class="label">現價錨</div><div class="value">US$209.66</div></div>
+        <div class="kpi warn"><div class="label">Framework 3 Base</div><div class="value">US$300</div></div>
+        <div class="kpi"><div class="label">Bear – Bull</div><div class="value">US$170–450</div></div>
+        <div class="kpi fail"><div class="label">判定 · 建倉區</div><div class="value">低估暫定 · 180–205</div></div>
+      </div>
+      <div class="panel">
+        <h2 class="sans">估值摘要 · Framework 3</h2>
+        <p class="sub">FY2028 normalized P/E（收入 × NM ÷ 預計攤薄加權平均股數）。只引用 F3，無 compact 22／26／30 模型。點擊情景。</p>
+        <div class="val-grid sans" id="valGrid">
+          <button class="val bear" data-val="bear" type="button">
+            <div class="tag">BEAR · 30% · −19%</div>
+            <div class="px">US$170</div>
+            <p>收入 US$450B · EPS US$10.0 · 17×。區間 152–189。</p>
+          </button>
+          <button class="val base on" data-val="base" type="button">
+            <div class="tag">BASE · 50% · +43%</div>
+            <div class="px">US$300</div>
+            <p>收入 US$550B · EPS US$12.5 · 24×。區間 275–330。</p>
+          </button>
+          <button class="val bull" data-val="bull" type="button">
+            <div class="tag">BULL · 20% · +115%</div>
+            <div class="px">US$450</div>
+            <p>收入 US$650B · EPS US$15.0 · 30×。區間 420–510。</p>
+          </button>
+        </div>
+        <div class="note" id="valNote">用收市 24× 反推，隱含 FY28 EPS 約 US$8.74、收入約 US$385B，低過 Base US$550B。市場喺折現下修同／或去評級。</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="3">
+      <div class="panel">
+        <h2 class="sans">股價催化劑 · 未來 1–2 季</h2>
+        <p class="sub">窗口 2026-08-27 至約 2027-01。只列會改寫倍數或現金路徑嘅事件。</p>
+        <div class="timeline sans">
+          <div class="event">
+            <div class="when">2026-09-02<br>AVGO 官方已排期</div>
+            <div>
+              <strong>Broadcom FY26-Q3 · AI 半導體 vs US$16.0B</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">ASIC 替代嘅近端成績表。Beat 兼上修 → NVDA 倍數受壓；miss → 短線偏多。</div>
+            </div>
+            <span class="dir high">雙向 · 高</span>
+          </div>
+          <div class="event">
+            <div class="when">約 2026-11-17<br>第三方日曆；IR 未確認</div>
+            <div>
+              <strong>NVIDIA FY2027-Q3</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">DSO≤55、FCF≥US$30B 或 margin≥35%、GM≥73.5%、DC 仍高過同業。營收對住 US$108B 只係入場券。</div>
+            </div>
+            <span class="dir high">雙向 · 最高</span>
+          </div>
+          <div class="event">
+            <div class="when">2026-10-15／11-03</div>
+            <div>
+              <strong>TSMC Q3 · AMD Q3</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">CoWoS／HPC 供應；Instinct／Helios 挑戰者進度。Read-through，唔係 NVDA 自身閘。</div>
+            </div>
+            <span class="dir mid">中 · read-through</span>
+          </div>
+          <div class="event">
+            <div class="when">2027–2028<br>2026-08-26 已公布</div>
+            <div>
+              <strong>AWS 額外約 200 萬顆 GPU</strong>
+              <div style="color:var(--muted);font-size:.88rem;margin-top:4px">官方 Newsroom。遠期需求，未入 Q3 帳。高估呢個 headline 係市場最常見誤判。</div>
+            </div>
+            <span class="dir low">敘事 · 近端低</span>
+          </div>
+        </div>
+        <div class="kill sans">
+          <div>
+            <h3 style="margin:0 0 6px">失效 1</h3>
+            DSO 再 ≥60 或應收再快過 DC → 現金支柱轉結構性，下修 F3 EPS／倍數。
+          </div>
+          <div>
+            <h3 style="margin:0 0 6px">失效 2</h3>
+            GM &lt;73.5% 再下修；或 DC 增速跌到同業或以下；或 PORTS 重述為類債務。
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav sans">
+    <div class="dots" id="dots"></div>
+    <div class="btns">
+      <button class="navbtn" id="prev" type="button">上一頁</button>
+      <button class="navbtn" id="next" type="button">下一頁</button>
+    </div>
+  </div>
+  <p class="foot sans">估值只引用 Framework 3（2026-08-27）。未核對 IB 持倉。delayed 唔當 live。此分析僅供研究參考，不構成投資建議。← → 翻頁</p>
+</div>
+<script>
+  const slides = [...document.querySelectorAll(".slide")];
+  const bar = document.getElementById("bar");
+  const dots = document.getElementById("dots");
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  let i = 0;
+  slides.forEach((_, idx) => {
+    const b = document.createElement("button");
+    b.className = "dot" + (idx === 0 ? " on" : "");
+    b.type = "button";
+    b.setAttribute("aria-label", "第 " + (idx + 1) + " 頁");
+    b.addEventListener("click", () => go(idx));
+    dots.appendChild(b);
+  });
+  function go(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, idx) => s.classList.toggle("on", idx === i));
+    [...dots.children].forEach((d, idx) => d.classList.toggle("on", idx === i));
+    bar.style.width = ((i + 1) / slides.length * 100) + "%";
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+  }
+  prev.addEventListener("click", () => go(i - 1));
+  next.addEventListener("click", () => go(i + 1));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === "PageDown") go(i + 1);
+    if (e.key === "ArrowLeft" || e.key === "PageUp") go(i - 1);
+  });
+  const notes = {
+    bear: "Bear：收市下行約 19%（delayed 約 25%）。適用於 ASIC 搶增量、DSO 常態 ≥60。區間 152–189。",
+    base: "Base 係主參考：收市上行約 43%，delayed 約 33%。建倉觀察區 US$180–205 要 DSO／FCF／GM 全部確認。概率加權 US$291。",
+    bull: "Bull 上行約 115%。要 Rubin／networking 超預期且 PORTS 不觸發。未確認前唔當可追目標。"
+  };
+  document.getElementById("valGrid").addEventListener("click", (e) => {
+    const btn = e.target.closest(".val");
+    if (!btn) return;
+    document.querySelectorAll(".val").forEach((el) => el.classList.toggle("on", el === btn));
+    document.getElementById("valNote").textContent = notes[btn.dataset.val];
+  });
+  go(0);
+</script>
+<section id="page-comments" data-page="/nvda/one-pager.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

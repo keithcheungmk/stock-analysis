@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ORCL One-pager</title><style>
+:root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--teal:#0f766e;--fail:#b91c1c;--card:#fffdf8;--line:#e7e0d5}
+body{margin:0;font-family:"Avenir Next","PingFang TC",sans-serif;background:radial-gradient(circle at 10% 0%,#fee2e2,transparent 30%),var(--bg);color:var(--ink)}
+.deck{max-width:720px;margin:0 auto;padding:20px 16px 64px}
+.slide{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px 24px;margin-bottom:16px;min-height:360px;box-shadow:0 12px 40px rgba(28,25,23,.08)}
+h1{font-size:1.6rem;margin:0 0 8px} h2{font-size:1.2rem;margin:0 0 12px}
+.badge{display:inline-block;background:var(--fail);color:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:800}
+.muted{color:var(--muted)} .big{font-size:2.2rem;font-weight:800;color:var(--fail)}
+ul{padding-left:1.1rem;line-height:1.6} .nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.nav button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
+.nav button.on{background:#7f1d1d;color:#fff;border-color:#7f1d1d}
+.slide{display:none}.slide.on{display:block}
+</style></head><body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="deck">
+<div class="nav" id="nav"></div>
+<section class="slide on" data-i="0"><span class="badge">FAIL · 僅觀察</span>
+  <h1>ORCL One-pager</h1>
+  <p class="muted">2026-10-14 · FY27-Q1 已入帳</p>
+  <div class="big">US$143.20</div>
+  <p>對 Base US$130 溢價 <strong>+10.2%</strong> → 唔好加倉</p>
+</section>
+<section class="slide" data-i="1"><h2>Thesis</h2>
+  <ul>
+    <li>IaaS 斜率真實：Q1 US$7.4B（+121%）</li>
+    <li>自我融資未成立：FCF −US$5.40B；ATM ~US$19.9B 已印</li>
+    <li>紅線 1 維持：現金 US$37.1B &lt; 票據 US$125.3B</li>
+  </ul>
+</section>
+<section class="slide" data-i="2"><h2>估值</h2>
+  <ul>
+    <li>Bear／Base／Bull：80／130／180</li>
+    <li>Fwd P/E ~17.7×（EPS 指引 US$8.1）</li>
+    <li>FY27 P/S ~4.82×</li>
+  </ul>
+</section>
+<section class="slide" data-i="3"><h2>催化劑／行動</h2>
+  <ul>
+    <li>下一閘：FY27-Q2 財報（FCF 符號、再融資）</li>
+    <li>行動：+10.2% 溢價 → 僅觀察；唔攤平</li>
+  </ul>
+  <p class="muted" style="margin-top:24px;font-size:.82rem">此分析僅供研究參考，不構成投資建議。</p>
+</section>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const nav=document.getElementById('nav');
+const labels=['封面','Thesis','估值','行動'];
+labels.forEach((l,i)=>{const b=document.createElement('button');b.textContent=l;if(i===0)b.classList.add('on');b.onclick=()=>go(i);nav.appendChild(b);});
+function go(i){slides.forEach((s,j)=>s.classList.toggle('on',j===i));[...nav.children].forEach((b,j)=>b.classList.toggle('on',j===i));}
+</script>
+<section id="page-comments" data-page="/orcl/one-pager.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body></html>

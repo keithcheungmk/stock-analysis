@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ORCL Framework 2 深度增長</title><style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--watch:#c2410c;--watch-soft:#ffedd5;--fail:#b91c1c;--fail-soft:#fee2e2;--pass:#15803d;--pass-soft:#dcfce7;--info:#1d4ed8;--info-soft:#dbeafe;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:3.2rem;font-weight:800;line-height:1;color:var(--fail);margin:8px 0 0}
+  .score-den{font-size:1rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.fail{background:var(--fail-soft);color:var(--fail);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.25rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
+  h2{margin:0 0 12px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.fail{background:var(--fail-soft);border:1px solid #fca5a5}
+  .callout.info{background:var(--info-soft);border:1px solid #93c5fd}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.15rem;font-weight:800;margin-top:4px}
+  .hud-cell .s{font-size:.78rem;color:#78716c;margin-top:2px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#fff;border:1px solid #e7e0d5;border-radius:999px;padding:6px 10px}
+
+.verdict-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+.verdict-title{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.35rem;font-weight:800;color:var(--fail);margin:8px 0 0}
+</style></head><body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+<section class="hero">
+  <div class="verdict-box"><div class="eyebrow">Framework 2 · F1 FAIL 維持</div><div class="verdict-title">增長通過<br>現金流未通過</div>
+    <p class="muted sans" style="margin:12px 0 0">唔翻案紅線</p></div>
+  <div class="hero-main"><h1>ORCL · 五季增長質量</h1>
+    <p>窗口 FY2026-Q1 → FY2027-Q1。兩條問題：RPO／IaaS 有冇變現金質量？FCF 有冇拐點定繼續靠 ATM？</p></div>
+</section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">現價 vs Base +10.2%</span></h2>
+    <p class="muted" style="margin:0">現價較 Base 溢價 <strong>+10.2%</strong> → 僅觀察，唔好加倉。F1 紅線 1 仍 FAIL（現金 &lt; 票據 且 Q1 FCF 為負）。權威：Framework 3 觀察區間。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（延遲 10/13）</div><div class="v">US$143.20</div><div class="s">市值 ~US$434B</div></div>
+      <div class="hud-cell"><div class="l">Bear / Base / Bull</div><div class="v">80 / 130 / 180</div><div class="s">研究情景每股</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">+10.2%</div><div class="s">偏貴 · 僅觀察</div></div>
+      <div class="hud-cell"><div class="l">輔助倍數</div><div class="v">P/S 4.82×</div><div class="s">Fwd P/E 17.7× · FY27 EPS US$8.1</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q1 IaaS US$7.4B（+121%）</span>
+      <span>★ Q1 官方 FCF −US$5.40B</span>
+      <span>★ RPO US$664B</span>
+      <span>★ 現金 US$37.1B vs 票據 US$125.3B</span>
+      <span>★ ATM 已售 ~US$19.9B</span>
+    </div>
+  </section>
+
+<section class="panel"><h2>五季 FCF（官方，US$B）</h2>
+<table><thead><tr><th>季</th><th>FCF</th><th>IaaS／增速</th><th>備註</th></tr></thead><tbody>
+<tr><td>FY26-Q1</td><td>−0.36</td><td>—</td><td></td></tr>
+<tr><td>FY26-Q2</td><td>−9.97</td><td>—</td><td></td></tr>
+<tr><td>FY26-Q3</td><td>−11.48</td><td>—</td><td></td></tr>
+<tr><td>FY26-Q4</td><td>−1.87</td><td>5.79／+93%</td><td></td></tr>
+<tr><td><strong>FY27-Q1</strong></td><td><strong>−5.40</strong></td><td><strong>7.4／+121%</strong></td><td>ATM 淨收款 19.9B</td></tr>
+</tbody></table></section>
+<section class="panel"><h2>維度</h2>
+<div class="grid-2">
+  <div class="box"><h3>增長真實性 · 通過</h3><p class="muted">營收 +30%、IaaS +121% 已入帳</p></div>
+  <div class="box"><h3>能見度 · 部分通過</h3><p class="muted">RPO US$664.0B，確認節奏後置</p></div>
+  <div class="box"><h3>單位經濟 · 部分通過</h3><p class="muted">經營利潤 +57%，IaaS mix 抬成本</p></div>
+  <div class="box"><h3>現金流 · 未通過</h3><p class="muted">Q1 FCF −5.40B，較 Q4 惡化</p></div>
+</div>
+<div class="callout fail" style="margin-top:14px"><p><strong>總判定：</strong>增長真實；自我融資未通過。F1 FAIL 唔翻案。現價對 Base +10.2% → 僅觀察。</p></div>
+</section>
+<p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div><section id="page-comments" data-page="/orcl/framework2.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body></html>

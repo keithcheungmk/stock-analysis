@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HIMS One-Pager</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:900px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:12px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.82rem;margin-bottom:16px}
+  .hero{display:grid;grid-template-columns:200px 1fr;gap:16px}
+  @media(max-width:700px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fef2f2,#fee2e2 70%,#fecaca);border:1px solid #fca5a5;border-radius:24px;padding:20px;box-shadow:var(--shadow);text-align:center}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:2.2rem;font-weight:800;color:var(--fail)}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 6px;font-size:1.4rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92;font-size:.92rem}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-top:14px}
+  h2{margin:0 0 12px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.88rem}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+  .kpi .l{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.72rem}
+  .kpi .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.05rem;margin-top:2px}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}
+  th,td{text-align:left;padding:6px;border-bottom:1px solid var(--line)}
+  .timeline-mini{display:grid;gap:8px;margin-top:8px}
+  .ev-mini{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;font-size:.85rem}
+  .footer{margin-top:16px;color:var(--muted);font-size:.8rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .warn{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#7f1d1d;font-weight:700}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">格式偏離說明：One-pager skill 建議主交付係 Cursor Canvas PPT，Cowork 呢個 session 冇呢個工具鏈，改用呢頁 4 段式互動 HTML 摘要代替，內容同 <code>output/HIMS_2026-08-28_one_pager.md</code> 一致。</div>
+
+  <section class="hero">
+    <div class="score-box"><div class="sans" style="font-size:.78rem;color:var(--fail);font-weight:700">STATUS</div><div class="score-num">FAIL</div><div class="muted">紅線 1 觸發 · 不評 13 維</div></div>
+    <div class="hero-main">
+      <h1>HIMS One-Pager</h1>
+      <p>現價 US$31.66 vs Base US$29.41（-7.1%）· Bear US$13.66／Bull US$43.56 · 數據截至 2026-08-28</p>
+    </div>
+  </section>
+
+  <div class="panel">
+    <div class="warn">FAIL——唔應該進場，現有持倉建議重新評估流動性風險。</div>
+  </div>
+
+  <div class="panel">
+    <h2>1 · 結論</h2>
+    <p class="muted">流動性覆蓋率 0.62×（現金＋短債投資 $841.0m 對可轉換債面值 $1,365.3m）同 Q2 2026 官方 FCF 轉負（-$68.2m）同時成立，觸發 Framework 1 紅線 1，13 維度評分因此完全跳過。Framework 2 深挖後<strong>進一步確認</strong>呢個判斷：headline +38% YoY 增速大部分來自 Eucalyptus 併購併表，美國自然增長已放緩至 +16%；毛利率連跌四季（74%→64%）；未來 18 個月仲有 $683.9m 遞延收購款要分期支付。</p>
+  </div>
+
+  <div class="panel">
+    <h2>2 · 事實</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="l">Q2 2026 總營收</div><div class="v">US$753.2m（+38%）</div></div>
+      <div class="kpi"><div class="l">官方 FCF</div><div class="v">-US$68.2m</div></div>
+      <div class="kpi"><div class="l">流動性覆蓋率</div><div class="v">0.62×</div></div>
+      <div class="kpi"><div class="l">毛利率</div><div class="v">64%（連跌四季）</div></div>
+      <div class="kpi"><div class="l">可轉換債（面值）</div><div class="v">US$1,365.3m</div></div>
+      <div class="kpi"><div class="l">未來 18 月確定現金流出</div><div class="v">US$683.9m</div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>3 · 估值（引用 Framework 3，僅供參考）</h2>
+    <table>
+      <thead><tr><th>情景</th><th>目標價</th><th>vs 現價</th></tr></thead>
+      <tbody>
+        <tr><td>Bear</td><td>US$13.66</td><td>-56.8%</td></tr>
+        <tr><td>Base</td><td>US$29.41</td><td>-7.1%</td></tr>
+        <tr><td>Bull</td><td>US$43.56</td><td>+37.6%</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin-top:6px">風險回報明顯不對稱，Base 情景嘅小幅折讓不足以補償流動性 FAIL 嘅風險。</p>
+  </div>
+
+  <div class="panel">
+    <h2>4 · 催化劑（1–2 季）</h2>
+    <div class="timeline-mini">
+      <div class="ev-mini"><strong>約 2026-11 中</strong> — Q3 2026 業績：官方 FCF 有冇連續第二季負數（最關鍵）</div>
+      <div class="ev-mini"><strong>持續</strong> — Eucalyptus 遞延付款分期兌現節奏、$400m 應收帳款融資動用情況</div>
+      <div class="ev-mini"><strong>持續</strong> — 2032 可轉換債（換股價 $29.53，現價已輕微價內）換股動態</div>
+    </div>
+    <p class="muted" style="margin-top:8px"><strong>失效／確認：</strong>連續兩季官方 FCF 轉正同時流動性覆蓋率回升至 0.70× 以上，先算紅線緩解跡象。</p>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/hims/one-pager.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

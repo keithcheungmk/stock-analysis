@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPCX Options Overlay · 2026-10-10</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#1e3a8a}
+  .badge-extra{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;background:#f1f5f9;color:#475569;border-radius:999px;padding:4px 10px;margin-bottom:12px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.85rem;font-weight:800;line-height:1.15;color:var(--watch);margin:8px 0 0}
+  .score-den{font-size:.95rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.75rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.15rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:1rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{background:var(--watch-soft);border:1px solid #fdba74;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#9a3412;font-weight:700}
+  .ban{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .ban span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:800;background:var(--fail-soft);color:var(--fail);border-radius:999px;padding:6px 10px}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .box.warn{border-left:5px solid var(--watch)}.box.fail{border-left:5px solid var(--fail)}.box.ok{border-left:5px solid var(--pass)}
+  .cite{font-size:.78rem;color:var(--muted);margin-top:10px}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="badge-extra">額外頁面 · 輕量刷新 · 唔另估 target price</div>
+  <div class="notice">✅ <strong>9/18 窗口已關閉：</strong>2026-09-18 short put（195／170）<strong>已到期</strong>。舊稿「距到期 19 日／15 日」同「近乎確定 assignment」敘事全部退役。assignment 有冇發生、而家總股數係幾多，<strong>等 Keith 帳戶確認</strong>——本頁唔估 827 定 1,027。閘門：唔開新 CSP；續抱現股；未確認前唔開新 covered call。F3 尺鎖定 68／91／182，直到官方 Q3。</div>
+
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Skill 7 · 十月刷新</div>
+      <div class="score-num">9/18 已到期<br>唔開新 CSP</div>
+      <div class="score-den">現價 vs F3 Base 溢價約 +79% · 續抱現股</div>
+    </div>
+    <div class="hero-main">
+      <h1>SPCX Options Overlay · 現倉閘門</h1>
+      <p>目的：關閉九月 put 敘事，重申閘門。唔係新開 Income 賣方，亦唔係重估 F3。</p>
+      <div class="badges">
+        <span class="badge">截至 2026-10-10 HKT</span>
+        <span class="badge">現價 US$162.57（10-09 收市）</span>
+        <span class="badge">F3 68／91／182 鎖定</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">WATCH · 續抱不加倉</span></h2>
+    <p class="muted" style="margin:0">估值尺沿用 2026-08-30 Framework 3，本頁<strong>唔另估 target price</strong>。現價只作 delayed 刷新。本輪只改 P0 頁；F1–F3 舊頁現價未同步。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（10-09 收市，delayed）</div><div class="v">US$162.57</div><div class="s">52w 高 ~225.64／低 ~104.83</div></div>
+      <div class="hud-cell"><div class="l">F3 估值尺</div><div class="v">68 / 91 / 182</div><div class="s">Bear · Base · Bull（每股，F3 鎖定至官方 Q3）</div></div>
+      <div class="hud-cell"><div class="l">現價 vs Base</div><div class="v">溢價 +78.6%</div><div class="s">約 +79%；等價 Base 低過現價約 −44.0%</div></div>
+      <div class="hud-cell"><div class="l">倉位尺</div><div class="v">高過 150／低過 180</div><div class="s">舊續抱上限已破；未到 trim 180</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Starlink 12.0M · ARPU US$66（2026-Q2）</span>
+      <span>★ Connectivity 營業利潤 US$1.66B</span>
+      <span>★ AI 已入帳 US$2.56B</span>
+      <span>★ H1 近似 FCF −US$25.0B</span>
+      <span>★ 9/18 put 已到期 · assignment 待確認</span>
+    </div>
+    <div class="action">現價 US$162.57 相對 F3 Base US$91 溢價約 +79% → 續抱現股、唔開新 CSP；已高過舊續抱上限 150，但仍低過 trim 180。</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi green"><div class="label">9/18 short put</div><div class="value">已到期</div><div class="note">195／170 · 2026-09-18</div></div>
+    <div class="kpi orange"><div class="label">Assignment／股數</div><div class="value">待 Keith 確認</div><div class="note">唔估 827 定 1,027</div></div>
+    <div class="kpi red"><div class="label">新 CSP</div><div class="value">唔開</div><div class="note">溢價約 +79% · 遠高過建倉區 ≤95</div></div>
+    <div class="kpi teal"><div class="label">新 covered call</div><div class="value">要 Keith 確認</div><div class="note">未確認前唔開新 CC</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>閘門（本輪維持）</h2>
+      <div class="ban">
+        <span>不開新現金擔保認沽</span>
+        <span>續抱現股</span>
+        <span>未確認前不開新 CC</span>
+        <span>F3 68／91／182 鎖定至官方 Q3</span>
+        <span>不代下單</span>
+      </div>
+      <p class="muted" style="margin-top:12px">現價已高過舊續抱區間上限 US$150，但仍低過 F3 減倉／鎖定線 US$180。呢個位置<strong>唔等於</strong>自動 trim，亦<strong>唔等於</strong>可以再賣 put 收租。Street 目標（Barclays OW US$254、MS OW US$300、GS US$230）只係對照，<strong>唔覆寫</strong> F3。</p>
+    </section>
+
+    <section class="panel">
+      <h2>已關閉：2026-09-18 put 簿（歷史）</h2>
+      <table>
+        <thead><tr><th>倉</th><th>Strike</th><th>Premium</th><th>到期</th><th>狀態（10-10）</th><th>舊稿有效成本</th></tr></thead>
+        <tbody>
+          <tr><td>Short put</td><td>195</td><td>US$35</td><td>2026-09-18</td><td><strong>已到期</strong> · assignment 待帳戶確認</td><td>US$160（歷史）</td></tr>
+          <tr><td>Short put</td><td>170</td><td>US$20</td><td>2026-09-18</td><td><strong>已到期</strong> · assignment 待帳戶確認</td><td>US$150（歷史）</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:8px">舊稿假設雙 assignment → 再買 200 股、現金約 US$36,500、總股數 1,027。而家呢組數字<strong>只係歷史情景</strong>，唔當現倉。現股成本同總股數以 Keith 券商帳戶為準。</p>
+    </section>
+
+    <section class="panel">
+      <h2>而家唔再做嘅事</h2>
+      <div class="grid-2">
+        <div class="box ok"><h3>退役</h3><p class="muted">「距到期 19 日」「轉 OTM 要 +37.9%／+20.1%」「優先買回 195」「9/9 解禁前 9 日」——全部過期。唔好再當即時風險清單。</p></div>
+        <div class="box fail"><h3>禁止</h3><p class="muted">唔開新 CSP 去「補」已到期倉。現價對 Base 溢價約 +79%，有效買入會遠高過 F3 建倉區 ≤US$95。</p></div>
+        <div class="box warn"><h3>Covered call</h3><p class="muted">舊稿講過：puts 處理後、接受封頂上行先考慮。而家仍要 <strong>Keith 確認</strong>先開；未確認＝唔開。唔用 CC 掩飾未確認嘅 assignment。</p></div>
+        <div class="box warn"><h3>股數</h3><p class="muted">827＠US$137 係 08-30 確認倉。9/18 之後有冇變，本頁標 pending，唔發明新平均成本。</p></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>下一窗（倉位節奏，唔係新賣方）</h2>
+      <table>
+        <thead><tr><th>日期</th><th>事件</th><th>對期權含義</th></tr></thead>
+        <tbody>
+          <tr><td>2026-10-24</td><td>Day 135 解禁最多 328.4M</td><td>供給窗；唔開新 CSP 去賭消化</td></tr>
+          <tr><td>約 11/03 或 11/17</td><td>Q3 業績（第三方，<strong>unverified</strong>）</td><td>IR 未排期。未確認前唔做 earnings put／call</td></tr>
+          <tr><td>2026-12-08</td><td>Day 180 剩餘最多 797.6M</td><td>180-day 尾批；Extra 455.8M 未觸發</td></tr>
+          <tr><td>FCC 待批</td><td>Grain 800 MHz（2026-10-08 公布）</td><td>敘事／監管；唔因此重開賣方</td></tr>
+        </tbody>
+      </table>
+      <p class="cite">Grain：SpaceX FCC public-interest narrative 2026-10-08（sxcontent9668…/FCC_Narrative_10_8_26_…pdf）；Grain PR Newswire 2026-10-08。官方未披露代價。傳媒 WSJ／Axios 報約 US$8B 現金＝<code>unverified</code>，唔入 F3。</p>
+    </section>
+
+    <section class="panel">
+      <h2>結論</h2>
+      <div class="callout">現價 US$162.57 相對 F3 Base US$91 溢價約 +79%。9/18 兩張 put 已到期；assignment／股數等 Keith 帳戶確認。正確動作係續抱現股、唔開新 CSP、未確認前唔開新 CC。已高過舊續抱上限 150，但仍低過 trim 180——F3 尺 68／91／182 鎖到官方 Q3，唔用 Street 254／300／230 改目標。</div>
+    </section>
+  </div>
+
+  <p class="footer">F3 2026-08-30 · 現價 delayed 2026-10-09。此分析僅供研究參考，不構成投資建議。執行前請用券商即時報價同帳戶持倉核對。</p>
+</div>
+<section id="page-comments" data-page="/spcx/options-overlay.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

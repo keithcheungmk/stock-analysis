@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HIMS Framework 3 估值模型</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .notice{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 18px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px;color:#7f1d1d}
+  .hero-main{background:linear-gradient(135deg,#7f1d1d,#b91c1c 58%,#991b1b);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .targets{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:700px){.targets{grid-template-columns:1fr}}
+  .tcard{border-radius:16px;padding:16px;text-align:center;border:1px solid var(--line)}
+  .tcard.bear{background:var(--fail-soft);border-color:#fca5a5}
+  .tcard.base{background:var(--watch-soft);border-color:#fdba74}
+  .tcard.bull{background:var(--pass-soft);border-color:#86efac}
+  .tcard .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.85rem}
+  .tcard .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.6rem;margin-top:6px}
+  .tcard .d{color:var(--muted);font-size:.85rem;margin-top:4px}
+  .callout{background:var(--fail-soft);border:1px solid #fca5a5;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;color:#7f1d1d}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">⚠️ <strong>F1 = FAIL，本頁只供參考，唔係持倉建議工具。</strong>紅線未清除之前，任何估值折讓都應該視為噪音，唔係買入訊號。</div>
+
+  <section class="hero-main">
+    <h1>HIMS Framework 3 · 估值模型與定位</h1>
+    <p>現價 US$31.66（2026-08-27）· 市值 ~US$7.39B（~233.3M 股）· 主方法：P/S 情景法</p>
+    <div class="badges"><span class="badge">對住 F1（FAIL）+ F2</span></div>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>🎯 方法選擇 &amp; 🧠 核心邏輯</h2>
+      <p class="muted">主方法：P/S（同 peer comparison 語言一致）。冇用 DCF／EV-EBITDA，因為 GAAP 淨利連續兩季轉虧、FCF 剛觸發紅線，用盈利／現金流做基礎嘅估值方法喺呢個階段雜訊太大。TTM P/S = 2.87×；公司 FY2026 指引 $2.7B–$2.9B 暗示遠期 P/S 約 2.55×–2.74×。三情景分野唔淨係營收增速，仲喺攤薄股數同市場願意畀嘅倍數——兩者都同流動性風險掛勾。</p>
+    </section>
+
+    <section class="panel">
+      <h2>📏 情景輸入（Cowork 自行推算，非官方指引）</h2>
+      <table>
+        <thead><tr><th>情景</th><th>FY2026 營收</th><th>攤薄股數</th><th>P/S 倍數</th><th>邏輯</th></tr></thead>
+        <tbody>
+          <tr><td>Bear</td><td>$2.70B（指引下限）</td><td>~257M（+10% 攤薄）</td><td>1.3×</td><td>流動性缺口未改善，需再融資，市場要求折讓</td></tr>
+          <tr><td>Base</td><td>$2.80B（指引中位）</td><td>~238M</td><td>2.5×</td><td>現時倍數輕微下修，反映流動性風險溢價</td></tr>
+          <tr><td>Bull</td><td>$2.90B（指引上限）</td><td>~233M</td><td>3.5×</td><td>缺口收窄、整合順利，市場重新畀增長溢價</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>📊 目標價</h2>
+      <div class="targets">
+        <div class="tcard bear"><div class="l">BEAR</div><div class="v">US$13.66</div><div class="d">-56.8% vs 現價</div></div>
+        <div class="tcard base"><div class="l">BASE</div><div class="v">US$29.41</div><div class="d">-7.1% vs 現價</div></div>
+        <div class="tcard bull"><div class="l">BULL</div><div class="v">US$43.56</div><div class="d">+37.6% vs 現價</div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>🪞 同業對照</h2>
+      <p class="muted">TDOC 交易喺約 0.5–0.7× TTM 營收（收入 YoY -4%）；LFMD、GDRX 同樣 YoY 輕微下滑，估值受壓。HIMS 現價 2.87× 遠高於三間同業，市場仍畀「高增長」溢價——但 F1／F2 已拆穿 headline +38% 大部分係併購效應，美國自然增長已放緩至 +16%。呢個係 Base 情景倍數由 2.87× 下修到 2.5× 嘅主要理由。</p>
+    </section>
+
+    <section class="panel">
+      <h2>⚖️ 風險回報不對稱</h2>
+      <p class="muted">Bear 情景 -56.8% 跌幅（攤薄＋倍數雙重壓縮）遠大於 Bull 情景 +37.6%，因為 F1 已 FAIL 嘅流動性風險本質上係非對稱下行風險——缺口一旦未改善，公司大機率要用攤薄或高成本再融資解決，衝擊通常急速。Bull 情景需要好幾個條件同時成立，機率唔高。</p>
+    </section>
+
+    <section class="panel">
+      <h2>🧭 定位建議 &amp; 💡 關鍵一句</h2>
+      <div class="callout"><strong>維持 F1 嘅 FAIL／觀察結論，唔加倉。</strong> 現價對 Base 情景嘅 -7.1% 折讓遠遠唔足以補償 Bear 情景嘅非對稱下行風險同 F1 未解除嘅流動性 FAIL 狀態。呢個唔係「等平啲先買」——紅線未清除之前，任何目標價折讓都應該視為噪音。<br><br>HIMS 現價隱含嘅增長溢價，未反映 F1 已 FAIL 嘅流動性風險同 F2 揭發嘅「headline 增長主要來自併購」事實——呢個唔係值博率問題，係流動性閘門未過嘅問題。</div>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/hims/framework3.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPCX Framework 1 初篩</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:3.4rem;font-weight:800;line-height:1;color:var(--watch);margin:8px 0 0}
+  .score-den{font-size:1.05rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .notice{background:var(--info-soft);border:1px solid #93c5fd;border-radius:16px;padding:14px 16px;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.85rem;margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .starred{color:var(--watch);font-weight:800}
+
+  .hud{margin-top:16px;background:var(--card,#fffdf8);border:1px solid var(--line,#e7e0d5);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow,0 12px 40px rgba(28,25,23,.08))}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line,#e7e0d5);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#f0fdfa;border:1px solid #99f6e4;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <div class="notice">🔄 <strong>本頁 2026-08-30 重做</strong>，格式對齊 HIMS／NVDA 9 頁標準。核心財務數字沿用 2026-08-21 已驗證嘅 2026-Q2 官方業績（冇新一季），本輪只 refresh 現價／市值，並新增鎖定期解禁時間表發現。</div>
+
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 1</div>
+      <div class="score-num">WATCH</div>
+      <div class="score-den">75 / 130</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge" style="background:var(--watch-soft);color:var(--watch)">估值泡沫：未否決（高風險觀察）</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>SPCX · Framework 1 基本面初篩</h1>
+      <p>Space Exploration Technologies Corp. · 截至 2026-08-30 · 最新季 2026-Q2（期終 2026-06-30）· USD · US GAAP · SEC 8-K EX-99.1 + 10-Q</p>
+      <div class="badges">
+        <span class="badge">現價 US$141.50（08-28）</span>
+        <span class="badge">市值 ~US$1.865T</span>
+        <span class="badge">持倉 827 股 + short put 195/170</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">WATCH · 續抱不加倉</span></h2>
+    <p class="muted" style="margin:0">Connectivity 已是十億級盈利引擎，但 AI／總 capex 令 FCF 極負，估值倍數約 74.6× 年化 P/S。現價落喺續抱區間（US$95–150），但短倉 put 距到期只剩 19 日，assignment 風險應視為近乎確定。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（08-28 收市）</div><div class="v">US$141.50</div><div class="s">市值 ~US$1.865T</div></div>
+      <div class="hud-cell"><div class="l">年化 P/S</div><div class="v">~74.6×</div><div class="s">H1 年化營收 ~US$25B</div></div>
+      <div class="hud-cell"><div class="l">現金 vs 債務</div><div class="v">~4.3×</div><div class="s">US$100.0B vs US$23.3B</div></div>
+      <div class="hud-cell"><div class="l">H1 近似 FCF</div><div class="v">−US$25.0B</div><div class="s">OCF US$3.47B − PPE US$28.48B</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Starlink 用戶 12.0M（去年 6.0M）</span>
+      <span>★ Connectivity 營業利潤 US$1.66B</span>
+      <span>★ AI 收入 US$2.56B（Q1 僅 US$0.82B）</span>
+      <span>★ 營收 YoY +92%</span>
+      <span>★ 短倉 put 19 日後到期</span>
+    </div>
+    <div class="action">紅線全過但估值透支：續抱現股／唔好加倉（WATCH 75/130，不變）</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi teal"><div class="label">現價（08-28）</div><div class="value">US$141.50</div><div class="note">較 08-21（135.86）+4.2%</div></div>
+    <div class="kpi green"><div class="label">Q2 2026 營收</div><div class="value">US$7,814m</div><div class="note">YoY +92%</div></div>
+    <div class="kpi orange"><div class="label">Starlink 用戶／ARPU</div><div class="value">12.0M · $66</div><div class="note">用戶倍增，ARPU 較去年回落後企穩</div></div>
+    <div class="kpi red"><div class="label">H1 近似 FCF</div><div class="value">−US$25.0B</div><div class="note">AI capex 單季 US$15.8B</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>致命紅線</h2>
+      <table>
+        <thead><tr><th>紅線</th><th>結果</th><th>理由</th></tr></thead>
+        <tbody>
+          <tr><td>1. 破產／流動性風險</td><td style="color:var(--pass);font-weight:800">安全</td><td>現金＋有價證券 ~US$100.0B ≫ 債務＋租賃 ~US$23.3B（~4.3×），即使 FCF 大額負都未同時觸發兩項</td></tr>
+          <tr><td>2. 衰退陷阱</td><td style="color:var(--pass);font-weight:800">安全</td><td>Q2 YoY +92%，「增速低於同業」不成立</td></tr>
+          <tr><td>3. 估值泡沫</td><td style="color:var(--watch);font-weight:800">未否決（高風險觀察）</td><td>年化 P/S ~74.6×，但有 +92% 高增長同 Connectivity 盈利支持，唔符合機械否決條件</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>13 維度評分（不變，合計 75/130）</h2>
+      <table>
+        <thead><tr><th>維度</th><th>分數</th><th>依據</th></tr></thead>
+        <tbody>
+          <tr><td>現金 vs 債務</td><td class="starred">10</td><td>現金遠超債務 2 倍以上</td></tr>
+          <tr><td>營收增長</td><td class="starred">10</td><td>Q2 YoY +92%</td></tr>
+          <tr><td>淨利潤率</td><td>0</td><td>虧損</td></tr>
+          <tr><td>估值（PEG）</td><td>0</td><td>PEG 不可用；P/S ~74.6×</td></tr>
+          <tr><td>TAM</td><td class="starred">10</td><td>發射＋星座＋AI 基礎設施 &gt; US$100B</td></tr>
+          <tr><td>需求 KPI</td><td class="starred">10</td><td>用戶倍增至 12.0M</td></tr>
+          <tr><td>ROE</td><td>0</td><td>持續淨虧</td></tr>
+          <tr><td>自由現金流</td><td>0</td><td>不穩定且為負</td></tr>
+          <tr><td>護城河</td><td class="starred">10</td><td>發射主導、全球星座、垂直整合</td></tr>
+          <tr><td>行業趨勢</td><td class="starred">10</td><td>太空／LEO／AI 基建</td></tr>
+          <tr><td>管理層能力</td><td>5</td><td>執行強；但控制權公司、關聯方、巨型收購</td></tr>
+          <tr><td>相對 S&P 500</td><td>5</td><td>上市約 2.5 個月，累計略高於發行價</td></tr>
+          <tr><td>預期 vs 實際</td><td>5</td><td>僅一季公開對照</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>本輪 refresh 檢查（08-21 → 08-30）</h2>
+      <p class="muted">WebSearch 查核未發現足以改變判斷嘅新 8-K／新聞。<strong>本輪新發現：</strong>IPO 後嘅分階段鎖定期解禁時間表遠比之前「低重要度雜訊」歸類具體同密集——2026-09-09（7%）、09-24、10-09、10-24 陸續解禁，Q3 業績觸發約 28%，2026-12-08 完全解禁——已升級寫入 Catalyst Calendar。</p>
+    </section>
+
+    <section class="panel">
+      <h2>Adversarial check</h2>
+      <p class="muted"><strong>最強支持：</strong>Connectivity 營業利潤 US$1.66B、用戶 12.0M、現金堡壘 US$100B。<strong>最強反證：</strong>AI capex（單季 US$15.8B）令 FCF 極負，市值倍數 74.6×。<strong>最可能令結論失效嘅假設：</strong>AI／Starship 投資長期無法轉成足夠高質量自由現金流，同時估值倍數壓縮＋鎖定期解禁供給壓力疊加。</p>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/spcx/framework1.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>

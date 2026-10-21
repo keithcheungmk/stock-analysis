@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPCX Thesis Tracker</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),radial-gradient(circle at 88% 8%,#ffe8d6 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero-main{background:linear-gradient(135deg,#7c2d12,#c2410c 58%,#9a3412);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92;font-weight:700}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:var(--muted)}
+  .muted{color:var(--muted);font-size:.9rem}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .pill{display:inline-block;border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .pill.support{background:var(--pass-soft);color:var(--pass)}
+  .pill.mixed{background:var(--watch-soft);color:var(--watch)}
+  .pill.weak{background:var(--fail-soft);color:var(--fail)}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+
+<div class="wrap">
+  <section class="hero-main">
+    <h1>SPCX Thesis Tracker</h1>
+    <p>總體狀態：Mixed／Needs Monitoring · 續抱／唔好加倉</p>
+  </section>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>四大支柱／裂痕</h2>
+      <table>
+        <thead><tr><th>支柱</th><th>狀態</th><th>證據</th></tr></thead>
+        <tbody>
+          <tr><td>A. Connectivity 現金引擎</td><td><span class="pill support">✅ 支持</span></td><td>Starlink 用戶 12.0M、Connectivity 營業利潤 US$1.66B，證明平台唔只靠故事</td></tr>
+          <tr><td>B. 發射／Starship 成本曲線</td><td><span class="pill mixed">⏳ 部分確認</span></td><td>發射主導權延續，但仍係資本消耗故事</td></tr>
+          <tr><td>C. AI 第二曲線</td><td><span class="pill mixed">⏳ 部分確認</span></td><td>AI 收入單季由 US$0.82B 暴增至 US$2.56B，但未證明可重複同可轉 FCF</td></tr>
+          <tr><td>D. 估值同資本強度（裂痕）</td><td><span class="pill weak">❌ 削弱</span></td><td>市值大幅超前近端收入，H1 近似 FCF -US$25B；<strong>本輪新增：</strong>未來 3 個月密集鎖定期解禁供給壓力</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>KPI 快照</h2>
+      <table>
+        <thead><tr><th>KPI</th><th>最新</th><th>對 thesis</th><th>影響</th></tr></thead>
+        <tbody>
+          <tr><td>Starlink 用戶</td><td>12.0M</td><td>A</td><td>支持</td></tr>
+          <tr><td>Connectivity 營業利潤</td><td>US$1.66B</td><td>A</td><td>支持</td></tr>
+          <tr><td>AI 收入</td><td>US$2.56B</td><td>C</td><td>支持（質量待驗證）</td></tr>
+          <tr><td>AI Capex</td><td>US$15.8B／季</td><td>D</td><td>削弱</td></tr>
+          <tr><td>H1 近似 FCF</td><td>−US$25B</td><td>D</td><td>削弱</td></tr>
+          <tr><td>現價 vs 建倉區 ≤95</td><td>US$141.50</td><td>D</td><td>削弱（較 08-21 進一步偏離）</td></tr>
+          <tr><td>未來 3 個月解禁股數</td><td>累計約 20 億股</td><td>D（新增）</td><td>削弱</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>證據時間線</h2>
+      <table>
+        <thead><tr><th>日期</th><th>事件</th><th>對 thesis 影響</th></tr></thead>
+        <tbody>
+          <tr><td>2026-06-12</td><td>IPO 上市</td><td>Thesis 起點</td></tr>
+          <tr><td>2026-08-04</td><td>Q2 2026 業績（8-K／10-Q）</td><td>支柱 A／C 強驗證；支柱 D 首次量化</td></tr>
+          <tr><td>2026-08-06</td><td>首批鎖定期解禁（20%）＋業績同日</td><td>供給壓力開始</td></tr>
+          <tr><td>2026-08-14</td><td>Cursor（Anysphere）收購交割</td><td>C 潛在強化，D 稀釋壓力增加</td></tr>
+          <tr><td>2026-08-21</td><td>原始 thesis 確立</td><td>基準</td></tr>
+          <tr><td>2026-08-28</td><td>現價 US$141.50（+4.2%）</td><td>D 進一步削弱</td></tr>
+          <tr><td>2026-08-30（本次）</td><td>重做：發現鎖定期解禁時間表</td><td>D 削弱（新增供給壓力維度）</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>下一個關鍵檢查點</h2>
+      <p class="muted"><strong>2026-09-09（Day 90 解禁）同 2026-09-18（put 到期）</strong>相隔僅 9 日，係未來 3 週最需要密切監察嘅時間窗；其次係 Q3 2026 業績（觸發最大一批 28% 解禁）。</p>
+    </section>
+  </div>
+
+  <p class="footer">此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/spcx/thesis-tracker.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
