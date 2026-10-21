@@ -3,13 +3,10 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [main]
-    tags:
-      - "pages-*"
+    paths:
+      - "docs/**"
+      - ".github/workflows/pages.yml"
   workflow_dispatch:
-  schedule:
-    # Cursor App git pushes often skip the `push` trigger. GitHub's scheduler
-    # still checks out current main and publishes docs/ (including new reports).
-    - cron: "*/15 * * * *"
 
 permissions:
   contents: read
@@ -18,7 +15,9 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # Do not cancel an in-flight Pages deploy: a cancelled deploy-pages job
+  # unpublishes the live site (this is what took the hub 404).
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -29,6 +28,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
