@@ -53,6 +53,7 @@ HUD_PRIORITY = (
 LABEL_OVERRIDES = {
     ("ORCL", "earnings-review"): "FY2027-Q1 財報複盤",
     ("AMD", "earnings-review"): "Earnings Review（舊尺，已退役）",
+    ("SPCX", "earnings-review"): "Q3 FY2026 財報複盤",
     ("SPCX", "options-overlay"): "期權 Overlay",
 }
 HUB_ORDER = ("TSLA", "NVDA", "SPCX", "IREN", "RKLB", "RDW", "MRNA")
@@ -72,7 +73,6 @@ HIDE_DOCS_SLUGS = {
         "valuation-model",
     },
     "SPCX": {
-        "earnings-review",
         "interactive-brief",
         "valuation-model",
     },
