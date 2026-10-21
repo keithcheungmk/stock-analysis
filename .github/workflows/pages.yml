@@ -3,10 +3,11 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [main]
-    paths:
-      - "docs/**"
-      - ".github/workflows/pages.yml"
   workflow_dispatch:
+  schedule:
+    # Cursor App git pushes often skip the `push` trigger. GitHub's scheduler
+    # still checks out current main and publishes docs/ (including new reports).
+    - cron: "*/15 * * * *"
 
 permissions:
   contents: read
