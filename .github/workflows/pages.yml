@@ -3,6 +3,8 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [main]
+    tags:
+      - "pages-*"
   workflow_dispatch:
   schedule:
     # Cursor App git pushes often skip the `push` trigger. GitHub's scheduler
