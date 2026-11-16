@@ -1,0 +1,21 @@
+as_of: "2026-11-16T16:20:00+08:00"
+sec:
+  submissions_url: "https://data.sec.gov/submissions/CIK{cik}.json"
+  archives_base: "https://www.sec.gov/Archives/edgar/data"
+  requests_per_second: 2
+
+companies:
+  ANT:
+    name: Anthropic, PBC
+    cik: "0002130357"
+    ir_url: "https://www.anthropic.com/news"
+    ipo_url: "https://ipo.anthropic.com/"
+    currency: USD
+    accounting_basis: [US_GAAP, Non_GAAP]
+    periods:
+      - {label: 2025-Q2, period_end: "2025-06-30"}
+      - {label: 2025-Q3, period_end: "2025-09-30"}
+      - {label: 2025-Q4, period_end: "2025-12-31"}
+      - {label: 2026-Q1, period_end: "2026-03-31"}
+      - {label: 2026-Q2, period_end: "2026-06-30"}
+      - {label: 2026-Q3, period_end: "2026-09-30", release_date: "2026-11-10"}

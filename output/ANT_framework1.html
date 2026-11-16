@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ANT Framework 1 初篩 · Anthropic</title>
+<style>
+  :root {
+    --bg:#f4f1ea; --ink:#1c1917; --muted:#78716c; --card:#fffdf8; --line:#e7e0d5;
+    --teal:#0f766e; --watch:#c2410c; --watch-soft:#ffedd5; --fail:#b91c1c; --fail-soft:#fee2e2;
+    --pass:#15803d; --pass-soft:#dcfce7; --info:#1d4ed8; --info-soft:#dbeafe;
+    --shadow:0 12px 40px rgba(28,25,23,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#ffe8d6 0,transparent 28%),radial-gradient(circle at 88% 8%,#dff7f3 0,transparent 24%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 72px}
+  .hero{display:grid;grid-template-columns:280px 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .score-box{background:linear-gradient(160deg,#fff7ed,#ffedd5 70%,#fed7aa);border:1px solid #fdba74;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--watch);font-weight:700}
+  .score-num{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:3.4rem;font-weight:800;line-height:1;color:var(--watch);margin:8px 0 0}
+  .score-den{font-size:1.05rem;color:var(--muted);font-weight:600;margin-top:8px}
+  .hero-main{background:linear-gradient(135deg,#9a3412,#c2410c 58%,#ea580c);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+  .hero-main h1{margin:0 0 8px;font-size:1.85rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hero-main p{margin:0;opacity:.92}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-family:"Avenir Next","PingFang TC",sans-serif;display:inline-flex;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+  .badge.watch{background:var(--watch-soft);color:var(--watch);border-color:transparent}
+  .badge.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .label{font-family:"Avenir Next","PingFang TC",sans-serif;color:var(--muted);font-size:.78rem}
+  .kpi .value{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.3rem;font-weight:800;margin-top:4px}
+  .kpi .note{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .kpi.green{border-top:4px solid var(--pass)}.kpi.orange{border-top:4px solid var(--watch)}.kpi.teal{border-top:4px solid var(--teal)}.kpi.red{border-top:4px solid var(--fail)}
+  .sections{display:grid;gap:16px;margin-top:18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 14px;font-size:1.2rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  h3{margin:0 0 8px;font-size:.95rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout{border-radius:16px;padding:14px 16px;margin:0;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .callout.watch{background:var(--watch-soft);border:1px solid #fdba74}
+  .verdict p{margin:0 0 10px}
+  .verdict p:last-child{margin-bottom:0}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.grid-2,.grid-3{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .safe{color:var(--pass);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .warn{color:var(--watch);font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .filters button{font-family:"Avenir Next","PingFang TC",sans-serif;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#9a3412;color:#fff;border-color:#9a3412}
+  .ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:860px){.ev-grid{grid-template-columns:1fr}}
+  .ev{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;border-left:5px solid #a8a29e}
+  .ev.support{border-left-color:var(--pass)}
+  .ev.weaken{border-left-color:var(--fail)}
+  .ev.neutral{border-left-color:var(--watch)}
+  .ev .type{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ev .impact{display:inline-block;border-radius:999px;padding:2px 8px;font-size:.75rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin-left:6px}
+  .ev .impact.support{background:var(--pass-soft);color:var(--pass)}
+  .ev .impact.weaken{background:var(--fail-soft);color:var(--fail)}
+  .ev .impact.neutral{background:var(--watch-soft);color:var(--watch)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;color:var(--muted)}
+  .footer{margin-top:18px;color:var(--muted);font-size:.82rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .muted{color:var(--muted);font-size:.9rem}
+  .hud{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;box-shadow:var(--shadow)}
+  .hud h2{margin:0 0 6px;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .hud-tag{display:inline-flex;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9a3412;background:#ffedd5;border-radius:999px;padding:3px 10px;margin-left:8px}
+  .hud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:860px){.hud-grid{grid-template-columns:repeat(2,1fr)}}
+  .hud-cell{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;border-top:3px solid #c2410c}
+  .hud-cell .l{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.72rem;color:#78716c;font-weight:700}
+  .hud-cell .v{font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:1.02rem;margin-top:4px}
+  .hud-cell .s{color:#78716c;font-size:.78rem;margin-top:4px}
+  .hud-drivers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hud-drivers span{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.78rem;font-weight:700;background:#fff7ed;border:1px solid #fdba74;border-radius:999px;padding:6px 10px}
+  .action{display:inline-flex;margin-top:14px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;background:var(--watch-soft);color:var(--watch);border-radius:999px;padding:8px 14px}
+  a{color:#0f766e;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="score-box">
+      <div class="eyebrow">Framework 1 · Pre-IPO</div>
+      <div class="score-num">WATCH</div>
+      <div class="score-den">65 / 130 · provisional</div>
+      <div class="badges" style="margin-top:10px">
+        <span class="badge pass">紅線全過</span>
+        <span class="badge watch">未上市 · 不可 PASS</span>
+      </div>
+    </div>
+    <div class="hero-main">
+      <h1>ANT · Framework 1 基本面初篩</h1>
+      <p>Anthropic, PBC · 截至 2026-11-16 · 最新季 2026-Q3（期終 2026-09-30）· USD · US GAAP／Non-GAAP · SEC S-1/A Amendment No. 2</p>
+      <div class="badges">
+        <span class="badge">擬掛牌 Nasdaq · ANT</span>
+        <span class="badge">招股區間 US$70–78 · 中位假設 US$74</span>
+        <span class="badge">預期開售 2026-11-19</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="hud" id="decision-hud">
+    <h2>Decision HUD <span class="hud-tag">F3 pending</span></h2>
+    <p class="muted" style="margin:0">暫定規尺，<strong>非 target price</strong>。IPO 中位假設市值約 US$968B（Class A+N × US$74）對 TTM 營收約 US$35.3B → TTM P/S 約 <strong>27.5×</strong>，相對成熟雲／軟件平台屬<strong>明顯溢價</strong>。</p>
+    <div class="hud-grid">
+      <div class="hud-cell"><div class="l">現價（暫定）</div><div class="v">US$74</div><div class="s">S-1 區間中位 · 非成交價 · 未上市</div></div>
+      <div class="hud-cell"><div class="l">估值尺</div><div class="v">TTM P/S ~27.5×</div><div class="s">PEG 不可用 · Q3 年化 ~14.3× · RRR US$81B ~12×</div></div>
+      <div class="hud-cell"><div class="l">溢價／折讓</div><div class="v">高溢價</div><div class="s">對成熟雲平台歷史倍數 · 靠四位數增長辯護</div></div>
+      <div class="hud-cell"><div class="l">FCF vs 市值</div><div class="v">~0.6% yield</div><div class="s">9M 近似 FCF ~US$5.6B／市值 ~US$968B</div></div>
+    </div>
+    <div class="hud-drivers">
+      <span>★ Q3 營收 US$17.0B（+1,127% YoY）</span>
+      <span>★ QoQ +47%（前季 ~+144%）</span>
+      <span>★ 9M 近似 FCF ~+US$5.6B</span>
+      <span>★ 12 個月 compute 承諾 ~US$70.7B</span>
+      <span>★ ≥US$1M 客戶 &gt;1,900 · NRR ~900%</span>
+    </div>
+    <div class="action">IPO 中位隱含 TTM P/S 約 27.5×，相對同業／成熟軟件屬高溢價 → 僅觀察；等開售成交價同首份 10-Q／F3</div>
+  </section>
+
+  <div class="kpis">
+    <div class="kpi green"><div class="label">Q3 營收</div><div class="value">US$17.0B</div><div class="note">YoY +1,127% · GAAP</div></div>
+    <div class="kpi orange"><div class="label">QoQ 增速</div><div class="value">+47%</div><div class="note">前季約 +144% · 減速</div></div>
+    <div class="kpi teal"><div class="label">現金＋短投</div><div class="value">US$131.8B</div><div class="note">vs notes US$130.5B</div></div>
+    <div class="kpi red"><div class="label">Compute 承諾</div><div class="value">~US$901B</div><div class="note">12 個月內 ~US$70.7B</div></div>
+  </div>
+
+  <div class="sections">
+    <section class="panel">
+      <h2>初篩結論</h2>
+      <div class="callout watch verdict">
+        <p><strong>WATCH（65／130，provisional）。</strong>三條致命紅線全部通過：現金＋短投略高過 notes payable，而且九個月近似自由現金流（FCF，Free Cash Flow）為正；營收增速遠高過 Azure／資料中心同業，衰退陷阱唔成立；PEG 不可用、TTM P/S 約 27.5× 已經貴，但四位數 YoY 令「無增長泡沫」機械否決唔成立。</p>
+        <p>正在被驗證嘅支柱係企業採用同收入規模：Q3 GAAP 營收 US$16,956m，≥US$100k TTM 客戶由約 950 增至超過 11,900，Net Revenue Retention（NRR）約 900%。九個月 Non-GAAP Adjusted Operating Income 已轉正至 US$4.081B（margin 12%）。</p>
+        <p>仍未成立嘅路徑，係「高增長可以無限期撐住超高倍數同超大 compute 承諾」。Q3 QoQ 已由約 +144% 減速到 +47%；GAAP 營業由 Q2 盈利再轉虧；招股書披露約 US$900.9B 承諾，其中約 US$70.7B 喺未來 12 個月到期。消費型收入同多年期基建承諾存在期限錯配。</p>
+        <p>最大裂痕係估值同資本結構。未上市，缺 S&P 相對回報同公開共識歷史，按規則<strong>不可給最終 PASS</strong>。IPO 中位隱含高溢價 → <strong>僅觀察</strong>，唔寫建倉區；等 11/19 開售、首份 10-Q 同 Framework 3。</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>致命紅線掃描</h2>
+      <div class="grid-3">
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">① 流動性 — 安全</span></h3>
+          <p>現金＋短投 US$131.8B 對 notes payable US$130.5B。9M 近似 FCF 約 +US$5.6B。紅線要「現金&lt;債務 <strong>並且</strong> FCF 為負」同時成立。近端 US$70.7B 承諾係觀察項，唔係機械觸發。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#f0fdf4,#fff)">
+          <h3><span class="safe">② 衰退陷阱 — 安全</span></h3>
+          <p>Q3 +1,127% YoY，遠高過 Azure ~40–43% 同 AMD Data Center +107%。淨利率雖負，但增速條款唔成立。</p>
+        </div>
+        <div class="box" style="background:linear-gradient(180deg,#fff7ed,#fff)">
+          <h3><span class="warn">③ 估值泡沫 — 未否決</span></h3>
+          <p>PEG 不可用；TTM P/S ~27.5× 高，但有對應超高增長。列作主風險，唔機械 FAIL。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>13 維度評分</h2>
+      <table>
+        <thead><tr><th>維度</th><th>證據</th><th>分</th><th>依據</th></tr></thead>
+        <tbody>
+          <tr><td>現金 vs 債務</td><td>現金＋短投 1.01× notes</td><td>5</td><td>高過但未達 2×</td></tr>
+          <tr><td>營收增長</td><td>+1,127% YoY</td><td>10</td><td>遠高過同業</td></tr>
+          <tr><td>淨利潤率</td><td>GAAP 大額虧損</td><td>0</td><td>虧損</td></tr>
+          <tr><td>估值（PEG）</td><td>PEG N/A · P/S ~27.5×（A+N）；媒體 FD 更高</td><td>0</td><td>透支／不可用</td></tr>
+          <tr><td>TAM</td><td>知識工作 &gt;US$40T 敘事</td><td>10</td><td>&gt;US$100B</td></tr>
+          <tr><td>用戶／客戶增長</td><td>≥US$100k 客戶 ~12.5×</td><td>10</td><td>遠高過同業</td></tr>
+          <tr><td>ROE</td><td>累計赤字／負權益</td><td>0</td><td>&lt;8%</td></tr>
+          <tr><td>自由現金流</td><td>9M 近似 FCF 正；歷史波動</td><td>5</td><td>波動但為正</td></tr>
+          <tr><td>護城河</td><td>企業 Claude；競爭激烈</td><td>5</td><td>有壁壘非壟斷</td></tr>
+          <tr><td>行業趨勢</td><td>前沿 AI</td><td>10</td><td>核心主線</td></tr>
+          <tr><td>管理層</td><td>執行到單季 ~US$17B</td><td>10</td><td>執行強</td></tr>
+          <tr><td>相對 S&amp;P 500</td><td>未上市</td><td>0</td><td>資料不足</td></tr>
+          <tr><td>預期 vs 實際</td><td>無公開共識史</td><td>0</td><td>資料不足</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:10px">合計 <strong>65／130</strong>。缺 S&amp;P 同共識兩維 → provisional WATCH，不可最終 PASS。</p>
+    </section>
+
+    <section class="panel">
+      <h2>證據卡</h2>
+      <div class="filters" id="filters">
+        <button class="active" data-f="all">全部</button>
+        <button data-f="support">支持</button>
+        <button data-f="neutral">中性</button>
+        <button data-f="weaken">削弱</button>
+      </div>
+      <div class="ev-grid" id="evidence"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Adversarial · 裂痕</h2>
+      <div class="grid-2">
+        <div class="box">
+          <h3>最強支持</h3>
+          <p>Q3 GAAP US$17.0B（+1,127%）；客戶規模爆炸；NRR ~900%；9M Adjusted Operating Income 轉正；帳上流動資產超過 notes。</p>
+        </div>
+        <div class="box">
+          <h3>最強反證</h3>
+          <p>~US$901B compute 承諾；QoQ 急減速；GAAP 營業再轉虧；Founder Class F 50.1% 投票＋LTBT 多數董事；消費收入 vs 多年承諾錯配。</p>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:12px">失效假設：公開市場拒絕 ~27× TTM P/S，或者增速繼續失速同時近端承諾現金流出加速。</p>
+    </section>
+
+    <section class="panel">
+      <h2>下一步</h2>
+      <p>升級 PASS 需要：上市後真實市值／倍數可核對；至少一季公開預期對照；營收 QoQ 唔好再腰斬式失速，同／或近端 compute 現金路徑對得上。</p>
+      <p><strong>Framework 2 候選兩問：</strong>（A）消費收入 vs ~US$900B 承諾嘅現金錯配會唔會喺 2027 前迫使再融資／稀釋？（B）Q3 減速同營業再轉虧係一次性 compute 費用，定單位經濟轉弱？</p>
+      <p class="muted">最近催化：2026-11-18／19 IPO 定價與開售 → 其後首份 Form 10-Q。</p>
+    </section>
+  </div>
+
+  <p class="footer">來源優先：SEC S-1/A-2（2026-11-10，accession 0001628280-26-072484）＞ Anthropic 官方 IPO／新聞稿 ＞ 第三方。Run-Rate Revenue 係 operating metric，唔當 GAAP。<br/>*此分析僅供研究參考，不構成投資建議。*</p>
+</div>
+<script>
+const cards = [
+  {k:"support",type:"財報",title:"Q3 營收 US$16,956m，+1,127% YoY",body:"S-1/A-2 確認三個月截至 2026-09-30 營收 US$16,956m，較上年同期增長 1,127%。呢個係已入帳 GAAP，唔係 run-rate。對 thesis：增長支柱成立，直接撐紅線 2 安全同營收維度 10 分。"},
+  {k:"weaken",type:"財報",title:"QoQ 由約 +144% 減速到 +47%",body:"Q2 營收 US$11,555m → Q3 US$16,956m，環比約 +47%，明顯慢過 Q1→Q2 約 +144%。對 thesis：絕對額仍升，但倍數依賴嘅「加速度」轉弱，係估值主裂痕之一。"},
+  {k:"support",type:"KPI",title:"≥US$100k 客戶 >11,900（上年 >950）",body:"S-1 寫明 2026-09-30 超過 11,900 個 ≥US$100k TTM 客戶，對上年同期超過 950，約 12.5 倍。另有 >1,900 個 ≥US$1M、約 250 個 ≥US$10M。NRR 約 900%。呢啲係企業擴張證據，替代「用戶增長」維度。"},
+  {k:"weaken",type:"現金流／承諾",title:"Compute 承諾約 US$900.9B，12 個月內 ~US$70.7B",body:"招股書披露購買承諾同未開始租約合計約 US$900.9B，絕大部分係 compute／基建；約 US$70.7B 喺 2026-09-30 起計 12 個月內到期。消費收入多數無長年約，承諾卻係多年期——期限錯配係最大資本風險。"},
+  {k:"neutral",type:"非 GAAP",title:"9M Adjusted Operating Income US$4.081B",body:"Non-GAAP 營業利潤轉正、margin 12%，同時 GAAP 9M 營業仍虧 US$1.26B、淨虧 US$104.0B（公允價值項目主導）。有用，但唔可以當 GAAP 已盈利。"},
+  {k:"neutral",type:"資本結構",title:"PBC + LTBT + Founder Class F 50.1% 投票",body:"公眾買 Class A 經濟權益；Class F 由創辦人 LLC 持有，對一般事項合計 50.1% 投票；Class T 令 LTBT 選出多數董事。呢個係治理特徵，唔另開評分維度，但影響「公眾股東話事權」假設。"},
+  {k:"support",type:"流動性",title:"現金＋短投 US$131.8B vs notes US$130.5B",body:"實際資產負債表流動性略高過 notes payable；9M 經營現金流 +US$6.6B。IPO 後 pro forma as adjusted 現金＋短投約 US$212.7B（假設 US$74）。紅線 1 未觸發。"},
+  {k:"weaken",type:"估值",title:"IPO 中位隱含 TTM P/S ~27.5×",body:"用上市後 Class A+N 約 13.09B 股 × US$74 ≈ US$968B 市值，除以 TTM 約 US$35.3B。PEG 因虧損不可用。高增長令紅線 3 未否決，但倍數本身係 WATCH 主因。"}
+];
+const grid = document.getElementById("evidence");
+function render(f){
+  grid.innerHTML = cards.filter(c => f==="all" || c.k===f).map(c =>
+    `<article class="ev ${c.k}"><div class="type">${c.type} <span class="impact ${c.k}">${c.k==="support"?"支持":c.k==="weaken"?"削弱":"中性"}</span></div><h3 style="margin:8px 0 6px;font-family:Avenir Next,PingFang TC,sans-serif;font-size:1rem">${c.title}</h3><p style="margin:0;font-size:.92rem">${c.body}</p></article>`
+  ).join("");
+}
+render("all");
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  [...e.currentTarget.querySelectorAll("button")].forEach(x => x.classList.toggle("active", x===b));
+  render(b.dataset.f);
+});
+</script>
+</body>
+</html>
