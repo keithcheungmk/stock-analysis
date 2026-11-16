@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-16T16:20:00+08:00",
+  "generated_at": "2026-11-16T08:20:00+00:00",
+  "companies": {
+    "ANT": {
+      "name": "Anthropic, PBC",
+      "cik": "0002130357",
+      "ir_url": "https://www.anthropic.com/news",
+      "ipo_url": "https://ipo.anthropic.com/",
+      "currency": "USD",
+      "accounting_basis": ["US_GAAP", "Non_GAAP"],
+      "periods": [
+        {
+          "label": "2025-Q2",
+          "period_end": "2025-06-30",
+          "release_date": null,
+          "filings": [
+            {
+              "form": "S-1/A",
+              "accession": "0001628280-26-072484",
+              "filing_date": "2026-11-10",
+              "role": "ipo_substitute"
+            }
+          ],
+          "ir_documents": [],
+          "unavailable_sources": [
+            {"type": "form_10_q", "status": "not_filed_pre_ipo", "substitute": "S-1/A"},
+            {"type": "official_transcript", "status": "not_applicable_pre_ipo", "substitute": "S-1/A MD&A"}
+          ]
+        },
+        {
+          "label": "2025-Q3",
+          "period_end": "2025-09-30",
+          "release_date": null,
+          "filings": [
+            {
+              "form": "S-1/A",
+              "accession": "0001628280-26-072484",
+              "filing_date": "2026-11-10",
+              "role": "ipo_substitute"
+            }
+          ],
+          "ir_documents": [],
+          "unavailable_sources": [
+            {"type": "form_10_q", "status": "not_filed_pre_ipo", "substitute": "S-1/A"}
+          ]
+        },
+        {
+          "label": "2025-Q4",
+          "period_end": "2025-12-31",
+          "release_date": null,
+          "filings": [
+            {
+              "form": "S-1/A",
+              "accession": "0001628280-26-072484",
+              "filing_date": "2026-11-10",
+              "role": "ipo_substitute"
+            }
+          ],
+          "ir_documents": [],
+          "unavailable_sources": [
+            {"type": "form_10_q", "status": "not_filed_pre_ipo", "substitute": "S-1/A"}
+          ]
+        },
+        {
+          "label": "2026-Q1",
+          "period_end": "2026-03-31",
+          "release_date": null,
+          "filings": [
+            {
+              "form": "S-1/A",
+              "accession": "0001628280-26-072484",
+              "filing_date": "2026-11-10",
+              "role": "ipo_substitute"
+            }
+          ],
+          "ir_documents": [],
+          "unavailable_sources": [
+            {"type": "form_10_q", "status": "not_filed_pre_ipo", "substitute": "S-1/A"}
+          ]
+        },
+        {
+          "label": "2026-Q2",
+          "period_end": "2026-06-30",
+          "release_date": null,
+          "filings": [
+            {
+              "form": "S-1/A",
+              "accession": "0001628280-26-072484",
+              "filing_date": "2026-11-10",
+              "role": "ipo_substitute"
+            }
+          ],
+          "ir_documents": [],
+          "unavailable_sources": [
+            {"type": "form_10_q", "status": "not_filed_pre_ipo", "substitute": "S-1/A"}
+          ]
+        },
+        {
+          "label": "2026-Q3",
+          "period_end": "2026-09-30",
+          "release_date": "2026-11-10",
+          "filings": [
+            {
+              "form": "S-1/A",
+              "accession": "0001628280-26-072484",
+              "filing_date": "2026-11-10",
+              "role": "ipo_substitute",
+              "primary_document": "anthropicpbc-sx1ax2.htm"
+            }
+          ],
+          "ir_documents": [
+            {
+              "type": "ipo_factsheet",
+              "url": "https://ipo.anthropic.com/documents/us/factsheet.pdf"
+            }
+          ],
+          "unavailable_sources": [
+            {"type": "form_10_q", "status": "not_filed_pre_ipo", "substitute": "S-1/A"},
+            {"type": "official_transcript", "status": "not_applicable_pre_ipo", "substitute": "S-1/A MD&A"}
+          ],
+          "pending_sources": [
+            {"type": "post_ipo_10q", "status": "awaiting_listing", "note": "First Form 10-Q after Nasdaq listing"}
+          ]
+        }
+      ]
+    }
+  }
+}
