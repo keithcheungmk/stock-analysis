@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IREN 資產負債表與估值</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#1c1917;--muted:#78716c;--card:#fffdf8;--line:#e7e0d5;--teal:#0f766e;--fail:#b91c1c;--watch:#c2410c;--pass:#15803d;--shadow:0 12px 40px rgba(28,25,23,.08)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Iowan Old Style","Songti TC","PingFang TC",serif;background:radial-gradient(circle at 12% 0%,#dff7f3 0,transparent 28%),var(--bg);color:var(--ink);line-height:1.55}
+  .sans{font-family:"Avenir Next","PingFang TC",sans-serif}
+  .wrap{max-width:1040px;margin:0 auto;padding:24px 16px 72px}
+  h1{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.65rem;margin:0 0 6px}
+  h2{font-family:"Avenir Next","PingFang TC",sans-serif;font-size:1.15rem;margin:0 0 12px}
+  .sub{color:var(--muted);margin:0 0 14px}
+  .hud{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:14px}
+  .hud-tag{display:inline-flex;font-size:.72rem;font-weight:800;color:#065f46;background:#d1fae5;border-radius:999px;padding:3px 10px;margin-left:8px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+  @media(max-width:800px){.grid{grid-template-columns:1fr 1fr}}
+  .cell{border:1px solid var(--line);border-top:3px solid var(--pass);border-radius:12px;padding:10px;background:#fff}
+  .cell .l{font-size:.72rem;color:var(--muted);font-weight:700;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .cell .v{font-weight:800;font-size:1.05rem;margin-top:3px;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .cell .s{font-size:.74rem;color:var(--muted);margin-top:3px}
+  .action{margin-top:10px;font-family:"Avenir Next","PingFang TC",sans-serif;font-weight:800;font-size:.88rem;background:#ccfbf1;border-radius:12px;padding:10px 12px;color:#134e4a}
+  .fail{background:#fee2e2;border:1px solid #fca5a5;border-radius:14px;padding:12px 14px;color:#7f1d1d;font-family:"Avenir Next","PingFang TC",sans-serif;font-size:.9rem;margin:12px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:14px;box-shadow:var(--shadow)}
+  table{width:100%;border-collapse:collapse;font-size:.84rem}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:"Avenir Next","PingFang TC",sans-serif}
+  .val{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  @media(max-width:800px){.val{grid-template-columns:1fr}}
+  .vcard{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+  .vcard.b{border-top:5px solid var(--fail)}.vcard.a{border-top:5px solid var(--watch)}.vcard.u{border-top:5px solid var(--pass)}
+  .vcard .t{font-size:.72rem;font-weight:800;letter-spacing:.06em;color:var(--muted);font-family:"Avenir Next","PingFang TC",sans-serif}
+  .vcard .p{font-size:1.7rem;font-weight:800;font-family:"Avenir Next","PingFang TC",sans-serif;margin:4px 0}
+  .muted{color:var(--muted);font-size:.9rem}
+  .disc{font-size:.78rem;color:var(--muted);margin-top:18px;text-align:center}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+  @media(max-width:800px){.kpis{grid-template-columns:1fr 1fr}}
+  .kpi{border:1px solid var(--line);border-radius:12px;padding:10px;border-top:3px solid var(--teal)}
+  .kpi .l{font-size:.72rem;color:var(--muted);font-weight:700}.kpi .v{font-weight:800;font-size:1.05rem;font-family:"Avenir Next","PingFang TC",sans-serif}
+</style>
+</head>
+<body>
+<a href="../" style="position:sticky;top:8px;z-index:50;display:inline-flex;margin:8px 0 0 12px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e7e0d5;color:#0f766e;font:700 13px/1 Avenir Next,PingFang TC,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,25,23,.08)">← 報告目錄</a>
+<div class="wrap">
+  <p class="sans" style="color:var(--teal);font-weight:800;margin:0 0 6px">資產負債表深挖 · 接到 Framework 3</p>
+  <h1>IREN · Balance Sheet → 估值</h1>
+  <p class="sub">官方期末 2026-09-30（Q1 FY27）USD US GAAP。現價 US$12.95（延遲 11/24）。主估值仍係 FY2027E EV/Sales；P/B 只作校準。</p>
+
+  <section class="hud" id="decision-hud">
+    <h2 class="sans" style="margin:0">Decision HUD <span class="hud-tag">現價 vs Base −33%</span></h2>
+    <div class="grid">
+      <div class="cell"><div class="l">現價</div><div class="v">US$12.95</div><div class="s">市值 ~US$5.50B · 424.4M 股</div></div>
+      <div class="cell"><div class="l">Bear / Base / Bull</div><div class="v">5 / 19 / 50</div><div class="s">F3 · 非指引</div></div>
+      <div class="cell"><div class="l">現價 vs Base</div><div class="v">−33%</div><div class="s">低估 · 續抱唔好大加</div></div>
+      <div class="cell"><div class="l">P/B · P/TB</div><div class="v">1.07× · 1.31×</div><div class="s">BVPS US$12.06 · TBV US$9.92</div></div>
+    </div>
+    <div class="action">現價相對 Base 折讓約 33% → 續抱；唔好大幅加倉。資產負債表顯示淨負債急升，但現價已大致反映。</div>
+  </section>
+  <div class="fail">紅線 1 FAIL：無受限現金 US$3.52B &lt; 有息負債 US$10.21B；研究 FCF ≈ −US$4.3bn。流動比率 1.60× 只說明短期營運未爆，唔等於紅線過關。</div>
+
+  <div class="card">
+    <h2>關鍵 BS KPI（US$m）</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="l">無受限現金</div><div class="v">3,522</div></div>
+      <div class="kpi"><div class="l">有息負債</div><div class="v">10,208</div></div>
+      <div class="kpi"><div class="l">Net Debt（公司）</div><div class="v">4,430</div></div>
+      <div class="kpi"><div class="l">PPE net</div><div class="v">12,344</div></div>
+      <div class="kpi"><div class="l">遞延收入合計</div><div class="v">2,544</div></div>
+      <div class="kpi"><div class="l">股東權益</div><div class="v">5,116</div></div>
+      <div class="kpi"><div class="l">研究 EV</div><div class="v">US$12.2B</div></div>
+      <div class="kpi"><div class="l">現金／債務</div><div class="v">0.35×</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>資產負債表對照（官方）</h2>
+    <table>
+      <thead><tr><th>項目</th><th class="n">2026-09-30</th><th class="n">2026-06-30</th><th class="n">QoQ</th></tr></thead>
+      <tbody>
+        <tr><td>現金及等價物</td><td class="n">3,522</td><td class="n">5,896</td><td class="n">−2,374</td></tr>
+        <tr><td>受限現金（流＋非流）</td><td class="n">2,256</td><td class="n">1,724</td><td class="n">+532</td></tr>
+        <tr><td>應收帳款</td><td class="n">192</td><td class="n">21</td><td class="n">+171</td></tr>
+        <tr><td>PPE net</td><td class="n">12,344</td><td class="n">6,753</td><td class="n">+5,591</td></tr>
+        <tr><td>商譽</td><td class="n">450</td><td class="n">36</td><td class="n">+414</td></tr>
+        <tr><td>總資產</td><td class="n">20,613</td><td class="n">15,790</td><td class="n">+4,823</td></tr>
+        <tr><td>債務（流動）</td><td class="n">950</td><td class="n">169</td><td class="n">+781</td></tr>
+        <tr><td>債務（非流動）</td><td class="n">8,947</td><td class="n">7,424</td><td class="n">+1,523</td></tr>
+        <tr><td>遞延收入（流＋非流）</td><td class="n">2,544</td><td class="n">1,842</td><td class="n">+702</td></tr>
+        <tr><td>有息負債合計</td><td class="n">10,208</td><td class="n">7,836</td><td class="n">+2,372</td></tr>
+        <tr><td>Net Debt（公司）</td><td class="n">4,430</td><td class="n">216</td><td class="n">+4,214</td></tr>
+        <tr><td>股東權益</td><td class="n">5,116</td><td class="n">4,186</td><td class="n">+930</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin:10px 0 0">PPE ≈ 總資產 60%。遞延收入係客戶預付負債，唔係權益。受限現金唔計入研究「可自由還債」口徑。</p>
+  </div>
+
+  <div class="card">
+    <h2>BS 點樣郁到目標價</h2>
+    <p class="muted">主方法：研究 EV = 市值 + 有息負債 − 無受限現金 ≈ US$12.2B。情景用更高淨負債／股數反映融資路徑。</p>
+    <div class="val">
+      <div class="vcard b"><div class="t">BEAR</div><div class="p">US$5</div><p class="muted">再槓桿／發股；淨負債 US$5.0B；480M 股</p></div>
+      <div class="vcard a"><div class="t">BASE</div><div class="p">US$19</div><p class="muted">ARR 投產但仍融資；淨負債 US$4.5B；450M 股</p></div>
+      <div class="vcard u"><div class="t">BULL</div><div class="p">US$50</div><p class="muted">預付覆蓋 capex；淨負債回落到 US$3.5B；430M 股</p></div>
+    </div>
+    <table style="margin-top:12px">
+      <thead><tr><th></th><th class="n">價格</th><th class="n">vs 現價</th></tr></thead>
+      <tbody>
+        <tr><td>Bear</td><td class="n">US$5</td><td class="n">−61%</td></tr>
+        <tr><td>Base</td><td class="n">US$19</td><td class="n">+47%</td></tr>
+        <tr><td>Bull</td><td class="n">US$50</td><td class="n">+286%</td></tr>
+        <tr><td>账面／股</td><td class="n">US$12.06</td><td class="n">現價 ≈ 1.07× book</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>行動</h2>
+    <p><strong>續抱；唔好大幅加倉。</strong>小加睇 US$8–11，並要見到淨負債見頂或 ARR 投產。P/B≈1 只係校準——PPE 專門化，清算唔切實際。</p>
+  </div>
+
+  <p class="disc">來源：SEC 8-K／業績稿／10-Q（期末 2026-09-30）。現價 yfinance delayed 2026-11-24。與 output/IREN_2026-11-25_framework3.md 一致。此分析僅供研究參考，不構成投資建議。</p>
+</div>
+<section id="page-comments" data-page="/iren/balance-sheet.html"></section>
+<script src="../assets/page-comments.js" defer></script>
+</body>
+</html>
