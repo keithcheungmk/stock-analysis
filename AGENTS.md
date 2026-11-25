@@ -38,17 +38,19 @@ Claude Cowork 負責審稿；唔好同 Cowork 平行改同一批未 push 嘅檔�
 
 ## GitHub 有 vs Mac 全量副本
 
-用戶 **Mac 永遠保留完整檔案庫**：git clone（報告、config、skills）＋ OneDrive `Stock research/raw`（所有 SEC／IR 原文）＋ 私人經紀檔。Cloud 從 SEC 重建文件只係為咗當次分析，**唔取代** Mac 副本。
+用戶 **Mac 永遠保留完整檔案庫**：git clone（報告、config、skills）＋ Google Drive `Personal/Stock research/raw`（所有 SEC／IR 原文）＋ 私人經紀檔。Cloud 從 SEC 重建文件只係為咗當次分析，**唔取代** Mac 副本。
 
-| 上 GitHub | 留喺 Mac／OneDrive，唔好 commit |
+| 上 GitHub | 留喺 Mac／Google Drive，唔好 commit |
 |---|---|
-| `output/*.md`（研究底稿）、`docs/**/*.html`（用戶可見頁） | `data/raw/` 原文 PDF／HTML 正文 |
+| `output/*.md`（研究底稿）、`docs/**/*.html`（用戶可見頁） | `data/raw/` 原文 PDF／HTML 正文（symlink → Drive） |
 | `config/`、`data/source-catalog/`、manifests | `.venv/`、`.env`、`output/*.csv|json|png` |
 | skills、scripts、src | `~/Documents/stock-analysis-private/`（禁止讀／索引／貼出） |
 
-Cloud 通常冇 OneDrive。用 `scripts/download_official_research.py` 從 SEC／官方 IR 重建，寫 manifest，再分析。持倉六季用 `config/official_sources.yaml`；非持倉另開 `config/official_sources_{ticker}.yaml` + catalog，唔好塞入持倉 10 隻名單。
+Canonical Drive 路徑：`~/我的雲端硬碟/Personal/Stock research/`（`raw/`、`research/`、`_private-broker/`）。用 `scripts/link_cloud_raw.sh` 把 repo `data/raw` 連過去。
 
-Mac 收工：`git pull` 攞最新報告；OneDrive 自己 sync raw。唔好刪本機 raw。
+Cloud 通常冇 Google Drive。用 `scripts/download_official_research.py` 從 SEC／官方 IR 重建，寫 manifest，再分析。持倉六季用 `config/official_sources.yaml`；非持倉另開 `config/official_sources_{ticker}.yaml` + catalog，唔好塞入持倉 10 隻名單。
+
+Mac 收工：`git pull` 攞最新報告；Google Drive 自己 sync raw。唔好刪本機 raw／Drive 副本。
 
 ## 用戶點評互動頁
 
@@ -87,7 +89,7 @@ TSLA 另讀 `docs/TESLA_AI_FRAMEWORK.md` 同 `config/tesla_*.yaml`。
 1. 你寫檔 → commit → push → 開／更新 PR。PR body 寫清改咗邊啲 `output/` 路徑。
 2. 用戶叫 Cowork 審完之後，會有 `output/{TICKER}_{date}_cowork_review.md` 或 PR 評語。
 3. 用戶再說「按 Cowork review 改」→ **只 patch 列明嘅檔**，唔重跑成份研究、唔另開平行分支改同一批檔。
-4. 未見到 Cowork review 上 GitHub 之前，唔好假設本機 OneDrive 改動存在。
+4. 未見到 Cowork review 上 GitHub 之前，唔好假設本機 Google Drive 改動存在。
 
 ## 電話指令（可原句用）
 

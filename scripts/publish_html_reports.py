@@ -125,7 +125,7 @@ def _git(*args: str) -> str:
 def git_dates(refresh: bool = False) -> dict[str, str]:
     """Last commit date per docs/ file; uncommitted changes count as today.
 
-    File mtimes are unreliable (fresh clones / OneDrive sync reset them), so the
+    File mtimes are unreliable (fresh clones / Google Drive sync reset them), so the
     "更新" badges come from git history instead.
     """
     global _GIT_DATES
@@ -566,7 +566,7 @@ def hub_html(summaries: list[dict]) -> str:
     <div class="tiles">
 {chr(10).join(tiles)}
     </div>
-    <p class="note">網址：https://keithcheungmk.github.io/stock-analysis/ · 合併到 main 之後先會更新。<br>Mac 保留完整研究檔案（git pull + OneDrive raw）。此分析僅供研究參考，不構成投資建議。</p>
+    <p class="note">網址：https://keithcheungmk.github.io/stock-analysis/ · 合併到 main 之後先會更新。<br>Mac 保留完整研究檔案（git pull + Google Drive raw）。此分析僅供研究參考，不構成投資建議。</p>
   </div>
 </body>
 </html>

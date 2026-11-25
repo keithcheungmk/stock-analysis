@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
-# Link repo data/raw to the OneDrive copy so Mac Mini / second Macs share the same files.
+# Link repo data/raw to the Google Drive Stock research/raw archive.
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 RAW_LINK="$REPO_ROOT/data/raw"
-DEFAULT_DEST="${HOME}/Library/CloudStorage/OneDrive2-個人/Stock research/raw"
+DEFAULT_DEST="${HOME}/我的雲端硬碟/Personal/Stock research/raw"
 DEST="${STOCK_ANALYSIS_RAW_ROOT:-$DEFAULT_DEST}"
 
 usage() {
   cat <<EOF
 Usage: $(basename "$0") [--dest PATH]
 
-Creates:  data/raw  ->  OneDrive .../Stock research/raw
+Creates:  data/raw  ->  Google Drive Personal/Stock research/raw
 
-OneDrive "Stock research" layout:
+Stock research layout (Google Drive):
   raw/              Official SEC/IR filings (this link target)
   research/         Notes, skills, third-party PDFs, ticker folders
   _private-broker/  IB / activity statements (do not share)
@@ -23,11 +23,11 @@ Default dest:
 
 Override with --dest or STOCK_ANALYSIS_RAW_ROOT.
 
-On Mac Mini / another Mac:
-  1. Install OneDrive and sign into the same account
-  2. Wait until "Stock research/raw" finishes syncing
+On another Mac:
+  1. Install Google Drive for Desktop and sign into the same account
+  2. Wait until "Personal/Stock research/raw" finishes syncing
   3. Clone this repo (or open your local copy)
-  4. Run:  ./scripts/link_onedrive_raw.sh
+  4. Run:  ./scripts/link_cloud_raw.sh
 EOF
 }
 
@@ -40,9 +40,9 @@ if [[ "${1:-}" == "--dest" ]]; then
 fi
 
 if [[ ! -d "$DEST" ]]; then
-  echo "ERROR: OneDrive raw folder not found:"
+  echo "ERROR: Google Drive Stock research raw folder not found:"
   echo "  $DEST"
-  echo "Sign into OneDrive and wait for sync, or pass --dest PATH"
+  echo "Sign into Google Drive for Desktop and wait for sync, or pass --dest PATH"
   exit 1
 fi
 
@@ -59,7 +59,7 @@ if [[ -L "$RAW_LINK" ]]; then
 elif [[ -d "$RAW_LINK" ]]; then
   # Newer clones can contain Git-tracked cloud catalog manifests under data/raw.
   # They are not the Mac's canonical raw library and can legitimately differ
-  # from the newer OneDrive manifests. Only replace the directory when every
+  # from the newer Drive manifests. Only replace the directory when every
   # file can be recovered from Git, then hide those tracked paths locally.
   while IFS= read -r -d '' source_file; do
     repo_relative="${source_file#"$REPO_ROOT"/}"

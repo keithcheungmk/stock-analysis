@@ -93,7 +93,7 @@ EXISTING_MAPPINGS = {
 }
 
 
-# Files manually saved in the OneDrive inbox. Kaleidoscope PDFs are convenient
+# Files manually saved in the Stock research inbox (Google Drive). Kaleidoscope PDFs are convenient
 # rendered copies of SEC filings, so keep them as third-party copies rather than
 # incorrectly promoting them above the canonical SEC HTML already in each period.
 ARCHIVE_MAPPINGS = {

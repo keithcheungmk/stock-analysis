@@ -131,6 +131,10 @@ companies:
       - type: financial_tables
         url: https://iren.gcs-web.com/static-files/1cb9f4da-d4c7-4510-8bda-e475022b59f5
         optional: true
+    FY2027-Q1:
+      documents:
+      - type: earnings_presentation
+        url: https://iren.com/api/media/file/Q1-FY27%20Presentation.pdf?prefix=payload
   NOK:
     2025-Q1:
       documents:
