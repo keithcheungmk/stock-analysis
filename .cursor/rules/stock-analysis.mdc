@@ -32,5 +32,6 @@ alwaysApply: true
   catalogs, and PRs. Branches/PRs remain per logical change, not per ticker chat.
 - User-facing HTML only in `docs/`; run `python scripts/publish_html_reports.py`;
   deliver a GitHub Pages URL, never source code
-- Mac keeps the full file archive (git + OneDrive `data/raw`); do not treat the
-  cloud reconstruct as a replacement for the local copy
+- Mac keeps the full file archive (git + Google Drive `Personal/Stock research/raw`
+  via `scripts/link_cloud_raw.sh`); do not treat the cloud reconstruct as a
+  replacement for the local copy
