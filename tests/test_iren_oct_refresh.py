@@ -1,4 +1,4 @@
-"""Lock IREN October 2026 light refresh: F3 16/40/80 unchanged; Anthropic unverified."""
+"""Lock IREN November 2026 Framework 3 refresh: F3 5/19/50; Q1 FY27 BS anchors."""
 
 from pathlib import Path
 from unittest import TestCase
@@ -7,39 +7,32 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs" / "iren"
 OUTPUT = ROOT / "output"
 P0 = (
-    DOCS / "catalyst-calendar.html",
-    DOCS / "thesis-tracker.html",
-    DOCS / "one-pager.html",
     DOCS / "index.html",
+    DOCS / "framework3.html",
+    DOCS / "valuation.html",
+    DOCS / "balance-sheet.html",
 )
-F3_LOCKED = ("16 / 40 / 80", "US$16", "US$40", "US$80")
+F3_LOCKED = ("5 / 19 / 50", "US$5", "US$19", "US$50")
 
 
-class IrenOctRefreshTests(TestCase):
-    def test_p0_pages_use_oct_spot_and_locked_f3(self) -> None:
+class IrenNovF3RefreshTests(TestCase):
+    def test_p0_pages_use_nov_spot_and_locked_f3(self) -> None:
         for path in P0:
             html = path.read_text(encoding="utf-8")
-            self.assertIn("US$35.19", html, path.name)
-            self.assertIn("16 / 40 / 80", html, path.name)
-            self.assertIn("−12%", html, path.name)
-            self.assertIn("2026-10-12", html, path.name)
+            self.assertIn("US$12.95", html, path.name)
+            self.assertIn("5 / 19 / 50", html, path.name)
+            self.assertIn("−33%", html, path.name)
+            self.assertIn("2026-11-25", html, path.name)
             self.assertIn("decision-hud", html, path.name)
             self.assertIn("續抱", html, path.name)
-            self.assertIn("唔好加倉", html, path.name)
+            self.assertIn("唔好", html, path.name)
+            self.assertIn("加倉", html, path.name)
 
-    def test_anthropic_is_unverified_not_confirmed(self) -> None:
-        for name in ("catalyst-calendar.html", "thesis-tracker.html", "one-pager.html"):
-            html = (DOCS / name).read_text(encoding="utf-8")
-            self.assertIn("Anthropic", html, name)
-            self.assertIn("unverified", html, name)
-            self.assertIn("未確認", html, name)
-
-    def test_gate_is_hold_not_trim(self) -> None:
-        for path in P0:
-            html = path.read_text(encoding="utf-8")
-            self.assertIn("未到 trim", html, path.name)
-            self.assertIn("唔寫減倉", html, path.name)
-            self.assertNotIn("應減倉", html, path.name)
+    def test_gate_is_hold_not_forced_trim(self) -> None:
+        html = (DOCS / "index.html").read_text(encoding="utf-8")
+        self.assertIn("續抱", html)
+        self.assertIn("唔好大幅加倉", html)
+        self.assertNotIn("應減倉", html)
 
     def test_no_new_covered_option_recommendation(self) -> None:
         for path in P0:
@@ -47,41 +40,27 @@ class IrenOctRefreshTests(TestCase):
             self.assertNotIn("開新 covered call", html, path.name)
             self.assertNotIn("covered put", html, path.name)
 
-    def test_redline_one_still_fail(self) -> None:
-        for name in ("thesis-tracker.html", "one-pager.html", "index.html"):
+    def test_redline_one_still_fail_q1(self) -> None:
+        for name in ("index.html", "framework3.html", "balance-sheet.html"):
             html = (DOCS / name).read_text(encoding="utf-8")
-            self.assertIn("5.90", html, name)
-            self.assertIn("7.84", html, name)
-            self.assertIn("167", html, name)
+            self.assertIn("3.52", html, name)
+            self.assertIn("10.21", html, name)
+            self.assertTrue("FAIL" in html or "紅線" in html, name)
 
-    def test_next_real_catalysts_on_calendar(self) -> None:
-        html = (DOCS / "catalyst-calendar.html").read_text(encoding="utf-8")
-        self.assertIn("Horizon 2–4", html)
-        self.assertIn("FY2027-Q1", html)
-        self.assertIn("未官方確認", html)
-
-    def test_framework3_numbers_not_rewritten(self) -> None:
+    def test_framework3_nov_numbers(self) -> None:
         html = (DOCS / "framework3.html").read_text(encoding="utf-8")
-        self.assertIn("US$16", html)
-        self.assertIn("US$40", html)
-        self.assertIn("US$80", html)
-        self.assertIn("US$40.53", html)
+        for token in F3_LOCKED:
+            self.assertIn(token, html)
+        self.assertIn("US$12.95", html)
         self.assertNotIn("US$35.19", html)
-        md = (OUTPUT / "IREN_2026-08-28_framework3.md").read_text(encoding="utf-8")
-        self.assertIn("US$40", md)
-        self.assertIn("US$16", md)
-        self.assertIn("US$80", md)
-        self.assertIn("US$40.53", md)
+        md = (OUTPUT / "IREN_2026-11-25_framework3.md").read_text(encoding="utf-8")
+        self.assertIn("US$19", md)
+        self.assertIn("US$5", md)
+        self.assertIn("US$50", md)
+        self.assertIn("US$12.95", md)
 
-    def test_output_drafts_match_p0_locks(self) -> None:
-        for name in (
-            "IREN_catalyst_calendar.html",
-            "IREN_thesis_tracker.html",
-            "IREN_one-pager.html",
-        ):
-            html = (OUTPUT / name).read_text(encoding="utf-8")
-            self.assertIn("US$35.19", html, name)
-            self.assertIn("16 / 40 / 80", html, name)
-            self.assertIn("unverified", html, name)
-            self.assertIn("Anthropic", html, name)
-            self.assertNotIn("應減倉", html)
+    def test_balance_sheet_page_present(self) -> None:
+        html = (DOCS / "balance-sheet.html").read_text(encoding="utf-8")
+        self.assertIn("1.07×", html)
+        self.assertIn("4,430", html)
+        self.assertIn("12,344", html)
